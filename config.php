@@ -33,7 +33,7 @@ $table_prefix  = 'em_';   // Only numbers, letters, and underscores please!
 // chosen language must be installed to wp-content/languages.
 // For example, install de.mo to wp-content/languages and set WPLANG to 'de'
 // to enable German language support.
-define ('WPLANG', '');
+define ('WPLANG', 'IT');
 
 /* That's all, stop editing! Happy blogging. */
 
