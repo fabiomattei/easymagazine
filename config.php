@@ -17,6 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
 // ** MySQL settings ** //
 define('DB_NAME', 'wordpress');    // The name of the database
 define('DB_USER', 'root');     // Your MySQL username
@@ -26,7 +27,7 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
 // You can have multiple installations in one database if you give each a unique prefix
-$table_prefix  = 'wp_';   // Only numbers, letters, and underscores please!
+$table_prefix  = 'em_';   // Only numbers, letters, and underscores please!
 
 // Change this to localize WordPress.  A corresponding MO file for the
 // chosen language must be installed to wp-content/languages.
