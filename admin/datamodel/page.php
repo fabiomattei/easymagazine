@@ -29,11 +29,11 @@ class Page {
     private $metakeyword;
     private $db;
 
-    const INSERT_SQL = 'insert into articles (title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
-    const DELETE_SQL = 'delete from articles where id=?';
-    const SELECT_BY_ID = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from articles where id = ?';
-    const SELECT_BY_TITLE = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from articles where title like ?';
+    const INSERT_SQL = 'insert into pages (title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update pages set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
+    const DELETE_SQL = 'delete from pages where id=?';
+    const SELECT_BY_ID = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from pages where id = ?';
+    const SELECT_BY_TITLE = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from pages where title like ?';
 
     public function __construct() {
         $this->db = DB::getInstance();

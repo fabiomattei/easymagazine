@@ -29,11 +29,11 @@ class User {
     private $skype;
     private $db;
 
-    const INSERT_SQL = 'insert into articles (name, username, password, role, email, msn, skype, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set name = ?, username = ?, sumary = ?, role = ?, email = ?, msn = ?, skype = ?, updated=now() where id = ?';
-    const DELETE_SQL = 'delete from articles where id=?';
-    const SELECT_BY_ID = 'select name, username, password, role, email, msn, skype, created, updated from articles where id = ?';
-    const SELECT_BY_name = 'select name, username, password, role, email, msn, skype, created, updated from articles where name like ?';
+    const INSERT_SQL = 'insert into users (name, username, password, role, email, msn, skype, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update users set name = ?, username = ?, sumary = ?, role = ?, email = ?, msn = ?, skype = ?, updated=now() where id = ?';
+    const DELETE_SQL = 'delete from users where id=?';
+    const SELECT_BY_ID = 'select name, username, password, role, email, msn, skype, created, updated from users where id = ?';
+    const SELECT_BY_name = 'select name, username, password, role, email, msn, skype, created, updated from users where name like ?';
 
     public function __construct() {
         $this->db = DB::getInstance();

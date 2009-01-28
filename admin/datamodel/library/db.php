@@ -52,6 +52,10 @@ class DB {
     public function getErrorMsg() {
         return $this->error;
     }
+
+    public function getTablePrefix() {
+        return $table_prefix;
+    }
 }
 
 
