@@ -19,6 +19,8 @@
 
 include('rindex.php');
 include('comments.php');
+include('page.php');
+include('article.php');
 
 class RouterFactory {
 
@@ -28,6 +30,10 @@ class RouterFactory {
         if ($request == "index") $out = new IndexRouter();
 
         if ($request == "comments") $out = new CommentsRouter();
+
+        if ($request == "page") $out = new PagesRouter();
+
+        if ($request == "article") $out = new ArticlesRouter();
 
         return $out;
     }

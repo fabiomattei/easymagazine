@@ -19,10 +19,10 @@
 
 include('router.php');
 
-class PagesRouter extends Router {
+class ArticlesRouter extends Router {
 
     function applyTemplate(){
-        if (file_exists(TEMPLATEPATH.'/page.php')) {
+        if (file_exists(TEMPLATEPATH.'/article.php')) {
             include (TEMPLATEPATH.'/page.php');
         }
 
