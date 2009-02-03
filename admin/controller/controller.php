@@ -17,39 +17,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class SessionManager {
+abstract class Controller {
 
-    private static $instance = null;
-
-    public function __construct() {
+    public function  __construct() {
     }
 
-    public static function getInstance()
-    {
-        if(self::$instance == null)
-        {
-            $c = __CLASS__;
-            self::$instance = new $c;
-        }
-
-        return self::$instance;
-    }
-
-    public function startingPage() {
-        session_start();
-        $_SESSION['user']="I'm Fabio";
-    }
-
-    public function closingPage() {
-        $_SESSION['user']='';
-        $_SESSION['error']='';
-        $_SESSION['advice']='';
-    }
-
-    public function close() {
-        $_SESSION = array();
-        session_destroy();
-    }
+    public abstract function loadData();
 
 }
 

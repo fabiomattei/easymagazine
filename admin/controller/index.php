@@ -17,38 +17,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class SessionManager {
+include('controller.php');
 
-    private static $instance = null;
+class IndexController extends Controller {
 
-    public function __construct() {
-    }
-
-    public static function getInstance()
-    {
-        if(self::$instance == null)
-        {
-            $c = __CLASS__;
-            self::$instance = new $c;
+    function applyTemplate(){
+        if (file_exists(TEMPLATEPATH.'/index.php')) {
+            include (TEMPLATEPATH.'/index.php');
         }
-
-        return self::$instance;
-    }
-
-    public function startingPage() {
-        session_start();
-        $_SESSION['user']="I'm Fabio";
-    }
-
-    public function closingPage() {
-        $_SESSION['user']='';
-        $_SESSION['error']='';
-        $_SESSION['advice']='';
-    }
-
-    public function close() {
-        $_SESSION = array();
-        session_destroy();
     }
 
 }

@@ -59,7 +59,7 @@ abstract class Router {
             include (TEMPLATEPATH.'/footer.php');
         }
     }
-    
+
 }
 
 ?>
