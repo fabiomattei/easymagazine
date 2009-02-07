@@ -30,13 +30,14 @@ abstract class Router {
         $this->session = SessionManager::getInstance();
     }
 
-    public function data() {
-    }
-
     public abstract function applyTemplate();
+
+    public abstract function loadController();
 
     public function show(){
         $this->session->startingPage();
+
+        $this->loadController();
 
         $this->header();
 

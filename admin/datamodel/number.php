@@ -30,6 +30,7 @@ class Number {
     const DELETE_SQL = 'delete from numbers where id = ?';
     const SELECT_BY_ID = 'select title, subtitle, summary, created, updated from numbers where id = ?';
     const SELECT_BY_TITLE = 'select title, subtitle, summary, created, updated from numbers where title like ?';
+    const SELECT_LAST = 'select title, subtitle, summary, created, updated from numbers where title like ?';
 
     public function __construct() {
         $this->db = DB::getInstance();
@@ -47,6 +48,18 @@ class Number {
         return $this->id;
     }
 
+    public static function findById($id) {
+        $rs = $this->db->execute(
+            self::SELECT_BY_ID,
+            array("$id"));
+        if ($rs) {
+            foreach ($rs->getArray() as $row) {
+                $ret = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
     public static function findByTitle($title) {
         $rs = $this->db->execute(
             self::SELECT_BY_TITLE,
@@ -54,7 +67,20 @@ class Number {
         $ret = array();
         if ($rs) {
             foreach ($rs->getArray() as $row) {
-                $ret[] = new Article($row['id'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret[] = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findLast() {
+        $rs = $this->db->execute(
+            self::SELECT_LAST,
+            array("%$title%"));
+        $ret = array();
+        if ($rs) {
+            foreach ($rs->getArray() as $row) {
+                $ret[] = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;

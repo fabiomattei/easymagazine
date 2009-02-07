@@ -6,4 +6,10 @@
 
 echo "Funziona!!!";
 
+echo "Provo a stampare il primo numero<br>";
+
+echo $number->getTitle();
+
+
+
 ?>

@@ -17,10 +17,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('TEMPLATEPATH', 'contents/templates/default/');
+
 define('ADMINPATH', 'admin/view/');
 define('COMMANDPATH', 'admin/command/');
-define('PLUGINPATH', 'contents/plug_in/');
 define('ROUTERPATH', 'admin/routers/');
+define('CONTROLLERPATH', 'admin/controller/');
+define('DATAMODELPATH', 'admin/datamodel/');
+
+define('PLUGINPATH', 'contents/plug_in/');
+define('TEMPLATEPATH', 'contents/templates/default/');
 
 ?>

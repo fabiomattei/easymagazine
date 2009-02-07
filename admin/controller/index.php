@@ -17,16 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include('controller.php');
+include(DATAMODELPATH.'/number.php');
 
-class IndexController extends Controller {
-
-    function applyTemplate(){
-        if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
-    }
-
-}
+$number = Number::findById(1);   // TODO sostituire con findLast
 
 ?>

@@ -21,6 +21,12 @@ include('router.php');
 
 class IndexRouter extends Router {
 
+    function loadController(){
+        if (file_exists(CONTROLLERPATH.'/index.php')) {
+            include (CONTROLLERPATH.'/index.php');
+        }
+    }
+
     function applyTemplate(){
         if (file_exists(TEMPLATEPATH.'/index.php')) {
             include (TEMPLATEPATH.'/index.php');
