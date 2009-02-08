@@ -21,7 +21,7 @@ include('router.php');
 
 class PagesRouter extends Router {
 
-    function loadController(){
+    function loadData(){
         if (file_exists(CONTROLLERPATH.'/index.php')) {
             include (CONTROLLERPATH.'/index.php');
         }

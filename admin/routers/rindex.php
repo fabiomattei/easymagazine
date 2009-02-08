@@ -22,15 +22,10 @@ include(DATAMODELPATH.'/number.php');
 
 class IndexRouter extends Router {
 
-//    function loadController(){
-//        if (file_exists(CONTROLLERPATH.'/index.php')) {
-//            include (CONTROLLERPATH.'/index.php');
-//        }
-//    }
+    private $number;
 
-    function loadController(){
-        $number = Number::findById(1);
-        $_SESSION['number']=$number;
+    function loadData(){
+        $this->number = Number::findById(1);
     }
 
     function applyTemplate(){

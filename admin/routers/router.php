@@ -24,6 +24,7 @@ abstract class Router {
 
     private $remote;
     private $session;
+    public $prova = "aleooo";
 
     public function  __construct() {
         $this->remote = Remote::getInstance();
@@ -32,12 +33,12 @@ abstract class Router {
 
     public abstract function applyTemplate();
 
-    public abstract function loadController();
+    public abstract function loadData();
 
     public function show(){
         $this->session->startingPage();
 
-        $this->loadController();
+        $this->loadData();
 
         $this->header();
 

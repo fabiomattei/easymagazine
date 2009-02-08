@@ -8,8 +8,7 @@ echo "<br><br>Funziona!!!<br>";
 
 echo "Provo a stampare il primo numero<br>";
 
-
-echo $_SESSION['number']->getTitle();
+echo $this->number->getTitle();
 
 //echo $number->getTitle();
 
