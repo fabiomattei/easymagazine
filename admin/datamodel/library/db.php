@@ -38,8 +38,8 @@ class DB {
         return self::$instance;
     }
 
-    public function execute($SQL, $array) {
-        $toSQL = StrHelper::replaceOccorrences($SQL, $array);
+    public function execute($SQL, $array, $tables) {
+        $toSQL = StrHelper::formatQRY($SQL, $array, $tables);
         $result = mysql_query($toSQL, $this->connection);
         if (!$result) {
             $this->error=mysql_error();

@@ -30,9 +30,9 @@ class Number {
     const INSERT_SQL = 'insert into numbers (title, subtitle, summary, created, updated) values (?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update numbers set title = ?, subtitle = ?, summary = ?, updated=now() where id = ?';
     const DELETE_SQL = 'delete from numbers where id = ?';
-    const SELECT_BY_ID = 'select id, indexnumer, title, subtitle, summary from em_numbers where id = ?';
-    const SELECT_BY_TITLE = 'select title, subtitle, summary, created, updated from numbers where title like ?';
-    const SELECT_LAST = 'select title, subtitle, summary, created, updated from numbers where title like ?';
+    const SELECT_BY_ID = 'select id, indexnumber, title, subtitle, summary from numbers where id = ?';
+    const SELECT_BY_TITLE = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
+    const SELECT_LAST = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
 
     public function __construct($id=NEW_NUMBER, $title="", $subtitle="", $summary="") {
         $this->db = DB::getInstance();
@@ -47,9 +47,11 @@ class Number {
     }
 
     public static function findById($id) {
+        $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::SELECT_BY_ID,
-            array("$id"));
+            array("$id"),
+            $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
                 $ret = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);

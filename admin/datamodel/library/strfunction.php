@@ -20,6 +20,13 @@
 class StrHelper {
     //static class, we do not need a constructor
 
+    public static function formatQRY($str, $array, $tables) {
+        $out = StrHelper::replaceOccorrences($str, $array);
+        $out = StrHelper::fixTableName($out, $tables);
+        echo $out;
+        return $out;
+    }
+
     public static function replaceOccorrences($str, $array) {
         $newArray = explode('?', $str);
         $out = $newArray[0];
@@ -27,6 +34,13 @@ class StrHelper {
         foreach ($array as $key){
             $out .= $key.$newArray[$i];
             $i++;
+        }
+        return $out;
+    }
+
+    public static function fixTableName($qry, $tables) {
+        foreach ($tables as $oldName => $newName){
+            $out = str_replace($oldName, $newName, $qry);
         }
         return $out;
     }

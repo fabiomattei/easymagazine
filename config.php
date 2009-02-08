@@ -25,10 +25,8 @@ define('DB_PASSWORD', 'root'); // ...and password
 define('DB_HOST', 'localhost:8889');    // 99% chance you won't need to change this value
 //  define('DB_CHARSET', 'utf8');
 
-
-define('TBPREFIX', 'em_');
 // You can have multiple installations in one database if you give each a unique prefix
-$table_prefix  = 'em_';   // Only numbers, letters, and underscores please!
+define('TBPREFIX', 'em_');
 
 // Change this to localize Easy Magazine.
 // A corresponding file for the
