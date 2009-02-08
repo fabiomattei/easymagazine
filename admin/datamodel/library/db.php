@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include (BASEPATH.'config.php');
+require_once(BASEPATH.'config.php');
 include (DBPATH.'strfunction.php');
 
 class DB {

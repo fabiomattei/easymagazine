@@ -18,6 +18,7 @@
  */
 
 include (DBPATH.'db.php');
+include (DATAMODELPATH.'article.php');
 
 class Number {
     const NEW_NUMBER = -1;
@@ -28,7 +29,7 @@ class Number {
     private $summary;
     private $db;
 
-    const INSERT_SQL = 'insert into numbers (indexnumber, title, subtitle, summary) values (?, ?, ?, ?, now(), now())';
+    const INSERT_SQL = 'insert into numbers (indexnumber, title, subtitle, summary) values (?, ?, ?, ?)';
     const UPDATE_SQL = 'update numbers set indexnumber = ?, title = ?, subtitle = ?, summary = ? where id = ?';
     const DELETE_SQL = 'delete from numbers where id = ?';
     const SELECT_BY_ID = 'select id, indexnumber, title, subtitle, summary from numbers where id = ?';
@@ -36,6 +37,7 @@ class Number {
     const SELECT_LAST = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by indexnumber DESC';
     const SELECT_ALL = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by id DESC';
+    const SELECT_ARTICLES_PUB = 'select * from articles where publisched=1 AND number_id = ? order by indexnumber DESC';
 
     public function __construct($id=NEW_NUMBER, $indexnumber="", $title="", $subtitle="", $summary="") {
         $this->db = DB::getInstance();
@@ -117,6 +119,32 @@ class Number {
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
                 $ret[] = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
+    public function articles() {
+        $tables = array("articles" => TBPREFIX."articles");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_ARTICLES_PUB,
+            array("$this->id"),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Article(
+                    $row['id'],
+                    $row['number_id'],
+                    $row['indexnumber'],
+                    $row['publisched'],
+                    $row['title'],
+                    $row['subtitle'],
+                    $row['summary'],
+                    $row['body'],
+                    $row['tag'],
+                    $row['metadescription'],
+                    $row['metakeyword']);
             }
         }
         return $ret;

@@ -31,10 +31,6 @@ class Comment {
     const SELECT_BY_ID = 'select title, body, signature, created, updated from comments where id = ?';
     const SELECT_BY_TITLE = 'select title, body, signature, created, updated from comments where title like ?';
 
-    public function __construct() {
-        $this->db = DB::getInstance();
-    }
-
     public function __construct($id, $title, $body, $signature) {
         $this->db = DB::getInstance();
         $this->id = $id;

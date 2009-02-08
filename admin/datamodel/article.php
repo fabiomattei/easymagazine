@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include ('./libray/query.php');
-include ('./libray/db.php');
+include (DBPATH.'db.php');
+include (DATAMODELPATH.'comment.php');
 
 class Article {
     const NEW_ARTICLE = -1;
@@ -38,13 +38,12 @@ class Article {
     const SELECT_BY_ID = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from articles where id = ?';
     const SELECT_BY_TITLE = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from articles where title like ?';
 
-    public function __construct() {
-        $this->db = DB::getInstance();
-    }
-
-    public function __construct($id, $title, $subtitle, $summary, $body, $tag, $metadescription, $metakeyword) {
+    public function __construct($id=NEW_NUMBER, $number_id=NEW_NUMBER, $indexnumber='', $publisched='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
         $this->id = $id;
+        $this->number_id = $number_id;
+        $this->indexnumber = $indexnumber;
+        $this->publisched = $publisched;
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->summary = $summary;

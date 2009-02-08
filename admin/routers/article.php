@@ -21,18 +21,16 @@ include('router.php');
 
 class ArticlesRouter extends Router {
 
+    private $article;
+
     function loadData(){
-        if (file_exists(CONTROLLERPATH.'/index.php')) {
-            include (CONTROLLERPATH.'/index.php');
-        }
+        $this->article = Number::findLast();
     }
 
     function applyTemplate(){
         if (file_exists(TEMPLATEPATH.'/article.php')) {
-            include (TEMPLATEPATH.'/page.php');
-        }
-
-        if (file_exists(TEMPLATEPATH.'/index.php')) {
+            include (TEMPLATEPATH.'/article.php');
+        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
             include (TEMPLATEPATH.'/index.php');
         }
     }

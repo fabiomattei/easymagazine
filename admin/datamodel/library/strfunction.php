@@ -23,6 +23,7 @@ class StrHelper {
     public static function formatQRY($str, $array, $tables) {
         $out = StrHelper::replaceOccorrences($str, $array);
         $out = StrHelper::fixTableName($out, $tables);
+        //echo $out."<br>";
         return $out;
     }
 
