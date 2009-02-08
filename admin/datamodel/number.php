@@ -27,8 +27,8 @@ class Number {
     private $summary;
     private $db;
 
-    const INSERT_SQL = 'insert into numbers (title, subtitle, summary, created, updated) values (?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update numbers set title = ?, subtitle = ?, summary = ?, updated=now() where id = ?';
+    const INSERT_SQL = 'insert into numbers (indexnumber, title, subtitle, summary) values (?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update numbers set indexnumber = ?, title = ?, subtitle = ?, summary = ? where id = ?';
     const DELETE_SQL = 'delete from numbers where id = ?';
     const SELECT_BY_ID = 'select id, indexnumber, title, subtitle, summary from numbers where id = ?';
     const SELECT_BY_TITLE = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
