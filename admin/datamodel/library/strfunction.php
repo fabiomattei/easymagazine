@@ -25,9 +25,10 @@ class StrHelper {
         $out = $newArray[0];
         $i = 1;
         foreach ($array as $key){
-            $out = '$key'.$newArray[$i];
+            $out .= $key.$newArray[$i];
             $i++;
         }
+        echo $out;
         return $out;
     }
 

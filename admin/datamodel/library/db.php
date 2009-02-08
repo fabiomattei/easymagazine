@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include ('../../../config.php');
-include ('strfunction.php');
+include (BASEPATH.'config.php');
+include (DBPATH.'strfunction.php');
 
 class DB {
     private static $instance = null;
@@ -26,8 +26,8 @@ class DB {
     private $error;
 
     private function __construct() {
-        $connection = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-        mysql_select_db(DB_NAME, $connection);
+        $this->connection = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+        mysql_select_db(DB_NAME, $this->connection);
     }
 
     public static function getInstance() {
@@ -54,7 +54,7 @@ class DB {
     }
 
     public function getTablePrefix() {
-        return $table_prefix;
+        return TBPREFIX;
     }
 }
 

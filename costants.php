@@ -23,6 +23,9 @@ define('COMMANDPATH', 'admin/command/');
 define('ROUTERPATH', 'admin/routers/');
 define('CONTROLLERPATH', 'admin/controller/');
 define('DATAMODELPATH', 'admin/datamodel/');
+define('SESSIONPATH', 'admin/sessionmanager/');
+define('DBPATH', 'admin/datamodel/library/');
+define('BASEPATH', '');
 
 define('PLUGINPATH', 'contents/plug_in/');
 define('TEMPLATEPATH', 'contents/templates/default/');

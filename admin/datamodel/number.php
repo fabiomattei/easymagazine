@@ -17,6 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+include (DBPATH.'db.php');
+
 class Number {
     const NEW_NUMBER = -1;
     private $id = self::NEW_NUMBER;
@@ -28,15 +30,11 @@ class Number {
     const INSERT_SQL = 'insert into numbers (title, subtitle, summary, created, updated) values (?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update numbers set title = ?, subtitle = ?, summary = ?, updated=now() where id = ?';
     const DELETE_SQL = 'delete from numbers where id = ?';
-    const SELECT_BY_ID = 'select title, subtitle, summary, created, updated from numbers where id = ?';
+    const SELECT_BY_ID = 'select id, indexnumer, title, subtitle, summary from em_numbers where id = ?';
     const SELECT_BY_TITLE = 'select title, subtitle, summary, created, updated from numbers where title like ?';
     const SELECT_LAST = 'select title, subtitle, summary, created, updated from numbers where title like ?';
 
-    public function __construct() {
-        $this->db = DB::getInstance();
-    }
-
-    public function __construct($id, $title, $subtitle, $summary) {
+    public function __construct($id=NEW_NUMBER, $title="", $subtitle="", $summary="") {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->title = $title;
@@ -49,11 +47,12 @@ class Number {
     }
 
     public static function findById($id) {
-        $rs = $this->db->execute(
+        $rs = DB::getInstance()->execute(
             self::SELECT_BY_ID,
             array("$id"));
         if ($rs) {
-            foreach ($rs->getArray() as $row) {
+            while ($row = mysql_fetch_array($rs)){
+                echo "entarto!!!";
                 $ret = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
@@ -61,7 +60,7 @@ class Number {
     }
 
     public static function findByTitle($title) {
-        $rs = $this->db->execute(
+        $rs = DB::getInstance()->execute(
             self::SELECT_BY_TITLE,
             array("%$title%"));
         $ret = array();
@@ -74,7 +73,7 @@ class Number {
     }
 
     public static function findLast() {
-        $rs = $this->db->execute(
+        $rs = DB::getInstance()->execute(
             self::SELECT_LAST,
             array("%$title%"));
         $ret = array();
