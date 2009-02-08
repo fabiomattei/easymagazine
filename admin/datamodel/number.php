@@ -22,6 +22,7 @@ include (DBPATH.'db.php');
 class Number {
     const NEW_NUMBER = -1;
     private $id = self::NEW_NUMBER;
+    private $indexnumber;
     private $title;
     private $subtitle;
     private $summary;
@@ -32,11 +33,12 @@ class Number {
     const DELETE_SQL = 'delete from numbers where id = ?';
     const SELECT_BY_ID = 'select id, indexnumber, title, subtitle, summary from numbers where id = ?';
     const SELECT_BY_TITLE = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
-    const SELECT_LAST = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
+    const SELECT_LAST = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by indexnumber DESC Limit 1';
 
-    public function __construct($id=NEW_NUMBER, $title="", $subtitle="", $summary="") {
+    public function __construct($id=NEW_NUMBER, $indexnumber="", $title="", $subtitle="", $summary="") {
         $this->db = DB::getInstance();
         $this->id = $id;
+        $this->indexnumber = $indexnumber;
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->summary = $summary;
@@ -54,7 +56,7 @@ class Number {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
@@ -63,24 +65,27 @@ class Number {
     public static function findByTitle($title) {
         $rs = DB::getInstance()->execute(
             self::SELECT_BY_TITLE,
-            array("%$title%"));
+            array("%$title%"),
+            $tables);
         $ret = array();
         if ($rs) {
-            foreach ($rs->getArray() as $row) {
-                $ret[] = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
     }
 
     public static function findLast() {
+        $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::SELECT_LAST,
-            array("%$title%"));
+            array(),
+            $tables);
         $ret = array();
         if ($rs) {
-            foreach ($rs->getArray() as $row) {
-                $ret[] = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
@@ -131,6 +136,15 @@ class Number {
         }
     }
     
+
+    public function getIndexnumber() {
+        return $this->indexnumber;
+    }
+
+    public function setIndexnumber($indexnumber) {
+        $this->indexnumber = $indexnumber;
+    }
+
     public function getTitle() {
         return $this->title;
     }

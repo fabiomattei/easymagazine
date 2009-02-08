@@ -25,7 +25,7 @@ class IndexRouter extends Router {
     private $number;
 
     function loadData(){
-        $this->number = Number::findById(1);
+        $this->number = Number::findLast();
     }
 
     function applyTemplate(){
