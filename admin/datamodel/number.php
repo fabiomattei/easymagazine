@@ -34,6 +34,8 @@ class Number {
     const SELECT_BY_ID = 'select id, indexnumber, title, subtitle, summary from numbers where id = ?';
     const SELECT_BY_TITLE = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
     const SELECT_LAST = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by indexnumber DESC Limit 1';
+    const SELECT_ALL_PUB = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by indexnumber DESC';
+    const SELECT_ALL = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by id DESC';
 
     public function __construct($id=NEW_NUMBER, $indexnumber="", $title="", $subtitle="", $summary="") {
         $this->db = DB::getInstance();
@@ -70,7 +72,7 @@ class Number {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
@@ -82,10 +84,39 @@ class Number {
             self::SELECT_LAST,
             array(),
             $tables);
-        $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
                 $ret = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findAllPublished() {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_ALL_PUB,
+            array(),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findAll() {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_ALL,
+            array(),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
