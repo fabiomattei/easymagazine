@@ -17,19 +17,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-echo "<br><br>Funziona!!!<br>";
-
-echo "Provo a stampare il primo numero<br>";
-
 echo $this->number->getTitle()."<br>";
-
-echo "PRima lista di articoli <br>";
 
 foreach($this->number->articles()  as $article) {
     echo $article->getTitle()."<br>";
 }
-
-//echo $number->getTitle();
 
 
 
