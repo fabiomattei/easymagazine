@@ -26,24 +26,26 @@ mysql_select_db(DB_NAME, $connection);
 
 $cmd = "CREATE TABLE ".$table_prefix."numbers (
        id int(11) NOT NULL auto_increment,
+       indexnumer int,
        title varchar(255),
        subtitle text,
        summary text,
        PRIMARY KEY (id)
     );";
 
-$result = mysql_db_query($db,$cmd);
+$result = mysql_query($cmd, $connection);
 
-if (!$result) {
-    $out .= "Table Numbers created";
+if ($result) {
+    $out = "Table Numbers created<BR>";
 } else {
-    $out .= "Table Numbers NOT created";;
+    $out = "Table Numbers NOT created<BR>";;
 }
 
 if ($connection) {
     $cmd = "CREATE TABLE ".$table_prefix."articles (
        id int(11) NOT NULL auto_increment,
        number_id int(11),
+       indexnumer int,
        title varchar(255),
        subtitle text,
        summary text,
@@ -51,15 +53,17 @@ if ($connection) {
        tag text,
        metadescription text,
        metakeyword text,
+       created datetime,
+       updated datetime,
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out = "Table Articles created";
+    if ($result) {
+        $out .= "Table Articles created<BR>";
     } else {
-        $out = "Table Articles NOT created";;
+        $out .= "Table Articles NOT created<BR>";;
     }
 
     $cmd = "CREATE TABLE ".$table_prefix."comments (
@@ -68,20 +72,23 @@ if ($connection) {
        title varchar(255),
        body text,
        signature text,
+       created datetime,
+       updated datetime, 
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Table Comments created";
+    if ($result) {
+        $out .= "Table Comments created<BR>";
     } else {
-        $out .= "Table Comments NOT created";;
+        $out .= "Table Comments NOT created<BR>";;
     }
 
     $cmd = "CREATE TABLE ".$table_prefix."pages (
        id int(11) NOT NULL auto_increment,
        title varchar(255),
+       indexnumer int,
        subtitle text,
        summary text,
        body text,
@@ -91,12 +98,12 @@ if ($connection) {
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Table Pages created";
+    if ($result) {
+        $out .= "Table Pages created<BR>";
     } else {
-        $out .= "Table Pages NOT created";;
+        $out .= "Table Pages NOT created<BR>";;
     }
 
     $cmd = "CREATE TABLE ".$table_prefix."users (
@@ -111,12 +118,12 @@ if ($connection) {
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Table Users created";
+    if ($result) {
+        $out .= "Table Users created<BR>";
     } else {
-        $out .= "Table Users NOT created";;
+        $out .= "Table Users NOT created<BR>";;
     }
 
     $cmd = "CREATE TABLE ".$table_prefix."users_articles (
@@ -126,93 +133,92 @@ if ($connection) {
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Table Users created";
+    if ($result) {
+        $out .= "Table Users created<BR>";
     } else {
-        $out .= "Table Users NOT created";;
+        $out .= "Table Users NOT created<BR>";
     }
 
     // Populate the tables with some dummy data
 
-    $cmd = "insert into ".$table_prefix."numbers (id, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated)
-            values (1, 'My first number', 'Subtitle to my first number',
-            'Summary of my first number', 'Description of my first number', 'first, number',
-            'first number', 'first, number meta keyword', now(), now())";
+    $cmd = "insert into ".$table_prefix."numbers (id, indexnumer, title, subtitle, summary)
+            values (1, 1, 'My first number', 'Subtitle to my first number',
+            'Summary of my first number')";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Dummy data Number Created";
+    if ($result) {
+        $out .= "Dummy data Number Created<BR>";
     } else {
-        $out .= "Dummy data Number NOT created";;
+        $out .= "Dummy data Number NOT created<BR>";;
     }
 
-    $cmd = "insert into ".$table_prefix."articles (id, number_id, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
-           (1, 1, 'My firts Article', 'Subtitle of my first article', 'summary of my first article',
+    $cmd = "insert into ".$table_prefix."articles (id, number_id, indexnumer, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+           (1, 1, 1, 'My firts Article', 'Subtitle of my first article', 'summary of my first article',
             'Body of my first article', 'tag of my first article',
             'metadescription of my first article', 'metakeyword of my first article', now(), now())";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Dummy data Article Created";
+    if ($result) {
+        $out .= "Dummy data Article Created<BR>";
     } else {
-        $out .= "Dummy data Article NOT created";;
+        $out .= "Dummy data Article NOT created<BR>";;
     }
 
     $cmd = "insert into ".$table_prefix."comments (id, article_id, title, body, signature, created, updated) values
            (1, 1, 'My first comment', 'text of my first comment', 'signature of my first comment', now(), now())";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Dummy data Comment Created";
+    if ($result) {
+        $out .= "Dummy data Comment Created<BR>";
     } else {
-        $out .= "Dummy data Comment NOT created";;
+        $out .= "Dummy data Comment NOT created<BR>";;
     }
 
-    $cmd = "insert into ".$table_prefix."pages (id, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
-           (1, 'My firts Page', 'Subtitle of my first page', 'summary of my first page',
+    $cmd = "insert into ".$table_prefix."pages (id, indexnumer, title, subtitle, summary, body, tag, metadescription, metakeyword) values
+           (1, 1, 'My firts Page', 'Subtitle of my first page', 'summary of my first page',
             'Body of my first page', 'tag of my first page',
-            'metadescription of my first page', 'metakeyword of my first page', now(), now())";
+            'metadescription of my first page', 'metakeyword of my first page')";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Dummy data Page Created";
+    if ($result) {
+        $out .= "Dummy data Page Created<BR>";
     } else {
-        $out .= "Dummy data Page NOT created";;
+        $out .= "Dummy data Page NOT created<BR>";;
     }
 
-    $cmd = "insert into ".$table_prefix."users (name, username, password, role, email, msn, skype, created, updated) values
-           ('New User', 'newuser', 'psw', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', now(), now())";
+    $cmd = "insert into ".$table_prefix."users (name, username, password, role, email, msn, skype) values
+           ('New User', 'newuser', 'psw', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef')";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Dummy data User Created";
+    if ($result) {
+        $out .= "Dummy data User Created<BR>";
     } else {
-        $out .= "Dummy data User NOT created";;
+        $out .= "Dummy data User NOT created<BR>";;
     }
 
     $cmd = "insert into ".$table_prefix."users_articles (id, article_id, user_id) values
            (1, 1, 1)";
 
-    $result = mysql_db_query($db,$cmd);
+    $result = mysql_query($cmd, $connection);
 
-    if (!$result) {
-        $out .= "Dummy data Relation User<->Article Created";
+    if ($result) {
+        $out .= "Dummy data Relation User<->Article Created<BR>";
     } else {
-        $out .= "Dummy data Relation User<->Article NOT created";;
+        $out .= "Dummy data Relation User<->Article NOT created<BR>";;
     }
-    
-    mysql_close($dbh);
+
+    mysql_close($connection);
 } else {
     $out = "Errore nella connessione<BR>".mysql_errno().": ".mysql_error();
 }
 
-
+echo $out;
 
 ?>
