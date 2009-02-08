@@ -23,14 +23,10 @@ include('costants.php');
 include(PLUGINPATH.'commandSandBox/index.php');
 include(ROUTERPATH.'routerfactory.php');
 
-echo "start";
-
 $routerFactory = new RouterFactory();
 
 $router = $routerFactory->createRouter("index");
 
 $router->show();
-
-echo "fine";
 
 ?>

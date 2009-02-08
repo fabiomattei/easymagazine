@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
-echo "Funziona!!!";
+echo "<br><br>Funziona!!!<br>";
 
 echo "Provo a stampare il primo numero<br>";
 
 
+echo $_SESSION['number']->getTitle();
 
-echo $number->getTitle();
+//echo $number->getTitle();
 
 
 

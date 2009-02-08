@@ -52,7 +52,6 @@ class Number {
             array("$id"));
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                echo "entarto!!!";
                 $ret = new Number($row['id'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }

@@ -18,13 +18,19 @@
  */
 
 include('router.php');
+include(DATAMODELPATH.'/number.php');
 
 class IndexRouter extends Router {
 
+//    function loadController(){
+//        if (file_exists(CONTROLLERPATH.'/index.php')) {
+//            include (CONTROLLERPATH.'/index.php');
+//        }
+//    }
+
     function loadController(){
-        if (file_exists(CONTROLLERPATH.'/index.php')) {
-            include (CONTROLLERPATH.'/index.php');
-        }
+        $number = Number::findById(1);
+        $_SESSION['number']=$number;
     }
 
     function applyTemplate(){

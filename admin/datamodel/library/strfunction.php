@@ -28,7 +28,6 @@ class StrHelper {
             $out .= $key.$newArray[$i];
             $i++;
         }
-        echo $out;
         return $out;
     }
 

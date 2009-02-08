@@ -25,7 +25,7 @@ include(COMMANDPATH.'/remote.php');
 class ProofCommand implements Command {
 
     function execute(){
-        echo "I'm a command";
+        echo "<br>I'm a command!!!<br>";
     }
     
 }
