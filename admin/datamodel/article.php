@@ -37,6 +37,7 @@ class Article {
     const DELETE_SQL = 'delete from articles where id=?';
     const SELECT_BY_ID = 'select * from articles where id = ?';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
+    const SELECT_COMMENTS_PUB = 'select * from comments where publisched=1 AND article_id = ? order by created DESC';
 
     public function __construct($id=NEW_NUMBER, $number_id=NEW_NUMBER, $indexnumber='', $publisched='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
@@ -81,6 +82,29 @@ class Article {
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
                 $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['publisched'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+            }
+        }
+        return $ret;
+    }
+
+    public function comments() {
+        $tables = array('comments' => TBPREFIX.'comments');
+        $rs = DB::getInstance()->execute(
+            self::SELECT_COMMENTS_PUB,
+            array("$this->id"),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Comment(
+                    $row['id'],
+                    $row['article_id'],
+                    $row['title'],
+                    $row['publisched'],
+                    $row['body'],
+                    $row['signature'],
+                    $row['created'],
+                    $row['updated']);
             }
         }
         return $ret;

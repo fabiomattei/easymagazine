@@ -17,26 +17,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include('router.php');
-include(DATAMODELPATH.'/page.php');
+echo $this->article->getTitle()."<br>";
 
-class PagesRouter extends Router {
+//foreach($this->number->articles()  as $article) {
+//    echo $article->getTitle()."<br>";
+//}
 
-    private $page;
-
-    function loadData(){
-        $arURI = $this->getArrayURI();
-        $this->page = Page::findById($arURI['id']);
-    }
-
-    function applyTemplate(){
-        if (file_exists(TEMPLATEPATH.'/page.php')) {
-            include (TEMPLATEPATH.'/page.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
-    }
-
-}
 
 ?>

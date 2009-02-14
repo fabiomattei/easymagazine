@@ -20,9 +20,13 @@
 class Comment {
     const NEW_COMMENT = -1;
     private $id = self::NEW_COMMENT;
+    private $article_id;
     private $title;
+    private $publisched;
     private $body;
     private $signature;
+    private $created;
+    private $updated;
     private $db;
 
     const INSERT_SQL = 'insert into comments (title, body, signature, created, updated) values (?, ?, ?, now(), now())';
@@ -31,12 +35,16 @@ class Comment {
     const SELECT_BY_ID = 'select title, body, signature, created, updated from comments where id = ?';
     const SELECT_BY_TITLE = 'select title, body, signature, created, updated from comments where title like ?';
 
-    public function __construct($id, $title, $body, $signature) {
+    public function __construct($id, $article_id, $title, $publisched, $body, $signature, $created, $updated) {
         $this->db = DB::getInstance();
         $this->id = $id;
+        $this->article_id = $article_id;
         $this->title = $title;
+        $this->publisched = $publisched;
         $this->body = $body;
         $this->signature = $signature;
+        $this->created = $created;
+        $this->updated = $updated;
     }
 
     public function getId() {
@@ -101,12 +109,28 @@ class Comment {
         }
     }
 
+    public function getArticle_id() {
+        return $this->article_id;
+    }
+
+    public function setArticle_id($article_id) {
+        $this->article_id = $article_id;
+    }
+
     public function getTitle() {
         return $this->title;
     }
 
     public function setTitle($title) {
         $this->title = $title;
+    }
+
+    public function getPublisched() {
+        return $this->publisched;
+    }
+
+    public function setPublisched($publisched) {
+        $this->publisched = $publisched;
     }
 
     public function getBody() {
@@ -123,6 +147,22 @@ class Comment {
 
     public function setSignature($signature) {
         $this->signature = $signature;
+    }
+
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function setCreated($created) {
+        $this->created = $created;
+    }
+
+    public function getUpdated() {
+        return $this->updated;
+    }
+
+    public function setUpdated($updated) {
+        $this->updated = $updated;
     }
         
 }

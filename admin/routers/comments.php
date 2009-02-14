@@ -17,22 +17,24 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+include(DATAMODELPATH.'/article.php');
+
 include('router.php');
 
 class CommentsRouter extends Router {
 
+    private $article;
+
     function loadData(){
-        if (file_exists(CONTROLLERPATH.'/index.php')) {
-            include (CONTROLLERPATH.'/index.php');
-        }
+        $arURI = $this->getArrayURI();
+        $this->article = Article::findById($arURI['id']);
     }
 
     function applyTemplate(){
         if (file_exists(TEMPLATEPATH.'/comments.php')) {
             include (TEMPLATEPATH.'/comments.php');
 
-        }
-        if (file_exists(TEMPLATEPATH.'/index.php')) {
+        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
             include (TEMPLATEPATH.'/index.php');
 
         }

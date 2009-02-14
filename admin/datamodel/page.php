@@ -21,6 +21,8 @@ class Page {
     const NEW_PAGE = -1;
     private $id = self::NEW_PAGE;
     private $title;
+    private $publisched;
+    private $indexnumber;
     private $subtitle;
     private $summary;
     private $body;
@@ -32,17 +34,15 @@ class Page {
     const INSERT_SQL = 'insert into pages (title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update pages set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
     const DELETE_SQL = 'delete from pages where id=?';
-    const SELECT_BY_ID = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from pages where id = ?';
-    const SELECT_BY_TITLE = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from pages where title like ?';
+    const SELECT_BY_ID = 'select * from pages where id = ?';
+    const SELECT_BY_TITLE = 'select * from pages where title like ?';
 
-    public function __construct() {
-        $this->db = DB::getInstance();
-    }
-
-    public function __construct($id, $title, $subtitle, $summary, $body, $tag, $metadescription, $metakeyword) {
+    public function __construct($id=NEW_NUMBER, $title='', $publisched='', $indexnumber='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->title = $title;
+        $this->publisched = $publisched;
+        $this->indexnumber = $indexnumber;    
         $this->subtitle = $subtitle;
         $this->summary = $summary;
         $this->body = $body;
@@ -55,14 +55,15 @@ class Page {
         return $this->id;
     }
 
-    public static function findByTitle($title) {
-        $rs = $this->db->execute(
-            self::SELECT_BY_TITLE,
-            array("%$title%"));
-        $ret = array();
+    public static function findById($id) {
+        $tables = array('pages' => TBPREFIX.'pages');
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_ID,
+            array("$id"),
+            $tables);
         if ($rs) {
-            foreach ($rs->getArray() as $row) {
-                $ret[] = new Article($row['id'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Page($row['id'], $row['title'], $row['publisched'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
         return $ret;
@@ -123,6 +124,22 @@ class Page {
 
     public function setTitle($title) {
         $this->title = $title;
+    }
+
+    public function getPublisched() {
+        return $this->publisched;
+    }
+
+    public function setPublisched($publisched) {
+        $this->publisched = $publisched;
+    }
+
+    public function getIndexnumber() {
+        return $this->indexnumber;
+    }
+
+    public function setIndexnumber($indexnumber) {
+        $this->indexnumber = $indexnumber;
     }
 
     public function getSubtitle() {
