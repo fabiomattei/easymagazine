@@ -34,11 +34,13 @@ class ArticlesRouter extends Router {
     }
 
     function applyTemplate(){
+        $this->getRemote()->executeCommandBeforeArticle();
         if (file_exists(TEMPLATEPATH.'/article.php')) {
             include (TEMPLATEPATH.'/article.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
             include (TEMPLATEPATH.'/index.php');
         }
+        $this->getRemote()->executeCommandAfterArticle();
     }
 
 }

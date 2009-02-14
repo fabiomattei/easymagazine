@@ -34,6 +34,7 @@ class CommentsRouter extends Router {
     }
 
     function applyTemplate(){
+        $this->getRemote()->executeCommandBeforeComments();
         if (file_exists(TEMPLATEPATH.'/comments.php')) {
             include (TEMPLATEPATH.'/comments.php');
 
@@ -41,6 +42,7 @@ class CommentsRouter extends Router {
             include (TEMPLATEPATH.'/index.php');
 
         }
+        $this->getRemote()->executeCommandAfterComments();
     }
 
 }

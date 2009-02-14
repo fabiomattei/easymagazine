@@ -42,12 +42,15 @@ abstract class Router {
 
         $this->loadData();
 
+        $this->remote->executeCommandBeforeHeader();
         $this->header();
+        $this->remote->executeCommandAfterHeader();
 
-        $this->remote->executeCommandBeforeIndex();
         $this->applyTemplate();
 
+        $this->remote->executeCommandBeforeFooter();
         $this->footer();
+        $this->remote->executeCommandAfterFooter();
 
         $this->session->closingPage();
     }
@@ -68,6 +71,9 @@ abstract class Router {
         return $this->arrayURY;
     }
 
+    public function getRemote() {
+        return $this->remote;
+    }
 }
 
 ?>

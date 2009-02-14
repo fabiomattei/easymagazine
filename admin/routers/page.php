@@ -32,11 +32,13 @@ class PagesRouter extends Router {
     }
 
     function applyTemplate(){
+        $this->getRemote()->executeCommandBeforePage();
         if (file_exists(TEMPLATEPATH.'/page.php')) {
             include (TEMPLATEPATH.'/page.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
             include (TEMPLATEPATH.'/index.php');
         }
+        $this->getRemote()->executeCommandAfterPage();
     }
 
 }

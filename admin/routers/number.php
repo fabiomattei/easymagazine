@@ -28,11 +28,13 @@ class NumberRouter extends Router {
     }
 
     function applyTemplate(){
+        $this->getRemote()->executeCommandBeforeNumber();
         if (file_exists(TEMPLATEPATH.'/number.php')) {
             include (TEMPLATEPATH.'/number.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
             include (TEMPLATEPATH.'/index.php');
         }
+        $this->getRemote()->executeCommandAfterNumber();
     }
 
 }

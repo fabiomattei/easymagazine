@@ -42,7 +42,7 @@ class FilterRemote {
     }
 
     function executeFiltersArticleGetTitle($string){
-        foreach ( $this->filtersArticleGetTitle as $filterCommand ) {
+        foreach ($this->filtersArticleGetTitle as $filterCommand) {
             $string = $filterCommand->execute($string);
         }
         return $string;
