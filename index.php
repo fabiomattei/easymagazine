@@ -22,11 +22,24 @@ include('costants.php');
 
 include(PLUGINPATH.'commandSandBox/index.php');
 include(ROUTERPATH.'routerfactory.php');
+include(URIPATH.'uridefault.php');
+
+if (isset ($_GET['uri'])) {
+    $uridefault = new UriDefault($_GET['uri']);
+    $uridefault->evaluate();
+    $arURI = $uridefault->getArrayuri();
+} else {
+    $arURI = array('Router' => 'index');
+}
 
 $routerFactory = new RouterFactory();
 
-$router = $routerFactory->createRouter("index");
+$router = $routerFactory->createRouter($arURI);
 
 $router->show();
+
+echo "<br>URI:".$_GET['uri'];
+echo "<br>ar URI:".$arURI;
+print_r($arURI);
 
 ?>

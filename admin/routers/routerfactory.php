@@ -21,19 +21,22 @@ include('rindex.php');
 include('comments.php');
 include('page.php');
 include('article.php');
+include('number.php');
 
 class RouterFactory {
 
     public function createRouter($request) {
         $out = null;
 
-        if ($request == "index") $out = new IndexRouter();
+        if ($request['Router'] == "index") $out = new IndexRouter();
 
-        if ($request == "comments") $out = new CommentsRouter();
+        if ($request['Router'] == "comments") $out = new CommentsRouter();
 
-        if ($request == "page") $out = new PagesRouter();
+        if ($request['Router'] == "page") $out = new PagesRouter();
 
-        if ($request == "article") $out = new ArticlesRouter();
+        if ($request['Router'] == "article") $out = new ArticlesRouter();
+
+        if ($request['Router'] == "number") $out = new NumberRouter();
 
         return $out;
     }

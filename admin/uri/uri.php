@@ -17,18 +17,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+abstract class URI {
 
-define('ADMINPATH', 'admin/view/');
-define('COMMANDPATH', 'admin/command/');
-define('ROUTERPATH', 'admin/routers/');
-define('CONTROLLERPATH', 'admin/controller/');
-define('DATAMODELPATH', 'admin/datamodel/');
-define('SESSIONPATH', 'admin/sessionmanager/');
-define('URIPATH', 'admin/uri/');
-define('DBPATH', 'admin/datamodel/library/');
-define('BASEPATH', '');
+    public $arrayURI;
+    public $uri;
 
-define('PLUGINPATH', 'contents/plug_in/');
-define('TEMPLATEPATH', 'contents/templates/default/');
+    public function __construct($uri) {
+        $this->uri = $uri;
+    }
+
+    abstract function evaluate();
+
+    public function getArrayuri() {
+        return $this->arrayURI;
+    }
+
+}
 
 ?>

@@ -17,18 +17,24 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+include('router.php');
 
-define('ADMINPATH', 'admin/view/');
-define('COMMANDPATH', 'admin/command/');
-define('ROUTERPATH', 'admin/routers/');
-define('CONTROLLERPATH', 'admin/controller/');
-define('DATAMODELPATH', 'admin/datamodel/');
-define('SESSIONPATH', 'admin/sessionmanager/');
-define('URIPATH', 'admin/uri/');
-define('DBPATH', 'admin/datamodel/library/');
-define('BASEPATH', '');
+class NumberRouter extends Router {
 
-define('PLUGINPATH', 'contents/plug_in/');
-define('TEMPLATEPATH', 'contents/templates/default/');
+    private $article;
+
+    function loadData(){
+        $this->article = Number::findLast();
+    }
+
+    function applyTemplate(){
+        if (file_exists(TEMPLATEPATH.'/number.php')) {
+            include (TEMPLATEPATH.'/number.php');
+        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
+            include (TEMPLATEPATH.'/index.php');
+        }
+    }
+
+}
 
 ?>

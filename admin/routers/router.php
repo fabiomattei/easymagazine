@@ -24,9 +24,10 @@ abstract class Router {
 
     private $remote;
     private $session;
-    public $prova = "aleooo";
+    private $arrayURY;
 
-    public function  __construct() {
+    public function  __construct($arrayURI) {
+        $this->arrayURY = $arrayURI;
         $this->remote = Remote::getInstance();
         $this->session = SessionManager::getInstance();
     }
