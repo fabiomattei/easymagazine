@@ -21,7 +21,7 @@ class Page {
     const NEW_PAGE = -1;
     private $id = self::NEW_PAGE;
     private $title;
-    private $publisched;
+    private $published;
     private $indexnumber;
     private $subtitle;
     private $summary;
@@ -35,14 +35,14 @@ class Page {
     const UPDATE_SQL = 'update pages set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
     const DELETE_SQL = 'delete from pages where id=?';
     const SELECT_BY_ID = 'select * from pages where id = ?';
-    const SELECT_ALL_PUBLISCHED = 'select * from pages where publisched = 1 order by indexnumber';
+    const SELECT_ALL_published = 'select * from pages where published = 1 order by indexnumber';
     const SELECT_BY_TITLE = 'select * from pages where title like ?';
 
-    public function __construct($id=NEW_NUMBER, $title='', $publisched='', $indexnumber='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
+    public function __construct($id=NEW_NUMBER, $title='', $published='', $indexnumber='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->title = $title;
-        $this->publisched = $publisched;
+        $this->published = $published;
         $this->indexnumber = $indexnumber;    
         $this->subtitle = $subtitle;
         $this->summary = $summary;
@@ -64,7 +64,7 @@ class Page {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Page($row['id'], $row['title'], $row['publisched'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret = new Page($row['id'], $row['title'], $row['published'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
         return $ret;
@@ -73,13 +73,13 @@ class Page {
     public static function findAllPublished() {
         $tables = array('pages' => TBPREFIX.'pages');
         $rs = DB::getInstance()->execute(
-            self::SELECT_ALL_PUBLISCHED,
+            self::SELECT_ALL_published,
             array(),
             $tables);
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Page($row['id'], $row['title'], $row['publisched'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret[] = new Page($row['id'], $row['title'], $row['published'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
         return $ret;
@@ -142,12 +142,12 @@ class Page {
         $this->title = $title;
     }
 
-    public function getPublisched() {
-        return $this->publisched;
+    public function getpublished() {
+        return $this->published;
     }
 
-    public function setPublisched($publisched) {
-        $this->publisched = $publisched;
+    public function setpublished($published) {
+        $this->published = $published;
     }
 
     public function getIndexnumber() {

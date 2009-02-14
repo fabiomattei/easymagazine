@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include('adminrouter.php');
+require_once('adminrouter.php');
 
 class AdminNumberRouter extends AdminRouter {
     function applyTemplate(){

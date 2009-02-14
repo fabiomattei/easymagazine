@@ -22,7 +22,7 @@
 define('DB_NAME', 'easymagazine');    // The name of the database
 define('DB_USER', 'root');     // Your MySQL username
 define('DB_PASSWORD', 'root'); // ...and password
-define('DB_HOST', 'localhost:8889');    // 99% chance you won't need to change this value
+define('DB_HOST', 'localhost');    // 99% chance you won't need to change this value
 //  define('DB_CHARSET', 'utf8');
 
 // You can have multiple installations in one database if you give each a unique prefix

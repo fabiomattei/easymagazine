@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include (DBPATH.'db.php');
-include (DATAMODELPATH.'article.php');
+require_once(DBPATH.'db.php');
+require_once(DATAMODELPATH.'article.php');
 
 class Number {
     const NEW_NUMBER = -1;
@@ -34,10 +34,10 @@ class Number {
     const DELETE_SQL = 'delete from numbers where id = ?';
     const SELECT_BY_ID = 'select id, indexnumber, title, subtitle, summary from numbers where id = ?';
     const SELECT_BY_TITLE = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
-    const SELECT_LAST = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by indexnumber DESC Limit 1';
-    const SELECT_ALL_PUB = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by indexnumber DESC';
-    const SELECT_ALL = 'select id, indexnumber, title, subtitle, summary from numbers where publisched=1 order by id DESC';
-    const SELECT_ARTICLES_PUB = 'select * from articles where publisched=1 AND number_id = ? order by indexnumber DESC';
+    const SELECT_LAST = 'select id, indexnumber, title, subtitle, summary from numbers where published=1 order by indexnumber DESC Limit 1';
+    const SELECT_ALL_PUB = 'select id, indexnumber, title, subtitle, summary from numbers where published=1 order by indexnumber DESC';
+    const SELECT_ALL = 'select id, indexnumber, title, subtitle, summary from numbers where published=1 order by id DESC';
+    const SELECT_ARTICLES_PUB = 'select * from articles where published=1 AND number_id = ? order by indexnumber DESC';
 
     public function __construct($id=NEW_NUMBER, $indexnumber="", $title="", $subtitle="", $summary="") {
         $this->db = DB::getInstance();
@@ -137,7 +137,7 @@ class Number {
                     $row['id'],
                     $row['number_id'],
                     $row['indexnumber'],
-                    $row['publisched'],
+                    $row['published'],
                     $row['title'],
                     $row['subtitle'],
                     $row['summary'],

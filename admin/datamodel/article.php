@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include (DBPATH.'db.php');
-include (DATAMODELPATH.'comment.php');
+require_once(DBPATH.'db.php');
+require_once(DATAMODELPATH.'comment.php');
 
 class Article {
     const NEW_ARTICLE = -1;
@@ -37,14 +37,14 @@ class Article {
     const DELETE_SQL = 'delete from articles where id=?';
     const SELECT_BY_ID = 'select * from articles where id = ?';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
-    const SELECT_COMMENTS_PUB = 'select * from comments where publisched=1 AND article_id = ? order by created DESC';
+    const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = ? order by created DESC';
 
-    public function __construct($id=NEW_NUMBER, $number_id=NEW_NUMBER, $indexnumber='', $publisched='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
+    public function __construct($id=NEW_NUMBER, $number_id=NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
         $this->indexnumber = $indexnumber;
-        $this->publisched = $publisched;
+        $this->published = $published;
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->summary = $summary;
@@ -67,7 +67,7 @@ class Article {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['publisched'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
         return $ret;
@@ -81,7 +81,7 @@ class Article {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['publisched'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
         return $ret;
@@ -100,7 +100,7 @@ class Article {
                     $row['id'],
                     $row['article_id'],
                     $row['title'],
-                    $row['publisched'],
+                    $row['published'],
                     $row['body'],
                     $row['signature'],
                     $row['created'],

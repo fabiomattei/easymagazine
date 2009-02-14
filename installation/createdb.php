@@ -27,7 +27,7 @@ mysql_select_db(DB_NAME, $connection);
 $cmd = "CREATE TABLE ".TBPREFIX."numbers (
        id int(11) NOT NULL auto_increment,
        indexnumber int,
-       publisched int,
+       published int,
        title varchar(255),
        subtitle text,
        summary text,
@@ -47,7 +47,7 @@ if ($connection) {
        id int(11) NOT NULL auto_increment,
        number_id int(11),
        indexnumber int,
-       publisched int,
+       published int,
        title varchar(255),
        subtitle text,
        summary text,
@@ -72,7 +72,7 @@ if ($connection) {
        id int(11) NOT NULL auto_increment,
        article_id int(11),
        title varchar(255),
-       publisched int,
+       published int,
        body text,
        signature text,
        created datetime,
@@ -91,7 +91,7 @@ if ($connection) {
     $cmd = "CREATE TABLE ".TBPREFIX."pages (
        id int(11) NOT NULL auto_increment,
        title varchar(255),
-       publisched int,
+       published int,
        indexnumber int,
        subtitle text,
        summary text,
@@ -147,7 +147,7 @@ if ($connection) {
 
     // Populate the tables with some dummy data
 
-    $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, publisched, title, subtitle, summary)
+    $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary)
             values (1, 1, 1, 'My first number', 'Subtitle to my first number',
             'Summary of my first number')";
 
@@ -159,7 +159,7 @@ if ($connection) {
         $out .= "Dummy data Number NOT created<BR>";;
     }
 
-    $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, publisched, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+    $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
            (1, 1, 1, 1, 'My firts Article', 'Subtitle of my first article', 'summary of my first article',
             'Body of my first article', 'tag of my first article',
             'metadescription of my first article', 'metakeyword of my first article', now(), now())";
@@ -172,7 +172,7 @@ if ($connection) {
         $out .= "Dummy data Article NOT created<BR>";;
     }
 
-    $cmd = "insert into ".TBPREFIX."comments (id, article_id, publisched, title, body, signature, created, updated) values
+    $cmd = "insert into ".TBPREFIX."comments (id, article_id, published, title, body, signature, created, updated) values
            (1, 1, 1, 'My first comment', 'text of my first comment', 'signature of my first comment', now(), now())";
 
     $result = mysql_query($cmd, $connection);
@@ -183,7 +183,7 @@ if ($connection) {
         $out .= "Dummy data Comment NOT created<BR>";;
     }
 
-    $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, publisched, title, subtitle, summary, body, tag, metadescription, metakeyword) values
+    $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword) values
            (1, 1, 1, 'My firts Page', 'Subtitle of my first page', 'summary of my first page',
             'Body of my first page', 'tag of my first page',
             'metadescription of my first page', 'metakeyword of my first page')";

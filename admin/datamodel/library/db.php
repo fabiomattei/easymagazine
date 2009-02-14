@@ -18,7 +18,7 @@
  */
 
 require_once(BASEPATH.'config.php');
-include (DBPATH.'strfunction.php');
+require_once(DBPATH.'strfunction.php');
 
 class DB {
     private static $instance = null;

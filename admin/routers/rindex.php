@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include('router.php');
-include(DATAMODELPATH.'/number.php');
-include(DATAMODELPATH.'/page.php');
+require_once('router.php');
+require_once(DATAMODELPATH.'/number.php');
+require_once(DATAMODELPATH.'/page.php');
 
 class IndexRouter extends Router {
 

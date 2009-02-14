@@ -22,7 +22,7 @@ class Comment {
     private $id = self::NEW_COMMENT;
     private $article_id;
     private $title;
-    private $publisched;
+    private $published;
     private $body;
     private $signature;
     private $created;
@@ -35,12 +35,12 @@ class Comment {
     const SELECT_BY_ID = 'select title, body, signature, created, updated from comments where id = ?';
     const SELECT_BY_TITLE = 'select title, body, signature, created, updated from comments where title like ?';
 
-    public function __construct($id, $article_id, $title, $publisched, $body, $signature, $created, $updated) {
+    public function __construct($id, $article_id, $title, $published, $body, $signature, $created, $updated) {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->article_id = $article_id;
         $this->title = $title;
-        $this->publisched = $publisched;
+        $this->published = $published;
         $this->body = $body;
         $this->signature = $signature;
         $this->created = $created;
@@ -125,12 +125,12 @@ class Comment {
         $this->title = $title;
     }
 
-    public function getPublisched() {
-        return $this->publisched;
+    public function getpublished() {
+        return $this->published;
     }
 
-    public function setPublisched($publisched) {
-        $this->publisched = $publisched;
+    public function setpublished($published) {
+        $this->published = $published;
     }
 
     public function getBody() {

@@ -18,11 +18,11 @@
  */
 
 
-include('costants.php');
+require_once('costants.php');
 
-include(PLUGINPATH.'commandSandBox/index.php');
-include(ROUTERPATH.'routerfactory.php');
-include(URIPATH.'uridefault.php');
+require_once(PLUGINPATH.'commandSandBox/index.php');
+require_once(ROUTERPATH.'routerfactory.php');
+require_once(URIPATH.'uridefault.php');
 
 if (isset ($_GET['uri'])) {
     $uridefault = new UriDefault($_GET['uri']);

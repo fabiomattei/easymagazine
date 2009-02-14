@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include('router.php');
+require_once('router.php');
 
 class NumberRouter extends Router {
 

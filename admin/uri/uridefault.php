@@ -27,7 +27,7 @@
  *
  */
 
-include(URIPATH.'/uri.php');
+require_once(URIPATH.'/uri.php');
 
 class UriDefault extends URI {
 

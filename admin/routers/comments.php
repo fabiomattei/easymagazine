@@ -17,10 +17,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include(DATAMODELPATH.'/article.php');
-include(DATAMODELPATH.'/page.php');
+require_once(DATAMODELPATH.'/article.php');
+require_once(DATAMODELPATH.'/page.php');
 
-include('router.php');
+require_once('router.php');
 
 class CommentsRouter extends Router {
 

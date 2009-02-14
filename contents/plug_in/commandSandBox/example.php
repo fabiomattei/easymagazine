@@ -17,9 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include(COMMANDPATH.'/command.php');
-include(COMMANDPATH.'/remote.php');
-
+require_once(COMMANDPATH.'/command.php');
+require_once(COMMANDPATH.'/remote.php');
 
 
 class ProofCommand implements Command {

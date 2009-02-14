@@ -17,11 +17,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include('rindex.php');
-include('comments.php');
-include('page.php');
-include('article.php');
-include('number.php');
+require_once('rindex.php');
+require_once('comments.php');
+require_once('page.php');
+require_once('article.php');
+require_once('number.php');
 
 class RouterFactory {
 
