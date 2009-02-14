@@ -35,8 +35,8 @@ class Article {
     const INSERT_SQL = 'insert into articles (title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update articles set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
     const DELETE_SQL = 'delete from articles where id=?';
-    const SELECT_BY_ID = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from articles where id = ?';
-    const SELECT_BY_TITLE = 'select title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated from articles where title like ?';
+    const SELECT_BY_ID = 'select * from articles where id = ?';
+    const SELECT_BY_TITLE = 'select * from articles where title like ?';
 
     public function __construct($id=NEW_NUMBER, $number_id=NEW_NUMBER, $indexnumber='', $publisched='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
@@ -58,13 +58,29 @@ class Article {
     }
 
     public static function findByTitle($title) {
-        $rs = $this->db->execute(
+        $tables = array("articles" => TBPREFIX."articles");
+        $rs = DB::getInstance()->execute(
             self::SELECT_BY_TITLE,
-            array("%$title%"));
+            array("%$title%"),
+            $tables);
         $ret = array();
         if ($rs) {
-            foreach ($rs->getArray() as $row) {
-                $ret[] = new Article($row['id'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['publisched'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findById($id) {
+        $tables = array("articles" => TBPREFIX."articles");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_ID,
+            array("$id"),
+            $tables);
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['publisched'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
         return $ret;

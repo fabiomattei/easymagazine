@@ -63,6 +63,10 @@ abstract class Router {
         }
     }
 
+    public function getArrayURI() {
+        return $this->arrayURY;
+    }
+
 }
 
 ?>

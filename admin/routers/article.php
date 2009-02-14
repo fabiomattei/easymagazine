@@ -17,6 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+include(DATAMODELPATH.'/article.php');
+
 include('router.php');
 
 class ArticlesRouter extends Router {
@@ -24,7 +26,8 @@ class ArticlesRouter extends Router {
     private $article;
 
     function loadData(){
-        $this->article = Number::findLast();
+        $arURI = $this->getArrayURI();
+        $this->article = Article::findById($arURI['id']);
     }
 
     function applyTemplate(){
