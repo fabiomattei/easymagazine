@@ -38,8 +38,4 @@ $router = $routerFactory->createRouter($arURI);
 
 $router->show();
 
-echo "<br>URI:".$_GET['uri'];
-echo "<br>ar URI:".$arURI;
-print_r($arURI);
-
 ?>

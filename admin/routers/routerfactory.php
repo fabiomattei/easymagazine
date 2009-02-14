@@ -28,15 +28,15 @@ class RouterFactory {
     public function createRouter($request) {
         $out = null;
 
-        if ($request['Router'] == "index") $out = new IndexRouter();
+        if ($request['Router'] == "index") $out = new IndexRouter($request);
 
-        if ($request['Router'] == "comments") $out = new CommentsRouter();
+        if ($request['Router'] == "comments") $out = new CommentsRouter($request);
 
-        if ($request['Router'] == "page") $out = new PagesRouter();
+        if ($request['Router'] == "page") $out = new PagesRouter($request);
 
-        if ($request['Router'] == "article") $out = new ArticlesRouter();
+        if ($request['Router'] == "article") $out = new ArticlesRouter($request);
 
-        if ($request['Router'] == "number") $out = new NumberRouter();
+        if ($request['Router'] == "number") $out = new NumberRouter($request);
 
         return $out;
     }
