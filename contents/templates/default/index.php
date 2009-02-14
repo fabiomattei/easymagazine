@@ -19,10 +19,16 @@
 
 echo $this->number->getTitle()."<br>";
 
+echo "<br><br>Articles<br>";
+
 foreach($this->number->articles()  as $article) {
-    echo $article->getTitle()."<br>";
+    echo '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a><br>";
 }
 
+echo "<br><br>Pages<br>";
+foreach($this->pages  as $page) {
+    echo '<a href="'.URIMaker::page($page).'"> '.$page->getTitle()." </a><br>";
+}
 
 
 ?>

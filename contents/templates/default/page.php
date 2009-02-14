@@ -19,4 +19,9 @@
 
 echo $this->page->getTitle()."<br>";
 
+echo "<br><br>Pages<br>";
+foreach($this->pages  as $one) {
+    echo '<a href="'.URIMaker::page($one).'"> '.$one->getTitle()." </a><br>";
+}
+
 ?>

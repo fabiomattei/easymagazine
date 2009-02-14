@@ -17,28 +17,26 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include('router.php');
-include(DATAMODELPATH.'/page.php');
-
-class PagesRouter extends Router {
-
-    private $page;
-    private $pages;
-
-    function loadData(){
-        $arURI = $this->getArrayURI();
-        $this->page = Page::findById($arURI['id']);
-        $this->pages = Page::findAllPublished();
+class URIMaker {
+    static function article($article) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'articles/'.$article->getTitle().'/'.$article->getId();
     }
 
-    function applyTemplate(){
-        if (file_exists(TEMPLATEPATH.'/page.php')) {
-            include (TEMPLATEPATH.'/page.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
+    static function number($number) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'numbers/'.$number->getTitle().'/'.$article->getId();
     }
 
+    static function comment($article) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'comments/'.$article->getTitle().'/'.$article->getId();
+    }
+
+    static function page($page) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'pages/'.$page->getTitle().'/'.$page->getId();
+    }
+
+    static function index() {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER;
+    }
 }
 
 ?>

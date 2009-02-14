@@ -19,9 +19,13 @@
 
 echo $this->article->getTitle()."<br>";
 
-//foreach($this->number->articles()  as $article) {
-//    echo $article->getTitle()."<br>";
-//}
+foreach($this->article->comments()  as $comment) {
+    echo $comment->getTitle()."<br>";
+}
 
+echo "<br><br>Pages<br>";
+foreach($this->pages  as $page) {
+    echo '<a href="'.URIMaker::page($page).'"> '.$page->getTitle()." </a><br>";
+}
 
 ?>

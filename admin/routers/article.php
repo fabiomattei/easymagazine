@@ -18,16 +18,19 @@
  */
 
 include(DATAMODELPATH.'/article.php');
+include(DATAMODELPATH.'/page.php');
 
 include('router.php');
 
 class ArticlesRouter extends Router {
 
     private $article;
+    private $pages;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
+        $this->pages = Page::findAllPublished();
     }
 
     function applyTemplate(){

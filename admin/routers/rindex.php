@@ -19,13 +19,16 @@
 
 include('router.php');
 include(DATAMODELPATH.'/number.php');
+include(DATAMODELPATH.'/page.php');
 
 class IndexRouter extends Router {
 
     private $number;
+    private $pages;
 
     function loadData(){
         $this->number = Number::findLast();
+        $this->pages = Page::findAllPublished();
     }
 
     function applyTemplate(){

@@ -35,6 +35,7 @@ class Page {
     const UPDATE_SQL = 'update pages set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
     const DELETE_SQL = 'delete from pages where id=?';
     const SELECT_BY_ID = 'select * from pages where id = ?';
+    const SELECT_ALL_PUBLISCHED = 'select * from pages where publisched = 1 order by indexnumber';
     const SELECT_BY_TITLE = 'select * from pages where title like ?';
 
     public function __construct($id=NEW_NUMBER, $title='', $publisched='', $indexnumber='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
@@ -64,6 +65,21 @@ class Page {
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
                 $ret = new Page($row['id'], $row['title'], $row['publisched'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findAllPublished() {
+        $tables = array('pages' => TBPREFIX.'pages');
+        $rs = DB::getInstance()->execute(
+            self::SELECT_ALL_PUBLISCHED,
+            array(),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Page($row['id'], $row['title'], $row['publisched'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
         return $ret;

@@ -19,6 +19,7 @@
 
 include(COMMANDPATH.'/remote.php');
 include(SESSIONPATH.'/sessionmanager.php');
+include(URIPATH.'/urimaker.php');
 
 abstract class Router {
 
