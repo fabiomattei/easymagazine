@@ -17,19 +17,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+interface FilterCommand {
 
-define('ADMINPATH', 'admin/view/');
-define('COMMANDPATH', 'admin/command/');
-define('ROUTERPATH', 'admin/routers/');
-define('FILTERPATH', 'admin/filters/');
-define('CONTROLLERPATH', 'admin/controller/');
-define('DATAMODELPATH', 'admin/datamodel/');
-define('SESSIONPATH', 'admin/sessionmanager/');
-define('URIPATH', 'admin/uri/');
-define('DBPATH', 'admin/datamodel/library/');
-define('BASEPATH', '');
+    function execute($string);
 
-define('PLUGINPATH', 'contents/plug_in/');
-define('TEMPLATEPATH', 'contents/templates/default/');
+}
 
 ?>

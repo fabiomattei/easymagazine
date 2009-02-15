@@ -19,6 +19,7 @@
 
 require_once(DBPATH.'db.php');
 require_once(DATAMODELPATH.'comment.php');
+require_once(FILTERPATH.'articlefilterremote.php');
 
 class Article {
     const NEW_ARTICLE = -1;
@@ -31,6 +32,7 @@ class Article {
     private $metadescription;
     private $metakeyword;
     private $db;
+    private $filter;
 
     const INSERT_SQL = 'insert into articles (title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update articles set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
@@ -41,6 +43,7 @@ class Article {
 
     public function __construct($id=NEW_NUMBER, $number_id=NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
+        $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
         $this->indexnumber = $indexnumber;
@@ -160,6 +163,11 @@ class Article {
     }
 
     public function getTitle() {
+        $out = $this->filter->executeFiltersTitle($this->title);
+        return $out;
+    }
+
+    public function getUnfilteredTitle(){
         return $this->title;
     }
 
@@ -168,6 +176,11 @@ class Article {
     }
 
     public function getSubtitle() {
+        $out = $this->filter->executeFiltersSubTitle($this->subtitle);
+        return $out;
+    }
+
+    public function getUnfilteredSubtitle() {
         return $this->subtitle;
     }
 
@@ -176,6 +189,11 @@ class Article {
     }
 
     public function getSummary() {
+        $out = $this->filter->executeFiltersSummary($this->summary);
+        return $out;
+    }
+
+    public function getUnfilteredSummary() {
         return $this->summary;
     }
 
@@ -184,6 +202,11 @@ class Article {
     }
 
     public function getBody() {
+        $out = $this->filter->executeFiltersBody($this->body);
+        return $out;
+    }
+
+    public function getUnfilteredBody() {
         return $this->body;
     }
 
@@ -192,6 +215,11 @@ class Article {
     }
 
     public function getTag() {
+        $out = $this->filter->executeFiltersTag($this->tag);
+        return $out;
+    }
+
+    public function getUnfilteredTag() {
         return $this->tag;
     }
 
