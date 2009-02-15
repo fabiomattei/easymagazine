@@ -17,6 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(FILTERPATH.'pagefilterremote.php');
+
 class Page {
     const NEW_PAGE = -1;
     private $id = self::NEW_PAGE;
@@ -40,6 +42,7 @@ class Page {
 
     public function __construct($id=NEW_NUMBER, $title='', $published='', $indexnumber='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
+        $this->filter = PageFilterRemote::getInstance();
         $this->id = $id;
         $this->title = $title;
         $this->published = $published;
@@ -135,6 +138,11 @@ class Page {
     }
 
     public function getTitle() {
+        $out = $this->filter->executeFiltersTitle($this->title);
+        return $out;
+    }
+
+    public function getUnfilteredTitle(){
         return $this->title;
     }
 
@@ -159,6 +167,11 @@ class Page {
     }
 
     public function getSubtitle() {
+        $out = $this->filter->executeFiltersSubTitle($this->subtitle);
+        return $out;
+    }
+
+    public function getUnfilteredSubtitle() {
         return $this->subtitle;
     }
 
@@ -167,6 +180,11 @@ class Page {
     }
 
     public function getSummary() {
+        $out = $this->filter->executeFiltersSummary($this->summary);
+        return $out;
+    }
+
+    public function getUnfilteredSummary() {
         return $this->summary;
     }
 
@@ -175,6 +193,11 @@ class Page {
     }
 
     public function getBody() {
+        $out = $this->filter->executeFiltersBody($this->body);
+        return $out;
+    }
+
+    public function getUnfilteredBody() {
         return $this->body;
     }
 
@@ -183,6 +206,11 @@ class Page {
     }
 
     public function getTag() {
+        $out = $this->filter->executeFiltersTag($this->tag);
+        return $out;
+    }
+
+    public function getUnfilteredTag() {
         return $this->tag;
     }
 
