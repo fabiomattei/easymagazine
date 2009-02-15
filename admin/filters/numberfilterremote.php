@@ -25,8 +25,6 @@ class NumberFilterRemote {
         $this->filtersGetTitle = array();
         $this->filtersGetSubTitle = array();
         $this->filtersGetSummary = array();
-        $this->filtersGetBody = array();
-        $this->filtersGetTag = array();
     }
 
     public static function getInstance()
@@ -68,28 +66,6 @@ class NumberFilterRemote {
 
     public function executeFiltersSummary($string){
         foreach ($this->filtersGetSummary as $filterCommand) {
-            $string = $filterCommand->execute($string);
-        }
-        return $string;
-    }
-
-    public function addFiltersGetBody($filterCommand) {
-        $this->filtersGetBody[] = $filterCommand;
-    }
-
-    public function executeFiltersBody($string){
-        foreach ($this->filtersGetBody as $filterCommand) {
-            $string = $filterCommand->execute($string);
-        }
-        return $string;
-    }
-
-    public function addFiltersGetTag($filterCommand) {
-        $this->filtersGetTag[] = $filterCommand;
-    }
-
-    public function executeFiltersTag($string){
-        foreach ($this->filtersGetTag as $filterCommand) {
             $string = $filterCommand->execute($string);
         }
         return $string;

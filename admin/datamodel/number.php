@@ -19,6 +19,7 @@
 
 require_once(DBPATH.'db.php');
 require_once(DATAMODELPATH.'article.php');
+require_once(FILTERPATH.'numberfilterremote.php');
 
 class Number {
     const NEW_NUMBER = -1;
@@ -28,6 +29,7 @@ class Number {
     private $subtitle;
     private $summary;
     private $db;
+    private $filter;
 
     const INSERT_SQL = 'insert into numbers (indexnumber, title, subtitle, summary) values (?, ?, ?, ?)';
     const UPDATE_SQL = 'update numbers set indexnumber = ?, title = ?, subtitle = ?, summary = ? where id = ?';
@@ -41,6 +43,7 @@ class Number {
 
     public function __construct($id=NEW_NUMBER, $indexnumber="", $title="", $subtitle="", $summary="") {
         $this->db = DB::getInstance();
+        $this->filter = NumberFilterRemote::getInstance();
         $this->id = $id;
         $this->indexnumber = $indexnumber;
         $this->title = $title;
@@ -195,7 +198,6 @@ class Number {
         }
     }
     
-
     public function getIndexnumber() {
         return $this->indexnumber;
     }
@@ -205,14 +207,25 @@ class Number {
     }
 
     public function getTitle() {
+        $out = $this->filter->executeFiltersTitle($this->title);
+        return $out;
+    }
+
+    public function getUnfilteredTitle(){
         return $this->title;
     }
+
 
     public function setTitle($title) {
         $this->title = $title;
     }
 
     public function getSubtitle() {
+        $out = $this->filter->executeFiltersSubTitle($this->subtitle);
+        return $out;
+    }
+
+    public function getUnfilteredSubtitle() {
         return $this->subtitle;
     }
 
@@ -221,14 +234,18 @@ class Number {
     }
 
     public function getSummary() {
+        $out = $this->filter->executeFiltersSummary($this->summary);
+        return $out;
+    }
+
+    public function getUnfilteredSummary() {
         return $this->summary;
     }
 
     public function setSummary($summary) {
         $this->summary = $summary;
     }
-        
-}
 
+}
 
 ?>
