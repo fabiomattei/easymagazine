@@ -19,6 +19,7 @@
 
 
 // ** MySQL settings ** //
+
 define('DB_NAME', 'easymagazine');    // The name of the database
 define('DB_USER', 'root');     // Your MySQL username
 define('DB_PASSWORD', 'root'); // ...and password
