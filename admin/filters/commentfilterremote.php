@@ -23,10 +23,8 @@ class CommentFilterRemote {
 
     public function __construct() {
         $this->filtersGetTitle = array();
-        $this->filtersGetSubTitle = array();
-        $this->filtersGetSummary = array();
         $this->filtersGetBody = array();
-        $this->filtersGetTag = array();
+        $this->filtersGetSignature = array();
     }
 
     public static function getInstance()
@@ -51,28 +49,6 @@ class CommentFilterRemote {
         return $string;
     }
 
-    public function addFiltersGetSubTitle($filterCommand) {
-        $this->filtersGetSubTitle[] = $filterCommand;
-    }
-
-    public function executeFiltersSubTitle($string){
-        foreach ($this->filtersGetSubTitle as $filterCommand) {
-            $string = $filterCommand->execute($string);
-        }
-        return $string;
-    }
-
-    public function addFiltersGetSummary($filterCommand) {
-        $this->filtersGetSummary[] = $filterCommand;
-    }
-
-    public function executeFiltersSummary($string){
-        foreach ($this->filtersGetSummary as $filterCommand) {
-            $string = $filterCommand->execute($string);
-        }
-        return $string;
-    }
-
     public function addFiltersGetBody($filterCommand) {
         $this->filtersGetBody[] = $filterCommand;
     }
@@ -84,12 +60,12 @@ class CommentFilterRemote {
         return $string;
     }
 
-    public function addFiltersGetTag($filterCommand) {
-        $this->filtersGetTag[] = $filterCommand;
+    public function addFiltersGetSignature($filterCommand) {
+        $this->filtersGetSignature[] = $filterCommand;
     }
 
-    public function executeFiltersTag($string){
-        foreach ($this->filtersGetTag as $filterCommand) {
+    public function executeFiltersSignature($string){
+        foreach ($this->filtersGetSignature as $filterCommand) {
             $string = $filterCommand->execute($string);
         }
         return $string;

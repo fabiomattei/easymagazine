@@ -17,6 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(FILTERPATH.'commentfilterremote.php');
+
 class Comment {
     const NEW_COMMENT = -1;
     private $id = self::NEW_COMMENT;
@@ -28,6 +30,7 @@ class Comment {
     private $created;
     private $updated;
     private $db;
+    private $filter;
 
     const INSERT_SQL = 'insert into comments (title, body, signature, created, updated) values (?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update comments set title = ?, body = ?, signature = ?, updated=now() where id = ?';
@@ -37,6 +40,7 @@ class Comment {
 
     public function __construct($id, $article_id, $title, $published, $body, $signature, $created, $updated) {
         $this->db = DB::getInstance();
+        $this->filter = CommentFilterRemote::getInstance();
         $this->id = $id;
         $this->article_id = $article_id;
         $this->title = $title;
@@ -118,6 +122,11 @@ class Comment {
     }
 
     public function getTitle() {
+        $out = $this->filter->executeFiltersTitle($this->title);
+        return $out;
+    }
+
+    public function getUnfilteredTitle(){
         return $this->title;
     }
 
@@ -134,6 +143,11 @@ class Comment {
     }
 
     public function getBody() {
+        $out = $this->filter->executeFiltersBody($this->body);
+        return $out;
+    }
+
+    public function getUnfilteredBody() {
         return $this->body;
     }
 
@@ -142,6 +156,11 @@ class Comment {
     }
 
     public function getSignature() {
+        $out = $this->filter->executeFiltersSignature($this->signature);
+        return $out;
+    }
+
+    public function getUnfilteredSignature() {
         return $this->signature;
     }
 
