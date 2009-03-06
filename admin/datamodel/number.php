@@ -25,6 +25,7 @@ class Number {
     const NEW_NUMBER = -1;
     private $id = self::NEW_NUMBER;
     private $indexnumber;
+    private $published;
     private $title;
     private $subtitle;
     private $summary;
@@ -36,16 +37,17 @@ class Number {
     const DELETE_SQL = 'delete from numbers where id = ?';
     const SELECT_BY_ID = 'select id, indexnumber, title, subtitle, summary from numbers where id = ?';
     const SELECT_BY_TITLE = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
-    const SELECT_LAST = 'select id, indexnumber, title, subtitle, summary from numbers where published=1 order by indexnumber DESC Limit 1';
+    const SELECT_LAST = 'select * from numbers where published=1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select id, indexnumber, title, subtitle, summary from numbers where published=1 order by indexnumber DESC';
-    const SELECT_ALL = 'select id, indexnumber, title, subtitle, summary from numbers where published=1 order by id DESC';
+    const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ARTICLES_PUB = 'select * from articles where published=1 AND number_id = ? order by indexnumber DESC';
 
-    public function __construct($id=NEW_NUMBER, $indexnumber="", $title="", $subtitle="", $summary="") {
+    public function __construct($id=NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='') {
         $this->db = DB::getInstance();
         $this->filter = NumberFilterRemote::getInstance();
         $this->id = $id;
         $this->indexnumber = $indexnumber;
+        $this->published = $published;
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->summary = $summary;
@@ -63,7 +65,7 @@ class Number {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
@@ -77,7 +79,7 @@ class Number {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
@@ -91,7 +93,7 @@ class Number {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
@@ -106,7 +108,7 @@ class Number {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;
@@ -121,7 +123,7 @@ class Number {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
         return $ret;

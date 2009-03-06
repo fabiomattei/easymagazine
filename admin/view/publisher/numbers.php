@@ -123,20 +123,20 @@ $numbs = Number::findAll();
 						<th class="full" colspan="2">New Number of the magazine</th>
 					</tr>
 					<tr>
-						<td class="first" width="172"><strong>Lorem Ipsum</strong></td>
+						<td class="first" width="172"><strong>Title</strong></td>
 						<td class="last"><input type="text" class="text" /></td>
-					</tr>
+                    </tr>
 					<tr class="bg">
-						<td class="first"><strong>Lorem Ipsum</strong></td>
+						<td class="first"><strong>Sub Title</strong></td>
 						<td class="last"><input type="text" class="text" /></td>
 					</tr>
 					<tr>
-						<td class="first"><strong>Lorem Ipsum</strong></td>
-						<td class="last"><input type="text" class="text" /></td>
+						<td class="first"><strong>Summary</strong></td>
+                        <td class="last"><textarea name="Summary" rows="4" cols="60"></textarea></td>
 					</tr>
-					<tr class="bg">
-						<td class="first"><strong>Lorem Ipsum</strong></td>
-						<td class="last"><input type="text" class="text" /></td>
+                    <tr class="bg">
+						<td class="first"><strong>Published</strong></td>
+						<td class="last"><input type="checkbox" class="text" value="1" /></td>
 					</tr>
 				</table>
 	        <p>&nbsp;</p>
