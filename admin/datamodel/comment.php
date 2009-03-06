@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(FILTERPATH.'commentfilterremote.php');
+require_once(STARTPATH.FILTERPATH.'commentfilterremote.php');
 
 class Comment {
     const NEW_COMMENT = -1;

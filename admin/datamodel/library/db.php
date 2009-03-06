@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(BASEPATH.'config.php');
-require_once(DBPATH.'strfunction.php');
+require_once(STARTPATH.BASEPATH.'config.php');
+require_once(STARTPATH.DBPATH.'strfunction.php');
 
 class DB {
     private static $instance = null;

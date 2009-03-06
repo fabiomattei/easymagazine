@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(DBPATH.'db.php');
-require_once(DATAMODELPATH.'article.php');
-require_once(FILTERPATH.'numberfilterremote.php');
+require_once(STARTPATH.DBPATH.'db.php');
+require_once(STARTPATH.DATAMODELPATH.'article.php');
+require_once(STARTPATH.FILTERPATH.'numberfilterremote.php');
 
 class Number {
     const NEW_NUMBER = -1;

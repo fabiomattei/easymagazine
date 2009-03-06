@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(DBPATH.'db.php');
-require_once(DATAMODELPATH.'comment.php');
-require_once(FILTERPATH.'articlefilterremote.php');
+require_once(STARTPATH.DBPATH.'db.php');
+require_once(STARTPATH.DATAMODELPATH.'comment.php');
+require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
 
 class Article {
     const NEW_ARTICLE = -1;

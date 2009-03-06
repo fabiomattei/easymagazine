@@ -17,7 +17,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 define('ADMINPATH', 'admin/view/');
 define('COMMANDPATH', 'admin/command/');
 define('ROUTERPATH', 'admin/routers/');

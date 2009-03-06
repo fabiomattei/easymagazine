@@ -17,8 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Ciao!
-
+define('STARTPATH', '');
 require_once('costants.php');
 
 require_once(PLUGINPATH.'commandSandBox/index.php');
