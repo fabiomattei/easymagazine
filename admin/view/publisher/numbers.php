@@ -50,24 +50,15 @@ $numbs = Number::findAll();
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3>Header</h3>
+			<h3>Utils</h3>
 			<ul class="nav">
-				<li><a href="#">Lorem Ipsum dollar</a></li>
-				<li><a href="#">Dollar</a></li>
-				<li><a href="#">Lorem dollar</a></li>
-				<li><a href="#">Ipsum dollar</a></li>
-				<li><a href="#">Lorem Ipsum dollar</a></li>
-				<li class="last"><a href="#">Dollar Lorem Ipsum</a></li>
+				<li><a href="#">List all comments</a></li>
+				<li><a href="#">List all Authors</a></li>
+				<li class="last"><a href="#">Filter all link</a></li>
 			</ul>
-			<a href="#" class="link">Link here</a>
-			<a href="#" class="link">Link here</a>
+			<a href="#" class="link">View in the website</a>
 		</div>
 		<div id="center-column">
-			<div class="top-bar">
-				<a href="#" class="button">ADD NEW </a>
-				<h1>Contents</h1>
-				<div class="breadcrumbs"><a href="#">Homepage</a> / <a href="#">Contents</a></div>
-			</div><br />
 		  <div class="select-bar">
 		    <label>
 		    <input type="text" name="textfield" />
@@ -81,14 +72,14 @@ $numbs = Number::findAll();
 				<img src="img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
 				<table class="listing" cellpadding="0" cellspacing="0">
 					<tr>
-						<th class="first" width="177">Header Here</th>
-						<th>Header</th>
-						<th>Head</th>
-						<th>Header</th>
-						<th>Header</th>
-						<th>Head</th>
-						<th>Header</th>
-						<th class="last">Head</th>
+						<th class="first" width="177">Title</th>
+						<th>Edit</th>
+						<th>Up</th>
+						<th>Down</th>
+						<th>Articles</th>
+						<th>Comments</th>
+						<th>Published</th>
+						<th class="last">Delete</th>
 					</tr>
 
                     <?
@@ -118,9 +109,10 @@ $numbs = Number::findAll();
 		  <div class="table">
 				<img src="img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
+                <form name="form1" enctype="multipart/form-data" method="post" action="funadmin.php?azione=inseriscilibro">
 				<table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
-						<th class="full" colspan="2">New Number of the magazine</th>
+						<th class="full" colspan="2">Edit</th>
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Title</strong></td>
@@ -138,7 +130,12 @@ $numbs = Number::findAll();
 						<td class="first"><strong>Published</strong></td>
 						<td class="last"><input type="checkbox" class="text" value="1" /></td>
 					</tr>
+                    <tr>
+						<td class="first"><strong>&nbsp;</strong></td>
+                        <td class="last"><input type="submit" value="Save" name="save" /></td>
+					</tr>
 				</table>
+                </form>
 	        <p>&nbsp;</p>
 		  </div>
 		</div>
@@ -149,7 +146,5 @@ $numbs = Number::findAll();
 	</div>
 	<div id="footer"></div>
 </div>
-
-
 </body>
 </html>
