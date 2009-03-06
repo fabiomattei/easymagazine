@@ -154,7 +154,7 @@ class Number {
     }
 
     protected function save() {
-        if ($this->id == self::NEW_COMMENT) {
+        if ($this->id == self::NEW_NUMBER) {
             $this->insert();
         } else {
             $this->update();
@@ -164,7 +164,7 @@ class Number {
 
     public function delete() {
         $this->conn->execute(DELETE_SQL, array((int) $this->getId()));
-        $this->id = self::NEW_COMMENT;
+        $this->id = self::NEW_NUMBER;
         $this->title = '';
         $this->subtitle = '';
         $this->summary = '';

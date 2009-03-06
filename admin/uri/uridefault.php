@@ -34,8 +34,7 @@ class UriDefault extends URI {
     function evaluate(){
         $newArray = explode('/', $this->uri);
 
-        switch ($newArray[0])
-        {
+        switch ($newArray[0]) {
             case 'numbers': $router = 'number'; $id = $newArray[2]; break;
             case 'articles': $router = 'article'; $id = $newArray[2]; break;
             case 'comments': $router = 'comments'; $id = $newArray[2]; break;
