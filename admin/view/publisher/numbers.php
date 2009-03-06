@@ -87,13 +87,13 @@ $numbs = Number::findAll();
                     ?>
 					<tr>
 						<td class="first style1"><? echo $num->getTitle(); ?> </td>
-						<td><img src="img/add-icon.gif" width="16" height="16" alt="" /></td>
-						<td><img src="img/hr.gif" width="16" height="16" alt="" /></td>
-						<td><img src="img/save-icon.gif" width="16" height="16" alt="" /></td>
 						<td><img src="img/edit-icon.gif" width="16" height="16" alt="" /></td>
-						<td><img src="img/login-icon.gif" width="16" height="16" alt="" /></td>
-						<td><img src="img/save-icon.gif" width="16" height="16" alt="save" /></td>
-						<td class="last"><img src="img/add-icon.gif" width="16" height="16" alt="add" /></td>
+						<td><img src="img/down-arrow.png" width="16" height="16" alt="" /></td>
+						<td><img src="img/up-arrow.png" width="16" height="16" alt="" /></td>
+						<td><img src="img/article.png" width="16" height="16" alt="" /></td>
+						<td><img src="img/comments.png" width="16" height="16" alt="" /></td>
+						<td><img src="img/tic.png" width="16" height="16" alt="save" /></td>
+						<td class="last"><img src="img/hr.gif" width="16" height="16" alt="add" /></td>
 					</tr>
                     <?
                     }
