@@ -18,8 +18,8 @@
  */
 
 require_once('router.php');
-require_once(DATAMODELPATH.'/number.php');
-require_once(DATAMODELPATH.'/page.php');
+require_once(STARTPATH.DATAMODELPATH.'/number.php');
+require_once(STARTPATH.DATAMODELPATH.'/page.php');
 
 class IndexRouter extends Router {
 

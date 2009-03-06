@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(FILTERPATH.'pagefilterremote.php');
+require_once(STARTPATH.FILTERPATH.'pagefilterremote.php');
 
 class Page {
     const NEW_PAGE = -1;

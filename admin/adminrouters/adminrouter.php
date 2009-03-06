@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(COMMANDPATH.'/remote.php');
-require_once(ROUTERPATH.'/router.php');
+require_once(STARTPATH.COMMANDPATH.'/remote.php');
+require_once(STARTPATH.ROUTERPATH.'/router.php');
 
 
 class AdminRouter extends Router{

@@ -27,7 +27,7 @@
  *
  */
 
-require_once(URIPATH.'/uri.php');
+require_once(STARTPATH.URIPATH.'/uri.php');
 
 class UriDefault extends URI {
 

@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(DATAMODELPATH.'/article.php');
-require_once(DATAMODELPATH.'/page.php');
+require_once(STARTPATH.DATAMODELPATH.'/article.php');
+require_once(STARTPATH.DATAMODELPATH.'/page.php');
 
 require_once('router.php');
 

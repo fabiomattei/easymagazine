@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(COMMANDPATH.'/remote.php');
-require_once(SESSIONPATH.'/sessionmanager.php');
-require_once(URIPATH.'/urimaker.php');
+require_once(STARTPATH.COMMANDPATH.'/remote.php');
+require_once(STARTPATH.SESSIONPATH.'/sessionmanager.php');
+require_once(STARTPATH.URIPATH.'/urimaker.php');
 
 abstract class Router {
 
