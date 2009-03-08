@@ -80,8 +80,8 @@
 					<tr>
 						<td class="first style1"><? echo $num->getTitle(); ?></td>
 						<td><a href="number.php?action=edit&id=<? echo $num->getId(); ?>"><img src="../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-						<td><img src="../resources/img/down-arrow.png" width="16" height="16" alt="" /></td>
-						<td><img src="../resources/img/up-arrow.png" width="16" height="16" alt="" /></td>
+						<td><a href="number.php?action=up&id=<? echo $num->getId(); ?>"><img src="../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="number.php?action=down&id=<? echo $num->getId(); ?>"><img src="../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><img src="../resources/img/article.png" width="16" height="16" alt="" /></td>
 						<td><img src="../resources/img/comments.png" width="16" height="16" alt="" /></td>
 						<td><img src="../resources/img/tic.png" width="16" height="16" alt="save" /></td>
@@ -123,7 +123,9 @@
 						<td class="last"><input type="checkbox" name="Published" class="text" value="1" /></td>
 					</tr>
                     <tr>
-						<td class="first"><strong><input type="hidden" name="id" value="<? echo $numb->getId(); ?>"></strong></td>
+						<td class="first"><strong>&nbsp;</strong></td>
+                        <input type="hidden" name="id" value="<? echo $numb->getId(); ?>">
+                        <input type="hidden" name="indexnumber" value="<? echo $numb->getIndexnumber(); ?>">
                         <td class="last"><input type="submit" value="Save" name="save" /></td>
 					</tr>
 				</table>

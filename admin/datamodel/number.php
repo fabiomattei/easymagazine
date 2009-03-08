@@ -32,7 +32,7 @@ class Number {
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (indexnumber, published, title, subtitle, summary) values (\'?\', \'?\', \'?\', \'?\', \'?\')';
+    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary) values (\'?\', \'?\', \'?\', \'?\', \'?\', \'?\')';
     const UPDATE_SQL = 'update numbers set indexnumber = \'?\', published = \'?\', title = \'?\', subtitle = \'?\', summary = \'?\' where id = \'?\'';
     const DELETE_SQL = 'delete from numbers where id = \'?\'';
     const SELECT_BY_ID = 'select * from numbers where id = ?';
@@ -40,8 +40,12 @@ class Number {
     const SELECT_LAST = 'select * from numbers where published=1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from numbers where published=1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from numbers order by id DESC';
+    const SELECT_ALL_ORD_INDEXNUMBER = 'select * from numbers order by indexnumber DESC';
     const SELECT_ARTICLES_PUB = 'select * from articles where published=1 AND number_id = ? order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from numbers order by indexnumber DESC';
+    const SELECT_BY_ID_ORD = 'select id from numbers order by id DESC';
+    const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > \'?\' order by indexnumber DESC';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < \'?\' order by indexnumber';
 
     public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='') {
         $this->db = DB::getInstance();
@@ -63,6 +67,34 @@ class Number {
         $rs = DB::getInstance()->execute(
             self::SELECT_BY_ID,
             array("$id"),
+            $tables);
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findUpIndexNumber ($indexnumber) {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_UP_INDEXNUMBER,
+            array("$indexnumber"),
+            $tables);
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findDownIndexNumber ($indexnumber) {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_DOWN_INDEXNUMBER,
+            array("$indexnumber"),
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
@@ -130,6 +162,21 @@ class Number {
         return $ret;
     }
 
+    public static function findAllOrderedByIndexNumber() {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_ALL_ORD_INDEXNUMBER,
+            array(),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
     public function articles() {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
@@ -180,11 +227,12 @@ class Number {
     }
 
     protected function insert() {
-        $this->setIndexnumber($this->getMaxIndexNumber()+1);
+        $this->id = $this->getMaxId()+1;
+        $this->indexnumber = $this->getMaxIndexNumber()+1;
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->indexnumber, $this->published, $this->title, $this->subtitle, $this->summary),
+            array($this->id, $this->indexnumber, $this->published, $this->title, $this->subtitle, $this->summary),
             $tables);
 ////        if ($rs) {
 ////            $this->id = (int) $this->conn->Insert_ID();
@@ -225,6 +273,19 @@ class Number {
                 $maxIndexNumber = $row['indexnumber'];
         }
         return $maxIndexNumber;
+    }
+
+    public function getMaxId() {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_ID_ORD,
+            array(),
+            $tables);
+        if ($rs) {
+            $row = mysql_fetch_array($rs);
+                $maxId = $row['id'];
+        }
+        return $maxId;
     }
 
     public function getIndexnumber() {

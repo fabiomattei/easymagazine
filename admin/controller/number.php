@@ -29,7 +29,7 @@ function index() {
     $numb = new Number();
     $out['numb'] = $numb;
 
-    $numbs = Number::findAll();
+    $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
     return $out;
 }
@@ -40,7 +40,7 @@ function edit($id) {
     $numb = Number::findById($id);
     $out['numb'] = $numb;
 
-    $numbs = Number::findAll();
+    $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
     return $out;
 }
@@ -53,7 +53,47 @@ function delete($id) {
     $numb = new Number();
     $out['numb'] = $numb;
 
-    $numbs = Number::findAll();
+    $numbs = Number::findAllOrderedByIndexNumber();
+    $out['numbs'] = $numbs;
+    return $out;
+}
+
+function up($id) {
+    $out = array();
+
+    $numb1 = Number::findById($id);
+    $indexnumber = $numb1->getIndexNumber();
+    $numb2 = Number::findUpIndexNumber($indexnumber);
+
+    $numb1->setIndexNumber($numb2->getIndexNumber());
+    $numb2->setIndexNumber($indexnumber);
+    $numb1->save();
+    $numb2->save();
+
+    $numb = new Number();
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAllOrderedByIndexNumber();
+    $out['numbs'] = $numbs;
+    return $out;
+}
+
+function down($id) {
+    $out = array();
+
+    $numb1 = Number::findById($id);
+    $indexnumber = $numb1->getIndexNumber();
+    $numb2 = Number::findDownIndexNumber($indexnumber);
+
+    $numb1->setIndexNumber($numb2->getIndexNumber());
+    $numb2->setIndexNumber($indexnumber);
+    $numb1->save();
+    $numb2->save();
+    
+    $numb = new Number();
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
     return $out;
 }
@@ -63,7 +103,7 @@ function save($toSave) {
     
     $numb = new Number(
         $toSave['id'],
-        '-1',
+        $toSave['indexnumber'],
         $toSave['Published'],
         $toSave['Title'],
         $toSave['SubTitle'],
@@ -71,7 +111,7 @@ function save($toSave) {
     $numb->save();
     $out['numb'] = $numb;
 
-    $numbs = Number::findAll();
+    $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
     return $out;
 }
@@ -83,6 +123,8 @@ if (!isset($_GET["action"])) { $out = index(); }
         case  'save':              $out = save($_POST); break;
         case  'edit':              $out = edit($_GET['id']); break;
         case  'delete':            $out = delete($_GET['id']); break;
+        case  'up':                $out = up($_GET['id']); break;
+        case  'down':              $out = down($_GET['id']); break;
     }
 }
 
