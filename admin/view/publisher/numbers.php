@@ -17,26 +17,18 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('STARTPATH', '../../../');
-
-require_once(STARTPATH.'config.php');
-require_once(STARTPATH.'costants.php');
-require_once(STARTPATH.DATAMODELPATH.'number.php');
-
-$numbs = Number::findAll();
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>Easy Magazine Admin</title>
+	<title>Easy Magazine Admin:</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-	<style media="all" type="text/css">@import "css/all.css";</style>
+	<style media="all" type="text/css">@import "../resources/css/all.css";</style>
 </head>
 <body>
 <div id="main">
 	<div id="header">
-		<a href="index.html" class="logo"><img src="img/logo.gif" width="101" height="29" alt="" /></a>
+		<a href="index.html" class="logo"><img src="../resources/img/logo.gif" width="101" height="29" alt="" /></a>
 		<ul id="top-navigation">
 			<li><span><span><a href="index.php">Dashboard</a></span></span></li>
 			<li class="active"><span><span>Numbers</span></span></li>
@@ -50,7 +42,7 @@ $numbs = Number::findAll();
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3>Utils</h3>
+			<h3>Services</h3>
 			<ul class="nav">
 				<li><a href="#">List all comments</a></li>
 				<li><a href="#">List all Authors</a></li>
@@ -68,8 +60,8 @@ $numbs = Number::findAll();
 			</label>
 		  </div>
 			<div class="table">
-				<img src="img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
-				<img src="img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
+				<img src="../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
+				<img src="../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
 				<table class="listing" cellpadding="0" cellspacing="0">
 					<tr>
 						<th class="first" width="177">Title</th>
@@ -87,13 +79,13 @@ $numbs = Number::findAll();
                     ?>
 					<tr>
 						<td class="first style1"><? echo $num->getTitle(); ?> </td>
-						<td><img src="img/edit-icon.gif" width="16" height="16" alt="" /></td>
-						<td><img src="img/down-arrow.png" width="16" height="16" alt="" /></td>
-						<td><img src="img/up-arrow.png" width="16" height="16" alt="" /></td>
-						<td><img src="img/article.png" width="16" height="16" alt="" /></td>
-						<td><img src="img/comments.png" width="16" height="16" alt="" /></td>
-						<td><img src="img/tic.png" width="16" height="16" alt="save" /></td>
-						<td class="last"><img src="img/hr.gif" width="16" height="16" alt="add" /></td>
+						<td><img src="../resources/img/edit-icon.gif" width="16" height="16" alt="" /></td>
+						<td><img src="../resources/img/down-arrow.png" width="16" height="16" alt="" /></td>
+						<td><img src="../resources/img/up-arrow.png" width="16" height="16" alt="" /></td>
+						<td><img src="../resources/img/article.png" width="16" height="16" alt="" /></td>
+						<td><img src="../resources/img/comments.png" width="16" height="16" alt="" /></td>
+						<td><img src="../resources/img/tic.png" width="16" height="16" alt="save" /></td>
+						<td class="last"><img src="../resources/img/hr.gif" width="16" height="16" alt="add" /></td>
 					</tr>
                     <?
                     }
@@ -107,8 +99,8 @@ $numbs = Number::findAll();
 			  </div>
 			</div>
 		  <div class="table">
-				<img src="img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
-				<img src="img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
+				<img src="../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
+				<img src="../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                 <form name="form1" enctype="multipart/form-data" method="post" action="funadmin.php?azione=inseriscilibro">
 				<table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
