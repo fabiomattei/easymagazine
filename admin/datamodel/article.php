@@ -33,7 +33,6 @@ class Article {
     private $tag;
     private $metadescription;
     private $metakeyword;
-    private $db;
     private $filter;
 
     const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (\'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', now(), now())';
@@ -52,7 +51,6 @@ class Article {
     const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE indexnumber < \'?\' order by indexnumber';
 
     public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
-        $this->db = DB::getInstance();
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
@@ -173,7 +171,7 @@ class Article {
     }
 
     public function delete() {
-        $this->conn->execute(DELETE_SQL, array((int) $this->getId()));
+        DB::getInstance()->execute(DELETE_SQL, array((int) $this->getId()));
         $this->id = self::NEW_ARTICLE;
         $this->title = '';
         $this->subtitle = '';
@@ -185,7 +183,7 @@ class Article {
     }
 
     protected function insert() {
-        $rs = $this->conn->execute(
+        $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
             array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword));
         if ($rs) {
@@ -196,13 +194,13 @@ class Article {
     }
 
     protected function update() {
-        $this->conn->execute(
+        DB::getInstance()->execute(
             self::UPDATE_SQL,
             array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword));
     }
 
     protected function setTimeStamps() {
-        $rs = $this->conn->execute(
+        $rs = DB::getInstance()->execute(
             self::SELECT_BY_ID,
             array($this->id));
         if ($rs) {

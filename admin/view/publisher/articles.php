@@ -108,15 +108,31 @@
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Title</strong></td>
-						<td class="last"><input type="text" name="Title" class="text" value="<? echo $art->getTitle(); ?>"/></td>
+						<td class="last"><input type="text" name="Title" class="text" value="<? echo $art->getUnfilteredTitle(); ?>"/></td>
                     </tr>
 					<tr class="bg">
 						<td class="first"><strong>Sub Title</strong></td>
-						<td class="last"><input type="text" name="SubTitle" class="text" value="<? echo $art->getSubtitle(); ?>"/></td>
+						<td class="last"><input type="text" name="SubTitle" class="text" value="<? echo $art->getUnfilteredSubtitle(); ?>"/></td>
 					</tr>
 					<tr>
 						<td class="first"><strong>Summary</strong></td>
-                        <td class="last"><textarea name="Summary" rows="4" cols="60"><? echo $art->getSummary(); ?></textarea></td>
+                        <td class="last"><textarea name="Summary" rows="4" cols="60"><? echo $art->getUnfilteredSummary(); ?></textarea></td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Body</strong></td>
+                        <td class="last"><textarea name="Body" rows="4" cols="60"><? echo $art->getUnfilteredBody(); ?></textarea></td>
+					</tr>
+                    					<tr>
+						<td class="first"><strong>Tag</strong></td>
+                        <td class="last"><input type="text" name="Tag" class="text" value="<? echo $art->getUnfilteredTag(); ?>"/></td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Meta Description</strong></td>
+                        <td class="last"><textarea name="MetaDescription" rows="4" cols="60"><? echo $art->getMetaDescription(); ?></textarea></td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Meta Keyword</strong></td>
+                        <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><? echo $art->getMetaKeyword(); ?></textarea></td>
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Published</strong></td>
