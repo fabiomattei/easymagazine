@@ -62,118 +62,72 @@ class Number {
         return $this->id;
     }
 
-    public static function findById($id) {
+    public static function findOne($SQL, $array) {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
-            self::SELECT_BY_ID,
-            array("$id"),
+            $SQL,
+            $array,
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
                 $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
             }
         }
+        return $ret;
+    }
+
+    public static function findMany($SQL, $array) {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            $SQL,
+            $array,
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findById($id) {
+        $ret = NUMBER::findOne(self::SELECT_BY_ID, array("$id"));
         return $ret;
     }
 
     public static function findUpIndexNumber ($indexnumber) {
-        $tables = array("numbers" => TBPREFIX."numbers");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_UP_INDEXNUMBER,
-            array("$indexnumber"),
-            $tables);
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
-            }
-        }
+        $ret = NUMBER::findOne(self::SELECT_UP_INDEXNUMBER, array("$indexnumber"));
         return $ret;
     }
 
     public static function findDownIndexNumber ($indexnumber) {
-        $tables = array("numbers" => TBPREFIX."numbers");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_DOWN_INDEXNUMBER,
-            array("$indexnumber"),
-            $tables);
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
-            }
-        }
+        $ret = NUMBER::findOne(self::SELECT_DOWN_INDEXNUMBER, array("$indexnumber"));
         return $ret;
     }
 
     public static function findByTitle($title) {
-        $rs = DB::getInstance()->execute(
-            self::SELECT_BY_TITLE,
-            array("%$title%"),
-            $tables);
-        $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
-            }
-        }
+        $ret = NUMBER::findMany(self::SELECT_BY_TITLE, array("%$title%"));
         return $ret;
     }
 
     public static function findLast() {
-        $tables = array("numbers" => TBPREFIX."numbers");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_LAST,
-            array(),
-            $tables);
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
-            }
-        }
+        $ret = NUMBER::findOne(self::SELECT_LAST, array(" "));
         return $ret;
     }
 
     public static function findAllPublished() {
-        $tables = array("numbers" => TBPREFIX."numbers");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_ALL_PUB,
-            array(),
-            $tables);
-        $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
-            }
-        }
+        $ret = NUMBER::findMany(self::SELECT_ALL_PUB, array());
         return $ret;
     }
 
     public static function findAll() {
-        $tables = array("numbers" => TBPREFIX."numbers");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_ALL,
-            array(),
-            $tables);
-        $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
-            }
-        }
+        $ret = NUMBER::findMany(self::SELECT_ALL, array());
         return $ret;
     }
 
     public static function findAllOrderedByIndexNumber() {
-        $tables = array("numbers" => TBPREFIX."numbers");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_ALL_ORD_INDEXNUMBER,
-            array(),
-            $tables);
-        $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
-            }
-        }
+        $ret = NUMBER::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array());
         return $ret;
     }
 
