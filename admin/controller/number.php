@@ -23,8 +23,30 @@ require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 
-function index(){
+function index() {
     $out = array();
+
+    $numb = new Number();
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+    return $out;
+}
+
+function save($toSave) {
+    $out = array();
+    
+    $numb = new Number(
+        $toSave['id'],
+        '-1',
+        $toSave['Published'],
+        $toSave['Title'],
+        $toSave['SubTitle'],
+        $toSave['Summary']);
+    $numb->save();
+    $out['numb'] = $numb;
+
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
     return $out;
@@ -33,11 +55,13 @@ function index(){
 if (!isset($_GET["action"])) { $out = index(); }
     else {
     switch ($_GET["action"]) {
-        case  'index':              index(); break;
+        case  'index':             $out = index(); break;
+        case  'save':              $out = save($_POST); break;
     }
 }
 
 $numbs = $out['numbs'];
+$numb = $out['numb'];
 
 include('../view/publisher/numbers.php');
 

@@ -32,17 +32,18 @@ class Number {
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (indexnumber, title, subtitle, summary) values (?, ?, ?, ?)';
-    const UPDATE_SQL = 'update numbers set indexnumber = ?, title = ?, subtitle = ?, summary = ? where id = ?';
+    const INSERT_SQL = 'insert into numbers (indexnumber, published, title, subtitle, summary) values (\'?\', \'?\', \'?\', \'?\', \'?\')';
+    const UPDATE_SQL = 'update numbers set indexnumber = ?, published = ?, title = ?, subtitle = ?, summary = ? where id = ?';
     const DELETE_SQL = 'delete from numbers where id = ?';
-    const SELECT_BY_ID = 'select id, indexnumber, title, subtitle, summary from numbers where id = ?';
-    const SELECT_BY_TITLE = 'select id, indexnumber, title, subtitle, summary from numbers where title like ?';
+    const SELECT_BY_ID = 'select * from numbers where id = ?';
+    const SELECT_BY_TITLE = 'select * from numbers where title like ?';
     const SELECT_LAST = 'select * from numbers where published=1 order by indexnumber DESC Limit 1';
-    const SELECT_ALL_PUB = 'select id, indexnumber, title, subtitle, summary from numbers where published=1 order by indexnumber DESC';
+    const SELECT_ALL_PUB = 'select * from numbers where published=1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ARTICLES_PUB = 'select * from articles where published=1 AND number_id = ? order by indexnumber DESC';
+    const SELECT_BY_INDEXNUMBER = 'select indexnumber from numbers order by indexnumber DESC';
 
-    public function __construct($id=NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='') {
+    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='') {
         $this->db = DB::getInstance();
         $this->filter = NumberFilterRemote::getInstance();
         $this->id = $id;
@@ -155,7 +156,7 @@ class Number {
         return $ret;
     }
 
-    protected function save() {
+    public function save() {
         if ($this->id == self::NEW_NUMBER) {
             $this->insert();
         } else {
@@ -173,14 +174,17 @@ class Number {
     }
 
     protected function insert() {
-        $rs = $this->conn->execute(
+        $this->setIndexnumber($this->getMaxIndexNumber()+1);
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->title, $this->subtitle, $this->summary));
-        if ($rs) {
-            $this->id = (int) $this->conn->Insert_ID();
-        } else {
-            trigger_error('DB error: '.$this->db->getErrorMsg());
-        }
+            array($this->indexnumber, $this->published, $this->title, $this->subtitle, $this->summary),
+            $tables);
+////        if ($rs) {
+////            $this->id = (int) $this->conn->Insert_ID();
+////        } else {
+////            trigger_error('DB error: '.$this->db->getErrorMsg());
+////        }
     }
 
     protected function update() {
@@ -190,16 +194,31 @@ class Number {
     }
 
     protected function setTimeStamps() {
-        $rs = $this->conn->execute(
-            self::SELECT_BY_ID,
-            array($this->id));
-        if ($rs) {
-            $row = $rs->fetchRow();
-            $this->created = $row['created'];
-            $this->updated = $row['updated'];
-        }
+//        $tables = array("numbers" => TBPREFIX."numbers");
+//        $rs = DB::getInstance()->execute(
+//            self::SELECT_BY_ID,
+//            array($this->id),
+//            $tables);
+//        if ($rs) {
+//            $row = $rs->fetchRow();
+//            $this->created = $row['created'];
+//            $this->updated = $row['updated'];
+//        }
     }
-    
+
+    public function getMaxIndexNumber() {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_INDEXNUMBER,
+            array(),
+            $tables);
+        if ($rs) {
+            $row = mysql_fetch_array($rs);
+                $maxIndexNumber = $row['indexnumber'];
+        }
+        return $maxIndexNumber;
+    }
+
     public function getIndexnumber() {
         return $this->indexnumber;
     }

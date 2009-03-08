@@ -40,6 +40,7 @@ class DB {
 
     public function execute($SQL, $array, $tables) {
         $toSQL = StrHelper::formatQRY($SQL, $array, $tables);
+        echo $toSQL;
         $result = mysql_query($toSQL, $this->connection);
         if (!$result) {
             $this->error=mysql_error();

@@ -101,29 +101,29 @@
 		  <div class="table">
 				<img src="../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                <form name="form1" enctype="multipart/form-data" method="post" action="funadmin.php?azione=inseriscilibro">
+                <form name="form1" enctype="multipart/form-data" method="post" action="number.php?action=save">
 				<table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
 						<th class="full" colspan="2">Edit</th>
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Title</strong></td>
-						<td class="last"><input type="text" class="text" /></td>
+						<td class="last"><input type="text" name="Title" class="text" value="<? echo $numb->getTitle(); ?>"/></td>
                     </tr>
 					<tr class="bg">
 						<td class="first"><strong>Sub Title</strong></td>
-						<td class="last"><input type="text" class="text" /></td>
+						<td class="last"><input type="text" name="SubTitle" class="text" value="<? echo $numb->getSubtitle(); ?>"/></td>
 					</tr>
 					<tr>
 						<td class="first"><strong>Summary</strong></td>
-                        <td class="last"><textarea name="Summary" rows="4" cols="60"></textarea></td>
+                        <td class="last"><textarea name="Summary" rows="4" cols="60"><? echo $numb->getSummary(); ?></textarea></td>
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Published</strong></td>
-						<td class="last"><input type="checkbox" class="text" value="1" /></td>
+						<td class="last"><input type="checkbox" name="Published" class="text" value="1" /></td>
 					</tr>
                     <tr>
-						<td class="first"><strong>&nbsp;</strong></td>
+						<td class="first"><strong><input type="hidden" name="id" value="<? echo $numb->getId(); ?>"></strong></td>
                         <td class="last"><input type="submit" value="Save" name="save" /></td>
 					</tr>
 				</table>
