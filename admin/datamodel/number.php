@@ -33,8 +33,8 @@ class Number {
     private $filter;
 
     const INSERT_SQL = 'insert into numbers (indexnumber, published, title, subtitle, summary) values (\'?\', \'?\', \'?\', \'?\', \'?\')';
-    const UPDATE_SQL = 'update numbers set indexnumber = ?, published = ?, title = ?, subtitle = ?, summary = ? where id = ?';
-    const DELETE_SQL = 'delete from numbers where id = ?';
+    const UPDATE_SQL = 'update numbers set indexnumber = \'?\', published = \'?\', title = \'?\', subtitle = \'?\', summary = \'?\' where id = \'?\'';
+    const DELETE_SQL = 'delete from numbers where id = \'?\'';
     const SELECT_BY_ID = 'select * from numbers where id = ?';
     const SELECT_BY_TITLE = 'select * from numbers where title like ?';
     const SELECT_LAST = 'select * from numbers where published=1 order by indexnumber DESC Limit 1';
@@ -166,8 +166,14 @@ class Number {
     }
 
     public function delete() {
-        $this->conn->execute(DELETE_SQL, array((int) $this->getId()));
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::DELETE_SQL,
+            array($this->id),
+            $tables);
         $this->id = self::NEW_NUMBER;
+        $this->indexnumber = '';
+        $this->published = '';
         $this->title = '';
         $this->subtitle = '';
         $this->summary = '';
@@ -188,9 +194,11 @@ class Number {
     }
 
     protected function update() {
-        $this->conn->execute(
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->title, $this->subtitle, $this->summary));
+            array($this->indexnumber, $this->published, $this->title, $this->subtitle, $this->summary, $this->id),
+            $tables);
     }
 
     protected function setTimeStamps() {

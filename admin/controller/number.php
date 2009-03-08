@@ -34,6 +34,30 @@ function index() {
     return $out;
 }
 
+function edit($id) {
+    $out = array();
+
+    $numb = Number::findById($id);
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+    return $out;
+}
+
+function delete($id) {
+    $out = array();
+
+    $numb = Number::findById($id);
+    $numb->delete();
+    $numb = new Number();
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+    return $out;
+}
+
 function save($toSave) {
     $out = array();
     
@@ -57,6 +81,8 @@ if (!isset($_GET["action"])) { $out = index(); }
     switch ($_GET["action"]) {
         case  'index':             $out = index(); break;
         case  'save':              $out = save($_POST); break;
+        case  'edit':              $out = edit($_GET['id']); break;
+        case  'delete':            $out = delete($_GET['id']); break;
     }
 }
 
