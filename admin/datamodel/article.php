@@ -40,8 +40,16 @@ class Article {
     const SELECT_BY_ID = 'select * from articles where id = ?';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = ? order by created DESC';
+    const SELECT_LAST = 'select * from articles where published=1 order by indexnumber DESC Limit 1';
+    const SELECT_ALL_PUB = 'select * from articles where published=1 order by indexnumber DESC';
+    const SELECT_ALL = 'select * from articles order by id DESC';
+    const SELECT_ALL_ORD_INDEXNUMBER = 'select * from articles order by indexnumber DESC';
+    const SELECT_BY_INDEXNUMBER = 'select indexnumber from articles order by indexnumber DESC';
+    const SELECT_BY_ID_ORD = 'select id from articles order by id DESC';
+    const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE indexnumber > \'?\' order by indexnumber DESC';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE indexnumber < \'?\' order by indexnumber';
 
-    public function __construct($id=NEW_NUMBER, $number_id=NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
+    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->db = DB::getInstance();
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
@@ -61,13 +69,12 @@ class Article {
         return $this->id;
     }
 
-    public static function findByTitle($title) {
+    public static function findOne($SQL, $array) {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
-            self::SELECT_BY_TITLE,
-            array("%$title%"),
+            $SQL,
+            $array,
             $tables);
-        $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
                 $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
@@ -76,17 +83,58 @@ class Article {
         return $ret;
     }
 
-    public static function findById($id) {
+    public static function findMany($SQL, $array) {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
-            self::SELECT_BY_ID,
-            array("$id"),
+            $SQL,
+            $array,
             $tables);
+        $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
+        return $ret;
+    }
+    
+    public static function findById($id) {
+        $ret = ARTICLE::findOne(self::SELECT_BY_TITLE, array("$id"));
+        return $ret;
+    }
+
+    public static function findUpIndexNumber ($indexnumber) {
+        $ret = ARTICLE::findOne(self::SELECT_UP_INDEXNUMBER, array("$indexnumber"));
+        return $ret;
+    }
+
+    public static function findDownIndexNumber ($indexnumber) {
+        $ret = ARTICLE::findOne(self::SELECT_DOWN_INDEXNUMBER, array("$indexnumber"));
+        return $ret;
+    }
+
+    public static function findByTitle($title) {
+        $ret = ARTICLE::findMany(self::SELECT_BY_TITLE, array("%$title%"));
+        return $ret;
+    }
+
+    public static function findLast() {
+        $ret = ARTICLE::findOne(self::SELECT_LAST, array(" "));
+        return $ret;
+    }
+
+    public static function findAllPublished() {
+        $ret = ARTICLE::findMany(self::SELECT_ALL_PUB, array());
+        return $ret;
+    }
+
+    public static function findAll() {
+        $ret = ARTICLE::findMany(self::SELECT_ALL, array());
+        return $ret;
+    }
+
+    public static function findAllOrderedByIndexNumber() {
+        $ret = ARTICLE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array());
         return $ret;
     }
 

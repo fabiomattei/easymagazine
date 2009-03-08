@@ -259,7 +259,6 @@ class Number {
         return $this->title;
     }
 
-
     public function setTitle($title) {
         $this->title = $title;
     }
