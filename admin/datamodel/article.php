@@ -24,6 +24,8 @@ require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
 class Article {
     const NEW_ARTICLE = -1;
     private $id = self::NEW_ARTICLE;
+    private $indexnumber;
+    private $published;
     private $title;
     private $subtitle;
     private $summary;
@@ -34,9 +36,9 @@ class Article {
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into articles (title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
-    const DELETE_SQL = 'delete from articles where id=?';
+    const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (\'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', now(), now())';
+    const UPDATE_SQL = 'update articles set number_id = \'?\', indexnumber = \'?\', published = \'?\', title = \'?\', subtitle = \'?\', sumary = \'?\', body = \'?\', tag = \'?\', metadescription = \'?\', metakeyword = \'?\', updated=now() where id = \'?\'';
+    const DELETE_SQL = 'delete from articles where id = ?';
     const SELECT_BY_ID = 'select * from articles where id = ?';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = ? order by created DESC';
@@ -99,7 +101,7 @@ class Article {
     }
     
     public static function findById($id) {
-        $ret = ARTICLE::findOne(self::SELECT_BY_TITLE, array("$id"));
+        $ret = ARTICLE::findOne(self::SELECT_BY_ID, array("$id"));
         return $ret;
     }
 
@@ -208,6 +210,22 @@ class Article {
             $this->created = $row['created'];
             $this->updated = $row['updated'];
         }
+    }
+
+    public function getIndexnumber() {
+        return $this->indexnumber;
+    }
+
+    public function setIndexnumber($indexnumber) {
+        $this->indexnumber = $indexnumber;
+    }
+
+    public function getPublished() {
+        return $this->published;
+    }
+
+    public function setPublished($published) {
+        $this->published = $published;
     }
 
     public function getTitle() {

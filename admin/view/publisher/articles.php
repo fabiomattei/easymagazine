@@ -75,17 +75,17 @@
 					</tr>
 
                     <?
-                    foreach ($arts as $art) {
+                    foreach ($arts as $ar) {
                     ?>
 					<tr>
-						<td class="first style1"><? echo $art->getTitle(); ?></td>
-						<td><a href="article.php?action=edit&id=<? echo $art->getId(); ?>"><img src="../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-						<td><a href="article.php?action=up&id=<? echo $art->getId(); ?>"><img src="../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><a href="article.php?action=down&id=<? echo $art->getId(); ?>"><img src="../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+						<td class="first style1"><? echo $ar->getTitle(); ?></td>
+						<td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td><a href="article.php?action=up&id=<? echo $ar->getId(); ?>"><img src="../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>"><img src="../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><img src="../resources/img/article.png" width="16" height="16" alt="" /></td>
 						<td><img src="../resources/img/comments.png" width="16" height="16" alt="" /></td>
 						<td><img src="../resources/img/tic.png" width="16" height="16" alt="save" /></td>
-						<td class="last"><a href="article.php?action=delete&id=<? echo $art->getId(); ?>"><img src="../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+						<td class="last"><a href="article.php?action=delete&id=<? echo $ar->getId(); ?>"><img src="../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
                     }
