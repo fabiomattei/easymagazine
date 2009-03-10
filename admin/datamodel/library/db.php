@@ -38,8 +38,8 @@ class DB {
         return self::$instance;
     }
 
-    public function execute($SQL, $array, $tables) {
-        $toSQL = StrHelper::formatQRY($SQL, $array, $tables);
+    public function execute($SQL, $array_str, $array_int , $tables) {
+        $toSQL = StrHelper::formatQRY($SQL, $array_str, $array_int, $tables);
         echo $toSQL;
         $result = mysql_query($toSQL, $this->connection);
         if (!$result) {

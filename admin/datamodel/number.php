@@ -32,20 +32,20 @@ class Number {
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary) values (\'?\', \'?\', \'?\', \'?\', \'?\', \'?\')';
-    const UPDATE_SQL = 'update numbers set indexnumber = \'?\', published = \'?\', title = \'?\', subtitle = \'?\', summary = \'?\' where id = \'?\'';
-    const DELETE_SQL = 'delete from numbers where id = \'?\'';
-    const SELECT_BY_ID = 'select * from numbers where id = ?';
+    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary) values (#, #, #, ?, ?, ?)';
+    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ? where id = #';
+    const DELETE_SQL = 'delete from numbers where id = #';
+    const SELECT_BY_ID = 'select * from numbers where id = #';
     const SELECT_BY_TITLE = 'select * from numbers where title like ?';
-    const SELECT_LAST = 'select * from numbers where published=1 order by indexnumber DESC Limit 1';
-    const SELECT_ALL_PUB = 'select * from numbers where published=1 order by indexnumber DESC';
+    const SELECT_LAST = 'select * from numbers where published = 1 order by indexnumber DESC Limit 1';
+    const SELECT_ALL_PUB = 'select * from numbers where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from numbers order by indexnumber DESC';
-    const SELECT_ARTICLES_PUB = 'select * from articles where published=1 AND number_id = ? order by indexnumber DESC';
+    const SELECT_ARTICLES_PUB = 'select * from articles where published=1 AND number_id = # order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from numbers order by indexnumber DESC';
     const SELECT_BY_ID_ORD = 'select id from numbers order by id DESC';
-    const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > \'?\' order by indexnumber DESC';
-    const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < \'?\' order by indexnumber';
+    const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber DESC';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < # order by indexnumber';
 
     public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='') {
         $this->db = DB::getInstance();
@@ -62,11 +62,12 @@ class Number {
         return $this->id;
     }
 
-    public static function findOne($SQL, $array) {
+    public static function findOne($SQL, $array_str, $array_int) {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             $SQL,
-            $array,
+            $array_str,
+            $array_int,
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
@@ -76,11 +77,12 @@ class Number {
         return $ret;
     }
 
-    public static function findMany($SQL, $array) {
+    public static function findMany($SQL, $array_str, $array_int) {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             $SQL,
-            $array,
+            $array_str,
+            $array_int,
             $tables);
         $ret = array();
         if ($rs) {
@@ -92,17 +94,17 @@ class Number {
     }
 
     public static function findById($id) {
-        $ret = NUMBER::findOne(self::SELECT_BY_ID, array("$id"));
+        $ret = NUMBER::findOne(self::SELECT_BY_ID, array(), array($id));
         return $ret;
     }
 
     public static function findUpIndexNumber ($indexnumber) {
-        $ret = NUMBER::findOne(self::SELECT_UP_INDEXNUMBER, array("$indexnumber"));
+        $ret = NUMBER::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($indexnumber));
         return $ret;
     }
 
     public static function findDownIndexNumber ($indexnumber) {
-        $ret = NUMBER::findOne(self::SELECT_DOWN_INDEXNUMBER, array("$indexnumber"));
+        $ret = NUMBER::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($indexnumber));
         return $ret;
     }
 
@@ -112,22 +114,22 @@ class Number {
     }
 
     public static function findLast() {
-        $ret = NUMBER::findOne(self::SELECT_LAST, array(" "));
+        $ret = NUMBER::findOne(self::SELECT_LAST, array(), array());
         return $ret;
     }
 
     public static function findAllPublished() {
-        $ret = NUMBER::findMany(self::SELECT_ALL_PUB, array());
+        $ret = NUMBER::findMany(self::SELECT_ALL_PUB, array(), array());
         return $ret;
     }
 
     public static function findAll() {
-        $ret = NUMBER::findMany(self::SELECT_ALL, array());
+        $ret = NUMBER::findMany(self::SELECT_ALL, array(), array());
         return $ret;
     }
 
     public static function findAllOrderedByIndexNumber() {
-        $ret = NUMBER::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array());
+        $ret = NUMBER::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
         return $ret;
     }
 
@@ -186,7 +188,8 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->id, $this->indexnumber, $this->published, $this->title, $this->subtitle, $this->summary),
+            array($this->title, $this->subtitle, $this->summary),
+            array($this->id, $this->indexnumber, $this->published),
             $tables);
 ////        if ($rs) {
 ////            $this->id = (int) $this->conn->Insert_ID();
@@ -199,7 +202,8 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->indexnumber, $this->published, $this->title, $this->subtitle, $this->summary, $this->id),
+            array($this->title, $this->subtitle, $this->summary),
+            array($this->id, $this->indexnumber, $this->published),
             $tables);
     }
 
@@ -221,10 +225,11 @@ class Number {
         $rs = DB::getInstance()->execute(
             self::SELECT_BY_INDEXNUMBER,
             array(),
+            array(),
             $tables);
         if ($rs) {
             $row = mysql_fetch_array($rs);
-                $maxIndexNumber = $row['indexnumber'];
+            $maxIndexNumber = $row['indexnumber'];
         }
         return $maxIndexNumber;
     }
@@ -233,6 +238,7 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::SELECT_BY_ID_ORD,
+            array(),
             array(),
             $tables);
         if ($rs) {

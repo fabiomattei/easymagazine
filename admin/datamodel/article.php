@@ -35,20 +35,20 @@ class Article {
     private $metakeyword;
     private $filter;
 
-    const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (\'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', \'?\', now(), now())';
-    const UPDATE_SQL = 'update articles set number_id = \'?\', indexnumber = \'?\', published = \'?\', title = \'?\', subtitle = \'?\', sumary = \'?\', body = \'?\', tag = \'?\', metadescription = \'?\', metakeyword = \'?\', updated=now() where id = \'?\'';
-    const DELETE_SQL = 'delete from articles where id = ?';
-    const SELECT_BY_ID = 'select * from articles where id = ?';
-    const SELECT_BY_TITLE = 'select * from articles where title like ?';
-    const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = ? order by created DESC';
+    const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const DELETE_SQL = 'delete from articles where id = #';
+    const SELECT_BY_ID = 'select * from articles where id = #';
+    const SELECT_BY_TITLE = 'select * from articles where title like #';
+    const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = # order by created DESC';
     const SELECT_LAST = 'select * from articles where published=1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from articles where published=1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from articles order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from articles order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from articles order by indexnumber DESC';
     const SELECT_BY_ID_ORD = 'select id from articles order by id DESC';
-    const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE indexnumber > \'?\' order by indexnumber DESC';
-    const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE indexnumber < \'?\' order by indexnumber';
+    const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE indexnumber > # order by indexnumber DESC';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE indexnumber < # order by indexnumber';
 
     public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
         $this->filter = ArticleFilterRemote::getInstance();
@@ -69,11 +69,12 @@ class Article {
         return $this->id;
     }
 
-    public static function findOne($SQL, $array) {
+    public static function findOne($SQL, $array_str, $array_int) {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             $SQL,
-            $array,
+            $array_str,
+            $array_int,
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
@@ -83,11 +84,12 @@ class Article {
         return $ret;
     }
 
-    public static function findMany($SQL, $array) {
+    public static function findMany($SQL, $array_str, $array_int) {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             $SQL,
-            $array,
+            $array_str,
+            $array_int,
             $tables);
         $ret = array();
         if ($rs) {
@@ -99,42 +101,42 @@ class Article {
     }
     
     public static function findById($id) {
-        $ret = ARTICLE::findOne(self::SELECT_BY_ID, array("$id"));
+        $ret = ARTICLE::findOne(self::SELECT_BY_ID, array(), array($id));
         return $ret;
     }
 
     public static function findUpIndexNumber ($indexnumber) {
-        $ret = ARTICLE::findOne(self::SELECT_UP_INDEXNUMBER, array("$indexnumber"));
+        $ret = ARTICLE::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($indexnumber));
         return $ret;
     }
 
     public static function findDownIndexNumber ($indexnumber) {
-        $ret = ARTICLE::findOne(self::SELECT_DOWN_INDEXNUMBER, array("$indexnumber"));
+        $ret = ARTICLE::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($indexnumber));
         return $ret;
     }
 
     public static function findByTitle($title) {
-        $ret = ARTICLE::findMany(self::SELECT_BY_TITLE, array("%$title%"));
+        $ret = ARTICLE::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
         return $ret;
     }
 
     public static function findLast() {
-        $ret = ARTICLE::findOne(self::SELECT_LAST, array(" "));
+        $ret = ARTICLE::findOne(self::SELECT_LAST, array(), array());
         return $ret;
     }
 
     public static function findAllPublished() {
-        $ret = ARTICLE::findMany(self::SELECT_ALL_PUB, array());
+        $ret = ARTICLE::findMany(self::SELECT_ALL_PUB, array(), array());
         return $ret;
     }
 
     public static function findAll() {
-        $ret = ARTICLE::findMany(self::SELECT_ALL, array());
+        $ret = ARTICLE::findMany(self::SELECT_ALL, array(), array());
         return $ret;
     }
 
     public static function findAllOrderedByIndexNumber() {
-        $ret = ARTICLE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array());
+        $ret = ARTICLE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
         return $ret;
     }
 
