@@ -103,11 +103,16 @@ function save($toSave) {
 
     $art = new Article(
         $toSave['id'],
+        $toSave['number_id'],
         $toSave['indexnumber'],
         $toSave['Published'],
         $toSave['Title'],
         $toSave['SubTitle'],
-        $toSave['Summary']);
+        $toSave['Summary'],
+        $toSave['Body'],
+        $toSave['Tag'],
+        $toSave['MetaDescription'],
+        $toSave['MetaKeyword']);
     $art->save();
     $out['art'] = $art;
 

@@ -164,7 +164,7 @@ class Article {
         return $ret;
     }
 
-    protected function save() {
+    public function save() {
         if ($this->id == self::NEW_ARTICLE) {
             $this->insert();
         } else {
@@ -188,7 +188,8 @@ class Article {
     protected function insert() {
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword));
+            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+            array());
         if ($rs) {
             $this->id = (int) $this->conn->Insert_ID();
         } else {
