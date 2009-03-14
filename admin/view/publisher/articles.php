@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>Easy Magazine Admin:</title>
+	<title>Easy Magazine Admin: Articles</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<style media="all" type="text/css">@import "../resources/css/all.css";</style>
 </head>
@@ -101,7 +101,7 @@
 		  <div class="table">
 				<img src="../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                <form name="form1" enctype="multipart/form-data" method="post" action="number.php?action=save">
+                <form name="form1" enctype="multipart/form-data" method="post" action="article.php?action=save">
 				<table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
 						<th class="full" colspan="2">Edit</th>

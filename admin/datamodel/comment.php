@@ -33,9 +33,9 @@ class Comment {
     private $filter;
 
     const INSERT_SQL = 'insert into comments (title, body, signature, created, updated) values (?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update comments set title = ?, body = ?, signature = ?, updated=now() where id = ?';
-    const DELETE_SQL = 'delete from comments where id = ?';
-    const SELECT_BY_ID = 'select title, body, signature, created, updated from comments where id = ?';
+    const UPDATE_SQL = 'update comments set title = ?, body = ?, signature = ?, updated=now() where id = #';
+    const DELETE_SQL = 'delete from comments where id = #';
+    const SELECT_BY_ID = 'select title, body, signature, created, updated from comments where id = #';
     const SELECT_BY_TITLE = 'select title, body, signature, created, updated from comments where title like ?';
 
     public function __construct($id, $article_id, $title, $published, $body, $signature, $created, $updated) {
@@ -53,6 +53,37 @@ class Comment {
 
     public function getId() {
         return $this->id;
+    }
+
+    public static function findOne($SQL, $array_str, $array_int) {
+        $tables = array("comments" => TBPREFIX."comments");
+        $rs = DB::getInstance()->execute(
+            $SQL,
+            $array_str,
+            $array_int,
+            $tables);
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Comment($row['id'], $row['article_id'], $row['published'], $row['body'], $row['signature']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findMany($SQL, $array_str, $array_int) {
+        $tables = array("comments" => TBPREFIX."comments");
+        $rs = DB::getInstance()->execute(
+            $SQL,
+            $array_str,
+            $array_int,
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Comment($row['id'], $row['article_id'], $row['published'], $row['body'], $row['signature']);
+            }
+        }
+        return $ret;
     }
 
     public static function findByTitle($title) {

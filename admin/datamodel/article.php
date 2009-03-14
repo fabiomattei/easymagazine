@@ -144,7 +144,8 @@ class Article {
         $tables = array('comments' => TBPREFIX.'comments');
         $rs = DB::getInstance()->execute(
             self::SELECT_COMMENTS_PUB,
-            array("$this->id"),
+            array(),
+            array($this->id),
             $tables);
         $ret = array();
         if ($rs) {
