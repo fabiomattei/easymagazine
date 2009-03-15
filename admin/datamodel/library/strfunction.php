@@ -23,9 +23,8 @@ class StrHelper {
     public static function formatQRY($str, $array_strings, $array_int ,$tables) {
         $array_strings = StrHelper::filterArgouments($array_strings);
         $out = StrHelper::replaceStrings($str, $array_strings);
-        $out = StrHelper::replaceNumbers($str, $array_int);
+        $out = StrHelper::replaceNumbers($out, $array_int);
         $out = StrHelper::fixTableName($out, $tables);
-        //echo $out."<br>";
         return $out;
     }
 

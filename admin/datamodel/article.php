@@ -24,6 +24,7 @@ require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
 class Article {
     const NEW_ARTICLE = -1;
     private $id = self::NEW_ARTICLE;
+    private $number_id;
     private $indexnumber;
     private $published;
     private $title;
@@ -186,32 +187,67 @@ class Article {
     }
 
     protected function insert() {
+        $this->id = $this->getMaxId()+1;
+        $this->indexnumber = $this->getMaxIndexNumber()+1;
+        $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
             array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
-            array());
-        if ($rs) {
-            $this->id = (int) $this->conn->Insert_ID();
-        } else {
-            trigger_error('DB error: '.$this->db->getErrorMsg());
-        }
+            array($this->id, $this->number_id, $this->indexnumber, $this->published),
+            $tables);
+//        if ($rs) {
+//            $this->id = (int) $this->conn->Insert_ID();
+//        } else {
+//            trigger_error('DB error: '.$this->db->getErrorMsg());
+//        }
     }
 
     protected function update() {
         DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword));
+            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+            array($this->number_id, $this->indexnumber, $this->published, $this->id),
+            $tables);
     }
 
     protected function setTimeStamps() {
+//        $rs = DB::getInstance()->execute(
+//            self::SELECT_BY_ID,
+//            array(),
+//            array($this->id));
+//        if ($rs) {
+//            $row = $rs->fetchRow();
+//            $this->created = $row['created'];
+//            $this->updated = $row['updated'];
+//        }
+    }
+
+    public function getMaxId() {
+        $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
-            self::SELECT_BY_ID,
-            array($this->id));
+            self::SELECT_BY_ID_ORD,
+            array(),
+            array(),
+            $tables);
         if ($rs) {
-            $row = $rs->fetchRow();
-            $this->created = $row['created'];
-            $this->updated = $row['updated'];
+            $row = mysql_fetch_array($rs);
+                $maxId = $row['id'];
         }
+        return $maxId;
+    }
+
+    public function getMaxIndexNumber() {
+        $tables = array("articles" => TBPREFIX."articles");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_INDEXNUMBER,
+            array(),
+            array(),
+            $tables);
+        if ($rs) {
+            $row = mysql_fetch_array($rs);
+            $maxIndexNumber = $row['indexnumber'];
+        }
+        return $maxIndexNumber;
     }
 
     public function getIndexnumber() {

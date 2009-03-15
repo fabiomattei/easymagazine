@@ -103,9 +103,9 @@ function save($toSave) {
 
     $art = new Article(
         $toSave['id'],
-        $toSave['number_id'],
+        1,
         $toSave['indexnumber'],
-        $toSave['Published'],
+        1,
         $toSave['Title'],
         $toSave['SubTitle'],
         $toSave['Summary'],
