@@ -174,7 +174,7 @@ class DbCreator {
 
     public function populateTableUsers() {
         $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype) values
-            ('New User', 'newuser', 'psw', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef')";
+            ('New User', 'newuser', '".md5("psw")."', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -273,9 +273,9 @@ class DbCreator {
             $result = $this->populateTableNumbers();
 
             if ($result) {
-                $out .= "Dummy data Number Created<BR>";
+                $out = "Dummy data Number Created<BR>";
             } else {
-                $out .= "Dummy data Number NOT created<BR>";;
+                $out = "Dummy data Number NOT created<BR>";;
             }
 
             $result = $this->populateTableArticles();
@@ -332,9 +332,9 @@ class DbCreator {
             $result = $this->dropTableNumbers();
 
             if ($result) {
-                $out .= "Table Number dropped<BR>";
+                $out = "Table Number dropped<BR>";
             } else {
-                $out .= "Table Number NOT dropped<BR>";;
+                $out = "Table Number NOT dropped<BR>";;
             }
 
             $result = $this->dropTableArticles();
