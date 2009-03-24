@@ -1,6 +1,7 @@
 <?php
 
 require_once('admin/datamodel/library/tstrfunction.php');
+require_once('admin/datamodel/tarticle.php');
 require_once('admin/datamodel/library/tdb.php');
 
 
@@ -15,4 +16,6 @@ class AllTests extends TestSuite {
     }
 }
 */
+
+
 ?>

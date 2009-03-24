@@ -20,30 +20,33 @@
 define('BASEDIR', '../');
 define('OUTDIR', BASEDIR.'../');
 
-require_once(BASEDIR.'admin/datamodel/library/strfunction.php');
+require_once(BASEDIR.'admin/datamodel/article.php');
+require_once(BASEDIR.'config.php');
+require_once(BASEDIR.'installation/dbCreator.php');
 require_once(OUTDIR.'simpletest/autorun.php');
 
 class ArticleTests extends UnitTestCase {
 
+    private $db;
+
     public function __construct() {
+        $this->db = new DbCreator();
+        $this->db->connect();
     }
 
 	function setUp() {
-        dropschema();
-		createSchema();
+        $this->db->dropSchema();
+        $this->db->createSchema();
+        $this->db->populateSchema();
 	}
 
 	public function tearDown() {
-
+        $this->db->dropSchema();
 	}
 
-   function TestStringInCompleteQuery() {
-	    $str = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-	    $array_strings = array("Titolo", "Sottotitolo", "sommario", "body", "TAg1 tag 2", "Metadescription", "Metakeyword");
-        $array_int = array(1, 2, 3, 1);
-        $tables = array("articles" => "Pretab"."articles");
-	    $out = StrHelper::formatQRY($str, $array_strings, $array_int ,$tables);
-		$this->assertPattern('(Titolo)', $out);
+   function TestFindById() {
+        $ar = Article::findById(1);
+		$this->assertPattern('(Article)', $ar->getTitle());
     }
 
 }
