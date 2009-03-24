@@ -29,22 +29,12 @@ class ArticleTests extends UnitTestCase {
     }
 
 	function setUp() {
-        createSchema();
+        dropschema();
+		createSchema();
 	}
 
 	public function tearDown() {
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."numbers;";
-		$result=mysql_query($sql, $this->conexion);
-		$sql="DROP TABLE IF EXISTS ".TBPREFIX."articles;";
-		$result=mysql_query($sql, $this->conexion);
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."comments;";
-		$result=mysql_query($sql, $this->conexion);
-		$sql="DROP TABLE IF EXISTS ".TBPREFIX."pages;";
-		$result=mysql_query($sql, $this->conexion);
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."users;";
-		$result=mysql_query($sql, $this->conexion);
-		$sql="DROP TABLE IF EXISTS ".TBPREFIX."users_articles;";
-		$result=mysql_query($sql, $this->conexion);
+
 	}
 
    function TestStringInCompleteQuery() {

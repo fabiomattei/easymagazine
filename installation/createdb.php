@@ -25,6 +25,7 @@ $dbCreator = new DbCreator();
 
 $dbCreator->connect();
 $out = $dbCreator->createSchema();
+$dbCreator->closeConnection();
 
 echo $out;
 

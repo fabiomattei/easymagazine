@@ -28,6 +28,13 @@ class DbCreator {
         mysql_select_db(DB_NAME, $this->connection);
     }
 
+    public function closeConnection() {
+        if ($this->connection) {
+            mysql_close($this->connection);
+        }
+    }
+
+
     public function createTableNumbers() {
         $cmd = "CREATE TABLE ".TBPREFIX."numbers (
            id int(11) NOT NULL auto_increment,
@@ -266,7 +273,6 @@ class DbCreator {
                 $out .= "Dummy data Relation User<->Article NOT created<BR>";;
             }
 
-            mysql_close($this->connection);
         } else {
             $out = "Error in the connection <br>".mysql_errno().": ".mysql_error();
         }
