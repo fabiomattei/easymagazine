@@ -21,10 +21,12 @@
 
 include ('../config.php');
 
-$connection = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-mysql_select_db(DB_NAME, $connection);
+function createSchema() {
 
-$cmd = "CREATE TABLE ".TBPREFIX."numbers (
+    $connection = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    mysql_select_db(DB_NAME, $connection);
+
+    $cmd = "CREATE TABLE ".TBPREFIX."numbers (
        id int(11) NOT NULL auto_increment,
        indexnumber int,
        published int NOT NULL DEFAULT '0',
@@ -34,16 +36,16 @@ $cmd = "CREATE TABLE ".TBPREFIX."numbers (
        PRIMARY KEY (id)
     );";
 
-$result = mysql_query($cmd, $connection);
+    $result = mysql_query($cmd, $connection);
 
-if ($result) {
-    $out = "Table Numbers created<BR>";
-} else {
-    $out = "Table Numbers NOT created<BR>";;
-}
+    if ($result) {
+        $out = "Table Numbers created<BR>";
+    } else {
+        $out = "Table Numbers NOT created<BR>";;
+    }
 
-if ($connection) {
-    $cmd = "CREATE TABLE ".TBPREFIX."articles (
+    if ($connection) {
+        $cmd = "CREATE TABLE ".TBPREFIX."articles (
        id int(11) NOT NULL auto_increment,
        number_id int(11),
        indexnumber int,
@@ -60,15 +62,15 @@ if ($connection) {
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Table Articles created<BR>";
-    } else {
-        $out .= "Table Articles NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Table Articles created<BR>";
+        } else {
+            $out .= "Table Articles NOT created<BR>";;
+        }
 
-    $cmd = "CREATE TABLE ".TBPREFIX."comments (
+        $cmd = "CREATE TABLE ".TBPREFIX."comments (
        id int(11) NOT NULL auto_increment,
        article_id int(11),
        title varchar(255),
@@ -76,19 +78,19 @@ if ($connection) {
        body text,
        signature text,
        created datetime,
-       updated datetime, 
+       updated datetime,
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Table Comments created<BR>";
-    } else {
-        $out .= "Table Comments NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Table Comments created<BR>";
+        } else {
+            $out .= "Table Comments NOT created<BR>";;
+        }
 
-    $cmd = "CREATE TABLE ".TBPREFIX."pages (
+        $cmd = "CREATE TABLE ".TBPREFIX."pages (
        id int(11) NOT NULL auto_increment,
        title varchar(255),
        published int NOT NULL DEFAULT '0',
@@ -102,15 +104,15 @@ if ($connection) {
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Table Pages created<BR>";
-    } else {
-        $out .= "Table Pages NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Table Pages created<BR>";
+        } else {
+            $out .= "Table Pages NOT created<BR>";;
+        }
 
-    $cmd = "CREATE TABLE ".TBPREFIX."users (
+        $cmd = "CREATE TABLE ".TBPREFIX."users (
        id int(11) NOT NULL auto_increment,
        name varchar(255),
        username varchar(255),
@@ -122,106 +124,111 @@ if ($connection) {
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Table Users created<BR>";
-    } else {
-        $out .= "Table Users NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Table Users created<BR>";
+        } else {
+            $out .= "Table Users NOT created<BR>";;
+        }
 
-    $cmd = "CREATE TABLE ".TBPREFIX."users_articles (
+        $cmd = "CREATE TABLE ".TBPREFIX."users_articles (
        id int(11) NOT NULL auto_increment,
        article_id int(11),
        user_id int(11),
        PRIMARY KEY (id)
     );";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Table Users created<BR>";
-    } else {
-        $out .= "Table Users NOT created<BR>";
-    }
+        if ($result) {
+            $out .= "Table Users created<BR>";
+        } else {
+            $out .= "Table Users NOT created<BR>";
+        }
 
-    // Populate the tables with some dummy data
+        // Populate the tables with some dummy data
 
-    $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary)
             values (1, 1, 1, 'My first number', 'Subtitle to my first number',
             'Summary of my first number')";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Dummy data Number Created<BR>";
-    } else {
-        $out .= "Dummy data Number NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Dummy data Number Created<BR>";
+        } else {
+            $out .= "Dummy data Number NOT created<BR>";;
+        }
 
-    $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
            (1, 1, 1, 1, 'My firts Article', 'Subtitle of my first article', 'summary of my first article',
             'Body of my first article', 'tag of my first article',
             'metadescription of my first article', 'metakeyword of my first article', now(), now())";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Dummy data Article Created<BR>";
-    } else {
-        $out .= "Dummy data Article NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Dummy data Article Created<BR>";
+        } else {
+            $out .= "Dummy data Article NOT created<BR>";;
+        }
 
-    $cmd = "insert into ".TBPREFIX."comments (id, article_id, published, title, body, signature, created, updated) values
+        $cmd = "insert into ".TBPREFIX."comments (id, article_id, published, title, body, signature, created, updated) values
            (1, 1, 1, 'My first comment', 'text of my first comment', 'signature of my first comment', now(), now())";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Dummy data Comment Created<BR>";
-    } else {
-        $out .= "Dummy data Comment NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Dummy data Comment Created<BR>";
+        } else {
+            $out .= "Dummy data Comment NOT created<BR>";;
+        }
 
-    $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword) values
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword) values
            (1, 1, 1, 'My firts Page', 'Subtitle of my first page', 'summary of my first page',
             'Body of my first page', 'tag of my first page',
             'metadescription of my first page', 'metakeyword of my first page')";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Dummy data Page Created<BR>";
-    } else {
-        $out .= "Dummy data Page NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Dummy data Page Created<BR>";
+        } else {
+            $out .= "Dummy data Page NOT created<BR>";;
+        }
 
-    $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype) values
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype) values
            ('New User', 'newuser', 'psw', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef')";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Dummy data User Created<BR>";
-    } else {
-        $out .= "Dummy data User NOT created<BR>";;
-    }
+        if ($result) {
+            $out .= "Dummy data User Created<BR>";
+        } else {
+            $out .= "Dummy data User NOT created<BR>";;
+        }
 
-    $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values
+        $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values
            (1, 1, 1)";
 
-    $result = mysql_query($cmd, $connection);
+        $result = mysql_query($cmd, $connection);
 
-    if ($result) {
-        $out .= "Dummy data Relation User<->Article Created<BR>";
+        if ($result) {
+            $out .= "Dummy data Relation User<->Article Created<BR>";
+        } else {
+            $out .= "Dummy data Relation User<->Article NOT created<BR>";;
+        }
+
+        mysql_close($connection);
     } else {
-        $out .= "Dummy data Relation User<->Article NOT created<BR>";;
+        $out = "Errore nella connessione<BR>".mysql_errno().": ".mysql_error();
     }
 
-    mysql_close($connection);
-} else {
-    $out = "Errore nella connessione<BR>".mysql_errno().": ".mysql_error();
+    return $out;
 }
+
+$out = createSchema();
 
 echo $out;
 
