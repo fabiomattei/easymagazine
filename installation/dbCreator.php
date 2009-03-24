@@ -56,6 +56,12 @@ class DbCreator {
         return $result;
     }
 
+    public function dropTableNumbers() {
+        $sql="DROP TABLE IF EXISTS ".TBPREFIX."numbers;";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
     public function createTableArticles() {
         $cmd = "CREATE TABLE ".TBPREFIX."articles (
             id int(11) NOT NULL auto_increment,
@@ -85,6 +91,12 @@ class DbCreator {
         return $result;
     }
 
+    public function dropTableArticles() {
+        $sql="DROP TABLE IF EXISTS ".TBPREFIX."articles;";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
     public function createTableComments() {
         $cmd = "CREATE TABLE ".TBPREFIX."comments (
             id int(11) NOT NULL auto_increment,
@@ -103,6 +115,12 @@ class DbCreator {
     public function populateTableComments() {
         $cmd = "insert into ".TBPREFIX."comments (id, article_id, published, title, body, signature, created, updated) values
             (1, 1, 1, 'My first comment', 'text of my first comment', 'signature of my first comment', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function dropTableComments() {
+        $sql="DROP TABLE IF EXISTS ".TBPREFIX."comments;";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -133,6 +151,12 @@ class DbCreator {
         return $result;
     }
 
+    public function dropTablePages() {
+        $sql="DROP TABLE IF EXISTS ".TBPREFIX."pages;";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
     public function createTableUsers() {
         $cmd = "CREATE TABLE ".TBPREFIX."users (
             id int(11) NOT NULL auto_increment,
@@ -155,6 +179,12 @@ class DbCreator {
         return $result;
     }
 
+    public function dropTableUsers() {
+        $sql="DROP TABLE IF EXISTS ".TBPREFIX."users;";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
     public function createTableUsersArticles() {
         $cmd = "CREATE TABLE ".TBPREFIX."users_articles (
             id int(11) NOT NULL auto_increment,
@@ -167,6 +197,12 @@ class DbCreator {
 
     public function populateTableUsersArticles() {
         $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values (1, 1, 1)";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function dropTableUsersArticles() {
+        $sql="DROP TABLE IF EXISTS ".TBPREFIX."users_articles;";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -223,7 +259,16 @@ class DbCreator {
                 $out .= "Table Users NOT created<BR>";
             }
 
-            // Populate the tables with some dummy data
+        } else {
+            $out = "Error in the connection <br>".mysql_errno().": ".mysql_error();
+        }
+
+        return $out;
+    }
+
+    function populateSchema() {
+
+        if ($this->connection) {
 
             $result = $this->populateTableNumbers();
 
@@ -265,7 +310,7 @@ class DbCreator {
                 $out .= "Dummy data User NOT created<BR>";;
             }
 
-            $result = mysql_query($cmd, $connection);
+            $result = $this->populateTableUsersArticles();
 
             if ($result) {
                 $out .= "Dummy data Relation User<->Article Created<BR>";
@@ -281,18 +326,62 @@ class DbCreator {
     }
 
     function dropSchema() {
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."numbers;";
-        $result=mysql_query($sql, $this->conexion);
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."articles;";
-        $result=mysql_query($sql, $this->conexion);
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."comments;";
-        $result=mysql_query($sql, $this->conexion);
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."pages;";
-        $result=mysql_query($sql, $this->conexion);
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."users;";
-        $result=mysql_query($sql, $this->conexion);
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."users_articles;";
-        $result=mysql_query($sql, $this->conexion);
+
+        if ($this->connection) {
+
+            $result = $this->dropTableNumbers();
+
+            if ($result) {
+                $out .= "Table Number dropped<BR>";
+            } else {
+                $out .= "Table Number NOT dropped<BR>";;
+            }
+
+            $result = $this->dropTableArticles();
+
+            if ($result) {
+                $out .= "Table Article dropped<BR>";
+            } else {
+                $out .= "Table Article NOT dropped<BR>";;
+            }
+
+            $result = $this->dropTableComments();
+
+            if ($result) {
+                $out .= "Table Comment dropped<BR>";
+            } else {
+                $out .= "Table Comment NOT dropped<BR>";;
+            }
+
+            $result = $this->dropTablePages();
+
+            if ($result) {
+                $out .= "Table Page dropped<BR>";
+            } else {
+                $out .= "Table Page NOT dropped<BR>";;
+            }
+
+            $result = $this->dropTableUsers();
+
+            if ($result) {
+                $out .= "Table User dropped<BR>";
+            } else {
+                $out .= "Table User NOT dropped<BR>";;
+            }
+
+            $result = $this->dropTableUsersArticles();
+
+            if ($result) {
+                $out .= "Table Relation User<->Article dropped<BR>";
+            } else {
+                $out .= "Table Relation User<->Article NOT dropped<BR>";;
+            }
+
+        } else {
+            $out = "Error in the connection <br>".mysql_errno().": ".mysql_error();
+        }
+
+        return $out;
     }
 
 }

@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Create all the tables
+// Create all the tables and fill it with dummy data
 
 include ('dbCreator.php');
 
@@ -25,6 +25,7 @@ $dbCreator = new DbCreator();
 
 $dbCreator->connect();
 $out = $dbCreator->createSchema();
+$out .= $dbCreator->populateSchema();
 $dbCreator->closeConnection();
 
 echo $out;
