@@ -25,7 +25,7 @@ define('STARTPATH', '../');
 //require_once(BASEDIR.'config.php');
 require_once(BASEDIR.'costants.php');
 require_once(BASEDIR.'admin/datamodel/article.php');
-require_once(BASEDIR.'installation/dbCreator.php');
+require_once('dummyDBCreator.php');
 require_once(OUTDIR.'simpletest/autorun.php');
 
 class ArticleTests extends UnitTestCase {
@@ -47,8 +47,43 @@ class ArticleTests extends UnitTestCase {
         $this->db->dropSchema();
 	}
 
-   function TestFindById() {
+    function testFindById() {
         $ar = Article::findById(1);
+		$this->assertPattern('(Article)', $ar->getTitle());
+    }
+
+    function testfindUpIndexNumber ($indexnumber) {
+        $ar = Article::findUpIndexNumber(0);
+		$this->assertPattern('(Article)', $ar->getTitle());
+    }
+
+    function testfindDownIndexNumber ($indexnumber) {
+        $ar = Article::findDownIndexNumber(2);
+		$this->assertPattern('(Article)', $ar->getTitle());
+    }
+
+    function testfindByTitle() {
+        $ar = Article::findByTitle('Article');
+		$this->assertPattern('(Article)', $ar->getTitle());
+    }
+
+    function testfindLast() {
+        $ar = Article::findLast();
+		$this->assertPattern('(Article)', $ar->getTitle());
+    }
+
+    function testfindAllPublished() {
+        $ar = Article::findAllPublished();
+		$this->assertPattern('(Article)', $ar->getTitle());
+    }
+
+    function testfindAll() {
+        $ar = Article::findAll();
+		$this->assertPattern('(Article)', $ar->getTitle());
+    }
+
+    function testfindAllOrderedByIndexNumber() {
+        $ar = Article::findAllOrderedByIndexNumber();
 		$this->assertPattern('(Article)', $ar->getTitle());
     }
 
