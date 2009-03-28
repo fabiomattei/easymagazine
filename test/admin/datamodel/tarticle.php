@@ -17,11 +17,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('BASEDIR', '../');
-define('OUTDIR', BASEDIR.'../');
+//define('BASEDIR', '../');
+//define('OUTDIR', BASEDIR.'../');
 
+define('STARTPATH', '../');
+
+//require_once(BASEDIR.'config.php');
+require_once(BASEDIR.'costants.php');
 require_once(BASEDIR.'admin/datamodel/article.php');
-require_once(BASEDIR.'config.php');
 require_once(BASEDIR.'installation/dbCreator.php');
 require_once(OUTDIR.'simpletest/autorun.php');
 

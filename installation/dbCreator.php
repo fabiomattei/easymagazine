@@ -57,7 +57,7 @@ class DbCreator {
     }
 
     public function dropTableNumbers() {
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."numbers;";
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."numbers;";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -92,7 +92,7 @@ class DbCreator {
     }
 
     public function dropTableArticles() {
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."articles;";
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."articles;";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -120,7 +120,7 @@ class DbCreator {
     }
 
     public function dropTableComments() {
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."comments;";
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."comments;";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -152,7 +152,7 @@ class DbCreator {
     }
 
     public function dropTablePages() {
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."pages;";
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."pages;";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -180,7 +180,7 @@ class DbCreator {
     }
 
     public function dropTableUsers() {
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."users;";
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."users;";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -202,7 +202,7 @@ class DbCreator {
     }
 
     public function dropTableUsersArticles() {
-        $sql="DROP TABLE IF EXISTS ".TBPREFIX."users_articles;";
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."users_articles;";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
