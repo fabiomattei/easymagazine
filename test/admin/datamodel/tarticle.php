@@ -62,29 +62,30 @@ class ArticleTests extends UnitTestCase {
 		$this->assertPattern('(first)', $ar->getTitle());
     }
 
-//    function testfindByTitle() {
-//        $ar = Article::findByTitle('Article');
-//		$this->assertPattern('(Article)', $ar->getTitle());
-//    }
+    function testfindByTitle() {
+        $ar = Article::findByTitle('first');
+		$this->assertPattern('(first)', $ar[0]->getTitle());
+    }
 
     function testfindLast() {
         $ar = Article::findLast();
-		$this->assertPattern('(Article)', $ar->getTitle());
+		$this->assertPattern('(third)', $ar->getTitle());
     }
 
     function testfindAllPublished() {
         $ar = Article::findAllPublished();
-		$this->assertPattern('(Article)', $ar[0]->getTitle());
+		$this->assertEqual(3, count($ar));
     }
 
     function testfindAll() {
         $ar = Article::findAll();
-		$this->assertPattern('(Article)', $ar[0]->getTitle());
+		$this->assertEqual(3, count($ar));
     }
 
     function testfindAllOrderedByIndexNumber() {
         $ar = Article::findAllOrderedByIndexNumber();
-		$this->assertPattern('(Article)', $ar[0]->getTitle());
+		$this->assertEqual(3, count($ar));
+		$this->assertPattern('(third)', $ar[0]->getTitle());
     }
 
 }

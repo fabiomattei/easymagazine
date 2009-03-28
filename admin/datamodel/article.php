@@ -40,7 +40,7 @@ class Article {
     const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from articles where id = #';
     const SELECT_BY_ID = 'select * from articles where id = #';
-    const SELECT_BY_TITLE = 'select * from articles where title like #';
+    const SELECT_BY_TITLE = 'select * from articles where title like ?';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = # order by created DESC';
     const SELECT_LAST = 'select * from articles where published=1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from articles where published=1 order by indexnumber DESC';
