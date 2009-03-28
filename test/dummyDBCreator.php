@@ -84,9 +84,19 @@ class DbCreator {
 
     public function populateTableArticles() {
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
-            (1, 1, 1, 1, 'My firts Article', 'Subtitle of my first article', 'summary of my first article',
+            (1, 1, 1, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
             'Body of my first article', 'tag of my first article',
             'metadescription of my first article', 'metakeyword of my first article', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+            (2, 1, 2, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
+            'Body of my second article', 'tag of my second article',
+            'metadescription of my second article', 'metakeyword of my second article', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+            (3, 1, 3, 1, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
+            'Body of my third article', 'tag of my third article',
+            'metadescription of my third article', 'metakeyword of my third article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }

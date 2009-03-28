@@ -52,20 +52,20 @@ class ArticleTests extends UnitTestCase {
 		$this->assertPattern('(Article)', $ar->getTitle());
     }
 
-    function testfindUpIndexNumber ($indexnumber) {
-        $ar = Article::findUpIndexNumber(0);
-		$this->assertPattern('(Article)', $ar->getTitle());
+    function testfindUpIndexNumber () {
+        $ar = Article::findUpIndexNumber(2);
+		$this->assertPattern('(third)', $ar->getTitle());
     }
 
-    function testfindDownIndexNumber ($indexnumber) {
+    function testfindDownIndexNumber () {
         $ar = Article::findDownIndexNumber(2);
-		$this->assertPattern('(Article)', $ar->getTitle());
+		$this->assertPattern('(first)', $ar->getTitle());
     }
 
-    function testfindByTitle() {
-        $ar = Article::findByTitle('Article');
-		$this->assertPattern('(Article)', $ar->getTitle());
-    }
+//    function testfindByTitle() {
+//        $ar = Article::findByTitle('Article');
+//		$this->assertPattern('(Article)', $ar->getTitle());
+//    }
 
     function testfindLast() {
         $ar = Article::findLast();
@@ -74,17 +74,17 @@ class ArticleTests extends UnitTestCase {
 
     function testfindAllPublished() {
         $ar = Article::findAllPublished();
-		$this->assertPattern('(Article)', $ar->getTitle());
+		$this->assertPattern('(Article)', $ar[0]->getTitle());
     }
 
     function testfindAll() {
         $ar = Article::findAll();
-		$this->assertPattern('(Article)', $ar->getTitle());
+		$this->assertPattern('(Article)', $ar[0]->getTitle());
     }
 
     function testfindAllOrderedByIndexNumber() {
         $ar = Article::findAllOrderedByIndexNumber();
-		$this->assertPattern('(Article)', $ar->getTitle());
+		$this->assertPattern('(Article)', $ar[0]->getTitle());
     }
 
 }
