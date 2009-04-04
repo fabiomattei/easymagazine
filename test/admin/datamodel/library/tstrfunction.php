@@ -17,12 +17,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('BASEDIR', '../');
-define('OUTDIR', BASEDIR.'../');
-
-require_once(BASEDIR.'admin/datamodel/library/strfunction.php');
-require_once(OUTDIR.'simpletest/autorun.php');
-
 class StrHelperTests extends UnitTestCase {
 
     public function __construct() {
