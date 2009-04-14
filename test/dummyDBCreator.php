@@ -166,6 +166,16 @@ class DbCreator {
             'Body of my first page', 'tag of my first page',
             'metadescription of my first page', 'metakeyword of my first page')";
         $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword) values
+            (2, 2, 1, 'My second Page', 'Subtitle of my second page', 'summary of my second page',
+            'Body of my second page', 'tag of my second page',
+            'metadescription of my first page', 'metakeyword of my first page')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword) values
+            (3, 3, 0, 'My third Page', 'Subtitle of my third page', 'summary of my third page',
+            'Body of my third page', 'tag of my third page',
+            'metadescription of my third page', 'metakeyword of my third page')";
+        $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 

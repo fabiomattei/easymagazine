@@ -35,8 +35,8 @@ class Comment {
     const INSERT_SQL = 'insert into comments (title, body, signature, created, updated) values (?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update comments set title = ?, body = ?, signature = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from comments where id = #';
-    const SELECT_BY_ID = 'select title, body, signature, created, updated from comments where id = #';
-    const SELECT_BY_TITLE = 'select title, body, signature, created, updated from comments where title like ?';
+    const SELECT_BY_ID = 'select * from comments where id = #';
+    const SELECT_BY_TITLE = 'select * from comments where title like ?';
 
     public function __construct($id, $article_id, $title, $published, $body, $signature, $created, $updated) {
         $this->db = DB::getInstance();
@@ -64,7 +64,7 @@ class Comment {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Comment($row['id'], $row['article_id'], $row['published'], $row['body'], $row['signature']);
+                $ret = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -80,22 +80,14 @@ class Comment {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Comment($row['id'], $row['article_id'], $row['published'], $row['body'], $row['signature']);
+                $ret[] = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
             }
         }
         return $ret;
     }
 
     public static function findByTitle($title) {
-        $rs = $this->db->execute(
-            self::SELECT_BY_TITLE,
-            array("%$title%"));
-        $ret = array();
-        if ($rs) {
-            foreach ($rs->getArray() as $row) {
-                $ret[] = new Article($row['id'], $row['title'], $row['body'], $row['signature']);
-            }
-        }
+        $ret = COMMENT::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
         return $ret;
     }
 

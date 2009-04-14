@@ -34,10 +34,10 @@ class Page {
     private $db;
 
     const INSERT_SQL = 'insert into pages (title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update pages set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = ?';
-    const DELETE_SQL = 'delete from pages where id=?';
-    const SELECT_BY_ID = 'select * from pages where id = ?';
-    const SELECT_ALL_published = 'select * from pages where published = 1 order by indexnumber';
+    const UPDATE_SQL = 'update pages set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const DELETE_SQL = 'delete from pages where id = #';
+    const SELECT_BY_ID = 'select * from pages where id = #';
+    const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber';
     const SELECT_BY_TITLE = 'select * from pages where title like ?';
 
     public function __construct($id=NEW_NUMBER, $title='', $published='', $indexnumber='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
@@ -59,11 +59,12 @@ class Page {
         return $this->id;
     }
 
-    public static function findById($id) {
-        $tables = array('pages' => TBPREFIX.'pages');
+    public static function findOne($SQL, $array_str, $array_int) {
+        $tables = array("pages" => TBPREFIX."pages");
         $rs = DB::getInstance()->execute(
-            self::SELECT_BY_ID,
-            array("$id"),
+            $SQL,
+            $array_str,
+            $array_int,
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
@@ -73,11 +74,12 @@ class Page {
         return $ret;
     }
 
-    public static function findAllPublished() {
-        $tables = array('pages' => TBPREFIX.'pages');
+    public static function findMany($SQL, $array_str, $array_int) {
+        $tables = array("pages" => TBPREFIX."pages");
         $rs = DB::getInstance()->execute(
-            self::SELECT_ALL_published,
-            array(),
+            $SQL,
+            $array_str,
+            $array_int,
             $tables);
         $ret = array();
         if ($rs) {
@@ -85,6 +87,16 @@ class Page {
                 $ret[] = new Page($row['id'], $row['title'], $row['published'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
             }
         }
+        return $ret;
+    }
+
+    public static function findById($id) {
+        $ret = PAGE::findOne(self::SELECT_BY_ID, array(), array($id));
+        return $ret;
+    }
+
+    public static function findAllPublished() {
+        $ret = PAGE::findMany(self::SELECT_ALL_PUB, array(), array());
         return $ret;
     }
 
