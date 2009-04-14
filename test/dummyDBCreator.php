@@ -53,6 +53,14 @@ class DbCreator {
            values (1, 1, 1, 'My first number', 'Subtitle to my first number',
            'Summary of my first number')";
         $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary)
+           values (2, 2, 1, 'My second number', 'Subtitle to my second number',
+           'Summary of my second number')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary)
+           values (3, 3, 0, 'My third number', 'Subtitle to my third number',
+           'Summary of my third number')";
+        $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 

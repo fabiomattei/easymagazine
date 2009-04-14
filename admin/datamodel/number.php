@@ -109,7 +109,7 @@ class Number {
     }
 
     public static function findByTitle($title) {
-        $ret = NUMBER::findMany(self::SELECT_BY_TITLE, array("%$title%"));
+        $ret = NUMBER::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
         return $ret;
     }
 
