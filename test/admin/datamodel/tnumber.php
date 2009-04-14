@@ -77,6 +77,13 @@ class NumberTests extends UnitTestCase {
 		$this->assertPattern('(third)', $num[0]->getTitle());
     }
 
+    function testfindArticles() {
+        $num = Number::findById(1);
+        $arts = $num->articles();
+		$this->assertEqual(3, count($arts));
+        $this->assertPattern('(Article)', $arts[0]->getTitle());
+    }
+
 }
 
 $test = new NumberTests();

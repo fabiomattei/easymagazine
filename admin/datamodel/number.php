@@ -137,6 +137,7 @@ class Number {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             self::SELECT_ARTICLES_PUB,
+            array(),
             array("$this->id"),
             $tables);
         $ret = array();
