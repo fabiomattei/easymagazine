@@ -36,9 +36,41 @@ class CommentTests extends UnitTestCase {
         $this->db->dropSchema();
 	}
 
+    function testFindById() {
+        $num = Comment::findById(1);
+		$this->assertPattern('(first)', $num->getTitle());
+    }
+
+    function testFindAll() {
+        $num = Comment::findAll();
+        $this->assertEqual(1, count($num));
+    }
+
     function testfindByTitle() {
         $num = Comment::findByTitle('first');
 		$this->assertPattern('(first)', $num[0]->getTitle());
+    }
+
+    function testSaveNewComment() {
+        $newCmt = new Comment(Comment::NEW_COMMENT, Comment::NEW_COMMENT, 'New Comment', '1', 'New Comment Body', 'Fabio');
+        $newCmt->save();
+        $num = Comment::findAll();
+		$this->assertEqual(2, count($num));
+    }
+
+    function testUpdateComment() {
+        $comt = Comment::findById(1);
+        $comt->setTitle("New strange Title");
+        $comt->save();
+        $comt = Comment::findById(1);
+        $this->assertPattern('(strange)', $comt->getTitle());
+    }
+
+    function testDeleteComment() {
+        $comt = Comment::findById(1);
+        $comt->delete();
+        $comt = Comment::findAll();
+		$this->assertEqual(0, count($comt));
     }
 
 }

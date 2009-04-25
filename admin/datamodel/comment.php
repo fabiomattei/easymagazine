@@ -32,13 +32,15 @@ class Comment {
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into comments (title, body, signature, created, updated) values (?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update comments set title = ?, body = ?, signature = ?, updated=now() where id = #';
+    const INSERT_SQL = 'insert into comments (id, article_id, published, title, body, signature, created, updated) values (#, #, #, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update comments set article_id = #, published = #, title = ?, body = ?, signature = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from comments where id = #';
     const SELECT_BY_ID = 'select * from comments where id = #';
     const SELECT_BY_TITLE = 'select * from comments where title like ?';
+    const SELECT_BY_ID_ORD = 'select id from comments order by id DESC';
+    const SELECT_ALL = 'select * from comments order by id DESC';
 
-    public function __construct($id, $article_id, $title, $published, $body, $signature, $created, $updated) {
+    public function __construct($id=self::NEW_COMMENT, $article_id='', $title='', $published='', $body='', $signature='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = CommentFilterRemote::getInstance();
         $this->id = $id;
@@ -85,55 +87,78 @@ class Comment {
         }
         return $ret;
     }
+    
+    public static function findById($id) {
+        $ret = COMMENT::findOne(self::SELECT_BY_ID, array(), array($id));
+        return $ret;
+    }
+
+    public static function findAll() {
+        $ret = COMMENT::findMany(self::SELECT_ALL, array(), array());
+        return $ret;
+    }
 
     public static function findByTitle($title) {
         $ret = COMMENT::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
         return $ret;
     }
 
-    protected function save() {
+    public function save() {
         if ($this->id == self::NEW_COMMENT) {
             $this->insert();
         } else {
             $this->update();
         }
-        $this->setTimeStamps();
     }
 
     public function delete() {
-        $this->conn->execute(DELETE_SQL, array((int) $this->getId()));
+        $tables = array("comments" => TBPREFIX."comments");
+        $rs = DB::getInstance()->execute(
+            self::DELETE_SQL,
+            array(),
+            array((int) $this->getId()),
+            $tables);
         $this->id = self::NEW_COMMENT;
+        $this->article_id = self::NEW_COMMENT;
         $this->title = '';
+        $this->published = '';
         $this->body = '';
         $this->signature = '';
+        $this->created = '';
+        $this->updated = '';
     }
 
     protected function insert() {
-        $rs = $this->conn->execute(
+        $this->id = $this->getMaxId()+1;
+        $tables = array("comments" => TBPREFIX."comments");
+        $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->title, $this->body, $this->signature));
-        if ($rs) {
-            $this->id = (int) $this->conn->Insert_ID();
-        } else {
-            trigger_error('DB error: '.$this->db->getErrorMsg());
-        }
+            array($this->title, $this->body, $this->signature),
+            array($this->id, $this->article_id, $this->published),
+            $tables);
     }
 
     protected function update() {
-        $this->conn->execute(
+        $tables = array("comments" => TBPREFIX."comments");
+        $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->title, $this->body, $this->signature));
+            array($this->title, $this->body, $this->signature),
+            array($this->article_id, $this->published, $this->id),
+            $tables);
     }
 
-    protected function setTimeStamps() {
-        $rs = $this->conn->execute(
-            self::SELECT_BY_ID,
-            array($this->id));
+    public function getMaxId() {
+        $tables = array("comments" => TBPREFIX."comments");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_ID_ORD,
+            array(),
+            array(),
+            $tables);
         if ($rs) {
-            $row = $rs->fetchRow();
-            $this->created = $row['created'];
-            $this->updated = $row['updated'];
+            $row = mysql_fetch_array($rs);
+                $maxId = $row['id'];
         }
+        return $maxId;
     }
 
     public function getArticle_id() {
