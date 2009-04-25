@@ -29,11 +29,13 @@ class Number {
     private $title;
     private $subtitle;
     private $summary;
+    private $created;
+    private $updated;
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary) values (#, #, #, ?, ?, ?)';
-    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ? where id = #';
+    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, created, updated) values (#, #, #, ?, ?, ?, Now(), Now())';
+    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from numbers where id = #';
     const SELECT_BY_ID = 'select * from numbers where id = #';
     const SELECT_BY_TITLE = 'select * from numbers where title like ?';
@@ -47,7 +49,7 @@ class Number {
     const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber DESC';
     const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < # order by indexnumber';
 
-    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='') {
+    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = NumberFilterRemote::getInstance();
         $this->id = $id;
@@ -56,6 +58,8 @@ class Number {
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->summary = $summary;
+        $this->created = $created;
+        $this->updated = $updated;
     }
 
     public function getId() {
@@ -71,7 +75,7 @@ class Number {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -87,7 +91,7 @@ class Number {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -166,13 +170,13 @@ class Number {
         } else {
             $this->update();
         }
-        $this->setTimeStamps();
     }
 
     public function delete() {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::DELETE_SQL,
+            array(),
             array($this->id),
             $tables);
         $this->id = self::NEW_NUMBER;
@@ -181,6 +185,8 @@ class Number {
         $this->title = '';
         $this->subtitle = '';
         $this->summary = '';
+        $this->created = '';
+        $this->updated = '';
     }
 
     protected function insert() {
@@ -192,11 +198,6 @@ class Number {
             array($this->title, $this->subtitle, $this->summary),
             array($this->id, $this->indexnumber, $this->published),
             $tables);
-////        if ($rs) {
-////            $this->id = (int) $this->conn->Insert_ID();
-////        } else {
-////            trigger_error('DB error: '.$this->db->getErrorMsg());
-////        }
     }
 
     protected function update() {
@@ -206,19 +207,6 @@ class Number {
             array($this->title, $this->subtitle, $this->summary),
             array($this->id, $this->indexnumber, $this->published),
             $tables);
-    }
-
-    protected function setTimeStamps() {
-//        $tables = array("numbers" => TBPREFIX."numbers");
-//        $rs = DB::getInstance()->execute(
-//            self::SELECT_BY_ID,
-//            array($this->id),
-//            $tables);
-//        if ($rs) {
-//            $row = $rs->fetchRow();
-//            $this->created = $row['created'];
-//            $this->updated = $row['updated'];
-//        }
     }
 
     public function getMaxIndexNumber() {
@@ -294,6 +282,30 @@ class Number {
 
     public function setSummary($summary) {
         $this->summary = $summary;
+    }
+
+    public function getPublished() {
+        return $this->published;
+    }
+
+    public function setPublished($published) {
+        $this->published = $published;
+    }
+
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function setCreated($created) {
+        $this->created = $created;
+    }
+
+    public function getUpdated() {
+        return $this->updated;
+    }
+
+    public function setUpdated($updated) {
+        $this->updated = $updated;
     }
 
 }

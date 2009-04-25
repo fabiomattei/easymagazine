@@ -43,23 +43,25 @@ class DbCreator {
            title varchar(255),
            subtitle text,
            summary text,
+           created datetime,
+           updated datetime,
            PRIMARY KEY (id));";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 
     public function populateTableNumbers() {
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, created, updated)
            values (1, 1, 1, 'My first number', 'Subtitle to my first number',
-           'Summary of my first number')";
+           'Summary of my first number', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, created, updated)
            values (2, 2, 1, 'My second number', 'Subtitle to my second number',
-           'Summary of my second number')";
+           'Summary of my second number', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, created, updated)
            values (3, 3, 0, 'My third number', 'Subtitle to my third number',
-           'Summary of my third number')";
+           'Summary of my third number', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
