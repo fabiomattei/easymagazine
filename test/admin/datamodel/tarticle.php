@@ -77,6 +77,41 @@ class ArticleTests extends UnitTestCase {
 		$this->assertPattern('(third)', $ar[0]->getTitle());
     }
 
+    function testArticleNumber() {
+        $ar = Article::findById(1);
+        $num = $ar->Number();
+        $this->assertPattern('(My first number)', $num->getTitle());
+    }
+
+    function testArticleComments() {
+        $ar = Article::findById(1);
+        $coms = $ar->Comments();
+        $this->assertEqual(1, count($coms));
+        $this->assertPattern('(My first comment)', $coms[0]->getTitle());
+    }
+
+    function testSaveNewArticle() {
+        $newArt = new Article(Article::NEW_ARTICLE, '1', '6', '0', 'Article four', 'Subtitle four', 'summary four', 'body four', 'tag four', 'metadescription four', 'metakeyword four');
+        $newArt->save();
+        $arts = Article::findAll();
+		$this->assertEqual(4, count($arts));
+    }
+
+    function testUpdateArticle() {
+        $ar = Article::findById(1);
+        $ar->setTitle("New strange Title");
+        $ar->save();
+        $ar = Article::findById(1);
+        $this->assertPattern('(strange)', $ar->getTitle());
+    }
+
+    function testDeleteArticle() {
+        $num = Article::findById(1);
+        $num->delete();
+        $num = Article::findAll();
+		$this->assertEqual(2, count($num));
+    }
+
 }
 
 $test = new ArticleTests();

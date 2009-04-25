@@ -18,6 +18,7 @@
  */
 
 require_once(STARTPATH.DBPATH.'db.php');
+require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'comment.php');
 require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
 
@@ -34,14 +35,17 @@ class Article {
     private $tag;
     private $metadescription;
     private $metakeyword;
+    private $created;
+    private $updated;
     private $filter;
 
     const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from articles where id = #';
     const SELECT_BY_ID = 'select * from articles where id = #';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = # order by created DESC';
+    const SELECT_NUMBER = 'select * from numbers where id = #';
     const SELECT_LAST = 'select * from articles where published=1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from articles where published=1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from articles order by id DESC';
@@ -51,7 +55,7 @@ class Article {
     const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE indexnumber > # order by indexnumber DESC';
     const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE indexnumber < # order by indexnumber';
 
-    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
+    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
@@ -64,6 +68,8 @@ class Article {
         $this->tag = $tag;
         $this->metadescription = $metadescription;
         $this->metakeyword = $metakeyword;
+        $this->created = $created;
+        $this->updated = $updated;
     }
 
     public function getId() {
@@ -79,7 +85,7 @@ class Article {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -95,7 +101,7 @@ class Article {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -165,17 +171,41 @@ class Article {
         return $ret;
     }
 
+    public function number() {
+        $tables = array('numbers' => TBPREFIX.'numbers');
+        $rs = DB::getInstance()->execute(
+            self::SELECT_NUMBER,
+            array(),
+            array($this->number_id),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Number(
+                    $row['id'],
+                    $row['indexnumber'],
+                    $row['published'],
+                    $row['title'],
+                    $row['subtitle'],
+                    $row['summary'],
+                    $row['created'],
+                    $row['updated']);
+            }
+        }
+        return $ret;
+    }
+
     public function save() {
         if ($this->id == self::NEW_ARTICLE) {
             $this->insert();
         } else {
             $this->update();
         }
-        $this->setTimeStamps();
     }
 
     public function delete() {
-        DB::getInstance()->execute(DELETE_SQL, array((int) $this->getId()));
+        $tables = array("articles" => TBPREFIX."articles");
+        DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
         $this->id = self::NEW_ARTICLE;
         $this->title = '';
         $this->subtitle = '';
@@ -184,6 +214,8 @@ class Article {
         $this->tag = '';
         $this->metadescription = '';
         $this->metakeyword = '';
+        $this->created = '';
+        $this->updated = '';
     }
 
     protected function insert() {
@@ -195,31 +227,15 @@ class Article {
             array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
             array($this->id, $this->number_id, $this->indexnumber, $this->published),
             $tables);
-//        if ($rs) {
-//            $this->id = (int) $this->conn->Insert_ID();
-//        } else {
-//            trigger_error('DB error: '.$this->db->getErrorMsg());
-//        }
     }
 
     protected function update() {
+        $tables = array("articles" => TBPREFIX."articles");
         DB::getInstance()->execute(
             self::UPDATE_SQL,
             array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
             array($this->number_id, $this->indexnumber, $this->published, $this->id),
             $tables);
-    }
-
-    protected function setTimeStamps() {
-//        $rs = DB::getInstance()->execute(
-//            self::SELECT_BY_ID,
-//            array(),
-//            array($this->id));
-//        if ($rs) {
-//            $row = $rs->fetchRow();
-//            $this->created = $row['created'];
-//            $this->updated = $row['updated'];
-//        }
     }
 
     public function getMaxId() {
@@ -345,6 +361,21 @@ class Article {
 
     public function setMetakeyword($metakeyword) {
         $this->metakeyword = $metakeyword;
+    }
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function getUpdated() {
+        return $this->updated;
+    }
+
+    public function getNumber_id() {
+        return $this->number_id;
+    }
+
+    public function setNumber_id($number_id) {
+        $this->number_id = $number_id;
     }
         
 }
