@@ -46,6 +46,23 @@ class PageTests extends UnitTestCase {
 		$this->assertEqual(2, count($pg));
     }
 
+    function testfindAll() {
+        $pg = Page::findAll();
+		$this->assertEqual(3, count($pg));
+    }
+
+    function testfindAllOrdered() {
+        $pg = Page::findAllOrdered();
+		$this->assertEqual(3, count($pg));
+        $this->assertEqual(1, $pg[0]->getId());
+    }
+
+    function testfindAllPublishedOrdered() {
+        $pg = Page::findAllPublishedOrdered();
+		$this->assertEqual(2, count($pg));
+        $this->assertEqual(1, $pg[0]->getId());
+    }
+
 }
 
 $test = new PageTests();

@@ -38,6 +38,9 @@ class Page {
     const DELETE_SQL = 'delete from pages where id = #';
     const SELECT_BY_ID = 'select * from pages where id = #';
     const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber';
+    const SELECT_ALL = 'select * from pages order by indexnumber';
+    const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber';
+    const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from pages where published = 1 order by indexnumber';
     const SELECT_BY_TITLE = 'select * from pages where title like ?';
 
     public function __construct($id=NEW_NUMBER, $title='', $published='', $indexnumber='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
@@ -97,6 +100,21 @@ class Page {
 
     public static function findAllPublished() {
         $ret = PAGE::findMany(self::SELECT_ALL_PUB, array(), array());
+        return $ret;
+    }
+
+    public static function findAllPublishedOrdered() {
+        $ret = PAGE::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
+        return $ret;
+    }
+
+    public static function findAll() {
+        $ret = PAGE::findMany(self::SELECT_ALL, array(), array());
+        return $ret;
+    }
+
+    public static function findAllOrdered() {
+        $ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
         return $ret;
     }
 
