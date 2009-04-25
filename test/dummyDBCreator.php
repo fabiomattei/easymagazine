@@ -157,26 +157,28 @@ class DbCreator {
             tag text,
             metadescription text,
             metakeyword text,
+            created datetime,
+            updated datetime,
             PRIMARY KEY (id));";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 
     public function populateTablePages() {
-        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword) values
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
             (1, 1, 1, 'My firts Page', 'Subtitle of my first page', 'summary of my first page',
             'Body of my first page', 'tag of my first page',
-            'metadescription of my first page', 'metakeyword of my first page')";
+            'metadescription of my first page', 'metakeyword of my first page', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword) values
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
             (2, 2, 1, 'My second Page', 'Subtitle of my second page', 'summary of my second page',
             'Body of my second page', 'tag of my second page',
-            'metadescription of my first page', 'metakeyword of my first page')";
+            'metadescription of my first page', 'metakeyword of my first page', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword) values
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
             (3, 3, 0, 'My third Page', 'Subtitle of my third page', 'summary of my third page',
             'Body of my third page', 'tag of my third page',
-            'metadescription of my third page', 'metakeyword of my third page')";
+            'metadescription of my third page', 'metakeyword of my third page', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -197,14 +199,16 @@ class DbCreator {
             email varchar(255),
             msn varchar(255),
             skype varchar(255),
+            created datetime,
+            updated datetime,
             PRIMARY KEY (id));";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 
     public function populateTableUsers() {
-        $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype) values
-            ('New User', 'newuser', '".md5("psw")."', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef')";
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype, created, updated) values
+            ('New User', 'newuser', '".md5("psw")."', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
