@@ -67,8 +67,9 @@ class StrHelper {
     }
 
     public static function fixTableName($qry, $tables) {
+        $out = $qry;
         foreach ($tables as $oldName => $newName){
-            $out = str_replace($oldName, $newName, $qry);
+            $out = str_replace(" $oldName ", " $newName ", $out);
         }
         return $out;
     }

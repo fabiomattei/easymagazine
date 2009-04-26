@@ -43,7 +43,7 @@ class Number {
     const SELECT_ALL_PUB = 'select * from numbers where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from numbers order by indexnumber DESC';
-    const SELECT_ARTICLES_PUB = 'select * from articles where published=1 AND number_id = # order by indexnumber DESC';
+    const SELECT_ARTICLES = 'select * from articles where number_id = # order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from numbers order by indexnumber DESC';
     const SELECT_BY_ID_ORD = 'select id from numbers order by id DESC';
     const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber DESC';
@@ -140,7 +140,7 @@ class Number {
     public function articles() {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
-            self::SELECT_ARTICLES_PUB,
+            self::SELECT_ARTICLES,
             array(),
             array("$this->id"),
             $tables);

@@ -208,7 +208,10 @@ class DbCreator {
 
     public function populateTableUsers() {
         $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype, created, updated) values
-            ('New User', 'newuser', '".md5("psw")."', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', NOW(), NOW())";
+            ('New User', 'newuser', '".md5('psw')."', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype, created, updated) values
+            ('Second User', 'seconduser', '".md5("second")."', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -231,6 +234,12 @@ class DbCreator {
 
     public function populateTableUsersArticles() {
         $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values (1, 1, 1)";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values (2, 1, 2)";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values (3, 2, 1)";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values (4, 3, 2)";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }

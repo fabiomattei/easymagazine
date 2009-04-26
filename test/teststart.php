@@ -29,6 +29,7 @@ require_once(BASEDIR.'admin/datamodel/article.php');
 require_once(BASEDIR.'admin/datamodel/number.php');
 require_once(BASEDIR.'admin/datamodel/comment.php');
 require_once(BASEDIR.'admin/datamodel/page.php');
+require_once(BASEDIR.'admin/datamodel/user.php');
 require_once('dummyDBCreator.php');
 
 
@@ -37,6 +38,7 @@ require_once('admin/datamodel/tarticle.php');
 require_once('admin/datamodel/tnumber.php');
 require_once('admin/datamodel/tcomment.php');
 require_once('admin/datamodel/tpage.php');
+require_once('admin/datamodel/tuser.php');
 require_once('admin/datamodel/library/tdb.php');
 
 

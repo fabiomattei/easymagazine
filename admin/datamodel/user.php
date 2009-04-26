@@ -27,19 +27,21 @@ class User {
     private $email;
     private $msn;
     private $skype;
+    private $created;
+    private $updated;
     private $db;
 
-    const INSERT_SQL = 'insert into users (name, username, password, role, email, msn, skype, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update users set name = ?, username = ?, sumary = ?, role = ?, email = ?, msn = ?, skype = ?, updated=now() where id = ?';
-    const DELETE_SQL = 'delete from users where id=?';
-    const SELECT_BY_ID = 'select name, username, password, role, email, msn, skype, created, updated from users where id = ?';
-    const SELECT_BY_name = 'select name, username, password, role, email, msn, skype, created, updated from users where name like ?';
+    const INSERT_SQL = 'insert into users (id, name, username, password, role, email, msn, skype, created, updated) values (#, ?, ?, ?, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update users set name = ?, username = ?, role = ?, email = ?, msn = ?, skype = ?, updated=now() where id = #';
+    const DELETE_SQL = 'delete from users where id = #';
+    const SELECT_BY_ID = 'select * from users where id = #';
+    const SELECT_BY_NAME = 'select * from users where name like ?';
+    const SELECT_ALL = 'select * from users ';
+    const SELECT_USR_PSW = 'select * from users WHERE username like ? AND password like ?';
+    const SELECT_BY_ID_ORD = 'select id from users order by id DESC';
+    const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
 
-    public function __construct() {
-        $this->db = DB::getInstance();
-    }
-
-    public function __construct($id, $name, $username, $password, $role, $email, $msn, $skype) {
+    public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $role='', $email='', $msn='', $skype='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->name = $name;
@@ -49,36 +51,118 @@ class User {
         $this->email = $email;
         $this->msn = $msn;
         $this->skype = $skype;
+        $this->created = $created;
+        $this->updated = $updated;
     }
 
-    public function getId() {
-        return $this->id;
-    }
-
-    public static function findByname($name) {
-        $rs = $this->db->execute(
-            self::SELECT_BY_name,
-            array("%$name%"));
-        $ret = array();
+    public static function findOne($SQL, $array_str, $array_int) {
+        $tables = array("users" => TBPREFIX."users");
+        $rs = DB::getInstance()->execute(
+            $SQL,
+            $array_str,
+            $array_int,
+            $tables);
         if ($rs) {
-            foreach ($rs->getArray() as $row) {
-                $ret[] = new Article($row['id'], $row['name'], $row['username'], $row['password'], $row['role'], $row['email'], $row['msn'], $row['skype']);
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
             }
         }
         return $ret;
     }
 
-    protected function save() {
+    public static function findMany($SQL, $array_str, $array_int) {
+        $tables = array("users" => TBPREFIX."users");
+        $rs = DB::getInstance()->execute(
+            $SQL,
+            $array_str,
+            $array_int,
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
+            }
+        }
+        return $ret;
+    }
+
+    public static function findById($id) {
+        $ret = USER::findOne(self::SELECT_BY_ID, array(), array($id));
+        return $ret;
+    }
+
+    public static function findByName($name) {
+        $ret = USER::findMany(self::SELECT_BY_NAME, array("%$name%"), array());
+        return $ret;
+    }
+
+    public static function findAll() {
+        $ret = USER::findMany(self::SELECT_ALL, array(), array());
+        return $ret;
+    }
+
+    public static function checkUsrPsw($usr, $psw) {
+        $ret = USER::findOne(self::SELECT_USR_PSW, array("$usr", md5("$psw")), array());
+        return $ret;
+    }
+
+    public function articles() {
+        $tables = array("articles" => TBPREFIX."articles",
+                        "users_articles" => TBPREFIX."users_articles");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_ARTICLES,
+            array(),
+            array("$this->id"),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Article(
+                    $row['id'],
+                    $row['number_id'],
+                    $row['indexnumber'],
+                    $row['published'],
+                    $row['title'],
+                    $row['subtitle'],
+                    $row['summary'],
+                    $row['body'],
+                    $row['tag'],
+                    $row['metadescription'],
+                    $row['metakeyword']);
+            }
+        }
+        return $ret;
+    }
+
+    public function getMaxId() {
+        $tables = array("users" => TBPREFIX."users");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_ID_ORD,
+            array(),
+            array(),
+            $tables);
+        if ($rs) {
+            $row = mysql_fetch_array($rs);
+                $maxId = $row['id'];
+        }
+        return $maxId;
+    }
+
+    public function save() {
         if ($this->id == self::NEW_USER) {
             $this->insert();
         } else {
             $this->update();
         }
-        $this->setTimeStamps();
     }
 
     public function delete() {
-        $this->conn->execute(DELETE_SQL, array((int) $this->getId()));
+        $tables = array("users" => TBPREFIX."users");
+        $rs = DB::getInstance()->execute(
+            self::DELETE_SQL,
+            array(),
+            array($this->id),
+            $tables);
         $this->id = self::NEW_USER;
         $this->name = '';
         $this->username = '';
@@ -87,36 +171,34 @@ class User {
         $this->email = '';
         $this->msn = '';
         $this->skype = '';
+        $this->created = '';
+        $this->updated = '';
     }
 
     protected function insert() {
-        $rs = $this->conn->execute(
+        $this->id = $this->getMaxId()+1;
+        $tables = array("users" => TBPREFIX."users");
+        $psw = md5($this->password);
+        $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->name, $this->username, $this->password, $this->role, $this->email, $this->msn, $this->skype));
-        if ($rs) {
-            $this->id = (int) $this->conn->Insert_ID();
-        } else {
-            trigger_error('DB error: '.$this->db->getErrorMsg());
-        }
+            array($this->name, $this->username, $psw, $this->role, $this->email, $this->msn, $this->skype),
+            array($this->id),
+            $tables);
     }
 
     protected function update() {
-        $this->conn->execute(
+        $tables = array("users" => TBPREFIX."users");
+        $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->name, $this->username, $this->password, $this->role, $this->email, $this->msn, $this->skype));
+            array($this->name, $this->username, $this->role, $this->email, $this->msn, $this->skype),
+            array($this->id),
+            $tables);
     }
 
-    protected function setTimeStamps() {
-        $rs = $this->conn->execute(
-            self::SELECT_BY_ID,
-            array($this->id));
-        if ($rs) {
-            $row = $rs->fetchRow();
-            $this->created = $row['created'];
-            $this->updated = $row['updated'];
-        }
+    public function getId() {
+        return $this->id;
     }
-
+        
     public function getName() {
         return $this->name;
     }
@@ -172,8 +254,15 @@ class User {
     public function setSkype($skype) {
         $this->skype = $skype;
     }
-        
-}
 
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function getUpdated() {
+        return $this->updated;
+    }
+
+}
 
 ?>

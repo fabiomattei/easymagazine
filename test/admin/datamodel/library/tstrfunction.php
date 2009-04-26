@@ -47,12 +47,13 @@ class StrHelperTests extends UnitTestCase {
     }
 
    function TestTableNameInCompleteQuery() {
-	    $str = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
+	    $str = 'insert into articles users_article (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
 	    $array_strings = array("Titolo", "Sottotitolo", "sommario", "body", "TAg1 tag 2", "Metadescription", "Metakeyword");
         $array_int = array(1, 2, 3, 1);
-        $tables = array("articles" => "Pretab"."articles");
+        $tables = array("articles" => "Pretab"."articles", "users_article" => "Pretab"."users_article");
 	    $out = StrHelper::formatQRY($str, $array_strings, $array_int ,$tables);
 		$this->assertPattern('(Pretabarticles)', $out);
+        $this->assertPattern('(Pretabusers_article)', $out);
     }
 
    function TestReplaceTitoloString() {
