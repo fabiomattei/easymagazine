@@ -46,8 +46,9 @@ class Article {
     const SELECT_BY_ID = 'select * from articles where id = #';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = # order by created DESC';
+    const SELECT_COMMENTS = 'select * from comments where article_id = # order by created DESC';
     const SELECT_NUMBER = 'select * from numbers where id = #';
-    const SELECT_LAST = 'select * from articles where published=1 order by indexnumber DESC Limit 1';
+    const SELECT_LAST = 'select * from articles order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from articles where published=1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from articles order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from articles order by indexnumber DESC';
@@ -150,10 +151,34 @@ class Article {
         return $ret;
     }
 
-    public function comments() {
+    public function commentsPublished() {
         $tables = array('comments' => TBPREFIX.'comments');
         $rs = DB::getInstance()->execute(
             self::SELECT_COMMENTS_PUB,
+            array(),
+            array($this->id),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Comment(
+                    $row['id'],
+                    $row['article_id'],
+                    $row['title'],
+                    $row['published'],
+                    $row['body'],
+                    $row['signature'],
+                    $row['created'],
+                    $row['updated']);
+            }
+        }
+        return $ret;
+    }
+
+    public function comments() {
+        $tables = array('comments' => TBPREFIX.'comments');
+        $rs = DB::getInstance()->execute(
+            self::SELECT_COMMENTS,
             array(),
             array($this->id),
             $tables);

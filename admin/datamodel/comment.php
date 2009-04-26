@@ -39,6 +39,7 @@ class Comment {
     const SELECT_BY_TITLE = 'select * from comments where title like ?';
     const SELECT_BY_ID_ORD = 'select id from comments order by id DESC';
     const SELECT_ALL = 'select * from comments order by id DESC';
+    const SELECT_ARTICLE = 'select * from articles where id = # ';
 
     public function __construct($id=self::NEW_COMMENT, $article_id='', $title='', $published='', $body='', $signature='', $created='', $updated='') {
         $this->db = DB::getInstance();
@@ -103,6 +104,35 @@ class Comment {
         return $ret;
     }
 
+    public function article() {
+        $tables = array("articles" => TBPREFIX."articles");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_ARTICLE,
+            array(),
+            array("$this->article_id"),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret = new Article(
+                    $row['id'],
+                    $row['number_id'],
+                    $row['indexnumber'],
+                    $row['published'],
+                    $row['title'],
+                    $row['subtitle'],
+                    $row['summary'],
+                    $row['body'],
+                    $row['tag'],
+                    $row['metadescription'],
+                    $row['metakeyword'],
+                    $row['created'],
+                    $row['updated']);
+            }
+        }
+        return $ret;
+    }
+    
     public function save() {
         if ($this->id == self::NEW_COMMENT) {
             $this->insert();

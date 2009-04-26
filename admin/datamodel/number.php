@@ -44,6 +44,7 @@ class Number {
     const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from numbers order by indexnumber DESC';
     const SELECT_ARTICLES = 'select * from articles where number_id = # order by indexnumber DESC';
+    const SELECT_ARTICLES_PUBLISHED = 'select * from articles where number_id = # AND published = 1 order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from numbers order by indexnumber DESC';
     const SELECT_BY_ID_ORD = 'select id from numbers order by id DESC';
     const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber DESC';
@@ -141,6 +142,33 @@ class Number {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             self::SELECT_ARTICLES,
+            array(),
+            array("$this->id"),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Article(
+                    $row['id'],
+                    $row['number_id'],
+                    $row['indexnumber'],
+                    $row['published'],
+                    $row['title'],
+                    $row['subtitle'],
+                    $row['summary'],
+                    $row['body'],
+                    $row['tag'],
+                    $row['metadescription'],
+                    $row['metakeyword']);
+            }
+        }
+        return $ret;
+    }
+
+    public function articlesPublished() {
+        $tables = array("articles" => TBPREFIX."articles");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_ARTICLES_PUBLISHED,
             array(),
             array("$this->id"),
             $tables);

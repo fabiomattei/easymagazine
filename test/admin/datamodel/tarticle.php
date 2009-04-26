@@ -63,7 +63,7 @@ class ArticleTests extends UnitTestCase {
 
     function testfindAllPublished() {
         $ar = Article::findAllPublished();
-		$this->assertEqual(3, count($ar));
+		$this->assertEqual(2, count($ar));
     }
 
     function testfindAll() {
@@ -85,7 +85,14 @@ class ArticleTests extends UnitTestCase {
 
     function testArticleComments() {
         $ar = Article::findById(1);
-        $coms = $ar->Comments();
+        $coms = $ar->comments();
+        $this->assertEqual(2, count($coms));
+        $this->assertPattern('(My first comment)', $coms[0]->getTitle());
+    }
+
+    function testArticleCommentsPublished() {
+        $ar = Article::findById(1);
+        $coms = $ar->commentsPublished();
         $this->assertEqual(1, count($coms));
         $this->assertPattern('(My first comment)', $coms[0]->getTitle());
     }

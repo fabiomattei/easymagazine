@@ -103,7 +103,7 @@ class User {
     }
 
     public static function checkUsrPsw($usr, $psw) {
-        $ret = USER::findOne(self::SELECT_USR_PSW, array("$usr", md5("$psw")), array());
+        $ret = USER::findOne(self::SELECT_USR_PSW, array("$usr", md5($psw)), array());
         return $ret;
     }
 
@@ -129,7 +129,9 @@ class User {
                     $row['body'],
                     $row['tag'],
                     $row['metadescription'],
-                    $row['metakeyword']);
+                    $row['metakeyword'],
+                    $row['created'],
+                    $row['updated']);
             }
         }
         return $ret;

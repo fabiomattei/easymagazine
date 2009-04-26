@@ -63,6 +63,28 @@ class PageTests extends UnitTestCase {
         $this->assertEqual(1, $pg[0]->getId());
     }
 
+    function testSaveNewPage() {
+        $newpage = new Page(Page::NEW_PAGE, '4', '0', 'Page four', 'Subtitle four', 'summary four', 'Body', 'tag', 'metadscritpion', 'metakeyword');
+        $newpage->save();
+        $pages = Page::findAll();
+		$this->assertEqual(4, count($pages));
+    }
+
+    function testUpdatePage() {
+        $num = Page::findById(1);
+        $num->setTitle("New strange Title");
+        $num->save();
+        $num = Page::findById(1);
+        $this->assertPattern('(strange)', $num->getTitle());
+    }
+
+    function testDeletePage() {
+        $num = Page::findById(1);
+        $num->delete();
+        $num = Page::findAll();
+		$this->assertEqual(3, count($num));
+    }
+
 }
 
 $test = new PageTests();

@@ -84,6 +84,13 @@ class NumberTests extends UnitTestCase {
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
+    function testfindArticlesPublished() {
+        $num = Number::findById(1);
+        $arts = $num->articlesPublished();
+		$this->assertEqual(2, count($arts));
+        $this->assertPattern('(Article)', $arts[0]->getTitle());
+    }
+
     function testSaveNewNumber() {
         $newNum = new Number(Number::NEW_NUMBER, '4', '0', 'Number four', 'Subtitle four', 'summary four');
         $newNum->save();

@@ -43,7 +43,7 @@ class CommentTests extends UnitTestCase {
 
     function testFindAll() {
         $num = Comment::findAll();
-        $this->assertEqual(1, count($num));
+        $this->assertEqual(2, count($num));
     }
 
     function testfindByTitle() {
@@ -55,7 +55,7 @@ class CommentTests extends UnitTestCase {
         $newCmt = new Comment(Comment::NEW_COMMENT, Comment::NEW_COMMENT, 'New Comment', '1', 'New Comment Body', 'Fabio');
         $newCmt->save();
         $num = Comment::findAll();
-		$this->assertEqual(2, count($num));
+		$this->assertEqual(3, count($num));
     }
 
     function testUpdateComment() {
@@ -70,9 +70,14 @@ class CommentTests extends UnitTestCase {
         $comt = Comment::findById(1);
         $comt->delete();
         $comt = Comment::findAll();
-		$this->assertEqual(0, count($comt));
+		$this->assertEqual(1, count($comt));
     }
 
+    function testArticle() {
+        $comt = Comment::findById(1);
+        $art = $comt->article();
+		$this->assertPattern('(first Article)', $art->getTitle());
+    }
 }
 
 $test = new CommentTests();

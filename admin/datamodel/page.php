@@ -22,40 +22,46 @@ require_once(STARTPATH.FILTERPATH.'pagefilterremote.php');
 class Page {
     const NEW_PAGE = -1;
     private $id = self::NEW_PAGE;
-    private $title;
-    private $published;
     private $indexnumber;
+    private $published;
+    private $title;
     private $subtitle;
     private $summary;
     private $body;
     private $tag;
     private $metadescription;
     private $metakeyword;
+    private $created;
+    private $updated;
     private $db;
 
-    const INSERT_SQL = 'insert into pages (title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update pages set title = ?, subtitle = ?, sumary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
-    const DELETE_SQL = 'delete from pages where id = #';
+    const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const DELETE_SQL = 'delete from pages where id = # ';
     const SELECT_BY_ID = 'select * from pages where id = #';
     const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber';
     const SELECT_ALL = 'select * from pages order by indexnumber';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber';
     const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from pages where published = 1 order by indexnumber';
     const SELECT_BY_TITLE = 'select * from pages where title like ?';
+    const SELECT_BY_ID_ORD = 'select id from pages order by id DESC';
+    const SELECT_BY_INDEXNUMBER = 'select indexnumber from pages order by indexnumber DESC';
 
-    public function __construct($id=NEW_NUMBER, $title='', $published='', $indexnumber='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='') {
+    public function __construct($id=NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = PageFilterRemote::getInstance();
         $this->id = $id;
-        $this->title = $title;
+        $this->indexnumber = $indexnumber;
         $this->published = $published;
-        $this->indexnumber = $indexnumber;    
+        $this->title = $title;   
         $this->subtitle = $subtitle;
         $this->summary = $summary;
         $this->body = $body;
         $this->tag = $tag;
         $this->metadescription = $metadescription;
         $this->metakeyword = $metakeyword;
+        $this->created = $created;
+        $this->updated = $updated;
     }
 
     public function getId() {
@@ -71,7 +77,7 @@ class Page {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Page($row['id'], $row['title'], $row['published'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated'] );
             }
         }
         return $ret;
@@ -87,7 +93,7 @@ class Page {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Page($row['id'], $row['title'], $row['published'], $row['indexnumber'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword']);
+                $ret[] = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated'] );
             }
         }
         return $ret;
@@ -118,17 +124,21 @@ class Page {
         return $ret;
     }
 
-    protected function save() {
+    public function save() {
         if ($this->id == self::NEW_PAGE) {
             $this->insert();
         } else {
             $this->update();
         }
-        $this->setTimeStamps();
     }
 
     public function delete() {
-        $this->conn->execute(DELETE_SQL, array((int) $this->getId()));
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::DELETE_SQL,
+            array(),
+            array($this->id),
+            $tables);
         $this->id = self::NEW_PAGE;
         $this->title = '';
         $this->subtitle = '';
@@ -137,34 +147,56 @@ class Page {
         $this->tag = '';
         $this->metadescription = '';
         $this->metakeyword = '';
+        $this->created = '';
+        $this->updated = '';
     }
 
     protected function insert() {
-        $rs = $this->conn->execute(
+        $this->id = $this->getMaxId()+1;
+        $this->indexnumber = $this->getMaxIndexNumber()+1;
+        $tables = array("pages" => TBPREFIX."pages");
+        $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword));
-        if ($rs) {
-            $this->id = (int) $this->conn->Insert_ID();
-        } else {
-            trigger_error('DB error: '.$this->db->getErrorMsg());
-        }
+            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+            array($this->id, $this->indexnumber, $this->published),
+            $tables);
     }
 
     protected function update() {
-        $this->conn->execute(
+        $tables = array("pages" => TBPREFIX."pages");
+        $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword));
+            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+            array($this->indexnumber, $this->published, $this->id),
+            $tables);
     }
 
-    protected function setTimeStamps() {
-        $rs = $this->conn->execute(
-            self::SELECT_BY_ID,
-            array($this->id));
+    public function getMaxIndexNumber() {
+        $tables = array("pages" => TBPREFIX."pages");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_INDEXNUMBER,
+            array(),
+            array(),
+            $tables);
         if ($rs) {
-            $row = $rs->fetchRow();
-            $this->created = $row['created'];
-            $this->updated = $row['updated'];
+            $row = mysql_fetch_array($rs);
+            $maxIndexNumber = $row['indexnumber'];
         }
+        return $maxIndexNumber;
+    }
+
+    public function getMaxId() {
+        $tables = array("pages" => TBPREFIX."pages");
+        $rs = DB::getInstance()->execute(
+            self::SELECT_BY_ID_ORD,
+            array(),
+            array(),
+            $tables);
+        if ($rs) {
+            $row = mysql_fetch_array($rs);
+                $maxId = $row['id'];
+        }
+        return $maxId;
     }
 
     public function getTitle() {

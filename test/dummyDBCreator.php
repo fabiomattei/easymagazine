@@ -104,7 +104,7 @@ class DbCreator {
             'metadescription of my second article', 'metakeyword of my second article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
-            (3, 1, 3, 1, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
+            (3, 1, 3, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
             'Body of my third article', 'tag of my third article',
             'metadescription of my third article', 'metakeyword of my third article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
@@ -135,6 +135,9 @@ class DbCreator {
     public function populateTableComments() {
         $cmd = "insert into ".TBPREFIX."comments (id, article_id, published, title, body, signature, created, updated) values
             (1, 1, 1, 'My first comment', 'text of my first comment', 'signature of my first comment', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."comments (id, article_id, published, title, body, signature, created, updated) values
+            (2, 1, 0, 'My first comment', 'text of my first comment', 'signature of my first comment', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
