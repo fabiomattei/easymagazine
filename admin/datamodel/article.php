@@ -20,6 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'comment.php');
+require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
 
 class Article {
@@ -54,6 +55,8 @@ class Article {
     const SELECT_BY_ID_ORD = 'select id from articles order by id DESC';
     const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE indexnumber > # order by indexnumber DESC';
     const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE indexnumber < # order by indexnumber';
+    const SELECT_USERS = 'select US.* from users as US, users_articles as UA where US.id = UA.user_id AND UA.article_id = # order by US.id DESC';
+
 
     public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
@@ -188,6 +191,33 @@ class Article {
                     $row['title'],
                     $row['subtitle'],
                     $row['summary'],
+                    $row['created'],
+                    $row['updated']);
+            }
+        }
+        return $ret;
+    }
+
+    public function users() {
+        $tables = array('users' => TBPREFIX.'users',
+                        'users_articles' => TBPREFIX.'users_articles');
+        $rs = DB::getInstance()->execute(
+            self::SELECT_USERS,
+            array(),
+            array($this->id),
+            $tables);
+        $ret = array();
+        if ($rs) {
+            while ($row = mysql_fetch_array($rs)){
+                $ret[] = new Comment(
+                    $row['id'],
+                    $row['name'],
+                    $row['username'],
+                    $row['password'],
+                    $row['role'],
+                    $row['email'],
+                    $row['msn'],
+                    $row['skype'],
                     $row['created'],
                     $row['updated']);
             }

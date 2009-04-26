@@ -108,8 +108,8 @@ class User {
     }
 
     public function articles() {
-        $tables = array("articles" => TBPREFIX."articles",
-                        "users_articles" => TBPREFIX."users_articles");
+        $tables = array('articles' => TBPREFIX.'articles',
+                        'users_articles' => TBPREFIX.'users_articles');
         $rs = DB::getInstance()->execute(
             self::SELECT_ARTICLES,
             array(),

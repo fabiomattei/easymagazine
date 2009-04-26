@@ -112,6 +112,11 @@ class ArticleTests extends UnitTestCase {
 		$this->assertEqual(2, count($num));
     }
 
+    function testUsers() {
+        $art = Article::findById(1);
+        $usrs = $art->users();
+		$this->assertEqual(2, count($usrs));
+    }
 }
 
 $test = new ArticleTests();
