@@ -39,7 +39,6 @@ require_once('admin/datamodel/tnumber.php');
 require_once('admin/datamodel/tcomment.php');
 require_once('admin/datamodel/tpage.php');
 require_once('admin/datamodel/tuser.php');
-require_once('admin/datamodel/library/tdb.php');
 
 
 /**

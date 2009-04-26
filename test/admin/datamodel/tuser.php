@@ -58,6 +58,13 @@ class UserTests extends UnitTestCase {
         $this->assertPattern('(User)', $usr->getName());
     }
 
+    function testCheckChangePsw() {
+        $usr = User::checkUsrPsw('newuser','psw');
+        $usr->updatePassword('hello');
+        $usr = User::checkUsrPsw('newuser','hello');
+        $this->assertPattern('(User)', $usr->getName());
+    }
+
     function testSaveNewUser() {
         $newNum = new User(User::NEW_USER, 'New User second', 'newusersecond', 'newpasswordsecond' , 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef');
         $newNum->save();
