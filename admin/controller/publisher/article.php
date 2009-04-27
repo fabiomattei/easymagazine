@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('STARTPATH', '../../');
+define('STARTPATH', '../../../');
 
 require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
@@ -136,6 +136,6 @@ if (!isset($_GET["action"])) { $out = index(); }
 $arts = $out['arts'];
 $art = $out['art'];
 
-include('../view/publisher/articles.php');
+include('../../view/publisher/articles.php');
 
 ?>

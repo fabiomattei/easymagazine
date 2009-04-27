@@ -23,12 +23,12 @@
 <head>
 	<title>Easy Magazine Admin: Numbers</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-	<style media="all" type="text/css">@import "../resources/css/all.css";</style>
+	<style media="all" type="text/css">@import "../../resources/css/all.css";</style>
 </head>
 <body>
 <div id="main">
 	<div id="header">
-		<a href="index.html" class="logo"><img src="../resources/img/logo.gif" width="101" height="29" alt="" /></a>
+		<a href="index.html" class="logo"><img src="../../resources/img/logo.gif" width="101" height="29" alt="" /></a>
 		<ul id="top-navigation">
 			<li><span><span><a href="index.php">Dashboard</a></span></span></li>
 			<li class="active"><span><span>Numbers</span></span></li>
@@ -60,8 +60,8 @@
 			</label>
 		  </div>
 			<div class="table">
-				<img src="../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
-				<img src="../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
+				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
+				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
 				<table class="listing" cellpadding="0" cellspacing="0">
 					<tr>
 						<th class="first" width="177">Title</th>
@@ -79,13 +79,13 @@
                     ?>
 					<tr>
 						<td class="first style1"><? echo $num->getTitle(); ?></td>
-						<td><a href="number.php?action=edit&id=<? echo $num->getId(); ?>"><img src="../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-						<td><a href="number.php?action=up&id=<? echo $num->getId(); ?>"><img src="../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><a href="number.php?action=down&id=<? echo $num->getId(); ?>"><img src="../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><img src="../resources/img/article.png" width="16" height="16" alt="" /></td>
-						<td><img src="../resources/img/comments.png" width="16" height="16" alt="" /></td>
-						<td><img src="../resources/img/tic.png" width="16" height="16" alt="save" /></td>
-						<td class="last"><a href="number.php?action=delete&id=<? echo $num->getId(); ?>"><img src="../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+						<td><a href="number.php?action=edit&id=<? echo $num->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td><a href="number.php?action=up&id=<? echo $num->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="number.php?action=down&id=<? echo $num->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+						<td><img src="../../resources/img/article.png" width="16" height="16" alt="" /></td>
+						<td><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></td>
+						<td><img src="../../resources/img/tic.png" width="16" height="16" alt="save" /></td>
+						<td class="last"><a href="number.php?action=delete&id=<? echo $num->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
                     }
@@ -99,8 +99,8 @@
 			  </div>
 			</div>
 		  <div class="table">
-				<img src="../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
-				<img src="../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
+				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
+				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                 <form name="form1" enctype="multipart/form-data" method="post" action="number.php?action=save">
 				<table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
