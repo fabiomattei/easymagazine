@@ -22,13 +22,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>Login Page</title>
+	<title>Login Error Page</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
-    <form action="openSession.php" method="post">
+    Username or password wrong!<br />
+    <a href="login.php">Try again</a>. <br /><br />
+    If you lost your password please type your username and email and we will send you a new password. <br />
+    <form action="mailPassword.php" method="post">
         Username: <input type="text" name="username" value="" /> <br />
-        Password: <input type="password" name="password" value="" /> <br />
+        Mail: <input type="text" name="password" value="" /> <br />
     </form>
 </body>
 </html>
+
