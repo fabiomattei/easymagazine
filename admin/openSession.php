@@ -21,6 +21,8 @@ define('STARTPATH', '../');
 
 require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
+require_once(STARTPATH.'costants.php');
+require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 
 $username = $_POST['username'];

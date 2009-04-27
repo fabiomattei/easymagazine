@@ -32,6 +32,7 @@
     <form action="mailPassword.php" method="post">
         Username: <input type="text" name="username" value="" /> <br />
         Mail: <input type="text" name="password" value="" /> <br />
+        <input type="submit" value="Ok" />
     </form>
 </body>
 </html>
