@@ -43,6 +43,7 @@ class DbCreator {
            title varchar(255),
            subtitle text,
            summary text,
+           commentsallowed int,
            created datetime,
            updated datetime,
            PRIMARY KEY (id));";
@@ -51,9 +52,9 @@ class DbCreator {
     }
 
     public function populateTableNumbers() {
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, created, updated)
            values (1, 1, 1, 'My first number', 'Subtitle to my first number',
-           'Summary of my first number', NOW(), NOW())";
+           'Summary of my first number', 1, NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -74,6 +75,7 @@ class DbCreator {
             subtitle text,
             summary text,
             body text,
+            commentsallowed int,
             tag text,
             metadescription text,
             metakeyword text,
@@ -85,9 +87,9 @@ class DbCreator {
     }
 
     public function populateTableArticles() {
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (1, 1, 1, 1, 'My firts Article', 'Subtitle of my first article', 'summary of my first article',
-            'Body of my first article', 'tag of my first article',
+            'Body of my first article', 1, 'tag of my first article',
             'metadescription of my first article', 'metakeyword of my first article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         return $result;

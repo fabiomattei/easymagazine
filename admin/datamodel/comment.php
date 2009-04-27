@@ -123,6 +123,7 @@ class Comment {
                     $row['subtitle'],
                     $row['summary'],
                     $row['body'],
+                    $row['commentsallowed'],
                     $row['tag'],
                     $row['metadescription'],
                     $row['metakeyword'],

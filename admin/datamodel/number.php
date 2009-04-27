@@ -29,13 +29,14 @@ class Number {
     private $title;
     private $subtitle;
     private $summary;
+    private $commentsallowed;
     private $created;
     private $updated;
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, created, updated) values (#, #, #, ?, ?, ?, Now(), Now())';
-    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, updated = Now() where id = #';
+    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, created, updated) values (#, #, #, ?, ?, ?, #, Now(), Now())';
+    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from numbers where id = #';
     const SELECT_BY_ID = 'select * from numbers where id = #';
     const SELECT_BY_TITLE = 'select * from numbers where title like ?';
@@ -50,7 +51,7 @@ class Number {
     const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber DESC';
     const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < # order by indexnumber';
 
-    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $created='', $updated='') {
+    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $commentsallowed='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = NumberFilterRemote::getInstance();
         $this->id = $id;
@@ -59,6 +60,7 @@ class Number {
         $this->title = $title;
         $this->subtitle = $subtitle;
         $this->summary = $summary;
+        $this->commentsallowed = $commentsallowed;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -76,7 +78,7 @@ class Number {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['created'], $row['updated']);
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -92,7 +94,7 @@ class Number {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['created'], $row['updated']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -157,9 +159,12 @@ class Number {
                     $row['subtitle'],
                     $row['summary'],
                     $row['body'],
+                    $row['commentsallowed'],
                     $row['tag'],
                     $row['metadescription'],
-                    $row['metakeyword']);
+                    $row['metakeyword'],
+                    $row['created'],
+                    $row['updated']);
             }
         }
         return $ret;
@@ -184,9 +189,12 @@ class Number {
                     $row['subtitle'],
                     $row['summary'],
                     $row['body'],
+                    $row['commentsallowed'],
                     $row['tag'],
                     $row['metadescription'],
-                    $row['metakeyword']);
+                    $row['metakeyword'],
+                    $row['created'],
+                    $row['updated']);
             }
         }
         return $ret;
@@ -224,7 +232,7 @@ class Number {
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
             array($this->title, $this->subtitle, $this->summary),
-            array($this->id, $this->indexnumber, $this->published),
+            array($this->id, $this->indexnumber, $this->published, $this->commentsallowed),
             $tables);
     }
 
@@ -233,7 +241,7 @@ class Number {
         $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
             array($this->title, $this->subtitle, $this->summary),
-            array($this->id, $this->indexnumber, $this->published),
+            array($this->indexnumber, $this->published, $this->commentsallowed, $this->id),
             $tables);
     }
 
@@ -312,6 +320,14 @@ class Number {
         $this->summary = $summary;
     }
 
+    public function getCommentsallowed() {
+        return $this->commentsallowed;
+    }
+
+    public function setCommentsallowed($commentsallowed) {
+        $this->commentsallowed = $commentsallowed;
+    }
+        
     public function getPublished() {
         return $this->published;
     }

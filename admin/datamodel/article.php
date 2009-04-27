@@ -33,6 +33,7 @@ class Article {
     private $subtitle;
     private $summary;
     private $body;
+    private $commentsallowed;
     private $tag;
     private $metadescription;
     private $metakeyword;
@@ -40,8 +41,8 @@ class Article {
     private $updated;
     private $filter;
 
-    const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from articles where id = #';
     const SELECT_BY_ID = 'select * from articles where id = #';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
@@ -59,7 +60,7 @@ class Article {
     const SELECT_USERS = 'select US.* from users as US, users_articles as UA where US.id = UA.user_id AND UA.article_id = # order by US.id DESC';
 
 
-    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
+    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $commentsallowed='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
@@ -69,6 +70,7 @@ class Article {
         $this->subtitle = $subtitle;
         $this->summary = $summary;
         $this->body = $body;
+        $this->commentsallowed = $commentsallowed;
         $this->tag = $tag;
         $this->metadescription = $metadescription;
         $this->metakeyword = $metakeyword;
@@ -89,7 +91,7 @@ class Article {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
+                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -105,7 +107,7 @@ class Article {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
+                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -280,7 +282,7 @@ class Article {
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
             array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
-            array($this->id, $this->number_id, $this->indexnumber, $this->published),
+            array($this->id, $this->number_id, $this->indexnumber, $this->published, $this->commentsallowed),
             $tables);
     }
 
@@ -289,7 +291,7 @@ class Article {
         DB::getInstance()->execute(
             self::UPDATE_SQL,
             array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
-            array($this->number_id, $this->indexnumber, $this->published, $this->id),
+            array($this->number_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
             $tables);
     }
 
@@ -389,6 +391,14 @@ class Article {
         $this->body = $body;
     }
 
+    public function getCommentsallowed() {
+        return $this->commentsallowed;
+    }
+
+    public function setCommentsallowed($commentsallowed) {
+        $this->commentsallowed = $commentsallowed;
+    }
+        
     public function getTag() {
         $out = $this->filter->executeFiltersTag($this->tag);
         return $out;
