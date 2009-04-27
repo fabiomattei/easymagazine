@@ -23,6 +23,8 @@ require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 
+session_start();
+
 function index() {
     $out = array();
 
@@ -116,16 +118,21 @@ function save($toSave) {
     return $out;
 }
 
-if (!isset($_GET["action"])) { $out = index(); }
+
+if (isset($_SESSION['user'])) {
+    if (!isset($_GET["action"])) { $out = index(); }
     else {
-    switch ($_GET["action"]) {
-        case  'index':             $out = index(); break;
-        case  'save':              $out = save($_POST); break;
-        case  'edit':              $out = edit($_GET['id']); break;
-        case  'delete':            $out = delete($_GET['id']); break;
-        case  'up':                $out = up($_GET['id']); break;
-        case  'down':              $out = down($_GET['id']); break;
+        switch ($_GET["action"]) {
+            case  'index':             $out = index(); break;
+            case  'save':              $out = save($_POST); break;
+            case  'edit':              $out = edit($_GET['id']); break;
+            case  'delete':            $out = delete($_GET['id']); break;
+            case  'up':                $out = up($_GET['id']); break;
+            case  'down':              $out = down($_GET['id']); break;
+        }
     }
+    } else {
+         header("Location: ../../loginError.php");
 }
 
 $numbs = $out['numbs'];

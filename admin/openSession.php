@@ -17,4 +17,29 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+define('STARTPATH', '../');
+
+require_once(STARTPATH.'config.php');
+require_once(STARTPATH.'costants.php');
+require_once(STARTPATH.DATAMODELPATH.'user.php');
+
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$usr = User::checkUsrPsw($username, $password);
+
+if ($usr != '') {
+    if ($usr->getRole()=='publisher') {
+        session_start();
+        $_SESSION['user'] = $usr;
+        header("Location: controller/publisher/number.php");
+    } else {
+        session_start();
+        $_SESSION['user'] = $usr;
+        header("Location: controller/journalist/number.php");
+    }
+} else {
+    header("Location: loginError.php");
+}
+
 ?>
