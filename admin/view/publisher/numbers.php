@@ -121,7 +121,11 @@
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Published</strong></td>
-						<td class="last"><input type="checkbox" name="Published" class="text" value="1" /></td>
+						<td class="last"><input type="checkbox" name="Published" class="text" value="1" <? if($numb->getPublished()) echo "CHECKED"; ?>/></td>
+					</tr>
+                    <tr class="bg">
+						<td class="first"><strong>Comments allowed</strong></td>
+						<td class="last"><input type="checkbox" name="commentsallowed" class="text" value="1"  <? if($numb->getCommentsallowed()) echo "CHECKED"; ?>/></td>
 					</tr>
                     <tr>
 						<td class="first"><strong>&nbsp;</strong></td>
