@@ -83,8 +83,8 @@
 						<td><a href="number.php?action=edit&id=<? echo $num->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td><a href="number.php?action=up&id=<? echo $num->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><a href="number.php?action=down&id=<? echo $num->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><img src="../../resources/img/article.png" width="16" height="16" alt="" /></td>
-						<td><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></td>
+						<td><a href="articlesnumber.php?id=<? echo $num->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="commentsnumber.php?id=<? echo $num->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
 						<td><img src="../../resources/img/tic.png" width="16" height="16" alt="save" /></td>
 						<td class="last"><a href="number.php?action=delete&id=<? echo $num->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
@@ -98,6 +98,9 @@
 						<option>1</option>
 					</select>
 			  </div>
+              <form name="formnew" enctype="multipart/form-data" method="post" action="number.php">
+                <input type="submit" value="New" name="new" />
+              </form>
 			</div>
 		  <div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
@@ -109,11 +112,11 @@
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Title</strong></td>
-						<td class="last"><input type="text" name="Title" class="text" value="<? echo $numb->getTitle(); ?>"/></td>
+						<td class="last"><input type="text" name="Title" value="<? echo $numb->getTitle(); ?>"/></td>
                     </tr>
 					<tr class="bg">
 						<td class="first"><strong>Sub Title</strong></td>
-						<td class="last"><input type="text" name="SubTitle" class="text" value="<? echo $numb->getSubtitle(); ?>"/></td>
+						<td class="last"><input type="text" name="SubTitle" value="<? echo $numb->getSubtitle(); ?>"/></td>
 					</tr>
 					<tr>
 						<td class="first"><strong>Summary</strong></td>
@@ -121,11 +124,11 @@
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Published</strong></td>
-						<td class="last"><input type="checkbox" name="Published" class="text" value="1" <? if($numb->getPublished()) echo "CHECKED"; ?>/></td>
+						<td class="last"><input type="checkbox" name="Published" value="1" <? if($numb->getPublished()) echo 'checked="checked"'; ?>/></td>
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Comments allowed</strong></td>
-						<td class="last"><input type="checkbox" name="commentsallowed" class="text" value="1"  <? if($numb->getCommentsallowed()) echo "CHECKED"; ?>/></td>
+						<td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($numb->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
 					</tr>
                     <tr>
 						<td class="first"><strong>&nbsp;</strong></td>

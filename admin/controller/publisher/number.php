@@ -102,14 +102,18 @@ function down($id) {
 
 function save($toSave) {
     $out = array();
-    
+
+    if (!isset ($toSave['Published'])) { $toSave['Published'] = 0; }
+    if (!isset ($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
+
     $numb = new Number(
         $toSave['id'],
         $toSave['indexnumber'],
-        $toSave['Published'],
+        $toSave['Published'] ,
         $toSave['Title'],
         $toSave['SubTitle'],
-        $toSave['Summary']);
+        $toSave['Summary'],
+        $toSave['commentsallowed']);
     $numb->save();
     $out['numb'] = $numb;
 
