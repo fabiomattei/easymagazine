@@ -67,10 +67,12 @@ function up($id) {
     $indexnumber = $numb1->getIndexNumber();
     $numb2 = Number::findUpIndexNumber($indexnumber);
 
-    $numb1->setIndexNumber($numb2->getIndexNumber());
-    $numb2->setIndexNumber($indexnumber);
-    $numb1->save();
-    $numb2->save();
+    if ($numb2) {
+        $numb1->setIndexNumber($numb2->getIndexNumber());
+        $numb2->setIndexNumber($indexnumber);
+        $numb1->save();
+        $numb2->save();
+    }
 
     $numb = new Number();
     $out['numb'] = $numb;
@@ -87,10 +89,12 @@ function down($id) {
     $indexnumber = $numb1->getIndexNumber();
     $numb2 = Number::findDownIndexNumber($indexnumber);
 
-    $numb1->setIndexNumber($numb2->getIndexNumber());
-    $numb2->setIndexNumber($indexnumber);
-    $numb1->save();
-    $numb2->save();
+    if ($numb2) {
+        $numb1->setIndexNumber($numb2->getIndexNumber());
+        $numb2->setIndexNumber($indexnumber);
+        $numb1->save();
+        $numb2->save();
+    }
     
     $numb = new Number();
     $out['numb'] = $numb;

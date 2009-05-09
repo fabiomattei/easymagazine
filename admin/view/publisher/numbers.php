@@ -85,7 +85,13 @@
 						<td><a href="number.php?action=down&id=<? echo $num->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><a href="articlesnumber.php?id=<? echo $num->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
 						<td><a href="commentsnumber.php?id=<? echo $num->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
-						<td><img src="../../resources/img/tic.png" width="16" height="16" alt="save" /></td>
+						<td>
+                        <? if ($num->getPublished()) { ?>
+                            <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
+                        <? } else { ?>
+                            <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
+                        <? } ?>
+                        </td>
 						<td class="last"><a href="number.php?action=delete&id=<? echo $num->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?

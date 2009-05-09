@@ -70,6 +70,7 @@ class Number {
     }
 
     public static function findOne($SQL, $array_str, $array_int) {
+        $ret = null;
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             $SQL,
