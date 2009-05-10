@@ -49,7 +49,7 @@
 				<li><a href="#">List all Authors</a></li>
 				<li class="last"><a href="#">Filter all link</a></li>
 			</ul>
-			<a href="#" class="link">View in the website</a>
+			<a href="#" class="link">View the website</a>
 		</div>
 		<div id="center-column">
 		  <div class="select-bar">

@@ -25,6 +25,7 @@ require_once(BASEDIR.'admin/datamodel/library/strfunction.php');
 require_once(OUTDIR.'simpletest/autorun.php');
 
 require_once(BASEDIR.'costants.php');
+require_once(BASEDIR.'admin/utils/imagefiles.php');
 require_once(BASEDIR.'admin/datamodel/article.php');
 require_once(BASEDIR.'admin/datamodel/number.php');
 require_once(BASEDIR.'admin/datamodel/comment.php');
@@ -33,6 +34,7 @@ require_once(BASEDIR.'admin/datamodel/user.php');
 require_once('dummyDBCreator.php');
 
 
+require_once('admin/utils/timagefiles.php');
 require_once('admin/datamodel/library/tstrfunction.php');
 require_once('admin/datamodel/tarticle.php');
 require_once('admin/datamodel/tnumber.php');
