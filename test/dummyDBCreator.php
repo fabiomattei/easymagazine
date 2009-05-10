@@ -44,6 +44,8 @@ class DbCreator {
            subtitle text,
            summary text,
            commentsallowed int,
+           imgfilename varchar(255),
+           imgdescription varchar(255),
            created datetime,
            updated datetime,
            PRIMARY KEY (id));";
@@ -52,17 +54,17 @@ class DbCreator {
     }
 
     public function populateTableNumbers() {
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgfilename, imgdescription, created, updated)
            values (1, 1, 1, 'My first number', 'Subtitle to my first number',
-           'Summary of my first number', 1, NOW(), NOW())";
+           'Summary of my first number', 1, '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgfilename, imgdescription, created, updated)
            values (2, 2, 1, 'My second number', 'Subtitle to my second number',
-           'Summary of my second number', 1, NOW(), NOW())";
+           'Summary of my second number', 1, '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgfilename, imgdescription, created, updated)
            values (3, 3, 0, 'My third number', 'Subtitle to my third number',
-           'Summary of my third number', 0, NOW(), NOW())";
+           'Summary of my third number', 0, '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -87,6 +89,8 @@ class DbCreator {
             tag text,
             metadescription text,
             metakeyword text,
+            imgfilename varchar(255),
+            imgdescription varchar(255),
             created datetime,
             updated datetime,
             PRIMARY KEY (id));";
@@ -95,20 +99,20 @@ class DbCreator {
     }
 
     public function populateTableArticles() {
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
             (1, 1, 1, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
             'Body of my first article', 1, 'tag of my first article',
-            'metadescription of my first article', 'metakeyword of my first article', now(), now())";
+            'metadescription of my first article', 'metakeyword of my first article', '', '', now(), now())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
             (2, 1, 2, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
             'Body of my second article', 1, 'tag of my second article',
-            'metadescription of my second article', 'metakeyword of my second article', now(), now())";
+            'metadescription of my second article', 'metakeyword of my second article', '', '', now(), now())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
             (3, 1, 3, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
             'Body of my third article', 1, 'tag of my third article',
-            'metadescription of my third article', 'metakeyword of my third article', now(), now())";
+            'metadescription of my third article', 'metakeyword of my third article', '', '', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -162,6 +166,8 @@ class DbCreator {
             tag text,
             metadescription text,
             metakeyword text,
+            imgfilename varchar(255),
+            imgdescription varchar(255),
             created datetime,
             updated datetime,
             PRIMARY KEY (id));";
@@ -170,20 +176,20 @@ class DbCreator {
     }
 
     public function populateTablePages() {
-        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
             (1, 1, 1, 'My firts Page', 'Subtitle of my first page', 'summary of my first page',
             'Body of my first page', 'tag of my first page',
-            'metadescription of my first page', 'metakeyword of my first page', NOW(), NOW())";
+            'metadescription of my first page', 'metakeyword of my first page', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
             (2, 2, 1, 'My second Page', 'Subtitle of my second page', 'summary of my second page',
             'Body of my second page', 'tag of my second page',
-            'metadescription of my first page', 'metakeyword of my first page', NOW(), NOW())";
+            'metadescription of my first page', 'metakeyword of my first page', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
             (3, 3, 0, 'My third Page', 'Subtitle of my third page', 'summary of my third page',
             'Body of my third page', 'tag of my third page',
-            'metadescription of my third page', 'metakeyword of my third page', NOW(), NOW())";
+            'metadescription of my third page', 'metakeyword of my third page', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
