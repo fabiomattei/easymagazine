@@ -218,6 +218,9 @@ class Article {
                     $row['title'],
                     $row['subtitle'],
                     $row['summary'],
+                    $row['commentsallowed'],
+                    $row['imgfilename'],
+                    $row['imgdescription'],
                     $row['created'],
                     $row['updated']);
             }

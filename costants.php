@@ -25,6 +25,7 @@ define('CONTROLLERPATH', 'admin/controller/');
 define('DATAMODELPATH', 'admin/datamodel/');
 define('SESSIONPATH', 'admin/sessionmanager/');
 define('URIPATH', 'admin/uri/');
+define('UTILSPATH', 'admin/utils/');
 define('DBPATH', 'admin/datamodel/library/');
 define('BASEPATH', '');
 

@@ -28,6 +28,32 @@ class ImageFiles {
         }
     }
 
+    public static function deletefile($date, $filename) {
+        $year = substr($date, 0, 4);
+        $month = substr($date, 5, 2);
+        $day = substr($date, 8, 2);
+        $completepath = STARTPATH.'/contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
+        if (file_exists($completepath)) {
+            unlink($completepath);
+        }
+    }
+
+    public static function fileexixts($date, $filename) {
+        $year = substr($date, 0, 4);
+        $month = substr($date, 5, 2);
+        $day = substr($date, 8, 2);
+        $completepath = STARTPATH.'/contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
+        return file_exists($completepath);
+    }
+
+    public static function imagepath($date, $filename) {
+        $year = substr($date, 0, 4);
+        $month = substr($date, 5, 2);
+        $day = substr($date, 8, 2);
+        $completepath = STARTPATH.'/contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
+        return $completepath;
+    }
+
     public static function checkAndCreatePath($date) {
         $year = substr($date, 0, 4);
         $month = substr($date, 5, 2);

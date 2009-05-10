@@ -20,6 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.FILTERPATH.'numberfilterremote.php');
+require_once(STARTPATH.UTILSPATH.'imagefiles.php');
 
 class Number {
     const NEW_NUMBER = -1;
@@ -30,13 +31,17 @@ class Number {
     private $subtitle;
     private $summary;
     private $commentsallowed;
+    private $imgfilename;
+    private $imgdescription;
     private $created;
     private $updated;
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, created, updated) values (#, #, #, ?, ?, ?, #, Now(), Now())';
-    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, updated = Now() where id = #';
+    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgdescription, created, updated) values (#, #, #, ?, ?, ?, #, ?, ?, Now(), Now())';
+    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, imgdescription = ?, updated = Now() where id = #';
+    const UPDATE_SQL_IMG = 'update numbers set imgfilename = ?, updated = Now() where id = #';
+    const UPDATE_SQL_IMG_IMGDESC = 'update numbers set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from numbers where id = #';
     const SELECT_BY_ID = 'select * from numbers where id = #';
     const SELECT_BY_TITLE = 'select * from numbers where title like ?';
@@ -51,7 +56,7 @@ class Number {
     const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber DESC';
     const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < # order by indexnumber';
 
-    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $commentsallowed='', $created='', $updated='') {
+    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $commentsallowed='', $imgfilename='', $imgdescription='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = NumberFilterRemote::getInstance();
         $this->id = $id;
@@ -61,6 +66,8 @@ class Number {
         $this->subtitle = $subtitle;
         $this->summary = $summary;
         $this->commentsallowed = $commentsallowed;
+        $this->imgfilename = $imgfilename;
+        $this->imgdescription = $imgdescription;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -79,7 +86,7 @@ class Number {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['created'], $row['updated']);
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -95,7 +102,7 @@ class Number {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['created'], $row['updated']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -222,6 +229,8 @@ class Number {
         $this->title = '';
         $this->subtitle = '';
         $this->summary = '';
+        $this->imgfilename = '';
+        $this->imgdescription = '';
         $this->created = '';
         $this->updated = '';
     }
@@ -232,7 +241,7 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->title, $this->subtitle, $this->summary),
+            array($this->title, $this->subtitle, $this->summary, $this->imgdescription),
             array($this->id, $this->indexnumber, $this->published, $this->commentsallowed),
             $tables);
     }
@@ -241,9 +250,40 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->title, $this->subtitle, $this->summary),
+            array($this->title, $this->subtitle, $this->summary, $this->imgdescription),
             array($this->indexnumber, $this->published, $this->commentsallowed, $this->id),
             $tables);
+    }
+
+    public function saveImg($img) {
+        $this->imgfilename = $img['Name'];
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::UPDATE_SQL_IMG,
+            array($this->imgfilename),
+            array($this->id),
+            $tables);
+        ImageFiles::savefile($this->created, $img);
+    }
+
+    public function daleteImg() {
+        $this->imgfilename = '';
+        $this->imgdescription = '';
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::UPDATE_SQL_IMG_IMGDESC,
+            array($this->imgfilename, $this->imgdescription),
+            array($this->id),
+            $tables);
+        ImageFiles::deletefile($this->created, $this->imgfilename);
+    }
+
+    public function imageExists() {
+        return ImageFiles::fileexixts($this->created, $this->imgfilename);
+    }
+
+    public function imagePath() {
+        return ImageFiles::filepath($this->created, $this->imgfilename);
     }
 
     public function getMaxIndexNumber() {
@@ -344,7 +384,22 @@ class Number {
     public function getUpdated() {
         return $this->updated;
     }
+    public function getImgfilename() {
+        return $this->imgfilename;
+    }
 
+    public function setImgfilename($imgfilename) {
+        $this->imgfilename = $imgfilename;
+    }
+
+    public function getImgdescription() {
+        return $this->imgdescription;
+    }
+
+    public function setImgdescription($imgdescription) {
+        $this->imgdescription = $imgdescription;
+    }
+        
 }
 
 ?>
