@@ -132,11 +132,27 @@
 						<td class="first"><strong>Published</strong></td>
 						<td class="last"><input type="checkbox" name="Published" value="1" <? if($numb->getPublished()) echo 'checked="checked"'; ?>/></td>
 					</tr>
-                    <tr class="bg">
+                    <tr>
 						<td class="first"><strong>Comments allowed</strong></td>
 						<td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($numb->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
 					</tr>
+                    <tr class="bg">
+						<td class="first"><strong>Image name:</strong></td>
+                        <td class="last"><? echo $numb->getImgfilename(); ?></td>
+					</tr>
                     <tr>
+						<td class="first"><strong>Image description:</strong></td>
+                        <td class="last"><input type="text" name="SubTitle" value="<? echo $numb->getImgdescription(); ?>"/></td>
+					</tr>
+                    <tr class="bg">
+						<td class="first"><strong>Created:</strong></td>
+                        <td class="last"><? echo $numb->getCreated(); ?></td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Updated:</strong></td>
+                        <td class="last"><? echo $numb->getUpdated(); ?></td>
+					</tr>
+                    <tr class="bg">
 						<td class="first"><strong>&nbsp;</strong></td>
                         <input type="hidden" name="id" value="<? echo $numb->getId(); ?>">
                         <input type="hidden" name="indexnumber" value="<? echo $numb->getIndexnumber(); ?>">
