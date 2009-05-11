@@ -104,7 +104,7 @@
 						<option>1</option>
 					</select>
 			  </div>
-              <form name="formnew" enctype="multipart/form-data" method="post" action="number.php">
+              <form name="formnew" method="post" action="number.php">
                 <input type="submit" value="New" name="new" />
               </form>
 			</div>
@@ -137,12 +137,26 @@
 						<td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($numb->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
 					</tr>
                     <tr class="bg">
-						<td class="first"><strong>Image name:</strong></td>
+						<td class="first"><strong>Show Image</strong></td>
+                        <td class="last">
+                        <? if ($numb->imageExists()) { ?>
+                        <img src="<? echo $numb->imagePath(); ?>" />
+                        <? } else { ?>
+                        &nbsp;
+                        <? } ?>
+                        </td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Image File</strong></td>
+                        <td class="last"><input type="file" name="Image" value="" /></td>
+					</tr>
+                    <tr class="bg">
+						<td class="first"><strong>Image file name:</strong></td>
                         <td class="last"><? echo $numb->getImgfilename(); ?></td>
 					</tr>
                     <tr>
 						<td class="first"><strong>Image description:</strong></td>
-                        <td class="last"><input type="text" name="SubTitle" value="<? echo $numb->getImgdescription(); ?>"/></td>
+                        <td class="last"><input type="text" name="ImageDescription" value="<? echo $numb->getImgdescription(); ?>"/></td>
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Created:</strong></td>
@@ -156,6 +170,8 @@
 						<td class="first"><strong>&nbsp;</strong></td>
                         <input type="hidden" name="id" value="<? echo $numb->getId(); ?>">
                         <input type="hidden" name="indexnumber" value="<? echo $numb->getIndexnumber(); ?>">
+                        <input type="hidden" name="created" value="<? echo $numb->getCreated(); ?>">
+                        <input type="hidden" name="updated" value="<? echo $numb->getUpdated(); ?>">
                         <td class="last"><input type="submit" value="Save" name="save" /></td>
 					</tr>
 				</table>

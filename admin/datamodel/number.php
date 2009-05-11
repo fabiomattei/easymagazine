@@ -216,25 +216,6 @@ class Number {
         }
     }
 
-    public function delete() {
-        $tables = array("numbers" => TBPREFIX."numbers");
-        $rs = DB::getInstance()->execute(
-            self::DELETE_SQL,
-            array(),
-            array($this->id),
-            $tables);
-        $this->id = self::NEW_NUMBER;
-        $this->indexnumber = '';
-        $this->published = '';
-        $this->title = '';
-        $this->subtitle = '';
-        $this->summary = '';
-        $this->imgfilename = '';
-        $this->imgdescription = '';
-        $this->created = '';
-        $this->updated = '';
-    }
-
     protected function insert() {
         $this->id = $this->getMaxId()+1;
         $this->indexnumber = $this->getMaxIndexNumber()+1;
@@ -255,8 +236,27 @@ class Number {
             $tables);
     }
 
+    public function delete() {
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::DELETE_SQL,
+            array(),
+            array($this->id),
+            $tables);
+        $this->id = self::NEW_NUMBER;
+        $this->indexnumber = '';
+        $this->published = '';
+        $this->title = '';
+        $this->subtitle = '';
+        $this->summary = '';
+        $this->imgfilename = '';
+        $this->imgdescription = '';
+        $this->created = '';
+        $this->updated = '';
+    }
+
     public function saveImg($img) {
-        $this->imgfilename = $img['Name'];
+        $this->imgfilename = $img['name'];
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::UPDATE_SQL_IMG,

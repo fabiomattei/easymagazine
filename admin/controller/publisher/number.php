@@ -104,7 +104,7 @@ function down($id) {
     return $out;
 }
 
-function save($toSave) {
+function save($toSave, $files) {
     $out = array();
 
     if (!isset ($toSave['Published'])) { $toSave['Published'] = 0; }
@@ -117,8 +117,17 @@ function save($toSave) {
         $toSave['Title'],
         $toSave['SubTitle'],
         $toSave['Summary'],
-        $toSave['commentsallowed']);
+        $toSave['commentsallowed'],
+        '',
+        $toSave['ImageDescription'],
+        $toSave['created'],
+        $toSave['updated']);
     $numb->save();
+
+    if ($files['Image'] != '' AND $files['Image'] != 'none') {
+        $numb->saveImg($files['Image']);
+    }
+
     $out['numb'] = $numb;
 
     $numbs = Number::findAllOrderedByIndexNumber();
@@ -132,7 +141,7 @@ if (isset($_SESSION['user'])) {
     else {
         switch ($_GET["action"]) {
             case  'index':             $out = index(); break;
-            case  'save':              $out = save($_POST); break;
+            case  'save':              $out = save($_POST, $_FILES); break;
             case  'edit':              $out = edit($_GET['id']); break;
             case  'delete':            $out = delete($_GET['id']); break;
             case  'up':                $out = up($_GET['id']); break;

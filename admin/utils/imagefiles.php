@@ -23,7 +23,7 @@ class ImageFiles {
 
     public static function savefile($date, $file) {
         if (!$file['error']) {
-            $path = checkAndCreatePath($date);
+            $path = ImageFiles::checkAndCreatePath($date);
             move_uploaded_file($file['tmp_name'], $path.'/'.$file['name']);
         }
     }
