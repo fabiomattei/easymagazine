@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('STARTPATH', '../');
+//define('STARTPATH', '../');
 
 class ImageFiles {
 
@@ -46,7 +46,7 @@ class ImageFiles {
         return file_exists($completepath);
     }
 
-    public static function imagepath($date, $filename) {
+    public static function filepath($date, $filename) {
         $year = substr($date, 0, 4);
         $month = substr($date, 5, 2);
         $day = substr($date, 8, 2);

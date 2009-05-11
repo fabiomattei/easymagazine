@@ -18,7 +18,6 @@
  */
 
 class StrHelper {
-    //static class, we do not need a constructor
 
     public static function formatQRY($str, $array_strings, $array_int ,$tables) {
         $array_strings = StrHelper::filterArgouments($array_strings);

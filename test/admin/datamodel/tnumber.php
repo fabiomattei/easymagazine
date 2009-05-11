@@ -92,7 +92,7 @@ class NumberTests extends UnitTestCase {
     }
 
     function testSaveNewNumber() {
-        $newNum = new Number(Number::NEW_NUMBER, '4', '0', 'Number four', 'Subtitle four', 'summary four', '1', '', '');
+        $newNum = new Number(Number::NEW_NUMBER, '4', '0', 'Number four', 'Subtitle four', 'summary four', '1', '', '', '', '');
         $newNum->save();
         $num = Number::findAll();
 		$this->assertEqual(4, count($num));

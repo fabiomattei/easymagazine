@@ -38,7 +38,7 @@ class Number {
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgdescription, created, updated) values (#, #, #, ?, ?, ?, #, ?, ?, Now(), Now())';
+    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgdescription, created, updated) values (#, #, #, ?, ?, ?, #, ?, Now(), Now())';
     const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, imgdescription = ?, updated = Now() where id = #';
     const UPDATE_SQL_IMG = 'update numbers set imgfilename = ?, updated = Now() where id = #';
     const UPDATE_SQL_IMG_IMGDESC = 'update numbers set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
