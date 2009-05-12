@@ -17,8 +17,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-//define('STARTPATH', '../');
-
 class ImageFiles {
 
     public static function savefile($date, $file) {
@@ -32,17 +30,17 @@ class ImageFiles {
         $year = substr($date, 0, 4);
         $month = substr($date, 5, 2);
         $day = substr($date, 8, 2);
-        $completepath = STARTPATH.'/contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
-        if (file_exists($completepath)) {
+        $completepath = STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
+        if (file_exists($completepath) && $filename != '') {
             unlink($completepath);
         }
     }
 
-    public static function fileexixts($date, $filename) {
+    public static function fileexists($date, $filename) {
         $year = substr($date, 0, 4);
         $month = substr($date, 5, 2);
         $day = substr($date, 8, 2);
-        $completepath = STARTPATH.'/contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
+        $completepath = STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
         return file_exists($completepath);
     }
 
@@ -50,7 +48,7 @@ class ImageFiles {
         $year = substr($date, 0, 4);
         $month = substr($date, 5, 2);
         $day = substr($date, 8, 2);
-        $completepath = STARTPATH.'/contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
+        $completepath = STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
         return $completepath;
     }
 
@@ -58,13 +56,13 @@ class ImageFiles {
         $year = substr($date, 0, 4);
         $month = substr($date, 5, 2);
         $day = substr($date, 8, 2);
-        if (!file_exists(STARTPATH.'/contents/img/'.$year)) { 
+        if (!file_exists(STARTPATH.'contents/img/'.$year)) { 
             mkdir(STARTPATH.'contents/img/'.$year);
         }
-        if (!file_exists(STARTPATH.'/contents/img/'.$year.'/'.$month)) {
+        if (!file_exists(STARTPATH.'contents/img/'.$year.'/'.$month)) {
             mkdir(STARTPATH.'contents/img/'.$year.'/'.$month);
         }
-        if (!file_exists(STARTPATH.'/contents/img/'.$year.'/'.$month.'/'.$day)) {
+        if (!file_exists(STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day)) {
             mkdir(STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day);
         }
         return STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day;

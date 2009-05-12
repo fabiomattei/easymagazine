@@ -256,17 +256,20 @@ class Number {
     }
 
     public function saveImg($img) {
-        $this->imgfilename = $img['name'];
-        $tables = array("numbers" => TBPREFIX."numbers");
-        $rs = DB::getInstance()->execute(
-            self::UPDATE_SQL_IMG,
-            array($this->imgfilename),
-            array($this->id),
-            $tables);
-        ImageFiles::savefile($this->created, $img);
+        if (!$img['error']) {
+            $this->imgfilename = $img['name'];
+            $tables = array("numbers" => TBPREFIX."numbers");
+            $rs = DB::getInstance()->execute(
+                self::UPDATE_SQL_IMG,
+                array($this->imgfilename),
+                array($this->id),
+                $tables);
+            ImageFiles::savefile($this->created, $img);
+        }
     }
 
-    public function daleteImg() {
+    public function deleteImg() {
+        ImageFiles::deletefile($this->created, $this->imgfilename);
         $this->imgfilename = '';
         $this->imgdescription = '';
         $tables = array("numbers" => TBPREFIX."numbers");
@@ -275,11 +278,11 @@ class Number {
             array($this->imgfilename, $this->imgdescription),
             array($this->id),
             $tables);
-        ImageFiles::deletefile($this->created, $this->imgfilename);
     }
 
     public function imageExists() {
-        return ImageFiles::fileexixts($this->created, $this->imgfilename);
+        if ($this->imgfilename == '') { return false; }
+        else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
     }
 
     public function imagePath() {
@@ -309,7 +312,7 @@ class Number {
             $tables);
         if ($rs) {
             $row = mysql_fetch_array($rs);
-                $maxId = $row['id'];
+            $maxId = $row['id'];
         }
         return $maxId;
     }
@@ -368,7 +371,7 @@ class Number {
     public function setCommentsallowed($commentsallowed) {
         $this->commentsallowed = $commentsallowed;
     }
-        
+
     public function getPublished() {
         return $this->published;
     }
@@ -399,7 +402,7 @@ class Number {
     public function setImgdescription($imgdescription) {
         $this->imgdescription = $imgdescription;
     }
-        
+
 }
 
 ?>

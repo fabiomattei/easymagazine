@@ -60,6 +60,18 @@ function delete($id) {
     return $out;
 }
 
+function deleteimg($id) {
+    $out = array();
+
+    $numb = Number::findById($id);
+    $numb->deleteImg();
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAllOrderedByIndexNumber();
+    $out['numbs'] = $numbs;
+    return $out;
+}
+
 function up($id) {
     $out = array();
 
@@ -107,8 +119,9 @@ function down($id) {
 function save($toSave, $files) {
     $out = array();
 
-    if (!isset ($toSave['Published'])) { $toSave['Published'] = 0; }
-    if (!isset ($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
+    if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
+    if (!isset($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
+    if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
 
     $numb = new Number(
         $toSave['id'],
@@ -118,16 +131,16 @@ function save($toSave, $files) {
         $toSave['SubTitle'],
         $toSave['Summary'],
         $toSave['commentsallowed'],
-        '',
+        $toSave['imagefilename'],
         $toSave['ImageDescription'],
         $toSave['created'],
         $toSave['updated']);
     $numb->save();
 
-    if ($files['Image'] != '' AND $files['Image'] != 'none') {
+    if (isset($files['Image']) && $files['Image']['size'] > 0) {
+        $numb->deleteImg();
         $numb->saveImg($files['Image']);
     }
-
     $out['numb'] = $numb;
 
     $numbs = Number::findAllOrderedByIndexNumber();
@@ -146,6 +159,7 @@ if (isset($_SESSION['user'])) {
             case  'delete':            $out = delete($_GET['id']); break;
             case  'up':                $out = up($_GET['id']); break;
             case  'down':              $out = down($_GET['id']); break;
+            case  'deleteimg':         $out = deleteimg($_GET['id']); break;
         }
     }
     } else {
