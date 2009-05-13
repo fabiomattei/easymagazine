@@ -37,12 +37,16 @@ class Article {
     private $tag;
     private $metadescription;
     private $metakeyword;
+    private $imgfilename;
+    private $imgdescription;
     private $created;
     private $updated;
     private $filter;
 
     const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const UPDATE_SQL_IMG = 'update articles set imgfilename = ?, updated = Now() where id = #';
+    const UPDATE_SQL_IMG_IMGDESC = 'update articles set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from articles where id = #';
     const SELECT_BY_ID = 'select * from articles where id = #';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
@@ -55,12 +59,12 @@ class Article {
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from articles order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from articles order by indexnumber DESC';
     const SELECT_BY_ID_ORD = 'select id from articles order by id DESC';
-    const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE indexnumber > # order by indexnumber DESC';
-    const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE indexnumber < # order by indexnumber';
+    const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber > # order by indexnumber DESC';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber < # order by indexnumber';
     const SELECT_USERS = 'select US.* from users as US, users_articles as UA where US.id = UA.user_id AND UA.article_id = # order by US.id DESC';
 
 
-    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $commentsallowed='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
+    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $commentsallowed='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
@@ -74,6 +78,8 @@ class Article {
         $this->tag = $tag;
         $this->metadescription = $metadescription;
         $this->metakeyword = $metakeyword;
+        $this->imgfilename = $imgfilename;
+        $this->imgdescription = $imgdescription;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -83,6 +89,7 @@ class Article {
     }
 
     public static function findOne($SQL, $array_str, $array_int) {
+        $ret = null;
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             $SQL,
@@ -91,13 +98,14 @@ class Article {
             $tables);
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
+                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
         }
         return $ret;
     }
 
     public static function findMany($SQL, $array_str, $array_int) {
+        $ret = array();
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             $SQL,
@@ -107,7 +115,7 @@ class Article {
         $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
+                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -118,13 +126,13 @@ class Article {
         return $ret;
     }
 
-    public static function findUpIndexNumber ($indexnumber) {
-        $ret = ARTICLE::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($indexnumber));
+    public function findUpIndexNumber () {
+        $ret = ARTICLE::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($this->number_id, $this->indexnumber));
         return $ret;
     }
 
-    public static function findDownIndexNumber ($indexnumber) {
-        $ret = ARTICLE::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($indexnumber));
+    public function findDownIndexNumber() {
+        $ret = ARTICLE::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($this->number_id, $this->indexnumber));
         return $ret;
     }
 
@@ -263,21 +271,6 @@ class Article {
         }
     }
 
-    public function delete() {
-        $tables = array("articles" => TBPREFIX."articles");
-        DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
-        $this->id = self::NEW_ARTICLE;
-        $this->title = '';
-        $this->subtitle = '';
-        $this->summary = '';
-        $this->body = '';
-        $this->tag = '';
-        $this->metadescription = '';
-        $this->metakeyword = '';
-        $this->created = '';
-        $this->updated = '';
-    }
-
     protected function insert() {
         $this->id = $this->getMaxId()+1;
         $this->indexnumber = $this->getMaxIndexNumber()+1;
@@ -297,6 +290,58 @@ class Article {
             array($this->number_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
             $tables);
     }
+
+    public function delete() {
+        $tables = array("articles" => TBPREFIX."articles");
+        DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
+        $this->id = self::NEW_ARTICLE;
+        $this->title = '';
+        $this->subtitle = '';
+        $this->summary = '';
+        $this->body = '';
+        $this->tag = '';
+        $this->metadescription = '';
+        $this->metakeyword = '';
+        $this->imgfilename = '';
+        $this->imgdescription = '';
+        $this->created = '';
+        $this->updated = '';
+    }
+
+    public function saveImg($img) {
+        if (!$img['error']) {
+            $this->imgfilename = $img['name'];
+            $tables = array("numbers" => TBPREFIX."numbers");
+            $rs = DB::getInstance()->execute(
+                self::UPDATE_SQL_IMG,
+                array($this->imgfilename),
+                array($this->id),
+                $tables);
+            ImageFiles::savefile($this->created, $img);
+        }
+    }
+
+    public function deleteImg() {
+        ImageFiles::deletefile($this->created, $this->imgfilename);
+        $this->imgfilename = '';
+        $this->imgdescription = '';
+        $tables = array("numbers" => TBPREFIX."numbers");
+        $rs = DB::getInstance()->execute(
+            self::UPDATE_SQL_IMG_IMGDESC,
+            array($this->imgfilename, $this->imgdescription),
+            array($this->id),
+            $tables);
+    }
+
+    public function imageExists() {
+        if ($this->imgfilename == '') { return false; }
+        else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
+    }
+
+    public function imagePath() {
+        return ImageFiles::filepath($this->created, $this->imgfilename);
+    }
+
 
     public function getMaxId() {
         $tables = array("articles" => TBPREFIX."articles");
@@ -444,6 +489,21 @@ class Article {
 
     public function setNumber_id($number_id) {
         $this->number_id = $number_id;
+    }
+    public function getImgfilename() {
+        return $this->imgfilename;
+    }
+
+    public function setImgfilename($imgfilename) {
+        $this->imgfilename = $imgfilename;
+    }
+
+    public function getImgdescription() {
+        return $this->imgdescription;
+    }
+
+    public function setImgdescription($imgdescription) {
+        $this->imgdescription = $imgdescription;
     }
         
 }

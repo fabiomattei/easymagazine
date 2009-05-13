@@ -127,6 +127,8 @@ class Comment {
                     $row['tag'],
                     $row['metadescription'],
                     $row['metakeyword'],
+                    $row['imgfilename'],
+                    $row['imgdescription'],
                     $row['created'],
                     $row['updated']);
             }

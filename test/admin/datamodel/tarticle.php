@@ -42,13 +42,15 @@ class ArticleTests extends UnitTestCase {
     }
 
     function testfindUpIndexNumber () {
-        $ar = Article::findUpIndexNumber(2);
-		$this->assertPattern('(third)', $ar->getTitle());
+        $ar = Article::findById(2);
+        $ar2 = $ar->findUpIndexNumber();
+		$this->assertPattern('(third)', $ar2->getTitle());
     }
 
     function testfindDownIndexNumber () {
-        $ar = Article::findDownIndexNumber(2);
-		$this->assertPattern('(first)', $ar->getTitle());
+        $ar = Article::findById(2);
+        $ar2 = $ar->findDownIndexNumber();
+		$this->assertPattern('(first)', $ar2->getTitle());
     }
 
     function testfindByTitle() {

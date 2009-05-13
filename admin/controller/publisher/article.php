@@ -23,6 +23,8 @@ require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 
+session_start();
+
 function index() {
     $out = array();
 
@@ -65,10 +67,12 @@ function up($id) {
     $indexnumber = $art1->getIndexNumber();
     $art2 = Article::findUpIndexNumber($indexnumber);
 
-    $art1->setIndexNumber($art2->getIndexNumber());
-    $art2->setIndexNumber($indexnumber);
-    $art1->save();
-    $art2->save();
+    if ($art2) {
+        $art1->setIndexNumber($art2->getIndexNumber());
+        $art2->setIndexNumber($indexnumber);
+        $art1->save();
+        $art2->save();
+    }
 
     $art = new Article();
     $out['art'] = $art;
@@ -85,10 +89,12 @@ function down($id) {
     $indexnumber = $art1->getIndexNumber();
     $art2 = Article::findDownIndexNumber($indexnumber);
 
-    $art1->setIndexNumber($art2->getIndexNumber());
-    $art2->setIndexNumber($indexnumber);
-    $art1->save();
-    $art2->save();
+    if ($art2) {
+        $art1->setIndexNumber($art2->getIndexNumber());
+        $art2->setIndexNumber($indexnumber);
+        $art1->save();
+        $art2->save();
+    }
 
     $art = new Article();
     $out['art'] = $art;
@@ -122,20 +128,20 @@ function save($toSave) {
 }
 
 if (!isset($_GET["action"])) { $out = index(); }
-    else {
+else {
     switch ($_GET["action"]) {
         case  'index':             $out = index(); break;
-        case  'save':              $out = save($_POST); break;
-        case  'edit':              $out = edit($_GET['id']); break;
-        case  'delete':            $out = delete($_GET['id']); break;
-        case  'up':                $out = up($_GET['id']); break;
-        case  'down':              $out = down($_GET['id']); break;
-    }
-}
+            case  'save':              $out = save($_POST); break;
+                case  'edit':              $out = edit($_GET['id']); break;
+                    case  'delete':            $out = delete($_GET['id']); break;
+                        case  'up':                $out = up($_GET['id']); break;
+                            case  'down':              $out = down($_GET['id']); break;
+                            }
+                        }
 
-$arts = $out['arts'];
-$art = $out['art'];
+                        $arts = $out['arts'];
+                        $art = $out['art'];
 
-include('../../view/publisher/articles.php');
+                        include('../../view/publisher/articles.php');
 
-?>
+                        ?>

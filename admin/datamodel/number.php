@@ -93,6 +93,7 @@ class Number {
     }
 
     public static function findMany($SQL, $array_str, $array_int) {
+        $ret = array();
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             $SQL,
@@ -171,6 +172,8 @@ class Number {
                     $row['tag'],
                     $row['metadescription'],
                     $row['metakeyword'],
+                    $row['imgfilename'],
+                    $row['imgdescription'],
                     $row['created'],
                     $row['updated']);
             }
@@ -201,6 +204,8 @@ class Number {
                     $row['tag'],
                     $row['metadescription'],
                     $row['metakeyword'],
+                    $row['imgfilename'],
+                    $row['imgdescription'],
                     $row['created'],
                     $row['updated']);
             }

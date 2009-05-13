@@ -174,6 +174,7 @@
                         <input type="hidden" name="imagefilename" value="<? echo $numb->getImgfilename(); ?>">
                         <input type="hidden" name="created" value="<? echo $numb->getCreated(); ?>">
                         <input type="hidden" name="updated" value="<? echo $numb->getUpdated(); ?>">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
                         <td class="last"><input type="submit" value="Save" name="save" /></td>
 					</tr>
 				</table>
