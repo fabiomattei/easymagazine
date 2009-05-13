@@ -42,7 +42,7 @@
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3>Services</h3>
+			<h3>Hello, <? echo $_SESSION['user']->getName() ?></h3>
 			<ul class="nav">
 				<li><a href="#">List all comments</a></li>
 				<li><a href="#">List all Authors</a></li>
@@ -97,6 +97,9 @@
 						<option>1</option>
 					</select>
 			  </div>
+              <form name="formnew" method="post" action="article.php">
+                <input type="submit" value="New" name="new" />
+              </form>
 			</div>
 		  <div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
@@ -139,9 +142,48 @@
 						<td class="last"><input type="checkbox" name="Published" class="text" value="1" /></td>
 					</tr>
                     <tr>
+						<td class="first"><strong>Comments allowed</strong></td>
+						<td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($art->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
+					</tr>
+                    <tr class="bg">
+						<td class="first"><strong>Show Image</strong></td>
+                        <td class="last">
+                        <? if ($art->imageExists()) { ?>
+                        <img src="<? echo $art->imagePath(); ?>"
+                        <a href="number.php?action=deleteimg&id=<? echo $art->getId(); ?>">Delete image</a>
+                        <? } else { ?>
+                        &nbsp;
+                        <? } ?>
+                        </td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Image File</strong></td>
+                        <td class="last"><input type="file" name="Image" value="" /></td>
+					</tr>
+                    <tr class="bg">
+						<td class="first"><strong>Image file name:</strong></td>
+                        <td class="last"><? echo $art->getImgfilename(); ?></td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Image description:</strong></td>
+                        <td class="last"><input type="text" name="ImageDescription" value="<? echo $art->getImgdescription(); ?>"/></td>
+					</tr>
+                    <tr class="bg">
+						<td class="first"><strong>Created:</strong></td>
+                        <td class="last"><? echo $art->getCreated(); ?></td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Updated:</strong></td>
+                        <td class="last"><? echo $art->getUpdated(); ?></td>
+					</tr>
+                    <tr>
 						<td class="first"><strong>&nbsp;</strong></td>
                         <input type="hidden" name="id" value="<? echo $art->getId(); ?>">
                         <input type="hidden" name="indexnumber" value="<? echo $art->getIndexnumber(); ?>">
+                        <input type="hidden" name="imagefilename" value="<? echo $art->getImgfilename(); ?>">
+                        <input type="hidden" name="created" value="<? echo $art->getCreated(); ?>">
+                        <input type="hidden" name="updated" value="<? echo $art->getUpdated(); ?>">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
                         <td class="last"><input type="submit" value="Save" name="save" /></td>
 					</tr>
 				</table>

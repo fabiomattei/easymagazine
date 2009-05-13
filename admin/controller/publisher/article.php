@@ -64,8 +64,7 @@ function up($id) {
     $out = array();
 
     $art1 = Article::findById($id);
-    $indexnumber = $art1->getIndexNumber();
-    $art2 = Article::findUpIndexNumber($indexnumber);
+    $art2 = $art1->findUpIndexNumber();
 
     if ($art2) {
         $art1->setIndexNumber($art2->getIndexNumber());
@@ -86,8 +85,7 @@ function down($id) {
     $out = array();
 
     $art1 = Article::findById($id);
-    $indexnumber = $art1->getIndexNumber();
-    $art2 = Article::findDownIndexNumber($indexnumber);
+    $art2 = $art1->findDownIndexNumber();
 
     if ($art2) {
         $art1->setIndexNumber($art2->getIndexNumber());
