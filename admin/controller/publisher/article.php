@@ -105,6 +105,10 @@ function down($id) {
 function save($toSave) {
     $out = array();
 
+    if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
+    if (!isset($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
+    if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
+
     $art = new Article(
         $toSave['id'],
         1,
@@ -118,6 +122,11 @@ function save($toSave) {
         $toSave['MetaDescription'],
         $toSave['MetaKeyword']);
     $art->save();
+
+    if (isset($files['Image']) && $files['Image']['size'] > 0) {
+        $art->deleteImg();
+        $art->saveImg($files['Image']);
+    }
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();

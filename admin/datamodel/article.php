@@ -43,8 +43,8 @@ class Article {
     private $updated;
     private $filter;
 
-    const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgdescription, created, updated) values (#, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgdescription = ?, updated=now() where id = #';
     const UPDATE_SQL_IMG = 'update articles set imgfilename = ?, updated = Now() where id = #';
     const UPDATE_SQL_IMG_IMGDESC = 'update articles set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from articles where id = #';
@@ -277,7 +277,7 @@ class Article {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
             array($this->id, $this->number_id, $this->indexnumber, $this->published, $this->commentsallowed),
             $tables);
     }
@@ -286,7 +286,7 @@ class Article {
         $tables = array("articles" => TBPREFIX."articles");
         DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
             array($this->number_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
             $tables);
     }

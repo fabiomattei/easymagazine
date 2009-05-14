@@ -111,11 +111,11 @@
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Title</strong></td>
-						<td class="last"><input type="text" name="Title" class="text" value="<? echo $art->getUnfilteredTitle(); ?>"/></td>
+						<td class="last"><input type="text" name="Title" value="<? echo $art->getUnfilteredTitle(); ?>"/></td>
                     </tr>
 					<tr class="bg">
 						<td class="first"><strong>Sub Title</strong></td>
-						<td class="last"><input type="text" name="SubTitle" class="text" value="<? echo $art->getUnfilteredSubtitle(); ?>"/></td>
+						<td class="last"><input type="text" name="SubTitle" value="<? echo $art->getUnfilteredSubtitle(); ?>"/></td>
 					</tr>
 					<tr>
 						<td class="first"><strong>Summary</strong></td>
@@ -127,7 +127,7 @@
 					</tr>
                     					<tr>
 						<td class="first"><strong>Tag</strong></td>
-                        <td class="last"><input type="text" name="Tag" class="text" value="<? echo $art->getUnfilteredTag(); ?>"/></td>
+                        <td class="last"><input type="text" name="Tag" value="<? echo $art->getUnfilteredTag(); ?>"/></td>
 					</tr>
                     <tr>
 						<td class="first"><strong>Meta Description</strong></td>
@@ -139,7 +139,7 @@
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Published</strong></td>
-						<td class="last"><input type="checkbox" name="Published" class="text" value="1" /></td>
+						<td class="last"><input type="checkbox" name="Published" value="1" /></td>
 					</tr>
                     <tr>
 						<td class="first"><strong>Comments allowed</strong></td>
