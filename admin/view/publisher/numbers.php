@@ -34,7 +34,7 @@
 			<li class="active"><span><span>Numbers</span></span></li>
 			<li><span><span><a href="article.php">Articles</a></span></span></li>
 			<li><span><span><a href="page.php">Pages</a></span></span></li>
-			<li><span><span><a href="comments.php">Comments</a></span></span></li>
+			<li><span><span><a href="comment.php">Comments</a></span></span></li>
 			<li><span><span><a href="plugin.php">Plugin</a></span></span></li>
 			<li><span><span><a href="template.php">Template</a></span></span></li>
             <li><span><span><a href="users.php">Users</a></span></span></li>

@@ -18,6 +18,8 @@
  */
 
 require_once(STARTPATH.FILTERPATH.'commentfilterremote.php');
+require_once(STARTPATH.DATAMODELPATH.'user.php');
+require_once(STARTPATH.DBPATH.'db.php');
 
 class Comment {
     const NEW_COMMENT = -1;
