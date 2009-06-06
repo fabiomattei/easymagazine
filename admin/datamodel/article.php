@@ -343,7 +343,6 @@ class Article {
         return ImageFiles::filepath($this->created, $this->imgfilename);
     }
 
-
     public function getMaxId() {
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(

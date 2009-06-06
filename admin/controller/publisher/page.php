@@ -118,21 +118,23 @@ function save($toSave) {
     $out = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
-    if (!isset($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
     if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
 
     $pag = new Page(
         $toSave['id'],
-        1,
         $toSave['indexnumber'],
-        1,
+        $toSave['Published'],
         $toSave['Title'],
         $toSave['SubTitle'],
         $toSave['Summary'],
         $toSave['Body'],
         $toSave['Tag'],
         $toSave['MetaDescription'],
-        $toSave['MetaKeyword']);
+        $toSave['MetaKeyword'],
+        $toSave['imagefilename'],
+        $toSave['ImageDescription'],
+        $toSave['created'],
+        $toSave['updated']);
     $pag->save();
 
     if (isset($files['Image']) && $files['Image']['size'] > 0) {

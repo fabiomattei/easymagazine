@@ -126,7 +126,7 @@ function save($toSave, $files) {
     $numb = new Number(
         $toSave['id'],
         $toSave['indexnumber'],
-        $toSave['Published'] ,
+        $toSave['Published'],
         $toSave['Title'],
         $toSave['SubTitle'],
         $toSave['Summary'],

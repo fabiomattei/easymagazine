@@ -84,7 +84,12 @@
 						<td><a href="page.php?action=down&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><img src="../../resources/img/article.png" width="16" height="16" alt="" /></td>
 						<td><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></td>
-						<td><img src="../../resources/img/tic.png" width="16" height="16" alt="save" /></td>
+						<td>
+                                                <? if ($pg->getPublished()) { ?>
+                                                    <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
+                                                <? } else { ?>
+                                                    <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
+                                                <? } ?></td>
 						<td class="last"><a href="page.php?action=delete&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
@@ -97,14 +102,14 @@
 						<option>1</option>
 					</select>
 			  </div>
-              <form name="formnew" method="post" action="article.php">
+              <form name="formnew" method="post" action="page.php">
                 <input type="submit" value="New" name="new" />
               </form>
 			</div>
 		  <div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                <form name="form1" enctype="multipart/form-data" method="post" action="article.php?action=save">
+                <form name="form1" enctype="multipart/form-data" method="post" action="page.php?action=save">
 				<table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
 						<th class="full" colspan="2">Edit</th>
@@ -139,11 +144,7 @@
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Published</strong></td>
-						<td class="last"><input type="checkbox" name="Published" value="1" /></td>
-					</tr>
-                    <tr>
-						<td class="first"><strong>Comments allowed</strong></td>
-						<td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($pag->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
+						<td class="last"><input type="checkbox" name="Published" value="1" <? if($pag->getPublished()) echo 'checked="checked"'; ?>/></td>
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Show Image</strong></td>

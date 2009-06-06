@@ -132,7 +132,11 @@ function save($toSave) {
         $toSave['Body'],
         $toSave['Tag'],
         $toSave['MetaDescription'],
-        $toSave['MetaKeyword']);
+        $toSave['MetaKeyword'],
+        $toSave['imagefilename'],
+        $toSave['ImageDescription'],
+        $toSave['created'],
+        $toSave['updated']);
     $art->save();
 
     if (isset($files['Image']) && $files['Image']['size'] > 0) {

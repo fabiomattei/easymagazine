@@ -82,7 +82,7 @@ class PageTests extends UnitTestCase {
         $num = Page::findById(1);
         $num->delete();
         $num = Page::findAll();
-		$this->assertEqual(3, count($num));
+		$this->assertEqual(2, count($num));
     }
 
 }

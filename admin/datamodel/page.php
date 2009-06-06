@@ -36,6 +36,8 @@ class Page {
     private $metakeyword;
     private $created;
     private $updated;
+    private $imgfilename;
+    private $imgdescription;
     private $db;
 
     const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
@@ -52,13 +54,13 @@ class Page {
     const SELECT_BY_ID_ORD = 'select id from pages order by id DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from pages order by indexnumber DESC';
 
-    public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
+    public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = PageFilterRemote::getInstance();
         $this->id = $id;
         $this->indexnumber = $indexnumber;
         $this->published = $published;
-        $this->title = $title;   
+        $this->title = $title;
         $this->subtitle = $subtitle;
         $this->summary = $summary;
         $this->body = $body;
@@ -81,8 +83,8 @@ class Page {
             $array_int,
             $tables);
         if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated'] );
+            while ($row = mysql_fetch_array($rs)) {
+                $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated'] );
             }
         }
         return $ret;
@@ -97,8 +99,8 @@ class Page {
             $tables);
         $ret = array();
         if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated'] );
+            while ($row = mysql_fetch_array($rs)) {
+                $ret[] = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
         }
         return $ret;
@@ -185,6 +187,15 @@ class Page {
             array($this->id),
             $tables);
     }
+    
+    public function imageExists() {
+        if ($this->imgfilename == '') { return false; }
+        else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
+    }
+
+    public function imagePath() {
+        return ImageFiles::filepath($this->created, $this->imgfilename);
+    }
 
     protected function insert() {
         $this->id = $this->getMaxId()+1;
@@ -229,7 +240,7 @@ class Page {
             $tables);
         if ($rs) {
             $row = mysql_fetch_array($rs);
-                $maxId = $row['id'];
+            $maxId = $row['id'];
         }
         return $maxId;
     }
@@ -239,7 +250,7 @@ class Page {
         return $out;
     }
 
-    public function getUnfilteredTitle(){
+    public function getUnfilteredTitle() {
         return $this->title;
     }
 
@@ -330,8 +341,39 @@ class Page {
     public function setMetakeyword($metakeyword) {
         $this->metakeyword = $metakeyword;
     }
-        
-}
 
+    public function getImgfilename() {
+        return $this->imgfilename;
+    }
+
+    public function setImgfilename($imgfilename) {
+        $this->imgfilename = $imgfilename;
+    }
+
+    public function getImgdescription() {
+        return $this->imgdescription;
+    }
+
+    public function setImgdescription($imgdescription) {
+        $this->imgdescription = $imgdescription;
+    }
+
+    public function getCreated() {
+        return $this->created;
+    }
+
+    public function setCreated($created) {
+        $this->created = $created;
+    }
+
+    public function getUpdated() {
+        return $this->updated;
+    }
+
+    public function setUpdated($updated) {
+        $this->updated = $updated;
+    }
+
+}
 
 ?>
