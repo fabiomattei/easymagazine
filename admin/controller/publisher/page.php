@@ -21,96 +21,96 @@ define('STARTPATH', '../../../');
 
 require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
-require_once(STARTPATH.DATAMODELPATH.'article.php');
+require_once(STARTPATH.DATAMODELPATH.'page.php');
 
 session_start();
 
 function index() {
     $out = array();
 
-    $art = new Article();
-    $out['art'] = $art;
+    $pag = new Page();
+    $out['pag'] = $pag;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $pags = Page::findAllOrderedByIndexNumber();
+    $out['pags'] = $pags;
     return $out;
 }
 
 function edit($id) {
     $out = array();
 
-    $art = Article::findById($id);
-    $out['art'] = $art;
+    $pag = Page::findById($id);
+    $out['pag'] = $pag;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $pags = Page::findAllOrderedByIndexNumber();
+    $out['pags'] = $pags;
     return $out;
 }
 
 function delete($id) {
     $out = array();
 
-    $art = Article::findById($id);
-    $art->delete();
-    $art = new Article();
-    $out['art'] = $art;
+    $pag = Page::findById($id);
+    $pag->delete();
+    $pag = new Page();
+    $out['pag'] = $pag;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $pags = Page::findAllOrderedByIndexNumber();
+    $out['pags'] = $pags;
     return $out;
 }
 
 function deleteimg($id) {
     $out = array();
 
-    $art = Article::findById($id);
-    $art->deleteImg();
-    $out['art'] = $art;
+    $pag = Page::findById($id);
+    $pag->deleteImg();
+    $out['pag'] = $pag;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $pags = Page::findAllOrderedByIndexNumber();
+    $out['pags'] = $pags;
     return $out;
 }
 
 function up($id) {
     $out = array();
 
-    $art1 = Article::findById($id);
-    $art2 = $art1->findUpIndexNumber();
+    $pag1 = Page::findById($id);
+    $pag2 = $pag1->findUpIndexNumber();
 
-    if ($art2) {
-        $art1->setIndexNumber($art2->getIndexNumber());
-        $art2->setIndexNumber($indexnumber);
-        $art1->save();
-        $art2->save();
+    if ($pag2) {
+        $pag1->setIndexNumber($pag2->getIndexNumber());
+        $pag2->setIndexNumber($indexnumber);
+        $pag1->save();
+        $pag2->save();
     }
 
-    $art = new Article();
-    $out['art'] = $art;
+    $pag = new Page();
+    $out['pag'] = $pag;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $pags = Page::findAllOrderedByIndexNumber();
+    $out['pags'] = $pags;
     return $out;
 }
 
 function down($id) {
     $out = array();
 
-    $art1 = Article::findById($id);
-    $art2 = $art1->findDownIndexNumber();
+    $pag1 = Page::findById($id);
+    $pag2 = $pag1->findDownIndexNumber();
 
-    if ($art2) {
-        $art1->setIndexNumber($art2->getIndexNumber());
-        $art2->setIndexNumber($indexnumber);
-        $art1->save();
-        $art2->save();
+    if ($pag2) {
+        $pag1->setIndexNumber($pag2->getIndexNumber());
+        $pag2->setIndexNumber($indexnumber);
+        $pag1->save();
+        $pag2->save();
     }
 
-    $art = new Article();
-    $out['art'] = $art;
+    $pag = new Page();
+    $out['pag'] = $pag;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $pags = Page::findAllOrderedByIndexNumber();
+    $out['pags'] = $pags;
     return $out;
 }
 
@@ -121,7 +121,7 @@ function save($toSave) {
     if (!isset($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
     if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
 
-    $art = new Article(
+    $pag = new Page(
         $toSave['id'],
         1,
         $toSave['indexnumber'],
@@ -133,16 +133,16 @@ function save($toSave) {
         $toSave['Tag'],
         $toSave['MetaDescription'],
         $toSave['MetaKeyword']);
-    $art->save();
+    $pag->save();
 
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $art->deleteImg();
-        $art->saveImg($files['Image']);
+        $pag->deleteImg();
+        $pag->saveImg($files['Image']);
     }
-    $out['art'] = $art;
+    $out['pag'] = $pag;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $pags = Page::findAllOrderedByIndexNumber();
+    $out['pags'] = $pags;
     return $out;
 }
 
@@ -159,9 +159,9 @@ else {
 	}
 }
 
-$arts = $out['arts'];
-$art = $out['art'];
+$pags = $out['pags'];
+$pag = $out['pag'];
 
-include('../../view/publisher/articles.php');
+include('../../view/publisher/Pages.php');
 
 ?>

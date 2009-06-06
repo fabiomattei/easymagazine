@@ -24,11 +24,27 @@
 <head>
 	<title>Login Page</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<style type="text/css">
+		#login .theInput {
+			font-family: Verdana;
+			font-size: 11px;
+			width: 110px;
+			margin-right: 5px;
+		}
+
+		#login .theSubmit {
+			font-family: Verdana;
+			font-size: 10px;
+			background-color: #333333;
+			color: #FFFFFF;
+			margin-right: 5px;
+		}
+	</style>
 </head>
 <body>
-    <form action="openSession.php" method="post">
-        Username: <input type="text" name="username" value="" /> <br />
-        Password: <input type="password" name="password" value="" /> <br />
+    <form action="openSession.php" method="post" id="login">
+        Username: <input type="text" class="theInput" name="username" value="" /> <br />
+        Password: <input type="password" class="theInput" name="password" value="" /> <br />
         <input type="submit" value="Ok" />
     </form>
 </body>

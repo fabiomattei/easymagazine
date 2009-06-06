@@ -242,6 +242,7 @@ class Number {
     }
 
     public function delete() {
+	    $this->deleteImg();
         $tables = array("numbers" => TBPREFIX."numbers");
         $rs = DB::getInstance()->execute(
             self::DELETE_SQL,

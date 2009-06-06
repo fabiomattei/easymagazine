@@ -292,6 +292,7 @@ class Article {
     }
 
     public function delete() {
+	    $this->deleteImg();
         $tables = array("articles" => TBPREFIX."articles");
         DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
         $this->id = self::NEW_ARTICLE;
@@ -311,7 +312,7 @@ class Article {
     public function saveImg($img) {
         if (!$img['error']) {
             $this->imgfilename = $img['name'];
-            $tables = array("numbers" => TBPREFIX."numbers");
+            $tables = array("articles" => TBPREFIX."articles");
             $rs = DB::getInstance()->execute(
                 self::UPDATE_SQL_IMG,
                 array($this->imgfilename),
@@ -325,7 +326,7 @@ class Article {
         ImageFiles::deletefile($this->created, $this->imgfilename);
         $this->imgfilename = '';
         $this->imgdescription = '';
-        $tables = array("numbers" => TBPREFIX."numbers");
+        $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             self::UPDATE_SQL_IMG_IMGDESC,
             array($this->imgfilename, $this->imgdescription),
