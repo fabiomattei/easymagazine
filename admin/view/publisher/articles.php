@@ -84,7 +84,12 @@
 						<td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><img src="../../resources/img/article.png" width="16" height="16" alt="" /></td>
 						<td><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></td>
-						<td><img src="../../resources/img/tic.png" width="16" height="16" alt="save" /></td>
+						<td>
+                                                <? if ($ar->getPublished()) { ?>
+                                                    <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
+                                                <? } else { ?>
+                                                    <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
+                                                <? } ?></td>
 						<td class="last"><a href="article.php?action=delete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
@@ -109,6 +114,18 @@
 					<tr>
 						<th class="full" colspan="2">Edit</th>
 					</tr>
+                                        <tr>
+						<td class="first" width="172"><strong>Number</strong></td>
+						<td class="last">
+                                                    <select name="numberid">
+                                                        <? foreach ($numbs as $nmb) { ?>
+						            <option value="<? echo $nmb->getId(); ?>"
+                                                                    <? if ($nmb->getId()==$art->getNumber_id()) { echo "selected"; } ?>
+                                                                    ><? echo $nmb->getTitle(); ?></option>
+                                                        <? } ?>
+                                                    </select>
+                                                </td>
+                    </tr>
 					<tr>
 						<td class="first" width="172"><strong>Title</strong></td>
 						<td class="last"><input type="text" name="Title" value="<? echo $art->getUnfilteredTitle(); ?>"/></td>
@@ -139,7 +156,7 @@
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Published</strong></td>
-						<td class="last"><input type="checkbox" name="Published" value="1" /></td>
+						<td class="last"><input type="checkbox" name="Published" value="1" <? if($art->getPublished()) echo 'checked="checked"'; ?>/></td>
 					</tr>
                     <tr>
 						<td class="first"><strong>Comments allowed</strong></td>
@@ -150,7 +167,7 @@
                         <td class="last">
                         <? if ($art->imageExists()) { ?>
                         <img src="<? echo $art->imagePath(); ?>"
-                        <a href="number.php?action=deleteimg&id=<? echo $art->getId(); ?>">Delete image</a>
+                        <a href="article.php?action=deleteimg&id=<? echo $art->getId(); ?>">Delete image</a>
                         <? } else { ?>
                         &nbsp;
                         <? } ?>

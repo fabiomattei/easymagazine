@@ -151,7 +151,7 @@
                         <td class="last">
                         <? if ($pag->imageExists()) { ?>
                         <img src="<? echo $pag->imagePath(); ?>"
-                        <a href="number.php?action=deleteimg&id=<? echo $pag->getId(); ?>">Delete image</a>
+                        <a href="page.php?action=deleteimg&id=<? echo $pag->getId(); ?>">Delete image</a>
                         <? } else { ?>
                         &nbsp;
                         <? } ?>

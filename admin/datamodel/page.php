@@ -41,7 +41,7 @@ class Page {
     private $db;
 
     const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgdescription = ?, updated=now() where id = #';
     const UPDATE_SQL_IMG = 'update pages set imgfilename = ?, updated = Now() where id = #';
     const UPDATE_SQL_IMG_IMGDESC = 'update pages set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from pages where id = # ';
@@ -67,6 +67,8 @@ class Page {
         $this->tag = $tag;
         $this->metadescription = $metadescription;
         $this->metakeyword = $metakeyword;
+        $this->imgfilename = $imgfilename;
+        $this->imgdescription = $imgdescription;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -212,7 +214,7 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
             array($this->indexnumber, $this->published, $this->id),
             $tables);
     }

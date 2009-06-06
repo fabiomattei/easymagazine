@@ -114,7 +114,7 @@ function down($id) {
     return $out;
 }
 
-function save($toSave) {
+function save($toSave, $files) {
     $out = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
@@ -152,7 +152,7 @@ if (!isset($_GET["action"])) { $out = index(); }
 else {
 	switch ($_GET["action"]) {
 		case  'index':             $out = index(); break;
-		case  'save':              $out = save($_POST); break;
+		case  'save':              $out = save($_POST, $_FILES); break;
 		case  'edit':              $out = edit($_GET['id']); break;
 		case  'delete':            $out = delete($_GET['id']); break;
 		case  'up':                $out = up($_GET['id']); break;

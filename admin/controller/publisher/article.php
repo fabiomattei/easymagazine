@@ -22,6 +22,7 @@ define('STARTPATH', '../../../');
 require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
+require_once(STARTPATH.DATAMODELPATH.'number.php');
 
 session_start();
 
@@ -33,6 +34,9 @@ function index() {
 
     $arts = Article::findAllOrderedByIndexNumber();
     $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
     return $out;
 }
 
@@ -44,6 +48,9 @@ function edit($id) {
 
     $arts = Article::findAllOrderedByIndexNumber();
     $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
     return $out;
 }
 
@@ -57,6 +64,9 @@ function delete($id) {
 
     $arts = Article::findAllOrderedByIndexNumber();
     $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
     return $out;
 }
 
@@ -69,6 +79,9 @@ function deleteimg($id) {
 
     $arts = Article::findAllOrderedByIndexNumber();
     $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
     return $out;
 }
 
@@ -90,6 +103,9 @@ function up($id) {
 
     $arts = Article::findAllOrderedByIndexNumber();
     $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
     return $out;
 }
 
@@ -111,10 +127,13 @@ function down($id) {
 
     $arts = Article::findAllOrderedByIndexNumber();
     $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
     return $out;
 }
 
-function save($toSave) {
+function save($toSave, $files) {
     $out = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
@@ -123,13 +142,14 @@ function save($toSave) {
 
     $art = new Article(
         $toSave['id'],
-        1,
+        $toSave['numberid'],
         $toSave['indexnumber'],
-        1,
+        $toSave['Published'],
         $toSave['Title'],
         $toSave['SubTitle'],
         $toSave['Summary'],
         $toSave['Body'],
+        $toSave['commentsallowed'],
         $toSave['Tag'],
         $toSave['MetaDescription'],
         $toSave['MetaKeyword'],
@@ -138,7 +158,6 @@ function save($toSave) {
         $toSave['created'],
         $toSave['updated']);
     $art->save();
-
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
         $art->deleteImg();
         $art->saveImg($files['Image']);
@@ -147,6 +166,9 @@ function save($toSave) {
 
     $arts = Article::findAllOrderedByIndexNumber();
     $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
     return $out;
 }
 
@@ -154,7 +176,7 @@ if (!isset($_GET["action"])) { $out = index(); }
 else {
 	switch ($_GET["action"]) {
 		case  'index':             $out = index(); break;
-		case  'save':              $out = save($_POST); break;
+		case  'save':              $out = save($_POST, $_FILES); break;
 		case  'edit':              $out = edit($_GET['id']); break;
 		case  'delete':            $out = delete($_GET['id']); break;
 		case  'up':                $out = up($_GET['id']); break;
@@ -165,6 +187,7 @@ else {
 
 $arts = $out['arts'];
 $art = $out['art'];
+$numbs = $out['numbs'];
 
 include('../../view/publisher/articles.php');
 
