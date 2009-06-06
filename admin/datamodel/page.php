@@ -17,7 +17,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.FILTERPATH.'pagefilterremote.php');
+require_once(STARTPATH.UTILSPATH.'imagefiles.php');
+require_once(STARTPATH.DATAMODELPATH.'user.php');
 
 class Page {
     const NEW_PAGE = -1;
@@ -37,6 +40,8 @@ class Page {
 
     const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
     const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
+    const UPDATE_SQL_IMG = 'update pages set imgfilename = ?, updated = Now() where id = #';
+    const UPDATE_SQL_IMG_IMGDESC = 'update pages set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from pages where id = # ';
     const SELECT_BY_ID = 'select * from pages where id = #';
     const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber';
@@ -47,7 +52,7 @@ class Page {
     const SELECT_BY_ID_ORD = 'select id from pages order by id DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from pages order by indexnumber DESC';
 
-    public function __construct($id=NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
+    public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = PageFilterRemote::getInstance();
         $this->id = $id;
@@ -124,6 +129,11 @@ class Page {
         return $ret;
     }
 
+    public static function findAllOrderedByIndexNumber() {
+        $ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
+        return $ret;
+    }
+
     public function save() {
         if ($this->id == self::NEW_PAGE) {
             $this->insert();
@@ -133,7 +143,7 @@ class Page {
     }
 
     public function delete() {
-        $tables = array("numbers" => TBPREFIX."numbers");
+        $tables = array("pages" => TBPREFIX."pages");
         $rs = DB::getInstance()->execute(
             self::DELETE_SQL,
             array(),
@@ -149,6 +159,31 @@ class Page {
         $this->metakeyword = '';
         $this->created = '';
         $this->updated = '';
+    }
+
+    public function saveImg($img) {
+        if (!$img['error']) {
+            $this->imgfilename = $img['name'];
+            $tables = array("pages" => TBPREFIX."pages");
+            $rs = DB::getInstance()->execute(
+                self::UPDATE_SQL_IMG,
+                array($this->imgfilename),
+                array($this->id),
+                $tables);
+            ImageFiles::savefile($this->created, $img);
+        }
+    }
+
+    public function deleteImg() {
+        ImageFiles::deletefile($this->created, $this->imgfilename);
+        $this->imgfilename = '';
+        $this->imgdescription = '';
+        $tables = array("pages" => TBPREFIX."pages");
+        $rs = DB::getInstance()->execute(
+            self::UPDATE_SQL_IMG_IMGDESC,
+            array($this->imgfilename, $this->imgdescription),
+            array($this->id),
+            $tables);
     }
 
     protected function insert() {

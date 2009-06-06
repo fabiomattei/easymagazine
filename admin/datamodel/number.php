@@ -21,6 +21,7 @@ require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.FILTERPATH.'numberfilterremote.php');
 require_once(STARTPATH.UTILSPATH.'imagefiles.php');
+require_once(STARTPATH.DATAMODELPATH.'user.php');
 
 class Number {
     const NEW_NUMBER = -1;
