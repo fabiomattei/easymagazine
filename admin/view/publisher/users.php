@@ -116,15 +116,15 @@
                         <td class="last"><input type="text" name="Signature" value="<? echo $userp->getUsername(); ?>"/></td>
 					</tr>
                                         <tr>
-						<td class="first" width="172"><strong>Name</strong></td>
+						<td class="first" width="172"><strong>Email</strong></td>
 						<td class="last"><input type="text" name="article_id" value="<? echo $userp->getEmail(); ?>"/></td>
                     </tr>
                     					<tr>
-						<td class="first"><strong>Username</strong></td>
+						<td class="first"><strong>MSN</strong></td>
                         <td class="last"><input type="text" name="Signature" value="<? echo $userp->getMsn(); ?>"/></td>
 					</tr>
                                         <tr>
-						<td class="first" width="172"><strong>Name</strong></td>
+						<td class="first" width="172"><strong>Skype</strong></td>
 						<td class="last"><input type="text" name="article_id" value="<? echo $userp->getSkype(); ?>"/></td>
                     </tr>
                     <tr class="bg">
