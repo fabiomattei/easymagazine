@@ -19,6 +19,7 @@
 
 require_once(STARTPATH.FILTERPATH.'commentfilterremote.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
+require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.DBPATH.'db.php');
 
 class Comment {
@@ -43,7 +44,7 @@ class Comment {
     const SELECT_ALL = 'select * from comments order by id DESC';
     const SELECT_ARTICLE = 'select * from articles where id = # ';
 
-    public function __construct($id=self::NEW_COMMENT, $article_id='', $title='', $published='', $body='', $signature='', $created='', $updated='') {
+    public function __construct($id=self::NEW_COMMENT, $article_id=self::NEW_COMMENT, $title='', $published='', $body='', $signature='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = CommentFilterRemote::getInstance();
         $this->id = $id;
@@ -111,9 +112,8 @@ class Comment {
         $rs = DB::getInstance()->execute(
             self::SELECT_ARTICLE,
             array(),
-            array("$this->article_id"),
+            array($this->article_id),
             $tables);
-        $ret = array();
         if ($rs) {
             while ($row = mysql_fetch_array($rs)){
                 $ret = new Article(

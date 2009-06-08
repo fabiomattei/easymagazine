@@ -21,18 +21,19 @@ define('STARTPATH', '../../../');
 
 require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
-require_once(STARTPATH.DATAMODELPATH.'comment.php');
+require_once(STARTPATH.DBPATH.'db.php');
+require_once(STARTPATH.DATAMODELPATH.'user.php');
 
 session_start();
 
 function index() {
     $out = array();
 
-    $comm = new Comment();
-    $out['comm'] = $comm;
+    $userp = new User();
+    $out['userp'] = $userp;
 
-    $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $userps = User::findAll();
+    $out['userps'] = $userps;
 
     return $out;
 }
@@ -40,11 +41,11 @@ function index() {
 function edit($id) {
     $out = array();
 
-    $comm = Comment::findById($id);
-    $out['comm'] = $comm;
+    $userp = User::findById($id);
+    $out['userp'] = $userp;
 
-    $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $userps = User::findAll();
+    $out['userps'] = $userps;
 
     return $out;
 }
@@ -52,13 +53,13 @@ function edit($id) {
 function delete($id) {
     $out = array();
 
-    $comm = Comment::findById($id);
-    $comm->delete();
-    $comm = new Comment();
-    $out['comm'] = $comm;
+    $userp = User::findById($id);
+    $userp->delete();
+    $userp = new User();
+    $out['userp'] = $userp;
 
-    $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $userps = User::findAll();
+    $out['userps'] = $userps;
 
     return $out;
 }
@@ -66,43 +67,43 @@ function delete($id) {
 function save($toSave) {
     $out = array();
 
-    if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
-    
-    $comm = new Comment(
+    $userp = new User(
         $toSave['id'],
-        $toSave['article_id'],
-        $toSave['Title'],
-        $toSave['Published'],
-        $toSave['Body'],
-        $toSave['Signature'],
+        $toSave['name'],
+        $toSave['username'],
+        $toSave['password'],
+        $toSave['role'],
+        $toSave['email'],
+        $toSave['msn'],
+        $toSave['skype'],
         $toSave['created'],
         $toSave['updated']);
-    $comm->save();
+    $userp->save();
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $comm->deleteImg();
-        $comm->saveImg($files['Image']);
+        $userp->deleteImg();
+        $userp->saveImg($files['Image']);
     }
-    $out['comm'] = $comm;
+    $out['userp'] = $userp;
 
-    $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $userps = User::findAll();
+    $out['userps'] = $userps;
 
     return $out;
 }
 
 if (!isset($_GET["action"])) { $out = index(); }
 else {
-	switch ($_GET["action"]) {
-		case  'index':             $out = index(); break;
-		case  'save':              $out = save($_POST); break;
-		case  'edit':              $out = edit($_GET['id']); break;
-		case  'delete':            $out = delete($_GET['id']); break;
-	}
+    switch ($_GET["action"]) {
+        case  'index':   $out = index(); break;
+        case  'save':    $out = save($_POST); break;
+        case  'edit':    $out = edit($_GET['id']); break;
+        case  'delete':  $out = delete($_GET['id']); break;
+    }
 }
 
-$comms = $out['comms'];
-$comm = $out['comm'];
+$userps = $out['userps'];
+$userp = $out['userp'];
 
-include('../../view/publisher/comments.php');
+include('../../view/publisher/users.php');
 
 ?>
