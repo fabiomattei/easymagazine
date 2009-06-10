@@ -63,6 +63,23 @@ function delete($id) {
     return $out;
 }
 
+function replay($id) {
+    $out = array();
+
+    $comm_to_be_replayed = Comment::findById($id);
+
+    $comm = new Comment();
+    $comm->setArticle_id($comm_to_be_replayed->getArticle_id());
+    $comm->setTitle('Re: '.$comm_to_be_replayed->getTitle());
+    $comm->setSignature($_SESSION['user']->getName());
+    $out['comm'] = $comm;
+
+    $comms = Comment::findAll();
+    $out['comms'] = $comms;
+
+    return $out;
+}
+
 function save($toSave) {
     $out = array();
 
@@ -78,11 +95,7 @@ function save($toSave) {
         $toSave['created'],
         $toSave['updated']);
     $comm->save();
-    if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $comm->deleteImg();
-        $comm->saveImg($files['Image']);
-    }
-    $out['comm'] = $comm;
+    $out['comm'] = $comm_to_be_replayed = Comment::findById($comm->getId());
 
     $comms = Comment::findAll();
     $out['comms'] = $comms;
@@ -97,6 +110,7 @@ else {
 		case  'save':              $out = save($_POST); break;
 		case  'edit':              $out = edit($_GET['id']); break;
 		case  'delete':            $out = delete($_GET['id']); break;
+                case  'replay':            $out = replay($_GET['id']); break;
 	}
 }
 

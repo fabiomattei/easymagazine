@@ -108,6 +108,7 @@ class Comment {
     }
 
     public function article() {
+        $ret = '';
         $tables = array("articles" => TBPREFIX."articles");
         $rs = DB::getInstance()->execute(
             self::SELECT_ARTICLE,
