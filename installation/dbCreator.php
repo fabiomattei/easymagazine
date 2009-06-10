@@ -224,6 +224,33 @@ class DbCreator {
         return $result;
     }
 
+    public function createTableOptions() {
+        $cmd = "CREATE TABLE ".TBPREFIX."options (
+            id int(11) NOT NULL auto_increment,
+            name varchar(255),
+            type varchar(255),
+            value varchar(255),
+            PRIMARY KEY (id));";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function populateTableOptions() {
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('commandSandBox', 'plugin', 'active')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('filterSandBox', 'filter', 'active')";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function dropTableOptions() {
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."options;";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
     function createSchema() {
 
         if ($this->connection) {
