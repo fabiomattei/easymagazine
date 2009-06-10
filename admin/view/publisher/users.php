@@ -109,27 +109,27 @@
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Name</strong></td>
-						<td class="last"><input type="text" name="article_id" value="<? echo $userp->getName(); ?>"/></td>
+						<td class="last"><input type="text" name="Name" value="<? echo $userp->getName(); ?>"/></td>
                     </tr>
                     					<tr>
 						<td class="first"><strong>Username</strong></td>
-                        <td class="last"><input type="text" name="Signature" value="<? echo $userp->getUsername(); ?>"/></td>
+                        <td class="last"><input type="text" name="Username" value="<? echo $userp->getUsername(); ?>"/></td>
 					</tr>
                                         <tr>
 						<td class="first" width="172"><strong>Email</strong></td>
-						<td class="last"><input type="text" name="article_id" value="<? echo $userp->getEmail(); ?>"/></td>
+						<td class="last"><input type="text" name="Email" value="<? echo $userp->getEmail(); ?>"/></td>
                     </tr>
                     					<tr>
 						<td class="first"><strong>MSN</strong></td>
-                        <td class="last"><input type="text" name="Signature" value="<? echo $userp->getMsn(); ?>"/></td>
+                        <td class="last"><input type="text" name="MSN" value="<? echo $userp->getMsn(); ?>"/></td>
 					</tr>
                                         <tr>
 						<td class="first" width="172"><strong>Skype</strong></td>
-						<td class="last"><input type="text" name="article_id" value="<? echo $userp->getSkype(); ?>"/></td>
+						<td class="last"><input type="text" name="Skype" value="<? echo $userp->getSkype(); ?>"/></td>
                     </tr>
                     <tr class="bg">
 						<td class="first"><strong>Publisher</strong></td>
-						<td class="last"><input type="checkbox" name="Publisher" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?>/></td>
+						<td class="last"><input type="checkbox" name="Role" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?>/></td>
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Created:</strong></td>
@@ -144,6 +144,7 @@
                         <input type="hidden" name="id" value="<? echo $userp->getId(); ?>">
                         <input type="hidden" name="created" value="<? echo $userp->getCreated(); ?>">
                         <input type="hidden" name="updated" value="<? echo $userp->getUpdated(); ?>">
+                        <input type="hidden" name="Password" value="<? echo $userp->getPassword(); ?>">
                         <td class="last">
                         <input type="submit" value="Save" name="save" />
                         </form>
@@ -152,21 +153,21 @@
 				</table>
                                 <br />
                                 <table class="listing form" cellpadding="0" cellspacing="0">
-                                    <form name="form1" enctype="multipart/form-data" method="post" action="user.php?action=save">
+                                    <form name="form1" enctype="multipart/form-data" method="post" action="user.php?action=savePassword">
 					<tr>
 						<th class="full" colspan="2">Change Password</th>
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Old Passwrd</strong></td>
-						<td class="last"><input type="text" name="article_id" value="<? echo $userp->getName(); ?>"/></td>
+						<td class="last"><input type="password" name="OldPassword" value=""/></td>
                     </tr>
                     					<tr>
 						<td class="first"><strong>New Password</strong></td>
-                        <td class="last"><input type="text" name="Signature" value="<? echo $userp->getUsername(); ?>"/></td>
+                        <td class="last"><input type="password" name="NewPassword1" value=""/></td>
 					</tr>
                                         <tr>
 						<td class="first" width="172"><strong>Retype new Password</strong></td>
-						<td class="last"><input type="text" name="article_id" value="<? echo $userp->getEmail(); ?>"/></td>
+						<td class="last"><input type="password" name="NewPassword2" value=""/></td>
                     </tr>
                     <tr>
 						<td class="first"><strong>&nbsp;</strong></td>

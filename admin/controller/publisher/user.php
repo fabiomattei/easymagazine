@@ -69,21 +69,34 @@ function save($toSave) {
 
     $userp = new User(
         $toSave['id'],
-        $toSave['name'],
-        $toSave['username'],
-        $toSave['password'],
-        $toSave['role'],
-        $toSave['email'],
-        $toSave['msn'],
-        $toSave['skype'],
+        $toSave['Name'],
+        $toSave['Username'],
+        $toSave['Password'],
+        $toSave['Role'],
+        $toSave['Email'],
+        $toSave['MSN'],
+        $toSave['Skype'],
         $toSave['created'],
         $toSave['updated']);
     $userp->save();
-    if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $userp->deleteImg();
-        $userp->saveImg($files['Image']);
+    $out['userp'] = User::findById($userp->getId());
+
+    $userps = User::findAll();
+    $out['userps'] = $userps;
+
+    return $out;
+}
+
+function savePassword($toSave) {
+    $out = array();
+
+    $userp = User::findById($toSave['id']);
+
+    if ($toSave['NewPassword1'] == $toSave['NewPassword2']) {
+        $userp->updatePassword($toSave['NewPassword1'], $toSave['OldPassword']);
     }
-    $out['userp'] = $userp;
+
+    $out['userp'] = User::findById($userp->getId());
 
     $userps = User::findAll();
     $out['userps'] = $userps;
@@ -94,10 +107,11 @@ function save($toSave) {
 if (!isset($_GET["action"])) { $out = index(); }
 else {
     switch ($_GET["action"]) {
-        case  'index':   $out = index(); break;
-        case  'save':    $out = save($_POST); break;
-        case  'edit':    $out = edit($_GET['id']); break;
-        case  'delete':  $out = delete($_GET['id']); break;
+        case  'index':         $out = index(); break;
+        case  'save':          $out = save($_POST); break;
+        case  'savePassword':  $out = savePassword($_POST); break;
+        case  'edit':          $out = edit($_GET['id']); break;
+        case  'delete':        $out = delete($_GET['id']); break;
     }
 }
 

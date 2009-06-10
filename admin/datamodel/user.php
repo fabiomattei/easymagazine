@@ -32,7 +32,7 @@ class User {
     private $db;
 
     const INSERT_SQL = 'insert into users (id, name, username, password, role, email, msn, skype, created, updated) values (#, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update users set name = ?, username = ?, role = ?, email = ?, msn = ?, skype = ?, updated=now() where id = #';
+    const UPDATE_SQL = 'update users set name = ?, role = ?, email = ?, msn = ?, skype = ?, updated=now() where id = #';
     const UPDATE_SQL_PASSWORD = 'update users set password = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from users where id = #';
     const SELECT_BY_ID = 'select * from users where id = #';
@@ -196,19 +196,21 @@ class User {
         $tables = array("users" => TBPREFIX."users");
         $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
-            array($this->name, $this->username, $this->role, $this->email, $this->msn, $this->skype),
+            array($this->name, $this->role, $this->email, $this->msn, $this->skype),
             array($this->id),
             $tables);
     }
 
-    public function updatePassword($psw) {
-        $tables = array("users" => TBPREFIX."users");
-        $this->password = md5($psw);
-        $rs = DB::getInstance()->execute(
-            self::UPDATE_SQL_PASSWORD,
-            array($this->password),
-            array($this->id),
-            $tables);
+    public function updatePassword($NewPsw, $OldPsw) {
+        if (md5($OldPsw)==$this->password) {
+            $tables = array("users" => TBPREFIX."users");
+            $this->password = md5($NewPsw);
+            $rs = DB::getInstance()->execute(
+                self::UPDATE_SQL_PASSWORD,
+                array($this->password),
+                array($this->id),
+                $tables);
+        }
     }
 
     public function getId() {
