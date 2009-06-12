@@ -40,6 +40,25 @@ class FileWriter {
         fclose($handle);
     }
 
+    public static function writeTemplateIncluder($dir) {
+        $filename = STARTPATH.'contents/plug_in/templateIncluder.php';
+
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+
+        FileWriter::write($handle, '<?PHP ');
+
+        $toWrite = ' require_once(PLUGINPATH.\''.$dir.'/index.php\'); ';
+        FileWriter::write($handle, $toWrite);
+
+        FileWriter::write($handle, ' ?>');
+
+        fclose($handle);
+    }
+
     private static function write($handle, $toWrite) {
         if (fwrite($handle, $toWrite) === FALSE) {
             echo "Cannot write to file ($filename)";

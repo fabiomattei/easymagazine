@@ -37,6 +37,24 @@ class DirectoryRunner {
         return $list;
     }
 
+    public static function retriveTemplatesList() {
+        $list = array();
+        $dir = STARTPATH.'contents/templates/';
+
+        if (is_dir($dir)) {
+            $dh = opendir($dir);
+            if ($dh) {
+                while (($file = readdir($dh)) !== false) {
+                    if ((filetype($dir.$file)=='dir') && ($file!='.') && ($file!='..')) {
+                        $list["$file"] = $file;
+                    }
+                }
+                closedir($dh);
+            }
+        }
+        return $list;
+    }
+
 }
 
 ?>

@@ -65,9 +65,13 @@
 				<table class="listing" cellpadding="0" cellspacing="0">
 					<tr>
 						<th class="first" width="377">Title</th>
-						<th>Edit</th>
-						<th>Published</th>
-						<th class="last">Delete</th>
+						<th>Info</th>
+                                                <th>Install</th>
+                                                <th>Uninstall</th>
+                                                <th>Activate</th>
+                                                <th>Deactivate</th>
+                                                <th>Installed</th>
+						<th class="last">Active</th>
 					</tr>
 
                     <?
@@ -75,50 +79,40 @@
                     ?>
 					<tr>
 						<td class="first style1"><? echo $key; ?></td>
-						<td><a href="comment.php?action=edit&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td><a href="plugin.php?action=info&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=install&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=uninstall&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=activate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=deactivate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td>
                                                 <? if ($key) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
                                                 <? } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                                 <? } ?></td>
-						<td class="last"><a href="comment.php?action=delete&id=<? echo $key; ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+						<td class="last"><a href="plugin.php?action=delete&id=<? echo $key; ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
                     }
                     ?>
 				</table>
-				<div class="select">
-					<strong>Other Pages: </strong>
-					<select>
-						<option>1</option>
-					</select>
-			  </div>
-              <form name="formnew" method="post" action="comment.php">
-                <input type="submit" value="New" name="new" />
-              </form>
 			</div>
 		  <div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                                 <table class="listing form" cellpadding="0" cellspacing="0">
-                <form name="form1" enctype="multipart/form-data" method="post" action="comment.php?action=save">
 					<tr>
-						<th class="full" colspan="2">Edit</th>
+						<th class="full" colspan="2">Info</th>
 					</tr>
                                         <tr>
 						<td class="first" width="172"><strong>Article</strong></td>
 						<td class="last">
                                                     <?  echo 'Hello!!!!'; ?>
-                                                    <input type="hidden" name="created" value="<? echo 'Hello'; ?>">
                                                 </td>
                                         </tr>
                                  <tr>
 						<td class="first"><strong>&nbsp;</strong></td>
-                        <input type="hidden" name="id" value="<? echo '' ?>">
                         <td class="last">
-                        <input type="submit" value="Save" name="save" />
-                        </form>
                              </td>
 			</tr>
 			</table>

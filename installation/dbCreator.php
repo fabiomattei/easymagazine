@@ -240,7 +240,7 @@ class DbCreator {
             ('commandSandBox', 'plugin', 'active')";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
-            ('filterSandBox', 'filter', 'active')";
+            ('filterSandBox', 'plugin', 'active')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -303,6 +303,14 @@ class DbCreator {
                 $out .= "Table Users NOT created<BR>";
             }
 
+            $result = $this->createTableOptions();
+
+            if ($result) {
+                $out .= "Table Options created<BR>";
+            } else {
+                $out .= "Table Option NOT created<BR>";
+            }
+
         } else {
             $out = "Error in the connection <br>".mysql_errno().": ".mysql_error();
         }
@@ -360,6 +368,14 @@ class DbCreator {
                 $out .= "Dummy data Relation User<->Article Created<BR>";
             } else {
                 $out .= "Dummy data Relation User<->Article NOT created<BR>";;
+            }
+
+            $result = $this->populateTableOptions();
+
+            if ($result) {
+                $out .= "Dummy data Relation Options Created<BR>";
+            } else {
+                $out .= "Dummy data Relation Options NOT created<BR>";;
             }
 
         } else {
@@ -421,6 +437,14 @@ class DbCreator {
                 $out .= "Table Relation User<->Article NOT dropped<BR>";;
             }
 
+            $result = $this->dropTableOptions();
+
+            if ($result) {
+                $out .= "Table Relation Options dropped<BR>";
+            } else {
+                $out .= "Table Relation Options NOT dropped<BR>";;
+            }
+            
         } else {
             $out = "Error in the connection <br>".mysql_errno().": ".mysql_error();
         }

@@ -31,14 +31,14 @@ session_start();
 function index() {
     $out = array();
 
-    $plugin = new Option();
-    $out['plugin'] = $plugin;
+    $template = new Option();
+    $out['template'] = $template;
 
-    $pluginsindb = Option::findByType('plugin');
-    $out['pluginsindb'] = $pluginsindb;
+    $templatesindb = Option::findByType('template');
+    $out['templatesindb'] = $templatesindb;
 
-    $plugins = DirectoryRunner::retrivePlugInList();
-    $out['plugins'] = $plugins;
+    $templates = DirectoryRunner::retriveTemplatesList();
+    $out['templates'] = $templates;
 
     return $out;
 }
@@ -46,11 +46,11 @@ function index() {
 function activate($id) {
     $out = array();
 
-    $plugin = Option::findById($id);
-    $out['plugin'] = $plugin;
+    $template = Option::findById($id);
+    $out['template'] = $template;
 
-    $plugins = Option::findAll();
-    $out['plugins'] = $plugins;
+    $templates = Option::findAll();
+    $out['templates'] = $templates;
 
     return $out;
 }
@@ -58,13 +58,13 @@ function activate($id) {
 function deactivate($id) {
     $out = array();
 
-    $plugin = Option::findById($id);
-    $plugin->delete();
-    $plugin = new Option();
-    $out['plugin'] = $plugin;
+    $template = Option::findById($id);
+    $template->delete();
+    $template = new Option();
+    $out['template'] = $template;
 
-    $plugins = Option::findAll();
-    $out['plugins'] = $plugins;
+    $templates = Option::findAll();
+    $out['templates'] = $templates;
 
     return $out;
 }
@@ -72,16 +72,16 @@ function deactivate($id) {
 function install($id) {
     $out = array();
 
-    $plugin_to_be_replayed = Option::findById($id);
+    $template_to_be_replayed = Option::findById($id);
 
-    $plugin = new Option();
-    $plugin->setArticle_id($plugin_to_be_replayed->getArticle_id());
-    $plugin->setTitle('Re: '.$plugin_to_be_replayed->getTitle());
-    $plugin->setSignature($_SESSION['user']->getName());
-    $out['plugin'] = $plugin;
+    $template = new Option();
+    $template->setArticle_id($template_to_be_replayed->getArticle_id());
+    $template->setTitle('Re: '.$template_to_be_replayed->getTitle());
+    $template->setSignature($_SESSION['user']->getName());
+    $out['template'] = $template;
 
-    $plugins = Option::findAll();
-    $out['plugins'] = $plugins;
+    $templates = Option::findAll();
+    $out['templates'] = $templates;
 
     return $out;
 }
@@ -91,7 +91,7 @@ function unistall($toSave) {
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
 
-    $plugin = new Option(
+    $template = new Option(
         $toSave['id'],
         $toSave['article_id'],
         $toSave['Title'],
@@ -100,11 +100,11 @@ function unistall($toSave) {
         $toSave['Signature'],
         $toSave['created'],
         $toSave['updated']);
-    $plugin->save();
-    $out['plugin'] = $plugin_to_be_replayed = Option::findById($plugin->getId());
+    $template->save();
+    $out['template'] = $template_to_be_replayed = Option::findById($template->getId());
 
-    $plugins = Option::findAll();
-    $out['plugins'] = $plugins;
+    $templates = Option::findAll();
+    $out['templates'] = $templates;
 
     return $out;
 }
@@ -120,9 +120,9 @@ else {
     }
 }
 
-$plugins = $out['plugins'];
-$plugin = $out['plugin'];
+$templates = $out['templates'];
+$template = $out['template'];
 
-include('../../view/publisher/plugin.php');
+include('../../view/publisher/templates.php');
 
 ?>
