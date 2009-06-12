@@ -17,26 +17,25 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class DirectoryRunner {
+class DiretoryRunnerTests extends UnitTestCase {
 
-    public static function retrivePlugInList() {
-        $list = array();
-        $dir = STARTPATH.'contents/plug_in/';
+    public function __construct() {
+    }
 
-        if (is_dir($dir)) {
-            $dh = opendir($dir);
-            if ($dh) {
-                while (($file = readdir($dh)) !== false) {
-                    if ((filetype($dir.$file)=='dir') && ($file!='.') && ($file!='..')) {
-                        $list["$file"] = $file;
-                    }
-                }
-                closedir($dh);
-            }
-        }
-        return $list;
+    function setUp() {
+    }
+
+    function tearDown() {
+    }
+
+    function testRetrivePlugInList() {
+        $listOut = DirectoryRunner::retrivePlugInList();
+	$this->assertPattern('(commandSandBox)', $listOut['commandSandBox']);
     }
 
 }
+
+$test = new DiretoryRunnerTests();
+$test->run(new HtmlReporter());
 
 ?>

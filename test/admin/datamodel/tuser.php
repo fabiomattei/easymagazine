@@ -60,7 +60,7 @@ class UserTests extends UnitTestCase {
 
     function testCheckChangePsw() {
         $usr = User::checkUsrPsw('newuser','psw');
-        $usr->updatePassword('hello');
+        $usr->updatePassword('hello','psw');
         $usr = User::checkUsrPsw('newuser','hello');
         $this->assertPattern('(User)', $usr->getName());
     }
@@ -84,7 +84,7 @@ class UserTests extends UnitTestCase {
         $num = User::findById(2);
         $num->delete();
         $num = User::findAll();
-		$this->assertEqual(1, count($num));
+	$this->assertEqual(1, count($num));
     }
 }
 
