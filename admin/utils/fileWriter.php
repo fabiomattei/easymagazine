@@ -22,28 +22,22 @@ class FileWriter {
     public static function writePlugInIncluder($dirList) {
         $filename = STARTPATH.'contents/plug_in/pluginIncluder.php';
 
-        if (is_writable($filename)) {
-            
-            $handle = fopen($filename, 'w');
-            if (!$handle) {
-                echo "Cannot open file ($filename)";
-                exit;
-            }
-
-            FileWriter::write($handle, '<?PHP\n\n');
-
-            foreach ($dirList as $key => $value) {
-                $toWrite = 'require_once(PLUGINPATH.'.$key.'.\'/index.php\');\n';
-                FileWriter::write($handle, $toWrite);
-            }
-
-            FileWriter::write($handle, '?>');
-
-            fclose($handle);
-
-        } else {
-            echo "The file $filename is not writable";
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
         }
+
+        FileWriter::write($handle, '<?PHP ');
+
+        foreach ($dirList as $key => $value) {
+            $toWrite = ' require_once(PLUGINPATH.\''.$key.'/index.php\'); ';
+            FileWriter::write($handle, $toWrite);
+        }
+
+        FileWriter::write($handle, ' ?>');
+
+        fclose($handle);
     }
 
     private static function write($handle, $toWrite) {
