@@ -37,6 +37,8 @@ function index() {
     $templates = DirectoryRunner::retriveTemplatesList();
     $out['templates'] = $templates;
 
+    $out['toshow'] = $out['activetemplate']->getName();
+
     return $out;
 }
 
@@ -59,19 +61,37 @@ function activate($id) {
     $templates = DirectoryRunner::retriveTemplatesList();
     $out['templates'] = $templates;
 
+    $out['toshow'] = $out['activetemplate']->getName();
+
+    return $out;
+}
+
+function info($id) {
+    $out = array();
+
+    $activetemplate = Option::findByType('template');
+    $out['activetemplate'] = $activetemplate[0];
+
+    $templates = DirectoryRunner::retriveTemplatesList();
+    $out['templates'] = $templates;
+
+    $out['toshow'] = $id;
+
     return $out;
 }
 
 if (!isset($_GET["action"])) { $out = index(); }
 else {
     switch ($_GET["action"]) {
-        case  'index':         $out = index(); break;
-        case  'activate':      $out = activate($_GET['id']); break;
+        case  'index':     $out = index(); break;
+        case  'activate':  $out = activate($_GET['id']); break;
+        case  'info':      $out = info($_GET['id']); break;
     }
 }
 
 $templates = $out['templates'];
 $activetemplate = $out['activetemplate'];
+$toshow = $out['toshow'];
 
 include('../../view/publisher/templates.php');
 

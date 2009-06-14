@@ -89,24 +89,24 @@
                     ?>
 				</table>
 			</div>
-		  <div class="table">
+		        <div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                                 <table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
-						<th class="full" colspan="2">Info</th>
+						<th class="full">Info</th>
 					</tr>
                                         <tr>
-						<td class="first" width="172"><strong>Article</strong></td>
-						<td class="last">
-                                                    <?  echo 'Hello!!!!'; ?>
+						<td class="first" width="172">
+                                                <?
+                                                if (file_exists('../../../contents/templates/'.$toshow.'/info.html')) {
+                                                    require_once '../../../contents/templates/'.$toshow.'/info.html';
+                                                } else {
+                                                    echo "No info file detected";
+                                                }
+                                                ?>
                                                 </td>
                                         </tr>
-                                 <tr>
-						<td class="first"><strong>&nbsp;</strong></td>
-                        <td class="last">
-                             </td>
-			</tr>
 			</table>
 	        <p>&nbsp;</p>
 		  </div>
