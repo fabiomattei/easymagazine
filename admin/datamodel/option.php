@@ -29,10 +29,12 @@ class Option {
     const INSERT_SQL = 'insert into options (id, name, type, value) values (#, ?, ?, ?)';
     const UPDATE_SQL = 'update options set name = ?, type = ?, value = ? where id = #';
     const DELETE_SQL = 'delete from options where id = #';
+    const DELETE_TYPE_SQL = 'delete from options where type = ?';
     const SELECT_BY_ID = 'select * from options where id = #';
     const SELECT_BY_NAME = 'select * from options where title like ?';
     const SELECT_BY_TYPE = 'select * from options where type like ?';
     const SELECT_ALL = 'select * from options order by id DESC';
+    const SELECT_BY_ID_ORD = 'select id from options order by id DESC';
 
     public function __construct($id=self::NEW_OPTION, $name='', $type='', $value='') {
         $this->id = $id;
@@ -96,6 +98,15 @@ class Option {
         return $ret;
     }
 
+    public static function cleanType($type) {
+        $tables = array("options" => TBPREFIX."options");
+        $rs = DB::getInstance()->execute(
+            self::DELETE_TYPE_SQL,
+            array($type),
+            array(),
+            $tables);
+    }
+
     public function save() {
         if ($this->id == self::NEW_OPTION) {
             $this->insert();
@@ -123,7 +134,7 @@ class Option {
         $rs = DB::getInstance()->execute(
             self::INSERT_SQL,
             array($this->name, $this->type, $this->value),
-            array(),
+            array($this->id),
             $tables);
     }
 
@@ -132,7 +143,7 @@ class Option {
         $rs = DB::getInstance()->execute(
             self::UPDATE_SQL,
             array($this->name, $this->type, $this->value),
-            array(),
+            array($this->id),
             $tables);
     }
 

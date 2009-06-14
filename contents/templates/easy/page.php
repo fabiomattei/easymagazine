@@ -17,20 +17,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('ADMINPATH', 'admin/view/');
-define('COMMANDPATH', 'admin/command/');
-define('ROUTERPATH', 'admin/routers/');
-define('FILTERPATH', 'admin/filters/');
-define('CONTROLLERPATH', 'admin/controller/');
-define('DATAMODELPATH', 'admin/datamodel/');
-define('SESSIONPATH', 'admin/sessionmanager/');
-define('URIPATH', 'admin/uri/');
-define('UTILSPATH', 'admin/utils/');
-define('DBPATH', 'admin/datamodel/library/');
-define('BASEPATH', '');
+echo $this->page->getTitle()."<br>";
 
-define('PLUGINPATH', 'contents/plug_in/');
-define('TEMPLATEBASEPATH', 'contents/templates/');
-//define('TEMPLATEPATH', 'contents/templates/default/');
+echo "<br><br>Pages<br>";
+foreach($this->pages  as $one) {
+    echo '<a href="'.URIMaker::page($one).'"> '.$one->getTitle()." </a><br>";
+}
 
 ?>

@@ -242,6 +242,9 @@ class DbCreator {
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
             ('filterSandBox', 'plugin', 'active')";
         $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('default', 'template', 'active')";
+        $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 

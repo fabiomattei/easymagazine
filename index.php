@@ -20,8 +20,8 @@
 define('STARTPATH', '');
 require_once('costants.php');
 
-//require_once(PLUGINPATH.'commandSandBox/index.php');
 require_once(PLUGINPATH.'pluginIncluder.php');
+require_once(TEMPLATEBASEPATH.'templateIncluder.php');
 require_once(ROUTERPATH.'routerfactory.php');
 require_once(URIPATH.'uridefault.php');
 

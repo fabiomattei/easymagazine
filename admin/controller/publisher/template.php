@@ -31,11 +31,8 @@ session_start();
 function index() {
     $out = array();
 
-    $template = new Option();
-    $out['template'] = $template;
-
-    $templatesindb = Option::findByType('template');
-    $out['templatesindb'] = $templatesindb;
+    $activetemplate = Option::findByType('template');
+    $out['activetemplate'] = $activetemplate[0];
 
     $templates = DirectoryRunner::retriveTemplatesList();
     $out['templates'] = $templates;
@@ -46,64 +43,20 @@ function index() {
 function activate($id) {
     $out = array();
 
-    $template = Option::findById($id);
-    $out['template'] = $template;
+    Option::cleanType('template');
 
-    $templates = Option::findAll();
-    $out['templates'] = $templates;
+    $toSave = new Option();
+    $toSave->setName($id);
+    $toSave->setType('template');
+    $toSave->setValue('active');
+    $toSave->save();
 
-    return $out;
-}
+    FileWriter::writeTemplateIncluder($id);
 
-function deactivate($id) {
-    $out = array();
+    $activetemplate = Option::findByType('template');
+    $out['activetemplate'] = $activetemplate[0];
 
-    $template = Option::findById($id);
-    $template->delete();
-    $template = new Option();
-    $out['template'] = $template;
-
-    $templates = Option::findAll();
-    $out['templates'] = $templates;
-
-    return $out;
-}
-
-function install($id) {
-    $out = array();
-
-    $template_to_be_replayed = Option::findById($id);
-
-    $template = new Option();
-    $template->setArticle_id($template_to_be_replayed->getArticle_id());
-    $template->setTitle('Re: '.$template_to_be_replayed->getTitle());
-    $template->setSignature($_SESSION['user']->getName());
-    $out['template'] = $template;
-
-    $templates = Option::findAll();
-    $out['templates'] = $templates;
-
-    return $out;
-}
-
-function unistall($toSave) {
-    $out = array();
-
-    if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
-
-    $template = new Option(
-        $toSave['id'],
-        $toSave['article_id'],
-        $toSave['Title'],
-        $toSave['Published'],
-        $toSave['Body'],
-        $toSave['Signature'],
-        $toSave['created'],
-        $toSave['updated']);
-    $template->save();
-    $out['template'] = $template_to_be_replayed = Option::findById($template->getId());
-
-    $templates = Option::findAll();
+    $templates = DirectoryRunner::retriveTemplatesList();
     $out['templates'] = $templates;
 
     return $out;
@@ -113,15 +66,12 @@ if (!isset($_GET["action"])) { $out = index(); }
 else {
     switch ($_GET["action"]) {
         case  'index':         $out = index(); break;
-        case  'activate':      $out = activate($_POST); break;
-        case  'deactivate':    $out = deactivate($_GET['id']); break;
-        case  'install':       $out = install($_GET['id']); break;
-        case  'unistall':      $out = unistall($_GET['id']); break;
+        case  'activate':      $out = activate($_GET['id']); break;
     }
 }
 
 $templates = $out['templates'];
-$template = $out['template'];
+$activetemplate = $out['activetemplate'];
 
 include('../../view/publisher/templates.php');
 

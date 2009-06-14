@@ -1,0 +1,1 @@
+<?PHP  define('TEMPLATEPATH', 'contents/templates/easy/');  ?>

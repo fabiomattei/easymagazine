@@ -41,7 +41,7 @@ class FileWriter {
     }
 
     public static function writeTemplateIncluder($dir) {
-        $filename = STARTPATH.'contents/plug_in/templateIncluder.php';
+        $filename = STARTPATH.'contents/templates/templateIncluder.php';
 
         $handle = fopen($filename, 'w');
         if (!$handle) {
@@ -51,7 +51,7 @@ class FileWriter {
 
         FileWriter::write($handle, '<?PHP ');
 
-        $toWrite = ' require_once(PLUGINPATH.\''.$dir.'/index.php\'); ';
+        $toWrite = ' define(\'TEMPLATEPATH\', \'contents/templates/'.$dir.'/\'); ';
         FileWriter::write($handle, $toWrite);
 
         FileWriter::write($handle, ' ?>');

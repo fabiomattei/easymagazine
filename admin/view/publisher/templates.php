@@ -66,11 +66,7 @@
 					<tr>
 						<th class="first" width="377">Title</th>
 						<th>Info</th>
-                                                <th>Install</th>
-                                                <th>Uninstall</th>
                                                 <th>Activate</th>
-                                                <th>Deactivate</th>
-                                                <th>Installed</th>
 						<th class="last">Active</th>
 					</tr>
 
@@ -79,19 +75,15 @@
                     ?>
 					<tr>
 						<td class="first style1"><? echo $key; ?></td>
-						<td><a href="plugin.php?action=info&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=install&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=uninstall&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=activate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=deactivate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td><a href="template.php?action=info&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="template.php?action=activate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td>
-                                                <? if ($key) { ?>
+                                                <? if ($key == $activetemplate->getName()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
                                                 <? } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                                 <? } ?></td>
-						<td class="last"><a href="plugin.php?action=delete&id=<? echo $key; ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
-					</tr>
+                                        </tr>
                     <?
                     }
                     ?>
@@ -121,7 +113,7 @@
 		</div>
 		<div id="right-column">
 			<strong class="h">INFO</strong>
-			<div class="box">Here there is a list of all comments, published and not still published.</div>
+			<div class="box">Here there is a list of all templates available for the website.</div>
 	  </div>
 	</div>
 	<div id="footer"></div>
