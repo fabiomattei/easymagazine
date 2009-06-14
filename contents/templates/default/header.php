@@ -1,5 +1,13 @@
 <?php
 
+echo "
+<html>
+<head>
+<link rel=\"stylesheet\" href=\"contents/templates/default/style.css\" type=\"text/css\" media=\"screen\"/>
+</head>
+<Body>
+";
+
 /*
     Copyright (C) 2009  Fabio Mattei
 

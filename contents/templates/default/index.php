@@ -30,5 +30,8 @@ foreach($this->pages  as $page) {
     echo '<a href="'.URIMaker::page($page).'"> '.$page->getTitle()." </a><br>";
 }
 
+echo "<img src=\"contents/templates/default/example.png\">";
+
+echo "<h1 class=\"prova\">eeeeeeeeeeee</h1>";
 
 ?>
