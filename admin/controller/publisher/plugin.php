@@ -59,11 +59,13 @@ function info($id) {
 function activate($id) {
     $out = array();
 
-    $plugin = Option::findById($id);
-    $out['plugin'] = $plugin;
+    $pluginsindb = Option::findByType('plugin');
+    $out['pluginsindb'] = $pluginsindb;
 
-    $plugins = Option::findAll();
+    $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
+
+    $out['toshow'] = $id.'/activate.php';
 
     return $out;
 }
@@ -71,13 +73,13 @@ function activate($id) {
 function deactivate($id) {
     $out = array();
 
-    $plugin = Option::findById($id);
-    $plugin->delete();
-    $plugin = new Option();
-    $out['plugin'] = $plugin;
+    $pluginsindb = Option::findByType('plugin');
+    $out['pluginsindb'] = $pluginsindb;
 
-    $plugins = Option::findAll();
+    $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
+
+    $out['toshow'] = $id.'/deactivate.php';
 
     return $out;
 }
@@ -96,14 +98,29 @@ function admin($id) {
     return $out;
 }
 
+function general($get) {
+    $out = array();
+
+    $pluginsindb = Option::findByType('plugin');
+    $out['pluginsindb'] = $pluginsindb;
+
+    $plugins = DirectoryRunner::retrivePlugInList();
+    $out['plugins'] = $plugins;
+
+    $out['toshow'] = $get['id'].'/'.$get['filename'];
+
+    return $out;
+}
+
 if (!isset($_GET["action"])) { $out = index(); }
 else {
     switch ($_GET["action"]) {
         case  'index':       $out = index(); break;
-        case  'activate':    $out = activate($_POST); break;
+        case  'activate':    $out = activate($_GET['id']); break;
         case  'deactivate':  $out = deactivate($_GET['id']); break;
         case  'info':        $out = info($_GET['id']); break;
         case  'admin':       $out = admin($_GET['id']); break;
+        case  'general':     $out = general($_GET); break;
     }
 }
 
