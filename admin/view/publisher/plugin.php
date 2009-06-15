@@ -69,7 +69,6 @@
                                                 <th>Admin</th>
                                                 <th>Activate</th>
                                                 <th>Deactivate</th>
-                                                <th>Installed</th>
 						<th class="last">Active</th>
 					</tr>
 
@@ -88,7 +87,6 @@
                                                 <? } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                                 <? } ?></td>
-						<td class="last"><a href="plugin.php?action=delete&id=<? echo $key; ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
                     }
@@ -100,19 +98,23 @@
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                                 <table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
-						<th class="full" colspan="2">Info</th>
+						<th class="full">Info</th>
 					</tr>
                                         <tr>
-						<td class="first" width="172"><strong>Article</strong></td>
-						<td class="last">
-                                                    <?  echo 'Hello!!!!'; ?>
+						<td class="first" width="172">
+                                                <?
+                                                if ($toshow !='' && file_exists('../../../contents/templates/'.$toshow)) {
+                                                    require_once '../../../contents/templates/'.$toshow;
+                                                } else {
+                                                    if ($toshow !='') {
+                                                        echo 'No info file detected: '.$toshow;
+                                                    } else {
+                                                        echo '&nbsp; ';
+                                                    }
+                                                }
+                                                ?>
                                                 </td>
                                         </tr>
-                                 <tr>
-						<td class="first"><strong>&nbsp;</strong></td>
-                        <td class="last">
-                             </td>
-			</tr>
 			</table>
 	        <p>&nbsp;</p>
 		  </div>

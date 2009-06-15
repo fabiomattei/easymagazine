@@ -31,14 +31,27 @@ session_start();
 function index() {
     $out = array();
 
-    $plugin = new Option();
-    $out['plugin'] = $plugin;
+    $pluginsindb = Option::findByType('plugin');
+    $out['pluginsindb'] = $pluginsindb;
+
+    $plugins = DirectoryRunner::retrivePlugInList();
+    $out['plugins'] = $plugins;
+
+    $out['toshow'] = '';
+
+    return $out;
+}
+
+function info($id) {
+    $out = array();
 
     $pluginsindb = Option::findByType('plugin');
     $out['pluginsindb'] = $pluginsindb;
 
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
+
+    $out['toshow'] = $id.'/info.php';
 
     return $out;
 }
@@ -72,16 +85,13 @@ function deactivate($id) {
 function admin($id) {
     $out = array();
 
-    $plugin_to_be_replayed = Option::findById($id);
+    $pluginsindb = Option::findByType('plugin');
+    $out['pluginsindb'] = $pluginsindb;
 
-    $plugin = new Option();
-    $plugin->setArticle_id($plugin_to_be_replayed->getArticle_id());
-    $plugin->setTitle('Re: '.$plugin_to_be_replayed->getTitle());
-    $plugin->setSignature($_SESSION['user']->getName());
-    $out['plugin'] = $plugin;
-
-    $plugins = Option::findAll();
+    $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
+
+    $out['toshow'] = $id.'/admin.php';
 
     return $out;
 }
@@ -89,16 +99,17 @@ function admin($id) {
 if (!isset($_GET["action"])) { $out = index(); }
 else {
     switch ($_GET["action"]) {
-        case  'index':         $out = index(); break;
-        case  'activate':      $out = activate($_POST); break;
-        case  'deactivate':    $out = deactivate($_GET['id']); break;
-        case  'install':       $out = install($_GET['id']); break;
-        case  'unistall':      $out = unistall($_GET['id']); break;
+        case  'index':       $out = index(); break;
+        case  'activate':    $out = activate($_POST); break;
+        case  'deactivate':  $out = deactivate($_GET['id']); break;
+        case  'info':        $out = info($_GET['id']); break;
+        case  'admin':       $out = admin($_GET['id']); break;
     }
 }
 
+$pluginsindb = $out['pluginsindb'];
 $plugins = $out['plugins'];
-$plugin = $out['plugin'];
+$toshow = $out['toshow'];
 
 include('../../view/publisher/plugin.php');
 
