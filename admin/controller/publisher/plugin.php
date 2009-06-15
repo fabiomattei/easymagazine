@@ -69,7 +69,7 @@ function deactivate($id) {
     return $out;
 }
 
-function install($id) {
+function admin($id) {
     $out = array();
 
     $plugin_to_be_replayed = Option::findById($id);
@@ -79,29 +79,6 @@ function install($id) {
     $plugin->setTitle('Re: '.$plugin_to_be_replayed->getTitle());
     $plugin->setSignature($_SESSION['user']->getName());
     $out['plugin'] = $plugin;
-
-    $plugins = Option::findAll();
-    $out['plugins'] = $plugins;
-
-    return $out;
-}
-
-function unistall($toSave) {
-    $out = array();
-
-    if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
-
-    $plugin = new Option(
-        $toSave['id'],
-        $toSave['article_id'],
-        $toSave['Title'],
-        $toSave['Published'],
-        $toSave['Body'],
-        $toSave['Signature'],
-        $toSave['created'],
-        $toSave['updated']);
-    $plugin->save();
-    $out['plugin'] = $plugin_to_be_replayed = Option::findById($plugin->getId());
 
     $plugins = Option::findAll();
     $out['plugins'] = $plugins;
