@@ -66,8 +66,7 @@
 					<tr>
 						<th class="first" width="377">Title</th>
 						<th>Info</th>
-                                                <th>Install</th>
-                                                <th>Uninstall</th>
+                                                <th>Admin</th>
                                                 <th>Activate</th>
                                                 <th>Deactivate</th>
                                                 <th>Installed</th>
@@ -80,8 +79,7 @@
 					<tr>
 						<td class="first style1"><? echo $key; ?></td>
 						<td><a href="plugin.php?action=info&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=install&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=uninstall&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=admin&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                                 <td><a href="plugin.php?action=activate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                                 <td><a href="plugin.php?action=deactivate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td>

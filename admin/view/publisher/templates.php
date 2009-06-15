@@ -99,8 +99,8 @@
                                         <tr>
 						<td class="first" width="172">
                                                 <?
-                                                if (file_exists('../../../contents/templates/'.$toshow.'/info.html')) {
-                                                    require_once '../../../contents/templates/'.$toshow.'/info.html';
+                                                if (file_exists('../../../contents/templates/'.$toshow.'/info.php')) {
+                                                    require_once '../../../contents/templates/'.$toshow.'/info.php';
                                                 } else {
                                                     echo "No info file detected";
                                                 }
