@@ -1,1 +1,1 @@
-<?PHP  require_once(PLUGINPATH.'0/index.php');  require_once(PLUGINPATH.'1/index.php');  require_once(PLUGINPATH.'2/index.php');  require_once(PLUGINPATH.'3/index.php');  require_once(PLUGINPATH.'4/index.php');  require_once(PLUGINPATH.'5/index.php');  ?>
+<?PHP  require_once(PLUGINPATH.'0/index.php');  require_once(PLUGINPATH.'1/index.php');  require_once(PLUGINPATH.'2/index.php');  require_once(PLUGINPATH.'3/index.php');  require_once(PLUGINPATH.'4/index.php');  ?>

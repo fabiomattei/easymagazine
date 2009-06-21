@@ -32,7 +32,12 @@ function index() {
     $out = array();
 
     $pluginsindb = Option::findByType('plugin');
-    $out['pluginsindb'] = $pluginsindb;
+
+    $out['pluginsindb'] = array();
+    foreach ($pluginsindb as $pldb) {
+        $name = $pldb->getName();
+        $out['pluginsindb']["$name"] = $pldb;
+    }
 
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
@@ -46,7 +51,12 @@ function info($pluginname) {
     $out = array();
 
     $pluginsindb = Option::findByType('plugin');
-    $out['pluginsindb'] = $pluginsindb;
+
+    $out['pluginsindb'] = array();
+    foreach ($pluginsindb as $pldb) {
+        $name = $pldb->getName();
+        $out['pluginsindb']["$name"] = $pldb;
+    }
 
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
@@ -59,6 +69,8 @@ function info($pluginname) {
 function activate($pluginname) {
     $out = array();
 
+    $pluginsindb = Option::findByName($pluginname);
+
     $toSave = new Option();
     $toSave->setName($pluginname);
     $toSave->setType('plugin');
@@ -66,7 +78,12 @@ function activate($pluginname) {
     $toSave->save();
 
     $pluginsindb = Option::findByType('plugin');
-    $out['pluginsindb'] = $pluginsindb;
+
+    $out['pluginsindb'] = array();
+    foreach ($pluginsindb as $pldb) {
+        $name = $pldb->getName();
+        $out['pluginsindb']["$name"] = $pldb;
+    }
 
     $dirList = array();
     foreach ($pluginsindb as $pldb) {
@@ -90,7 +107,12 @@ function deactivate($pluginname) {
     $toDelete[0]->delete();
 
     $pluginsindb = Option::findByType('plugin');
-    $out['pluginsindb'] = $pluginsindb;
+
+    $out['pluginsindb'] = array();
+    foreach ($pluginsindb as $pldb) {
+        $name = $pldb->getName();
+        $out['pluginsindb']["$name"] = $pldb;
+    }
 
     $dirList = array();
     foreach ($pluginsindb as $pldb) {
@@ -111,7 +133,12 @@ function admin($pluginname) {
     $out = array();
 
     $pluginsindb = Option::findByType('plugin');
-    $out['pluginsindb'] = $pluginsindb;
+
+    $out['pluginsindb'] = array();
+    foreach ($pluginsindb as $pldb) {
+        $name = $pldb->getName();
+        $out['pluginsindb']["$name"] = $pldb;
+    }
 
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
@@ -125,7 +152,12 @@ function general($get, $post) {
     $out = array();
 
     $pluginsindb = Option::findByType('plugin');
-    $out['pluginsindb'] = $pluginsindb;
+
+    $out['pluginsindb'] = array();
+    foreach ($pluginsindb as $pldb) {
+        $name = $pldb->getName();
+        $out['pluginsindb']["$name"] = $pldb;
+    }
 
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;

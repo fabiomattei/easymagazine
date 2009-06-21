@@ -82,7 +82,7 @@
                                                 <td><a href="plugin.php?action=activate&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                                 <td><a href="plugin.php?action=deactivate&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td>
-                                                <? if ($key) { ?>
+                                                <? if (isset($pluginsindb["$key"])) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
                                                 <? } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
