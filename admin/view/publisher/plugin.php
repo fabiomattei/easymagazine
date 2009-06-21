@@ -77,10 +77,10 @@
                     ?>
 					<tr>
 						<td class="first style1"><? echo $key; ?></td>
-						<td><a href="plugin.php?action=info&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=admin&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=activate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=deactivate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td><a href="plugin.php?action=info&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=admin&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=activate&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=deactivate&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td>
                                                 <? if ($key) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
@@ -103,8 +103,8 @@
                                         <tr>
 						<td class="first" width="172">
                                                 <?
-                                                if ($toshow !='' && file_exists('../../../contents/templates/'.$toshow)) {
-                                                    require_once '../../../contents/templates/'.$toshow;
+                                                if ($toshow !='' && file_exists('../../../contents/plug_in/'.$toshow)) {
+                                                    require_once '../../../contents/plug_in/'.$toshow;
                                                 } else {
                                                     if ($toshow !='') {
                                                         echo 'No info file detected: '.$toshow;

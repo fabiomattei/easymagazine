@@ -31,7 +31,7 @@ class Option {
     const DELETE_SQL = 'delete from options where id = #';
     const DELETE_TYPE_SQL = 'delete from options where type = ?';
     const SELECT_BY_ID = 'select * from options where id = #';
-    const SELECT_BY_NAME = 'select * from options where title like ?';
+    const SELECT_BY_NAME = 'select * from options where name like ?';
     const SELECT_BY_TYPE = 'select * from options where type like ?';
     const SELECT_ALL = 'select * from options order by id DESC';
     const SELECT_BY_ID_ORD = 'select id from options order by id DESC';

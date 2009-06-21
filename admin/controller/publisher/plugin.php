@@ -42,7 +42,7 @@ function index() {
     return $out;
 }
 
-function info($id) {
+function info($pluginname) {
     $out = array();
 
     $pluginsindb = Option::findByType('plugin');
@@ -51,40 +51,63 @@ function info($id) {
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
 
-    $out['toshow'] = $id.'/info.php';
+    $out['toshow'] = $pluginname.'/info.php';
 
     return $out;
 }
 
-function activate($id) {
+function activate($pluginname) {
     $out = array();
+
+    $toSave = new Option();
+    $toSave->setName($pluginname);
+    $toSave->setType('plugin');
+    $toSave->setValue('active');
+    $toSave->save();
 
     $pluginsindb = Option::findByType('plugin');
     $out['pluginsindb'] = $pluginsindb;
 
+    $dirList = array();
+    foreach ($pluginsindb as $pldb) {
+        $dirList[] = $pldb->getName();
+    }
+
+    FileWriter::writePlugInIncluder($dirList);
+
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
 
-    $out['toshow'] = $id.'/activate.php';
+    $out['toshow'] = $pluginname.'/activate.php';
 
     return $out;
 }
 
-function deactivate($id) {
+function deactivate($pluginname) {
     $out = array();
+
+    $toDelete = Option::findByName($pluginname);
+    $toDelete[0]->delete();
 
     $pluginsindb = Option::findByType('plugin');
     $out['pluginsindb'] = $pluginsindb;
 
+    $dirList = array();
+    foreach ($pluginsindb as $pldb) {
+        $dirList[] = $pldb->getName();
+    }
+
+    FileWriter::writePlugInIncluder($dirList);
+
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
 
-    $out['toshow'] = $id.'/deactivate.php';
+    $out['toshow'] = $pluginname.'/deactivate.php';
 
     return $out;
 }
 
-function admin($id) {
+function admin($pluginname) {
     $out = array();
 
     $pluginsindb = Option::findByType('plugin');
@@ -93,12 +116,12 @@ function admin($id) {
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
 
-    $out['toshow'] = $id.'/admin.php';
+    $out['toshow'] = $pluginname.'/admin.php';
 
     return $out;
 }
 
-function general($get) {
+function general($get, $post) {
     $out = array();
 
     $pluginsindb = Option::findByType('plugin');
@@ -107,7 +130,7 @@ function general($get) {
     $plugins = DirectoryRunner::retrivePlugInList();
     $out['plugins'] = $plugins;
 
-    $out['toshow'] = $get['id'].'/'.$get['filename'];
+    $out['toshow'] = $get['pluginname'].'/'.$get['destiantionfilename'];
 
     return $out;
 }
@@ -116,11 +139,11 @@ if (!isset($_GET["action"])) { $out = index(); }
 else {
     switch ($_GET["action"]) {
         case  'index':       $out = index(); break;
-        case  'activate':    $out = activate($_GET['id']); break;
-        case  'deactivate':  $out = deactivate($_GET['id']); break;
-        case  'info':        $out = info($_GET['id']); break;
-        case  'admin':       $out = admin($_GET['id']); break;
-        case  'general':     $out = general($_GET); break;
+        case  'activate':    $out = activate($_GET['pluginname']); break;
+        case  'deactivate':  $out = deactivate($_GET['pluginname']); break;
+        case  'info':        $out = info($_GET['pluginname']); break;
+        case  'admin':       $out = admin($_GET['pluginname']); break;
+        case  'general':     $out = general($_GET, $_POST); break;
     }
 }
 
