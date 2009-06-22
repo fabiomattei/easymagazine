@@ -261,6 +261,36 @@ class DbCreator {
         return $result;
     }
 
+    public function createTableOptions() {
+        $cmd = "CREATE TABLE ".TBPREFIX."options (
+            id int(11) NOT NULL auto_increment,
+            name varchar(255),
+            type varchar(255),
+            value varchar(255),
+            PRIMARY KEY (id));";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function populateTableOptions() {
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('commandSandBox', 'plugin', 'active')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('filterSandBox', 'plugin', 'active')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('default', 'template', 'active')";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function dropTableOptions() {
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."options;";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
     function createSchema() {
 
         if ($this->connection) {
@@ -311,6 +341,14 @@ class DbCreator {
                 $out .= "Table Users created<BR>";
             } else {
                 $out .= "Table Users NOT created<BR>";
+            }
+
+            $result = $this->createTableOptions();
+
+            if ($result) {
+                $out .= "Table Options created<BR>";
+            } else {
+                $out .= "Table Options NOT created<BR>";
             }
 
         } else {
@@ -372,6 +410,14 @@ class DbCreator {
                 $out .= "Dummy data Relation User<->Article NOT created<BR>";;
             }
 
+            $result = $this->populateTableOptions();
+
+            if ($result) {
+                $out .= "Dummy data Relation Options Created<BR>";
+            } else {
+                $out .= "Dummy data Relation Options NOT created<BR>";;
+            }
+
         } else {
             $out = "Error in the connection <br>".mysql_errno().": ".mysql_error();
         }
@@ -431,6 +477,14 @@ class DbCreator {
                 $out .= "Table Relation User<->Article NOT dropped<BR>";;
             }
 
+            $result = $this->dropTableOptions();
+
+            if ($result) {
+                $out .= "Table Relation Options dropped<BR>";
+            } else {
+                $out .= "Table Relation Options NOT dropped<BR>";;
+            }
+            
         } else {
             $out = "Error in the connection <br>".mysql_errno().": ".mysql_error();
         }
