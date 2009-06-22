@@ -27,6 +27,7 @@ define('SESSIONPATH', 'admin/sessionmanager/');
 define('URIPATH', 'admin/uri/');
 define('UTILSPATH', 'admin/utils/');
 define('DBPATH', 'admin/datamodel/library/');
+define('ADMINCONTROLLERPUBLISHERPATH', 'admin/controller/publisher/');
 define('BASEPATH', '');
 
 define('PLUGINPATH', 'contents/plug_in/');

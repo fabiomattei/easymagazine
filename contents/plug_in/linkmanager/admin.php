@@ -32,7 +32,9 @@ $rs = DB::getInstance()->execute(
 
 if ($rs) {
     while ($row = mysql_fetch_array($rs)) {
-        echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].'<br />';
+        echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' 
+             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=admin&pluginname=linkmanager">Modify</a>
+             <a href="">Delete</a><br />';
     }
 }
 
