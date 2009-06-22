@@ -87,7 +87,8 @@ function activate($pluginname) {
 
     $dirList = array();
     foreach ($pluginsindb as $pldb) {
-        $dirList[] = $pldb->getName();
+        $name = $pldb->getName();
+        $dirList["$name"] = $name;
     }
 
     FileWriter::writePlugInIncluder($dirList);
@@ -103,8 +104,10 @@ function activate($pluginname) {
 function deactivate($pluginname) {
     $out = array();
 
-    $toDelete = Option::findByName($pluginname);
-    $toDelete[0]->delete();
+    $toDeletes = Option::findByNameAndType($pluginname, 'plugin');
+    foreach ($toDeletes as $td) {
+        $td->delete();
+    }
 
     $pluginsindb = Option::findByType('plugin');
 
@@ -116,7 +119,8 @@ function deactivate($pluginname) {
 
     $dirList = array();
     foreach ($pluginsindb as $pldb) {
-        $dirList[] = $pldb->getName();
+        $name = $pldb->getName();
+        $dirList["$name"] = $name;
     }
 
     FileWriter::writePlugInIncluder($dirList);

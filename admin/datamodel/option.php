@@ -32,6 +32,7 @@ class Option {
     const DELETE_TYPE_SQL = 'delete from options where type = ?';
     const SELECT_BY_ID = 'select * from options where id = #';
     const SELECT_BY_NAME = 'select * from options where name like ?';
+    const SELECT_BY_NAME_AND_TYPE = 'select * from options where name like ? and type like ?';
     const SELECT_BY_TYPE = 'select * from options where type like ?';
     const SELECT_ALL = 'select * from options order by id DESC';
     const SELECT_BY_ID_ORD = 'select id from options order by id DESC';
@@ -90,6 +91,11 @@ class Option {
 
     public static function findByName($name) {
         $ret = OPTION::findMany(self::SELECT_BY_NAME, array("%$name%"), array());
+        return $ret;
+    }
+
+    public static function findByNameAndType($name, $type) {
+        $ret = OPTION::findMany(self::SELECT_BY_NAME_AND_TYPE, array("%$name%", "%$type%"), array());
         return $ret;
     }
 
