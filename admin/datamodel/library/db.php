@@ -43,6 +43,7 @@ class DB {
         $result = mysql_query($toSQL, $this->connection);
         if (!$result) {
             $this->error=mysql_error();
+            throw new Exception('Error in DB.');
         } else {
             $this->error='';
         }

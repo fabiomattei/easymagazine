@@ -97,7 +97,7 @@ class Article {
             $array_int,
             $tables);
         if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
+            while ($row = mysql_fetch_array($rs)) {
                 $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
         }
@@ -106,21 +106,26 @@ class Article {
 
     public static function findMany($SQL, $array_str, $array_int) {
         $ret = array();
-        $tables = array("articles" => TBPREFIX."articles");
-        $rs = DB::getInstance()->execute(
-            $SQL,
-            $array_str,
-            $array_int,
-            $tables);
-        $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+        try {
+            $tables = array("articles" => TBPREFIX."articles");
+            $rs = DB::getInstance()->execute(
+                $SQL,
+                $array_str,
+                $array_int,
+                $tables);
+            $ret = array();
+            if ($rs) {
+                while ($row = mysql_fetch_array($rs)) {
+                    $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+                }
             }
+        } catch (Exception $e)  {
+            $ret[] = new Article();
+            // echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
-    
+
     public static function findById($id) {
         $ret = ARTICLE::findOne(self::SELECT_BY_ID, array(), array($id));
         return $ret;
@@ -170,7 +175,7 @@ class Article {
             $tables);
         $ret = array();
         if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
+            while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Comment(
                     $row['id'],
                     $row['article_id'],
@@ -194,7 +199,7 @@ class Article {
             $tables);
         $ret = array();
         if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
+            while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Comment(
                     $row['id'],
                     $row['article_id'],
@@ -218,7 +223,7 @@ class Article {
             $tables);
         $ret = array();
         if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
+            while ($row = mysql_fetch_array($rs)) {
                 $ret = new Number(
                     $row['id'],
                     $row['indexnumber'],
@@ -238,7 +243,7 @@ class Article {
 
     public function users() {
         $tables = array('users' => TBPREFIX.'users',
-                        'users_articles' => TBPREFIX.'users_articles');
+            'users_articles' => TBPREFIX.'users_articles');
         $rs = DB::getInstance()->execute(
             self::SELECT_USERS,
             array(),
@@ -246,7 +251,7 @@ class Article {
             $tables);
         $ret = array();
         if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
+            while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Comment(
                     $row['id'],
                     $row['name'],
@@ -292,7 +297,7 @@ class Article {
     }
 
     public function delete() {
-	    $this->deleteImg();
+        $this->deleteImg();
         $tables = array("articles" => TBPREFIX."articles");
         DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
         $this->id = self::NEW_ARTICLE;
@@ -352,7 +357,7 @@ class Article {
             $tables);
         if ($rs) {
             $row = mysql_fetch_array($rs);
-                $maxId = $row['id'];
+            $maxId = $row['id'];
         }
         return $maxId;
     }
@@ -392,7 +397,7 @@ class Article {
         return $out;
     }
 
-    public function getUnfilteredTitle(){
+    public function getUnfilteredTitle() {
         return $this->title;
     }
 
@@ -446,7 +451,7 @@ class Article {
     public function setCommentsallowed($commentsallowed) {
         $this->commentsallowed = $commentsallowed;
     }
-        
+
     public function getTag() {
         $out = $this->filter->executeFiltersTag($this->tag);
         return $out;
@@ -505,7 +510,7 @@ class Article {
     public function setImgdescription($imgdescription) {
         $this->imgdescription = $imgdescription;
     }
-        
+
 }
 
 ?>
