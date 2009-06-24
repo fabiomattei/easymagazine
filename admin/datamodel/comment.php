@@ -62,36 +62,45 @@ class Comment {
     }
 
     public static function findOne($SQL, $array_str, $array_int) {
-        $tables = array("comments" => TBPREFIX."comments");
-        $rs = DB::getInstance()->execute(
-            $SQL,
-            $array_str,
-            $array_int,
-            $tables);
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
+        try {
+            $tables = array("comments" => TBPREFIX."comments");
+            $rs = DB::getInstance()->execute(
+                $SQL,
+                $array_str,
+                $array_int,
+                $tables);
+            if ($rs) {
+                $row = mysql_fetch_array($rs);
                 $ret = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
             }
+        } catch (Exception $e) {
+            $ret = new Comment();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
 
     public static function findMany($SQL, $array_str, $array_int) {
-        $tables = array("comments" => TBPREFIX."comments");
-        $rs = DB::getInstance()->execute(
-            $SQL,
-            $array_str,
-            $array_int,
-            $tables);
         $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret[] = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
+        $tables = array("comments" => TBPREFIX."comments");
+        try {
+            $rs = DB::getInstance()->execute(
+                $SQL,
+                $array_str,
+                $array_int,
+                $tables);
+            if ($rs) {
+                while ($row = mysql_fetch_array($rs)) {
+                    $ret[] = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
+                }
             }
+        } catch (Exception $e) {
+            $ret[] = new Comment();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
-    
+
     public static function findById($id) {
         $ret = COMMENT::findOne(self::SELECT_BY_ID, array(), array($id));
         return $ret;
@@ -108,37 +117,41 @@ class Comment {
     }
 
     public function article() {
-        $ret = '';
         $tables = array("articles" => TBPREFIX."articles");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_ARTICLE,
-            array(),
-            array($this->article_id),
-            $tables);
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)){
-                $ret = new Article(
-                    $row['id'],
-                    $row['number_id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['body'],
-                    $row['commentsallowed'],
-                    $row['tag'],
-                    $row['metadescription'],
-                    $row['metakeyword'],
-                    $row['imgfilename'],
-                    $row['imgdescription'],
-                    $row['created'],
-                    $row['updated']);
+        try {
+            $rs = DB::getInstance()->execute(
+                self::SELECT_ARTICLE,
+                array(),
+                array($this->article_id),
+                $tables);
+            if ($rs) {
+                while ($row = mysql_fetch_array($rs)) {
+                    $ret = new Article(
+                        $row['id'],
+                        $row['number_id'],
+                        $row['indexnumber'],
+                        $row['published'],
+                        $row['title'],
+                        $row['subtitle'],
+                        $row['summary'],
+                        $row['body'],
+                        $row['commentsallowed'],
+                        $row['tag'],
+                        $row['metadescription'],
+                        $row['metakeyword'],
+                        $row['imgfilename'],
+                        $row['imgdescription'],
+                        $row['created'],
+                        $row['updated']);
+                }
             }
+        } catch (Exception $e) {
+            $ret = new Article();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
-    
+
     public function save() {
         if ($this->id == self::NEW_COMMENT) {
             $this->insert();
@@ -149,50 +162,67 @@ class Comment {
 
     public function delete() {
         $tables = array("comments" => TBPREFIX."comments");
-        $rs = DB::getInstance()->execute(
-            self::DELETE_SQL,
-            array(),
-            array((int) $this->getId()),
-            $tables);
-        $this->id = self::NEW_COMMENT;
-        $this->article_id = self::NEW_COMMENT;
-        $this->title = '';
-        $this->published = '';
-        $this->body = '';
-        $this->signature = '';
-        $this->created = '';
-        $this->updated = '';
+        try {
+            DB::getInstance()->execute(
+                self::DELETE_SQL,
+                array(),
+                array((int) $this->getId()),
+                $tables);
+            $this->id = self::NEW_COMMENT;
+            $this->article_id = self::NEW_COMMENT;
+            $this->title = '';
+            $this->published = '';
+            $this->body = '';
+            $this->signature = '';
+            $this->created = '';
+            $this->updated = '';
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     protected function insert() {
         $this->id = $this->getMaxId()+1;
         $tables = array("comments" => TBPREFIX."comments");
-        $rs = DB::getInstance()->execute(
-            self::INSERT_SQL,
-            array($this->title, $this->body, $this->signature),
-            array($this->id, $this->article_id, $this->published),
-            $tables);
+        try {
+            DB::getInstance()->execute(
+                self::INSERT_SQL,
+                array($this->title, $this->body, $this->signature),
+                array($this->id, $this->article_id, $this->published),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     protected function update() {
         $tables = array("comments" => TBPREFIX."comments");
-        $rs = DB::getInstance()->execute(
-            self::UPDATE_SQL,
-            array($this->title, $this->body, $this->signature),
-            array($this->article_id, $this->published, $this->id),
-            $tables);
+        try {
+            DB::getInstance()->execute(
+                self::UPDATE_SQL,
+                array($this->title, $this->body, $this->signature),
+                array($this->article_id, $this->published, $this->id),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     public function getMaxId() {
         $tables = array("comments" => TBPREFIX."comments");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_BY_ID_ORD,
-            array(),
-            array(),
-            $tables);
-        if ($rs) {
-            $row = mysql_fetch_array($rs);
+        try {
+            $rs = DB::getInstance()->execute(
+                self::SELECT_BY_ID_ORD,
+                array(),
+                array(),
+                $tables);
+            if ($rs) {
+                $row = mysql_fetch_array($rs);
                 $maxId = $row['id'];
+            }
+        } catch (Exception $e) {
+            $maxId = 0;
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxId;
     }
@@ -210,7 +240,7 @@ class Comment {
         return $out;
     }
 
-    public function getUnfilteredTitle(){
+    public function getUnfilteredTitle() {
         return $this->title;
     }
 
@@ -267,7 +297,7 @@ class Comment {
     public function setUpdated($updated) {
         $this->updated = $updated;
     }
-        
+
 }
 
 

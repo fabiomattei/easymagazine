@@ -230,7 +230,6 @@ class Article {
     }
 
     public function number() {
-        $ret = array();
         try {
             $tables = array('numbers' => TBPREFIX.'numbers');
             $rs = DB::getInstance()->execute(
@@ -255,7 +254,7 @@ class Article {
                 }
             }
         } catch (Exception $e) {
-            $ret[] = new Number();
+            $ret = new Number();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
@@ -273,7 +272,7 @@ class Article {
                 $tables);
             if ($rs) {
                 while ($row = mysql_fetch_array($rs)) {
-                    $ret[] = new Comment(
+                    $ret[] = new User(
                         $row['id'],
                         $row['name'],
                         $row['username'],
@@ -287,7 +286,7 @@ class Article {
                 }
             }
         } catch (Exception $e) {
-            $ret[] = new Comment();
+            $ret[] = new User();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
@@ -369,11 +368,11 @@ class Article {
     }
 
     public function deleteImg() {
-        ImageFiles::deletefile($this->created, $this->imgfilename);
-        $this->imgfilename = '';
-        $this->imgdescription = '';
-        $tables = array("articles" => TBPREFIX."articles");
         try {
+            ImageFiles::deletefile($this->created, $this->imgfilename);
+            $this->imgfilename = '';
+            $this->imgdescription = '';
+            $tables = array("articles" => TBPREFIX."articles");
             $rs = DB::getInstance()->execute(
                 self::UPDATE_SQL_IMG_IMGDESC,
                 array($this->imgfilename, $this->imgdescription),
@@ -394,7 +393,6 @@ class Article {
     }
 
     public function getMaxId() {
-        $maxId = 0;
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
@@ -407,13 +405,13 @@ class Article {
                 $maxId = $row['id'];
             }
         } catch (Exception $e) {
+            $maxId = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxId;
     }
 
     public function getMaxIndexNumber() {
-        $maxIndexNumber = 0;
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
@@ -426,6 +424,7 @@ class Article {
                 $maxIndexNumber = $row['indexnumber'];
             }
         } catch (Exception $e) {
+            $maxIndexNumber = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxIndexNumber;
