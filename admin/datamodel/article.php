@@ -89,17 +89,20 @@ class Article {
     }
 
     public static function findOne($SQL, $array_str, $array_int) {
-        $ret = null;
-        $tables = array("articles" => TBPREFIX."articles");
-        $rs = DB::getInstance()->execute(
-            $SQL,
-            $array_str,
-            $array_int,
-            $tables);
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)) {
+        try {
+            $tables = array("articles" => TBPREFIX."articles");
+            $rs = DB::getInstance()->execute(
+                $SQL,
+                $array_str,
+                $array_int,
+                $tables);
+            if ($rs) {
+                $row = mysql_fetch_array($rs);
                 $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
+        } catch (Exception $e) {
+            $ret = new Article();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
@@ -119,9 +122,9 @@ class Article {
                     $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
                 }
             }
-        } catch (Exception $e)  {
+        } catch (Exception $e) {
             $ret[] = new Article();
-            // echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
@@ -167,103 +170,125 @@ class Article {
     }
 
     public function commentsPublished() {
-        $tables = array('comments' => TBPREFIX.'comments');
-        $rs = DB::getInstance()->execute(
-            self::SELECT_COMMENTS_PUB,
-            array(),
-            array($this->id),
-            $tables);
         $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Comment(
-                    $row['id'],
-                    $row['article_id'],
-                    $row['title'],
-                    $row['published'],
-                    $row['body'],
-                    $row['signature'],
-                    $row['created'],
-                    $row['updated']);
+        try {
+            $tables = array('comments' => TBPREFIX.'comments');
+            $rs = DB::getInstance()->execute(
+                self::SELECT_COMMENTS_PUB,
+                array(),
+                array($this->id),
+                $tables);
+
+            if ($rs) {
+                while ($row = mysql_fetch_array($rs)) {
+                    $ret[] = new Comment(
+                        $row['id'],
+                        $row['article_id'],
+                        $row['title'],
+                        $row['published'],
+                        $row['body'],
+                        $row['signature'],
+                        $row['created'],
+                        $row['updated']);
+                }
             }
+        } catch (Exception $e) {
+            $ret[] = new Comment();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
 
     public function comments() {
-        $tables = array('comments' => TBPREFIX.'comments');
-        $rs = DB::getInstance()->execute(
-            self::SELECT_COMMENTS,
-            array(),
-            array($this->id),
-            $tables);
         $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Comment(
-                    $row['id'],
-                    $row['article_id'],
-                    $row['title'],
-                    $row['published'],
-                    $row['body'],
-                    $row['signature'],
-                    $row['created'],
-                    $row['updated']);
+        try {
+            $tables = array('comments' => TBPREFIX.'comments');
+            $rs = DB::getInstance()->execute(
+                self::SELECT_COMMENTS,
+                array(),
+                array($this->id),
+                $tables);
+
+            if ($rs) {
+                while ($row = mysql_fetch_array($rs)) {
+                    $ret[] = new Comment(
+                        $row['id'],
+                        $row['article_id'],
+                        $row['title'],
+                        $row['published'],
+                        $row['body'],
+                        $row['signature'],
+                        $row['created'],
+                        $row['updated']);
+                }
             }
+        } catch (Exception $e) {
+            $ret[] = new Comment();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
 
     public function number() {
-        $tables = array('numbers' => TBPREFIX.'numbers');
-        $rs = DB::getInstance()->execute(
-            self::SELECT_NUMBER,
-            array(),
-            array($this->number_id),
-            $tables);
         $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)) {
-                $ret = new Number(
-                    $row['id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['commentsallowed'],
-                    $row['imgfilename'],
-                    $row['imgdescription'],
-                    $row['created'],
-                    $row['updated']);
+        try {
+            $tables = array('numbers' => TBPREFIX.'numbers');
+            $rs = DB::getInstance()->execute(
+                self::SELECT_NUMBER,
+                array(),
+                array($this->number_id),
+                $tables);
+            if ($rs) {
+                while ($row = mysql_fetch_array($rs)) {
+                    $ret = new Number(
+                        $row['id'],
+                        $row['indexnumber'],
+                        $row['published'],
+                        $row['title'],
+                        $row['subtitle'],
+                        $row['summary'],
+                        $row['commentsallowed'],
+                        $row['imgfilename'],
+                        $row['imgdescription'],
+                        $row['created'],
+                        $row['updated']);
+                }
             }
+        } catch (Exception $e) {
+            $ret[] = new Number();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
 
     public function users() {
-        $tables = array('users' => TBPREFIX.'users',
-            'users_articles' => TBPREFIX.'users_articles');
-        $rs = DB::getInstance()->execute(
-            self::SELECT_USERS,
-            array(),
-            array($this->id),
-            $tables);
         $ret = array();
-        if ($rs) {
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Comment(
-                    $row['id'],
-                    $row['name'],
-                    $row['username'],
-                    $row['password'],
-                    $row['role'],
-                    $row['email'],
-                    $row['msn'],
-                    $row['skype'],
-                    $row['created'],
-                    $row['updated']);
+        try {
+            $tables = array('users' => TBPREFIX.'users',
+                'users_articles' => TBPREFIX.'users_articles');
+            $rs = DB::getInstance()->execute(
+                self::SELECT_USERS,
+                array(),
+                array($this->id),
+                $tables);
+            if ($rs) {
+                while ($row = mysql_fetch_array($rs)) {
+                    $ret[] = new Comment(
+                        $row['id'],
+                        $row['name'],
+                        $row['username'],
+                        $row['password'],
+                        $row['role'],
+                        $row['email'],
+                        $row['msn'],
+                        $row['skype'],
+                        $row['created'],
+                        $row['updated']);
+                }
             }
+        } catch (Exception $e) {
+            $ret[] = new Comment();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
     }
@@ -280,50 +305,66 @@ class Article {
         $this->id = $this->getMaxId()+1;
         $this->indexnumber = $this->getMaxIndexNumber()+1;
         $tables = array("articles" => TBPREFIX."articles");
-        $rs = DB::getInstance()->execute(
-            self::INSERT_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
-            array($this->id, $this->number_id, $this->indexnumber, $this->published, $this->commentsallowed),
-            $tables);
+        try {
+            DB::getInstance()->execute(
+                self::INSERT_SQL,
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
+                array($this->id, $this->number_id, $this->indexnumber, $this->published, $this->commentsallowed),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     protected function update() {
         $tables = array("articles" => TBPREFIX."articles");
-        DB::getInstance()->execute(
-            self::UPDATE_SQL,
-            array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
-            array($this->number_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
-            $tables);
+        try {
+            DB::getInstance()->execute(
+                self::UPDATE_SQL,
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
+                array($this->number_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     public function delete() {
         $this->deleteImg();
         $tables = array("articles" => TBPREFIX."articles");
-        DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
-        $this->id = self::NEW_ARTICLE;
-        $this->title = '';
-        $this->subtitle = '';
-        $this->summary = '';
-        $this->body = '';
-        $this->tag = '';
-        $this->metadescription = '';
-        $this->metakeyword = '';
-        $this->imgfilename = '';
-        $this->imgdescription = '';
-        $this->created = '';
-        $this->updated = '';
+        try {
+            DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
+            $this->id = self::NEW_ARTICLE;
+            $this->title = '';
+            $this->subtitle = '';
+            $this->summary = '';
+            $this->body = '';
+            $this->tag = '';
+            $this->metadescription = '';
+            $this->metakeyword = '';
+            $this->imgfilename = '';
+            $this->imgdescription = '';
+            $this->created = '';
+            $this->updated = '';
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     public function saveImg($img) {
         if (!$img['error']) {
             $this->imgfilename = $img['name'];
             $tables = array("articles" => TBPREFIX."articles");
-            $rs = DB::getInstance()->execute(
-                self::UPDATE_SQL_IMG,
-                array($this->imgfilename),
-                array($this->id),
-                $tables);
-            ImageFiles::savefile($this->created, $img);
+            try {
+                DB::getInstance()->execute(
+                    self::UPDATE_SQL_IMG,
+                    array($this->imgfilename),
+                    array($this->id),
+                    $tables);
+                ImageFiles::savefile($this->created, $img);
+            } catch (Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
         }
     }
 
@@ -332,11 +373,15 @@ class Article {
         $this->imgfilename = '';
         $this->imgdescription = '';
         $tables = array("articles" => TBPREFIX."articles");
-        $rs = DB::getInstance()->execute(
-            self::UPDATE_SQL_IMG_IMGDESC,
-            array($this->imgfilename, $this->imgdescription),
-            array($this->id),
-            $tables);
+        try {
+            $rs = DB::getInstance()->execute(
+                self::UPDATE_SQL_IMG_IMGDESC,
+                array($this->imgfilename, $this->imgdescription),
+                array($this->id),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     public function imageExists() {
@@ -349,29 +394,39 @@ class Article {
     }
 
     public function getMaxId() {
+        $maxId = 0;
         $tables = array("articles" => TBPREFIX."articles");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_BY_ID_ORD,
-            array(),
-            array(),
-            $tables);
-        if ($rs) {
-            $row = mysql_fetch_array($rs);
-            $maxId = $row['id'];
+        try {
+            $rs = DB::getInstance()->execute(
+                self::SELECT_BY_ID_ORD,
+                array(),
+                array(),
+                $tables);
+            if ($rs) {
+                $row = mysql_fetch_array($rs);
+                $maxId = $row['id'];
+            }
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxId;
     }
 
     public function getMaxIndexNumber() {
+        $maxIndexNumber = 0;
         $tables = array("articles" => TBPREFIX."articles");
-        $rs = DB::getInstance()->execute(
-            self::SELECT_BY_INDEXNUMBER,
-            array(),
-            array(),
-            $tables);
-        if ($rs) {
-            $row = mysql_fetch_array($rs);
-            $maxIndexNumber = $row['indexnumber'];
+        try {
+            $rs = DB::getInstance()->execute(
+                self::SELECT_BY_INDEXNUMBER,
+                array(),
+                array(),
+                $tables);
+            if ($rs) {
+                $row = mysql_fetch_array($rs);
+                $maxIndexNumber = $row['indexnumber'];
+            }
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxIndexNumber;
     }
