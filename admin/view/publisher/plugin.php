@@ -96,12 +96,6 @@
 		  <div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                                <table class="listing form" cellpadding="0" cellspacing="0">
-					<tr>
-						<th class="full">Info</th>
-					</tr>
-                                        <tr>
-						<td class="first" width="172">
                                                 <?
                                                 if ($toshow !='' && file_exists('../../../contents/plug_in/'.$toshow)) {
                                                     require_once '../../../contents/plug_in/'.$toshow;
@@ -113,9 +107,6 @@
                                                     }
                                                 }
                                                 ?>
-                                                </td>
-                                        </tr>
-			</table>
 	        <p>&nbsp;</p>
 		  </div>
 		</div>

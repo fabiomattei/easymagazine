@@ -20,9 +20,9 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'SELECT * FROM '.TBPREFIX.'links ';
+$SQL = 'SELECT * FROM '.TBPREFIX.'links WHERE id = #';
 $array_str = array();
-$array_int = array();
+$array_int = array($get['id']);
 
 $rs = DB::getInstance()->execute(
     $SQL,
@@ -31,14 +31,38 @@ $rs = DB::getInstance()->execute(
     $tables);
 
 if ($rs) {
-    while ($row = mysql_fetch_array($rs)) {
-        echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' 
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php">Modify</a>
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=delete.php">Delete</a><br />';
-    }
+    $row = mysql_fetch_array($rs);
+    $id = $row['id'];
+    $title = $row['title'];
+    $text = $row['text'];
+    $url = $row['url'];
 }
 
 echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
 
 
 ?>
+
+<form name="form1" enctype="multipart/form-data" method="post" action="number.php?action=save">
+    <table class="listing form" cellpadding="0" cellspacing="0">
+        <tr>
+            <th class="full" colspan="2">Edit</th>
+        </tr>
+        <tr>
+            <td class="first" width="172"><strong>Title</strong></td>
+            <td class="last"><input type="text" name="Title" value="<?=$title?>"/></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>Text</strong></td>
+            <td class="last"><input type="text" name="Text" value="<?=$text?>"/></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>Url</strong></td>
+            <td class="last"><input type="text" name="Url" value="<?=$url?>"/></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>&nbsp;</strong></td>
+        <td class="last"><input type="submit" value="Save" name="save" /></td>
+        </tr>
+    </table>
+</form>

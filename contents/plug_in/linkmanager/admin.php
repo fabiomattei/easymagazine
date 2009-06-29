@@ -30,15 +30,29 @@ $rs = DB::getInstance()->execute(
     $array_int,
     $tables);
 
-if ($rs) {
-    while ($row = mysql_fetch_array($rs)) {
-        echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' 
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php">Modify</a>
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=delete.php">Delete</a><br />';
-    }
-}
-
-echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
-
-
 ?>
+
+
+<table class="listing form" cellpadding="0" cellspacing="0">
+    <?
+    if ($rs) {
+        while ($row = mysql_fetch_array($rs)) { ?>
+    <tr>
+        <td class="first" width="172">
+                    <?
+                    echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].'
+             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php&id='.$row['id'].'">Modify</a>
+             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=delete.php&id='.$row['id'].'">Delete</a><br />';
+                    ?>
+
+                <?     }
+            }
+            ?>
+    <tr>
+        <td class="first" width="172">
+            <?
+            echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
+            ?>
+        </td>
+    </tr>
+</table>

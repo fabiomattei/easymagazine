@@ -152,7 +152,7 @@ function admin($pluginname) {
     return $out;
 }
 
-function general($get, $post) {
+function general($get, $post, $files) {
     $out = array();
 
     $pluginsindb = Option::findByType('plugin');
@@ -168,6 +168,10 @@ function general($get, $post) {
 
     $out['toshow'] = $get['pluginname'].'/'.$get['destiantionfilename'];
 
+    $out['get'] = $get;
+    $out['post'] = $post;
+    $out['files'] = $files;
+
     return $out;
 }
 
@@ -179,13 +183,17 @@ else {
         case  'deactivate':  $out = deactivate($_GET['pluginname']); break;
         case  'info':        $out = info($_GET['pluginname']); break;
         case  'admin':       $out = admin($_GET['pluginname']); break;
-        case  'general':     $out = general($_GET, $_POST); break;
+        case  'general':     $out = general($_GET, $_POST, $_FILES); break;
     }
 }
 
 $pluginsindb = $out['pluginsindb'];
 $plugins = $out['plugins'];
 $toshow = $out['toshow'];
+
+if (isset($out['get'])) { $get = $out['get']; }
+if (isset($out['post'])) { $post = $out['post']; }
+if (isset($out['files'])) { $post = $out['files']; }
 
 include('../../view/publisher/plugin.php');
 
