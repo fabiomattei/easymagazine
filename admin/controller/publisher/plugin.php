@@ -193,7 +193,7 @@ $toshow = $out['toshow'];
 
 if (isset($out['get'])) { $get = $out['get']; }
 if (isset($out['post'])) { $post = $out['post']; }
-if (isset($out['files'])) { $post = $out['files']; }
+if (isset($out['files'])) { $files = $out['files']; }
 
 include('../../view/publisher/plugin.php');
 

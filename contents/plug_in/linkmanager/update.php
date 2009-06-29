@@ -20,9 +20,9 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'SELECT * FROM '.TBPREFIX.'links ';
-$array_str = array();
-$array_int = array();
+$SQL = 'update links set title = ?, text = ?, url = ? WHERE id = #';
+$array_str = array($post['title'], $post['text'], $post['url']);
+$array_int = array($post['id']);
 
 $rs = DB::getInstance()->execute(
     $SQL,
@@ -30,15 +30,33 @@ $rs = DB::getInstance()->execute(
     $array_int,
     $tables);
 
-if ($rs) {
-    while ($row = mysql_fetch_array($rs)) {
-        echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' 
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php">Modify</a>
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=delete.php">Delete</a><br />';
-    }
-}
-
-echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
-
+    $id = $post['id'];
+    $title = $post['title'];
+    $text = $post['text'];
+    $url = $post['url'];
 
 ?>
+
+<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=admin.php'?>">
+    <table class="listing form" cellpadding="0" cellspacing="0">
+        <tr>
+            <th class="full" colspan="2">Data Updated</th>
+        </tr>
+        <tr>
+            <td class="first" width="172"><strong>Title</strong></td>
+            <td class="last"><?=$title?></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>Text</strong></td>
+            <td class="last"><?=$text?></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>Url</strong></td>
+            <td class="last"><?=$url?></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>&nbsp;</strong></td>
+        <td class="last"><input type="submit" value="Ok" name="Ok" /></td>
+        </tr>
+    </table>
+</form>

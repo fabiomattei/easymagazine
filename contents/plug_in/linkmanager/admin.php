@@ -20,7 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'SELECT * FROM '.TBPREFIX.'links ';
+$SQL = 'SELECT * FROM links ';
 $array_str = array();
 $array_int = array();
 
@@ -34,14 +34,17 @@ $rs = DB::getInstance()->execute(
 
 
 <table class="listing form" cellpadding="0" cellspacing="0">
+     <tr>
+            <th class="full" colspan="2">Link list</th>
+     </tr>
     <?
     if ($rs) {
         while ($row = mysql_fetch_array($rs)) { ?>
     <tr>
         <td class="first" width="172">
                     <?
-                    echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].'
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php&id='.$row['id'].'">Modify</a>
+                    echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' |
+             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php&id='.$row['id'].'">Modify</a> |
              <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=delete.php&id='.$row['id'].'">Delete</a><br />';
                     ?>
 

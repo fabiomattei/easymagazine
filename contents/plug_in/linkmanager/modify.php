@@ -20,7 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'SELECT * FROM '.TBPREFIX.'links WHERE id = #';
+$SQL = 'SELECT * FROM links WHERE id = #';
 $array_str = array();
 $array_int = array($get['id']);
 
@@ -43,22 +43,24 @@ echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=gener
 
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="number.php?action=save">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=update.php'?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">Edit</th>
         </tr>
         <tr>
             <td class="first" width="172"><strong>Title</strong></td>
-            <td class="last"><input type="text" name="Title" value="<?=$title?>"/></td>
+            <td class="last"><input type="text" name="title" value="<?=$title?>"/></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>Text</strong></td>
-            <td class="last"><input type="text" name="Text" value="<?=$text?>"/></td>
+            <td class="last"><input type="text" name="text" value="<?=$text?>"/></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>Url</strong></td>
-            <td class="last"><input type="text" name="Url" value="<?=$url?>"/></td>
+            <td class="last"><input type="text" name="url" value="<?=$url?>"/>
+            <input type="hidden" name="id" value="<?=$id?>"/>
+            </td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>&nbsp;</strong></td>

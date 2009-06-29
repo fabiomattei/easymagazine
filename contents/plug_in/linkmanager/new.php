@@ -20,22 +20,22 @@
 
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="number.php?action=save">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=insert.php'?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">New</th>
         </tr>
         <tr>
             <td class="first" width="172"><strong>Title</strong></td>
-            <td class="last"><input type="text" name="Title" value=""/></td>
+            <td class="last"><input type="text" name="title" value=""/></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>Text</strong></td>
-            <td class="last"><input type="text" name="Text" value=""/></td>
+            <td class="last"><input type="text" name="text" value=""/></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>Url</strong></td>
-            <td class="last"><input type="text" name="Url" value=""/></td>
+            <td class="last"><input type="text" name="url" value=""/></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>&nbsp;</strong></td>

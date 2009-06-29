@@ -20,9 +20,10 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'SELECT * FROM '.TBPREFIX.'links ';
+$SQL = 'SELECT * FROM links WHERE id = #';
+
 $array_str = array();
-$array_int = array();
+$array_int = array($get['id']);
 
 $rs = DB::getInstance()->execute(
     $SQL,
@@ -31,14 +32,35 @@ $rs = DB::getInstance()->execute(
     $tables);
 
 if ($rs) {
-    while ($row = mysql_fetch_array($rs)) {
-        echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' 
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php">Modify</a>
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=delete.php">Delete</a><br />';
-    }
+    $row = mysql_fetch_array($rs);
+    $id = $row['id'];
+    $title = $row['title'];
+    $text = $row['text'];
+    $url = $row['url'];
 }
 
-echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
-
-
 ?>
+
+<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=dodelete.php'?>&id=<?=$id?>">
+    <table class="listing form" cellpadding="0" cellspacing="0">
+        <tr>
+            <th class="full" colspan="2">Are you sure you want delete:</th>
+        </tr>
+        <tr>
+            <td class="first" width="172"><strong>Title</strong></td>
+            <td class="last"><?=$title?></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>Text</strong></td>
+            <td class="last"><?=$text?></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>Url</strong></td>
+            <td class="last"><?=$url?></td>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>&nbsp;</strong></td>
+        <td class="last"><input type="submit" value="Delete" name="Delete" /></td>
+        </tr>
+    </table>
+</form>

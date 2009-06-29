@@ -20,9 +20,9 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'SELECT * FROM '.TBPREFIX.'links ';
+$SQL = 'delete from links where id = #';
 $array_str = array();
-$array_int = array();
+$array_int = array($get['id']);
 
 $rs = DB::getInstance()->execute(
     $SQL,
@@ -30,15 +30,16 @@ $rs = DB::getInstance()->execute(
     $array_int,
     $tables);
 
-if ($rs) {
-    while ($row = mysql_fetch_array($rs)) {
-        echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' 
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php">Modify</a>
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=delete.php">Delete</a><br />';
-    }
-}
-
-echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
-
-
 ?>
+
+<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=admin.php'?>">
+    <table class="listing form" cellpadding="0" cellspacing="0">
+        <tr>
+            <th class="full" colspan="2">Deleted!</th>
+        </tr>
+        <tr class="bg">
+            <td class="first"><strong>&nbsp;</strong></td>
+        <td class="last"><input type="submit" value="Ok" name="Ok" /></td>
+        </tr>
+    </table>
+</form>
