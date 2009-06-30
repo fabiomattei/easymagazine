@@ -106,38 +106,30 @@
                 <input type="submit" value="New" name="new" />
               </form>
 			</div>
-		 <div class="table">
+		<div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
 				<table class="listing" cellpadding="0" cellspacing="0">
 					<tr>
-						<th class="first" width="177">Title</th>
+						<th class="first" width="377">Title</th>
 						<th>Edit</th>
-						<th>Up</th>
-						<th>Down</th>
-						<th>Articles</th>
-						<th>Comments</th>
 						<th>Published</th>
 						<th class="last">Delete</th>
 					</tr>
 
                     <?
-                    foreach ($arts as $ar) {
+                    foreach ($comms as $ar) {
                     ?>
 					<tr>
 						<td class="first style1"><? echo $ar->getTitle(); ?></td>
-						<td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-						<td><a href="article.php?action=up&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><img src="../../resources/img/article.png" width="16" height="16" alt="" /></td>
-						<td><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></td>
+						<td><a href="comment.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td>
                                                 <? if ($ar->getPublished()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
                                                 <? } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                                 <? } ?></td>
-						<td class="last"><a href="article.php?action=delete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+						<td class="last"><a href="comment.php?action=delete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
                     }
@@ -149,7 +141,7 @@
 						<option>1</option>
 					</select>
 			  </div>
-              <form name="formnew" method="post" action="article.php">
+              <form name="formnew" method="post" action="comment.php">
                 <input type="submit" value="New" name="new" />
               </form>
 			</div>

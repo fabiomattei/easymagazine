@@ -48,7 +48,7 @@ else {
 }
 
 $arts = $out['arts'];
-$art = $out['comms'];
+$comms = $out['comms'];
 
 include('../../view/publisher/dashboard.php');
 
