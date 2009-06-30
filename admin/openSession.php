@@ -30,15 +30,15 @@ $password = $_POST['password'];
 
 $usr = User::checkUsrPsw($username, $password);
 
-if ($usr != '') {
+if ($usr->getName() != '') {
     if ($usr->getRole()=='publisher') {
         session_start();
         $_SESSION['user'] = $usr;
-        header("Location: controller/publisher/number.php");
+        header("Location: controller/publisher/dashboard.php");
     } else {
         session_start();
         $_SESSION['user'] = $usr;
-        header("Location: controller/journalist/number.php");
+        header("Location: controller/journalist/dashboard.php");
     }
 } else {
     header("Location: loginError.php");
