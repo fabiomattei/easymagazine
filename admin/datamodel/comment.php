@@ -39,6 +39,7 @@ class Comment {
 	const UPDATE_SQL = 'update comments set article_id = #, published = #, title = ?, body = ?, signature = ?, updated=now() where id = #';
 	const DELETE_SQL = 'delete from comments where id = #';
 	const SELECT_BY_ID = 'select * from comments where id = #';
+        const SELECT_LAST_N = 'select * from comments ORDER BY updated DESC LIMIT # ';
 	const SELECT_BY_TITLE = 'select * from comments where title like ?';
 	const SELECT_BY_ID_ORD = 'select id from comments order by id DESC';
 	const SELECT_ALL = 'select * from comments order by id DESC';
@@ -104,6 +105,11 @@ class Comment {
 
 	public static function findAll() {
 		$ret = COMMENT::findMany(self::SELECT_ALL, array(), array());
+		return $ret;
+	}
+
+        public static function findLastN($n) {
+		$ret = COMMENT::findMany(self::SELECT_LAST_N, array(), array($n));
 		return $ret;
 	}
 

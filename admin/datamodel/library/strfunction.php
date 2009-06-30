@@ -58,7 +58,7 @@ class StrHelper {
         $i = 1;
         foreach ($array as $key){
             if (is_numeric($key)) {
-            $out .= '\''.$key.'\''.$newArray[$i];
+            $out .= ' '.$key.' '.$newArray[$i];
             }
             $i++;
         }

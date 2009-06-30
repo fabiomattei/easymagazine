@@ -49,6 +49,7 @@ class Article {
     const UPDATE_SQL_IMG_IMGDESC = 'update articles set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from articles where id = #';
     const SELECT_BY_ID = 'select * from articles where id = #';
+    const SELECT_LAST_N = 'select * from articles ORDER BY updated DESC LIMIT # ';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = # order by created DESC';
     const SELECT_COMMENTS = 'select * from comments where article_id = # order by created DESC';
@@ -127,6 +128,11 @@ class Article {
 
     public static function findById($id) {
         $ret = ARTICLE::findOne(self::SELECT_BY_ID, array(), array($id));
+        return $ret;
+    }
+
+    public static function findLastN($n) {
+        $ret = ARTICLE::findMany(self::SELECT_LAST_N, array(), array($n));
         return $ret;
     }
 

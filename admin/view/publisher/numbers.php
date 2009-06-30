@@ -30,7 +30,7 @@
 	<div id="header">
 		<a href="index.html" class="logo"><img src="../../resources/img/logo.gif" width="101" height="29" alt="" /></a>
 		<ul id="top-navigation">
-			<li><span><span><a href="index.php">Dashboard</a></span></span></li>
+			<li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
 			<li class="active"><span><span>Numbers</span></span></li>
 			<li><span><span><a href="article.php">Articles</a></span></span></li>
 			<li><span><span><a href="page.php">Pages</a></span></span></li>
