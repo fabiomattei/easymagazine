@@ -24,6 +24,7 @@
 	<title>Easy Magazine Admin: Users</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<style media="all" type="text/css">@import "../../resources/css/all.css";</style>
+        <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
 </head>
 <body>
 <div id="main">
@@ -51,6 +52,20 @@
 			<a href="#" class="link">View in the website</a>
 		</div>
 		<div id="center-column">
+                    <?
+                    if (isset($info) AND $info!='') {
+                        echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
+                    }
+                    if (isset($warning) AND $warning!='') {
+                        echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
+                    }
+                    if (isset($question) AND $question!='') {
+                        echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
+                    }
+                    if (isset($error) AND $error!='') {
+                        echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
+                    }
+                    ?>
 		  <div class="select-bar">
 		    <label>
 		    <input type="text" name="textfield" />

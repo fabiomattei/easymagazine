@@ -1,0 +1,7 @@
+/* messages styles */
+div.message{margin: 0 0  2em; padding: 30px 20px 0;border: solid;border-width: 2px 0;background:#F0F0F0;text-align: justify}
+div.message p{margin: 0 0 1em}
+div.message.info{background: #EAEBF7 url(../img/info20.png) no-repeat 50% 10px;border-color: #8E9AFF}
+div.message.warning{background: #FFF0BA url(../img/warning20.png) no-repeat 50% 10px;border-color: #E87C29}
+div.message.question{background: #E4F6DE url(../img/help20.png) no-repeat 50% 10px;border-color: #8FDC79}
+div.message.error{background: #FFD8D6 url(../img/error20.png) no-repeat 50% 10px;border-color: #FF0038}

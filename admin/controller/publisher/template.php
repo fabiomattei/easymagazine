@@ -93,6 +93,11 @@ $templates = $out['templates'];
 $activetemplate = $out['activetemplate'];
 $toshow = $out['toshow'];
 
+if (isset($out['info'])) { $info = $out['info']; }
+if (isset($out['warning'])) { $warning = $out['warning']; }
+if (isset($out['question'])) { $question = $out['question']; }
+if (isset($out['error'])) { $error = $out['error']; }
+
 include('../../view/publisher/templates.php');
 
 ?>

@@ -37,6 +37,7 @@ function index() {
 
     $comms = Comment::findLastN(10);
     $out['comms'] = $comms;
+
     return $out;
 }
 
@@ -49,6 +50,11 @@ else {
 
 $arts = $out['arts'];
 $comms = $out['comms'];
+
+if (isset($out['info'])) { $info = $out['info']; }
+if (isset($out['warning'])) { $warning = $out['warning']; }
+if (isset($out['question'])) { $question = $out['question']; }
+if (isset($out['error'])) { $error = $out['error']; }
 
 include('../../view/publisher/dashboard.php');
 

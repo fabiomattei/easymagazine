@@ -117,6 +117,11 @@ else {
 $comms = $out['comms'];
 $comm = $out['comm'];
 
+if (isset($out['info'])) { $info = $out['info']; }
+if (isset($out['warning'])) { $warning = $out['warning']; }
+if (isset($out['question'])) { $question = $out['question']; }
+if (isset($out['error'])) { $error = $out['error']; }
+
 include('../../view/publisher/comments.php');
 
 ?>

@@ -164,6 +164,11 @@ else {
 $pags = $out['pags'];
 $pag = $out['pag'];
 
+if (isset($out['info'])) { $info = $out['info']; }
+if (isset($out['warning'])) { $warning = $out['warning']; }
+if (isset($out['question'])) { $question = $out['question']; }
+if (isset($out['error'])) { $error = $out['error']; }
+
 include('../../view/publisher/Pages.php');
 
 ?>
