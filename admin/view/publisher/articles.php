@@ -83,7 +83,6 @@
 						<th>Edit</th>
 						<th>Up</th>
 						<th>Down</th>
-						<th>Articles</th>
 						<th>Comments</th>
 						<th>Published</th>
 						<th class="last">Delete</th>
@@ -97,8 +96,7 @@
 						<td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td><a href="article.php?action=up&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><img src="../../resources/img/article.png" width="16" height="16" alt="" /></td>
-						<td><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></td>
+						<td><a href="comment.php?action=commentarticle&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
 						<td>
                                                 <? if ($ar->getPublished()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />

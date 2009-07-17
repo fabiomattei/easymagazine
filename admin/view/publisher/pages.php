@@ -83,8 +83,6 @@
 						<th>Edit</th>
 						<th>Up</th>
 						<th>Down</th>
-						<th>Articles</th>
-						<th>Comments</th>
 						<th>Published</th>
 						<th class="last">Delete</th>
 					</tr>
@@ -97,8 +95,6 @@
 						<td><a href="page.php?action=edit&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td><a href="page.php?action=up&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><a href="page.php?action=down&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><img src="../../resources/img/article.png" width="16" height="16" alt="" /></td>
-						<td><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></td>
 						<td>
                                                 <? if ($pg->getPublished()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />

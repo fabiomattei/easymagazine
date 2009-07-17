@@ -40,6 +40,21 @@ function index() {
     return $out;
 }
 
+function articlenumber($id) {
+    $out = array();
+
+    $art = new Article();
+    $out['art'] = $art;
+
+    $num = Number::findById($id);
+    $arts = $num->articles();
+    $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+    return $out;
+}
+
 function edit($id) {
     $out = array();
 
@@ -182,6 +197,7 @@ else {
 		case  'up':                $out = up($_GET['id']); break;
 		case  'down':              $out = down($_GET['id']); break;
 		case  'deleteimg':         $out = deleteimg($_GET['id']); break;
+                case  'articlenumber':     $out = articlenumber($_GET['id']); break;
 	}
 }
 

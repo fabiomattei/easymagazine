@@ -98,8 +98,8 @@
 						<td><a href="number.php?action=edit&id=<? echo $num->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
 						<td><a href="number.php?action=up&id=<? echo $num->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td><a href="number.php?action=down&id=<? echo $num->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><a href="articlesnumber.php?id=<? echo $num->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
-						<td><a href="commentsnumber.php?id=<? echo $num->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="article.php?action=articlenumber&id=<? echo $num->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="comment.php?action=commentnumber&id=<? echo $num->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
 						<td>
                         <? if ($num->getPublished()) { ?>
                             <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />

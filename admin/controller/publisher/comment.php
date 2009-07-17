@@ -37,6 +37,32 @@ function index() {
     return $out;
 }
 
+function commentnumber($id) {
+    $out = array();
+
+    $comm = new Comment();
+    $out['comm'] = $comm;
+
+    $num = Number::findById($id);
+    $comms = $num->comments();
+    $out['comms'] = $comms;
+
+    return $out;
+}
+
+function commentarticle($id) {
+    $out = array();
+
+    $comm = new Comment();
+    $out['comm'] = $comm;
+
+    $art = Article::findById($id);
+    $comms = $art->comments();
+    $out['comms'] = $comms;
+
+    return $out;
+}
+
 function edit($id) {
     $out = array();
 
@@ -111,6 +137,8 @@ else {
 		case  'edit':              $out = edit($_GET['id']); break;
 		case  'delete':            $out = delete($_GET['id']); break;
                 case  'replay':            $out = replay($_GET['id']); break;
+                case  'commentnumber':     $out = commentnumber($_GET['id']); break;
+                case  'commentarticle':    $out = commentarticle($_GET['id']); break;
 	}
 }
 
