@@ -55,6 +55,22 @@ function articlenumber($id) {
     return $out;
 }
 
+function find($string) {
+    $out = array();
+
+    $art = new Article();
+    $out['art'] = $art;
+
+    $arts = Article::findByTitle($string);
+    $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+
+    if (count($arts)==0) { $out['warning'] = 'No articles corresponding to search criteria';  }
+    return $out;
+}
+
 function edit($id) {
     $out = array();
 
@@ -198,6 +214,7 @@ else {
 		case  'down':              $out = down($_GET['id']); break;
 		case  'deleteimg':         $out = deleteimg($_GET['id']); break;
                 case  'articlenumber':     $out = articlenumber($_GET['id']); break;
+                case  'find':              $out = find($_POST['string']); break;
 	}
 }
 

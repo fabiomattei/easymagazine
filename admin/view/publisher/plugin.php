@@ -109,10 +109,10 @@
 				</table>
 			</div>
 		  <div class="table">
-				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
-				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                                                 <?
                                                 if ($toshow !='' && file_exists('../../../contents/plug_in/'.$toshow)) {
+                                                    echo '<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
+                                                    <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />';
                                                     require_once '../../../contents/plug_in/'.$toshow;
                                                 } else {
                                                     if ($toshow !='') {
