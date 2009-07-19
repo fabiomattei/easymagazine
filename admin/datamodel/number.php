@@ -46,6 +46,7 @@ class Number {
     const DELETE_SQL = 'delete from numbers where id = #';
     const SELECT_BY_ID = 'select * from numbers where id = #';
     const SELECT_BY_TITLE = 'select * from numbers where title like ?';
+    const FIND_IN_ALL_TEXT_FIELDS = 'select * from numbers where title like ? OR subtitle like ? OR summary like ? ';
     const SELECT_LAST = 'select * from numbers where published = 1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from numbers where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from numbers order by id DESC';
@@ -117,6 +118,11 @@ class Number {
 
     public static function findById($id) {
         $ret = NUMBER::findOne(self::SELECT_BY_ID, array(), array($id));
+        return $ret;
+    }
+
+    public static function findInAllTextFields($string) {
+        $ret = NUMBER::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%"), array());
         return $ret;
     }
 

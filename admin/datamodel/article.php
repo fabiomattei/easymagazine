@@ -51,6 +51,7 @@ class Article {
     const SELECT_BY_ID = 'select * from articles where id = #';
     const SELECT_LAST_N = 'select * from articles ORDER BY updated DESC LIMIT # ';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
+    const FIND_IN_ALL_TEXT_FIELDS = 'select * from articles where title like ? OR subtitle like ? OR summary like ? OR body like ? ';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = # order by created DESC';
     const SELECT_COMMENTS = 'select * from comments where article_id = # order by created DESC';
     const SELECT_NUMBER = 'select * from numbers where id = #';
@@ -148,6 +149,11 @@ class Article {
 
     public static function findByTitle($title) {
         $ret = ARTICLE::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
+        return $ret;
+    }
+
+    public static function findInAllTextFields($string) {
+        $ret = ARTICLE::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%", "%$string%"), array());
         return $ret;
     }
 

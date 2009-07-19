@@ -68,14 +68,14 @@
                     }
                     ?>
 		  <div class="select-bar">
-                      <form name="searchform" method="post" action="number.php?action=findnumber">
+                    <form name="searchform" method="post" action="number.php?action=find">
 		    <label>
-		    <input type="text" name="textfield" />
+		    <input type="text" name="string" />
 		    </label>
 		    <label>
-			<input type="submit" name="Submit" value="Search" />
-			</label
-                      </form>
+		    <input type="submit" name="Submit" value="Search" />
+		    </label
+                    </form>
 		  </div>
 			<div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />

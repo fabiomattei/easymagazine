@@ -61,7 +61,7 @@ function find($string) {
     $art = new Article();
     $out['art'] = $art;
 
-    $arts = Article::findByTitle($string);
+    $arts = Article::findInAllTextFields($string);
     $out['arts'] = $arts;
 
     $numbs = Number::findAll();

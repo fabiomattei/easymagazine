@@ -36,6 +36,20 @@ function index() {
     return $out;
 }
 
+
+function find($string) {
+    $out = array();
+
+    $numb = new Number();
+    $out['numb'] = $numb;
+
+    $numbs = Number::findInAllTextFields($string);
+    $out['numbs'] = $numbs;
+
+    if (count($numbs)==0) { $out['warning'] = 'No numbers corresponding to search criteria';  }
+    return $out;
+}
+
 function edit($id) {
     $out = array();
 
@@ -160,6 +174,7 @@ if (isset($_SESSION['user'])) {
             case  'up':                $out = up($_GET['id']); break;
             case  'down':              $out = down($_GET['id']); break;
             case  'deleteimg':         $out = deleteimg($_GET['id']); break;
+            case  'find':              $out = find($_POST['string']); break;
         }
     }
     } else {

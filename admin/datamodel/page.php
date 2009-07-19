@@ -23,390 +23,396 @@ require_once(STARTPATH.UTILSPATH.'imagefiles.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 
 class Page {
-	const NEW_PAGE = -1;
-	private $id = self::NEW_PAGE;
-	private $indexnumber;
-	private $published;
-	private $title;
-	private $subtitle;
-	private $summary;
-	private $body;
-	private $tag;
-	private $metadescription;
-	private $metakeyword;
-	private $created;
-	private $updated;
-	private $imgfilename;
-	private $imgdescription;
-	private $db;
+    const NEW_PAGE = -1;
+    private $id = self::NEW_PAGE;
+    private $indexnumber;
+    private $published;
+    private $title;
+    private $subtitle;
+    private $summary;
+    private $body;
+    private $tag;
+    private $metadescription;
+    private $metakeyword;
+    private $created;
+    private $updated;
+    private $imgfilename;
+    private $imgdescription;
+    private $db;
 
-	const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-	const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgdescription = ?, updated=now() where id = #';
-	const UPDATE_SQL_IMG = 'update pages set imgfilename = ?, updated = Now() where id = #';
-	const UPDATE_SQL_IMG_IMGDESC = 'update pages set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
-	const DELETE_SQL = 'delete from pages where id = # ';
-	const SELECT_BY_ID = 'select * from pages where id = #';
-	const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber';
-	const SELECT_ALL = 'select * from pages order by indexnumber';
-	const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber';
-	const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from pages where published = 1 order by indexnumber';
-	const SELECT_BY_TITLE = 'select * from pages where title like ?';
-	const SELECT_BY_ID_ORD = 'select id from pages order by id DESC';
-	const SELECT_BY_INDEXNUMBER = 'select indexnumber from pages order by indexnumber DESC';
+    const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgdescription = ?, updated=now() where id = #';
+    const UPDATE_SQL_IMG = 'update pages set imgfilename = ?, updated = Now() where id = #';
+    const UPDATE_SQL_IMG_IMGDESC = 'update pages set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
+    const DELETE_SQL = 'delete from pages where id = # ';
+    const SELECT_BY_ID = 'select * from pages where id = #';
+    const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber';
+    const SELECT_ALL = 'select * from pages order by indexnumber';
+    const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber';
+    const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from pages where published = 1 order by indexnumber';
+    const SELECT_BY_TITLE = 'select * from pages where title like ?';
+    const FIND_IN_ALL_TEXT_FIELDS = 'select * from pages where title like ? OR subtitle like ? OR summary like ? OR body like ? ';
+    const SELECT_BY_ID_ORD = 'select id from pages order by id DESC';
+    const SELECT_BY_INDEXNUMBER = 'select indexnumber from pages order by indexnumber DESC';
 
-	public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
-		$this->db = DB::getInstance();
-		$this->filter = PageFilterRemote::getInstance();
-		$this->id = $id;
-		$this->indexnumber = $indexnumber;
-		$this->published = $published;
-		$this->title = $title;
-		$this->subtitle = $subtitle;
-		$this->summary = $summary;
-		$this->body = $body;
-		$this->tag = $tag;
-		$this->metadescription = $metadescription;
-		$this->metakeyword = $metakeyword;
-		$this->imgfilename = $imgfilename;
-		$this->imgdescription = $imgdescription;
-		$this->created = $created;
-		$this->updated = $updated;
-	}
+    public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
+        $this->db = DB::getInstance();
+        $this->filter = PageFilterRemote::getInstance();
+        $this->id = $id;
+        $this->indexnumber = $indexnumber;
+        $this->published = $published;
+        $this->title = $title;
+        $this->subtitle = $subtitle;
+        $this->summary = $summary;
+        $this->body = $body;
+        $this->tag = $tag;
+        $this->metadescription = $metadescription;
+        $this->metakeyword = $metakeyword;
+        $this->imgfilename = $imgfilename;
+        $this->imgdescription = $imgdescription;
+        $this->created = $created;
+        $this->updated = $updated;
+    }
 
-	public function getId() {
-		return $this->id;
-	}
+    public function getId() {
+        return $this->id;
+    }
 
-	public static function findOne($SQL, $array_str, $array_int) {
-		$tables = array("pages" => TBPREFIX."pages");
-		try {
-			$rs = DB::getInstance()->execute(
-				$SQL,
-				$array_str,
-				$array_int,
-				$tables);
-			$row = mysql_fetch_array($rs);
-			$ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated'] );
-		} catch (Exception $e) {
-			$ret = new Page();
-			echo 'Caught exception: ',  $e->getMessage(), "\n";
-		}
-		return $ret;
-	}
+    public static function findOne($SQL, $array_str, $array_int) {
+        $tables = array("pages" => TBPREFIX."pages");
+        try {
+            $rs = DB::getInstance()->execute(
+                $SQL,
+                $array_str,
+                $array_int,
+                $tables);
+            $row = mysql_fetch_array($rs);
+            $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated'] );
+        } catch (Exception $e) {
+            $ret = new Page();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return $ret;
+    }
 
-	public static function findMany($SQL, $array_str, $array_int) {
-		$ret = array();
-		$tables = array("pages" => TBPREFIX."pages");
-		try {
-			$rs = DB::getInstance()->execute(
-				$SQL,
-				$array_str,
-				$array_int,
-				$tables);
-			while ($row = mysql_fetch_array($rs)) {
-				$ret[] = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
-			}
-		} catch (Exception $e) {
-			$ret[] = new Page();
-			echo 'Caught exception: ',  $e->getMessage(), "\n";
-		}
-		return $ret;
-	}
+    public static function findMany($SQL, $array_str, $array_int) {
+        $ret = array();
+        $tables = array("pages" => TBPREFIX."pages");
+        try {
+            $rs = DB::getInstance()->execute(
+                $SQL,
+                $array_str,
+                $array_int,
+                $tables);
+            while ($row = mysql_fetch_array($rs)) {
+                $ret[] = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+            }
+        } catch (Exception $e) {
+            $ret[] = new Page();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return $ret;
+    }
 
-	public static function findById($id) {
-		$ret = PAGE::findOne(self::SELECT_BY_ID, array(), array($id));
-		return $ret;
-	}
+    public static function findById($id) {
+        $ret = PAGE::findOne(self::SELECT_BY_ID, array(), array($id));
+        return $ret;
+    }
 
-	public static function findAllPublished() {
-		$ret = PAGE::findMany(self::SELECT_ALL_PUB, array(), array());
-		return $ret;
-	}
+    public static function findAllPublished() {
+        $ret = PAGE::findMany(self::SELECT_ALL_PUB, array(), array());
+        return $ret;
+    }
 
-	public static function findAllPublishedOrdered() {
-		$ret = PAGE::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
-		return $ret;
-	}
+    public static function findAllPublishedOrdered() {
+        $ret = PAGE::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
+        return $ret;
+    }
 
-	public static function findAll() {
-		$ret = PAGE::findMany(self::SELECT_ALL, array(), array());
-		return $ret;
-	}
+    public static function findAll() {
+        $ret = PAGE::findMany(self::SELECT_ALL, array(), array());
+        return $ret;
+    }
 
-	public static function findAllOrdered() {
-		$ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
-		return $ret;
-	}
+    public static function findAllOrdered() {
+        $ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
+        return $ret;
+    }
 
-	public static function findAllOrderedByIndexNumber() {
-		$ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
-		return $ret;
-	}
+    public static function findInAllTextFields($string) {
+        $ret = PAGE::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%", "%$string%"), array());
+        return $ret;
+    }
 
-	public function save() {
-		if ($this->id == self::NEW_PAGE) {
-			$this->insert();
-		} else {
-			$this->update();
-		}
-	}
+    public static function findAllOrderedByIndexNumber() {
+        $ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
+        return $ret;
+    }
 
-	public function delete() {
-		$tables = array("pages" => TBPREFIX."pages");
-		try {
-			DB::getInstance()->execute(
-				self::DELETE_SQL,
-				array(),
-				array($this->id),
-				$tables);
-			$this->id = self::NEW_PAGE;
-			$this->title = '';
-			$this->subtitle = '';
-			$this->summary = '';
-			$this->body = '';
-			$this->tag = '';
-			$this->metadescription = '';
-			$this->metakeyword = '';
-			$this->created = '';
-			$this->updated = '';
-		} catch (Exception $e) {
-			echo 'Caught exception: ',  $e->getMessage(), "\n";
-		}
-	}
+    public function save() {
+        if ($this->id == self::NEW_PAGE) {
+            $this->insert();
+        } else {
+            $this->update();
+        }
+    }
 
-	public function saveImg($img) {
-		if (!$img['error']) {
-			$this->imgfilename = $img['name'];
-			$tables = array("pages" => TBPREFIX."pages");
-			try {
-				DB::getInstance()->execute(
-					self::UPDATE_SQL_IMG,
-					array($this->imgfilename),
-					array($this->id),
-					$tables);
-				ImageFiles::savefile($this->created, $img);
-			} catch (Exception $e) {
-				echo 'Caught exception: ',  $e->getMessage(), "\n";
-			}
-		}
-	}
+    public function delete() {
+        $tables = array("pages" => TBPREFIX."pages");
+        try {
+            DB::getInstance()->execute(
+                self::DELETE_SQL,
+                array(),
+                array($this->id),
+                $tables);
+            $this->id = self::NEW_PAGE;
+            $this->title = '';
+            $this->subtitle = '';
+            $this->summary = '';
+            $this->body = '';
+            $this->tag = '';
+            $this->metadescription = '';
+            $this->metakeyword = '';
+            $this->created = '';
+            $this->updated = '';
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
 
-	public function deleteImg() {
-		ImageFiles::deletefile($this->created, $this->imgfilename);
-		$this->imgfilename = '';
-		$this->imgdescription = '';
-		$tables = array("pages" => TBPREFIX."pages");
-		try {
-			DB::getInstance()->execute(
-				self::UPDATE_SQL_IMG_IMGDESC,
-				array($this->imgfilename, $this->imgdescription),
-				array($this->id),
-				$tables);
-		} catch (Exception $e) {
-			echo 'Caught exception: ',  $e->getMessage(), "\n";
-		}
-	}
+    public function saveImg($img) {
+        if (!$img['error']) {
+            $this->imgfilename = $img['name'];
+            $tables = array("pages" => TBPREFIX."pages");
+            try {
+                DB::getInstance()->execute(
+                    self::UPDATE_SQL_IMG,
+                    array($this->imgfilename),
+                    array($this->id),
+                    $tables);
+                ImageFiles::savefile($this->created, $img);
+            } catch (Exception $e) {
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+            }
+        }
+    }
 
-	public function imageExists() {
-		if ($this->imgfilename == '') { return false; }
-		else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
-	}
+    public function deleteImg() {
+        ImageFiles::deletefile($this->created, $this->imgfilename);
+        $this->imgfilename = '';
+        $this->imgdescription = '';
+        $tables = array("pages" => TBPREFIX."pages");
+        try {
+            DB::getInstance()->execute(
+                self::UPDATE_SQL_IMG_IMGDESC,
+                array($this->imgfilename, $this->imgdescription),
+                array($this->id),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
 
-	public function imagePath() {
-		return ImageFiles::filepath($this->created, $this->imgfilename);
-	}
+    public function imageExists() {
+        if ($this->imgfilename == '') { return false; }
+        else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
+    }
 
-	protected function insert() {
-		$this->id = $this->getMaxId()+1;
-		$this->indexnumber = $this->getMaxIndexNumber()+1;
-		$tables = array("pages" => TBPREFIX."pages");
-		try {
-			DB::getInstance()->execute(
-				self::INSERT_SQL,
-				array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
-				array($this->id, $this->indexnumber, $this->published),
-				$tables);
-		} catch (Exception $e) {
-			echo 'Caught exception: ',  $e->getMessage(), "\n";
-		}
-	}
+    public function imagePath() {
+        return ImageFiles::filepath($this->created, $this->imgfilename);
+    }
 
-	protected function update() {
-		$tables = array("pages" => TBPREFIX."pages");
-		try {
-			DB::getInstance()->execute(
-				self::UPDATE_SQL,
-				array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
-				array($this->indexnumber, $this->published, $this->id),
-				$tables);
-		} catch (Exception $e) {
-			echo 'Caught exception: ',  $e->getMessage(), "\n";
-		}
-	}
+    protected function insert() {
+        $this->id = $this->getMaxId()+1;
+        $this->indexnumber = $this->getMaxIndexNumber()+1;
+        $tables = array("pages" => TBPREFIX."pages");
+        try {
+            DB::getInstance()->execute(
+                self::INSERT_SQL,
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+                array($this->id, $this->indexnumber, $this->published),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
 
-	public function getMaxIndexNumber() {
-		$tables = array("pages" => TBPREFIX."pages");
-		try {
-			$rs = DB::getInstance()->execute(
-				self::SELECT_BY_INDEXNUMBER,
-				array(),
-				array(),
-				$tables);
-			$row = mysql_fetch_array($rs);
-			$maxIndexNumber = $row['indexnumber'];
-		} catch (Exception $e) {
-			$maxIndexNumber = 0;
-			echo 'Caught exception: ',  $e->getMessage(), "\n";
-		}
-		return $maxIndexNumber;
-	}
+    protected function update() {
+        $tables = array("pages" => TBPREFIX."pages");
+        try {
+            DB::getInstance()->execute(
+                self::UPDATE_SQL,
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
+                array($this->indexnumber, $this->published, $this->id),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
 
-	public function getMaxId() {
-		$tables = array("pages" => TBPREFIX."pages");
-		try {
-			$rs = DB::getInstance()->execute(
-				self::SELECT_BY_ID_ORD,
-				array(),
-				array(),
-				$tables);
-			$row = mysql_fetch_array($rs);
-			$maxId = $row['id'];
-		} catch (Exception $e) {
-			$maxId = 0;
-			echo 'Caught exception: ',  $e->getMessage(), "\n";
-		}
+    public function getMaxIndexNumber() {
+        $tables = array("pages" => TBPREFIX."pages");
+        try {
+            $rs = DB::getInstance()->execute(
+                self::SELECT_BY_INDEXNUMBER,
+                array(),
+                array(),
+                $tables);
+            $row = mysql_fetch_array($rs);
+            $maxIndexNumber = $row['indexnumber'];
+        } catch (Exception $e) {
+            $maxIndexNumber = 0;
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return $maxIndexNumber;
+    }
 
-		return $maxId;
-	}
+    public function getMaxId() {
+        $tables = array("pages" => TBPREFIX."pages");
+        try {
+            $rs = DB::getInstance()->execute(
+                self::SELECT_BY_ID_ORD,
+                array(),
+                array(),
+                $tables);
+            $row = mysql_fetch_array($rs);
+            $maxId = $row['id'];
+        } catch (Exception $e) {
+            $maxId = 0;
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
 
-	public function getTitle() {
-		$out = $this->filter->executeFiltersTitle($this->title);
-		return $out;
-	}
+        return $maxId;
+    }
 
-	public function getUnfilteredTitle() {
-		return $this->title;
-	}
+    public function getTitle() {
+        $out = $this->filter->executeFiltersTitle($this->title);
+        return $out;
+    }
 
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    public function getUnfilteredTitle() {
+        return $this->title;
+    }
 
-	public function getpublished() {
-		return $this->published;
-	}
+    public function setTitle($title) {
+        $this->title = $title;
+    }
 
-	public function setpublished($published) {
-		$this->published = $published;
-	}
+    public function getpublished() {
+        return $this->published;
+    }
 
-	public function getIndexnumber() {
-		return $this->indexnumber;
-	}
+    public function setpublished($published) {
+        $this->published = $published;
+    }
 
-	public function setIndexnumber($indexnumber) {
-		$this->indexnumber = $indexnumber;
-	}
+    public function getIndexnumber() {
+        return $this->indexnumber;
+    }
 
-	public function getSubtitle() {
-		$out = $this->filter->executeFiltersSubTitle($this->subtitle);
-		return $out;
-	}
+    public function setIndexnumber($indexnumber) {
+        $this->indexnumber = $indexnumber;
+    }
 
-	public function getUnfilteredSubtitle() {
-		return $this->subtitle;
-	}
+    public function getSubtitle() {
+        $out = $this->filter->executeFiltersSubTitle($this->subtitle);
+        return $out;
+    }
 
-	public function setSubtitle($subtitle) {
-		$this->subtitle = $subtitle;
-	}
+    public function getUnfilteredSubtitle() {
+        return $this->subtitle;
+    }
 
-	public function getSummary() {
-		$out = $this->filter->executeFiltersSummary($this->summary);
-		return $out;
-	}
+    public function setSubtitle($subtitle) {
+        $this->subtitle = $subtitle;
+    }
 
-	public function getUnfilteredSummary() {
-		return $this->summary;
-	}
+    public function getSummary() {
+        $out = $this->filter->executeFiltersSummary($this->summary);
+        return $out;
+    }
 
-	public function setSummary($summary) {
-		$this->summary = $summary;
-	}
+    public function getUnfilteredSummary() {
+        return $this->summary;
+    }
 
-	public function getBody() {
-		$out = $this->filter->executeFiltersBody($this->body);
-		return $out;
-	}
+    public function setSummary($summary) {
+        $this->summary = $summary;
+    }
 
-	public function getUnfilteredBody() {
-		return $this->body;
-	}
+    public function getBody() {
+        $out = $this->filter->executeFiltersBody($this->body);
+        return $out;
+    }
 
-	public function setBody($body) {
-		$this->body = $body;
-	}
+    public function getUnfilteredBody() {
+        return $this->body;
+    }
 
-	public function getTag() {
-		$out = $this->filter->executeFiltersTag($this->tag);
-		return $out;
-	}
+    public function setBody($body) {
+        $this->body = $body;
+    }
 
-	public function getUnfilteredTag() {
-		return $this->tag;
-	}
+    public function getTag() {
+        $out = $this->filter->executeFiltersTag($this->tag);
+        return $out;
+    }
 
-	public function setTag($tag) {
-		$this->tag = $tag;
-	}
+    public function getUnfilteredTag() {
+        return $this->tag;
+    }
 
-	public function getMetadescription() {
-		return $this->metadescription;
-	}
+    public function setTag($tag) {
+        $this->tag = $tag;
+    }
 
-	public function setMetadescription($metadescription) {
-		$this->metadescription = $metadescription;
-	}
+    public function getMetadescription() {
+        return $this->metadescription;
+    }
 
-	public function getMetakeyword() {
-		return $this->metakeyword;
-	}
+    public function setMetadescription($metadescription) {
+        $this->metadescription = $metadescription;
+    }
 
-	public function setMetakeyword($metakeyword) {
-		$this->metakeyword = $metakeyword;
-	}
+    public function getMetakeyword() {
+        return $this->metakeyword;
+    }
 
-	public function getImgfilename() {
-		return $this->imgfilename;
-	}
+    public function setMetakeyword($metakeyword) {
+        $this->metakeyword = $metakeyword;
+    }
 
-	public function setImgfilename($imgfilename) {
-		$this->imgfilename = $imgfilename;
-	}
+    public function getImgfilename() {
+        return $this->imgfilename;
+    }
 
-	public function getImgdescription() {
-		return $this->imgdescription;
-	}
+    public function setImgfilename($imgfilename) {
+        $this->imgfilename = $imgfilename;
+    }
 
-	public function setImgdescription($imgdescription) {
-		$this->imgdescription = $imgdescription;
-	}
+    public function getImgdescription() {
+        return $this->imgdescription;
+    }
 
-	public function getCreated() {
-		return $this->created;
-	}
+    public function setImgdescription($imgdescription) {
+        $this->imgdescription = $imgdescription;
+    }
 
-	public function setCreated($created) {
-		$this->created = $created;
-	}
+    public function getCreated() {
+        return $this->created;
+    }
 
-	public function getUpdated() {
-		return $this->updated;
-	}
+    public function setCreated($created) {
+        $this->created = $created;
+    }
 
-	public function setUpdated($updated) {
-		$this->updated = $updated;
-	}
+    public function getUpdated() {
+        return $this->updated;
+    }
+
+    public function setUpdated($updated) {
+        $this->updated = $updated;
+    }
 
 }
 

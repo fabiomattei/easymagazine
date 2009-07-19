@@ -36,6 +36,19 @@ function index() {
     return $out;
 }
 
+function find($string) {
+    $out = array();
+
+    $pag = new Page();
+    $out['pag'] = $pag;
+
+    $pags = Page::findInAllTextFields($string);
+    $out['pags'] = $pags;
+
+    if (count($pags)==0) { $out['warning'] = 'No pages corresponding to search criteria';  }
+    return $out;
+}
+
 function edit($id) {
     $out = array();
 
@@ -158,6 +171,7 @@ else {
 		case  'up':                $out = up($_GET['id']); break;
 		case  'down':              $out = down($_GET['id']); break;
 		case  'deleteimg':         $out = deleteimg($_GET['id']); break;
+                case  'find':              $out = find($_POST['string']); break;
 	}
 }
 
