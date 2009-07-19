@@ -26,68 +26,68 @@ class NumberTests extends UnitTestCase {
         $this->db->connect();
     }
 
-	function setUp() {
+    function setUp() {
         $this->db->dropSchema();
         $this->db->createSchema();
         $this->db->populateSchema();
-	}
+    }
 
-	public function tearDown() {
+    public function tearDown() {
         $this->db->dropSchema();
-	}
+    }
 
     function testFindById() {
         $num = Number::findById(1);
-		$this->assertPattern('(number)', $num->getTitle());
+        $this->assertPattern('(number)', $num->getTitle());
     }
 
     function testfindUpIndexNumber () {
         $num = Number::findUpIndexNumber(2);
-		$this->assertPattern('(third)', $num->getTitle());
+        $this->assertPattern('(third)', $num->getTitle());
     }
 
     function testfindDownIndexNumber () {
         $num = Number::findDownIndexNumber(2);
-		$this->assertPattern('(first)', $num->getTitle());
+        $this->assertPattern('(first)', $num->getTitle());
     }
 
     function testfindByTitle() {
         $num = Number::findByTitle('first');
-		$this->assertPattern('(first)', $num[0]->getTitle());
+        $this->assertPattern('(first)', $num['numbers'][0]->getTitle());
     }
 
     function testfindLast() {
         $num = Number::findLast();
-		$this->assertPattern('(second)', $num->getTitle());
+        $this->assertPattern('(second)', $num->getTitle());
     }
 
     function testfindAllPublished() {
         $num = Number::findAllPublished();
-		$this->assertEqual(2, count($num));
+        $this->assertEqual(2, count($num));
     }
 
     function testfindAll() {
         $num = Number::findAll();
-		$this->assertEqual(3, count($num));
+        $this->assertEqual(3, count($num['numbers']));
     }
 
     function testfindAllOrderedByIndexNumber() {
         $num = Number::findAllOrderedByIndexNumber();
-		$this->assertEqual(3, count($num));
-		$this->assertPattern('(third)', $num[0]->getTitle());
+        $this->assertEqual(3, count($num['numbers']));
+        $this->assertPattern('(third)', $num['numbers'][0]->getTitle());
     }
 
     function testfindArticles() {
         $num = Number::findById(1);
         $arts = $num->articles();
-		$this->assertEqual(3, count($arts));
+        $this->assertEqual(3, count($arts));
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
     function testfindArticlesPublished() {
         $num = Number::findById(1);
         $arts = $num->articlesPublished();
-		$this->assertEqual(2, count($arts));
+        $this->assertEqual(2, count($arts));
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
@@ -95,7 +95,7 @@ class NumberTests extends UnitTestCase {
         $newNum = new Number(Number::NEW_NUMBER, '4', '0', 'Number four', 'Subtitle four', 'summary four', '1', '', '', '', '');
         $newNum->save();
         $num = Number::findAll();
-		$this->assertEqual(4, count($num));
+        $this->assertEqual(4, count($num['numbers']));
     }
 
     function testUpdate() {
@@ -110,7 +110,7 @@ class NumberTests extends UnitTestCase {
         $num = Number::findById(1);
         $num->delete();
         $num = Number::findAll();
-		$this->assertEqual(2, count($num));
+        $this->assertEqual(2, count($num));
     }
 }
 

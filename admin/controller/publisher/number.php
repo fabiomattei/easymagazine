@@ -31,8 +31,10 @@ function index() {
     $numb = new Number();
     $out['numb'] = $numb;
 
-    $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
+    $query_result = Number::findAllOrderedByIndexNumber();
+    $out['numbers_num'] = $query_result['numbers_num'];
+    $out['numbs'] = $query_result['numbers'];
+    
     return $out;
 }
 
@@ -43,8 +45,9 @@ function find($string) {
     $numb = new Number();
     $out['numb'] = $numb;
 
-    $numbs = Number::findInAllTextFields($string);
-    $out['numbs'] = $numbs;
+    $query_result = Number::findInAllTextFields($string);
+    $out['numbers_num'] = $query_result['numbers_num'];
+    $out['numbers'] = $query_result['numbers'];
 
     if (count($numbs)==0) { $out['warning'] = 'No numbers corresponding to search criteria';  }
     return $out;

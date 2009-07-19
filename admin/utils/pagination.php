@@ -17,25 +17,16 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class ImagesFileTests extends UnitTestCase {
+class Pagination {
 
-    public function __construct() {
-    }
-
-    function setUp() {
-    }
-
-    function tearDown() {
-    }
-
-    function testCheckAndCreatePath() {
-        $path = ImageFiles::checkAndCreatePath("1975-04-06");
-        $this->assertPattern('(\/contents\/img\/1975\/04\/06)', $path);
+    public static function calculatePageNumbers($num_results) {
+        if ($num_results == 0) return 1;
+        $remainder = $num_results % 10;
+        if ($remainder == 0) $num_pages = $num_results/10;
+        else $num_pages = intval($num_results/10 + 1);
+        return $num_pages;
     }
 
 }
-
-$test = new ImagesFileTests();
-$test->run(new HtmlReporter());
 
 ?>

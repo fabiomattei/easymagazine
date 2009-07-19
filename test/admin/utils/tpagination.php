@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class ImagesFileTests extends UnitTestCase {
+class PaginationTests extends UnitTestCase {
 
     public function __construct() {
     }
@@ -28,14 +28,33 @@ class ImagesFileTests extends UnitTestCase {
     function tearDown() {
     }
 
-    function testCheckAndCreatePath() {
-        $path = ImageFiles::checkAndCreatePath("1975-04-06");
-        $this->assertPattern('(\/contents\/img\/1975\/04\/06)', $path);
+    function testcalculatePageNumbers() {
+        $pages = Pagination::calculatePageNumbers(5);
+        $this->assertEqual(1, $pages);
     }
 
+    function testcalculatePageNumbers2() {
+        $pages = Pagination::calculatePageNumbers(0);
+        $this->assertEqual(1, $pages);
+    }
+
+    function testcalculatePageNumbers3() {
+        $pages = Pagination::calculatePageNumbers(10);
+        $this->assertEqual(1, $pages);
+    }
+
+    function testcalculatePageNumbers4() {
+        $pages = Pagination::calculatePageNumbers(16);
+        $this->assertEqual(2, $pages);
+    }
+
+    function testcalculatePageNumbers5() {
+        $pages = Pagination::calculatePageNumbers(26);
+        $this->assertEqual(3, $pages);
+    }
 }
 
-$test = new ImagesFileTests();
+$test = new PaginationTests();
 $test->run(new HtmlReporter());
 
 ?>
