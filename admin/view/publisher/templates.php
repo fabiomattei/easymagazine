@@ -66,14 +66,6 @@
                         echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
                     }
                     ?>
-		  <div class="select-bar">
-		    <label>
-		    <input type="text" name="textfield" />
-		    </label>
-		    <label>
-			<input type="submit" name="Submit" value="Search" />
-			</label>
-		  </div>
 			<div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />

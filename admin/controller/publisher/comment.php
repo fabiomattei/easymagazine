@@ -37,6 +37,19 @@ function index() {
     return $out;
 }
 
+function find($string) {
+    $out = array();
+
+    $comm = new Comment();
+    $out['comm'] = $comm;
+
+    $comms = Comment::findInAllTextFields($string);
+    $out['comms'] = $comms;
+
+    if (count($comms)==0) { $out['warning'] = 'No comments corresponding to search criteria';  }
+    return $out;
+}
+
 function commentnumber($id) {
     $out = array();
 
@@ -110,7 +123,7 @@ function save($toSave) {
     $out = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
-    
+
     $comm = new Comment(
         $toSave['id'],
         $toSave['article_id'],
@@ -131,15 +144,16 @@ function save($toSave) {
 
 if (!isset($_GET["action"])) { $out = index(); }
 else {
-	switch ($_GET["action"]) {
-		case  'index':             $out = index(); break;
-		case  'save':              $out = save($_POST); break;
-		case  'edit':              $out = edit($_GET['id']); break;
-		case  'delete':            $out = delete($_GET['id']); break;
-                case  'replay':            $out = replay($_GET['id']); break;
-                case  'commentnumber':     $out = commentnumber($_GET['id']); break;
-                case  'commentarticle':    $out = commentarticle($_GET['id']); break;
-	}
+    switch ($_GET["action"]) {
+        case  'index':             $out = index(); break;
+        case  'save':              $out = save($_POST); break;
+        case  'edit':              $out = edit($_GET['id']); break;
+        case  'delete':            $out = delete($_GET['id']); break;
+        case  'replay':            $out = replay($_GET['id']); break;
+        case  'commentnumber':     $out = commentnumber($_GET['id']); break;
+        case  'commentarticle':    $out = commentarticle($_GET['id']); break;
+        case  'find':              $out = find($_POST['string']); break;
+    }
 }
 
 $comms = $out['comms'];
