@@ -31,9 +31,9 @@ function index() {
     $numb = new Number();
     $out['numb'] = $numb;
 
-    $query_result = Number::findAllOrderedByIndexNumber();
-    $out['numbers_num'] = $query_result['numbers_num'];
-    $out['numbs'] = $query_result['numbers'];
+    $numbs = Number::findAllOrderedByIndexNumber();
+    $out['numbs'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
     
     return $out;
 }
@@ -45,9 +45,9 @@ function find($string) {
     $numb = new Number();
     $out['numb'] = $numb;
 
-    $query_result = Number::findInAllTextFields($string);
-    $out['numbers_num'] = $query_result['numbers_num'];
-    $out['numbers'] = $query_result['numbers'];
+    $numbs = Number::findInAllTextFields($string);
+    $out['numbers'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
 
     if (count($numbs)==0) { $out['warning'] = 'No numbers corresponding to search criteria';  }
     return $out;
@@ -61,6 +61,8 @@ function edit($id) {
 
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
+
     return $out;
 }
 
@@ -74,6 +76,8 @@ function delete($id) {
 
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
+
     return $out;
 }
 
@@ -86,6 +90,8 @@ function deleteimg($id) {
 
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
+
     return $out;
 }
 
@@ -108,6 +114,8 @@ function up($id) {
 
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
+    
     return $out;
 }
 
@@ -130,6 +138,8 @@ function down($id) {
 
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
+    
     return $out;
 }
 
@@ -162,6 +172,8 @@ function save($toSave, $files) {
 
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
+    
     return $out;
 }
 
@@ -186,6 +198,7 @@ if (isset($_SESSION['user'])) {
 
 $numbs = $out['numbs'];
 $numb = $out['numb'];
+$page_numbers = $out['page_numbers'];
 
 if (isset($out['info'])) { $info = $out['info']; }
 if (isset($out['warning'])) { $warning = $out['warning']; }

@@ -53,7 +53,7 @@ class NumberTests extends UnitTestCase {
 
     function testfindByTitle() {
         $num = Number::findByTitle('first');
-        $this->assertPattern('(first)', $num['numbers'][0]->getTitle());
+        $this->assertPattern('(first)', $num[0]->getTitle());
     }
 
     function testfindLast() {
@@ -68,13 +68,13 @@ class NumberTests extends UnitTestCase {
 
     function testfindAll() {
         $num = Number::findAll();
-        $this->assertEqual(3, count($num['numbers']));
+        $this->assertEqual(3, count($num));
     }
 
     function testfindAllOrderedByIndexNumber() {
         $num = Number::findAllOrderedByIndexNumber();
-        $this->assertEqual(3, count($num['numbers']));
-        $this->assertPattern('(third)', $num['numbers'][0]->getTitle());
+        $this->assertEqual(3, count($num));
+        $this->assertPattern('(third)', $num[0]->getTitle());
     }
 
     function testfindArticles() {
@@ -95,7 +95,7 @@ class NumberTests extends UnitTestCase {
         $newNum = new Number(Number::NEW_NUMBER, '4', '0', 'Number four', 'Subtitle four', 'summary four', '1', '', '', '', '');
         $newNum->save();
         $num = Number::findAll();
-        $this->assertEqual(4, count($num['numbers']));
+        $this->assertEqual(4, count($num));
     }
 
     function testUpdate() {

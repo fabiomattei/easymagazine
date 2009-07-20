@@ -24,6 +24,7 @@ class DB {
     private static $instance = null;
     private $connection;
     private $error;
+    private $countLastQueryResults = 0;
 
     private function __construct() {
         $this->connection = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
@@ -42,10 +43,16 @@ class DB {
         $toSQL = StrHelper::formatQRY($SQL, $array_str, $array_int, $tables);
         $result = mysql_query($toSQL, $this->connection);
         if (!$result) {
+            $this->countLastQueryResults = 0;
             $this->error=mysql_error();
             throw new Exception('Error in DB.'.$toSQL);
         } else {
             $this->error='';
+            if (strlen(strstr(strtolower($toSQL),'select'))>0) {
+                $this->countLastQueryResults = mysql_num_rows($result);
+            } else {
+                $this->countLastQueryResults = 0;
+            }
         }
         return $result;
     }
@@ -57,6 +64,11 @@ class DB {
     public function getTablePrefix() {
         return TBPREFIX;
     }
+
+    public function getCountLastQueryResults() {
+        return $this->countLastQueryResults;
+    }
+
 }
 
 ?>

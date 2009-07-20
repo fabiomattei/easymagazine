@@ -21,6 +21,7 @@ require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.FILTERPATH.'numberfilterremote.php');
 require_once(STARTPATH.UTILSPATH.'imagefiles.php');
+require_once(STARTPATH.UTILSPATH.'pagination.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 
 class Number {
@@ -97,6 +98,7 @@ class Number {
     }
 
     public static function findMany($SQL, $array_str, $array_int) {
+        $ret = array();
         $tables = array("numbers" => TBPREFIX."numbers");
         try {
             $rs = DB::getInstance()->execute(
@@ -104,19 +106,18 @@ class Number {
                 $array_str,
                 $array_int,
                 $tables);
-            $numbers_num = mysql_num_rows($rs);
-            $numbers = array();
             while ($row = mysql_fetch_array($rs)) {
-                $numbers[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Number();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-        $ret = array();
-        $ret['numbers_num'] = $numbers_num;
-        $ret['numbers'] = $numbers;
         return $ret;
+    }
+
+    public static function getPageNumbers() {
+        return Pagination::calculatePageNumbers(DB::getInstance()->getCountLastQueryResults());
     }
 
     public static function findById($id) {
