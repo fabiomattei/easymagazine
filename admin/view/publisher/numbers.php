@@ -116,13 +116,16 @@
                     ?>
 				</table>
 				<div class="select">
-					<strong>Other Pages: </strong>
+                                    <form name="pageselectionform" method="post" action="number.php?action=find">
+					<strong>Pages: </strong>
 					<select>
                                             <? for ($i=1;$i<=$page_numbers;$i++) {?>
 						<option><?=$i?></option>
                                             <? }?>
-					</select>
-			  </div>
+                                        </select>&nbsp;
+                                        <input type="submit" value="Go" name="Go" />
+                                    </form>
+			       </div>
               <form name="formnew" method="post" action="number.php">
                 <input type="submit" value="New" name="new" />
               </form>

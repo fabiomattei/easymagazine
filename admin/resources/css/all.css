@@ -219,6 +219,7 @@ ul.nav li.last {background:none;}
 	margin:0 0 17px 0;
 	}
 .select-bar select {width:145px;margin:0 2px;}
+.select-bar input {width:145px;margin:0 2px;}
 
 /* table container */
 div.table {
