@@ -22,24 +22,30 @@ define('STARTPATH', '../../../');
 require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
+require_once(STARTPATH.UTILSPATH.'paginator.php');
 
 session_start();
 
-function index() {
+function index($posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
     $out = array();
 
     $numb = new Number();
     $out['numb'] = $numb;
 
     $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
+    $out['numbs'] = Paginator::paginate($numbs, $page);
     $out['page_numbers'] = Number::getPageNumbers();
+    $out['pageSelected'] = $page;
     
     return $out;
 }
 
 
 function find($string) {
+    $page = 1;
     $out = array();
 
     $numb = new Number();
@@ -48,6 +54,7 @@ function find($string) {
     $numbs = Number::findInAllTextFields($string);
     $out['numbers'] = $numbs;
     $out['page_numbers'] = Number::getPageNumbers();
+    $out['pageSelected'] = $page;
 
     if (count($numbs)==0) { $out['warning'] = 'No numbers corresponding to search criteria';  }
     return $out;
@@ -179,10 +186,10 @@ function save($toSave, $files) {
 
 
 if (isset($_SESSION['user'])) {
-    if (!isset($_GET["action"])) { $out = index(); }
+    if (!isset($_GET['action'])) { $out = index($_POST); }
     else {
-        switch ($_GET["action"]) {
-            case  'index':             $out = index(); break;
+        switch ($_GET['action']) {
+            case  'index':             $out = index($_POST); break;
             case  'save':              $out = save($_POST, $_FILES); break;
             case  'edit':              $out = edit($_GET['id']); break;
             case  'delete':            $out = delete($_GET['id']); break;
@@ -199,6 +206,9 @@ if (isset($_SESSION['user'])) {
 $numbs = $out['numbs'];
 $numb = $out['numb'];
 $page_numbers = $out['page_numbers'];
+if (isset($_GET['action'])) $lastAction = $_GET['action'];
+else $lastAction = 'index';
+$pageSelected = $out['pageSelected'];
 
 if (isset($out['info'])) { $info = $out['info']; }
 if (isset($out['warning'])) { $warning = $out['warning']; }

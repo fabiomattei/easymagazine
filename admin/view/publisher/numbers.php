@@ -116,11 +116,11 @@
                     ?>
 				</table>
 				<div class="select">
-                                    <form name="pageselectionform" method="post" action="number.php?action=find">
+                                    <form name="pageselectionform" method="post" action="number.php?action=<?=$lastAction?>">
 					<strong>Pages: </strong>
-					<select>
+					<select name="page">
                                             <? for ($i=1;$i<=$page_numbers;$i++) {?>
-						<option><?=$i?></option>
+                                                <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
                                             <? }?>
                                         </select>&nbsp;
                                         <input type="submit" value="Go" name="Go" />
