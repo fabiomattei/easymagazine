@@ -35,7 +35,7 @@
 			<li><span><span><a href="number.php">Numbers</a></span></span></li>
 			<li><span><span><a href="article.php">Articles</a></span></span></li>
 			<li><span><span><a href="page.php">Pages</a></span></span></li>
-			<li><span><span><a href="user.php">Comments</a></span></span></li>
+			<li><span><span><a href="comment.php">Comments</a></span></span></li>
 			<li><span><span><a href="plugin.php">Plugin</a></span></span></li>
 			<li><span><span><a href="template.php">Template</a></span></span></li>
                         <li class="active"><span><span>Users</span></span></li>
@@ -95,12 +95,6 @@
                     }
                     ?>
 				</table>
-				<div class="select">
-					<strong>Other Pages: </strong>
-					<select>
-						<option>1</option>
-					</select>
-			  </div>
               <form name="formnew" method="post" action="user.php">
                 <input type="submit" value="New" name="new" />
               </form>

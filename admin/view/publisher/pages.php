@@ -109,12 +109,6 @@
                     }
                     ?>
 				</table>
-				<div class="select">
-					<strong>Other Pages: </strong>
-					<select>
-						<option>1</option>
-					</select>
-			  </div>
               <form name="formnew" method="post" action="page.php">
                 <input type="submit" value="New" name="new" />
               </form>

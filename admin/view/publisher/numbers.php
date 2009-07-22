@@ -119,7 +119,7 @@
                                     <form name="pageselectionform" method="post" action="number.php?action=<?=$lastAction?>">
 					<strong>Pages: </strong>
 					<select name="page">
-                                            <? for ($i=1;$i<=$page_numbers;$i++) {?>
+                                            <? for ($i=1;$i<=$page_numbers;$i++) { ?>
                                                 <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
                                             <? }?>
                                         </select>&nbsp;

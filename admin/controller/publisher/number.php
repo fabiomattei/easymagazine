@@ -81,6 +81,9 @@ function edit($id) {
     $out['numbs'] = $numbs;
     $out['page_numbers'] = Number::getPageNumbers();
 
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'index';
+
     return $out;
 }
 
@@ -96,6 +99,9 @@ function delete($id) {
     $out['numbs'] = $numbs;
     $out['page_numbers'] = Number::getPageNumbers();
 
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'index';
+
     return $out;
 }
 
@@ -109,6 +115,9 @@ function deleteimg($id) {
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
     $out['page_numbers'] = Number::getPageNumbers();
+
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'index';
 
     return $out;
 }
@@ -133,6 +142,9 @@ function up($id) {
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
     $out['page_numbers'] = Number::getPageNumbers();
+
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'index';
     
     return $out;
 }
@@ -157,6 +169,9 @@ function down($id) {
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
     $out['page_numbers'] = Number::getPageNumbers();
+
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'index';
     
     return $out;
 }
@@ -191,6 +206,9 @@ function save($toSave, $files) {
     $numbs = Number::findAllOrderedByIndexNumber();
     $out['numbs'] = $numbs;
     $out['page_numbers'] = Number::getPageNumbers();
+
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'index';
     
     return $out;
 }

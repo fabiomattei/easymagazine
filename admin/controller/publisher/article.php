@@ -23,6 +23,7 @@ require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
+require_once(STARTPATH.UTILSPATH.'paginator.php');
 
 session_start();
 
@@ -37,6 +38,9 @@ function index() {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+    $out['lastAction'] = 'index';
+    
     return $out;
 }
 
