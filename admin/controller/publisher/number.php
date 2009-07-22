@@ -39,22 +39,33 @@ function index($posts) {
     $out['numbs'] = Paginator::paginate($numbs, $page);
     $out['page_numbers'] = Number::getPageNumbers();
     $out['pageSelected'] = $page;
+
+    $out['lastAction'] = 'index';
     
     return $out;
 }
 
 
-function find($string) {
-    $page = 1;
+function find($posts) {
+    if (isset($posts['page'])) {
+        $page = $posts['page'];
+        $string = $_SESSION['oldstring'];
+    } else {
+        $string = $posts['string'];
+        $page = 1;
+    }
+    
     $out = array();
 
     $numb = new Number();
     $out['numb'] = $numb;
 
     $numbs = Number::findInAllTextFields($string);
-    $out['numbers'] = $numbs;
+    $out['numbs'] = Paginator::paginate($numbs, $page);
     $out['page_numbers'] = Number::getPageNumbers();
     $out['pageSelected'] = $page;
+
+    $out['lastAction'] = 'find';
 
     if (count($numbs)==0) { $out['warning'] = 'No numbers corresponding to search criteria';  }
     return $out;
@@ -196,7 +207,7 @@ if (isset($_SESSION['user'])) {
             case  'up':                $out = up($_GET['id']); break;
             case  'down':              $out = down($_GET['id']); break;
             case  'deleteimg':         $out = deleteimg($_GET['id']); break;
-            case  'find':              $out = find($_POST['string']); break;
+            case  'find':              $out = find($_POST); break;
         }
     }
     } else {
@@ -206,9 +217,8 @@ if (isset($_SESSION['user'])) {
 $numbs = $out['numbs'];
 $numb = $out['numb'];
 $page_numbers = $out['page_numbers'];
-if (isset($_GET['action'])) $lastAction = $_GET['action'];
-else $lastAction = 'index';
 $pageSelected = $out['pageSelected'];
+$lastAction = $out['lastAction'];
 
 if (isset($out['info'])) { $info = $out['info']; }
 if (isset($out['warning'])) { $warning = $out['warning']; }
