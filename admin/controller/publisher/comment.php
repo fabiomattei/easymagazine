@@ -22,10 +22,14 @@ define('STARTPATH', '../../../');
 require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.DATAMODELPATH.'comment.php');
+require_once(STARTPATH.UTILSPATH.'paginator.php');
 
 session_start();
 
-function index() {
+function index($posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
     $out = array();
 
     $comm = new Comment();
@@ -142,17 +146,17 @@ function save($toSave) {
     return $out;
 }
 
-if (!isset($_GET["action"])) { $out = index(); }
+if (!isset($_GET["action"])) { $out = index($_POST); }
 else {
     switch ($_GET["action"]) {
-        case  'index':             $out = index(); break;
+        case  'index':             $out = index($_POST); break;
         case  'save':              $out = save($_POST); break;
         case  'edit':              $out = edit($_GET['id']); break;
         case  'delete':            $out = delete($_GET['id']); break;
         case  'replay':            $out = replay($_GET['id']); break;
         case  'commentnumber':     $out = commentnumber($_GET['id']); break;
         case  'commentarticle':    $out = commentarticle($_GET['id']); break;
-        case  'find':              $out = find($_POST['string']); break;
+        case  'find':              $out = find($_POST); break;
     }
 }
 

@@ -23,6 +23,7 @@ require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
+require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
 
 session_start();
@@ -40,7 +41,9 @@ function index() {
     $out['numbs'] = $numbs;
 
     $out['lastAction'] = 'index';
-    
+
+    $out['authors'] = User::findAll();
+
     return $out;
 }
 
@@ -56,6 +59,9 @@ function articlenumber($id) {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+    $out['authors'] = User::findAll();
+
     return $out;
 }
 
@@ -70,6 +76,8 @@ function find($string) {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+    $out['authors'] = User::findAll();
 
     if (count($arts)==0) { $out['warning'] = 'No articles corresponding to search criteria';  }
     return $out;
@@ -86,6 +94,9 @@ function edit($id) {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+        $out['authors'] = User::findAll();
+        
     return $out;
 }
 
@@ -102,6 +113,9 @@ function delete($id) {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+        $out['authors'] = User::findAll();
+        
     return $out;
 }
 
@@ -117,6 +131,9 @@ function deleteimg($id) {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+        $out['authors'] = User::findAll();
+        
     return $out;
 }
 
@@ -141,6 +158,9 @@ function up($id) {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+        $out['authors'] = User::findAll();
+        
     return $out;
 }
 
@@ -165,6 +185,9 @@ function down($id) {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+        $out['authors'] = User::findAll();
+        
     return $out;
 }
 
@@ -204,6 +227,9 @@ function save($toSave, $files) {
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
+
+        $out['authors'] = User::findAll();
+        
     return $out;
 }
 
@@ -225,6 +251,7 @@ else {
 $arts = $out['arts'];
 $art = $out['art'];
 $numbs = $out['numbs'];
+$authors = $out['authors'];
 
 if (isset($out['info'])) { $info = $out['info']; }
 if (isset($out['warning'])) { $warning = $out['warning']; }

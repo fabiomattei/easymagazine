@@ -214,7 +214,41 @@
                                 </tr>
                             </table>
                         </form>
-                        <p>&nbsp;</p>
+                    </div>
+                    <div class="table">
+                        <img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
+                        <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
+                        <table class="listing" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <th class="first" width="177">Article Authors</th>
+                                <th class="last">Unlink</th>
+                            </tr>
+                            <?
+                            foreach ($art->users() as $ur) {
+                            ?>
+                            <tr>
+                                <td class="first style1"><? echo $ur->getName(); ?> - <? echo $ur->getUsername(); ?></td>
+                                <td class="last" width="50"><a href="article.php?action=unlinkauthor&id=<? echo $ur->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                            </tr>
+                            <?
+                            }
+                            ?>
+                            <tr>
+                                <form name="formnew" method="post" action="article.php?action=linkauthor">
+                                <td class="first style1">
+                                    <select name="authorid">
+                                        <? foreach ($authors as $auth) { ?>
+                                        <option value="<? echo $auth->getId(); ?>" ><? echo $auth->getName(); ?> - <? echo $auth->getUsername(); ?></option>
+                                        <? } ?>
+                                    </select>
+                                </td>
+                                <td class="last" width="50"><input type="submit" value="Link" name="Link" /></td>
+                                </form>
+                            </tr>
+
+                            
+
+                        </table>
                     </div>
                 </div>
                 <div id="right-column">
