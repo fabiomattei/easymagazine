@@ -18,6 +18,7 @@
  */
 
 echo $this->article->getTitle()."<br>";
+echo $this->article->getBody()."<br>";
 
 foreach($this->article->comments()  as $comment) {
     echo $comment->getTitle()."<br>";

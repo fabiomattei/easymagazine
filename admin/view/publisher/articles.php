@@ -148,8 +148,17 @@
                                     <td class="last"><textarea name="Summary" rows="4" cols="60"><? echo $art->getUnfilteredSummary(); ?></textarea></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Body</strong></td>
-                                    <td class="last"><textarea name="Body" rows="4" cols="60"><? echo $art->getUnfilteredBody(); ?></textarea></td>
+                                    <td class="first" colspan="2"><strong>Body</strong><br />
+                                        <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
+                                            <textarea cols="40" id="article_body" name="Body" rows="20" style="width: 500px; padding: 5px"><? echo $art->getUnfilteredBody(); ?></textarea>
+                                            <link href="../../../lib/textileeditor/teh/stylesheets/textile-editor.css" media="screen" rel="Stylesheet" type="text/css" />
+                                            <script src="../../../lib/textileeditor/teh/javascripts/textile-editor.js" type="text/javascript"></script>
+                                            <script type="text/javascript">
+                                                Event.observe(window, "load", function() {
+                                                    TextileEditor.initialize("article_body", "extended");
+                                                });
+                                            </script>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Tag</strong></td>
@@ -225,7 +234,7 @@
                             </tr>
                             <?
                             foreach ($art->users() as $ur) {
-                            ?>
+                                ?>
                             <tr>
                                 <td class="first style1"><? echo $ur->getName(); ?> - <? echo $ur->getUsername(); ?></td>
                                 <td class="last" width="50"><a href="article.php?action=unlinkauthor&id=<? echo $ur->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
@@ -234,7 +243,7 @@
                             }
                             ?>
                             <tr>
-                                <form name="formnew" method="post" action="article.php?action=linkauthor">
+                            <form name="formnew" method="post" action="article.php?action=linkauthor">
                                 <td class="first style1">
                                     <select name="authorid">
                                         <? foreach ($authors as $auth) { ?>
@@ -243,10 +252,10 @@
                                     </select>
                                 </td>
                                 <td class="last" width="50"><input type="submit" value="Link" name="Link" /></td>
-                                </form>
+                            </form>
                             </tr>
 
-                            
+
 
                         </table>
                     </div>

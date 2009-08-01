@@ -21,6 +21,7 @@ require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.FILTERPATH.'pagefilterremote.php');
 require_once(STARTPATH.UTILSPATH.'imagefiles.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
+require_once(STARTPATH.'lib/textile2/classTextile.php');
 
 class Page {
     const NEW_PAGE = -1;
@@ -341,7 +342,8 @@ class Page {
     }
 
     public function getBody() {
-        $out = $this->filter->executeFiltersBody($this->body);
+        $textile = new Textile();
+        $out = $this->filter->executeFiltersBody($textile->TextileThis($this->body));
         return $out;
     }
 

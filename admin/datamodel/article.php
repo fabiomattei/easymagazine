@@ -22,6 +22,7 @@ require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'comment.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
+require_once(STARTPATH.'lib/textile2/classTextile.php');
 
 class Article {
     const NEW_ARTICLE = -1;
@@ -480,7 +481,8 @@ class Article {
     }
 
     public function getBody() {
-        $out = $this->filter->executeFiltersBody($this->body);
+        $textile = new Textile();
+        $out = $this->filter->executeFiltersBody($textile->TextileThis($this->body));
         return $out;
     }
 
