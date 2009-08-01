@@ -60,7 +60,24 @@ function edit($id) {
     return $out;
 }
 
-function delete($id) {
+
+function requestdelete($id) {
+    $out = array();
+
+    $pag = Page::findById($id);
+    $out['pag'] = $pag;
+
+    $pags = Page::findAllOrderedByIndexNumber();
+    $out['pags'] = $pags;
+
+    $out['question'] = 'Do you really want to delete the page: '.$pag->getTitle().'? <br />
+    <a href="page.php?action=dodelete&id='.$pag->getId().'">yes</a>,
+    <a href="page.php">no</a>';
+
+    return $out;
+}
+
+function dodelete($id) {
     $out = array();
 
     $pag = Page::findById($id);
@@ -70,6 +87,9 @@ function delete($id) {
 
     $pags = Page::findAllOrderedByIndexNumber();
     $out['pags'] = $pags;
+
+    $out['info'] = 'Page deleted';
+
     return $out;
 }
 
@@ -163,16 +183,17 @@ function save($toSave, $files) {
 
 if (!isset($_GET["action"])) { $out = index(); }
 else {
-	switch ($_GET["action"]) {
-		case  'index':             $out = index(); break;
-		case  'save':              $out = save($_POST, $_FILES); break;
-		case  'edit':              $out = edit($_GET['id']); break;
-		case  'delete':            $out = delete($_GET['id']); break;
-		case  'up':                $out = up($_GET['id']); break;
-		case  'down':              $out = down($_GET['id']); break;
-		case  'deleteimg':         $out = deleteimg($_GET['id']); break;
-                case  'find':              $out = find($_POST['string']); break;
-	}
+    switch ($_GET["action"]) {
+        case  'index':             $out = index(); break;
+        case  'save':              $out = save($_POST, $_FILES); break;
+        case  'edit':              $out = edit($_GET['id']); break;
+        case  'dodelete':          $out = dodelete($_GET['id']); break;
+        case  'requestdelete':     $out = requestdelete($_GET['id']); break;
+        case  'up':                $out = up($_GET['id']); break;
+        case  'down':              $out = down($_GET['id']); break;
+        case  'deleteimg':         $out = deleteimg($_GET['id']); break;
+        case  'find':              $out = find($_POST['string']); break;
+    }
 }
 
 $pags = $out['pags'];

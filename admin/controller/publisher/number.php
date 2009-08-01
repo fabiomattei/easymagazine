@@ -41,7 +41,7 @@ function index($posts) {
     $out['pageSelected'] = $page;
 
     $out['lastAction'] = 'index';
-    
+
     return $out;
 }
 
@@ -54,7 +54,7 @@ function find($posts) {
         $string = $posts['string'];
         $page = 1;
     }
-    
+
     $out = array();
 
     $numb = new Number();
@@ -87,7 +87,27 @@ function edit($id) {
     return $out;
 }
 
-function delete($id) {
+function requestdelete($id) {
+    $out = array();
+
+    $numb = Number::findById($id);
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAllOrderedByIndexNumber();
+    $out['numbs'] = $numbs;
+    $out['page_numbers'] = Number::getPageNumbers();
+
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'index';
+
+    $out['question'] = 'Do you really want to delete the number: '.$numb->getTitle().'? <br />
+    <a href="number.php?action=dodelete&id='.$numb->getId().'">yes</a>,
+    <a href="number.php">no</a>';
+
+    return $out;
+}
+
+function dodelete($id) {
     $out = array();
 
     $numb = Number::findById($id);
@@ -101,6 +121,8 @@ function delete($id) {
 
     $out['pageSelected'] = 1;
     $out['lastAction'] = 'index';
+
+    $out['info'] = 'Number deleted';
 
     return $out;
 }
@@ -145,7 +167,7 @@ function up($id) {
 
     $out['pageSelected'] = 1;
     $out['lastAction'] = 'index';
-    
+
     return $out;
 }
 
@@ -162,7 +184,7 @@ function down($id) {
         $numb1->save();
         $numb2->save();
     }
-    
+
     $numb = new Number();
     $out['numb'] = $numb;
 
@@ -172,7 +194,7 @@ function down($id) {
 
     $out['pageSelected'] = 1;
     $out['lastAction'] = 'index';
-    
+
     return $out;
 }
 
@@ -209,7 +231,7 @@ function save($toSave, $files) {
 
     $out['pageSelected'] = 1;
     $out['lastAction'] = 'index';
-    
+
     return $out;
 }
 
@@ -221,15 +243,16 @@ if (isset($_SESSION['user'])) {
             case  'index':             $out = index($_POST); break;
             case  'save':              $out = save($_POST, $_FILES); break;
             case  'edit':              $out = edit($_GET['id']); break;
-            case  'delete':            $out = delete($_GET['id']); break;
+            case  'dodelete':          $out = dodelete($_GET['id']); break;
+            case  'requestdelete':     $out = requestdelete($_GET['id']); break;
             case  'up':                $out = up($_GET['id']); break;
             case  'down':              $out = down($_GET['id']); break;
             case  'deleteimg':         $out = deleteimg($_GET['id']); break;
             case  'find':              $out = find($_POST); break;
         }
     }
-    } else {
-         header("Location: ../../loginError.php");
+} else {
+    header("Location: ../../loginError.php");
 }
 
 $numbs = $out['numbs'];

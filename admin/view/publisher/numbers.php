@@ -109,7 +109,7 @@
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                         <? } ?>
                                 </td>
-                                <td class="last"><a href="number.php?action=delete&id=<? echo $num->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                <td class="last"><a href="number.php?action=requestdelete&id=<? echo $num->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }

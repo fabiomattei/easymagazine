@@ -50,7 +50,23 @@ function edit($id) {
     return $out;
 }
 
-function delete($id) {
+function requestdelete($id) {
+    $out = array();
+
+    $userp = User::findById($id);
+    $out['userp'] = $userp;
+
+    $userps = User::findAll();
+    $out['userps'] = $userps;
+    
+    $out['question'] = 'Do you really want to delete the user: '.$userp->getName().' - '.$userp->getUsername().'? <br />
+    <a href="user.php?action=dodelete&id='.$userp->getId().'">yes</a>,
+    <a href="user.php">no</a>';
+
+    return $out;
+}
+
+function dodelete($id) {
     $out = array();
 
     $userp = User::findById($id);
@@ -60,6 +76,8 @@ function delete($id) {
 
     $userps = User::findAll();
     $out['userps'] = $userps;
+
+    $out['info'] = 'User deleted';
 
     return $out;
 }
@@ -111,7 +129,8 @@ else {
         case  'save':          $out = save($_POST); break;
         case  'savePassword':  $out = savePassword($_POST); break;
         case  'edit':          $out = edit($_GET['id']); break;
-        case  'delete':        $out = delete($_GET['id']); break;
+        case  'dodelete':      $out = dodelete($_GET['id']); break;
+        case  'requestdelete': $out = requestdelete($_GET['id']); break;
     }
 }
 

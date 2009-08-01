@@ -92,7 +92,23 @@ function edit($id) {
     return $out;
 }
 
-function delete($id) {
+function requestdelete($id) {
+    $out = array();
+
+    $comm = Comment::findById($id);
+    $out['comm'] = $comm;
+
+    $comms = Comment::findAll();
+    $out['comms'] = $comms;
+
+    $out['question'] = 'Do you really want to delete the comment: '.$comm->getTitle().'? <br />
+    <a href="comment.php?action=dodelete&id='.$comm->getId().'">yes</a>,
+    <a href="comment.php">no</a>';
+
+    return $out;
+}
+
+function dodelete($id) {
     $out = array();
 
     $comm = Comment::findById($id);
@@ -102,6 +118,8 @@ function delete($id) {
 
     $comms = Comment::findAll();
     $out['comms'] = $comms;
+
+    $out['info'] = 'Comment deleted';
 
     return $out;
 }
@@ -152,7 +170,8 @@ else {
         case  'index':             $out = index($_POST); break;
         case  'save':              $out = save($_POST); break;
         case  'edit':              $out = edit($_GET['id']); break;
-        case  'delete':            $out = delete($_GET['id']); break;
+        case  'dodelete':          $out = dodelete($_GET['id']); break;
+        case  'requestdelete':     $out = requestdelete($_GET['id']); break;
         case  'replay':            $out = replay($_GET['id']); break;
         case  'commentnumber':     $out = commentnumber($_GET['id']); break;
         case  'commentarticle':    $out = commentarticle($_GET['id']); break;
