@@ -1,0 +1,25 @@
+<html>
+<body>
+<h2>Demo of Textile Editor Helper</h2>
+<script src="teh/javascripts/prototype.js" type="text/javascript"></script>
+
+<form action="#">
+
+<textarea cols="40" id="article_body" name="article[body]" rows="20" style="width: 580px; padding: 5px">
+h1. Welcome!
+
+This is a demo of the _Textile Editor Helper_ (TEH).  Feel free to play around with it ;-)
+
+For instructions on downloading, please visit the &quot;plugins&quot;:http://slateinfo.blogs.wvu.edu/plugins page.
+</textarea>
+
+<link href="teh/stylesheets/textile-editor.css" media="screen" rel="Stylesheet" type="text/css" />
+<script src="teh/javascripts/textile-editor.js" type="text/javascript"></script>
+<script type="text/javascript">
+Event.observe(window, "load", function() {
+TextileEditor.initialize("article_body", "extended");
+});
+</script>
+
+</body>
+</html>
