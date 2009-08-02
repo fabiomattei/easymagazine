@@ -1,0 +1,65 @@
+body {
+	margin: 0;
+	padding: 0 0px;
+	background:#FFFFF0;
+	color: #000;
+	font: 80% Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+#corpoalto {
+	height: 140px;
+	width:100%;
+	background: #FFFFF0;
+	border-bottom: 8px solid #A65F00;
+}
+#corpo {
+	width:100%;
+	background: #FFFFF0;
+    border-top: 8px solid #A65F00;
+}
+#intestazione {
+	background: #666 url(../img/sfondomarroncino.gif) repeat;
+	color: #FFF;
+	width:100%;
+}
+.menu {
+	color: #A65F00;
+	background: transparent;
+	margin-top: -66px;
+	margin-left: 350px;
+}
+#pie-di-pagina {
+	background: #A65F00;
+	color: #fff;
+	width:100%;
+	clear: left;
+}
+#intestazione {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+div p {
+	margin: 0;
+	padding: 0.5em 1em 0.5em 1em;
+}
+.corpo{
+	margin: 0;
+	padding: 0.5em 2em 0.5em 3em;
+}
+.logo {
+	width: 200px;
+	height: 80px;
+	background: url(../img/logo.gif) no-repeat 20px 10px;
+}
+a:link,
+a:visited{
+background:transparent;
+color:#A65F00;
+text-decoration:none;
+}
+a:hover,
+a:focus,
+a:active{
+background:transparent;
+color:#A65F00;
+text-decoration:underline;
+}

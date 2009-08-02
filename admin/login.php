@@ -19,33 +19,40 @@
 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-	<title>Login Page</title>
-	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-	<style type="text/css">
-		#login .theInput {
-			font-family: Verdana;
-			font-size: 11px;
-			width: 110px;
-			margin-right: 5px;
-		}
-
-		#login .theSubmit {
-			font-family: Verdana;
-			font-size: 10px;
-			background-color: #333333;
-			color: #FFFFFF;
-			margin-right: 5px;
-		}
-	</style>
-</head>
-<body>
-    <form action="openSession.php" method="post" id="login">
-        Username: <input type="text" class="theInput" name="username" value="" /> <br />
-        Password: <input type="password" class="theInput" name="password" value="" /> <br />
-        <input type="submit" value="Ok" />
-    </form>
-</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" dir="ltr">
+    <head>
+        <title>Easy Magazine: Administration Login Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+        <link href="resources/css/stylelogin.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="corpoalto">&nbsp;
+        </div>
+        <div id="intestazione">
+            <p class="logo">&nbsp;</p>
+            <div class="menu">
+                <form action="openSession.php" method="post" id="login">
+                    <table>
+                        <tr>
+                            <td>Username:</td>
+                            <td><input type="text" class="theInput" name="username" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td><input type="password" class="theInput" name="password" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" value="Ok" /></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    <br />
+                </form>
+            </div>
+        </div>
+        <div id="corpo">&nbsp;
+        </div>
+    </body>
 </html>
