@@ -17,19 +17,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Create all the tables and fill it with dummy data
-
-include ('dbCreator.php');
-
-$dbCreator = new DbCreator();
-
-$dbCreator->connect();
-$out = $dbCreator->createSchema();
-$out .= $dbCreator->populateSchema();
-$dbCreator->closeConnection();
-
-
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -46,12 +33,28 @@ $dbCreator->closeConnection();
         <div id="intestazione">
             <p class="logo">&nbsp;</p>
             <div class="menu">
-                If there are no error the istallation is well done.<br />
-                Please delete the "installation" folder and access to your new
-                on-line magazine with the username "user" and password "psw" in the
-                <a href="../admin/login.php">login page</a><br /><br />
-                <? echo $out; ?>
-                <br />
+                <form action="createdb.php" method="post" id="login">
+                    In order to install the application please fill the form.
+                    <table>
+                        <tr>
+                            <td>MySql DB name:</td>
+                            <td><input type="text" name="dbname" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>MySql DB Username:</td>
+                            <td><input type="text" name="username" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>MySql DB Password:</td>
+                            <td><input type="password" name="password" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" value="Ok" /></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    <br />
+                </form>
             </div>
         </div>
         <div id="corpo">&nbsp;
