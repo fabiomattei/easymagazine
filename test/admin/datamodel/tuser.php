@@ -26,15 +26,15 @@ class UserTests extends UnitTestCase {
         $this->db->connect();
     }
 
-	function setUp() {
+    function setUp() {
         $this->db->dropSchema();
         $this->db->createSchema();
         $this->db->populateSchema();
-	}
+    }
 
-	public function tearDown() {
+    public function tearDown() {
         $this->db->dropSchema();
-	}
+    }
 
     function testfindById() {
         $usr = User::findById(1);
@@ -43,13 +43,13 @@ class UserTests extends UnitTestCase {
 
     function testfindAll() {
         $usr = User::findAll();
-		$this->assertEqual(2, count($usr));
+        $this->assertEqual(2, count($usr));
     }
 
     function testfindArticles() {
         $usr = User::findById(1);
         $arts = $usr->articles();
-		$this->assertEqual(2, count($arts));
+        $this->assertEqual(2, count($arts));
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
@@ -69,7 +69,7 @@ class UserTests extends UnitTestCase {
         $newNum = new User(User::NEW_USER, 'New User second', 'newusersecond', 'newpasswordsecond' , 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef');
         $newNum->save();
         $num = User::findAll();
-		$this->assertEqual(3, count($num));
+        $this->assertEqual(3, count($num));
     }
 
     function testUpdateUser() {
@@ -84,7 +84,12 @@ class UserTests extends UnitTestCase {
         $num = User::findById(2);
         $num->delete();
         $num = User::findAll();
-	$this->assertEqual(1, count($num));
+        $this->assertEqual(1, count($num));
+    }
+
+    function testfindUserByUsernameAndEmail() {
+        $usr = User::findByUsernameAndEmail('newuser', 'email@email.com');
+        $this->assertPattern('(email@email.com)', $usr->getEmail());;
     }
 }
 

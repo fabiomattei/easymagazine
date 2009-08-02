@@ -19,7 +19,7 @@
 
 class Password {
 
-    public static function generatePassword ($length = 8) {
+    public static function generatePassword($length = 8) {
         $password = "";
         $possible = "0123456789abcdfghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
