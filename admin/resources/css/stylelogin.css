@@ -51,11 +51,7 @@ div p {
 	background: url(../img/logo.gif) no-repeat 20px 10px;
 }
 a:link,
-a:visited{
-background:transparent;
-color:#A65F00;
-text-decoration:none;
-}
+a:visited,
 a:hover,
 a:focus,
 a:active{

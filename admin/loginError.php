@@ -18,22 +18,45 @@
  */
 
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" dir="ltr">
+    <head>
+        <title>Easy Magazine: Login Error Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="MSSmartTagsPreventParsing" content="TRUE" />
+        <link href="resources/css/stylelogin.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="corpoalto">&nbsp;
+        </div>
+        <div id="intestazione">
+            <p class="logo">&nbsp;</p>
+            <div class="menu">
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-	<title>Login Error Page</title>
-	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
-</head>
-<body>
-    Username or password wrong!<br />
-    <a href="login.php">Try again</a>. <br /><br />
-    If you lost your password please type your username and email and we will send you a new password. <br />
-    <form action="mailPassword.php" method="post">
-        Username: <input type="text" name="username" value="" /> <br />
-        Mail: <input type="text" name="password" value="" /> <br />
-        <input type="submit" value="Ok" />
-    </form>
-</body>
+                Username or password wrong!<br />
+                <a href="login.php">Try again</a>. <br /><br />
+                If you lost your password please type your username and
+                email and you will recevive a new password. <br />
+                <form action="mailPassword.php" method="post">
+                    <table>
+                        <tr>
+                            <td>Username:</td>
+                            <td><input type="text" name="username" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td><input type="text" name="password" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" value="Ok" /></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    <br />
+                </form>
+            </div>
+        </div>
+        <div id="corpo">&nbsp;
+        </div>
+    </body>
 </html>
-
