@@ -20,6 +20,15 @@
 // Create all the tables and fill it with dummy data
 
 include ('dbCreator.php');
+include ('configWriter.php');
+
+$dbName = $_POST['dbname'];
+$dbuser = $_POST['username'];
+$dbpassword = $_POST['password'];
+$dbhost = $_POST['dbhost'];
+$tbprefix = $_POST['tbprefix'];
+
+ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix);
 
 $dbCreator = new DbCreator();
 
@@ -27,8 +36,6 @@ $dbCreator->connect();
 $out = $dbCreator->createSchema();
 $out .= $dbCreator->populateSchema();
 $dbCreator->closeConnection();
-
-
 
 ?>
 

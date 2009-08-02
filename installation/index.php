@@ -37,8 +37,16 @@
                     In order to install the application please fill the form.
                     <table>
                         <tr>
+                            <td>MySql DB host:</td>
+                            <td><input type="text" name="dbhost" value="" /></td>
+                        </tr>
+                        <tr>
                             <td>MySql DB name:</td>
                             <td><input type="text" name="dbname" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>MySql DB tables prefix:</td>
+                            <td><input type="text" name="tbprefix" value="" /></td>
                         </tr>
                         <tr>
                             <td>MySql DB Username:</td>

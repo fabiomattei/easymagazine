@@ -29,11 +29,4 @@ define('DB_HOST', 'localhost');    // 99% chance you won't need to change this v
 // You can have multiple installations in one database if you give each a unique prefix
 define('TBPREFIX', 'em_');
 
-define('FOLDER', '/easymagazine/');
-
-// Change this to localize Easy Magazine.
-// A corresponding file for the
-// chosen language must be installed to contents/languages.
-define ('EMLANG', 'IT');
-
 ?>
