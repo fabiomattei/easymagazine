@@ -63,6 +63,23 @@ function articlenumber($id) {
     return $out;
 }
 
+function byuser() {
+    $out = array();
+
+    $art = new Article();
+    $out['art'] = $art;
+
+    $arts = $_SESSION['user']->articles();
+    $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+
+    $out['authors'] = User::findAll();
+
+    return $out;
+}
+
 function find($string) {
     $out = array();
 
@@ -334,6 +351,7 @@ else {
         case  'requestunlinkauthor': $out = requestunlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
         case  'dounlinkauthor':      $out = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
         case  'find':                $out = find($_POST['string']); break;
+        case  'byuser':              $out = byuser(); break;
     }
 }
 

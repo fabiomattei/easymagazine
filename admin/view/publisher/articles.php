@@ -46,8 +46,8 @@
                     <h3>Hello, <? echo $_SESSION['user']->getName() ?> </h3><br />
                     <h3>Articles</h3>
                     <ul class="nav">
-                        <li><a href="#">Show My Articles</a></li>
-                        <li class="last"><a href="#">Show All Articles</a></li>
+                        <li><a href="article.php">Show All</a></li>
+                        <li class="last"><a href="article.php?action=byuser">Show My Articles</a></li>
                     </ul>
                     <a href="#" class="link">View the website</a>
                 </div>
@@ -234,7 +234,7 @@
                             </tr>
                             <?
                             foreach ($art->users() as $ur) {
-                                ?>
+                            ?>
                             <tr>
                                 <td class="first style1"><? echo $ur->getName(); ?> - <? echo $ur->getUsername(); ?></td>
                                 <td class="last" width="50"><a href="article.php?action=requestunlinkauthor&idauthor=<? echo $ur->getId(); ?>&idarticle=<? echo $art->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>

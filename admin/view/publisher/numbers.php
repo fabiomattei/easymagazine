@@ -46,6 +46,7 @@
                     <h3>Hello, <? echo $_SESSION['user']->getName() ?> </h3><br />
                     <h3>Numbers</h3>
                     <ul class="nav">
+                        <li><a href="number.php">Show All</a></li>
                         <li><a href="number.php?action=showPublished">Show Published</a></li>
                         <li class="last"><a href="number.php?action=showNotPublished">Show Not Published</a></li>
                     </ul>
