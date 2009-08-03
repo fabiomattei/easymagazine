@@ -22,6 +22,7 @@ require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'comment.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
+require_once(STARTPATH.UTILSPATH.'pagination.php');
 require_once(STARTPATH.'lib/textile2/classTextile.php');
 
 class Article {
@@ -451,6 +452,10 @@ class Article {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxIndexNumber;
+    }
+
+    public static function getPageNumbers() {
+        return Pagination::calculatePageNumbers(DB::getInstance()->getCountLastQueryResults());
     }
 
     public function getIndexnumber() {

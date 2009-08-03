@@ -28,14 +28,21 @@ require_once(STARTPATH.UTILSPATH.'paginator.php');
 
 session_start();
 
-function index() {
+function index($posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+    
     $out = array();
 
     $art = new Article();
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -335,10 +342,10 @@ function save($toSave, $files) {
     return $out;
 }
 
-if (!isset($_GET["action"])) { $out = index(); }
+if (!isset($_GET["action"])) { $out = index($_POST); }
 else {
     switch ($_GET["action"]) {
-        case  'index':               $out = index(); break;
+        case  'index':               $out = index($_POST); break;
         case  'save':                $out = save($_POST, $_FILES); break;
         case  'edit':                $out = edit($_GET['id']); break;
         case  'dodelete':            $out = dodelete($_GET['id']); break;
@@ -351,7 +358,7 @@ else {
         case  'requestunlinkauthor': $out = requestunlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
         case  'dounlinkauthor':      $out = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
         case  'find':                $out = find($_POST['string']); break;
-        case  'byuser':              $out = byuser(); break;
+        case  'byuser':              $out = byuser($_POST); break;
     }
 }
 
@@ -359,6 +366,9 @@ $arts = $out['arts'];
 $art = $out['art'];
 $numbs = $out['numbs'];
 $authors = $out['authors'];
+$lastAction = $out['lastAction'];
+$page_numbers = $out['page_numbers'];
+$pageSelected = $out['pageSelected'];
 
 if (isset($out['info'])) { $info = $out['info']; }
 if (isset($out['warning'])) { $warning = $out['warning']; }

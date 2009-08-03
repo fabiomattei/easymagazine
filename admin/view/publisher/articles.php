@@ -111,6 +111,17 @@
                             }
                             ?>
                         </table>
+                        <div class="select">
+                            <form name="pageselectionform" method="post" action="number.php?action=<?=$lastAction?>">
+                                <strong>Pages: </strong>
+                                <select name="page">
+                                    <? for ($i=1;$i<=$page_numbers;$i++) { ?>
+                                    <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
+                                    <? }?>
+                                </select>&nbsp;
+                                <input type="submit" value="Go" name="Go" />
+                            </form>
+                        </div>
                         <form name="formnew" method="post" action="article.php">
                             <input type="submit" value="New" name="new" />
                         </form>

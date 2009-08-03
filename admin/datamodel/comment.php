@@ -231,6 +231,10 @@ class Comment {
         return $maxId;
     }
 
+    public static function getPageNumbers() {
+        return Pagination::calculatePageNumbers(DB::getInstance()->getCountLastQueryResults());
+    }
+
     public function getArticle_id() {
         return $this->article_id;
     }

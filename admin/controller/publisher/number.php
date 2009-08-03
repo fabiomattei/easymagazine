@@ -59,7 +59,7 @@ function showPublished($posts) {
     $out['page_numbers'] = Number::getPageNumbers();
     $out['pageSelected'] = $page;
 
-    $out['lastAction'] = 'index';
+    $out['lastAction'] = 'showPublished';
 
     return $out;
 }
@@ -78,7 +78,7 @@ function showNotPublished($posts) {
     $out['page_numbers'] = Number::getPageNumbers();
     $out['pageSelected'] = $page;
 
-    $out['lastAction'] = 'index';
+    $out['lastAction'] = 'showNotPublished';
 
     return $out;
 }
