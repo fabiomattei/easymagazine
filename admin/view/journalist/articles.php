@@ -266,7 +266,7 @@
                 </div>
                 <div id="right-column">
                     <strong class="h">INFO</strong>
-                    <div class="box">Here there is a list of all numbers, published and not still published.</div>
+                    <div class="box">Here there is a list of all articles, published and not still published.</div>
                 </div>
             </div>
             <div id="footer"></div>
