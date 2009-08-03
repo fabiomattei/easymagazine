@@ -43,11 +43,12 @@
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3>Hello, <? echo $_SESSION['user']->getName() ?></h3>
+			<h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
+                        <h3>Comments</h3>
 			<ul class="nav">
-				<li><a href="#">List all comments</a></li>
-				<li><a href="#">List all Authors</a></li>
-				<li class="last"><a href="#">Filter all link</a></li>
+				<li><a href="#">View all comments</a></li>
+				<li><a href="#">View my comments</a></li>
+				<li class="last"><a href="#">View comments to my articles</a></li>
 			</ul>
 			<a href="#" class="link">View in the website</a>
 		</div>

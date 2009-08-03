@@ -43,13 +43,13 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3>Hello, <? echo $_SESSION['user']->getName() ?></h3>
+                    <h3>Hello, <? echo $_SESSION['user']->getName() ?> </h3><br />
+                    <h3>Articles</h3>
                     <ul class="nav">
-                        <li><a href="#">List all comments</a></li>
-                        <li><a href="#">List all Authors</a></li>
-                        <li class="last"><a href="#">Filter all link</a></li>
+                        <li><a href="#">Show My Articles</a></li>
+                        <li class="last"><a href="#">Show All Articles</a></li>
                     </ul>
-                    <a href="#" class="link">View in the website</a>
+                    <a href="#" class="link">View the website</a>
                 </div>
                 <div id="center-column">
                     <?
@@ -254,9 +254,6 @@
                                 <td class="last" width="50"><input type="submit" value="Link" name="Link" /></td>
                             </form>
                             </tr>
-
-
-
                         </table>
                     </div>
                 </div>

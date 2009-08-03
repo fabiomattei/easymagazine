@@ -44,11 +44,10 @@
             <div id="middle">
                 <div id="left-column">
                     <h3>Hello, <? echo $_SESSION['user']->getName() ?> </h3><br />
-                    <h3>Services</h3>
+                    <h3>Numbers</h3>
                     <ul class="nav">
-                        <li><a href="#">List all comments</a></li>
-                        <li><a href="#">List all Authors</a></li>
-                        <li class="last"><a href="#">Filter all link</a></li>
+                        <li><a href="#">Show Published</a></li>
+                        <li class="last"><a href="#">Show Not Published</a></li>
                     </ul>
                     <a href="#" class="link">View the website</a>
                 </div>

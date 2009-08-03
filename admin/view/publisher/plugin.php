@@ -43,12 +43,7 @@
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3>Hello, <? echo $_SESSION['user']->getName() ?></h3>
-			<ul class="nav">
-				<li><a href="#">List all comments</a></li>
-				<li><a href="#">List all Authors</a></li>
-				<li class="last"><a href="#">Filter all link</a></li>
-			</ul>
+			<h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
 			<a href="#" class="link">View in the website</a>
 		</div>
 		<div id="center-column">
