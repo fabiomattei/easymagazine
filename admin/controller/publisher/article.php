@@ -103,6 +103,9 @@ function find($string) {
 
     $arts = Article::findInAllTextFields($string);
     $out['arts'] = $arts;
+    $out['page_numbers'] = 1;
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'find';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
