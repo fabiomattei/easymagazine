@@ -41,6 +41,21 @@ function index($posts) {
     return $out;
 }
 
+function byuser($posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
+    $out = array();
+
+    $comm = new Comment();
+    $out['comm'] = $comm;
+
+    $comms = $_SESSION['user']->articlescomments();
+    $out['comms'] = $comms;
+
+    return $out;
+}
+
 function find($string) {
     $out = array();
 
@@ -176,6 +191,7 @@ else {
         case  'commentnumber':     $out = commentnumber($_GET['id']); break;
         case  'commentarticle':    $out = commentarticle($_GET['id']); break;
         case  'find':              $out = find($_POST); break;
+        case  'byuser':            $out = byuser($_POST); break;
     }
 }
 

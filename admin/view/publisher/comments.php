@@ -46,9 +46,8 @@
 			<h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
                         <h3>Comments</h3>
 			<ul class="nav">
-				<li><a href="#">View all comments</a></li>
-				<li><a href="#">View my comments</a></li>
-				<li class="last"><a href="#">View comments to my articles</a></li>
+				<li><a href="comment.php">View all comments</a></li>
+				<li class="last"><a href="comment.php?action=byuser">View comments to my articles</a></li>
 			</ul>
 			<a href="#" class="link">View the website</a>
 		</div>

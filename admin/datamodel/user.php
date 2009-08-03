@@ -44,6 +44,7 @@ class User {
     const SELECT_USR_PSW = 'select * from users WHERE username like ? AND password like ? ';
     const SELECT_BY_ID_ORD = 'select id from users order by id DESC';
     const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
+    const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
 
     public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $role='', $email='', $msn='', $skype='', $created='', $updated='') {
         $this->db = DB::getInstance();
@@ -151,6 +152,35 @@ class User {
             }
         } catch (Exception $e) {
             $ret[] = new Article();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return $ret;
+    }
+
+    public function articlescomments() {
+        $ret = array();
+        $tables = array('comments' => TBPREFIX.'comments',
+            'articles' => TBPREFIX.'articles',
+            'users_articles' => TBPREFIX.'users_articles');
+        try {
+            $rs = DB::getInstance()->execute(
+                self::SELECT_COMMENTSARTICLES,
+                array(),
+                array("$this->id"),
+                $tables);
+            while ($row = mysql_fetch_array($rs)) {
+                $ret[] = new Comment(
+                    $row['id'],
+                    $row['article_id'],
+                    $row['title'],
+                    $row['published'],
+                    $row['body'],
+                    $row['signature'],
+                    $row['created'],
+                    $row['updated']);
+            }
+        } catch (Exception $e) {
+            $ret[] = new Comment();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
