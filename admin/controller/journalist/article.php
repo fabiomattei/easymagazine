@@ -256,7 +256,7 @@ function dounlinkauthor($idAuthor, $idArticle) {
 
     $out['authors'] = User::findAll();
 
-    $out['info'] = 'Author unlinked';
+    $out['info'] = 'Author unlinked from article';
 
     return $out;
 }
@@ -280,7 +280,7 @@ function linkauthor($idAuthor, $idArticle) {
 
     $out['authors'] = User::findAll();
 
-    $out['info'] = 'Author unlinked';
+    $out['info'] = 'Author '.$idAuthor.' linked to article '.$idArticle;
 
     return $out;
 }

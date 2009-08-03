@@ -84,6 +84,11 @@ function dodelete($id) {
 
 function save($toSave) {
     $out = array();
+    if (isset($toSave['Role'])) {
+        $toSave['Role'] = 'publisher';
+    } else {
+        $toSave['Role'] = 'journalist';
+    }
 
     $userp = new User(
         $toSave['id'],

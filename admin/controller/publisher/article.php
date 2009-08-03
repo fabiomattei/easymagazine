@@ -280,7 +280,7 @@ function linkauthor($idAuthor, $idArticle) {
 
     $out['authors'] = User::findAll();
 
-    $out['info'] = 'Author unlinked';
+    $out['info'] = 'Author linked';
 
     return $out;
 }

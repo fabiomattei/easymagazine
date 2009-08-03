@@ -254,7 +254,7 @@
                             }
                             ?>
                             <tr>
-                            <form name="formlink" method="post" action="article.php?action=linkauthor&idarticle=<? echo $art->getId(); ?>">
+                            <form name="formlinkauthor" method="post" action="article.php?action=linkauthor&idarticle=<? echo $art->getId(); ?>">
                                 <td class="first style1">
                                     <select name="authorid">
                                         <? foreach ($authors as $auth) { ?>
