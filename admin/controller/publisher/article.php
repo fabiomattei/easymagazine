@@ -41,7 +41,6 @@ function index($posts) {
     $out['arts'] = Paginator::paginate($arts, $page);
     $out['page_numbers'] = Article::getPageNumbers();
     $out['pageSelected'] = $page;
-    
     $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
@@ -61,6 +60,9 @@ function articlenumber($id) {
     $num = Number::findById($id);
     $arts = $num->articles();
     $out['arts'] = $arts;
+    $out['page_numbers'] = 1;
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'articlenumber';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -70,14 +72,20 @@ function articlenumber($id) {
     return $out;
 }
 
-function byuser() {
+function byuser($posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
     $out = array();
 
     $art = new Article();
     $out['art'] = $art;
 
     $arts = $_SESSION['user']->articles();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'byuser';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -106,13 +114,17 @@ function find($string) {
 }
 
 function edit($id) {
+    $page = 1;
     $out = array();
 
     $art = Article::findById($id);
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -123,13 +135,17 @@ function edit($id) {
 }
 
 function requestdelete($id) {
+    $page = 1;
     $out = array();
 
     $art = Article::findById($id);
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -144,6 +160,7 @@ function requestdelete($id) {
 }
 
 function dodelete($id) {
+    $page = 1;
     $out = array();
 
     $art = Article::findById($id);
@@ -152,7 +169,10 @@ function dodelete($id) {
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -165,6 +185,7 @@ function dodelete($id) {
 }
 
 function deleteimg($id) {
+    $page = 1;
     $out = array();
 
     $art = Article::findById($id);
@@ -172,7 +193,10 @@ function deleteimg($id) {
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -183,13 +207,17 @@ function deleteimg($id) {
 }
 
 function requestunlinkauthor($idAuthor, $idArticle) {
+    $page = 1;
     $out = array();
 
     $art = Article::findById($idArticle);
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -207,6 +235,7 @@ function requestunlinkauthor($idAuthor, $idArticle) {
 }
 
 function dounlinkauthor($idAuthor, $idArticle) {
+    $page = 1;
     $out = array();
 
     $art = Article::findById($idArticle);
@@ -214,7 +243,10 @@ function dounlinkauthor($idAuthor, $idArticle) {
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -227,6 +259,7 @@ function dounlinkauthor($idAuthor, $idArticle) {
 }
 
 function linkauthor($idAuthor, $idArticle) {
+    $page = 1;
     $out = array();
 
     $art = Article::findById($idArticle);
@@ -234,7 +267,10 @@ function linkauthor($idAuthor, $idArticle) {
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -247,6 +283,7 @@ function linkauthor($idAuthor, $idArticle) {
 }
 
 function up($id) {
+    $page = 1;
     $out = array();
 
     $art1 = Article::findById($id);
@@ -263,7 +300,10 @@ function up($id) {
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -274,6 +314,7 @@ function up($id) {
 }
 
 function down($id) {
+    $page = 1;
     $out = array();
 
     $art1 = Article::findById($id);
@@ -290,7 +331,10 @@ function down($id) {
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
@@ -301,6 +345,7 @@ function down($id) {
 }
 
 function save($toSave, $files) {
+    $page = 1;
     $out = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
@@ -332,7 +377,10 @@ function save($toSave, $files) {
     $out['art'] = $art;
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = $arts;
+    $out['arts'] = Paginator::paginate($arts, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $numbs = Number::findAll();
     $out['numbs'] = $numbs;
