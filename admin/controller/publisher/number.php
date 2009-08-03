@@ -45,6 +45,43 @@ function index($posts) {
     return $out;
 }
 
+function showPublished($posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
+    $out = array();
+
+    $numb = new Number();
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAllPublishedOrderedByIndexNumber();
+    $out['numbs'] = Paginator::paginate($numbs, $page);
+    $out['page_numbers'] = Number::getPageNumbers();
+    $out['pageSelected'] = $page;
+
+    $out['lastAction'] = 'index';
+
+    return $out;
+}
+
+function showNotPublished($posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
+    $out = array();
+
+    $numb = new Number();
+    $out['numb'] = $numb;
+
+    $numbs = Number::findAllNotPublishedOrderedByIndexNumber();
+    $out['numbs'] = Paginator::paginate($numbs, $page);
+    $out['page_numbers'] = Number::getPageNumbers();
+    $out['pageSelected'] = $page;
+
+    $out['lastAction'] = 'index';
+
+    return $out;
+}
 
 function find($posts) {
     if (isset($posts['page'])) {
@@ -241,6 +278,8 @@ if (isset($_SESSION['user'])) {
     else {
         switch ($_GET['action']) {
             case  'index':             $out = index($_POST); break;
+            case  'showPublished':     $out = showPublished($_POST); break;
+            case  'showNotPublished':  $out = showNotPublished($_POST); break;
             case  'save':              $out = save($_POST, $_FILES); break;
             case  'edit':              $out = edit($_GET['id']); break;
             case  'dodelete':          $out = dodelete($_GET['id']); break;

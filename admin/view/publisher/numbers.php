@@ -46,8 +46,8 @@
                     <h3>Hello, <? echo $_SESSION['user']->getName() ?> </h3><br />
                     <h3>Numbers</h3>
                     <ul class="nav">
-                        <li><a href="#">Show Published</a></li>
-                        <li class="last"><a href="#">Show Not Published</a></li>
+                        <li><a href="number.php?action=showPublished">Show Published</a></li>
+                        <li class="last"><a href="number.php?action=showNotPublished">Show Not Published</a></li>
                     </ul>
                     <a href="#" class="link">View the website</a>
                 </div>
@@ -148,7 +148,7 @@
                                 <tr>
                                     <td class="first" colspan="2"><strong>Summary</strong><br />
                                         <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
-                                        <textarea cols="40" id="article_body" name="Body" rows="20" style="width: 500px; padding: 5px"><? echo $numb->getSummary(); ?></textarea>
+                                        <textarea cols="40" id="article_body" name="Summary" rows="20" style="width: 500px; padding: 5px"><? echo $numb->getUnfilteredSummary(); ?></textarea>
                                 <link href="../../../lib/textileeditor/teh/stylesheets/textile-editor.css" media="screen" rel="Stylesheet" type="text/css" />
                                 <script src="../../../lib/textileeditor/teh/javascripts/textile-editor.js" type="text/javascript"></script>
                                 <script type="text/javascript">

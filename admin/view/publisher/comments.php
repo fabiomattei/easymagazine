@@ -50,7 +50,7 @@
 				<li><a href="#">View my comments</a></li>
 				<li class="last"><a href="#">View comments to my articles</a></li>
 			</ul>
-			<a href="#" class="link">View in the website</a>
+			<a href="#" class="link">View the website</a>
 		</div>
 		<div id="center-column">
                     <?

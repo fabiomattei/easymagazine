@@ -44,7 +44,7 @@
 	<div id="middle">
 		<div id="left-column">
 			<h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
-			<a href="#" class="link">View in the website</a>
+			<a href="#" class="link">View the website</a>
 		</div>
 		<div id="center-column">
                     <?
