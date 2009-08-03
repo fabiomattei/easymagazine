@@ -36,7 +36,10 @@ function index($posts) {
     $out['comm'] = $comm;
 
     $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     return $out;
 }
@@ -51,7 +54,10 @@ function byuser($posts) {
     $out['comm'] = $comm;
 
     $comms = $_SESSION['user']->articlescomments();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     return $out;
 }
@@ -64,12 +70,18 @@ function find($string) {
 
     $comms = Comment::findInAllTextFields($string);
     $out['comms'] = $comms;
+    $out['page_numbers'] = 1;
+    $out['pageSelected'] = 1;
+    $out['lastAction'] = 'find';
 
     if (count($comms)==0) { $out['warning'] = 'No comments corresponding to search criteria';  }
     return $out;
 }
 
-function commentnumber($id) {
+function commentnumber($id, $posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+    
     $out = array();
 
     $comm = new Comment();
@@ -77,12 +89,18 @@ function commentnumber($id) {
 
     $num = Number::findById($id);
     $comms = $num->comments();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     return $out;
 }
 
-function commentarticle($id) {
+function commentarticle($id, $posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+    
     $out = array();
 
     $comm = new Comment();
@@ -90,31 +108,42 @@ function commentarticle($id) {
 
     $art = Article::findById($id);
     $comms = $art->comments();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     return $out;
 }
 
 function edit($id) {
+    $page = 1;
     $out = array();
 
     $comm = Comment::findById($id);
     $out['comm'] = $comm;
 
     $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     return $out;
 }
 
 function requestdelete($id) {
+    $page = 1;
     $out = array();
 
     $comm = Comment::findById($id);
     $out['comm'] = $comm;
 
     $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $out['question'] = 'Do you really want to delete the comment: '.$comm->getTitle().'? <br />
     <a href="comment.php?action=dodelete&id='.$comm->getId().'">yes</a>,
@@ -124,6 +153,7 @@ function requestdelete($id) {
 }
 
 function dodelete($id) {
+    $page = 1;
     $out = array();
 
     $comm = Comment::findById($id);
@@ -132,7 +162,10 @@ function dodelete($id) {
     $out['comm'] = $comm;
 
     $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     $out['info'] = 'Comment deleted';
 
@@ -140,6 +173,7 @@ function dodelete($id) {
 }
 
 function replay($id) {
+    $page = 1;
     $out = array();
 
     $comm_to_be_replayed = Comment::findById($id);
@@ -151,12 +185,16 @@ function replay($id) {
     $out['comm'] = $comm;
 
     $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     return $out;
 }
 
 function save($toSave) {
+    $page = 1;
     $out = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
@@ -174,7 +212,10 @@ function save($toSave) {
     $out['comm'] = $comm_to_be_replayed = Comment::findById($comm->getId());
 
     $comms = Comment::findAll();
-    $out['comms'] = $comms;
+    $out['comms'] = Paginator::paginate($comms, $page);
+    $out['page_numbers'] = Article::getPageNumbers();
+    $out['pageSelected'] = $page;
+    $out['lastAction'] = 'index';
 
     return $out;
 }
@@ -188,8 +229,8 @@ else {
         case  'dodelete':          $out = dodelete($_GET['id']); break;
         case  'requestdelete':     $out = requestdelete($_GET['id']); break;
         case  'replay':            $out = replay($_GET['id']); break;
-        case  'commentnumber':     $out = commentnumber($_GET['id']); break;
-        case  'commentarticle':    $out = commentarticle($_GET['id']); break;
+        case  'commentnumber':     $out = commentnumber($_GET['id'], $_POST); break;
+        case  'commentarticle':    $out = commentarticle($_GET['id'], $_POST); break;
         case  'find':              $out = find($_POST); break;
         case  'byuser':            $out = byuser($_POST); break;
     }
@@ -197,6 +238,9 @@ else {
 
 $comms = $out['comms'];
 $comm = $out['comm'];
+$lastAction = $out['lastAction'];
+$page_numbers = $out['page_numbers'];
+$pageSelected = $out['pageSelected'];
 
 if (isset($out['info'])) { $info = $out['info']; }
 if (isset($out['warning'])) { $warning = $out['warning']; }
