@@ -65,6 +65,8 @@ class Article {
     const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber > # order by indexnumber DESC';
     const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber < # order by indexnumber';
     const SELECT_USERS = 'select US.* from users as US, users_articles as UA where US.id = UA.user_id AND UA.article_id = # order by US.id DESC';
+    const DELETE_USER = 'delete from users_articles WHERE article_id = # AND user_id = # ';
+    const LINK_USER = 'insert into users_articles (article_id, user_id) values (#, #) ';
 
 
     public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $commentsallowed='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
@@ -289,6 +291,32 @@ class Article {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
+    }
+
+    public function unlinkUser($idUser) {
+        try {
+            $tables = array('users_articles' => TBPREFIX.'users_articles');
+            $rs = DB::getInstance()->execute(
+                self::DELETE_USER,
+                array(),
+                array($this->id, $idUser),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+    }
+
+    public function linkUser($idUser) {
+        try {
+            $tables = array('users_articles' => TBPREFIX.'users_articles');
+            $rs = DB::getInstance()->execute(
+                self::LINK_USER,
+                array(),
+                array($this->id, $idUser),
+                $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
     }
 
     public function save() {

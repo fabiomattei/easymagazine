@@ -158,6 +158,70 @@ function deleteimg($id) {
     return $out;
 }
 
+function requestunlinkauthor($idAuthor, $idArticle) {
+    $out = array();
+
+    $art = Article::findById($idArticle);
+    $out['art'] = $art;
+
+    $arts = Article::findAllOrderedByIndexNumber();
+    $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+
+    $out['authors'] = User::findAll();
+
+    $author = User::findById($idAuthor);
+
+    $out['question'] = 'Do you really want to unlink the author '.$author->getName().' - '.$author->getUsername().'
+    from the article: '.$art->getTitle().'? <br />
+    <a href="article.php?action=dounlinkauthor&idauthor='.$idAuthor.'&idarticle='.$idArticle.'">yes</a>,
+    <a href="article.php">no</a>';
+
+    return $out;
+}
+
+function dounlinkauthor($idAuthor, $idArticle) {
+    $out = array();
+
+    $art = Article::findById($idArticle);
+    $art->unlinkUser($idAuthor);
+    $out['art'] = $art;
+
+    $arts = Article::findAllOrderedByIndexNumber();
+    $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+
+    $out['authors'] = User::findAll();
+
+    $out['info'] = 'Author unlinked';
+
+    return $out;
+}
+
+function linkauthor($idAuthor, $idArticle) {
+    $out = array();
+
+    $art = Article::findById($idArticle);
+    $art->linkUser($idAuthor);
+    $out['art'] = $art;
+
+    $arts = Article::findAllOrderedByIndexNumber();
+    $out['arts'] = $arts;
+
+    $numbs = Number::findAll();
+    $out['numbs'] = $numbs;
+
+    $out['authors'] = User::findAll();
+
+    $out['info'] = 'Author unlinked';
+
+    return $out;
+}
+
 function up($id) {
     $out = array();
 
@@ -257,16 +321,19 @@ function save($toSave, $files) {
 if (!isset($_GET["action"])) { $out = index(); }
 else {
     switch ($_GET["action"]) {
-        case  'index':             $out = index(); break;
-        case  'save':              $out = save($_POST, $_FILES); break;
-        case  'edit':              $out = edit($_GET['id']); break;
-        case  'dodelete':          $out = dodelete($_GET['id']); break;
-        case  'requestdelete':     $out = requestdelete($_GET['id']); break;
-        case  'up':                $out = up($_GET['id']); break;
-        case  'down':              $out = down($_GET['id']); break;
-        case  'deleteimg':         $out = deleteimg($_GET['id']); break;
-        case  'articlenumber':     $out = articlenumber($_GET['id']); break;
-        case  'find':              $out = find($_POST['string']); break;
+        case  'index':               $out = index(); break;
+        case  'save':                $out = save($_POST, $_FILES); break;
+        case  'edit':                $out = edit($_GET['id']); break;
+        case  'dodelete':            $out = dodelete($_GET['id']); break;
+        case  'requestdelete':       $out = requestdelete($_GET['id']); break;
+        case  'up':                  $out = up($_GET['id']); break;
+        case  'down':                $out = down($_GET['id']); break;
+        case  'deleteimg':           $out = deleteimg($_GET['id']); break;
+        case  'articlenumber':       $out = articlenumber($_GET['id']); break;
+        case  'linkauthor':          $out = linkauthor($_POST['authorid'], $_GET['idarticle']); break;
+        case  'requestunlinkauthor': $out = requestunlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
+        case  'dounlinkauthor':      $out = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
+        case  'find':                $out = find($_POST['string']); break;
     }
 }
 

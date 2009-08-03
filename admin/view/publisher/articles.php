@@ -237,13 +237,13 @@
                                 ?>
                             <tr>
                                 <td class="first style1"><? echo $ur->getName(); ?> - <? echo $ur->getUsername(); ?></td>
-                                <td class="last" width="50"><a href="article.php?action=unlinkauthor&id=<? echo $ur->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                <td class="last" width="50"><a href="article.php?action=requestunlinkauthor&idauthor=<? echo $ur->getId(); ?>&idarticle=<? echo $art->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
                             ?>
                             <tr>
-                            <form name="formnew" method="post" action="article.php?action=linkauthor">
+                            <form name="formlink" method="post" action="article.php?action=linkauthor&idarticle=<? echo $art->getId(); ?>">
                                 <td class="first style1">
                                     <select name="authorid">
                                         <? foreach ($authors as $auth) { ?>
