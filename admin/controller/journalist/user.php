@@ -26,58 +26,11 @@ require_once(STARTPATH.DATAMODELPATH.'user.php');
 
 session_start();
 
-function index() {
-    $out = array();
-
-    $userp = new User();
-    $out['userp'] = $userp;
-
-    $userps = User::findAll();
-    $out['userps'] = $userps;
-
-    return $out;
-}
-
 function edit($id) {
     $out = array();
 
     $userp = User::findById($id);
     $out['userp'] = $userp;
-
-    $userps = User::findAll();
-    $out['userps'] = $userps;
-
-    return $out;
-}
-
-function requestdelete($id) {
-    $out = array();
-
-    $userp = User::findById($id);
-    $out['userp'] = $userp;
-
-    $userps = User::findAll();
-    $out['userps'] = $userps;
-    
-    $out['question'] = 'Do you really want to delete the user: '.$userp->getName().' - '.$userp->getUsername().'? <br />
-    <a href="user.php?action=dodelete&id='.$userp->getId().'">yes</a>,
-    <a href="user.php">no</a>';
-
-    return $out;
-}
-
-function dodelete($id) {
-    $out = array();
-
-    $userp = User::findById($id);
-    $userp->delete();
-    $userp = new User();
-    $out['userp'] = $userp;
-
-    $userps = User::findAll();
-    $out['userps'] = $userps;
-
-    $out['info'] = 'User deleted';
 
     return $out;
 }
@@ -85,12 +38,14 @@ function dodelete($id) {
 function save($toSave) {
     $out = array();
 
+    $user_old = User::findById($_SESSION['user']->getId());
+
     $userp = new User(
-        $toSave['id'],
+        $_SESSION['user']->getId(),
         $toSave['Name'],
         $toSave['Username'],
         $toSave['Password'],
-        $toSave['Role'],
+        $user_old->getRole(),
         $toSave['Email'],
         $toSave['MSN'],
         $toSave['Skype'],
@@ -98,9 +53,6 @@ function save($toSave) {
         $toSave['updated']);
     $userp->save();
     $out['userp'] = User::findById($userp->getId());
-
-    $userps = User::findAll();
-    $out['userps'] = $userps;
 
     return $out;
 }
@@ -115,26 +67,19 @@ function savePassword($toSave) {
     }
 
     $out['userp'] = User::findById($userp->getId());
-
-    $userps = User::findAll();
-    $out['userps'] = $userps;
-
+    
     return $out;
 }
 
-if (!isset($_GET["action"])) { $out = index(); }
+if (!isset($_GET["action"])) { $out = edit($_SESSION['user']->getId()); }
 else {
     switch ($_GET["action"]) {
-        case  'index':         $out = index(); break;
         case  'save':          $out = save($_POST); break;
         case  'savePassword':  $out = savePassword($_POST); break;
         case  'edit':          $out = edit($_GET['id']); break;
-        case  'dodelete':      $out = dodelete($_GET['id']); break;
-        case  'requestdelete': $out = requestdelete($_GET['id']); break;
     }
 }
-
-$userps = $out['userps'];
+;
 $userp = $out['userp'];
 
 if (isset($out['info'])) { $info = $out['info']; }
@@ -142,6 +87,6 @@ if (isset($out['warning'])) { $warning = $out['warning']; }
 if (isset($out['question'])) { $question = $out['question']; }
 if (isset($out['error'])) { $error = $out['error']; }
 
-include('../../view/publisher/users.php');
+include('../../view/journalist/users.php');
 
 ?>

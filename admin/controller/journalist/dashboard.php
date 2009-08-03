@@ -56,6 +56,6 @@ if (isset($out['warning'])) { $warning = $out['warning']; }
 if (isset($out['question'])) { $question = $out['question']; }
 if (isset($out['error'])) { $error = $out['error']; }
 
-include('../../view/publisher/dashboard.php');
+include('../../view/journalist/dashboard.php');
 
 ?>
