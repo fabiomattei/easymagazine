@@ -102,6 +102,9 @@ function deleteimg($id) {
 
     $pags = Page::findAllOrderedByIndexNumber();
     $out['pags'] = $pags;
+
+    $out['info'] = 'Image deleted';
+
     return $out;
 }
 

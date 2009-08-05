@@ -206,10 +206,13 @@ class DbCreator {
             name varchar(255),
             username varchar(255),
             password varchar(255),
+            body text,
             role varchar(255),
             email varchar(255),
             msn varchar(255),
             skype varchar(255),
+            imgfilename varchar(255),
+            imgdescription varchar(255),
             created datetime,
             updated datetime,
             PRIMARY KEY (id));";
@@ -218,11 +221,11 @@ class DbCreator {
     }
 
     public function populateTableUsers() {
-        $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype, created, updated) values
-            ('New User', 'newuser', '".md5('psw')."', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', NOW(), NOW())";
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, imgfilename, imgdescription, created, updated) values
+            ('New User', 'newuser', '".md5('psw')."', 'short description', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype, created, updated) values
-            ('Second User', 'seconduser', '".md5("second")."', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', NOW(), NOW())";
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, imgfilename, imgdescription, created, updated) values
+            ('Second User', 'seconduser', '".md5("second")."', 'short description', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }

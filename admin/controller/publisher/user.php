@@ -82,7 +82,22 @@ function dodelete($id) {
     return $out;
 }
 
-function save($toSave) {
+function deleteimg($id) {
+    $out = array();
+
+    $userp = User::findById($id);
+    $userp->deleteImg();
+    $out['userp'] = $userp;
+
+    $userps = User::findAll();
+    $out['userps'] = $userps;
+
+    $out['info'] = 'Image deleted';
+
+    return $out;
+}
+
+function save($toSave, $files) {
     $out = array();
     if (isset($toSave['Role'])) {
         $toSave['Role'] = 'publisher';
@@ -90,18 +105,29 @@ function save($toSave) {
         $toSave['Role'] = 'journalist';
     }
 
+    if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
+
     $userp = new User(
         $toSave['id'],
         $toSave['Name'],
         $toSave['Username'],
         $toSave['Password'],
+        $toSave['Body'],
         $toSave['Role'],
         $toSave['Email'],
         $toSave['MSN'],
         $toSave['Skype'],
+        $toSave['imagefilename'],
+        $toSave['ImageDescription'],
         $toSave['created'],
         $toSave['updated']);
     $userp->save();
+
+    if (isset($files['Image']) && $files['Image']['size'] > 0) {
+        $userp->deleteImg();
+        $userp->saveImg($files['Image']);
+    }
+
     $out['userp'] = User::findById($userp->getId());
 
     $userps = User::findAll();
@@ -131,7 +157,7 @@ if (!isset($_GET["action"])) { $out = index(); }
 else {
     switch ($_GET["action"]) {
         case  'index':         $out = index(); break;
-        case  'save':          $out = save($_POST); break;
+        case  'save':          $out = save($_POST, $_FILES); break;
         case  'savePassword':  $out = savePassword($_POST); break;
         case  'edit':          $out = edit($_GET['id']); break;
         case  'dodelete':      $out = dodelete($_GET['id']); break;

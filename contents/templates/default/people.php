@@ -23,12 +23,14 @@
 
     <? foreach($this->people  as $user) { ?>
 
-    <div class="date"><small><?= $user->getName() ?></small></div>
+    <div class="date"><h4><?= $user->getName() ?></h4></div>
 
     <div class="entry">
+         <? if ($user->imageExists()) { ?>
+            <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>" width="60" align="left">
+         <? } ?>
 
-               riassuntino
-
+         <?= $user->getBody() ?>
     </div>
 
     <? } ?>

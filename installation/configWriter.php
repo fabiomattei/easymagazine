@@ -19,7 +19,7 @@
 
 class ConfigWriter {
 
-    public static function writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix) {
+    public static function writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder) {
         $filename = '../config.php';
 
         $handle = fopen($filename, 'w');
@@ -30,6 +30,11 @@ class ConfigWriter {
 
         ConfigWriter::write($handle, '<?PHP ');
 
+        if ($folder == '') $folder = '/';
+        else $folder = '/'.$folder.'/';
+
+        $toWrite = ' define(\'FOLDER\', \''.$folder.'\'); ';
+        ConfigWriter::write($handle, $toWrite);
         $toWrite = ' define(\'DB_NAME\', \''.$dbName.'\'); ';
         ConfigWriter::write($handle, $toWrite);
         $toWrite = ' define(\'DB_USER\', \''.$dbuser.'\'); ';

@@ -57,6 +57,10 @@
                             <td><input type="password" name="password" value="" /></td>
                         </tr>
                         <tr>
+                            <td>SubFolder: <br />(Ex. in www.mydomain.org/mymag)<br />folder is mymag</td>
+                            <td valign="top"><input type="text" name="folder" value="" /></td>
+                        </tr>
+                        <tr>
                             <td><input type="submit" value="Ok" /></td>
                             <td>&nbsp;</td>
                         </tr>

@@ -27,8 +27,9 @@ $dbuser = $_POST['username'];
 $dbpassword = $_POST['password'];
 $dbhost = $_POST['dbhost'];
 $tbprefix = $_POST['tbprefix'];
+$folder = $_POST['folder'];
 
-ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix);
+ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder);
 
 $dbCreator = new DbCreator();
 

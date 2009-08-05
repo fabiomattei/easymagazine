@@ -281,10 +281,13 @@ class Article {
                     $row['name'],
                     $row['username'],
                     $row['password'],
+                    $row['body'],
                     $row['role'],
                     $row['email'],
                     $row['msn'],
                     $row['skype'],
+                    $row['imgfilename'],
+                    $row['imgdescription'],
                     $row['created'],
                     $row['updated']);
             }

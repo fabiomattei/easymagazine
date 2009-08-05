@@ -92,9 +92,18 @@ class DbCreator {
 
     public function populateTableArticles() {
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
-            (1, 1, 1, 1, 'My firts Article', 'Subtitle of my first article', 'summary of my first article',
-            'Body of my first article', 1, 'tag of my first article',
-            'metadescription of my first article', 'metakeyword of my first article', '', '', now(), now())";
+            (1, 1, 1, 1, 'My firts Article', 'Subtitle of my first article',
+            'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.',
+            'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt. Gallos ab Aquitanis Garumna flumen, a Belgis Matrona et Sequana dividit. Horum omnium fortissimi sunt Belgae, propterea quod a cultu atque humanitate provinciae longissime absunt, minimeque ad eos mercatores saepe commeant atque ea quae ad effeminandos animos pertinent important, proximique sunt Germanis, qui trans Rhenum incolunt, quibuscum continenter bellum gerunt. Qua de causa Helvetii quoque reliquos Gallos virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, cum aut suis finibus eos prohibent aut ipsi in eorum finibus bellum gerunt. Eorum una, pars, quam Gallos obtinere dictum est, initium capit a flumine Rhodano, continetur Garumna flumine, Oceano, finibus Belgarum, attingit etiam ab Sequanis et Helvetiis flumen Rhenum, vergit ad septentriones. Belgae ab extremis Galliae finibus oriuntur, pertinent ad inferiorem partem fluminis Rheni, spectant in septentrionem et orientem solem. Aquitania a Garumna flumine ad Pyrenaeos montes et eam partem Oceani quae est ad Hispaniam pertinet; spectat inter occasum solis et septentriones.',
+            1, 'tag of my first article',
+            'metadescription of my first article', 'metakeyword of my first article', 'viale_dei_pini.jpg', '', '2009-08-03', '2009-08-03')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (2, 1, 2, 1, 'My second Article', 'Subtitle of my first article',
+            'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.',
+            'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt. Gallos ab Aquitanis Garumna flumen, a Belgis Matrona et Sequana dividit. Horum omnium fortissimi sunt Belgae, propterea quod a cultu atque humanitate provinciae longissime absunt, minimeque ad eos mercatores saepe commeant atque ea quae ad effeminandos animos pertinent important, proximique sunt Germanis, qui trans Rhenum incolunt, quibuscum continenter bellum gerunt. Qua de causa Helvetii quoque reliquos Gallos virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, cum aut suis finibus eos prohibent aut ipsi in eorum finibus bellum gerunt. Eorum una, pars, quam Gallos obtinere dictum est, initium capit a flumine Rhodano, continetur Garumna flumine, Oceano, finibus Belgarum, attingit etiam ab Sequanis et Helvetiis flumen Rhenum, vergit ad septentriones. Belgae ab extremis Galliae finibus oriuntur, pertinent ad inferiorem partem fluminis Rheni, spectant in septentrionem et orientem solem. Aquitania a Garumna flumine ad Pyrenaeos montes et eam partem Oceani quae est ad Hispaniam pertinet; spectat inter occasum solis et septentriones.',
+            1, 'tag of my first article',
+            'metadescription of my first article', 'metakeyword of my first article', 'viale_dei_pini.jpg', '', '2009-08-03', '2009-08-03')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -175,10 +184,13 @@ class DbCreator {
             name varchar(255),
             username varchar(255),
             password varchar(255),
+            body text,
             role varchar(255),
             email varchar(255),
             msn varchar(255),
             skype varchar(255),
+            imgfilename varchar(255),
+            imgdescription varchar(255),
             created datetime,
             updated datetime,
             PRIMARY KEY (id));";
@@ -187,11 +199,15 @@ class DbCreator {
     }
 
     public function populateTableUsers() {
-        $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype, created, updated) values
-            ('New User', 'user', '".md5("psw")."', 'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', NOW(), NOW())";
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, imgfilename, imgdescription, created, updated) values
+            ('New User', 'user', '".md5("psw")."', 
+            'Tityre, tu patulae recubans sub tegmine fagi siluestrem tenui musam meditaris auena: nos patriae finis et dulcia linquimus arua. nos patriam fugimus: tu, Tityre, lentus in umbra formosam resonare doces Amaryllida siluas. O Meliboee, deus nobis haec otia fecit. namque erit ille mihi semper deus, illius aram saepe tener nostris ab ouilibus imbuet agnus. ille meas errare boues, ut cernis, et ipsum ludere quae uellem calamo permisit agresti. Non equidem inuideo, miror magis; undique totis',
+            'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', 'faccina.png', '', '2009-08-06', '2009-08-06')";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."users (name, username, password, role, email, msn, skype, created, updated) values
-            ('New User', 'newuser', '".md5("psw")."', 'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', NOW(), NOW())";
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, imgfilename, imgdescription, created, updated) values
+            ('New User', 'newuser', '".md5("psw")."', 
+            'Tityre, tu patulae recubans sub tegmine fagi siluestrem tenui musam meditaris auena: nos patriae finis et dulcia linquimus arua. nos patriam fugimus: tu, Tityre, lentus in umbra formosam resonare doces Amaryllida siluas. O Meliboee, deus nobis haec otia fecit. namque erit ille mihi semper deus, illius aram saepe tener nostris ab ouilibus imbuet agnus. ille meas errare boues, ut cernis, et ipsum ludere quae uellem calamo permisit agresti. Non equidem inuideo, miror magis; undique totis',
+            'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', '', '', '2009-08-06', '2009-08-06')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
