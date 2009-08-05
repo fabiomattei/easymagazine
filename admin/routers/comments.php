@@ -26,10 +26,12 @@ class CommentsRouter extends Router {
 
     private $article;
     private $pages;
+    private $numbers;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
+        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
     }
 

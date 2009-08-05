@@ -10,7 +10,7 @@
 <h2>Lasts Numbers</h2>
 <ul>
     <? foreach ($this->numbers as $num) {
-           echo '<li><a href="http://wp-themes.com/?p=19">'.$num->getTitle().'</a></li>';
+           echo '<li><a href="'.URIMaker::number($num).'">'.$num->getTitle().'</a></li>';
        }?>
 </ul>
 </div>
@@ -38,15 +38,15 @@
     <div class="entry">
 
          <? if ($article->imageExists()) { ?>
-        <img src="<? echo $article->imagePath(); ?>" width="100" align="left">
+        <img src="<?= URIMaker::fromBasePath($article->imagePath()) ?>" width="100" align="left">
          <? } ?>
 
         <?= $article->getSummary() ?>
 
     </div>
 
-    <p class="info">
-        <? echo '<a href="'.URIMaker::comment($article).'"> comments </a>'; ?>
+    <p class="date">
+        <? echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->comments()).') </a>'; ?>
     </p>
 
     <? } ?>

@@ -9,13 +9,9 @@
 
 <h2>Lasts Numbers</h2>
 <ul>
-<li><a href='http://wp-themes.com/?p=19'>Worth A Thousand Words</a></li>
-<li><a href='http://wp-themes.com/?p=36'>Elements</a></li>
-<li><a href='http://wp-themes.com/?p=14'>More Tags</a></li>
-<li><a href='http://wp-themes.com/?p=8'>HTML</a></li>
-<li><a href='http://wp-themes.com/?p=6'>Links</a></li>
-<li><a href='http://wp-themes.com/?p=4'>Category Hierarchy</a></li>
-<li><a href='http://wp-themes.com/?p=1'>Hello world!</a></li>
+    <? foreach ($this->numbers as $num) {
+           echo '<li><a href="'.URIMaker::number($num).'">'.$num->getTitle().'</a></li>';
+       }?>
 </ul>
 </div>
 
@@ -23,25 +19,17 @@
 
 <div class="post">
 
-    <h1><?= $this->number->getTitle() ?></h1>
+    <h1>People</h1>
 
-    <? foreach($this->number->articles()  as $article) { ?>
+    <? foreach($this->people  as $user) { ?>
 
-    <h2>
-        <? echo '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
-    </h2>
-
-    <div class="date"><small>autore data </small></div>
+    <div class="date"><small><?= $user->getName() ?></small></div>
 
     <div class="entry">
 
                riassuntino
 
     </div>
-
-    <p class="info">
-        <? echo '<a href="'.URIMaker::comment($article).'"> comments </a>'; ?>
-        <strong>|</strong> autore</p>
 
     <? } ?>
 

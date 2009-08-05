@@ -21,11 +21,14 @@ require_once('router.php');
 
 class NumberRouter extends Router {
 
-    private $article;
+    private $pages;
+    private $number;
+    private $numbers;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->number = Number::findById($arURI['id']);
+        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
     }
 

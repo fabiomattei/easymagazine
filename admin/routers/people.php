@@ -26,11 +26,13 @@ class PeopleRouter extends Router {
 
     private $people;
     private $pages;
+    private $numbers;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->people = User::findAll();
         $this->pages = Page::findAllPublished();
+        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
     }
 
     function applyTemplate(){

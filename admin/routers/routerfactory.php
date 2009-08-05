@@ -22,6 +22,7 @@ require_once('comments.php');
 require_once('page.php');
 require_once('article.php');
 require_once('number.php');
+require_once('people.php');
 
 class RouterFactory {
 
@@ -37,6 +38,8 @@ class RouterFactory {
         if ($request['Router'] == "article") $out = new ArticlesRouter($request);
 
         if ($request['Router'] == "number") $out = new NumberRouter($request);
+
+        if ($request['Router'] == "people") $out = new PeopleRouter($request);
 
         return $out;
     }

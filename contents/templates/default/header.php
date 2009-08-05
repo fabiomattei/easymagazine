@@ -20,7 +20,7 @@
                 <ul id="nav">
 
                     <li class="page_item"><a href="<?= URIMaker::fromBasePath('index.php') ?>">Home</a></li>
-                    <li class="page_item"><a href="<?= URIMaker::fromBasePath('people.php') ?>">People</a></li>
+                    <li class="page_item"><a href="<?= URIMaker::people() ?>">People</a></li>
 
                     <?
                     foreach (Page::findAllOrdered() as $page) {

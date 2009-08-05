@@ -23,7 +23,7 @@ class URIMaker {
     }
 
     static function number($number) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'numbers/'.$number->getTitle().'/'.$article->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'numbers/'.$number->getTitle().'/'.$number->getId();
     }
 
     static function comment($article) {
@@ -32,6 +32,10 @@ class URIMaker {
 
     static function page($page) {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'pages/'.$page->getTitle().'/'.$page->getId();
+    }
+
+    static function people() {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'people/';
     }
 
     static function index() {

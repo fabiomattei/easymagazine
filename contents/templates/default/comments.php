@@ -9,13 +9,9 @@
 
 <h2>Lasts Numbers</h2>
 <ul>
-<li><a href='http://wp-themes.com/?p=19'>Worth A Thousand Words</a></li>
-<li><a href='http://wp-themes.com/?p=36'>Elements</a></li>
-<li><a href='http://wp-themes.com/?p=14'>More Tags</a></li>
-<li><a href='http://wp-themes.com/?p=8'>HTML</a></li>
-<li><a href='http://wp-themes.com/?p=6'>Links</a></li>
-<li><a href='http://wp-themes.com/?p=4'>Category Hierarchy</a></li>
-<li><a href='http://wp-themes.com/?p=1'>Hello world!</a></li>
+    <? foreach ($this->numbers as $num) {
+           echo '<li><a href="'.URIMaker::number($num).'">'.$num->getTitle().'</a></li>';
+       }?>
 </ul>
 </div>
 
@@ -23,21 +19,37 @@
 
 <div class="post">
 
-    <h1><?= $this->number->getTitle() ?></h1>
-
-    <? foreach($this->number->articles()  as $article) { ?>
-
     <h2>
         <?= $this->article->getTitle(); ?>
     </h2>
 
-    <div class="date"><small>autore data </small></div>
+    <div class="date"><small><?= $this->article->getCreatedFormatted() ?></small> by
+            <?
+        foreach ($this->article->users() as $user) {
+             echo $user->getName().' ';
+        }
+        ?>
+    </div>
+
+        <div class="entry">
+
+        <?= $this->article->getSummary() ?>
+
+    </div>
+
+    <h3>Comments</h3>
 
     <? foreach($this->article->comments()  as $comment) { ?>
 
+    <div class="date"><small><?= $comment->getCreatedFormatted() ?></small> by
+           <?= $comment->getSignature() ?>
+    </div>
+
     <div class="entry">
 
-               <?= $comment->getTitle() ?>
+        <?= $comment->getTitle() ?><br />
+
+        <?= $comment->getBody() ?>
 
     </div>
 

@@ -24,10 +24,12 @@ class PagesRouter extends Router {
 
     private $page;
     private $pages;
+    private $numbers;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->page = Page::findById($arURI['id']);
+        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
     }
 
