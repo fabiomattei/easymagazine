@@ -38,8 +38,8 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER;
     }
 
-    static function fromBasePath() {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER;
+    static function fromBasePath($path) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.$path;
     }
 }
 

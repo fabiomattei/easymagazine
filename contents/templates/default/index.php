@@ -9,13 +9,9 @@
 
 <h2>Lasts Numbers</h2>
 <ul>
-<li><a href='http://wp-themes.com/?p=19'>Worth A Thousand Words</a></li>
-<li><a href='http://wp-themes.com/?p=36'>Elements</a></li>
-<li><a href='http://wp-themes.com/?p=14'>More Tags</a></li>
-<li><a href='http://wp-themes.com/?p=8'>HTML</a></li>
-<li><a href='http://wp-themes.com/?p=6'>Links</a></li>
-<li><a href='http://wp-themes.com/?p=4'>Category Hierarchy</a></li>
-<li><a href='http://wp-themes.com/?p=1'>Hello world!</a></li>
+    <? foreach ($this->numbers as $num) {
+           echo '<li><a href="http://wp-themes.com/?p=19">'.$num->getTitle().'</a></li>';
+       }?>
 </ul>
 </div>
 
@@ -31,31 +27,28 @@
         <? echo '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
     </h2>
 
-    <div class="date"><small><?= $article->getCreatedFormatted() ?></small></div>
+    <div class="date"><small><?= $article->getCreatedFormatted() ?></small> by
+            <?
+        foreach ($article->users() as $user) {
+             echo $user->getName().' ';
+        }
+        ?>
+    </div>
 
     <div class="entry">
 
-               <?= $article->getSummary() ?>
+         <? if ($article->imageExists()) { ?>
+        <img src="<? echo $article->imagePath(); ?>" width="100" align="left">
+         <? } ?>
+
+        <?= $article->getSummary() ?>
 
     </div>
 
     <p class="info">
         <? echo '<a href="'.URIMaker::comment($article).'"> comments </a>'; ?>
-        <strong>|</strong>
-        <?
-        foreach ($article->users() as $user) {
-             echo $user->getName().' ';
-        }
-        ?>
     </p>
 
     <? } ?>
 
 </div>
-
-
-<?php
-
-echo "<img src=\"contents/templates/default/example.png\">";
-
-?>

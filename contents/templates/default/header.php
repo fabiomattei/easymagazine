@@ -6,7 +6,7 @@
 
         <title>Easy Magazine</title>
 
-        <link rel="stylesheet" href="<?= URIMaker::fromBasePath() ?>contents/templates/default/style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?= URIMaker::fromBasePath('contents/templates/default/style.css') ?>" type="text/css" media="screen" />
 
     </head>
 
@@ -19,7 +19,8 @@
 
                 <ul id="nav">
 
-                    <li class="page_item"><a href="index.php">Home</a></li>
+                    <li class="page_item"><a href="<?= URIMaker::fromBasePath('index.php') ?>">Home</a></li>
+                    <li class="page_item"><a href="<?= URIMaker::fromBasePath('people.php') ?>">People</a></li>
 
                     <?
                     foreach (Page::findAllOrdered() as $page) {
@@ -33,6 +34,6 @@
                     Little Magazine Description
                 </p>
 
-                <h1><a href="info.html">Magazine Title</a></h1>
+                <h1><a href="<?= URIMaker::fromBasePath() ?>index.php">Magazine Title</a></h1>
 
             </div>

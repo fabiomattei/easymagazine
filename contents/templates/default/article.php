@@ -25,10 +25,19 @@
 
     <h2><?= $this->article->getTitle() ?></h2>
 
-    <div class="date"><small>autore data </small></div>
+        <div class="date"><small><?= $this->article->getCreatedFormatted() ?></small> by
+            <?
+        foreach ($this->article->users() as $user) {
+             echo $user->getName().' ';
+        }
+        ?>
+    </div>
 
     <div class="entry">
-
+        <? if ($this->article->imageExists()) { ?>
+        <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" align="left">
+        <? } ?>
+        
          <?= $this->article->getBody() ?>
 
     </div>
