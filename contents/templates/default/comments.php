@@ -1,31 +1,46 @@
-<?php
+<div id="sidebar">
 
-/*
-    Copyright (C) 2009  Fabio Mattei
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+      <h2>About this Magazine</h2>
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+      <p class="news">
+          A little something about you, the author. Nothing lengthy, just an overview.
+      </p>
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+<h2>Lasts Numbers</h2>
+<ul>
+<li><a href='http://wp-themes.com/?p=19'>Worth A Thousand Words</a></li>
+<li><a href='http://wp-themes.com/?p=36'>Elements</a></li>
+<li><a href='http://wp-themes.com/?p=14'>More Tags</a></li>
+<li><a href='http://wp-themes.com/?p=8'>HTML</a></li>
+<li><a href='http://wp-themes.com/?p=6'>Links</a></li>
+<li><a href='http://wp-themes.com/?p=4'>Category Hierarchy</a></li>
+<li><a href='http://wp-themes.com/?p=1'>Hello world!</a></li>
+</ul>
+</div>
 
-echo $this->article->getTitle()."<br>";
+<div id="content">
 
-foreach($this->article->comments()  as $comment) {
-    echo $comment->getTitle()."<br>";
-}
+<div class="post">
 
-echo "<br><br>Pages<br>";
-foreach($this->pages  as $page) {
-    echo '<a href="'.URIMaker::page($page).'"> '.$page->getTitle()." </a><br>";
-}
+    <h1><?= $this->number->getTitle() ?></h1>
 
-?>
+    <? foreach($this->number->articles()  as $article) { ?>
+
+    <h2>
+        <?= $this->article->getTitle(); ?>
+    </h2>
+
+    <div class="date"><small>autore data </small></div>
+
+    <? foreach($this->article->comments()  as $comment) { ?>
+
+    <div class="entry">
+
+               <?= $comment->getTitle() ?>
+
+    </div>
+
+    <? } ?>
+
+</div>

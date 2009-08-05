@@ -24,7 +24,7 @@ require_once(COMMANDPATH.'/remote.php');
 class ProofCommand implements Command {
 
     function execute(){
-        echo "<br>I'm a command!!!<br>";
+        // echo "<br>I'm a command!!!<br>";
     }
     
 }

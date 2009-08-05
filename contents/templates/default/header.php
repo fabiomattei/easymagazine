@@ -1,30 +1,38 @@
-<?php
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-echo "
-<html>
-<head>
-<link rel=\"stylesheet\" href=\"contents/templates/default/style.css\" type=\"text/css\" media=\"screen\"/>
-</head>
-<Body>
-";
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-/*
-    Copyright (C) 2009  Fabio Mattei
+    <head profile="http://gmpg.org/xfn/11">
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+        <title>Easy Magazine</title>
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+        <link rel="stylesheet" href="<?= URIMaker::fromBasePath() ?>contents/templates/default/style.css" type="text/css" media="screen" />
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+    </head>
 
-echo "I 'm the header";
+    <body>
 
-?>
+        <div ><a name='up' id='up'></a></div>
+        <div id="wrapper">
+
+            <div id="header">
+
+                <ul id="nav">
+
+                    <li class="page_item"><a href="index.php">Home</a></li>
+
+                    <?
+                    foreach (Page::findAllOrdered() as $page) {
+                         echo '<li class="page_item"><a href="'.URIMaker::page($page).'">'.$page->getTitle().'</a></li>';
+                    }
+                    ?>
+
+                </ul>
+
+                <p class="description">
+                    Little Magazine Description
+                </p>
+
+                <h1><a href="info.html">Magazine Title</a></h1>
+
+            </div>

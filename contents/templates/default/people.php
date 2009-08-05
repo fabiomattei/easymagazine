@@ -23,27 +23,33 @@
 
 <div class="post">
 
-    <h2><?= $this->article->getTitle() ?></h2>
+    <h1><?= $this->number->getTitle() ?></h1>
+
+    <? foreach($this->number->articles()  as $article) { ?>
+
+    <h2>
+        <? echo '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
+    </h2>
 
     <div class="date"><small>autore data </small></div>
 
     <div class="entry">
 
-         <?= $this->article->getBody() ?>
+               riassuntino
 
     </div>
 
-    <p class="info">commenti (09) <strong>|</strong> autore</p>
+    <p class="info">
+        <? echo '<a href="'.URIMaker::comment($article).'"> comments </a>'; ?>
+        <strong>|</strong> autore</p>
+
+    <? } ?>
 
 </div>
 
 
 <?php
 
-
-echo "<br><br>Pages<br>";
-foreach($this->pages  as $page) {
-    echo '<a href="'.URIMaker::page($page).'"> '.$page->getTitle()." </a><br>";
-}
+echo "<img src=\"contents/templates/default/example.png\">";
 
 ?>

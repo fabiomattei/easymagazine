@@ -17,26 +17,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once('router.php');
+class Data {
 
-class NumberRouter extends Router {
-
-    private $article;
-
-    function loadData(){
-        $arURI = $this->getArrayURI();
-        $this->number = Number::findById($arURI['id']);
-        $this->pages = Page::findAllPublished();
-    }
-
-    function applyTemplate(){
-        $this->getRemote()->executeCommandBeforeNumber();
-        if (file_exists(TEMPLATEPATH.'/number.php')) {
-            include (TEMPLATEPATH.'/number.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
-        $this->getRemote()->executeCommandAfterNumber();
+    public static function DataFormat($data) {
+        return date("d M Y",strtotime($data));
     }
 
 }

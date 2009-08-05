@@ -17,26 +17,30 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(STARTPATH.DATAMODELPATH.'/user.php');
+require_once(STARTPATH.DATAMODELPATH.'/page.php');
+
 require_once('router.php');
 
-class NumberRouter extends Router {
+class PeopleRouter extends Router {
 
-    private $article;
+    private $people;
+    private $pages;
 
     function loadData(){
         $arURI = $this->getArrayURI();
-        $this->number = Number::findById($arURI['id']);
+        $this->people = User::findAll();
         $this->pages = Page::findAllPublished();
     }
 
     function applyTemplate(){
-        $this->getRemote()->executeCommandBeforeNumber();
-        if (file_exists(TEMPLATEPATH.'/number.php')) {
-            include (TEMPLATEPATH.'/number.php');
+        $this->getRemote()->executeCommandBeforeArticle();
+        if (file_exists(TEMPLATEPATH.'/people.php')) {
+            include (TEMPLATEPATH.'/people.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
             include (TEMPLATEPATH.'/index.php');
         }
-        $this->getRemote()->executeCommandAfterNumber();
+        $this->getRemote()->executeCommandAfterArticle();
     }
 
 }

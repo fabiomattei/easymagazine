@@ -37,6 +37,10 @@ class URIMaker {
     static function index() {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER;
     }
+
+    static function fromBasePath() {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER;
+    }
 }
 
 ?>
