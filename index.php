@@ -25,6 +25,7 @@ require_once(TEMPLATEBASEPATH.'templateIncluder.php');
 require_once(ROUTERPATH.'routerfactory.php');
 require_once(URIPATH.'uridefault.php');
 
+
 if (isset ($_GET['uri'])) {
     $uridefault = new UriDefault($_GET['uri']);
     $uridefault->evaluate();
