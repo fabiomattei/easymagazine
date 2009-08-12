@@ -46,11 +46,14 @@ class Page {
     const UPDATE_SQL_IMG = 'update pages set imgfilename = ?, updated = Now() where id = #';
     const UPDATE_SQL_IMG_IMGDESC = 'update pages set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from pages where id = # ';
-    const SELECT_BY_ID = 'select * from pages where id = #';
+    const SELECT_BY_ID = 'select * from pages where id = # ';
     const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber';
     const SELECT_ALL = 'select * from pages order by indexnumber';
-    const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber';
+    const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber ';
+    const SELECT_MAX_INDEXNUMBER = 'select max(indexnumber) from pages ';
     const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from pages where published = 1 order by indexnumber';
+    const SELECT_UP_INDEXNUMBER = 'select * from pages WHERE indexnumber > # order by indexnumber ';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from pages WHERE indexnumber < # order by indexnumber DESC ';
     const SELECT_BY_TITLE = 'select * from pages where title like ?';
     const FIND_IN_ALL_TEXT_FIELDS = 'select * from pages where title like ? OR subtitle like ? OR summary like ? OR body like ? ';
     const SELECT_BY_ID_ORD = 'select id from pages order by id DESC';
@@ -147,6 +150,16 @@ class Page {
 
     public static function findAllOrderedByIndexNumber() {
         $ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
+        return $ret;
+    }
+
+    public function findUpIndexNumber () {
+        $ret = PAGE::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($this->indexnumber));
+        return $ret;
+    }
+
+    public function findDownIndexNumber() {
+        $ret = PAGE::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($this->indexnumber));
         return $ret;
     }
 
@@ -255,14 +268,17 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_INDEXNUMBER,
+                self::SELECT_MAX_INDEXNUMBER,
                 array(),
                 array(),
                 $tables);
-            $row = mysql_fetch_array($rs);
-            $maxIndexNumber = $row['indexnumber'];
+            if ($row = mysql_fetch_array($rs)) {
+                $maxIndexNumber = $row[0];
+            } else {
+                $maxIndexNumber = 1;
+            }
         } catch (Exception $e) {
-            $maxIndexNumber = 0;
+            $maxIndexNumber = 1;
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxIndexNumber;
