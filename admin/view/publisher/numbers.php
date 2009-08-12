@@ -47,8 +47,8 @@
                     <h3>Numbers</h3>
                     <ul class="nav">
                         <li><a href="number.php">Show All</a></li>
-                        <li><a href="number.php?action=showPublished">Show Published</a></li>
-                        <li class="last"><a href="number.php?action=showNotPublished">Show Not Published</a></li>
+                        <li><a href="number.php?list=showPublished">Show Published</a></li>
+                        <li class="last"><a href="number.php?list=showNotPublished">Show Not Published</a></li>
                     </ul>
                     <a href="#" class="link">View the website</a>
                 </div>
@@ -97,9 +97,9 @@
                                 ?>
                             <tr>
                                 <td class="first style1"><? echo $num->getTitle(); ?></td>
-                                <td><a href="number.php?action=edit&id=<? echo $num->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                <td><a href="number.php?action=up&id=<? echo $num->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="number.php?action=down&id=<? echo $num->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="number.php?action=edit&id=<? echo $num->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td><a href="number.php?action=up&id=<? echo $num->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="number.php?action=down&id=<? echo $num->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="article.php?action=articlenumber&id=<? echo $num->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="comment.php?action=commentnumber&id=<? echo $num->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
                                 <td>
@@ -109,31 +109,32 @@
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                         <? } ?>
                                 </td>
-                                <td class="last"><a href="number.php?action=requestdelete&id=<? echo $num->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                <td class="last"><a href="number.php?action=requestdelete&id=<? echo $num->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
                             ?>
                         </table>
                         <div class="select">
-                            <form name="pageselectionform" method="post" action="number.php?action=<?=$lastAction?>">
+                            <form name="pageselectionform" method="post" action="number.php?lastList=<?=$lastList?>">
                                 <strong>Pages: </strong>
                                 <select name="page">
                                     <? for ($i=1;$i<=$page_numbers;$i++) { ?>
                                     <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
                                     <? }?>
                                 </select>&nbsp;
+                                <input type="hidden" name="movinglist" value="yes" />
                                 <input type="submit" value="Go" name="Go" />
                             </form>
                         </div>
-                        <form name="formnew" method="post" action="number.php">
+                        <form name="formnew" method="post" action="number.php?list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
                             <input type="submit" value="New" name="new" />
                         </form>
                     </div>
                     <div class="table">
                         <img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                        <form name="form1" enctype="multipart/form-data" method="post" action="number.php?action=save">
+                        <form name="form1" enctype="multipart/form-data" method="post" action="number.php?action=save&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
                             <table class="listing form" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <th class="full" colspan="2">Edit</th>
@@ -215,7 +216,8 @@
                 </div>
                 <div id="right-column">
                     <strong class="h">INFO</strong>
-                    <div class="box">Here there is a list of all numbers, published and not still published.</div>
+                    <div class="box">Here there is a list of all numbers, published and not still published.<br />
+                    Numbers are showed in the same order than in the website.</div>
                 </div>
             </div>
             <div id="footer"></div>

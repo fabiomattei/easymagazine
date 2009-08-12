@@ -57,10 +57,11 @@ class Number {
     const SELECT_ALL_NOTPUB_ORD_INDEXNUMBER = 'select * from numbers where published = 0 order by indexnumber DESC';
     const SELECT_ARTICLES = 'select * from articles where number_id = # order by indexnumber DESC';
     const SELECT_ARTICLES_PUBLISHED = 'select * from articles where number_id = # AND published = 1 order by indexnumber DESC';
-    const SELECT_BY_INDEXNUMBER = 'select indexnumber from numbers order by indexnumber DESC';
+    const SELECT_BY_INDEXNUMBER = 'select * from numbers order by indexnumber DESC ';
+    const SELECT_MAX_INDEXNUMBER = 'select max(indexnumber) from numbers ';
     const SELECT_BY_ID_ORD = 'select id from numbers order by id DESC';
-    const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber DESC';
-    const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < # order by indexnumber';
+    const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber ';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < # order by indexnumber DESC ';
     const SELECT_COMMENTS = 'select C.* from comments as C, articles as A where A.number_id = # AND C.article_id = A.id order by C.created DESC';
 
     public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $commentsallowed='', $imgfilename='', $imgdescription='', $created='', $updated='') {
@@ -91,9 +92,12 @@ class Number {
                 $array_str,
                 $array_int,
                 $tables);
-            $row = mysql_fetch_array($rs);
-            $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
-        } catch (Exception $e) {
+            if ($row = mysql_fetch_array($rs)) {
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+            } else {
+                $ret = new Number();
+            }
+        } catch (Exception $e)  {
             $ret = new Number();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -274,7 +278,7 @@ class Number {
         }
         return $ret;
     }
-    
+
     public function save() {
         if ($this->id == self::NEW_NUMBER) {
             $this->insert();
@@ -386,7 +390,7 @@ class Number {
                 array(),
                 $tables);
             $row = mysql_fetch_array($rs);
-            $maxIndexNumber = $row['indexnumber'];
+            $maxIndexNumber = $row[0];
         } catch (Exception $e) {
             $maxIndexNumber = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";

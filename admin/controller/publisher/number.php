@@ -30,61 +30,52 @@ function index($posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
 
-    $out = array();
-
-    $numb = new Number();
-    $out['numb'] = $numb;
+    $outList = array();
 
     $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = Paginator::paginate($numbs, $page);
-    $out['page_numbers'] = Number::getPageNumbers();
-    $out['pageSelected'] = $page;
+    $outList['numbs'] = Paginator::paginate($numbs, $page);
+    $outList['page_numbers'] = Number::getPageNumbers();
+    $outList['pageSelected'] = $page;
 
-    $out['lastAction'] = 'index';
+    $outList['lastList'] = 'index';
 
-    return $out;
+    return $outList;
 }
 
 function showPublished($posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
 
-    $out = array();
-
-    $numb = new Number();
-    $out['numb'] = $numb;
+    $outList = array();
 
     $numbs = Number::findAllPublishedOrderedByIndexNumber();
-    $out['numbs'] = Paginator::paginate($numbs, $page);
-    $out['page_numbers'] = Number::getPageNumbers();
-    $out['pageSelected'] = $page;
+    $outList['numbs'] = Paginator::paginate($numbs, $page);
+    $outList['page_numbers'] = Number::getPageNumbers();
+    $outList['pageSelected'] = $page;
 
-    $out['lastAction'] = 'showPublished';
+    $outList['lastList'] = 'showPublished';
 
-    return $out;
+    return $outList;
 }
 
 function showNotPublished($posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
 
-    $out = array();
-
-    $numb = new Number();
-    $out['numb'] = $numb;
+    $outList = array();
 
     $numbs = Number::findAllNotPublishedOrderedByIndexNumber();
-    $out['numbs'] = Paginator::paginate($numbs, $page);
-    $out['page_numbers'] = Number::getPageNumbers();
-    $out['pageSelected'] = $page;
+    $outList['numbs'] = Paginator::paginate($numbs, $page);
+    $outList['page_numbers'] = Number::getPageNumbers();
+    $outList['pageSelected'] = $page;
 
-    $out['lastAction'] = 'showNotPublished';
+    $outList['lastList'] = 'showNotPublished';
 
-    return $out;
+    return $outList;
 }
 
 function find($posts) {
-    if (isset($posts['page'])) {
+    if (isset($posts['movinglist'])) {
         $page = $posts['page'];
         $string = $_SESSION['oldstring'];
     } else {
@@ -92,151 +83,115 @@ function find($posts) {
         $page = 1;
     }
 
-    $out = array();
-
-    $numb = new Number();
-    $out['numb'] = $numb;
+    $outList = array();
 
     $numbs = Number::findInAllTextFields($string);
-    $out['numbs'] = Paginator::paginate($numbs, $page);
-    $out['page_numbers'] = Number::getPageNumbers();
-    $out['pageSelected'] = $page;
+    $outList['numbs'] = Paginator::paginate($numbs, $page);
+    $outList['page_numbers'] = Number::getPageNumbers();
+    $outList['pageSelected'] = $page;
 
-    $out['lastAction'] = 'find';
+    $outList['lastList'] = 'find';
 
-    if (count($numbs)==0) { $out['warning'] = 'No numbers corresponding to search criteria';  }
-    return $out;
+    if (count($numbs)==0) { $outList['warning'] = 'No numbers corresponding to search criteria';  }
+    return $outList;
+}
+
+function newNumber() {
+    $outAction = array();
+
+    $numb = new Number();
+    $outAction['numb'] = $numb;
+
+    return $outAction;
 }
 
 function edit($id) {
-    $out = array();
+    $outAction = array();
 
     $numb = Number::findById($id);
-    $out['numb'] = $numb;
+    $outAction['numb'] = $numb;
 
-    $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
-    $out['page_numbers'] = Number::getPageNumbers();
-
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'index';
-
-    return $out;
+    return $outAction;
 }
 
-function requestdelete($id) {
-    $out = array();
+function requestdelete($id, $list, $pageSelected) {
+    $outAction = array();
 
     $numb = Number::findById($id);
-    $out['numb'] = $numb;
+    $outAction['numb'] = $numb;
 
-    $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
-    $out['page_numbers'] = Number::getPageNumbers();
-
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'index';
-
-    $out['question'] = 'Do you really want to delete the number: '.$numb->getTitle().'? <br />
-    <a href="number.php?action=dodelete&id='.$numb->getId().'">yes</a>,
+    $outAction['question'] = 'Do you really want to delete the number: '.$numb->getTitle().'? <br />
+    <a href="number.php?action=dodelete&id='.$numb->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
     <a href="number.php">no</a>';
 
-    return $out;
+    return $outAction;
 }
 
 function dodelete($id) {
-    $out = array();
+    $outAction = array();
 
     $numb = Number::findById($id);
     $numb->delete();
     $numb = new Number();
-    $out['numb'] = $numb;
+    $outAction['numb'] = $numb;
 
-    $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
-    $out['page_numbers'] = Number::getPageNumbers();
+    $outAction['info'] = 'Number deleted';
 
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'index';
-
-    $out['info'] = 'Number deleted';
-
-    return $out;
+    return $outAction;
 }
 
 function deleteimg($id) {
-    $out = array();
+    $outAction = array();
 
     $numb = Number::findById($id);
     $numb->deleteImg();
-    $out['numb'] = $numb;
+    $outAction['numb'] = $numb;
 
-    $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
-    $out['page_numbers'] = Number::getPageNumbers();
-
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'index';
-
-    return $out;
+    return $outAction;
 }
 
 function up($id) {
-    $out = array();
+    $outAction = array();
 
     $numb1 = Number::findById($id);
     $indexnumber = $numb1->getIndexNumber();
     $numb2 = Number::findUpIndexNumber($indexnumber);
 
-    if ($numb2) {
+    if ($numb2->getId()!=Number::NEW_NUMBER) {
         $numb1->setIndexNumber($numb2->getIndexNumber());
         $numb2->setIndexNumber($indexnumber);
         $numb1->save();
         $numb2->save();
     }
 
-    $numb = new Number();
-    $out['numb'] = $numb;
+    $numb = Number::findById($id);
+    $outAction['numb'] = $numb;
 
-    $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
-    $out['page_numbers'] = Number::getPageNumbers();
-
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'index';
-
-    return $out;
+    return $outAction;
 }
 
 function down($id) {
-    $out = array();
+    $outAction = array();
 
     $numb1 = Number::findById($id);
     $indexnumber = $numb1->getIndexNumber();
     $numb2 = Number::findDownIndexNumber($indexnumber);
 
-    if ($numb2) {
+    if ($numb2->getId()!=Number::NEW_NUMBER) {
         $numb1->setIndexNumber($numb2->getIndexNumber());
         $numb2->setIndexNumber($indexnumber);
         $numb1->save();
         $numb2->save();
     }
 
-    $numb = new Number();
-    $out['numb'] = $numb;
+    $numb = Number::findById($id);
+    $outAction['numb'] = $numb;
 
-    $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
-    $out['page_numbers'] = Number::getPageNumbers();
-
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'index';
-
-    return $out;
+    return $outAction;
 }
 
 function save($toSave, $files) {
-    $out = array();
+    $outAction = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
     if (!isset($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
@@ -260,50 +215,49 @@ function save($toSave, $files) {
         $numb->deleteImg();
         $numb->saveImg($files['Image']);
     }
-    $out['numb'] = $numb;
+    $outAction['numb'] = $numb;
 
-    $numbs = Number::findAllOrderedByIndexNumber();
-    $out['numbs'] = $numbs;
-    $out['page_numbers'] = Number::getPageNumbers();
-
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'index';
-
-    return $out;
+    return $outAction;
 }
 
+if (isset($_GET['list'])) { $list = $_GET['list']; }
+else { $list = 'index'; }
+if (isset($_GET['action'])) { $action = $_GET['action']; }
+else { $action = 'newNumber'; }
 
 if (isset($_SESSION['user'])) {
-    if (!isset($_GET['action'])) { $out = index($_POST); }
-    else {
-        switch ($_GET['action']) {
-            case  'index':             $out = index($_POST); break;
-            case  'showPublished':     $out = showPublished($_POST); break;
-            case  'showNotPublished':  $out = showNotPublished($_POST); break;
-            case  'save':              $out = save($_POST, $_FILES); break;
-            case  'edit':              $out = edit($_GET['id']); break;
-            case  'dodelete':          $out = dodelete($_GET['id']); break;
-            case  'requestdelete':     $out = requestdelete($_GET['id']); break;
-            case  'up':                $out = up($_GET['id']); break;
-            case  'down':              $out = down($_GET['id']); break;
-            case  'deleteimg':         $out = deleteimg($_GET['id']); break;
-            case  'find':              $out = find($_POST); break;
-        }
+    switch ($action) {
+        case  'newNumber':         $outAction = newNumber(); break;
+        case  'save':              $outAction = save($_POST, $_FILES); break;
+        case  'edit':              $outAction = edit($_GET['id']); break;
+        case  'dodelete':          $outAction = dodelete($_GET['id']); break;
+        case  'requestdelete':     $outAction = requestdelete($_GET['id'], $_GET['list'], $_GET['pageSelected']); break;
+        case  'deleteimg':         $outAction = deleteimg($_GET['id']); break;
+        case  'up':                $outAction = up($_GET['id']); break;
+        case  'down':              $outAction = down($_GET['id']); break;
+    }
+    switch ($list) {
+        case  'index':             $outList = index($_POST); break;
+        case  'showPublished':     $outList = showPublished($_POST); break;
+        case  'showNotPublished':  $outList = showNotPublished($_POST); break;
+        case  'find':              $outList = find($_POST); break;
     }
 } else {
     header("Location: ../../loginError.php");
 }
 
-$numbs = $out['numbs'];
-$numb = $out['numb'];
-$page_numbers = $out['page_numbers'];
-$pageSelected = $out['pageSelected'];
-$lastAction = $out['lastAction'];
+$numbs = $outList['numbs'];
+$page_numbers = $outList['page_numbers'];
 
-if (isset($out['info'])) { $info = $out['info']; }
-if (isset($out['warning'])) { $warning = $out['warning']; }
-if (isset($out['question'])) { $question = $out['question']; }
-if (isset($out['error'])) { $error = $out['error']; }
+$pageSelected = $outList['pageSelected'];
+$lastList = $outList['lastList'];
+
+$numb = $outAction['numb'];
+
+if (isset($outAction['info'])) { $info = $outAction['info']; }
+if (isset($outAction['warning'])) { $warning = $outAction['warning']; }
+if (isset($outAction['question'])) { $question = $outAction['question']; }
+if (isset($outAction['error'])) { $error = $outAction['error']; }
 
 include('../../view/publisher/numbers.php');
 
