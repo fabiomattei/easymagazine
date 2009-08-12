@@ -122,7 +122,7 @@ function requestdelete($id, $list, $pageSelected) {
 
     $outAction['question'] = 'Do you really want to delete the number: '.$numb->getTitle().'? <br />
     <a href="number.php?action=dodelete&id='.$numb->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
-    <a href="number.php">no</a>';
+    <a href="number.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
 
     return $outAction;
 }
@@ -248,7 +248,6 @@ if (isset($_SESSION['user'])) {
 
 $numbs = $outList['numbs'];
 $page_numbers = $outList['page_numbers'];
-
 $pageSelected = $outList['pageSelected'];
 $lastList = $outList['lastList'];
 
