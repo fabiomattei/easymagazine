@@ -385,14 +385,17 @@ class Number {
         try {
             $tables = array("numbers" => TBPREFIX."numbers");
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_INDEXNUMBER,
+                self::SELECT_MAX_INDEXNUMBER,
                 array(),
                 array(),
                 $tables);
-            $row = mysql_fetch_array($rs);
-            $maxIndexNumber = $row[0];
+            if ($row = mysql_fetch_array($rs)) {
+                $maxIndexNumber = $row[0];
+            } else {
+                $maxIndexNumber = 1;
+            }
         } catch (Exception $e) {
-            $maxIndexNumber = 0;
+            $maxIndexNumber = 1;
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxIndexNumber;

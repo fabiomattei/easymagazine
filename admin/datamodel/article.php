@@ -63,9 +63,10 @@ class Article {
     const SELECT_ALL = 'select * from articles order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from articles order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from articles order by indexnumber DESC';
+    const SELECT_MAX_INDEXNUMBER = 'select max(indexnumber) from articles ';
     const SELECT_BY_ID_ORD = 'select id from articles order by id DESC';
-    const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber > # order by indexnumber DESC';
-    const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber < # order by indexnumber';
+    const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber > # order by indexnumber ';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber < # order by indexnumber DESC ';
     const SELECT_USERS = 'select US.* from users as US, users_articles as UA where US.id = UA.user_id AND UA.article_id = # order by US.id DESC';
     const DELETE_USER = 'delete from users_articles WHERE article_id = # AND user_id = # ';
     const LINK_USER = 'insert into users_articles (article_id, user_id) values (#, #) ';
@@ -445,14 +446,17 @@ class Article {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_INDEXNUMBER,
+                self::SELECT_MAX_INDEXNUMBER,
                 array(),
                 array(),
                 $tables);
-            $row = mysql_fetch_array($rs);
-            $maxIndexNumber = $row['indexnumber'];
+            if ($row = mysql_fetch_array($rs)) {
+                $maxIndexNumber = $row[0];
+            } else {
+                $maxIndexNumber = 1;
+            }
         } catch (Exception $e) {
-            $maxIndexNumber = 0;
+            $maxIndexNumber = 1;
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $maxIndexNumber;
