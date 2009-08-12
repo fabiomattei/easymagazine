@@ -72,8 +72,11 @@ class Comment {
                 $array_str,
                 $array_int,
                 $tables);
-            $row = mysql_fetch_array($rs);
-            $ret = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
+            if ($row = mysql_fetch_array($rs)) {
+                $ret = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
+            } else {
+                $ret = new Comment();
+            }
         } catch (Exception $e) {
             $ret = new Comment();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -298,7 +301,7 @@ class Comment {
     public function getCreatedFormatted() {
         return Data::DataFormat($this->created);
     }
-    
+
     public function setCreated($created) {
         $this->created = $created;
     }

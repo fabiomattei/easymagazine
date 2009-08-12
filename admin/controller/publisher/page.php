@@ -25,91 +25,86 @@ require_once(STARTPATH.DATAMODELPATH.'page.php');
 
 session_start();
 
-function index() {
-    $out = array();
-
-    $pag = new Page();
-    $out['pag'] = $pag;
+function index($posts) {
+    $outList = array();
 
     $pags = Page::findAllOrderedByIndexNumber();
-    $out['pags'] = $pags;
-    return $out;
+    $outList['pags'] = $pags;
+    $outList['lastList'] = 'index';
+    
+    return $outList;
+}
+
+function newPage() {
+    $outAction = array();
+
+    $pag = new Page();
+    $outAction['pag'] = $pag;
+
+    return $outAction;
 }
 
 function find($string) {
-    $out = array();
-
-    $pag = new Page();
-    $out['pag'] = $pag;
+    $outList = array();
 
     $pags = Page::findInAllTextFields($string);
-    $out['pags'] = $pags;
+    $outList['pags'] = $pags;
+    $outList['lastList'] = 'find';
 
-    if (count($pags)==0) { $out['warning'] = 'No pages corresponding to search criteria';  }
-    return $out;
+    if (count($pags)==0) { $outList['warning'] = 'No pages corresponding to search criteria';  }
+    return $outList;
 }
 
 function edit($id) {
-    $out = array();
+    $outAction = array();
 
     $pag = Page::findById($id);
-    $out['pag'] = $pag;
+    $outAction['pag'] = $pag;
 
-    $pags = Page::findAllOrderedByIndexNumber();
-    $out['pags'] = $pags;
-    return $out;
+    return $outAction;
 }
 
 
 function requestdelete($id) {
-    $out = array();
+    $outAction = array();
 
     $pag = Page::findById($id);
-    $out['pag'] = $pag;
+    $outAction['pag'] = $pag;
 
-    $pags = Page::findAllOrderedByIndexNumber();
-    $out['pags'] = $pags;
-
-    $out['question'] = 'Do you really want to delete the page: '.$pag->getTitle().'? <br />
+    $outAction['question'] = 'Do you really want to delete the page: '.$pag->getTitle().'? <br />
     <a href="page.php?action=dodelete&id='.$pag->getId().'">yes</a>,
     <a href="page.php">no</a>';
 
-    return $out;
+    return $outAction;
 }
 
 function dodelete($id) {
-    $out = array();
+    $outAction = array();
 
     $pag = Page::findById($id);
     $pag->delete();
     $pag = new Page();
-    $out['pag'] = $pag;
+    $outAction['pag'] = $pag;
 
-    $pags = Page::findAllOrderedByIndexNumber();
-    $out['pags'] = $pags;
+    $outAction['info'] = 'Page deleted';
 
-    $out['info'] = 'Page deleted';
-
-    return $out;
+    return $outAction;
 }
 
 function deleteimg($id) {
-    $out = array();
+    $outAction = array();
 
     $pag = Page::findById($id);
     $pag->deleteImg();
-    $out['pag'] = $pag;
+    $outAction['pag'] = $pag;
 
-    $pags = Page::findAllOrderedByIndexNumber();
-    $out['pags'] = $pags;
+    $outAction['info'] = 'Image deleted';
 
-    $out['info'] = 'Image deleted';
-
-    return $out;
+    return $outAction;
 }
 
 function up($id) {
-    $out = array();
+    $outAction = array();
 
     $pag1 = Page::findById($id);
     $pag2 = $pag1->findUpIndexNumber();
@@ -122,15 +117,13 @@ function up($id) {
     }
 
     $pag = new Page();
-    $out['pag'] = $pag;
+    $outAction['pag'] = $pag;
 
-    $pags = Page::findAllOrderedByIndexNumber();
-    $out['pags'] = $pags;
-    return $out;
+    return $outAction;
 }
 
 function down($id) {
-    $out = array();
+    $Action = array();
 
     $pag1 = Page::findById($id);
     $pag2 = $pag1->findDownIndexNumber();
@@ -143,15 +136,13 @@ function down($id) {
     }
 
     $pag = new Page();
-    $out['pag'] = $pag;
+    $Action['pag'] = $pag;
 
-    $pags = Page::findAllOrderedByIndexNumber();
-    $out['pags'] = $pags;
-    return $out;
+    return $Action;
 }
 
 function save($toSave, $files) {
-    $out = array();
+    $outAction = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
     if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
@@ -177,30 +168,39 @@ function save($toSave, $files) {
         $pag->deleteImg();
         $pag->saveImg($files['Image']);
     }
-    $out['pag'] = $pag;
+    $outAction['pag'] = $pag;
 
-    $pags = Page::findAllOrderedByIndexNumber();
-    $out['pags'] = $pags;
-    return $out;
+    return $outAction;
 }
 
-if (!isset($_GET["action"])) { $out = index(); }
-else {
-    switch ($_GET["action"]) {
-        case  'index':             $out = index(); break;
-        case  'save':              $out = save($_POST, $_FILES); break;
-        case  'edit':              $out = edit($_GET['id']); break;
-        case  'dodelete':          $out = dodelete($_GET['id']); break;
-        case  'requestdelete':     $out = requestdelete($_GET['id']); break;
-        case  'up':                $out = up($_GET['id']); break;
-        case  'down':              $out = down($_GET['id']); break;
-        case  'deleteimg':         $out = deleteimg($_GET['id']); break;
-        case  'find':              $out = find($_POST['string']); break;
+if (isset($_GET['list'])) { $list = $_GET['list']; }
+else { $list = 'index'; }
+if (isset($_GET['action'])) { $action = $_GET['action']; }
+else { $action = 'newPage'; }
+
+if (isset($_SESSION['user'])) {
+    switch ($action) {
+        case  'newPage':           $outAction = newPage(); break;
+        case  'save':              $outAction = save($_POST, $_FILES); break;
+        case  'edit':              $outAction = edit($_GET['id']); break;
+        case  'dodelete':          $outAction = dodelete($_GET['id']); break;
+        case  'requestdelete':     $outAction = requestdelete($_GET['id']); break;
+        case  'up':                $outAction = up($_GET['id']); break;
+        case  'down':              $outAction = down($_GET['id']); break;
+        case  'deleteimg':         $outAction = deleteimg($_GET['id']); break;
     }
+    switch ($list) {
+        case  'index':             $outList = index($_POST); break;
+        case  'find':              $outList = find($_POST); break;
+    }
+} else {
+    header("Location: ../../loginError.php");
 }
 
-$pags = $out['pags'];
-$pag = $out['pag'];
+$pags = $outList['pags'];
+$lastList = $outList['lastList'];
+
+$pag = $outAction['pag'];
 
 if (isset($out['info'])) { $info = $out['info']; }
 if (isset($out['warning'])) { $warning = $out['warning']; }

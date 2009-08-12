@@ -78,8 +78,11 @@ class User {
                 $array_str,
                 $array_int,
                 $tables);
-            $row = mysql_fetch_array($rs);
-            $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+            if ($row = mysql_fetch_array($rs)) {
+                $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+            } else {
+                $ret = new User();
+            }
         } catch (Exception $e) {
             $ret = new User();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -101,7 +104,7 @@ class User {
             }
         } catch (Exception $e) {
             $ret[] = new User();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         return $ret;
     }
@@ -376,7 +379,7 @@ class User {
     public function setPassword($password) {
         $this->password = $password;
     }
-    
+
     public function getBody() {
         $textile = new Textile();
         return $textile->TextileThis($this->body);
@@ -421,7 +424,7 @@ class User {
     public function setSkype($skype) {
         $this->skype = $skype;
     }
-    
+
     public function getImgfilename() {
         return $this->imgfilename;
     }

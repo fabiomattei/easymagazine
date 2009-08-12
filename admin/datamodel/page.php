@@ -90,8 +90,11 @@ class Page {
                 $array_str,
                 $array_int,
                 $tables);
-            $row = mysql_fetch_array($rs);
-            $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated'] );
+            if ($row = mysql_fetch_array($rs)) {
+                $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated'] );
+            } else {
+                $ret = new Page();
+            }
         } catch (Exception $e) {
             $ret = new Page();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
