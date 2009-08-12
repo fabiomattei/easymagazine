@@ -47,7 +47,7 @@
                     <h3>Articles</h3>
                     <ul class="nav">
                         <li><a href="article.php">Show All</a></li>
-                        <li class="last"><a href="article.php?action=byuser">Show My Articles</a></li>
+                        <li class="last"><a href="article.php?list=byuser">Show My Articles</a></li>
                     </ul>
                     <a href="#" class="link">View the website</a>
                 </div>
@@ -67,7 +67,7 @@
                     }
                     ?>
                     <div class="select-bar">
-                        <form name="searchform" method="post" action="article.php?action=find">
+                        <form name="searchform" method="post" action="article.php?list=find">
                             <label>
                                 <input type="text" name="string" />
                             </label>
@@ -112,7 +112,7 @@
                             ?>
                         </table>
                         <div class="select">
-                            <form name="pageselectionform" method="post" action="number.php?action=<?=$lastAction?>">
+                            <form name="pageselectionform" method="post" action="number.php?lastList=<?=$lastList?>">
                                 <strong>Pages: </strong>
                                 <select name="page">
                                     <? for ($i=1;$i<=$page_numbers;$i++) { ?>
@@ -129,7 +129,7 @@
                     <div class="table">
                         <img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                        <form name="form1" enctype="multipart/form-data" method="post" action="article.php?action=save">
+                        <form name="form1" enctype="multipart/form-data" method="post" action="article.php?action=save&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
                             <table class="listing form" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <th class="full" colspan="2">Edit</th>
@@ -142,7 +142,7 @@
                                             <option value="<? echo $nmb->getId(); ?>"
                                                 <? if ($nmb->getId()==$art->getNumber_id()) { echo "selected"; } ?>
                                                     ><? echo $nmb->getTitle(); ?></option>
-                                                    <? } ?>
+                                                <? } ?>
                                         </select>
                                     </td>
                                 </tr>

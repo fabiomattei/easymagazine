@@ -30,9 +30,7 @@ session_start();
 
 function commons() {
     $outCommons = array();
-
     $outCommons['numbs'] = Number::findAll();
-
     $outCommons['authors'] = User::findAll();
 
     return $outCommons;
@@ -48,7 +46,7 @@ function index($posts) {
     $outList['arts'] = Paginator::paginate($arts, $page);
     $outList['page_numbers'] = Article::getPageNumbers();
     $outList['pageSelected'] = $page;
-    $outList['lastAction'] = 'index';
+    $outList['lastList'] = 'index';
 
     return $outList;
 }
@@ -69,7 +67,7 @@ function articlenumber($id) {
     $outList['arts'] = $num->articles();
     $outList['page_numbers'] = 1;
     $outList['pageSelected'] = 1;
-    $outList['lastAction'] = 'articlenumber';
+    $outList['lastList'] = 'articlenumber';
 
     return $outList;
 }
@@ -84,7 +82,7 @@ function byuser($posts) {
     $outList['arts'] = Paginator::paginate($arts, $page);
     $outList['page_numbers'] = Article::getPageNumbers();
     $outList['pageSelected'] = $page;
-    $outList['lastAction'] = 'byuser';
+    $outList['lastList'] = 'byuser';
 
     return $outList;
 }
@@ -95,7 +93,7 @@ function find($string) {
     $outList['arts'] = Article::findInAllTextFields($string);
     $outList['page_numbers'] = 1;
     $outList['pageSelected'] = 1;
-    $outList['lastAction'] = 'find';
+    $outList['lastList'] = 'find';
 
     if (count($arts)==0) { $outList['warning'] = 'No articles corresponding to search criteria';  }
     return $outList;
@@ -191,9 +189,10 @@ function up($id) {
     $outAction = array();
 
     $art1 = Article::findById($id);
+    $indexnumber =$art1->getIndexNumber();
     $art2 = $art1->findUpIndexNumber();
 
-    if ($art2) {
+    if ($art2->getId()!=Article::NEW_ARTICLE) {
         $art1->setIndexNumber($art2->getIndexNumber());
         $art2->setIndexNumber($indexnumber);
         $art1->save();
@@ -209,9 +208,10 @@ function down($id) {
     $outAction = array();
 
     $art1 = Article::findById($id);
+    $indexnumber =$art1->getIndexNumber();
     $art2 = $art1->findDownIndexNumber();
 
-    if ($art2) {
+    if ($art2->getId()!=Article::NEW_ARTICLE) {
         $art1->setIndexNumber($art2->getIndexNumber());
         $art2->setIndexNumber($indexnumber);
         $art1->save();
@@ -261,7 +261,7 @@ function save($toSave, $files) {
 if (isset($_GET['list'])) { $list = $_GET['list']; }
 else { $list = 'index'; }
 if (isset($_GET['action'])) { $action = $_GET['action']; }
-else { $action = 'newNumber'; }
+else { $action = 'newArticle'; }
 
 if (isset($_SESSION['user'])) {
     $outCommons = commons();
@@ -296,7 +296,7 @@ $authors = $outCommons['authors'];
 $art = $outAction['art'];
 
 $arts = $outList['arts'];
-$lastAction = $outList['lastAction'];
+$lastList = $outList['lastList'];
 $page_numbers = $outList['page_numbers'];
 $pageSelected = $outList['pageSelected'];
 

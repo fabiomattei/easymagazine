@@ -104,8 +104,11 @@ class Article {
                 $array_str,
                 $array_int,
                 $tables);
-            $row = mysql_fetch_array($rs);
-            $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+            if ($row = mysql_fetch_array($rs)) {
+                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+            } else {
+                $ret = new Article();
+            }
         } catch (Exception $e) {
             $ret = new Article();
             echo 'Caught exception: ',  $e->getMessage(), "\n";

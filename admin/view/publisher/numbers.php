@@ -68,13 +68,13 @@
                     }
                     ?>
                     <div class="select-bar">
-                        <form name="searchform" method="post" action="number.php?action=find">
+                        <form name="searchform" method="post" action="number.php?list=find">
                             <label>
                                 <input type="text" name="string" />
                             </label>
                             <label>
                                 <input type="submit" name="Submit" value="Search" />
-                            </label
+                            </label>
                         </form>
                     </div>
                     <div class="table">

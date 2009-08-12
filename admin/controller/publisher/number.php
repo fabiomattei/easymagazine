@@ -36,7 +36,6 @@ function index($posts) {
     $outList['numbs'] = Paginator::paginate($numbs, $page);
     $outList['page_numbers'] = Number::getPageNumbers();
     $outList['pageSelected'] = $page;
-
     $outList['lastList'] = 'index';
 
     return $outList;
