@@ -113,6 +113,7 @@
                                     <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
                                     <? }?>
                                 </select>&nbsp;
+                                <input type="hidden" name="movinglist" value="yes" />
                                 <input type="submit" value="Go" name="Go" />
                             </form>
                         </div>

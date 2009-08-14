@@ -56,13 +56,21 @@ function byuser($posts) {
     return $outList;
 }
 
-function find($post) {
+function find($posts) {
+    if (isset($posts['movinglist'])) {
+        $page = $posts['page'];
+        $string = $_SESSION['oldstring'];
+    } else {
+        $string = $posts['string'];
+        $page = 1;
+    }
+    
     $outList = array();
 
-    $comms = Comment::findInAllTextFields($post['string']);
-    $outList['comms'] = $comms;
-    $outList['page_numbers'] = 1;
-    $outList['pageSelected'] = 1;
+    $comms = Comment::findInAllTextFields($posts['string']);
+    $outList['comms'] = Paginator::paginate($comms, $page);
+    $outList['page_numbers'] = Number::getPageNumbers();;
+    $outList['pageSelected'] = $page;
     $outList['lastList'] = 'find';
 
     if (count($comms)==0) { $outList['warning'] = 'No comments corresponding to search criteria';  }

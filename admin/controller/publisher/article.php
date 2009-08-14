@@ -90,12 +90,22 @@ function byuser($posts) {
     return $outList;
 }
 
-function find($string) {
+function find($posts) {
+    if (isset($posts['movinglist'])) {
+        $page = $posts['page'];
+        $string = $_SESSION['oldstring'];
+    } else {
+        $string = $posts['string'];
+        $page = 1;
+    }
+
     $outList = array();
 
-    $outList['arts'] = Article::findInAllTextFields($string);
-    $outList['page_numbers'] = 1;
-    $outList['pageSelected'] = 1;
+    $arts = Article::findInAllTextFields($posts['string']);
+    $outList['arts'] = Paginator::paginate($arts, $page);
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
+    
     $outList['lastList'] = 'find';
 
     if (count($arts)==0) { $outList['warning'] = 'No articles corresponding to search criteria';  }
