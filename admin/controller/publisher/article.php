@@ -274,7 +274,6 @@ if (isset($_SESSION['user'])) {
         case  'up':                  $outAction = up($_GET['id']); break;
         case  'down':                $outAction = down($_GET['id']); break;
         case  'deleteimg':           $outAction = deleteimg($_GET['id']); break;
-        case  'articlenumber':       $outAction = articlenumber($_GET['id']); break;
         case  'linkauthor':          $outAction = linkauthor($_POST['authorid'], $_GET['idarticle']); break;
         case  'requestunlinkauthor': $outAction = requestunlinkauthor($_GET['idauthor'], $_GET['idarticle'], $_GET['list'], $_GET['pageSelected']); break;
         case  'dounlinkauthor':      $outAction = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
@@ -285,6 +284,7 @@ if (isset($_SESSION['user'])) {
         case  'showNotPublished':    $outList = showNotPublished($_POST); break;
         case  'find':                $outList = find($_POST); break;
         case  'byuser':              $outList = byuser($_POST); break;
+        case  'articlenumber':       $outList = articlenumber($_GET['id']); break;
     }
 } else {
     header("Location: ../../loginError.php");

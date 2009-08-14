@@ -47,7 +47,7 @@
                         <h3>Comments</h3>
 			<ul class="nav">
 				<li><a href="comment.php">View all comments</a></li>
-				<li class="last"><a href="comment.php?action=byuser">View comments to my articles</a></li>
+				<li class="last"><a href="comment.php?list=byuser">View comments to my articles</a></li>
 			</ul>
 			<a href="#" class="link">View the website</a>
 		</div>
