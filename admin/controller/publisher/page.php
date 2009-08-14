@@ -44,10 +44,10 @@ function newPage() {
     return $outAction;
 }
 
-function find($string) {
+function find($post) {
     $outList = array();
 
-    $pags = Page::findInAllTextFields($string);
+    $pags = Page::findInAllTextFields($post['string']);
     $outList['pags'] = $pags;
     $outList['lastList'] = 'find';
 
@@ -65,15 +65,15 @@ function edit($id) {
 }
 
 
-function requestdelete($id) {
+function requestdelete($id, $list) {
     $outAction = array();
 
     $pag = Page::findById($id);
     $outAction['pag'] = $pag;
 
     $outAction['question'] = 'Do you really want to delete the page: '.$pag->getTitle().'? <br />
-    <a href="page.php?action=dodelete&id='.$pag->getId().'">yes</a>,
-    <a href="page.php">no</a>';
+    <a href="page.php?action=dodelete&id='.$pag->getId().'&list='.$list.'">yes</a>,
+    <a href="page.php?list='.$list.'">no</a>';
 
     return $outAction;
 }
@@ -107,6 +107,7 @@ function up($id) {
     $outAction = array();
 
     $pag1 = Page::findById($id);
+    $indexnumber = $pag1->getIndexNumber();
     $pag2 = $pag1->findUpIndexNumber();
 
     if ($pag2) {
@@ -126,6 +127,7 @@ function down($id) {
     $Action = array();
 
     $pag1 = Page::findById($id);
+    $indexnumber = $pag1->getIndexNumber();
     $pag2 = $pag1->findDownIndexNumber();
 
     if ($pag2) {
@@ -184,7 +186,7 @@ if (isset($_SESSION['user'])) {
         case  'save':              $outAction = save($_POST, $_FILES); break;
         case  'edit':              $outAction = edit($_GET['id']); break;
         case  'dodelete':          $outAction = dodelete($_GET['id']); break;
-        case  'requestdelete':     $outAction = requestdelete($_GET['id']); break;
+        case  'requestdelete':     $outAction = requestdelete($_GET['id'], $_GET['list']); break;
         case  'up':                $outAction = up($_GET['id']); break;
         case  'down':              $outAction = down($_GET['id']); break;
         case  'deleteimg':         $outAction = deleteimg($_GET['id']); break;

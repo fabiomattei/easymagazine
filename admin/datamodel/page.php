@@ -97,7 +97,7 @@ class Page {
             }
         } catch (Exception $e) {
             $ret = new Page();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         return $ret;
     }
@@ -116,7 +116,7 @@ class Page {
             }
         } catch (Exception $e) {
             $ret[] = new Page();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         return $ret;
     }
@@ -193,7 +193,7 @@ class Page {
             $this->created = '';
             $this->updated = '';
         } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
     }
 
@@ -209,7 +209,7 @@ class Page {
                     $tables);
                 ImageFiles::savefile($this->created, $img);
             } catch (Exception $e) {
-                echo 'Caught exception: ',  $e->getMessage(), "\n";
+                echo 'Caught exception: ', $e->getMessage(), "\n";
             }
         }
     }
@@ -226,7 +226,7 @@ class Page {
                 array($this->id),
                 $tables);
         } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
     }
 
@@ -250,7 +250,7 @@ class Page {
                 array($this->id, $this->indexnumber, $this->published),
                 $tables);
         } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
     }
 
@@ -263,7 +263,7 @@ class Page {
                 array($this->indexnumber, $this->published, $this->id),
                 $tables);
         } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
     }
 
@@ -282,7 +282,7 @@ class Page {
             }
         } catch (Exception $e) {
             $maxIndexNumber = 1;
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         return $maxIndexNumber;
     }

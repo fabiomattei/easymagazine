@@ -62,7 +62,7 @@
                     }
                     ?>
 		  <div class="select-bar">
-                    <form name="searchform" method="post" action="page.php?action=find">
+                    <form name="searchform" method="post" action="page.php?list=find">
 		    <label>
 		    <input type="text" name="string" />
 		    </label>
@@ -89,29 +89,29 @@
                     ?>
 					<tr>
 						<td class="first style1"><? echo $pg->getTitle(); ?></td>
-						<td><a href="page.php?action=edit&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-						<td><a href="page.php?action=up&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-						<td><a href="page.php?action=down&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="page.php?action=edit&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td><a href="page.php?action=up&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="page.php?action=down&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
 						<td>
                                                 <? if ($pg->getPublished()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
                                                 <? } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                                 <? } ?></td>
-						<td class="last"><a href="page.php?action=requestdelete&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+						<td class="last"><a href="page.php?action=requestdelete&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
                     }
                     ?>
 				</table>
-              <form name="formnew" method="post" action="page.php">
+              <form name="formnew" method="post" action="page.php&list=<?=$lastList?>">
                 <input type="submit" value="New" name="new" />
               </form>
 			</div>
 		  <div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                <form name="form1" enctype="multipart/form-data" method="post" action="page.php?action=save">
+                <form name="form1" enctype="multipart/form-data" method="post" action="page.php?action=save&list=<?=$lastList?>">
 				<table class="listing form" cellpadding="0" cellspacing="0">
 					<tr>
 						<th class="full" colspan="2">Edit</th>
@@ -162,7 +162,7 @@
                         <td class="last">
                         <? if ($pag->imageExists()) { ?>
                         <img src="<? echo $pag->imagePath(); ?>"
-                        <a href="page.php?action=deleteimg&id=<? echo $pag->getId(); ?>">Delete image</a>
+                        <a href="page.php?action=deleteimg&id=<? echo $pag->getId(); ?>&list=<?=$lastList?>">Delete image</a>
                         <? } else { ?>
                         &nbsp;
                         <? } ?>
