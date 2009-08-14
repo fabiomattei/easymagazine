@@ -110,7 +110,7 @@ function up($id) {
     $indexnumber = $pag1->getIndexNumber();
     $pag2 = $pag1->findUpIndexNumber();
 
-    if ($pag2) {
+    if ($pag2->getId()!=Page::NEW_PAGE) {
         $pag1->setIndexNumber($pag2->getIndexNumber());
         $pag2->setIndexNumber($indexnumber);
         $pag1->save();
@@ -130,7 +130,7 @@ function down($id) {
     $indexnumber = $pag1->getIndexNumber();
     $pag2 = $pag1->findDownIndexNumber();
 
-    if ($pag2) {
+    if ($pag2->getId()!=Page::NEW_PAGE) {
         $pag1->setIndexNumber($pag2->getIndexNumber());
         $pag2->setIndexNumber($indexnumber);
         $pag1->save();

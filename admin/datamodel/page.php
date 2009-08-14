@@ -47,11 +47,11 @@ class Page {
     const UPDATE_SQL_IMG_IMGDESC = 'update pages set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from pages where id = # ';
     const SELECT_BY_ID = 'select * from pages where id = # ';
-    const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber';
+    const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from pages order by indexnumber';
-    const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber ';
+    const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber DESC ';
     const SELECT_MAX_INDEXNUMBER = 'select max(indexnumber) from pages ';
-    const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from pages where published = 1 order by indexnumber';
+    const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from pages where published = 1 order by indexnumber DESC ';
     const SELECT_UP_INDEXNUMBER = 'select * from pages WHERE indexnumber > # order by indexnumber ';
     const SELECT_DOWN_INDEXNUMBER = 'select * from pages WHERE indexnumber < # order by indexnumber DESC ';
     const SELECT_BY_TITLE = 'select * from pages where title like ?';

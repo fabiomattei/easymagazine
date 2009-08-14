@@ -53,7 +53,7 @@ class Number {
     const SELECT_ALL_PUB = 'select * from numbers where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from numbers order by indexnumber DESC';
-    const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from numbers where published = 1 order by indexnumber DESC';
+    const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from numbers where published = 1 order by indexnumber DESC ';
     const SELECT_ALL_NOTPUB_ORD_INDEXNUMBER = 'select * from numbers where published = 0 order by indexnumber DESC';
     const SELECT_ARTICLES = 'select * from articles where number_id = # order by indexnumber DESC';
     const SELECT_ARTICLES_PUBLISHED = 'select * from articles where number_id = # AND published = 1 order by indexnumber DESC';
