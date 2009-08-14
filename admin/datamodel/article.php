@@ -50,7 +50,8 @@ class Article {
     const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgdescription = ?, updated=now() where id = #';
     const UPDATE_SQL_IMG = 'update articles set imgfilename = ?, updated = Now() where id = #';
     const UPDATE_SQL_IMG_IMGDESC = 'update articles set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
-    const DELETE_SQL = 'delete from articles where id = #';
+    const DELETE_SQL = 'delete from articles where id = # ';
+    const DELETE_USER_ARTICLE = 'delete from users_articles where article_id = # ';
     const SELECT_BY_ID = 'select * from articles where id = #';
     const SELECT_LAST_N = 'select * from articles ORDER BY updated DESC LIMIT # ';
     const SELECT_BY_TITLE = 'select * from articles where title like ?';
@@ -369,6 +370,7 @@ class Article {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
+            DB::getInstance()->execute(self::DELETE_USER_ARTICLE, array(),array((int) $this->getId()), $tables);
             $this->id = self::NEW_ARTICLE;
             $this->title = '';
             $this->subtitle = '';
