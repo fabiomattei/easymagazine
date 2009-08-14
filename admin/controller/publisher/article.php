@@ -300,10 +300,20 @@ $lastList = $outList['lastList'];
 $page_numbers = $outList['page_numbers'];
 $pageSelected = $outList['pageSelected'];
 
-if (isset($out['info'])) { $info = $out['info']; }
-if (isset($out['warning'])) { $warning = $out['warning']; }
-if (isset($out['question'])) { $question = $out['question']; }
-if (isset($out['error'])) { $error = $out['error']; }
+$infoarray = array();
+$warningarray = array();
+$questionarray = array();
+$errorarray = array();
+
+if (isset($outAction['info'])) { $infoarray[] = $outAction['info']; }
+if (isset($outAction['warning'])) { $warningarray[] = $outAction['warning']; }
+if (isset($outAction['question'])) { $questionarray[] = $outAction['question']; }
+if (isset($outAction['error'])) { $errorarray[] = $outAction['error']; }
+
+if (isset($outList['info'])) { $infoarray[] = $outList['info']; }
+if (isset($outList['warning'])) { $warningarray[] = $outList['warning']; }
+if (isset($outList['question'])) { $questionarray[] = $outList['question']; }
+if (isset($outList['error'])) { $errorarray[] = $outList['error']; }
 
 include('../../view/publisher/articles.php');
 

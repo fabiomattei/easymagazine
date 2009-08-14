@@ -54,16 +54,16 @@
                 </div>
                 <div id="center-column">
                     <?
-                    if (isset($info) AND $info!='') {
+                    foreach ($infoarray as $info) {
                         echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
                     }
-                    if (isset($warning) AND $warning!='') {
+                    foreach ($warningarray as $warning) {
                         echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
                     }
-                    if (isset($question) AND $question!='') {
+                    foreach ($questionarray as $question) {
                         echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
                     }
-                    if (isset($error) AND $error!='') {
+                    foreach ($errorarray as $error) {
                         echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
                     }
                     ?>
@@ -217,7 +217,7 @@
                 <div id="right-column">
                     <strong class="h">INFO</strong>
                     <div class="box">Here there is a list of all numbers, published and not still published.<br />
-                    Numbers are showed in the same order than in the website.</div>
+                        Numbers are showed in the same order than in the website.</div>
                 </div>
             </div>
             <div id="footer"></div>

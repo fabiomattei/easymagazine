@@ -36,7 +36,7 @@ function index($posts) {
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Article::getPageNumbers();
     $outList['pageSelected'] = $page;
-    $outList['lastAction'] = 'index';
+    $outList['lastList'] = 'index';
 
     return $outList;
 }
@@ -51,7 +51,7 @@ function byuser($posts) {
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Article::getPageNumbers();
     $outList['pageSelected'] = $page;
-    $outList['lastAction'] = 'index';
+    $outList['lastList'] = 'index';
 
     return $outList;
 }
@@ -63,7 +63,7 @@ function find($string) {
     $outList['comms'] = $comms;
     $outList['page_numbers'] = 1;
     $outList['pageSelected'] = 1;
-    $outList['lastAction'] = 'find';
+    $outList['lastList'] = 'find';
 
     if (count($comms)==0) { $outList['warning'] = 'No comments corresponding to search criteria';  }
     return $outList;
@@ -80,7 +80,7 @@ function commentnumber($id, $posts) {
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Article::getPageNumbers();
     $outList['pageSelected'] = $page;
-    $outList['lastAction'] = 'index';
+    $outList['lastList'] = 'index';
 
     return $outList;
 }
@@ -96,9 +96,18 @@ function commentarticle($id, $posts) {
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Article::getPageNumbers();
     $outList['pageSelected'] = $page;
-    $outList['lastAction'] = 'index';
+    $outList['lastList'] = 'index';
 
     return $outList;
+}
+
+function newComment() {
+    $outAction = array();
+
+    $comm = new Comment();
+    $outAction['comm'] = $comm;
+
+    return $outAction;
 }
 
 function edit($id) {
@@ -110,15 +119,15 @@ function edit($id) {
     return $outAction;
 }
 
-function requestdelete($id) {
+function requestdelete($id, $list, $pageSelected) {
     $outAction = array();
 
     $comm = Comment::findById($id);
     $outAction['comm'] = $comm;
 
     $outAction['question'] = 'Do you really want to delete the comment: '.$comm->getTitle().'? <br />
-    <a href="comment.php?action=dodelete&id='.$comm->getId().'">yes</a>,
-    <a href="comment.php">no</a>';
+    <a href="comment.php?action=dodelete&id='.$comm->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
+    <a href="comment.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
 
     return $outAction;
 }
@@ -173,14 +182,15 @@ function save($toSave) {
 if (isset($_GET['list'])) { $list = $_GET['list']; }
 else { $list = 'index'; }
 if (isset($_GET['action'])) { $action = $_GET['action']; }
-else { $action = 'newNumber'; }
+else { $action = 'newComment'; }
 
 if (isset($_SESSION['user'])) {
-    switch ($_GET["action"]) {
+    switch ($action) {
+        case  'newComment':        $outAction = newComment(); break;
         case  'save':              $outAction = save($_POST); break;
         case  'edit':              $outAction = edit($_GET['id']); break;
         case  'dodelete':          $outAction = dodelete($_GET['id']); break;
-        case  'requestdelete':     $outAction = requestdelete($_GET['id']); break;
+        case  'requestdelete':     $outAction = requestdelete($_GET['id'], $_GET['list'], $_GET['pageSelected']); break;
         case  'replay':            $outAction = replay($_GET['id']); break;
     }
     switch ($list) {
@@ -193,16 +203,26 @@ if (isset($_SESSION['user'])) {
 }
 
 $comms = $outList['comms'];
-$lastAction = $outList['lastAction'];
+$lastList = $outList['lastList'];
 $page_numbers = $outList['page_numbers'];
 $pageSelected = $outList['pageSelected'];
 
 $comm = $outAction['comm'];
 
-if (isset($out['info'])) { $info = $out['info']; }
-if (isset($out['warning'])) { $warning = $out['warning']; }
-if (isset($out['question'])) { $question = $out['question']; }
-if (isset($out['error'])) { $error = $out['error']; }
+$infoarray = array();
+$warningarray = array();
+$questionarray = array();
+$errorarray = array();
+
+if (isset($outAction['info'])) { $infoarray[] = $outAction['info']; }
+if (isset($outAction['warning'])) { $warningarray[] = $outAction['warning']; }
+if (isset($outAction['question'])) { $questionarray[] = $outAction['question']; }
+if (isset($outAction['error'])) { $errorarray[] = $outAction['error']; }
+
+if (isset($outList['info'])) { $infoarray[] = $outList['info']; }
+if (isset($outList['warning'])) { $warningarray[] = $outList['warning']; }
+if (isset($outList['question'])) { $questionarray[] = $outList['question']; }
+if (isset($outList['error'])) { $errorarray[] = $outList['error']; }
 
 include('../../view/publisher/comments.php');
 
