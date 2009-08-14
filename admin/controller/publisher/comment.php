@@ -56,10 +56,10 @@ function byuser($posts) {
     return $outList;
 }
 
-function find($string) {
+function find($post) {
     $outList = array();
 
-    $comms = Comment::findInAllTextFields($string);
+    $comms = Comment::findInAllTextFields($post['string']);
     $outList['comms'] = $comms;
     $outList['page_numbers'] = 1;
     $outList['pageSelected'] = 1;

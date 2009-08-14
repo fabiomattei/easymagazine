@@ -67,7 +67,7 @@
                     }
                     ?>
 		  <div class="select-bar">
-                    <form name="searchform" method="post" action="comment.php?action=find">
+                    <form name="searchform" method="post" action="comment.php?list=find">
 		    <label>
 		    <input type="text" name="string" />
 		    </label>
