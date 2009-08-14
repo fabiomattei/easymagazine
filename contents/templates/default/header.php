@@ -23,7 +23,7 @@
                     <li class="page_item"><a href="<?= URIMaker::people() ?>">People</a></li>
 
                     <?
-                    foreach (Page::findAllOrdered() as $page) {
+                    foreach (Page::findAllPublishedOrdered() as $page) {
                          echo '<li class="page_item"><a href="'.URIMaker::page($page).'">'.$page->getTitle().'</a></li>';
                     }
                     ?>
