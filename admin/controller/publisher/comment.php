@@ -30,151 +30,114 @@ function index($posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
 
-    $out = array();
-
-    $comm = new Comment();
-    $out['comm'] = $comm;
+    $outList = array();
 
     $comms = Comment::findAll();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outList['comms'] = Paginator::paginate($comms, $page);
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
+    $outList['lastAction'] = 'index';
 
-    return $out;
+    return $outList;
 }
 
 function byuser($posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
 
-    $out = array();
-
-    $comm = new Comment();
-    $out['comm'] = $comm;
+    $outList = array();
 
     $comms = $_SESSION['user']->articlescomments();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outList['comms'] = Paginator::paginate($comms, $page);
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
+    $outList['lastAction'] = 'index';
 
-    return $out;
+    return $outList;
 }
 
 function find($string) {
-    $out = array();
-
-    $comm = new Comment();
-    $out['comm'] = $comm;
+    $outList = array();
 
     $comms = Comment::findInAllTextFields($string);
-    $out['comms'] = $comms;
-    $out['page_numbers'] = 1;
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'find';
+    $outList['comms'] = $comms;
+    $outList['page_numbers'] = 1;
+    $outList['pageSelected'] = 1;
+    $outList['lastAction'] = 'find';
 
-    if (count($comms)==0) { $out['warning'] = 'No comments corresponding to search criteria';  }
-    return $out;
+    if (count($comms)==0) { $outList['warning'] = 'No comments corresponding to search criteria';  }
+    return $outList;
 }
 
 function commentnumber($id, $posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
-    
-    $out = array();
 
-    $comm = new Comment();
-    $out['comm'] = $comm;
+    $outList = array();
 
     $num = Number::findById($id);
     $comms = $num->comments();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outList['comms'] = Paginator::paginate($comms, $page);
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
+    $outList['lastAction'] = 'index';
 
-    return $out;
+    return $outList;
 }
 
 function commentarticle($id, $posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
-    
-    $out = array();
 
-    $comm = new Comment();
-    $out['comm'] = $comm;
+    $outList = array();
 
     $art = Article::findById($id);
     $comms = $art->comments();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outList['comms'] = Paginator::paginate($comms, $page);
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
+    $outList['lastAction'] = 'index';
 
-    return $out;
+    return $outList;
 }
 
 function edit($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $comm = Comment::findById($id);
-    $out['comm'] = $comm;
+    $outAction['comm'] = $comm;
 
-    $comms = Comment::findAll();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    return $out;
+    return $outAction;
 }
 
 function requestdelete($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $comm = Comment::findById($id);
-    $out['comm'] = $comm;
+    $outAction['comm'] = $comm;
 
-    $comms = Comment::findAll();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    $out['question'] = 'Do you really want to delete the comment: '.$comm->getTitle().'? <br />
+    $outAction['question'] = 'Do you really want to delete the comment: '.$comm->getTitle().'? <br />
     <a href="comment.php?action=dodelete&id='.$comm->getId().'">yes</a>,
     <a href="comment.php">no</a>';
 
-    return $out;
+    return $outAction;
 }
 
 function dodelete($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $comm = Comment::findById($id);
     $comm->delete();
     $comm = new Comment();
-    $out['comm'] = $comm;
+    $outAction['comm'] = $comm;
 
-    $comms = Comment::findAll();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outAction['info'] = 'Comment deleted';
 
-    $out['info'] = 'Comment deleted';
-
-    return $out;
+    return $outAction;
 }
 
 function replay($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $comm_to_be_replayed = Comment::findById($id);
 
@@ -182,20 +145,13 @@ function replay($id) {
     $comm->setArticle_id($comm_to_be_replayed->getArticle_id());
     $comm->setTitle('Re: '.$comm_to_be_replayed->getTitle());
     $comm->setSignature($_SESSION['user']->getName());
-    $out['comm'] = $comm;
+    $outAction['comm'] = $comm;
 
-    $comms = Comment::findAll();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    return $out;
+    return $outAction;
 }
 
 function save($toSave) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
 
@@ -209,38 +165,39 @@ function save($toSave) {
         $toSave['created'],
         $toSave['updated']);
     $comm->save();
-    $out['comm'] = $comm_to_be_replayed = Comment::findById($comm->getId());
+    $outAction['comm'] = $comm_to_be_replayed = Comment::findById($comm->getId());
 
-    $comms = Comment::findAll();
-    $out['comms'] = Paginator::paginate($comms, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    return $out;
+    return $outAction;
 }
 
-if (!isset($_GET["action"])) { $out = index($_POST); }
-else {
+if (isset($_GET['list'])) { $list = $_GET['list']; }
+else { $list = 'index'; }
+if (isset($_GET['action'])) { $action = $_GET['action']; }
+else { $action = 'newNumber'; }
+
+if (isset($_SESSION['user'])) {
     switch ($_GET["action"]) {
-        case  'index':             $out = index($_POST); break;
-        case  'save':              $out = save($_POST); break;
-        case  'edit':              $out = edit($_GET['id']); break;
-        case  'dodelete':          $out = dodelete($_GET['id']); break;
-        case  'requestdelete':     $out = requestdelete($_GET['id']); break;
-        case  'replay':            $out = replay($_GET['id']); break;
-        case  'commentnumber':     $out = commentnumber($_GET['id'], $_POST); break;
-        case  'commentarticle':    $out = commentarticle($_GET['id'], $_POST); break;
-        case  'find':              $out = find($_POST); break;
-        case  'byuser':            $out = byuser($_POST); break;
+        case  'save':              $outAction = save($_POST); break;
+        case  'edit':              $outAction = edit($_GET['id']); break;
+        case  'dodelete':          $outAction = dodelete($_GET['id']); break;
+        case  'requestdelete':     $outAction = requestdelete($_GET['id']); break;
+        case  'replay':            $outAction = replay($_GET['id']); break;
+    }
+    switch ($list) {
+        case  'index':             $outList = index($_POST); break;
+        case  'commentnumber':     $outList = commentnumber($_GET['id'], $_POST); break;
+        case  'commentarticle':    $outList = commentarticle($_GET['id'], $_POST); break;
+        case  'find':              $outList = find($_POST); break;
+        case  'byuser':            $outList = byuser($_POST); break;
     }
 }
 
-$comms = $out['comms'];
-$comm = $out['comm'];
-$lastAction = $out['lastAction'];
-$page_numbers = $out['page_numbers'];
-$pageSelected = $out['pageSelected'];
+$comms = $outList['comms'];
+$lastAction = $outList['lastAction'];
+$page_numbers = $outList['page_numbers'];
+$pageSelected = $outList['pageSelected'];
+
+$comm = $outAction['comm'];
 
 if (isset($out['info'])) { $info = $out['info']; }
 if (isset($out['warning'])) { $warning = $out['warning']; }
