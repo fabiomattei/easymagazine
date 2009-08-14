@@ -68,8 +68,7 @@
                             <tr>
                                 <th class="first">Updated Articles</th>
                                 <th width="80">Edit</th>
-                                <th width="80">Published</th>
-                                <th class="last" width="80">Delete</th>
+                                <th class="last" width="80">Published</th>
                             </tr>
 
                             <?
@@ -78,13 +77,14 @@
                             <tr>
                                 <td class="first style1"><? echo $ar->getTitle(); ?></td>
                                 <td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                <td>
-                                        <? if ($ar->getPublished()) { ?>
+                                <td class="last">
+                                    <? if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <? } else { ?>
+                                    <? } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <? } ?></td>
-                                <td class="last"><a href="article.php?action=delete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                    <? } ?>
+
+                                </td>
                             </tr>
                             <?
                             }
@@ -98,8 +98,7 @@
                             <tr>
                                 <th class="first">Last comments</th>
                                 <th width="80">Edit</th>
-                                <th width="80">Published</th>
-                                <th class="last" width="80">Delete</th>
+                                <th class="last" width="80">Published</th>
                             </tr>
 
                             <?
@@ -108,13 +107,13 @@
                             <tr>
                                 <td class="first style1"><? echo $ar->getTitle(); ?></td>
                                 <td><a href="comment.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                <td>
-                                        <? if ($ar->getPublished()) { ?>
-                                    <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <? } else { ?>
-                                    <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <? } ?></td>
-                                <td class="last"><a href="comment.php?action=delete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                <td class="last">
+                                    <? if ($ar->getPublished()) { ?>
+                                        <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
+                                    <? } else { ?>
+                                        <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
+                                    <? } ?>
+                                </td>
                             </tr>
                             <?
                             }

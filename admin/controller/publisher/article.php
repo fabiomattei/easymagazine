@@ -60,11 +60,14 @@ function newArticle() {
     return $outAction;
 }
 
-function articlenumber($id) {
+function articlenumber($id, $posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
     $outList = array();
 
     $num = Number::findById($id);
-    $outList['arts'] = $num->articles();
+    $outList['arts'] = Paginator::paginate($num->articles(), $page);
     $outList['page_numbers'] = 1;
     $outList['pageSelected'] = 1;
     $outList['lastList'] = 'articlenumber';
@@ -284,7 +287,7 @@ if (isset($_SESSION['user'])) {
         case  'showNotPublished':    $outList = showNotPublished($_POST); break;
         case  'find':                $outList = find($_POST); break;
         case  'byuser':              $outList = byuser($_POST); break;
-        case  'articlenumber':       $outList = articlenumber($_GET['id']); break;
+        case  'articlenumber':       $outList = articlenumber($_GET['id'], $_POST); break;
     }
 } else {
     header("Location: ../../loginError.php");
