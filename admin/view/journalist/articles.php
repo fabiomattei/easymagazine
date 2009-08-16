@@ -79,8 +79,6 @@
                             <tr>
                                 <th class="first" width="177">Title</th>
                                 <th>Edit</th>
-                                <th>Up</th>
-                                <th>Down</th>
                                 <th>Comments</th>
                                 <th>Published</th>
                                 <th class="last">Delete</th>
@@ -92,8 +90,6 @@
                             <tr>
                                 <td class="first style1"><? echo $ar->getTitle(); ?></td>
                                 <td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                <td><a href="article.php?action=up&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="comment.php?list=commentarticle&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
                                 <td>
                                         <? if ($ar->getPublished()) { ?>

@@ -198,44 +198,6 @@ function linkauthor($idAuthor, $idArticle) {
     return $outAction;
 }
 
-function up($id) {
-    $outAction = array();
-
-    $art1 = Article::findById($id);
-    $indexnumber =$art1->getIndexNumber();
-    $art2 = $art1->findUpIndexNumber();
-
-    if ($art2->getId()!=Article::NEW_ARTICLE) {
-        $art1->setIndexNumber($art2->getIndexNumber());
-        $art2->setIndexNumber($indexnumber);
-        $art1->save();
-        $art2->save();
-    }
-
-    $outAction['art'] = Article::findById($id);
-
-    return $outAction;
-}
-
-function down($id) {
-    $outAction = array();
-
-    $art1 = Article::findById($id);
-    $indexnumber =$art1->getIndexNumber();
-    $art2 = $art1->findDownIndexNumber();
-
-    if ($art2->getId()!=Article::NEW_ARTICLE) {
-        $art1->setIndexNumber($art2->getIndexNumber());
-        $art2->setIndexNumber($indexnumber);
-        $art1->save();
-        $art2->save();
-    }
-
-    $outAction['art'] = Article::findById($id);
-
-    return $outAction;
-}
-
 function save($toSave, $files) {
     $page = 1;
     $outAction = array();
