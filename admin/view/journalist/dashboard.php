@@ -32,12 +32,8 @@
                 <a href="index.html" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
                 <ul id="top-navigation">
                     <li class="active"><span><span>Dashboard</span></span></li>
-                    <li><span><span><a href="number.php">Numbers</a></span></span></li>
                     <li><span><span><a href="article.php">Articles</a></span></span></li>
-                    <li><span><span><a href="page.php">Pages</a></span></span></li>
                     <li><span><span><a href="comment.php">Comments</a></span></span></li>
-                    <li><span><span><a href="plugin.php">Plugin</a></span></span></li>
-                    <li><span><span><a href="template.php">Template</a></span></span></li>
                     <li><span><span><a href="user.php">Users</a></span></span></li>
                 </ul>
             </div>

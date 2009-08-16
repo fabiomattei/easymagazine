@@ -74,18 +74,18 @@ function savePassword($toSave) {
 if (isset($_SESSION['user'])) {
 
     if (!isset($_GET["action"])) { $out = edit($_SESSION['user']->getId()); }
-
-    switch ($_GET["action"]) {
-        case  'save':          $out = save($_POST); break;
-        case  'savePassword':  $out = savePassword($_POST, $_FILES); break;
-        case  'edit':          $out = edit($_SESSION['user']->getId()); break;
+    else {
+        switch ($_GET["action"]) {
+            case  'save':          $out = save($_POST); break;
+            case  'savePassword':  $out = savePassword($_POST, $_FILES); break;
+            case  'edit':          $out = edit($_SESSION['user']->getId()); break;
+        }
     }
-    
+
 } else {
     header("Location: ../../loginError.php");
 }
 
-$userps = $out['userps'];
 $userp = $out['userp'];
 
 $infoarray = array();
