@@ -89,15 +89,27 @@
                                 ?>
                             <tr>
                                 <td class="first style1"><? echo $ar->getTitle(); ?></td>
-                                <td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td>
+                                    <? if ($ar->isUser($_SESSION['user']->getId())) { ?>
+                                    <a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a>
+                                    <? } else { ?>
+                                    &nbsp;
+                                    <? } ?>
+                                </td>
                                 <td><a href="comment.php?list=commentarticle&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
                                 <td>
-                                        <? if ($ar->getPublished()) { ?>
+                                    <? if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <? } else { ?>
+                                    <? } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                     <? } ?></td>
-                                <td class="last"><a href="article.php?action=requestdelete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                <td class="last">
+                                    <? if ($ar->isUser($_SESSION['user']->getId())) { ?>
+                                    <a href="article.php?action=requestdelete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a>
+                                    <? } else { ?>
+                                    &nbsp;
+                                    <? } ?>
+                                </td>
                             </tr>
                             <?
                             }

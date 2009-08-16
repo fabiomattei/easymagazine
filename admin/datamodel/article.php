@@ -15,7 +15,7 @@
 
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
@@ -301,6 +301,14 @@ class Article {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
+    }
+
+    public function isUser($iduser) {
+        $out = false;
+        foreach ($this->users() as $user) {
+            if ($user->getId() == $iduser) $out = true;
+        }
+        return $out;
     }
 
     public function unlinkUser($idUser) {
