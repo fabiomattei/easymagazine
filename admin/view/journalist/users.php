@@ -32,9 +32,13 @@
 		<a href="index.html" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
 		<ul id="top-navigation">
 			<li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
+			<li><span><span><a href="number.php">Numbers</a></span></span></li>
 			<li><span><span><a href="article.php">Articles</a></span></span></li>
+			<li><span><span><a href="page.php">Pages</a></span></span></li>
 			<li><span><span><a href="comment.php">Comments</a></span></span></li>
-                        <li class="active"><span><span>About Me</span></span></li>
+			<li><span><span><a href="plugin.php">Plugin</a></span></span></li>
+			<li><span><span><a href="template.php">Template</a></span></span></li>
+                        <li class="active"><span><span>Users</span></span></li>
 		</ul>
 	</div>
 	<div id="middle">
@@ -44,24 +48,56 @@
 		</div>
 		<div id="center-column">
                     <?
-                    if (isset($info) AND $info!='') {
+                    foreach ($infoarray as $info) {
                         echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
                     }
-                    if (isset($warning) AND $warning!='') {
+                    foreach ($warningarray as $warning) {
                         echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
                     }
-                    if (isset($question) AND $question!='') {
+                    foreach ($questionarray as $question) {
                         echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
                     }
-                    if (isset($error) AND $error!='') {
+                    foreach ($errorarray as $error) {
                         echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
                     }
                     ?>
-			
+			<div class="table">
+				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
+				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
+				<table class="listing" cellpadding="0" cellspacing="0">
+					<tr>
+						<th class="first" width="377">Name - Username</th>
+						<th>Edit</th>
+						<th>Publisher</th>
+						<th class="last">Delete</th>
+					</tr>
+
+                    <?
+                    foreach ($userps as $ar) {
+                    ?>
+					<tr>
+						<td class="first style1"><? echo $ar->getName(); ?> - <? echo $ar->getUsername(); ?></td>
+						<td><a href="user.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td>
+                                                <? if ($ar->getRole()=='publisher') { ?>
+                                                    <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
+                                                <? } else { ?>
+                                                    <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
+                                                <? } ?></td>
+						<td class="last"><a href="user.php?action=requestdelete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+					</tr>
+                    <?
+                    }
+                    ?>
+				</table>
+              <form name="formnew" method="post" action="user.php">
+                <input type="submit" value="New" name="new" />
+              </form>
+			</div>
 		  <div class="table">
 				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                
+
 				<table class="listing form" cellpadding="0" cellspacing="0">
                                     <form name="form1" enctype="multipart/form-data" method="post" action="user.php?action=save">
 					<tr>
@@ -74,6 +110,18 @@
                     					<tr>
 						<td class="first"><strong>Username</strong></td>
                         <td class="last"><input type="text" name="Username" value="<? echo $userp->getUsername(); ?>"/></td>
+					</tr>                    <tr>
+                                    <td class="first" colspan="2"><strong>Body</strong><br />
+                                        <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
+                                            <textarea cols="40" id="article_body" name="Body" rows="20" style="width: 500px; padding: 5px"><? echo $userp->getUnfilteredBody(); ?></textarea>
+                                            <link href="../../../lib/textileeditor/teh/stylesheets/textile-editor.css" media="screen" rel="Stylesheet" type="text/css" />
+                                            <script src="../../../lib/textileeditor/teh/javascripts/textile-editor.js" type="text/javascript"></script>
+                                            <script type="text/javascript">
+                                                Event.observe(window, "load", function() {
+                                                    TextileEditor.initialize("article_body", "extended");
+                                                });
+                                            </script>
+                                    </td>
 					</tr>
                                         <tr>
 						<td class="first" width="172"><strong>Email</strong></td>
@@ -87,6 +135,33 @@
 						<td class="first" width="172"><strong>Skype</strong></td>
 						<td class="last"><input type="text" name="Skype" value="<? echo $userp->getSkype(); ?>"/></td>
                     </tr>
+                    <tr class="bg">
+						<td class="first"><strong>Publisher</strong></td>
+						<td class="last"><input type="checkbox" name="Role" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?>/></td>
+					</tr
+                       <tr class="bg">
+						<td class="first"><strong>Show Image</strong></td>
+                        <td class="last">
+                        <? if ($userp->imageExists()) { ?>
+                        <img src="<? echo $userp->imagePath(); ?>"
+                        <a href="page.php?action=deleteimg&id=<? echo $userp->getId(); ?>">Delete image</a>
+                        <? } else { ?>
+                        &nbsp;
+                        <? } ?>
+                        </td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Image File</strong></td>
+                        <td class="last"><input type="file" name="Image" value="" /></td>
+					</tr>
+                    <tr class="bg">
+						<td class="first"><strong>Image file name:</strong></td>
+                        <td class="last"><? echo $userp->getImgfilename(); ?></td>
+					</tr>
+                    <tr>
+						<td class="first"><strong>Image description:</strong></td>
+                        <td class="last"><input type="text" name="ImageDescription" value="<? echo $userp->getImgdescription(); ?>"/></td>
+					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Created:</strong></td>
                         <td class="last"><? echo $userp->getCreated(); ?></td>
@@ -142,7 +217,7 @@
 		</div>
 		<div id="right-column">
 			<strong class="h">INFO</strong>
-			<div class="box">Here you can modify the information about you and your password.</div>
+			<div class="box">Here there is a list of all user and their informations.</div>
 	  </div>
 	</div>
 	<div id="footer"></div>

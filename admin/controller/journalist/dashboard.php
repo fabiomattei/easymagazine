@@ -41,20 +41,32 @@ function index() {
     return $out;
 }
 
-if (!isset($_GET["action"])) { $out = index(); }
-else {
-	switch ($_GET["action"]) {
-		case  'index':             $out = index(); break;
-	}
+if (isset($_GET['list'])) { $list = $_GET['list']; }
+else { $list = 'index'; }
+
+if (isset($_SESSION['user'])) {
+    switch ($list) {
+        case  'index':       $outList = index(); break;
+    }
 }
 
-$arts = $out['arts'];
-$comms = $out['comms'];
+$arts = $outList['arts'];
+$comms = $outList['comms'];
 
-if (isset($out['info'])) { $info = $out['info']; }
-if (isset($out['warning'])) { $warning = $out['warning']; }
-if (isset($out['question'])) { $question = $out['question']; }
-if (isset($out['error'])) { $error = $out['error']; }
+$infoarray = array();
+$warningarray = array();
+$questionarray = array();
+$errorarray = array();
+
+if (isset($outAction['info'])) { $infoarray[] = $outAction['info']; }
+if (isset($outAction['warning'])) { $warningarray[] = $outAction['warning']; }
+if (isset($outAction['question'])) { $questionarray[] = $outAction['question']; }
+if (isset($outAction['error'])) { $errorarray[] = $outAction['error']; }
+
+if (isset($outList['info'])) { $infoarray[] = $outList['info']; }
+if (isset($outList['warning'])) { $warningarray[] = $outList['warning']; }
+if (isset($outList['question'])) { $questionarray[] = $outList['question']; }
+if (isset($outList['error'])) { $errorarray[] = $outList['error']; }
 
 include('../../view/journalist/dashboard.php');
 

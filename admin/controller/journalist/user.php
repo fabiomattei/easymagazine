@@ -67,25 +67,36 @@ function savePassword($toSave) {
     }
 
     $out['userp'] = User::findById($userp->getId());
-    
+
     return $out;
 }
 
-if (!isset($_GET["action"])) { $out = edit($_SESSION['user']->getId()); }
-else {
+if (isset($_SESSION['user'])) {
+
+    if (!isset($_GET["action"])) { $out = edit($_SESSION['user']->getId()); }
+
     switch ($_GET["action"]) {
         case  'save':          $out = save($_POST); break;
-        case  'savePassword':  $out = savePassword($_POST); break;
-        case  'edit':          $out = edit($_GET['id']); break;
+        case  'savePassword':  $out = savePassword($_POST, $_FILES); break;
+        case  'edit':          $out = edit($_SESSION['user']->getId()); break;
     }
+    
+} else {
+    header("Location: ../../loginError.php");
 }
-;
+
+$userps = $out['userps'];
 $userp = $out['userp'];
 
-if (isset($out['info'])) { $info = $out['info']; }
-if (isset($out['warning'])) { $warning = $out['warning']; }
-if (isset($out['question'])) { $question = $out['question']; }
-if (isset($out['error'])) { $error = $out['error']; }
+$infoarray = array();
+$warningarray = array();
+$questionarray = array();
+$errorarray = array();
+
+if (isset($out['info'])) { $infoarray[] = $out['info']; }
+if (isset($out['warning'])) { $warningarray[] = $out['warning']; }
+if (isset($out['question'])) { $questionarray[] = $out['question']; }
+if (isset($out['error'])) { $errorarray[] = $out['error']; }
 
 include('../../view/journalist/users.php');
 

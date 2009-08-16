@@ -41,15 +41,17 @@ function index() {
     return $out;
 }
 
-if (!isset($_GET["action"])) { $out = index(); }
-else {
-	switch ($_GET["action"]) {
-		case  'index':             $out = index(); break;
-	}
+if (isset($_GET['list'])) { $list = $_GET['list']; }
+else { $list = 'index'; }
+
+if (isset($_SESSION['user'])) {
+    switch ($list) {
+        case  'index':       $outList = index(); break;
+    }
 }
 
-$arts = $out['arts'];
-$comms = $out['comms'];
+$arts = $outList['arts'];
+$comms = $outList['comms'];
 
 $infoarray = array();
 $warningarray = array();

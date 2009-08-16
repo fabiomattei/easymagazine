@@ -58,7 +58,7 @@ function requestdelete($id) {
 
     $userps = User::findAll();
     $out['userps'] = $userps;
-    
+
     $out['question'] = 'Do you really want to delete the user: '.$userp->getName().' - '.$userp->getUsername().'? <br />
     <a href="user.php?action=dodelete&id='.$userp->getId().'">yes</a>,
     <a href="user.php">no</a>';
@@ -153,18 +153,24 @@ function savePassword($toSave) {
     return $out;
 }
 
-if (isset($_GET['action'])) { $action = $_GET['action']; }
-else { $action = 'index'; }
-
 if (isset($_SESSION['user'])) {
-    switch ($action) {
-        case  'index':         $out = index(); break;
-        case  'save':          $out = save($_POST, $_FILES); break;
-        case  'savePassword':  $out = savePassword($_POST); break;
-        case  'edit':          $out = edit($_GET['id']); break;
-        case  'dodelete':      $out = dodelete($_GET['id']); break;
-        case  'requestdelete': $out = requestdelete($_GET['id']); break;
+
+    if (isset($_GET['action'])) { $action = $_GET['action']; }
+    else { $action = 'index'; }
+
+    if (isset($_SESSION['user'])) {
+        switch ($action) {
+            case  'index':         $out = index(); break;
+            case  'save':          $out = save($_POST, $_FILES); break;
+            case  'savePassword':  $out = savePassword($_POST); break;
+            case  'edit':          $out = edit($_GET['id']); break;
+            case  'dodelete':      $out = dodelete($_GET['id']); break;
+            case  'requestdelete': $out = requestdelete($_GET['id']); break;
+        }
     }
+    
+} else {
+    header("Location: ../../loginError.php");
 }
 
 $userps = $out['userps'];

@@ -32,9 +32,13 @@
 		<a href="index.html" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
 		<ul id="top-navigation">
 			<li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
+			<li><span><span><a href="number.php">Numbers</a></span></span></li>
 			<li><span><span><a href="article.php">Articles</a></span></span></li>
+			<li><span><span><a href="page.php">Pages</a></span></span></li>
 			<li class="active"><span><span>Comments</span></span></li>
-                        <li><span><span><a href="user.php">About Me</a></span></span></li>
+			<li><span><span><a href="plugin.php">Plugin</a></span></span></li>
+			<li><span><span><a href="template.php">Template</a></span></span></li>
+                        <li><span><span><a href="user.php">Users</a></span></span></li>
 		</ul>
 	</div>
 	<div id="middle">
@@ -43,27 +47,27 @@
                         <h3>Comments</h3>
 			<ul class="nav">
 				<li><a href="comment.php">View all comments</a></li>
-				<li class="last"><a href="comment.php?action=byuser">View comments to my articles</a></li>
+				<li class="last"><a href="comment.php?list=byuser">View comments to my articles</a></li>
 			</ul>
 			<a href="#" class="link">View the website</a>
 		</div>
 		<div id="center-column">
                     <?
-                    if (isset($info) AND $info!='') {
+                    foreach ($infoarray as $info) {
                         echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
                     }
-                    if (isset($warning) AND $warning!='') {
+                    foreach ($warningarray as $warning) {
                         echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
                     }
-                    if (isset($question) AND $question!='') {
+                    foreach ($questionarray as $question) {
                         echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
                     }
-                    if (isset($error) AND $error!='') {
+                    foreach ($errorarray as $error) {
                         echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
                     }
                     ?>
 		  <div class="select-bar">
-                    <form name="searchform" method="post" action="comment.php?action=find">
+                    <form name="searchform" method="post" action="comment.php?list=find">
 		    <label>
 		    <input type="text" name="string" />
 		    </label>
@@ -95,7 +99,7 @@
                                                 <? } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                                 <? } ?></td>
-						<td class="last"><a href="comment.php?action=requestdelete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+						<td class="last"><a href="comment.php?action=requestdelete&id=<? echo $ar->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
 					</tr>
                     <?
                     }
@@ -109,6 +113,7 @@
                                     <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
                                     <? }?>
                                 </select>&nbsp;
+                                <input type="hidden" name="movinglist" value="yes" />
                                 <input type="submit" value="Go" name="Go" />
                             </form>
                         </div>

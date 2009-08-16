@@ -28,328 +28,217 @@ require_once(STARTPATH.UTILSPATH.'paginator.php');
 
 session_start();
 
+function commons() {
+    $outCommons = array();
+    $outCommons['numbs'] = Number::findAll();
+    $outCommons['authors'] = User::findAll();
+
+    return $outCommons;
+}
+
 function index($posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
-    
-    $out = array();
 
-    $art = new Article();
-    $out['art'] = $art;
+    $outList = array();
 
     $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outList['arts'] = Paginator::paginate($arts, $page);
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
+    $outList['lastList'] = 'index';
 
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    return $out;
+    return $outList;
 }
 
-function articlenumber($id) {
-    $out = array();
+function newArticle() {
+    $outAction = array();
 
     $art = new Article();
-    $out['art'] = $art;
+    $outAction['art'] = $art;
+
+    return $outAction;
+}
+
+function articlenumber($id, $posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
+    $outList = array();
 
     $num = Number::findById($id);
-    $arts = $num->articles();
-    $out['arts'] = $arts;
-    $out['page_numbers'] = 1;
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'articlenumber';
+    $outList['arts'] = Paginator::paginate($num->articles(), $page);
+    $outList['page_numbers'] = 1;
+    $outList['pageSelected'] = 1;
+    $outList['lastList'] = 'articlenumber';
 
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    return $out;
+    return $outList;
 }
 
 function byuser($posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
 
-    $out = array();
-
-    $art = new Article();
-    $out['art'] = $art;
+    $outList = array();
 
     $arts = $_SESSION['user']->articles();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'byuser';
+    $outList['arts'] = Paginator::paginate($arts, $page);
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
+    $outList['lastList'] = 'byuser';
 
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    return $out;
+    return $outList;
 }
 
-function find($string) {
-    $out = array();
+function find($posts) {
+    if (isset($posts['movinglist'])) {
+        $page = $posts['page'];
+        $string = $_SESSION['oldstring'];
+    } else {
+        $string = $posts['string'];
+        $page = 1;
+    }
 
-    $art = new Article();
-    $out['art'] = $art;
+    $outList = array();
 
-    $arts = Article::findInAllTextFields($string);
-    $out['arts'] = $arts;
-    $out['page_numbers'] = 1;
-    $out['pageSelected'] = 1;
-    $out['lastAction'] = 'find';
+    $arts = Article::findInAllTextFields($posts['string']);
+    $outList['arts'] = Paginator::paginate($arts, $page);
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
 
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
+    $outList['lastList'] = 'find';
 
-    $out['authors'] = User::findAll();
-
-    if (count($arts)==0) { $out['warning'] = 'No articles corresponding to search criteria';  }
-    return $out;
+    if (count($arts)==0) { $outList['warning'] = 'No articles corresponding to search criteria';  }
+    return $outList;
 }
 
 function edit($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $art = Article::findById($id);
-    $out['art'] = $art;
+    $outAction['art'] = $art;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    return $out;
+    return $outAction;
 }
 
-function requestdelete($id) {
-    $page = 1;
-    $out = array();
+function requestdelete($id, $list, $pageSelected) {
+    $outAction = array();
 
     $art = Article::findById($id);
-    $out['art'] = $art;
+    $outAction['art'] = $art;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outAction['question'] = 'Do you really want to delete the article: '.$art->getTitle().'? <br />
+    <a href="article.php?action=dodelete&id='.$art->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
+    <a href="article.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
 
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    $out['question'] = 'Do you really want to delete the article: '.$art->getTitle().'? <br />
-    <a href="article.php?action=dodelete&id='.$art->getId().'">yes</a>,
-    <a href="article.php">no</a>';
-
-    return $out;
+    return $outAction;
 }
 
 function dodelete($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $art = Article::findById($id);
     $art->delete();
     $art = new Article();
-    $out['art'] = $art;
+    $outAction['art'] = $art;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outAction['info'] = 'Article deleted';
 
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    $out['info'] = 'Article deleted';
-
-    return $out;
+    return $outAction;
 }
 
 function deleteimg($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $art = Article::findById($id);
     $art->deleteImg();
-    $out['art'] = $art;
+    $outAction['art'] = $art;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    return $out;
+    return $outAction;
 }
 
-function requestunlinkauthor($idAuthor, $idArticle) {
-    $page = 1;
-    $out = array();
+function requestunlinkauthor($idAuthor, $idArticle, $list, $pageSelected) {
+    $outAction = array();
 
     $art = Article::findById($idArticle);
-    $out['art'] = $art;
-
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
+    $outAction['art'] = $art;
 
     $author = User::findById($idAuthor);
 
-    $out['question'] = 'Do you really want to unlink the author '.$author->getName().' - '.$author->getUsername().'
+    $outAction['question'] = 'Do you really want to unlink the author '.$author->getName().' - '.$author->getUsername().'
     from the article: '.$art->getTitle().'? <br />
-    <a href="article.php?action=dounlinkauthor&idauthor='.$idAuthor.'&idarticle='.$idArticle.'">yes</a>,
-    <a href="article.php">no</a>';
+    <a href="article.php?action=dounlinkauthor&idauthor='.$idAuthor.'&idarticle='.$idArticle.'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
+    <a href="article.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
 
-    return $out;
+    return $outAction;
 }
 
 function dounlinkauthor($idAuthor, $idArticle) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $art = Article::findById($idArticle);
     $art->unlinkUser($idAuthor);
-    $out['art'] = $art;
+    $outAction['art'] = $art;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outAction['info'] = 'Author unlinked';
 
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    $out['info'] = 'Author unlinked from article';
-
-    return $out;
+    return $outAction;
 }
 
 function linkauthor($idAuthor, $idArticle) {
     $page = 1;
-    $out = array();
+    $outAction = array();
 
     $art = Article::findById($idArticle);
     $art->linkUser($idAuthor);
-    $out['art'] = $art;
+    $outAction['art'] = $art;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
+    $outAction['info'] = 'Author linked';
 
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    $out['info'] = 'Author '.$idAuthor.' linked to article '.$idArticle;
-
-    return $out;
+    return $outAction;
 }
 
 function up($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $art1 = Article::findById($id);
+    $indexnumber =$art1->getIndexNumber();
     $art2 = $art1->findUpIndexNumber();
 
-    if ($art2) {
+    if ($art2->getId()!=Article::NEW_ARTICLE) {
         $art1->setIndexNumber($art2->getIndexNumber());
         $art2->setIndexNumber($indexnumber);
         $art1->save();
         $art2->save();
     }
 
-    $art = new Article();
-    $out['art'] = $art;
+    $outAction['art'] = Article::findById($id);
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    return $out;
+    return $outAction;
 }
 
 function down($id) {
-    $page = 1;
-    $out = array();
+    $outAction = array();
 
     $art1 = Article::findById($id);
+    $indexnumber =$art1->getIndexNumber();
     $art2 = $art1->findDownIndexNumber();
 
-    if ($art2) {
+    if ($art2->getId()!=Article::NEW_ARTICLE) {
         $art1->setIndexNumber($art2->getIndexNumber());
         $art2->setIndexNumber($indexnumber);
         $art1->save();
         $art2->save();
     }
 
-    $art = new Article();
-    $out['art'] = $art;
+    $outAction['art'] = Article::findById($id);
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    return $out;
+    return $outAction;
 }
 
 function save($toSave, $files) {
     $page = 1;
-    $out = array();
+    $outAction = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
     if (!isset($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
@@ -377,54 +266,67 @@ function save($toSave, $files) {
         $art->deleteImg();
         $art->saveImg($files['Image']);
     }
-    $out['art'] = $art;
+    $outAction['art'] = $art;
 
-    $arts = Article::findAllOrderedByIndexNumber();
-    $out['arts'] = Paginator::paginate($arts, $page);
-    $out['page_numbers'] = Article::getPageNumbers();
-    $out['pageSelected'] = $page;
-    $out['lastAction'] = 'index';
-
-    $numbs = Number::findAll();
-    $out['numbs'] = $numbs;
-
-    $out['authors'] = User::findAll();
-
-    return $out;
+    return $outAction;
 }
 
-if (!isset($_GET["action"])) { $out = index($_POST); }
-else {
-    switch ($_GET["action"]) {
-        case  'index':               $out = index($_POST); break;
-        case  'save':                $out = save($_POST, $_FILES); break;
-        case  'edit':                $out = edit($_GET['id']); break;
-        case  'dodelete':            $out = dodelete($_GET['id']); break;
-        case  'requestdelete':       $out = requestdelete($_GET['id']); break;
-        case  'up':                  $out = up($_GET['id']); break;
-        case  'down':                $out = down($_GET['id']); break;
-        case  'deleteimg':           $out = deleteimg($_GET['id']); break;
-        case  'articlenumber':       $out = articlenumber($_GET['id']); break;
-        case  'linkauthor':          $out = linkauthor($_POST['authorid'], $_GET['idarticle']); break;
-        case  'requestunlinkauthor': $out = requestunlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
-        case  'dounlinkauthor':      $out = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
-        case  'find':                $out = find($_POST['string']); break;
-        case  'byuser':              $out = byuser($_POST); break;
+if (isset($_GET['list'])) { $list = $_GET['list']; }
+else { $list = 'index'; }
+if (isset($_GET['action'])) { $action = $_GET['action']; }
+else { $action = 'newArticle'; }
+
+if (isset($_SESSION['user'])) {
+    $outCommons = commons();
+    switch ($action) {
+        case  'newArticle':          $outAction = newArticle(); break;
+        case  'save':                $outAction = save($_POST, $_FILES); break;
+        case  'edit':                $outAction = edit($_GET['id']); break;
+        case  'dodelete':            $outAction = dodelete($_GET['id']); break;
+        case  'requestdelete':       $outAction = requestdelete($_GET['id'], $_GET['list'], $_GET['pageSelected']); break;
+        case  'up':                  $outAction = up($_GET['id']); break;
+        case  'down':                $outAction = down($_GET['id']); break;
+        case  'deleteimg':           $outAction = deleteimg($_GET['id']); break;
+        case  'linkauthor':          $outAction = linkauthor($_POST['authorid'], $_GET['idarticle']); break;
+        case  'requestunlinkauthor': $outAction = requestunlinkauthor($_GET['idauthor'], $_GET['idarticle'], $_GET['list'], $_GET['pageSelected']); break;
+        case  'dounlinkauthor':      $outAction = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
     }
+    switch ($list) {
+        case  'index':               $outList = index($_POST); break;
+        case  'showPublished':       $outList = showPublished($_POST); break;
+        case  'showNotPublished':    $outList = showNotPublished($_POST); break;
+        case  'find':                $outList = find($_POST); break;
+        case  'byuser':              $outList = byuser($_POST); break;
+        case  'articlenumber':       $outList = articlenumber($_GET['id'], $_POST); break;
+    }
+} else {
+    header("Location: ../../loginError.php");
 }
 
-$arts = $out['arts'];
-$art = $out['art'];
-$numbs = $out['numbs'];
-$authors = $out['authors'];
-$lastAction = $out['lastAction'];
-$page_numbers = $out['page_numbers'];
-$pageSelected = $out['pageSelected'];
+$numbs = $outCommons['numbs'];
+$authors = $outCommons['authors'];
 
-if (isset($out['info'])) { $info = $out['info']; }
-if (isset($out['warning'])) { $warning = $out['warning']; }
-if (isset($out['question'])) { $question = $out['question']; }
-if (isset($out['error'])) { $error = $out['error']; }
+$art = $outAction['art'];
+
+$arts = $outList['arts'];
+$lastList = $outList['lastList'];
+$page_numbers = $outList['page_numbers'];
+$pageSelected = $outList['pageSelected'];
+
+$infoarray = array();
+$warningarray = array();
+$questionarray = array();
+$errorarray = array();
+
+if (isset($outAction['info'])) { $infoarray[] = $outAction['info']; }
+if (isset($outAction['warning'])) { $warningarray[] = $outAction['warning']; }
+if (isset($outAction['question'])) { $questionarray[] = $outAction['question']; }
+if (isset($outAction['error'])) { $errorarray[] = $outAction['error']; }
+
+if (isset($outList['info'])) { $infoarray[] = $outList['info']; }
+if (isset($outList['warning'])) { $warningarray[] = $outList['warning']; }
+if (isset($outList['question'])) { $questionarray[] = $outList['question']; }
+if (isset($outList['error'])) { $errorarray[] = $outList['error']; }
 
 include('../../view/journalist/articles.php');
 

@@ -32,9 +32,13 @@
                 <a href="index.html" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
                 <ul id="top-navigation">
                     <li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
+                    <li><span><span><a href="number.php">Numbers</a></span></span></li>
                     <li class="active"><span><span>Articles</span></span></li>
+                    <li><span><span><a href="page.php">Pages</a></span></span></li>
                     <li><span><span><a href="comment.php">Comments</a></span></span></li>
-                    <li><span><span><a href="user.php">About Me</a></span></span></li>
+                    <li><span><span><a href="plugin.php">Plugin</a></span></span></li>
+                    <li><span><span><a href="template.php">Template</a></span></span></li>
+                    <li><span><span><a href="user.php">Users</a></span></span></li>
                 </ul>
             </div>
             <div id="middle">
@@ -43,27 +47,27 @@
                     <h3>Articles</h3>
                     <ul class="nav">
                         <li><a href="article.php">Show All</a></li>
-                        <li class="last"><a href="article.php?action=byuser">Show My Articles</a></li>
+                        <li class="last"><a href="article.php?list=byuser">Show My Articles</a></li>
                     </ul>
                     <a href="#" class="link">View the website</a>
                 </div>
                 <div id="center-column">
                     <?
-                    if (isset($info) AND $info!='') {
+                    foreach ($infoarray as $info) {
                         echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
                     }
-                    if (isset($warning) AND $warning!='') {
+                    foreach ($warningarray as $warning) {
                         echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
                     }
-                    if (isset($question) AND $question!='') {
+                    foreach ($questionarray as $question) {
                         echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
                     }
-                    if (isset($error) AND $error!='') {
+                    foreach ($errorarray as $error) {
                         echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
                     }
                     ?>
                     <div class="select-bar">
-                        <form name="searchform" method="post" action="article.php?action=find">
+                        <form name="searchform" method="post" action="article.php?list=find">
                             <label>
                                 <input type="text" name="string" />
                             </label>
@@ -94,7 +98,7 @@
                                 <td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td><a href="article.php?action=up&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="comment.php?action=commentarticle&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="comment.php?list=commentarticle&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
                                 <td>
                                         <? if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
@@ -108,13 +112,14 @@
                             ?>
                         </table>
                         <div class="select">
-                            <form name="pageselectionform" method="post" action="number.php?action=<?=$lastAction?>">
+                            <form name="pageselectionform" method="post" action="number.php?lastList=<?=$lastList?>">
                                 <strong>Pages: </strong>
                                 <select name="page">
                                     <? for ($i=1;$i<=$page_numbers;$i++) { ?>
                                     <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
                                     <? }?>
                                 </select>&nbsp;
+                                <input type="hidden" name="movinglist" value="yes" />
                                 <input type="submit" value="Go" name="Go" />
                             </form>
                         </div>
@@ -125,7 +130,7 @@
                     <div class="table">
                         <img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                        <form name="form1" enctype="multipart/form-data" method="post" action="article.php?action=save">
+                        <form name="form1" enctype="multipart/form-data" method="post" action="article.php?action=save&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
                             <table class="listing form" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <th class="full" colspan="2">Edit</th>
@@ -138,7 +143,7 @@
                                             <option value="<? echo $nmb->getId(); ?>"
                                                 <? if ($nmb->getId()==$art->getNumber_id()) { echo "selected"; } ?>
                                                     ><? echo $nmb->getTitle(); ?></option>
-                                                    <? } ?>
+                                                <? } ?>
                                         </select>
                                     </td>
                                 </tr>
