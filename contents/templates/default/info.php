@@ -1,2 +1,5 @@
-<img src="<? echo STARTPATH; ?>contents/templates/default/example.jpg"><br />
-very nice template!!!
+<img src="<? echo STARTPATH; ?>contents/templates/default/example.jpg"><br /><br />
+This template was created modifying the Wordpress theme called "Blass2"
+created by 1000ff and released under GPL.<br />
+The graphic idea didn't be change, only the technical aspect was changed
+to let it works with Easy Magazine.<br />
