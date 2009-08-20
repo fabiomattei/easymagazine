@@ -1,22 +1,36 @@
-<?php
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head profile="http://gmpg.org/xfn/11">
+        <meta name="distribution" content="global" />
+        <meta name="robots" content="follow, all" />
+        <meta name="language" content="en, sv" />
 
-/*
-    Copyright (C) 2009  Fabio Mattei
+        <title>My magazine</title>
+        <!-- leave this for stats please -->
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+        <link rel="stylesheet" href="<?= URIMaker::fromBasePath('contents/templates/easy/style.css') ?>" type="text/css" media="screen" />
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+        </style>
+    </head>
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+    <body>
 
-echo "I 'm the header";
+        <div id="header">
+            <a href="<?= URIMaker::fromBasePath('index.php') ?>/">My magazine</a><br />
+	A little something about the magazine and the authors. Nothing lengthy, just an overview.
+        </div>
 
-?>
+        <div id="navbar">
+            <ul>
+                <li><a href="<?= URIMaker::fromBasePath('index.php') ?>">Home</a></li>
+                <li><a href="<?= URIMaker::people() ?>">People</a></li>
+
+                <?
+                foreach (Page::findAllPublishedOrdered() as $page) {
+                    echo '<li><a href="'.URIMaker::page($page).'">'.$page->getTitle().'</a></li>';
+                }
+                ?>
+            </ul>
+        </div>
+
+        <div id="wrap">

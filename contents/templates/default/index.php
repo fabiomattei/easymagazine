@@ -1,10 +1,9 @@
 <div id="sidebar">
 
-
       <h2>About this Magazine</h2>
 
       <p class="news">
-          A little something about you, the author. Nothing lengthy, just an overview.
+          A little something about the magazine and the authors. Nothing lengthy, just an overview.
       </p>
 
 <h2>Lasts Numbers</h2>

@@ -1,31 +1,47 @@
-<?php
+<div id="content">
 
-/*
-    Copyright (C) 2009  Fabio Mattei
+    <?php include("l_sidebar.php");?>
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    <div id="contentmiddle">
+        <div class="contenttitle">
+            <h1><a href="<?=URIMaker::article($this->article)?>" rel="bookmark"><?= $this->article->getTitle() ?></a></h1>
+            <p>
+                <?= $this->article->getCreatedFormatted() ?>  by
+                <?
+                foreach ($this->article->users() as $user) {
+                    echo $user->getName().' ';
+                }
+                ?> |
+                <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->comments()).') </a>'; ?>
+            </p>
+            <p>
+                <? if ($this->article->imageExists()) { ?>
+                <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" width="100" align="left">
+                <? } ?>
+                <?= $this->article->getSummary() ?>
+            </p>
+            
+            <h3>Comments</h3>
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+            <? foreach($this->article->comments()  as $comment) { ?>
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+            <p><small><?= $comment->getCreatedFormatted() ?></small> by
+                    <?= $comment->getSignature() ?>
+            </p>
 
-echo $this->article->getTitle()."<br>";
+            <p>
 
-foreach($this->article->comments()  as $comment) {
-    echo $comment->getTitle()."<br>";
-}
+                    <?= $comment->getTitle() ?><br />
 
-echo "<br><br>Pages<br>";
-foreach($this->pages  as $page) {
-    echo '<a href="'.URIMaker::page($page).'"> '.$page->getTitle()." </a><br>";
-}
+                    <?= $comment->getBody() ?>
 
-?>
+            </p>
+
+            <? } ?>
+
+        </div>
+    </div>
+
+    <?php include("r_sidebar.php");?>
+
+</div>

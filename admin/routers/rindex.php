@@ -28,7 +28,7 @@ class IndexRouter extends Router {
     private $numbers;
 
     function loadData(){
-        $this->number = Number::findLast();
+        $this->number = Number::findLastPublished();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
     }

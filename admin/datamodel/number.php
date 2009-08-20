@@ -50,6 +50,7 @@ class Number {
     const SELECT_BY_TITLE = 'select * from numbers where title like ?';
     const FIND_IN_ALL_TEXT_FIELDS = 'select * from numbers where title like ? OR subtitle like ? OR summary like ? ';
     const SELECT_LAST = 'select * from numbers where published = 1 order by indexnumber DESC Limit 1';
+    const SELECT_LAST_PUBLISHED = 'select * from numbers where published = 1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from numbers where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from numbers order by indexnumber DESC';
@@ -154,6 +155,11 @@ class Number {
 
     public static function findLast() {
         $ret = NUMBER::findOne(self::SELECT_LAST, array(), array());
+        return $ret;
+    }
+
+    public static function findLastPublished() {
+        $ret = NUMBER::findOne(self::SELECT_LAST_PUBLISHED, array(), array());
         return $ret;
     }
 
