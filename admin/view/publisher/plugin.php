@@ -79,10 +79,10 @@
                     ?>
 					<tr>
 						<td class="first style1"><? echo $key; ?></td>
-						<td><a href="plugin.php?action=info&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td><a href="plugin.php?action=info&pluginname=<? echo $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
                                                 <td><a href="plugin.php?action=admin&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=activate&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=deactivate&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=activate&pluginname=<? echo $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=deactivate&pluginname=<? echo $key; ?>"><img src="../../resources/img/flag-red.png" width="16" height="16" alt="" /></a></td>
 						<td>
                                                 <? if (isset($pluginsindb["$key"])) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />

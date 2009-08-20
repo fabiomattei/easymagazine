@@ -77,8 +77,8 @@
                     ?>
 					<tr>
 						<td class="first style1"><? echo $key; ?></td>
-						<td><a href="template.php?action=info&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="template.php?action=activate&id=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+						<td><a href="template.php?action=info&id=<? echo $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="template.php?action=activate&id=<? echo $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
 						<td>
                                                 <? if ($key == $activetemplate->getName()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
