@@ -378,7 +378,9 @@ class Article {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
-            DB::getInstance()->execute(self::DELETE_USER_ARTICLE, array(),array((int) $this->getId()), $tables);
+            if (count($this->users()) > 0) {
+                DB::getInstance()->execute(self::DELETE_USER_ARTICLE, array(),array((int) $this->getId()), $tables);
+            }
             $this->id = self::NEW_ARTICLE;
             $this->title = '';
             $this->subtitle = '';

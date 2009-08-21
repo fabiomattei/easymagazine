@@ -105,7 +105,7 @@
                                     <? } ?></td>
                                 <td class="last">
                                     <? if ($ar->isUser($_SESSION['user']->getId())) { ?>
-                                    <a href="article.php?action=requestdelete&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a>
+                                    <a href="article.php?action=requestdelete&id=<? echo $ar->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a>
                                     <? } else { ?>
                                     &nbsp;
                                     <? } ?>
