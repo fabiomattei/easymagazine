@@ -27,21 +27,27 @@ class PeopleRouter extends Router {
     private $people;
     private $pages;
     private $numbers;
+    public $metadescritpion;
+    public $metakeywords;
 
-    function loadData(){
+    function loadData() {
         $arURI = $this->getArrayURI();
         $this->people = User::findAll();
         $this->pages = Page::findAllPublished();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        foreach ($this->people as $person) {
+            $this->metadescritpion = $person->getName.', ';
+            $this->metakeywords = $person->getName.', ';
+        }
     }
 
-    function applyTemplate(){
+    function applyTemplate() {
         $this->getRemote()->executeCommandBeforeArticle();
         if (file_exists(TEMPLATEPATH.'/people.php')) {
             include (TEMPLATEPATH.'/people.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
+                include (TEMPLATEPATH.'/index.php');
+            }
         $this->getRemote()->executeCommandAfterArticle();
     }
 

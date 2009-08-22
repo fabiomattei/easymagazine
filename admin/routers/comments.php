@@ -27,12 +27,16 @@ class CommentsRouter extends Router {
     private $article;
     private $pages;
     private $numbers;
+    public $metadescritpion;
+    public $metakeywords;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
+        $this->metadescritpion = $this->article->getMetadescription();
+        $this->metakeywords = $this->article->getMetakeyword();
     }
 
     function applyTemplate(){

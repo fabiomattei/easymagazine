@@ -26,11 +26,15 @@ class IndexRouter extends Router {
     private $number;
     private $pages;
     private $numbers;
+    public $metadescritpion;
+    public $metakeywords;
 
     function loadData(){
         $this->number = Number::findLastPublished();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
+        $this->metadescritpion = $this->number->getMetadescription();
+        $this->metakeywords = $this->number->getMetakeyword();
     }
 
     function applyTemplate(){

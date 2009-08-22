@@ -24,12 +24,16 @@ class NumberRouter extends Router {
     private $pages;
     private $number;
     private $numbers;
+    public $metadescritpion;
+    public $metakeywords;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->number = Number::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
+        $this->metadescritpion = $this->number->getMetadescription();
+        $this->metakeywords = $this->number->getMetakeyword();
     }
 
     function applyTemplate(){

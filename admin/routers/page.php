@@ -25,12 +25,16 @@ class PagesRouter extends Router {
     private $page;
     private $pages;
     private $numbers;
+    public $metadescritpion;
+    public $metakeywords;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->page = Page::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
+        $this->metadescritpion = $this->page->getMetadescription();
+        $this->metakeywords = $this->page->getMetakeyword();
     }
 
     function applyTemplate(){

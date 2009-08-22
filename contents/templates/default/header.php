@@ -8,6 +8,10 @@
 
         <link rel="stylesheet" href="<?= URIMaker::fromBasePath('contents/templates/default/style.css') ?>" type="text/css" media="screen" />
 
+        <meta name="keywords" content="<?= $this->metakeywords; ?>" />
+
+        <meta name="description" content="<?= $this->metadescritpion; ?>" />
+
     </head>
 
     <body>
