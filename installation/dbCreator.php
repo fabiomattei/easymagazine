@@ -44,6 +44,8 @@ class DbCreator {
            subtitle text,
            summary text,
            commentsallowed int,
+           metadescription text,
+           metakeyword text,
            imgfilename varchar(255),
            imgdescription varchar(255),
            created datetime,
@@ -54,9 +56,9 @@ class DbCreator {
     }
 
     public function populateTableNumbers() {
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgfilename, imgdescription, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
            values (1, 1, 1, 'My first number', 'Subtitle to my first number',
-           'Summary of my first number', 1, '', '', NOW(), NOW())";
+           'Summary of my first number', 1, 'meta description of the number', 'meta keywords of the number', 'viale_dei_pini.jpg', '', '2009-08-03', '2009-08-03')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }

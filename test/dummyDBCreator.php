@@ -44,6 +44,8 @@ class DbCreator {
            subtitle text,
            summary text,
            commentsallowed int,
+           metadescription text,
+           metakeyword text,
            imgfilename varchar(255),
            imgdescription varchar(255),
            created datetime,
@@ -54,17 +56,17 @@ class DbCreator {
     }
 
     public function populateTableNumbers() {
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgfilename, imgdescription, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
            values (1, 1, 1, 'My first number', 'Subtitle to my first number',
-           'Summary of my first number', 1, '', '', NOW(), NOW())";
+           'Summary of my first number', 1, '', '', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgfilename, imgdescription, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
            values (2, 2, 1, 'My second number', 'Subtitle to my second number',
-           'Summary of my second number', 1, '', '', NOW(), NOW())";
+           'Summary of my second number', 1, '', '', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, imgfilename, imgdescription, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
            values (3, 3, 0, 'My third number', 'Subtitle to my third number',
-           'Summary of my third number', 0, '', '', NOW(), NOW())";
+           'Summary of my third number', 0, '', '', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }

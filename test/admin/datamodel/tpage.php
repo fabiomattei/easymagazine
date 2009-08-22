@@ -26,48 +26,48 @@ class PageTests extends UnitTestCase {
         $this->db->connect();
     }
 
-	function setUp() {
+    function setUp() {
         $this->db->dropSchema();
         $this->db->createSchema();
         $this->db->populateSchema();
-	}
+    }
 
-	public function tearDown() {
+    public function tearDown() {
         $this->db->dropSchema();
-	}
+    }
 
     function testFindById() {
         $pg = Page::findById(1);
-		$this->assertPattern('(Page)', $pg->getTitle());
+        $this->assertPattern('(Page)', $pg->getTitle());
     }
 
     function testfindAllPublished() {
         $pg = Page::findAllPublished();
-		$this->assertEqual(2, count($pg));
+        $this->assertEqual(2, count($pg));
     }
 
     function testfindAll() {
         $pg = Page::findAll();
-		$this->assertEqual(3, count($pg));
+        $this->assertEqual(3, count($pg));
     }
 
     function testfindAllOrdered() {
         $pg = Page::findAllOrdered();
-		$this->assertEqual(3, count($pg));
-        $this->assertEqual(1, $pg[0]->getId());
+        $this->assertEqual(3, count($pg));
+        $this->assertEqual(3, $pg[0]->getId());
     }
 
     function testfindAllPublishedOrdered() {
         $pg = Page::findAllPublishedOrdered();
-		$this->assertEqual(2, count($pg));
-        $this->assertEqual(1, $pg[0]->getId());
+        $this->assertEqual(2, count($pg));
+        $this->assertEqual(2, $pg[0]->getId());
     }
 
     function testSaveNewPage() {
         $newpage = new Page(Page::NEW_PAGE, '4', '0', 'Page four', 'Subtitle four', 'summary four', 'Body', 'tag', 'metadscritpion', 'metakeyword');
         $newpage->save();
         $pages = Page::findAll();
-		$this->assertEqual(4, count($pages));
+        $this->assertEqual(4, count($pages));
     }
 
     function testUpdatePage() {
@@ -82,7 +82,7 @@ class PageTests extends UnitTestCase {
         $num = Page::findById(1);
         $num->delete();
         $num = Page::findAll();
-		$this->assertEqual(2, count($num));
+        $this->assertEqual(2, count($num));
     }
 
 }

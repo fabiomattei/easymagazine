@@ -160,6 +160,14 @@
                                 </script>
                                 </td>
                                 </tr>
+                                <tr>
+                                    <td class="first"><strong>Meta Description</strong></td>
+                                    <td class="last"><textarea name="MetaDescription" rows="4" cols="60"><? echo $numb->getMetaDescription(); ?></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td class="first"><strong>Meta Keyword</strong></td>
+                                    <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><? echo $numb->getMetaKeyword(); ?></textarea></td>
+                                </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Published</strong></td>
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($numb->getPublished()) echo 'checked="checked"'; ?>/></td>

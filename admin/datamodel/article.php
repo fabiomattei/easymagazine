@@ -258,6 +258,8 @@ class Article {
                     $row['subtitle'],
                     $row['summary'],
                     $row['commentsallowed'],
+                    $row['metadescription'],
+                    $row['metakeyword'],
                     $row['imgfilename'],
                     $row['imgdescription'],
                     $row['created'],

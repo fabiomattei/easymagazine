@@ -204,6 +204,8 @@ function save($toSave, $files) {
         $toSave['SubTitle'],
         $toSave['Summary'],
         $toSave['commentsallowed'],
+        $toSave['MetaDescription'],
+        $toSave['MetaKeyword'],
         $toSave['imagefilename'],
         $toSave['ImageDescription'],
         $toSave['created'],
