@@ -7,7 +7,6 @@
         <meta name="description" content="<?= $this->metadescritpion; ?>" />
 
         <title>My magazine</title>
-        <!-- leave this for stats please -->
 
         <link rel="stylesheet" href="<?= URIMaker::fromBasePath('contents/templates/easy/style.css') ?>" type="text/css" media="screen" />
 

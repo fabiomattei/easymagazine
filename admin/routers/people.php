@@ -36,9 +36,11 @@ class PeopleRouter extends Router {
         $this->pages = Page::findAllPublished();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         foreach ($this->people as $person) {
-            $this->metadescritpion = $person->getName.', ';
-            $this->metakeywords = $person->getName.', ';
+            $this->metadescritpion .= $person->getName().', ';
+            $this->metakeywords .= $person->getName().', ';
         }
+        $this->metadescritpion = substr($this->metadescritpion, 0, strlen($this->metadescritpion)-2);
+        $this->metakeywords = substr($this->metakeywords, 0, strlen($this->metakeywords)-2);
     }
 
     function applyTemplate() {
