@@ -32,7 +32,7 @@ class PagesRouter extends Router {
         $arURI = $this->getArrayURI();
         $this->page = Page::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
-        $this->pages = Page::findAllPublished();
+        $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->page->getMetadescription();
         $this->metakeywords = $this->page->getMetakeyword();
     }

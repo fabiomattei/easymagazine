@@ -33,7 +33,7 @@ class PeopleRouter extends Router {
     function loadData() {
         $arURI = $this->getArrayURI();
         $this->people = User::findAll();
-        $this->pages = Page::findAllPublished();
+        $this->pages = Page::findAllPublishedOrdered();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         foreach ($this->people as $person) {
             $this->metadescritpion .= $person->getName().', ';

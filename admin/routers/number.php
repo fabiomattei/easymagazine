@@ -31,7 +31,7 @@ class NumberRouter extends Router {
         $arURI = $this->getArrayURI();
         $this->number = Number::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
-        $this->pages = Page::findAllPublished();
+        $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->number->getMetadescription();
         $this->metakeywords = $this->number->getMetakeyword();
     }
