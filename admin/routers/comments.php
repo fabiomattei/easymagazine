@@ -39,7 +39,12 @@ class CommentsRouter extends Router {
         $this->metadescritpion = $this->article->getMetadescription();
         $this->metakeywords = $this->article->getMetakeyword();
 
-        if (isset($_POST['Title']) && isset($_POST['Body']) && isset($_POST['Signature'])) {
+        $cont = 0;
+        if (isset($_POST['Title']) && $_POST['Title']!='') $cont++;
+        if (isset($_POST['Body']) && $_POST['Body']!='') $cont++;
+        if (isset($_POST['Signature']) && $_POST['Signature']!='') $cont++;
+
+        if ($cont == 3) {
             $published = 0;
             $com = new Comment(
                 Comment::NEW_COMMENT,
@@ -51,8 +56,11 @@ class CommentsRouter extends Router {
             $com->save();
             $this->advice = 'Comment saved, it will be checked then published';
         }
-        if (isset($_POST['Title']) || isset($_POST['Body']) || isset($_POST['Signature'])) {
+        if ($cont < 3 && $cont > 0) {
             $this->advice = 'Fill all the fields please';
+        }
+        if ($cont == 0) {
+            $this->advice = '';
         }
     }
 
