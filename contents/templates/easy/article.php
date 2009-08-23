@@ -12,7 +12,7 @@
                         echo $user->getName().' ';
                     }
                     ?> |
-                    <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->comments()).') </a>'; ?>
+                    <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
             </p>
             <p>
                     <? if ($this->article->imageExists()) { ?>

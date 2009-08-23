@@ -260,11 +260,11 @@ class Comment {
         $this->title = $title;
     }
 
-    public function getpublished() {
+    public function getPublished() {
         return $this->published;
     }
 
-    public function setpublished($published) {
+    public function setPublished($published) {
         $this->published = $published;
     }
 

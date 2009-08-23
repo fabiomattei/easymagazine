@@ -39,7 +39,7 @@
     </div>
 
     <p class="date">
-        <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->comments()).') </a>'; ?>
+        <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
     </p>
 
 </div>

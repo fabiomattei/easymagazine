@@ -13,7 +13,7 @@
                         echo $user->getName().' ';
                     }
                     ?> |
-                    <? echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->comments()).') </a>'; ?>
+                    <? echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
             </p>
             <p>
                     <? if ($article->imageExists()) { ?>

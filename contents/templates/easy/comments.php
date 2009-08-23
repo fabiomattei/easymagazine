@@ -12,7 +12,7 @@
                     echo $user->getName().' ';
                 }
                 ?> |
-                <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->comments()).') </a>'; ?>
+                <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
             </p>
             <p>
                 <? if ($this->article->imageExists()) { ?>
@@ -23,7 +23,13 @@
             
             <h3>Comments</h3>
 
-            <? foreach($this->article->comments()  as $comment) { ?>
+            <?
+            if (isset($this->advice)) {
+                echo '<b>'.$this->advice.'</b>';
+            }
+            ?>
+
+            <? foreach($this->article->commentsPublished()  as $comment) { ?>
 
             <p><small><?= $comment->getCreatedFormatted() ?></small> by
                     <?= $comment->getSignature() ?>
@@ -38,6 +44,18 @@
             </p>
 
             <? } ?>
+
+            <p>
+            <form name="newcomment" method="post" action="<?= URIMaker::comment($this->article) ?>">
+                Title<br />
+                <input type="text" name="Title" value=""/><br />
+                Body<br />
+                <textarea name="Body" rows="4" cols="40"></textarea><br />
+                Signature<br />
+                <input type="text" name="Signature" value=""/><br />
+                <input type="submit" value="Ok" name="Ok" />
+            </form>
+            </p>
 
         </div>
     </div>

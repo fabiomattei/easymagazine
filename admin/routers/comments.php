@@ -29,25 +29,42 @@ class CommentsRouter extends Router {
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
+    public $advice;
 
-    function loadData(){
+    function loadData() {
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublished();
         $this->metadescritpion = $this->article->getMetadescription();
         $this->metakeywords = $this->article->getMetakeyword();
+
+        if (isset($_POST['Title']) && isset($_POST['Body']) && isset($_POST['Signature'])) {
+            $published = 0;
+            $com = new Comment(
+                Comment::NEW_COMMENT,
+                $arURI['id'],
+                $_POST['Title'],
+                $published,
+                $_POST['Body'],
+                $_POST['Signature']);
+            $com->save();
+            $this->advice = 'Comment saved, it will be checked then published';
+        }
+        if (isset($_POST['Title']) || isset($_POST['Body']) || isset($_POST['Signature'])) {
+            $this->advice = 'Fill all the fields please';
+        }
     }
 
-    function applyTemplate(){
+    function applyTemplate() {
         $this->getRemote()->executeCommandBeforeComments();
         if (file_exists(TEMPLATEPATH.'/comments.php')) {
             include (TEMPLATEPATH.'/comments.php');
 
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
+                include (TEMPLATEPATH.'/index.php');
 
-        }
+            }
         $this->getRemote()->executeCommandAfterComments();
     }
 
