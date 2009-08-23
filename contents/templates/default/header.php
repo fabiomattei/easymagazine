@@ -38,6 +38,6 @@
                     Little Magazine Description
                 </p>
 
-                <h1><a href="<?= URIMaker::fromBasePath() ?>index.php">Magazine Title</a></h1>
+                <h1><a href="<?= URIMaker::fromBasePath('index.php') ?>">Magazine Title</a></h1>
 
             </div>
