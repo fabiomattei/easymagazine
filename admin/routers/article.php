@@ -25,7 +25,7 @@ require_once('router.php');
 class ArticlesRouter extends Router {
 
     private $article;
-    private $pages;
+    public $pages;
     private $numbers;
     public $metadescritpion;
     public $metakeywords;

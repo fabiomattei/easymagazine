@@ -25,7 +25,7 @@ require_once('router.php');
 class PeopleRouter extends Router {
 
     private $people;
-    private $pages;
+    public $pages;
     private $numbers;
     public $metadescritpion;
     public $metakeywords;

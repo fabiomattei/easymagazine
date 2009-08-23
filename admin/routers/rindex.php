@@ -24,7 +24,7 @@ require_once(STARTPATH.DATAMODELPATH.'/page.php');
 class IndexRouter extends Router {
 
     private $number;
-    private $pages;
+    public $pages;
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
@@ -32,7 +32,7 @@ class IndexRouter extends Router {
     function loadData(){
         $this->number = Number::findLastPublished();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
-        $this->pages = Page::findAllPublished();
+        $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->number->getMetadescription();
         $this->metakeywords = $this->number->getMetakeyword();
     }

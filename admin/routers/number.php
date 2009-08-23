@@ -21,7 +21,7 @@ require_once('router.php');
 
 class NumberRouter extends Router {
 
-    private $pages;
+    public $pages;
     private $number;
     private $numbers;
     public $metadescritpion;

@@ -23,7 +23,7 @@ require_once(STARTPATH.DATAMODELPATH.'/page.php');
 class PagesRouter extends Router {
 
     private $page;
-    private $pages;
+    public $pages;
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
