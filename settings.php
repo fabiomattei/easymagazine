@@ -1,1 +1,1 @@
-<?PHP  define('TITLE', 'Title of the magazine dd');  define('DESCRIPTION', 'A short description ddof the magazine  ddd');  define('URLTYPE', 'standard');  ?>
+<?PHP  define('TITLE', 'Title of the magazine');  define('DESCRIPTION', "A short description of the magazine");  define('URLTYPE', 'optimized');  ?>

@@ -72,7 +72,7 @@ class FileWriter {
 
         $toWrite = ' define(\'TITLE\', \''.$settingsindb['title']->getValue().'\'); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'DESCRIPTION\', \''.$settingsindb['description']->getValue().'\'); ';
+        $toWrite = ' define(\'DESCRIPTION\', "'.$settingsindb['description']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
         $toWrite = ' define(\'URLTYPE\', \''.$settingsindb['urltype']->getValue().'\'); ';
         FileWriter::write($handle, $toWrite);
