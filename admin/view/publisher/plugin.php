@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>Easy Magazine Admin: Articles</title>
+	<title>Easy Magazine Admin: Plugin</title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
