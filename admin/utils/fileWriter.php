@@ -59,6 +59,29 @@ class FileWriter {
         fclose($handle);
     }
 
+    public static function writeSettingsFile($settingsindb) {
+        $filename = STARTPATH.'settings.php';
+
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+
+        FileWriter::write($handle, '<?PHP ');
+
+        $toWrite = ' define(\'TITLE\', \''.$settingsindb['title']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'DESCRIPTION\', \''.$settingsindb['description']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'URLTYPE\', \''.$settingsindb['urltype']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
+
+        FileWriter::write($handle, ' ?>');
+
+        fclose($handle);
+    }
+
     private static function write($handle, $toWrite) {
         if (fwrite($handle, $toWrite) === FALSE) {
             echo "Cannot write to file ($filename)";

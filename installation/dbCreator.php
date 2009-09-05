@@ -263,6 +263,15 @@ class DbCreator {
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
             ('default', 'template', 'active')";
         $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('title', 'settings', 'Title of the magazine')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('description', 'settings', 'A short description of the magazine')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('urltype', 'settings', 'optimized')";
+        $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 

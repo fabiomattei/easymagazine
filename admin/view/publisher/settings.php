@@ -72,18 +72,18 @@
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Web Magazine Title</strong></td>
-                                    <td class="last"><input type="text" name="Title" value=""/></td>
+                                    <td class="last"><input type="text" name="title" value="<?= $settingsindb['title']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Web Magazine Description</strong></td>
-                                    <td class="last"><textarea name="Summary" rows="4" cols="60"></textarea></td>
+                                    <td class="last"><textarea name="description" rows="4" cols="60"><?= $settingsindb['description']->getValue(); ?></textarea></td>
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>URL Type</strong></td>
                                     <td class="last">
                                         <select name="urltype">
-                                            <option value="standard">PHP standard</option>
-                                            <option value="optimized">SEO optimized (require apache)</option>
+                                            <option value="standard" <?if ($settingsindb['urltype']->getValue() == 'standard') echo 'selected';?> >PHP standard</option>
+                                            <option value="optimized" <?if ($settingsindb['urltype']->getValue() == 'optimized') echo 'selected';?> >SEO optimized (require apache)</option>
                                         </select>
                                     </td>
                                 </tr>

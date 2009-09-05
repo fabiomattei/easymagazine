@@ -31,18 +31,13 @@ session_start();
 function index() {
     $out = array();
 
-    $pluginsindb = Option::findByType('plugin');
+    $settingsindb = Option::findByType('settings');
 
-    $out['pluginsindb'] = array();
-    foreach ($pluginsindb as $pldb) {
-        $name = $pldb->getName();
-        $out['pluginsindb']["$name"] = $pldb;
+    $out['settingsindb'] = array();
+    foreach ($settingsindb as $stdb) {
+        $name = $stdb->getName();
+        $out['settingsindb']["$name"] = $stdb;
     }
-
-    $plugins = DirectoryRunner::retrivePlugInList();
-    $out['plugins'] = $plugins;
-
-    $out['toshow'] = '';
 
     return $out;
 }
@@ -50,34 +45,35 @@ function index() {
 function update($get, $post) {
     $out = array();
 
-    $pluginsindb = Option::findByName($pluginname);
+    Option::cleanType('settings');
 
     $toSave = new Option();
-    $toSave->setName($pluginname);
-    $toSave->setType('plugin');
-    $toSave->setValue('active');
+    $toSave->setName('title');
+    $toSave->setType('settings');
+    $toSave->setValue($post['title']);
     $toSave->save();
 
-    $pluginsindb = Option::findByType('plugin');
+    $toSave = new Option();
+    $toSave->setName('description');
+    $toSave->setType('settings');
+    $toSave->setValue($post['description']);
+    $toSave->save();
 
-    $out['pluginsindb'] = array();
-    foreach ($pluginsindb as $pldb) {
-        $name = $pldb->getName();
-        $out['pluginsindb']["$name"] = $pldb;
+    $toSave = new Option();
+    $toSave->setName('urltype');
+    $toSave->setType('settings');
+    $toSave->setValue($post['urltype']);
+    $toSave->save();
+    
+    $settingsindb = Option::findByType('settings');
+
+    $out['settingsindb'] = array();
+    foreach ($settingsindb as $stdb) {
+        $name = $stdb->getName();
+        $out['settingsindb']["$name"] = $stdb;
     }
 
-    $dirList = array();
-    foreach ($pluginsindb as $pldb) {
-        $name = $pldb->getName();
-        $dirList["$name"] = $name;
-    }
-
-    FileWriter::writePlugInIncluder($dirList);
-
-    $plugins = DirectoryRunner::retrivePlugInList();
-    $out['plugins'] = $plugins;
-
-    $out['toshow'] = $pluginname.'/activate.php';
+    FileWriter::writeSettingsFile($out['settingsindb']);
 
     return $out;
 }
@@ -92,9 +88,7 @@ if (isset($_SESSION['user'])) {
     }
 }
 
-$pluginsindb = $out['pluginsindb'];
-$plugins = $out['plugins'];
-$toshow = $out['toshow'];
+$settingsindb = $out['settingsindb'];
 
 if (isset($out['get'])) { $get = $out['get']; }
 if (isset($out['post'])) { $post = $out['post']; }
