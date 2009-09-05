@@ -16,15 +16,14 @@
     <body>
 
         <div id="header">
-            <a href="<?= URIMaker::fromBasePath('index.php') ?>/">My magazine</a><br />
-	A little something about the magazine and the authors. Nothing lengthy, just an overview.
+            <a href="<?= URIMaker::fromBasePath('index.php') ?>/"><?= Magazine::getMagazineTitle() ?></a><br />
+	<?= Magazine::getMagazineDescription() ?>
         </div>
 
         <div id="navbar">
             <ul>
                 <li><a href="<?= URIMaker::fromBasePath('index.php') ?>">Home</a></li>
                 <li><a href="<?= URIMaker::people() ?>">People</a></li>
-
                 <?
                 foreach ($this->pages as $page) {
                     echo '<li><a href="'.URIMaker::page($page).'">'.$page->getTitle().'</a></li>';

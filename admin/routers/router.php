@@ -19,6 +19,7 @@
 
 require_once(STARTPATH.COMMANDPATH.'/remote.php');
 require_once(STARTPATH.SESSIONPATH.'/sessionmanager.php');
+require_once(STARTPATH.DATAMODELPATH.'/magazine.php');
 
 if (URLTYPE == 'optimized') {
     require_once(STARTPATH.URIPATH.'/urimakeroptimized.php');

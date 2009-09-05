@@ -21,7 +21,7 @@
                     ?>
                 </ul>
                 <p class="description">
-                    Little Magazine Description
+                    <?= Magazine::getMagazineDescription() ?>
                 </p>
-                <h1><a href="<?= URIMaker::fromBasePath('index.php') ?>">Magazine Title</a></h1>
+                <h1><a href="<?= URIMaker::fromBasePath('index.php') ?>"><?= Magazine::getMagazineTitle() ?></a></h1>
             </div>
