@@ -1,1 +1,1 @@
-<?PHP  require_once(PLUGINPATH.'urltype/index.php');  require_once(PLUGINPATH.'title/index.php');  require_once(PLUGINPATH.'description/index.php');  ?>
+<?PHP  ?>

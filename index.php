@@ -19,19 +19,30 @@
 
 define('STARTPATH', '');
 require_once('costants.php');
+require_once('settings.php');
 
 require_once(PLUGINPATH.'pluginIncluder.php');
 require_once(TEMPLATEBASEPATH.'templateIncluder.php');
 require_once(ROUTERPATH.'routerfactory.php');
-require_once(URIPATH.'uridefault.php');
 
-
-if (isset ($_GET['uri'])) {
-    $uridefault = new UriDefault($_GET['uri']);
-    $uridefault->evaluate();
-    $arURI = $uridefault->getArrayuri();
+if (URLTYPE == 'optimized') {
+    require_once(URIPATH.'urioptimized.php');
+    if (isset($_GET['uri'])) {
+        $uri = new UriOptimized($_GET['uri']);
+        $uri->evaluate();
+        $arURI = $uri->getArrayuri();
+    } else {
+        $arURI = array('Router' => 'index');
+    }
 } else {
-    $arURI = array('Router' => 'index');
+    require_once(URIPATH.'uristandard.php');
+     if (isset($_GET['page'])) {
+        $uri = new UriStandard($_GET);
+        $uri->evaluate();
+        $arURI = $uri->getArrayuri();
+    } else {
+        $arURI = array('Router' => 'index');
+    }
 }
 
 $routerFactory = new RouterFactory();

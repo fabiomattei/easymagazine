@@ -29,9 +29,9 @@
 
 require_once(STARTPATH.URIPATH.'/uri.php');
 
-class UriDefault extends URI {
+class UriOptimized extends URI {
 
-    function evaluate(){
+    function evaluate() {
         $newArray = explode('/', $this->uri);
 
         switch ($newArray[0]) {
@@ -42,7 +42,7 @@ class UriDefault extends URI {
             case 'people': $router = 'people'; $id = 'not required'; break;
             default: $router = 'index'; $id = 'not required';
         }
-
+        
         $this->arrayURI = array(
             'Router' => $router,
             'id' => $id
