@@ -38,6 +38,7 @@
 			<li><span><span><a href="comment.php">Comments</a></span></span></li>
 			<li><span><span><a href="plugin.php">Plugin</a></span></span></li>
 			<li><span><span><a href="template.php">Template</a></span></span></li>
+                        <li><span><span><a href="settings.php">Settings</a></span></span></li>
                         <li class="active"><span><span>Users</span></span></li>
 		</ul>
 	</div>
