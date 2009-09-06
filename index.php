@@ -19,10 +19,10 @@
 
 define('STARTPATH', '');
 require_once('costants.php');
-require_once('settings.php');
 
-require_once(PLUGINPATH.'pluginIncluder.php');
-require_once(TEMPLATEBASEPATH.'templateIncluder.php');
+require_once(SYSTEMPATH.'settings.php');
+require_once(SYSTEMPATH.'pluginIncluder.php');
+require_once(SYSTEMPATH.'templateIncluder.php');
 require_once(ROUTERPATH.'routerfactory.php');
 
 if (URLTYPE == 'optimized') {

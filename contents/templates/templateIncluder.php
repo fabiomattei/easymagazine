@@ -1,1 +1,0 @@
-<?PHP  define('TEMPLATEPATH', 'contents/templates/default/');  ?>

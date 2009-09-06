@@ -20,7 +20,7 @@
 class ConfigWriter {
 
     public static function writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder) {
-        $filename = '../config.php';
+        $filename = '../system/config.php';
 
         $handle = fopen($filename, 'w');
         if (!$handle) {

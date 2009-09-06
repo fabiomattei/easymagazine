@@ -20,7 +20,7 @@
 class FileWriter {
 
     public static function writePlugInIncluder($dirList) {
-        $filename = STARTPATH.'contents/plug_in/pluginIncluder.php';
+        $filename = STARTPATH.'system/pluginIncluder.php';
 
         $handle = fopen($filename, 'w');
         if (!$handle) {
@@ -41,7 +41,7 @@ class FileWriter {
     }
 
     public static function writeTemplateIncluder($dir) {
-        $filename = STARTPATH.'contents/templates/templateIncluder.php';
+        $filename = STARTPATH.'system/templateIncluder.php';
 
         $handle = fopen($filename, 'w');
         if (!$handle) {
@@ -60,7 +60,7 @@ class FileWriter {
     }
 
     public static function writeSettingsFile($settingsindb) {
-        $filename = STARTPATH.'settings.php';
+        $filename = STARTPATH.'system/settings.php';
 
         $handle = fopen($filename, 'w');
         if (!$handle) {

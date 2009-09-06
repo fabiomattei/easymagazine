@@ -19,8 +19,8 @@
 
 define('STARTPATH', '../../../');
 
-require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
+require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.DATAMODELPATH.'comment.php');
 

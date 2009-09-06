@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(STARTPATH.BASEPATH.'config.php');
+require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DBPATH.'strfunction.php');
 
 class DB {
