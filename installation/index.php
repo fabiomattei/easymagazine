@@ -34,7 +34,10 @@
             <p class="logo">&nbsp;</p>
             <div class="menu">
                 <form action="createconfig.php" method="post" id="login">
-                    In order to install the application please fill the form.
+                    In order to install the application please put rights 0777 to the folders:
+                    <b>easymagazine/system</b> (and all contained files)<br />
+                    <b>easymagazine/contents/img</b><br /><br />
+                    Then fill the form:
                     <table>
                         <tr>
                             <td>MySql DB host:</td>
