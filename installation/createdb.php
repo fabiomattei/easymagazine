@@ -49,6 +49,10 @@ $dbCreator->closeConnection();
                 Please delete the "installation" folder and access to your new
                 on-line magazine with the username "user" and password "psw" in the
                 <a href="../admin/login.php">login page</a><br /><br />
+                Remember to put rights 0777 to the folders:
+                <b>easymagazine/system</b><br />
+                <b>easymagazine/contents</b><br />
+                and all contained files and folders.
             </div>
         </div>
         <div id="corpo">&nbsp;
