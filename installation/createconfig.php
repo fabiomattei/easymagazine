@@ -17,16 +17,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Create all the tables and fill it with dummy data
+include ('configWriter.php');
 
-include ('dbCreator.php');
+$dbName = $_POST['dbname'];
+$dbuser = $_POST['username'];
+$dbpassword = $_POST['password'];
+$dbhost = $_POST['dbhost'];
+$tbprefix = $_POST['tbprefix'];
+$folder = $_POST['folder'];
 
-$dbCreator = new DbCreator();
+if ($folder == '') $folder = '/';
+else $folder = '/'.$folder.'/';
 
-$dbCreator->connect();
-$out = $dbCreator->createSchema();
-$out .= $dbCreator->populateSchema();
-$dbCreator->closeConnection();
+ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder);
 
 ?>
 
@@ -44,11 +47,25 @@ $dbCreator->closeConnection();
         <div id="intestazione">
             <p class="logo">&nbsp;</p>
             <div class="menu">
-                <? echo $out; ?><br /><br />
-                If there are no error the istallation is well done.<br />
-                Please delete the "installation" folder and access to your new
-                on-line magazine with the username "user" and password "psw" in the
-                <a href="../admin/login.php">login page</a><br /><br />
+                If, for some reason, Easy Magazine is not able to save the file
+                <b>easymagazine/system/config.php</b>,
+                please set the rights of the <b>easymagazine/system</b> folder and reload
+                this page or edit the file
+                by hand filling it with the following code:
+                <br /><br />
+                <CODE>
+                    &lt;? <br />
+                     define('FOLDER', '<?=$folder?>'); <br />
+                     define('DB_NAME', '<?=$dbName?>');<br />
+                     define('DB_USER', '<?=$dbuser?>');<br />
+                     define('DB_PASSWORD', '<?=$dbpassword?>');<br />
+                     define('DB_HOST', '<?=$dbhost?>');<br />
+                     define('TBPREFIX', '<?=$tbprefix?>');<br />
+                     ?&gt;<br />
+                </CODE>
+                <br />
+                After that <a href="createdb.php">click here and create the database</a>
+                <br />
             </div>
         </div>
         <div id="corpo">&nbsp;

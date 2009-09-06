@@ -33,7 +33,7 @@
         <div id="intestazione">
             <p class="logo">&nbsp;</p>
             <div class="menu">
-                <form action="createdb.php" method="post" id="login">
+                <form action="createconfig.php" method="post" id="login">
                     In order to install the application please fill the form.
                     <table>
                         <tr>
