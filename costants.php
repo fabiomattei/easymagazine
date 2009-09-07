@@ -26,6 +26,7 @@ define('DATAMODELPATH', 'admin/datamodel/');
 define('SESSIONPATH', 'admin/sessionmanager/');
 define('URIPATH', 'admin/uri/');
 define('UTILSPATH', 'admin/utils/');
+define('EPUBSPATH', 'contents/epubs/');
 define('SYSTEMPATH', 'system/');
 define('DBPATH', 'admin/datamodel/library/');
 define('ADMINCONTROLLERPUBLISHERPATH', 'admin/controller/publisher/');
@@ -33,5 +34,8 @@ define('BASEPATH', '');
 
 define('PLUGINPATH', 'contents/plug_in/');
 define('TEMPLATEBASEPATH', 'contents/templates/');
+
+define('LIBPATH', 'lib/');
+define('PCLZIPPATH', 'pclzip_2_8_1/');
 
 ?>

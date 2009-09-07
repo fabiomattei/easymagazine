@@ -23,6 +23,7 @@ require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
+require_once(STARTPATH.UTILSPATH.'epugcreator.php');
 
 session_start();
 
@@ -109,6 +110,20 @@ function edit($id) {
 
     $numb = Number::findById($id);
     $outAction['numb'] = $numb;
+
+    return $outAction;
+}
+
+function epub($id) {
+    $outAction = array();
+
+    $numb = Number::findById($id);
+    $outAction['numb'] = $numb;
+
+    $epugcreator = new ePugCreator();
+    $epugcreator->writeEPugForNumber($numb);
+
+    $outAction['info'] = 'Epub file created for number <i>'.$numb->getTitle().'</i>';
 
     return $outAction;
 }
@@ -236,6 +251,7 @@ if (isset($_SESSION['user'])) {
         case  'deleteimg':         $outAction = deleteimg($_GET['id']); break;
         case  'up':                $outAction = up($_GET['id']); break;
         case  'down':              $outAction = down($_GET['id']); break;
+        case  'epub':              $outAction = epub($_GET['id']); break;
     }
     switch ($list) {
         case  'index':             $outList = index($_POST); break;

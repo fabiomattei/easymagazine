@@ -89,6 +89,7 @@
                                 <th>Down</th>
                                 <th>Articles</th>
                                 <th>Comments</th>
+                                <th>EPub</th>
                                 <th>Published</th>
                                 <th class="last">Delete</th>
                             </tr>
@@ -103,6 +104,7 @@
                                 <td><a href="number.php?action=down&id=<? echo $num->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="article.php?list=articlenumber&id=<? echo $num->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="comment.php?list=commentnumber&id=<? echo $num->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="number.php?action=epub&id=<? echo $num->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/epub.png" width="16" height="16" alt="Creates and publish ePub file" /></a></td>
                                 <td>
                                         <? if ($num->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
