@@ -76,6 +76,10 @@ class FileWriter {
         FileWriter::write($handle, $toWrite);
         $toWrite = ' define(\'URLTYPE\', \''.$settingsindb['urltype']->getValue().'\'); ';
         FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'PUBLISHER\', \''.$settingsindb['publisher']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'RIGHTS\', \''.$settingsindb['rights']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
 
         FileWriter::write($handle, ' ?>');
 

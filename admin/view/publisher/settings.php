@@ -88,6 +88,14 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="first" width="172"><strong>Publisher</strong></td>
+                                    <td class="last"><input type="text" name="publisher" value="<?= $settingsindb['publisher']->getValue(); ?>"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="first" width="172"><strong>Rights</strong></td>
+                                    <td class="last"><input type="text" name="rights" value="<?= $settingsindb['rights']->getValue(); ?>"/></td>
+                                </tr>
+                                <tr>
                                     <td class="first"><strong>&nbsp;</strong></td>
                                     <td class="last"><input type="submit" value="Save" name="save" /></td>
                                 </tr>

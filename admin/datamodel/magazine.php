@@ -17,6 +17,8 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(STARTPATH.SYSTEMPATH.'settings.php');
+
 class Magazine {
 
     public static function getMagazineTitle() {
@@ -25,6 +27,14 @@ class Magazine {
 
     public static function getMagazineDescription() {
         return DESCRIPTION;
+    }
+
+    public static function getMagazinePublisher() {
+        return PUBLISHER;
+    }
+
+    public static function getMagazineRights() {
+        return RIGHTS;
     }
 }
 

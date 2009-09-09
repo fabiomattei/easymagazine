@@ -18,6 +18,7 @@
  */
 
 require_once(STARTPATH.LIBPATH.PCLZIPPATH.'pclzip.lib.php');
+require_once(STARTPATH.DATAMODELPATH.'magazine.php');
 
 class ePugCreator {
 
@@ -42,6 +43,7 @@ class ePugCreator {
 
         $this->writeMimeTypeFile();
         $this->writeContentOPFFile();
+        $this->writecoverxhtmlFile();
         // creates all files
 
         $this->zipFolder($this->epubFolderName);
@@ -128,10 +130,8 @@ class ePugCreator {
   <metadata xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:language>en</dc:language>
     <dc:title>'.$this->number->getTitle().'</dc:title>
-    <dc:creator xmlns:dc="http://www.w3.org/1999/xhtml" opf:role="aut">Craig Walls</dc:creator>
-    <dc:publisher>The Pragmatic Bookshelf, LLC (169157)</dc:publisher>
-    <dc:rights>Copyright © 2009 Craig Walls</dc:rights>
-    <dc:identifier id="PragmaticBook" opf:scheme="ISBN">1-934356-40-9</dc:identifier>
+    <dc:publisher>'.Magazine::getMagazinePublisher().'</dc:publisher>
+    <dc:rights>'.Magazine::getMagazineRights().'</dc:rights>
     <meta name="cover" content="cover-image"/>
   </metadata>
   <manifest>
@@ -143,6 +143,62 @@ class ePugCreator {
     <item id="joe-image" href="images/joe.jpg" media-type="image/jpeg"/>
     <item id="wiggly-image" href="images/WigglyRoad.jpg" media-type="image/jpeg"/>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>';
+
+    foreach ($this->number->articles() as $article) {
+            $text.='<item id="article'.$article->getId().'" href="article'.$article->getId().'.html" media-type="application/xhtml+xml" />
+            ';
+            if ($article->imageExists()) {
+                $text.='<item id="img'.$article->getId().'" href="images/fading-jars.jpg" media-type="image/jpeg"/>';
+            }
+        }
+
+    $text .= '  <spine toc="ncx">
+    <itemref idref="cover" linear="no"/>
+';
+        foreach ($this->number->articles() as $article) {
+            $text.='<itemref idref="article'.$article->getId().'" />
+            ';
+        }
+
+  $text .= '</spine>
+  <guide>
+    <reference type="cover" title="Cover" href="cover.xhtml"/>
+  </guide>
+</package>
+';
+
+        ePugCreator::write($handle, $text);
+
+        fclose($handle);
+    }
+
+    public function writecoverxhtmlFile() {
+        $filename = $this->epubFolderName.'cover.xhtml';
+
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+
+        $text = '<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC
+	  "-//W3C//DTD XHTML 1.1//EN"
+	  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>'.$this->number->getTitle().'</title>
+    <link rel="stylesheet" href="css/bookshelf.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+  </head>
+  <body>
+    <div>
+      <img src="images/cover.jpg"
+	   alt="'.Magazine::getMagazinePublisher().'"
+	   title="'.$this->number->getTitle().'" />
+    </div>
+  </body>
+</html>';
 
         ePugCreator::write($handle, $text);
 
