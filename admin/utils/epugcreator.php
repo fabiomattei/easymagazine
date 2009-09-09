@@ -140,8 +140,6 @@ class ePugCreator {
     <meta name="cover" content="cover-image"/>
   </metadata>
   <manifest>
-    <item id="bookshelf-css" href="css/bookshelf.css" media-type="text/css"/>
-    <item id="book_local-css" href="css/book_local.css" media-type="text/css"/>
     <item id="pt" href="page-template.xpgt" media-type="application/vnd.adobe-page-template+xml"/>
     <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>
     <item id="cover-image" href="images/cover.jpg" media-type="image/jpeg"/>
@@ -152,9 +150,9 @@ class ePugCreator {
         foreach ($this->number->articles() as $article) {
             $text.='<item id="article'.$article->getId().'" href="article'.$article->getId().'.html" media-type="application/xhtml+xml" />
             ';
-            if ($article->imageExists()) {
-                $text.='<item id="img'.$article->getId().'" href="images/fading-jars.jpg" media-type="image/jpeg"/>';
-            }
+//            if ($article->imageExists()) {
+//                $text.='<item id="img'.$article->getId().'" href="images/fading-jars.jpg" media-type="image/jpeg"/>';
+//            }
         }
 
         $text .= '  <spine toc="ncx">
