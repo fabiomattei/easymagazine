@@ -40,11 +40,16 @@ class ePugCreator {
         $this->cleanNumber($number);
 
         $this->createFolder($this->epubFolderName);
+        $this->createFolder($this->epubFolderName.'META-INF/');
 
         $this->writeMimeTypeFile();
         $this->writeContentOPFFile();
         $this->writecoverxhtmlFile();
-        // creates all files
+        $this->writecontainerXmlFile();
+        $this->writetocncxFile();
+        $this->writeStyleCssFile();
+        $this->writeArticlesFile();
+        $this->copyAndRenameImages();
 
         $this->zipFolder($this->epubFolderName);
 
@@ -144,7 +149,7 @@ class ePugCreator {
     <item id="wiggly-image" href="images/WigglyRoad.jpg" media-type="image/jpeg"/>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>';
 
-    foreach ($this->number->articles() as $article) {
+        foreach ($this->number->articles() as $article) {
             $text.='<item id="article'.$article->getId().'" href="article'.$article->getId().'.html" media-type="application/xhtml+xml" />
             ';
             if ($article->imageExists()) {
@@ -152,7 +157,7 @@ class ePugCreator {
             }
         }
 
-    $text .= '  <spine toc="ncx">
+        $text .= '  <spine toc="ncx">
     <itemref idref="cover" linear="no"/>
 ';
         foreach ($this->number->articles() as $article) {
@@ -160,7 +165,7 @@ class ePugCreator {
             ';
         }
 
-  $text .= '</spine>
+        $text .= '</spine>
   <guide>
     <reference type="cover" title="Cover" href="cover.xhtml"/>
   </guide>
@@ -203,6 +208,164 @@ class ePugCreator {
         ePugCreator::write($handle, $text);
 
         fclose($handle);
+    }
+
+    public function writecontainerXmlFile() {
+        $filename = $this->epubFolderName.'META-INF/container.xml';
+
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+
+        $text = '<?xml version="1.0"?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="OPS/content.opf" media-type="application/oebps-package+xml" />
+  </rootfiles>
+</container>';
+
+        ePugCreator::write($handle, $text);
+
+        fclose($handle);
+    }
+
+    public function writeStyleCssFile() {
+        $filename = $this->epubFolderName.'style.css';
+
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+
+        $text = 'body { text-align: justify; }
+div.header { color: green; margin-top: 1.5em; margin-bottom: 1.5em; border-bottom: 1px solid red;  text-align: center; }
+a { text-decoration: none }
+p { text-indent: 4% }
+p.noindent { text-indent: 0% }
+h4 { color: green; font-size: large; font-weight: bold; text-indent: 0%; margin-top: 1.5em; margin-bottom: 1.5em;}
+h5 { font-size: medium; font-weight: bold; text-indent: 0%; margin-top: 1.5em; margin-bottom: 1.5em;}
+h6 { font-size: medium; font-weight: bold; text-indent: 0%; margin-top: 1.5em; margin-bottom: 1.5em; text-align: center;}
+.CENTER { text-align: center;  text-indent: 0em; }
+.RIGHT { text-align: right; }
+.center { text-align: center;  text-indent: 0em; }
+.right { text-align: right; }
+.small { font-size: small; }
+.large { font-size: large; }
+    .smcap    { font-variant: small-caps;}
+    .figcenter   {	text-align: center;  margin-top: 2em; margin-bottom: 2em;  text-indent: 0em;}
+    .caption { font-size: small;  text-indent: 0%; text-align: center }
+    hr { width: 33%; text-align: center  }
+table.cell {
+	border-width: 3px;
+	border-style: outset;
+	border-color: green;
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
+table.cell td {
+	border-width: 1px;
+	padding: 10px;
+	border-style: inset;
+	border-color: red;
+	text-align: center;
+}';
+
+        ePugCreator::write($handle, $text);
+
+        fclose($handle);
+    }
+
+    public function writetocncxFile() {
+        $filename = $this->epubFolderName.'toc.ncx';
+
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+
+        $text = '<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" xml:lang="en" version="2005-1">
+  <head>
+      <meta name="dtb:uid" content="web-books-12345" />
+      <meta name="dtb:depth" content="2" />
+      <meta name="dtb:totalPageCount" content="0" />
+      <meta name="dtb:maxPageNumber" content="0" />
+   </head>
+    <docTitle>
+         <text>'.$this->number->getTitle().'</text>
+    </docTitle>
+  <navMap>';
+
+
+        foreach ($this->number->articles() as $article) {
+            $text .= '<navPoint id="navpoint-'.$article->getId().'" playOrder="'.$article->getId().'">
+      <navLabel>
+        <text>'.$article->getTitle().'</text>
+      </navLabel>
+        <content src="article'.$article->getId().'.html" />
+    </navPoint>';
+        }
+        $text.='</navMap>
+            </ncx>';
+
+        ePugCreator::write($handle, $text);
+
+        fclose($handle);
+    }
+
+    public function writeArticlesFile() {
+        foreach ($this->number->articles() as $article) {
+            $filename = $this->epubFolderName.'article'.$article->getId().'.html';
+
+            $handle = fopen($filename, 'w');
+            if (!$handle) {
+                echo "Cannot open file ($filename)";
+                exit;
+            }
+
+            $text = '<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta name="generator" content="Web Books Publishing" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>'.$article->getTitle().'</title>
+</head>
+
+<body>
+	<div class="header">
+	     <h2>'.$article->getTitle().'</h2>
+	</div>
+
+<div>
+
+<p>'.$article->getSummary().'</p>
+
+      <p>'.$article->getBody().'</p>
+
+
+
+</div>
+</body>
+</html>';
+
+            ePugCreator::write($handle, $text);
+
+            fclose($handle);
+        }
+    }
+
+    public function copyAndRenameImages() {
+
     }
 
     private static function write($handle, $toWrite) {
