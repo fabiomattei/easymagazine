@@ -65,7 +65,7 @@
 		  <div class="select-bar">
                     <form name="searchform" method="post" action="page.php?list=find">
 		    <label>
-		    <input type="text" name="string" />
+		    <input type="text" size="50" name="string" />
 		    </label>
 		    <label>
 			<input type="submit" name="Submit" value="Search" />
@@ -119,11 +119,11 @@
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Title</strong></td>
-						<td class="last"><input type="text" name="Title" value="<? echo $pag->getUnfilteredTitle(); ?>"/></td>
+						<td class="last"><input type="text" size="50" name="Title" value="<? echo $pag->getUnfilteredTitle(); ?>"/></td>
                     </tr>
 					<tr class="bg">
 						<td class="first"><strong>Sub Title</strong></td>
-						<td class="last"><input type="text" name="SubTitle" value="<? echo $pag->getUnfilteredSubtitle(); ?>"/></td>
+						<td class="last"><input type="text" size="50" name="SubTitle" value="<? echo $pag->getUnfilteredSubtitle(); ?>"/></td>
 					</tr>
 					<tr>
 						<td class="first"><strong>Summary</strong></td>
@@ -144,7 +144,7 @@
 					</tr>
                     					<tr>
 						<td class="first"><strong>Tag</strong></td>
-                        <td class="last"><input type="text" name="Tag" value="<? echo $pag->getUnfilteredTag(); ?>"/></td>
+                        <td class="last"><input type="text" size="50" name="Tag" value="<? echo $pag->getUnfilteredTag(); ?>"/></td>
 					</tr>
                     <tr>
 						<td class="first"><strong>Meta Description</strong></td>
@@ -179,7 +179,7 @@
 					</tr>
                     <tr>
 						<td class="first"><strong>Image description:</strong></td>
-                        <td class="last"><input type="text" name="ImageDescription" value="<? echo $pag->getImgdescription(); ?>"/></td>
+                        <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $pag->getImgdescription(); ?>"/></td>
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Created:</strong></td>

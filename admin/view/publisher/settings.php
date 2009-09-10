@@ -72,7 +72,7 @@
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Web Magazine Title</strong></td>
-                                    <td class="last"><input type="text" name="title" value="<?= $settingsindb['title']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="title" value="<?= $settingsindb['title']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Web Magazine Description</strong></td>
@@ -89,11 +89,11 @@
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Publisher</strong></td>
-                                    <td class="last"><input type="text" name="publisher" value="<?= $settingsindb['publisher']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="publisher" value="<?= $settingsindb['publisher']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Rights</strong></td>
-                                    <td class="last"><input type="text" name="rights" value="<?= $settingsindb['rights']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="rights" value="<?= $settingsindb['rights']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>&nbsp;</strong></td>

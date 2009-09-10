@@ -68,11 +68,11 @@
 					</tr>
 					<tr>
 						<td class="first" width="172"><strong>Name</strong></td>
-						<td class="last"><input type="text" name="Name" value="<? echo $userp->getName(); ?>"/></td>
+						<td class="last"><input type="text" size="50" name="Name" value="<? echo $userp->getName(); ?>"/></td>
                     </tr>
                     					<tr>
 						<td class="first"><strong>Username</strong></td>
-                        <td class="last"><input type="text" name="Username" value="<? echo $userp->getUsername(); ?>"/></td>
+                        <td class="last"><input type="text" size="50" name="Username" value="<? echo $userp->getUsername(); ?>"/></td>
 					</tr>                    <tr>
                                     <td class="first" colspan="2"><strong>Body</strong><br />
                                         <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
@@ -88,15 +88,15 @@
 					</tr>
                                         <tr>
 						<td class="first" width="172"><strong>Email</strong></td>
-						<td class="last"><input type="text" name="Email" value="<? echo $userp->getEmail(); ?>"/></td>
+						<td class="last"><input type="text" size="50" name="Email" value="<? echo $userp->getEmail(); ?>"/></td>
                     </tr>
                     					<tr>
 						<td class="first"><strong>MSN</strong></td>
-                        <td class="last"><input type="text" name="MSN" value="<? echo $userp->getMsn(); ?>"/></td>
+                        <td class="last"><input type="text" size="50" name="MSN" value="<? echo $userp->getMsn(); ?>"/></td>
 					</tr>
                                         <tr>
 						<td class="first" width="172"><strong>Skype</strong></td>
-						<td class="last"><input type="text" name="Skype" value="<? echo $userp->getSkype(); ?>"/></td>
+						<td class="last"><input type="text" size="50" name="Skype" value="<? echo $userp->getSkype(); ?>"/></td>
                     </tr>
                     <tr class="bg">
 						<td class="first"><strong>Publisher</strong></td>
@@ -123,7 +123,7 @@
 					</tr>
                     <tr>
 						<td class="first"><strong>Image description:</strong></td>
-                        <td class="last"><input type="text" name="ImageDescription" value="<? echo $userp->getImgdescription(); ?>"/></td>
+                        <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $userp->getImgdescription(); ?>"/></td>
 					</tr>
                     <tr class="bg">
 						<td class="first"><strong>Created:</strong></td>

@@ -71,7 +71,7 @@
                     <div class="select-bar">
                         <form name="searchform" method="post" action="number.php?list=find">
                             <label>
-                                <input type="text" name="string" />
+                                <input type="text" size="50" name="string" />
                             </label>
                             <label>
                                 <input type="submit" name="Submit" value="Search" />
@@ -144,11 +144,11 @@
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Title</strong></td>
-                                    <td class="last"><input type="text" name="Title" value="<? echo $numb->getTitle(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Title" value="<? echo $numb->getTitle(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Sub Title</strong></td>
-                                    <td class="last"><input type="text" name="SubTitle" value="<? echo $numb->getSubtitle(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="SubTitle" value="<? echo $numb->getSubtitle(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first" colspan="2"><strong>Summary</strong><br />
@@ -200,7 +200,7 @@
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Image description:</strong></td>
-                                    <td class="last"><input type="text" name="ImageDescription" value="<? echo $numb->getImgdescription(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $numb->getImgdescription(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Created:</strong></td>
