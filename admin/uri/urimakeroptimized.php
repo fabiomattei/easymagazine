@@ -34,6 +34,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'pages/'.$page->getTitle().'/'.$page->getId();
     }
 
+    static function articlesperson($person) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'articlesperson/'.$person->getName().'/'.$person->getId();
+    }
+
     static function people() {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'people/';
     }

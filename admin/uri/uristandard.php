@@ -37,6 +37,7 @@ class UriStandard extends URI {
             case 'article': $router = 'article'; $id = $this->uri['id']; break;
             case 'comments': $router = 'comments'; $id = $this->uri['id']; break;
             case 'page': $router = 'page'; $id = $this->uri['id']; break;
+            case 'articlesperson': $router = 'articlesperson'; $id = $this->uri['id']; break;
             case 'people': $router = 'people'; $id = 'not required'; break;
             default: $router = 'index'; $id = 'not required';
         }

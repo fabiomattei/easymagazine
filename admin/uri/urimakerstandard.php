@@ -38,6 +38,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?page=people';
     }
 
+    static function articlesperson($person) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'page=articlesperson&id='.$person->getId();
+    }
+
     static function index() {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php';
     }

@@ -6,7 +6,7 @@
 
         <? foreach($this->people  as $user) { ?>
         <div class="contenttitle">
-            <h1><?= $user->getName() ?></h1>
+            <h1><a href="<?= URIMaker::articlesperson($user) ?>"><?= $user->getName() ?></a></h1>
             <p>
                     <? if ($user->imageExists()) { ?>
                 <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>" width="60" align="left">

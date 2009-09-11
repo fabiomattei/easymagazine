@@ -191,7 +191,7 @@ class ePugCreator {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
   <head>
     <title>'.$this->number->getTitle().'</title>
-    <link rel="stylesheet" href="css/bookshelf.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
   </head>
   <body>
@@ -343,15 +343,9 @@ table.cell td {
 	<div class="header">
 	     <h2>'.$article->getTitle().'</h2>
 	</div>
-
 <div>
-
-<p>'.$article->getSummary().'</p>
-
-      <p>'.$article->getBody().'</p>
-
-
-
+'.$article->getSummary().'<br /><br />
+'.$article->getBody().'
 </div>
 </body>
 </html>';

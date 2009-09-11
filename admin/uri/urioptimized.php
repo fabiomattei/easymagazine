@@ -39,6 +39,7 @@ class UriOptimized extends URI {
             case 'articles': $router = 'article'; $id = $newArray[2]; break;
             case 'comments': $router = 'comments'; $id = $newArray[2]; break;
             case 'pages': $router = 'page'; $id = $newArray[2]; break;
+            case 'articlesperson': $router = 'articlesperson'; $id = $newArray[2]; break;
             case 'people': $router = 'people'; $id = 'not required'; break;
             default: $router = 'index'; $id = 'not required';
         }

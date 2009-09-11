@@ -233,6 +233,8 @@ class DbCreator {
     public function populateTableUsersArticles() {
         $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values (1, 1, 1)";
         $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."users_articles (id, article_id, user_id) values (2, 2, 1)";
+        $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 
