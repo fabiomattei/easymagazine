@@ -141,8 +141,10 @@ class ePugCreator {
     <meta name="cover" content="cover-image"/>
   </metadata>
   <manifest>
-    <item id="pt" href="page-template.xpgt" media-type="application/vnd.adobe-page-template+xml"/>
-    <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>';
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml" />
+    <item id="WTOC" href="TOC.html" media-type="application/xhtml+xml" />
+    <item id="style" href="style.css" media-type="text/css" />';
 
         if ($this->number->imageExists()) {
             $target = $this->number->imagePath();
@@ -200,13 +202,13 @@ class ePugCreator {
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
   </head>
   <body>
-    <div>
+    <p class="CENTER">
       ';
         if ($this->number->imageExists()) {
             $text.='<img src="images/number'.$this->number->getId().'.jpg" />';
         }
         $text.='
-    </div>
+    </p>
   </body>
 </html>';
 
