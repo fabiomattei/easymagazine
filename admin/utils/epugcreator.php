@@ -41,15 +41,16 @@ class ePugCreator {
 
         $this->createFolder($this->epubFolderName);
         $this->createFolder($this->epubFolderName.'META-INF/');
+        $this->createFolder($this->epubFolderName.'images/');
 
         $this->writeMimeTypeFile();
         $this->writeContentOPFFile();
         $this->writecoverxhtmlFile();
         $this->writecontainerXmlFile();
         $this->writetocncxFile();
+        $this->writetochtmlFile();
         $this->writeStyleCssFile();
         $this->writeArticlesFile();
-        $this->copyAndRenameImages();
 
         $this->zipFolder($this->epubFolderName);
 
@@ -141,32 +142,36 @@ class ePugCreator {
   </metadata>
   <manifest>
     <item id="pt" href="page-template.xpgt" media-type="application/vnd.adobe-page-template+xml"/>
-    <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>
-    <item id="cover-image" href="images/cover.jpg" media-type="image/jpeg"/>
-    <item id="joe-image" href="images/joe.jpg" media-type="image/jpeg"/>
-    <item id="wiggly-image" href="images/WigglyRoad.jpg" media-type="image/jpeg"/>
-    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>';
+    <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>';
+
+        if ($this->number->imageExists()) {
+            $target = $this->number->imagePath();
+            $link = $this->epubFolderName.'images/number'.$this->number->getId().'.jpg';
+            copy($target, $link);
+            $text.='<item id="imgn'.$this->number->getId().'" href="images/number'.$this->number->getId().'.jpg" media-type="image/jpeg"/>';
+        }
 
         foreach ($this->number->articles() as $article) {
             $text.='<item id="article'.$article->getId().'" href="article'.$article->getId().'.html" media-type="application/xhtml+xml" />
             ';
-//            if ($article->imageExists()) {
-//                $text.='<item id="img'.$article->getId().'" href="images/fading-jars.jpg" media-type="image/jpeg"/>';
-//            }
+            if ($article->imageExists()) {
+                $target = $article->imagePath();
+                $link = $this->epubFolderName.'images/article'.$article->getId().'.jpg';
+                copy($target, $link);
+                $text.='<item id="img'.$article->getId().'" href="images/article'.$article->getId().'.jpg" media-type="image/jpeg"/>';
+            }
         }
 
-        $text .= '  <spine toc="ncx">
-    <itemref idref="cover" linear="no"/>
+        $text .= '</manifest>
+<spine toc="ncx">
+    <itemref idref="cover" />
 ';
-        foreach ($this->number->articles() as $article) {
+        foreach ($this->number->articlesPublished() as $article) {
             $text.='<itemref idref="article'.$article->getId().'" />
             ';
         }
 
         $text .= '</spine>
-  <guide>
-    <reference type="cover" title="Cover" href="cover.xhtml"/>
-  </guide>
 </package>
 ';
 
@@ -189,16 +194,18 @@ class ePugCreator {
 	  "-//W3C//DTD XHTML 1.1//EN"
 	  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<link rel="stylesheet" href="style.css" type="text/css" />
   <head>
     <title>'.$this->number->getTitle().'</title>
-    <link rel="stylesheet" href="style.css" type="text/css" />
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
   </head>
   <body>
     <div>
-      <img src="images/cover.jpg"
-	   alt="'.Magazine::getMagazinePublisher().'"
-	   title="'.$this->number->getTitle().'" />
+      ';
+        if ($this->number->imageExists()) {
+            $text.='<img src="images/number'.$this->number->getId().'.jpg" />';
+        }
+        $text.='
     </div>
   </body>
 </html>';
@@ -239,11 +246,11 @@ class ePugCreator {
         }
 
         $text = 'body { text-align: justify; }
-div.header { color: green; margin-top: 1.5em; margin-bottom: 1.5em; border-bottom: 1px solid red;  text-align: center; }
+div.header { color: black; margin-top: 1.5em; margin-bottom: 1.5em; border-bottom: 1px solid black;  text-align: center; }
 a { text-decoration: none }
 p { text-indent: 4% }
 p.noindent { text-indent: 0% }
-h4 { color: green; font-size: large; font-weight: bold; text-indent: 0%; margin-top: 1.5em; margin-bottom: 1.5em;}
+h4 { color: black; font-size: large; font-weight: bold; text-indent: 0%; margin-top: 1.5em; margin-bottom: 1.5em;}
 h5 { font-size: medium; font-weight: bold; text-indent: 0%; margin-top: 1.5em; margin-bottom: 1.5em;}
 h6 { font-size: medium; font-weight: bold; text-indent: 0%; margin-top: 1.5em; margin-bottom: 1.5em; text-align: center;}
 .CENTER { text-align: center;  text-indent: 0em; }
@@ -303,7 +310,7 @@ table.cell td {
   <navMap>';
 
 
-        foreach ($this->number->articles() as $article) {
+        foreach ($this->number->articlesPublished() as $article) {
             $text .= '<navPoint id="navpoint-'.$article->getId().'" playOrder="'.$article->getId().'">
       <navLabel>
         <text>'.$article->getTitle().'</text>
@@ -319,8 +326,40 @@ table.cell td {
         fclose($handle);
     }
 
+    public function writetochtmlFile() {
+        $filename = $this->epubFolderName.'TOC.html';
+
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+
+        $text = '<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta name="generator" content="Web Books Publishing" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>'.$this->number->getTitle().'</title>
+</head>
+<body>';
+      foreach ($this->number->articlesPublished() as $article) {
+            $text .= '<p><a href=\'article'.$article->getId().'.html\'>'.$article->getTitle().'</a></p>';
+        }
+
+$text .= '
+</body>
+</html>';
+
+        ePugCreator::write($handle, $text);
+
+        fclose($handle);
+    }
+
     public function writeArticlesFile() {
-        foreach ($this->number->articles() as $article) {
+        foreach ($this->number->articlesPublished() as $article) {
             $filename = $this->epubFolderName.'article'.$article->getId().'.html';
 
             $handle = fopen($filename, 'w');
@@ -342,10 +381,11 @@ table.cell td {
 <body>
 	<div class="header">
 	     <h2>'.$article->getTitle().'</h2>
-	</div>
-<div>
-'.$article->getSummary().'<br /><br />
-'.$article->getBody().'
+	</div>';
+            if ($article->imageExists()) {
+                $text.='<img src="images/article'.$article->getId().'.jpg" />';
+            }
+            $text.='<div>'.$article->getSummary().'<br /><br />'.$article->getBody().'
 </div>
 </body>
 </html>';
@@ -354,10 +394,6 @@ table.cell td {
 
             fclose($handle);
         }
-    }
-
-    public function copyAndRenameImages() {
-
     }
 
     private static function write($handle, $toWrite) {
