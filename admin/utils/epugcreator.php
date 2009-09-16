@@ -132,13 +132,16 @@ class ePugCreator {
         }
 
         $text = '<?xml version="1.0" encoding="UTF-8"?>
-<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="PragmaticBook">
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
   <metadata xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:language>en</dc:language>
     <dc:title>'.$this->number->getTitle().'</dc:title>
     <dc:publisher>'.Magazine::getMagazinePublisher().'</dc:publisher>
     <dc:rights>'.Magazine::getMagazineRights().'</dc:rights>
-    <meta name="cover" content="cover-image"/>
+    <dc:creator>Author contentopf file</dc:creator>
+    <dc:date>2009-09-15</dc:date>
+    <dc:subject>Fiction</dc:subject>
+    <dc:identifier id="BookId">web-books-12345</dc:identifier>
   </metadata>
   <manifest>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />

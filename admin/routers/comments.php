@@ -30,14 +30,18 @@ class CommentsRouter extends Router {
     public $metadescritpion;
     public $metakeywords;
     public $advice;
+    public $title;
+    public $number;
 
     function loadData() {
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
+        $this->number = $this->article->number();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->article->getMetadescription();
         $this->metakeywords = $this->article->getMetakeyword();
+        //$this->title = Magazine::getMagazineTitle().': '.$this->article->getTitle();
 
         $cont = 0;
         if (isset($_POST['Title']) && $_POST['Title']!='') $cont++;

@@ -27,14 +27,18 @@ class PagesRouter extends Router {
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
+    public $title;
+    public $number;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->page = Page::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->number = Number::findLastPublished();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->page->getMetadescription();
         $this->metakeywords = $this->page->getMetakeyword();
+        $this->title = Magazine::getMagazineTitle().': '.$this->page->getTitle();
     }
 
     function applyTemplate(){

@@ -26,6 +26,7 @@ class NumberRouter extends Router {
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
+    public $title;
 
     function loadData(){
         $arURI = $this->getArrayURI();
@@ -34,6 +35,7 @@ class NumberRouter extends Router {
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->number->getMetadescription();
         $this->metakeywords = $this->number->getMetakeyword();
+        $this->title = Magazine::getMagazineTitle().': '.$this->number->getTitle();
     }
 
     function applyTemplate(){

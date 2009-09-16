@@ -29,18 +29,21 @@ class PeopleRouter extends Router {
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
+    public $number;
 
     function loadData() {
         $arURI = $this->getArrayURI();
         $this->people = User::findAll();
         $this->pages = Page::findAllPublishedOrdered();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->number = Number::findLastPublished();
         foreach ($this->people as $person) {
             $this->metadescritpion .= $person->getName().', ';
             $this->metakeywords .= $person->getName().', ';
         }
         $this->metadescritpion = substr($this->metadescritpion, 0, strlen($this->metadescritpion)-2);
         $this->metakeywords = substr($this->metakeywords, 0, strlen($this->metakeywords)-2);
+        $this->title = Magazine::getMagazineTitle().': People';
     }
 
     function applyTemplate() {

@@ -29,14 +29,18 @@ class ArticlesRouter extends Router {
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
+    public $title;
+    public $number;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->number = $this->article->number();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->article->getMetadescription();
         $this->metakeywords = $this->article->getMetakeyword();
+        $this->title = Magazine::getMagazineTitle().': '.$this->article->getTitle();
     }
 
     function applyTemplate(){
