@@ -19,10 +19,11 @@
 
 require_once(STARTPATH.DATAMODELPATH.'/article.php');
 require_once(STARTPATH.DATAMODELPATH.'/page.php');
+require_once(STARTPATH.DATAMODELPATH.'/number.php');
 
 require_once('router.php');
 
-class CommentsRouter extends Router {
+class ResultsRouter extends Router {
 
     private $article;
     public $pages;
@@ -35,43 +36,43 @@ class CommentsRouter extends Router {
 
     function loadData() {
         $arURI = $this->getArrayURI();
-        $this->article = Article::findById($arURI['id']);
-        $this->number = $this->article->number();
+        $this->number = Number::findLastPublished();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
-        $this->metadescritpion = $this->article->getMetadescription();
-        $this->metakeywords = $this->article->getMetakeyword();
-        $this->title = Magazine::getMagazineTitle().': '.$this->article->getTitle();
+        $this->title = 'Results for: '.$_POST['s'];
 
         $cont = 0;
-        if (isset($_POST['Title']) && $_POST['Title']!='') $cont++;
-        if (isset($_POST['Body']) && $_POST['Body']!='') $cont++;
-        if (isset($_POST['Signature']) && $_POST['Signature']!='') $cont++;
-
-        if ($cont == 3) {
-            $published = 0;
-            $com = new Comment(
-                Comment::NEW_COMMENT,
-                $arURI['id'],
-                $_POST['Title'],
-                $published,
-                $_POST['Body'],
-                $_POST['Signature']);
-            $com->save();
-            $this->advice = 'Comment saved, it will be checked then published';
+        if (isset($_POST['s']) && $_POST['s']!='') {
+            $cont++;
+            $this->articles = Article::findInAllTextFieldsInPublishedArticles($_POST['s']);
+            $this->title = 'Results for: '.$_POST['s'];
+            $this->metadescritpion = 'Results for: '.$_POST['s'];
+            $this->metakeywords = 'Results for: '.$_POST['s'];
+            $resultsNumber = count($this->articles);
+        } else {
+            $this->articles = array();
+            $this->title = 'No Results!';
+            $this->metadescritpion = 'No Results!';
+            $this->metakeywords = 'No Results!';
+            $resultsNumber = 0;
         }
-        if ($cont < 3 && $cont > 0) {
-            $this->advice = 'Fill all the fields please';
+
+
+        if ($cont == 1 && $resultsNumber > 0) {
+            $this->advice = 'Results:';
         }
         if ($cont == 0) {
-            $this->advice = '';
+            $this->advice = 'What I\'m looking for?';
+        }
+        if ($resultsNumber == 0) {
+            $this->advice = 'No Article matches with your search criteria';
         }
     }
 
     function applyTemplate() {
         $this->getRemote()->executeCommandBeforeComments();
-        if (file_exists(TEMPLATEPATH.'/comments.php')) {
-            include (TEMPLATEPATH.'/comments.php');
+        if (file_exists(TEMPLATEPATH.'/results.php')) {
+            include (TEMPLATEPATH.'/results.php');
 
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
                 include (TEMPLATEPATH.'/index.php');

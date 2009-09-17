@@ -30,6 +30,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'comments/'.$article->getTitle().'/'.$article->getId();
     }
 
+    static function result() {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'results/';
+    }
+
     static function page($page) {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'pages/'.$page->getTitle().'/'.$page->getId();
     }

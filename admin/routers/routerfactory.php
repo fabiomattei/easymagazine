@@ -21,6 +21,7 @@ require_once('rindex.php');
 require_once('comments.php');
 require_once('page.php');
 require_once('article.php');
+require_once('results.php');
 require_once('number.php');
 require_once('people.php');
 require_once('articlesperson.php');
@@ -33,6 +34,8 @@ class RouterFactory {
         if ($request['Router'] == "index") $out = new IndexRouter($request);
 
         if ($request['Router'] == "comments") $out = new CommentsRouter($request);
+
+        if ($request['Router'] == "results") $out = new ResultsRouter($request);
 
         if ($request['Router'] == "page") $out = new PagesRouter($request);
 

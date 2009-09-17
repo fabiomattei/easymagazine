@@ -26,9 +26,6 @@ $dbhost = $_POST['dbhost'];
 $tbprefix = $_POST['tbprefix'];
 $folder = $_POST['folder'];
 
-if ($folder == '') $folder = '/';
-else $folder = '/'.$folder.'/';
-
 ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder);
 
 ?>
