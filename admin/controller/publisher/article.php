@@ -70,8 +70,8 @@ function articlenumber($id, $posts) {
 
     $num = Number::findById($id);
     $outList['arts'] = Paginator::paginate($num->articles(), $page);
-    $outList['page_numbers'] = 1;
-    $outList['pageSelected'] = 1;
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
     $outList['lastList'] = 'articlenumber';
 
     return $outList;
@@ -85,8 +85,8 @@ function articlecategory($id, $posts) {
 
     $cat = Category::findById($id);
     $outList['arts'] = Paginator::paginate($cat->articles(), $page);
-    $outList['page_numbers'] = 1;
-    $outList['pageSelected'] = 1;
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
     $outList['lastList'] = 'articlecategory';
 
     return $outList;
