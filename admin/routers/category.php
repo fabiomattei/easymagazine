@@ -28,10 +28,21 @@ class CategoryRouter extends Router {
     public $metakeywords;
     public $title;
     public $categories;
+    public $paginator;
 
-    function loadData(){
+    function loadData() {
         $arURI = $this->getArrayURI();
         $this->category = Category::findById($arURI['id']);
+
+        $collection = $this->category->articlesPublished();
+        $this->paginator = new Paginator($collection, 10, 5);
+        if (isset($_GET['page']) && $_GET['page'] > 0){
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+        $this->articles = $this->paginator->rowsToShow($page);
+
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
         $this->number = Number::findLastPublished();
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
@@ -41,13 +52,13 @@ class CategoryRouter extends Router {
         $this->title = Magazine::getMagazineTitle().': '.$this->category->getName();
     }
 
-    function applyTemplate(){
+    function applyTemplate() {
         $this->getRemote()->executeCommandBeforeNumber();
         if (file_exists(TEMPLATEPATH.'/category.php')) {
             include (TEMPLATEPATH.'/category.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
+                include (TEMPLATEPATH.'/index.php');
+            }
         $this->getRemote()->executeCommandAfterNumber();
     }
 
