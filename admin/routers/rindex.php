@@ -19,6 +19,7 @@
 
 require_once('router.php');
 require_once(STARTPATH.DATAMODELPATH.'/number.php');
+require_once(STARTPATH.DATAMODELPATH.'/category.php');
 require_once(STARTPATH.DATAMODELPATH.'/page.php');
 
 class IndexRouter extends Router {
@@ -29,10 +30,12 @@ class IndexRouter extends Router {
     public $metadescritpion;
     public $metakeywords;
     public $title;
+    public $categories;
 
     function loadData(){
         $this->number = Number::findLastPublished();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->number->getMetadescription();
         $this->metakeywords = $this->number->getMetakeyword();

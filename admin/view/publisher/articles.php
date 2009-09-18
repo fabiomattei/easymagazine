@@ -114,7 +114,7 @@
                             ?>
                         </table>
                         <div class="select">
-                            <form name="pageselectionform" method="post" action="number.php?lastList=<?=$lastList?>">
+                            <form name="pageselectionform" method="post" action="article.php?lastList=<?=$lastList?>">
                                 <strong>Pages: </strong>
                                 <select name="page">
                                     <? for ($i=1;$i<=$page_numbers;$i++) { ?>

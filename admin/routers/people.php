@@ -30,12 +30,14 @@ class PeopleRouter extends Router {
     public $metadescritpion;
     public $metakeywords;
     public $number;
+    public $categories;
 
     function loadData() {
         $arURI = $this->getArrayURI();
         $this->people = User::findAll();
         $this->pages = Page::findAllPublishedOrdered();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->number = Number::findLastPublished();
         foreach ($this->people as $person) {
             $this->metadescritpion .= $person->getName().', ';

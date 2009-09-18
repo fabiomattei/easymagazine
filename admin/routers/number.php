@@ -27,11 +27,13 @@ class NumberRouter extends Router {
     public $metadescritpion;
     public $metakeywords;
     public $title;
+    public $categories;
 
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->number = Number::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->number->getMetadescription();
         $this->metakeywords = $this->number->getMetakeyword();

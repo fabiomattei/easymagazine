@@ -32,12 +32,14 @@ class CommentsRouter extends Router {
     public $advice;
     public $title;
     public $number;
+    public $categories;
 
     function loadData() {
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
         $this->number = $this->article->number();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->article->getMetadescription();
         $this->metakeywords = $this->article->getMetakeyword();

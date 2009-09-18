@@ -18,39 +18,37 @@
  */
 
 require_once('router.php');
-require_once(STARTPATH.DATAMODELPATH.'/page.php');
 
-class PagesRouter extends Router {
+class CategoryRouter extends Router {
 
-    private $page;
     public $pages;
+    private $number;
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
     public $title;
-    public $number;
     public $categories;
 
     function loadData(){
         $arURI = $this->getArrayURI();
-        $this->page = Page::findById($arURI['id']);
+        $this->category = Category::findById($arURI['id']);
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
-        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->number = Number::findLastPublished();
+        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
-        $this->metadescritpion = $this->page->getMetadescription();
-        $this->metakeywords = $this->page->getMetakeyword();
-        $this->title = Magazine::getMagazineTitle().': '.$this->page->getTitle();
+        $this->metadescritpion = $this->category->getdescription();
+        $this->metakeywords = $this->category->getName();
+        $this->title = Magazine::getMagazineTitle().': '.$this->category->getName();
     }
 
     function applyTemplate(){
-        $this->getRemote()->executeCommandBeforePage();
-        if (file_exists(TEMPLATEPATH.'/page.php')) {
-            include (TEMPLATEPATH.'/page.php');
+        $this->getRemote()->executeCommandBeforeNumber();
+        if (file_exists(TEMPLATEPATH.'/category.php')) {
+            include (TEMPLATEPATH.'/category.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
             include (TEMPLATEPATH.'/index.php');
         }
-        $this->getRemote()->executeCommandAfterPage();
+        $this->getRemote()->executeCommandAfterNumber();
     }
 
 }

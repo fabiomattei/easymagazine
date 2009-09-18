@@ -31,12 +31,14 @@ class ArticlesPersonRouter extends Router {
     public $metakeywords;
     public $title;
     public $number;
+    public $categories;
 
     function loadData() {
         $arURI = $this->getArrayURI();
         $this->person = User::findById($arURI['id']);
         $this->pages = Page::findAllPublishedOrdered();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->number = Number::findLastPublished();
         foreach ($this->person as $person) {
             $this->metadescritpion .= $person->getName().', ';

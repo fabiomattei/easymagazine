@@ -34,6 +34,7 @@ class UriStandard extends URI {
     function evaluate() {
         switch ($this->uri['page']) {
             case 'number': $router = 'number'; $id = $this->uri['id']; break;
+            case 'category': $router = 'category'; $id = $this->uri['id']; break;
             case 'article': $router = 'article'; $id = $this->uri['id']; break;
             case 'comments': $router = 'comments'; $id = $this->uri['id']; break;
             case 'results': $router = 'results'; $id = 'not required'; break;

@@ -20,12 +20,12 @@
 require_once(STARTPATH.DATAMODELPATH.'/article.php');
 require_once(STARTPATH.DATAMODELPATH.'/page.php');
 require_once(STARTPATH.DATAMODELPATH.'/number.php');
+require_once(STARTPATH.UTILSPATH.'/paginator.php');
 
 require_once('router.php');
 
 class ResultsRouter extends Router {
 
-    private $article;
     public $pages;
     private $numbers;
     public $metadescritpion;
@@ -33,28 +33,43 @@ class ResultsRouter extends Router {
     public $advice;
     public $title;
     public $number;
+    public $categories;
 
     function loadData() {
         $arURI = $this->getArrayURI();
         $this->number = Number::findLastPublished();
         $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
-        $this->title = 'Results for: '.$_POST['s'];
 
         $cont = 0;
         if (isset($_POST['s']) && $_POST['s']!='') {
             $cont++;
-            $this->articles = Article::findInAllTextFieldsInPublishedArticles($_POST['s']);
+
+            $collection = Article::findInAllTextFieldsInPublishedArticles($_POST['s']);
+            $_SESSION['paginator'] = new Paginator($collection, 10, 5);
+
+            $this->articles = $_SESSION['paginator']->rowsToShow(1);
+            $_SESSION['s'] = $_POST['s'];
             $this->title = 'Results for: '.$_POST['s'];
             $this->metadescritpion = 'Results for: '.$_POST['s'];
             $this->metakeywords = 'Results for: '.$_POST['s'];
             $resultsNumber = count($this->articles);
         } else {
-            $this->articles = array();
-            $this->title = 'No Results!';
-            $this->metadescritpion = 'No Results!';
-            $this->metakeywords = 'No Results!';
-            $resultsNumber = 0;
+            if (isset($_SESSION['paginator'])) {
+                $cont++;
+                $this->articles = $_SESSION['paginator']->rowsToShow($_GET['page']);
+                $this->title = 'Results for: '.$_SESSION['s'];
+                $this->metadescritpion = 'Results for: '.$_SESSION['s'];
+                $this->metakeywords = 'Results for: '.$_SESSION['s'];
+                $resultsNumber = count($this->articles);
+            } else {
+                $this->articles = array();
+                $this->title = 'No Results!';
+                $this->metadescritpion = 'No Results!';
+                $this->metakeywords = 'No Results!';
+                $resultsNumber = 0;
+            }
         }
 
 
