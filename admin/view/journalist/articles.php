@@ -152,6 +152,18 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="first" width="172"><strong>Category</strong></td>
+                                    <td class="last">
+                                        <select name="categoryid">
+                                            <? foreach ($categories as $cat) { ?>
+                                            <option value="<? echo $cat->getId(); ?>"
+                                                <? if ($cat->getId()==$art->getCategory_id()) { echo "selected"; } ?>
+                                                    ><? echo $cat->getName(); ?></option>
+                                                <? } ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="first" width="172"><strong>Title</strong></td>
                                     <td class="last"><input type="text" size="50" name="Title" value="<? echo $art->getUnfilteredTitle(); ?>"/></td>
                                 </tr>

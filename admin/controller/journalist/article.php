@@ -209,6 +209,7 @@ function save($toSave, $files) {
     $art = new Article(
         $toSave['id'],
         $toSave['numberid'],
+        $toSave['categoryid'],
         $toSave['indexnumber'],
         $toSave['Published'],
         $toSave['Title'],
