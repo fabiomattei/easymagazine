@@ -403,7 +403,7 @@ class Article {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
                 array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
-                array($this->number_id, $this->indexnumber, $this->category_id, $this->published, $this->commentsallowed, $this->id),
+                array($this->number_id, $this->category_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
                 $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
