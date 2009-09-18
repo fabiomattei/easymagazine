@@ -205,6 +205,7 @@ class Number {
                 $ret[] = new Article(
                     $row['id'],
                     $row['number_id'],
+                    $row['category_id'],
                     $row['indexnumber'],
                     $row['published'],
                     $row['title'],
@@ -240,6 +241,7 @@ class Number {
                 $ret[] = new Article(
                     $row['id'],
                     $row['number_id'],
+                    $row['category_id'],
                     $row['indexnumber'],
                     $row['published'],
                     $row['title'],

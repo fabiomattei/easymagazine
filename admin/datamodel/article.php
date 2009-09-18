@@ -20,6 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'comment.php');
+require_once(STARTPATH.DATAMODELPATH.'category.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
 require_once(STARTPATH.UTILSPATH.'pagination.php');
@@ -30,6 +31,7 @@ class Article {
     const NEW_ARTICLE = -1;
     private $id = self::NEW_ARTICLE;
     private $number_id;
+    private $category_id;
     private $indexnumber;
     private $published;
     private $title;
@@ -46,8 +48,8 @@ class Article {
     private $updated;
     private $filter;
 
-    const INSERT_SQL = 'insert into articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgdescription, created, updated) values (#, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set number_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgdescription = ?, updated=now() where id = #';
+    const INSERT_SQL = 'insert into articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgdescription, created, updated) values (#, #, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update articles set number_id = #, category_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgdescription = ?, updated=now() where id = #';
     const UPDATE_SQL_IMG = 'update articles set imgfilename = ?, updated = Now() where id = #';
     const UPDATE_SQL_IMG_IMGDESC = 'update articles set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from articles where id = # ';
@@ -74,10 +76,11 @@ class Article {
     const LINK_USER = 'insert into users_articles (article_id, user_id) values (#, #) ';
 
 
-    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $commentsallowed='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
+    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $category_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $commentsallowed='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
+        $this->category_id = $category_id;
         $this->indexnumber = $indexnumber;
         $this->published = $published;
         $this->title = $title;
@@ -107,7 +110,7 @@ class Article {
                 $array_int,
                 $tables);
             if ($row = mysql_fetch_array($rs)) {
-                $ret = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+                $ret = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             } else {
                 $ret = new Article();
             }
@@ -129,7 +132,7 @@ class Article {
                 $tables);
             $ret = array();
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Article($row['id'], $row['number_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+                $ret[] = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Article();
@@ -242,6 +245,32 @@ class Article {
             }
         } catch (Exception $e) {
             $ret[] = new Comment();
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        return $ret;
+    }
+
+    public function category() {
+        $ret = array();
+        try {
+            $tables = array('categories' => TBPREFIX.'categories');
+            $rs = DB::getInstance()->execute(
+                self::SELECT_COMMENTS,
+                array(),
+                array($this->id),
+                $tables);
+            while ($row = mysql_fetch_array($rs)) {
+                $ret[] = new Category(
+                    $row['id'],
+                    $row['indexnumber'],
+                    $row['published'],
+                    $row['name'],
+                    $row['description'],
+                    $row['created'],
+                    $row['updated']);
+            }
+        } catch (Exception $e) {
+            $ret[] = new Category();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
@@ -361,7 +390,7 @@ class Article {
             DB::getInstance()->execute(
                 self::INSERT_SQL,
                 array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
-                array($this->id, $this->number_id, $this->indexnumber, $this->published, $this->commentsallowed),
+                array($this->id, $this->number_id, $this->category_id, $this->indexnumber, $this->published, $this->commentsallowed),
                 $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -374,7 +403,7 @@ class Article {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
                 array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
-                array($this->number_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
+                array($this->number_id, $this->indexnumber, $this->category_id, $this->published, $this->commentsallowed, $this->id),
                 $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -390,6 +419,8 @@ class Article {
                 DB::getInstance()->execute(self::DELETE_USER_ARTICLE, array(),array((int) $this->getId()), $tables);
             }
             $this->id = self::NEW_ARTICLE;
+            $this->number_id = '';
+            $this->category_id = '';
             $this->title = '';
             $this->subtitle = '';
             $this->summary = '';

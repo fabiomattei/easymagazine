@@ -73,6 +73,7 @@ class DbCreator {
         $cmd = "CREATE TABLE ".TBPREFIX."articles (
             id int(11) NOT NULL auto_increment,
             number_id int(11),
+            category_id int(11),
             indexnumber int,
             published int NOT NULL DEFAULT '0',
             title varchar(255),
@@ -93,15 +94,15 @@ class DbCreator {
     }
 
     public function populateTableArticles() {
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
-            (1, 1, 2, 1, 'My firts Article', 'Subtitle of my first article',
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (1, 1, 2, 2, 1, 'My firts Article', 'Subtitle of my first article',
             'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.',
             'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt. Gallos ab Aquitanis Garumna flumen, a Belgis Matrona et Sequana dividit. Horum omnium fortissimi sunt Belgae, propterea quod a cultu atque humanitate provinciae longissime absunt, minimeque ad eos mercatores saepe commeant atque ea quae ad effeminandos animos pertinent important, proximique sunt Germanis, qui trans Rhenum incolunt, quibuscum continenter bellum gerunt. Qua de causa Helvetii quoque reliquos Gallos virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, cum aut suis finibus eos prohibent aut ipsi in eorum finibus bellum gerunt. Eorum una, pars, quam Gallos obtinere dictum est, initium capit a flumine Rhodano, continetur Garumna flumine, Oceano, finibus Belgarum, attingit etiam ab Sequanis et Helvetiis flumen Rhenum, vergit ad septentriones. Belgae ab extremis Galliae finibus oriuntur, pertinent ad inferiorem partem fluminis Rheni, spectant in septentrionem et orientem solem. Aquitania a Garumna flumine ad Pyrenaeos montes et eam partem Oceani quae est ad Hispaniam pertinet; spectat inter occasum solis et septentriones.',
             1, 'tag of my first article',
             'metadescription of my first article', 'metakeyword of my first article', 'viale_dei_pini.jpg', '', '2009-08-03', '2009-08-03')";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
-            (2, 1, 1, 1, 'My second Article', 'Subtitle of my first article',
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (2, 1, 1, 1, 1, 'My second Article', 'Subtitle of my first article',
             'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.',
             'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt. Gallos ab Aquitanis Garumna flumen, a Belgis Matrona et Sequana dividit. Horum omnium fortissimi sunt Belgae, propterea quod a cultu atque humanitate provinciae longissime absunt, minimeque ad eos mercatores saepe commeant atque ea quae ad effeminandos animos pertinent important, proximique sunt Germanis, qui trans Rhenum incolunt, quibuscum continenter bellum gerunt. Qua de causa Helvetii quoque reliquos Gallos virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, cum aut suis finibus eos prohibent aut ipsi in eorum finibus bellum gerunt. Eorum una, pars, quam Gallos obtinere dictum est, initium capit a flumine Rhodano, continetur Garumna flumine, Oceano, finibus Belgarum, attingit etiam ab Sequanis et Helvetiis flumen Rhenum, vergit ad septentriones. Belgae ab extremis Galliae finibus oriuntur, pertinent ad inferiorem partem fluminis Rheni, spectant in septentrionem et orientem solem. Aquitania a Garumna flumine ad Pyrenaeos montes et eam partem Oceani quae est ad Hispaniam pertinet; spectat inter occasum solis et septentriones.',
             1, 'tag of my first article',
@@ -244,6 +245,36 @@ class DbCreator {
         return $result;
     }
 
+    public function createCategories() {
+        $cmd = "CREATE TABLE ".TBPREFIX."categories (
+            id int(11) NOT NULL auto_increment,
+            name varchar(255),
+            description text,
+            published int NOT NULL DEFAULT '0',
+            indexnumber int,
+            created datetime,
+            updated datetime,
+            PRIMARY KEY (id));";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function populateCategories() {
+        $cmd = "insert into ".TBPREFIX."categories (name, description, published, indexnumber, created, updated) values
+            ('News', 'News Articles', 1, 1, '2009-08-06', '2009-08-06')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."categories (name, description, published, indexnumber, created, updated) values
+            ('Sport', 'Sport Articles', 1, 2, '2009-08-06', '2009-08-06')";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function dropCategories() {
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."categories;";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
     public function createTableOptions() {
         $cmd = "CREATE TABLE ".TBPREFIX."options (
             id int(11) NOT NULL auto_increment,
@@ -299,6 +330,14 @@ class DbCreator {
                 $out = "Table Numbers created<BR>";
             } else {
                 $out = "Table Numbers NOT created<BR>";;
+            }
+
+            $result = $this->createTableCategories();
+
+            if ($result) {
+                $out .= "Table Categories created<BR>";
+            } else {
+                $out .= "Table Categories NOT created<BR>";;
             }
 
             $result = $this->createTableArticles();
@@ -366,6 +405,14 @@ class DbCreator {
                 $out = "Dummy data Number Created<BR>";
             } else {
                 $out = "Dummy data Number NOT created<BR>";;
+            }
+
+            $result = $this->populateTableCategories();
+
+            if ($result) {
+                $out .= "Dummy data Categories Created<BR>";
+            } else {
+                $out .= "Dummy data Categories NOT created<BR>";;
             }
 
             $result = $this->populateTableArticles();
@@ -441,6 +488,14 @@ class DbCreator {
                 $out .= "Table Article dropped<BR>";
             } else {
                 $out .= "Table Article NOT dropped<BR>";;
+            }
+
+            $result = $this->dropTableCategories();
+
+            if ($result) {
+                $out .= "Table Categories dropped<BR>";
+            } else {
+                $out .= "Table Categories NOT dropped<BR>";;
             }
 
             $result = $this->dropTableComments();

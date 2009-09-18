@@ -81,6 +81,7 @@ class DbCreator {
         $cmd = "CREATE TABLE ".TBPREFIX."articles (
             id int(11) NOT NULL auto_increment,
             number_id int(11),
+            category_id int(11),
             indexnumber int,
             published int NOT NULL DEFAULT '0',
             title varchar(255),
@@ -101,18 +102,18 @@ class DbCreator {
     }
 
     public function populateTableArticles() {
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
-            (1, 1, 1, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (1, 1, 1, 1, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
             'Body of my first article', 1, 'tag of my first article',
             'metadescription of my first article', 'metakeyword of my first article', '', '', now(), now())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
-            (2, 1, 2, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (2, 1, 1, 2, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
             'Body of my second article', 1, 'tag of my second article',
             'metadescription of my second article', 'metakeyword of my second article', '', '', now(), now())";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
-            (3, 1, 3, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (3, 1, 2, 3, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
             'Body of my third article', 1, 'tag of my third article',
             'metadescription of my third article', 'metakeyword of my third article', '', '', now(), now())";
         $result = mysql_query($cmd, $this->connection);
@@ -266,6 +267,39 @@ class DbCreator {
         return $result;
     }
 
+    public function createCategories() {
+        $cmd = "CREATE TABLE ".TBPREFIX."categories (
+            id int(11) NOT NULL auto_increment,
+            name varchar(255),
+            description text,
+            published int NOT NULL DEFAULT '0',
+            indexnumber int,
+            created datetime,
+            updated datetime,
+            PRIMARY KEY (id));";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function populateCategories() {
+        $cmd = "insert into ".TBPREFIX."categories (name, description, published, indexnumber, created, updated) values
+            ('News', 'News Articles', 1, 1, '2009-08-06', '2009-08-06')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."categories (name, description, published, indexnumber, created, updated) values
+            ('Sport', 'Sport Articles', 1, 2, '2009-08-06', '2009-08-06')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."categories (name, description, published, indexnumber, created, updated) values
+            ('Relax', 'Relaxing Articles', 0, 3, '2009-08-06', '2009-08-06')";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
+    public function dropCategories() {
+        $cmd="DROP TABLE IF EXISTS ".TBPREFIX."categories;";
+        $result = mysql_query($cmd, $this->connection);
+        return $result;
+    }
+
     public function createTableOptions() {
         $cmd = "CREATE TABLE ".TBPREFIX."options (
             id int(11) NOT NULL auto_increment,
@@ -306,6 +340,14 @@ class DbCreator {
                 $out = "Table Numbers created<BR>";
             } else {
                 $out = "Table Numbers NOT created<BR>";;
+            }
+
+            $result = $this->createCategories();
+
+            if ($result) {
+                $out .= "Table Categories created<BR>";
+            } else {
+                $out .= "Table Categories NOT created<BR>";;
             }
 
             $result = $this->createTableArticles();
@@ -375,6 +417,14 @@ class DbCreator {
                 $out = "Dummy data Number NOT created<BR>";;
             }
 
+            $result = $this->populateCategories();
+
+            if ($result) {
+                $out .= "Dummy data Categories Created<BR>";
+            } else {
+                $out .= "Dummy data Categories NOT created<BR>";;
+            }
+
             $result = $this->populateTableArticles();
 
             if ($result) {
@@ -440,6 +490,14 @@ class DbCreator {
                 $out = "Table Number dropped<BR>";
             } else {
                 $out = "Table Number NOT dropped<BR>";;
+            }
+
+            $result = $this->dropCategories();
+
+            if ($result) {
+                $out .= "Table Categories dropped<BR>";
+            } else {
+                $out .= "Table Categories NOT dropped<BR>";;
             }
 
             $result = $this->dropTableArticles();

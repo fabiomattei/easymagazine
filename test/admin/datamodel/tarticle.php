@@ -100,10 +100,10 @@ class ArticleTests extends UnitTestCase {
     }
 
     function testSaveNewArticle() {
-        $newArt = new Article(Article::NEW_ARTICLE, '1', '6', '0', 'Article four', 'Subtitle four', 'summary four', 'body four', '1', 'tag four', 'metadescription four', 'metakeyword four');
+        $newArt = new Article(Article::NEW_ARTICLE, '1', '1', '6', '0', 'Article four', 'Subtitle four', 'summary four', 'body four', '1', 'tag four', 'metadescription four', 'metakeyword four');
         $newArt->save();
         $arts = Article::findAll();
-		$this->assertEqual(4, count($arts));
+	$this->assertEqual(4, count($arts));
     }
 
     function testUpdateArticle() {

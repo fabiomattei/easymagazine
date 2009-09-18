@@ -31,6 +31,7 @@ require_once(BASEDIR.'admin/utils/directoryrunner.php');
 require_once(BASEDIR.'admin/utils/fileWriter.php');
 require_once(BASEDIR.'admin/utils/password.php');
 require_once(BASEDIR.'admin/datamodel/article.php');
+require_once(BASEDIR.'admin/datamodel/category.php');
 require_once(BASEDIR.'admin/datamodel/number.php');
 require_once(BASEDIR.'admin/datamodel/comment.php');
 require_once(BASEDIR.'admin/datamodel/page.php');
@@ -46,6 +47,7 @@ require_once('admin/utils/tfileWriter.php');
 require_once('admin/utils/tpassword.php');
 require_once('admin/datamodel/library/tstrfunction.php');
 require_once('admin/datamodel/tarticle.php');
+require_once('admin/datamodel/tcategory.php');
 require_once('admin/datamodel/tnumber.php');
 require_once('admin/datamodel/tcomment.php');
 require_once('admin/datamodel/tpage.php');
@@ -53,17 +55,25 @@ require_once('admin/datamodel/tuser.php');
 require_once('admin/datamodel/toption.php');
 
 
-/**
-require_once('../../simpletest/autorun.php');
+/* Repopulates the schema in order to restart to develop */
+$db = new DbCreator();
+$db->connect();
+$db->dropSchema();
+$db->createSchema();
+$db->populateSchema();
 
-class AllTests extends TestSuite {
-    function AllTests() {
-        $this->TestSuite('All tests');
-        $this->addFile('../easymagazine/test/admin/datamodel/library/tstrfunction.php');
-        $this->addFile('test/admin/datamodel/library/tstrfunction.php');
-    }
-}
-*/
+
+/**
+ require_once('../../simpletest/autorun.php');
+
+ class AllTests extends TestSuite {
+ function AllTests() {
+ $this->TestSuite('All tests');
+ $this->addFile('../easymagazine/test/admin/datamodel/library/tstrfunction.php');
+ $this->addFile('test/admin/datamodel/library/tstrfunction.php');
+ }
+ }
+ */
 
 
 ?>
