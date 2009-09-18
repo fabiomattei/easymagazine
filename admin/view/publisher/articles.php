@@ -33,6 +33,7 @@
                 <ul id="top-navigation">
                     <li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
                     <li><span><span><a href="number.php">Numbers</a></span></span></li>
+                    <li><span><span><a href="category.php">Categories</a></span></span></li>
                     <li class="active"><span><span>Articles</span></span></li>
                     <li><span><span><a href="page.php">Pages</a></span></span></li>
                     <li><span><span><a href="comment.php">Comments</a></span></span></li>
@@ -144,6 +145,18 @@
                                             <option value="<? echo $nmb->getId(); ?>"
                                                 <? if ($nmb->getId()==$art->getNumber_id()) { echo "selected"; } ?>
                                                     ><? echo $nmb->getTitle(); ?></option>
+                                                <? } ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="first" width="172"><strong>Category</strong></td>
+                                    <td class="last">
+                                        <select name="categoryid">
+                                            <? foreach ($categories as $cat) { ?>
+                                            <option value="<? echo $cat->getId(); ?>"
+                                                <? if ($cat->getId()==$art->getCategory_id()) { echo "selected"; } ?>
+                                                    ><? echo $cat->getName(); ?></option>
                                                 <? } ?>
                                         </select>
                                     </td>

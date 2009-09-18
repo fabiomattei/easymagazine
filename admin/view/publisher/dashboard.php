@@ -33,6 +33,7 @@
                 <ul id="top-navigation">
                     <li class="active"><span><span>Dashboard</span></span></li>
                     <li><span><span><a href="number.php">Numbers</a></span></span></li>
+                    <li><span><span><a href="category.php">Categories</a></span></span></li>
                     <li><span><span><a href="article.php">Articles</a></span></span></li>
                     <li><span><span><a href="page.php">Pages</a></span></span></li>
                     <li><span><span><a href="comment.php">Comments</a></span></span></li>

@@ -21,6 +21,7 @@ require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.UTILSPATH.'pagination.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
+require_once(STARTPATH.'lib/textile2/classTextile.php');
 
 class Category {
     const NEW_CATEGORY = -1;
@@ -348,6 +349,12 @@ class Category {
     }
 
     public function getDescription() {
+        $textile = new Textile();
+        $out = $textile->TextileThis($this->description);
+        return $out;
+    }
+
+    public function getUnfilteredDescription() {
         return $this->description;
     }
 

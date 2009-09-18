@@ -43,7 +43,7 @@ class UserTests extends UnitTestCase {
 
     function testfindAll() {
         $usr = User::findAll();
-        $this->assertEqual(2, count($usr));
+        $this->assertEqual(3, count($usr));
     }
 
     function testfindArticles() {
@@ -69,7 +69,7 @@ class UserTests extends UnitTestCase {
         $newNum = new User(User::NEW_USER, 'New User second', 'newusersecond', 'newpasswordsecond' , 'description example', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef');
         $newNum->save();
         $num = User::findAll();
-        $this->assertEqual(3, count($num));
+        $this->assertEqual(4, count($num));
     }
 
     function testUpdateUser() {
@@ -84,7 +84,7 @@ class UserTests extends UnitTestCase {
         $num = User::findById(2);
         $num->delete();
         $num = User::findAll();
-        $this->assertEqual(1, count($num));
+        $this->assertEqual(2, count($num));
     }
 
     function testfindUserByUsernameAndEmail() {

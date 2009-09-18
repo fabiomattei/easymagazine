@@ -24,6 +24,7 @@ require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
+require_once(STARTPATH.DATAMODELPATH.'category.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
 
 session_start();
@@ -31,6 +32,7 @@ session_start();
 function commons() {
     $outCommons = array();
     $outCommons['numbs'] = Number::findAll();
+    $outCommons['categories'] = Category::findAll();
     $outCommons['authors'] = User::findAll();
 
     return $outCommons;
@@ -71,6 +73,21 @@ function articlenumber($id, $posts) {
     $outList['page_numbers'] = 1;
     $outList['pageSelected'] = 1;
     $outList['lastList'] = 'articlenumber';
+
+    return $outList;
+}
+
+function articlecategory($id, $posts) {
+    if (isset($posts['page'])) $page = $posts['page'];
+    else $page = 1;
+
+    $outList = array();
+
+    $cat = Category::findById($id);
+    $outList['arts'] = Paginator::paginate($cat->articles(), $page);
+    $outList['page_numbers'] = 1;
+    $outList['pageSelected'] = 1;
+    $outList['lastList'] = 'articlecategory';
 
     return $outList;
 }
@@ -247,6 +264,7 @@ function save($toSave, $files) {
     $art = new Article(
         $toSave['id'],
         $toSave['numberid'],
+        $toSave['categoryid'],
         $toSave['indexnumber'],
         $toSave['Published'],
         $toSave['Title'],
@@ -298,6 +316,7 @@ if (isset($_SESSION['user'])) {
         case  'find':                $outList = find($_POST); break;
         case  'byuser':              $outList = byuser($_POST); break;
         case  'articlenumber':       $outList = articlenumber($_GET['id'], $_POST); break;
+        case  'articlecategory':     $outList = articlecategory($_GET['id'], $_POST); break;
     }
 } else {
     header("Location: ../../loginError.php");
@@ -305,6 +324,7 @@ if (isset($_SESSION['user'])) {
 
 $numbs = $outCommons['numbs'];
 $authors = $outCommons['authors'];
+$categories = $outCommons['categories'];
 
 $art = $outAction['art'];
 

@@ -642,6 +642,15 @@ class Article {
     public function setNumber_id($number_id) {
         $this->number_id = $number_id;
     }
+
+    public function getCategory_id() {
+        return $this->category_id;
+    }
+
+    public function setCategory_id($category_id) {
+        $this->category_id = $category_id;
+    }
+
     public function getImgfilename() {
         return $this->imgfilename;
     }
