@@ -65,17 +65,17 @@ class ArticleTests extends UnitTestCase {
 
     function testfindAllPublished() {
         $ar = Article::findAllPublished();
-		$this->assertEqual(2, count($ar));
+		$this->assertEqual(14, count($ar));
     }
 
     function testfindAll() {
         $ar = Article::findAll();
-		$this->assertEqual(3, count($ar));
+		$this->assertEqual(15, count($ar));
     }
 
     function testfindAllOrderedByIndexNumber() {
         $ar = Article::findAllOrderedByIndexNumber();
-		$this->assertEqual(3, count($ar));
+		$this->assertEqual(15, count($ar));
 		$this->assertPattern('(third)', $ar[0]->getTitle());
     }
 
@@ -103,7 +103,7 @@ class ArticleTests extends UnitTestCase {
         $newArt = new Article(Article::NEW_ARTICLE, '1', '1', '6', '0', 'Article four', 'Subtitle four', 'summary four', 'body four', '1', 'tag four', 'metadescription four', 'metakeyword four');
         $newArt->save();
         $arts = Article::findAll();
-	$this->assertEqual(4, count($arts));
+	$this->assertEqual(16, count($arts));
     }
 
     function testUpdateArticle() {
@@ -118,7 +118,7 @@ class ArticleTests extends UnitTestCase {
         $num = Article::findById(1);
         $num->delete();
         $num = Article::findAll();
-		$this->assertEqual(2, count($num));
+		$this->assertEqual(14, count($num));
     }
 
     function testUsers() {

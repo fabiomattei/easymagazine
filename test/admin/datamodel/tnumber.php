@@ -58,36 +58,36 @@ class NumberTests extends UnitTestCase {
 
     function testfindLast() {
         $num = Number::findLast();
-        $this->assertPattern('(second)', $num->getTitle());
+        $this->assertPattern('(14th)', $num->getTitle());
     }
 
     function testfindAllPublished() {
         $num = Number::findAllPublished();
-        $this->assertEqual(2, count($num));
+        $this->assertEqual(14, count($num));
     }
 
     function testfindAll() {
         $num = Number::findAll();
-        $this->assertEqual(3, count($num));
+        $this->assertEqual(15, count($num));
     }
 
     function testfindAllOrderedByIndexNumber() {
         $num = Number::findAllOrderedByIndexNumber();
-        $this->assertEqual(3, count($num));
-        $this->assertPattern('(third)', $num[0]->getTitle());
+        $this->assertEqual(15, count($num));
+        $this->assertPattern('(15)', $num[0]->getTitle());
     }
 
     function testfindArticles() {
         $num = Number::findById(1);
         $arts = $num->articles();
-        $this->assertEqual(3, count($arts));
+        $this->assertEqual(15, count($arts));
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
     function testfindArticlesPublished() {
         $num = Number::findById(1);
         $arts = $num->articlesPublished();
-        $this->assertEqual(2, count($arts));
+        $this->assertEqual(14, count($arts));
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
@@ -95,7 +95,7 @@ class NumberTests extends UnitTestCase {
         $newNum = new Number(Number::NEW_NUMBER, '4', '0', 'Number four', 'Subtitle four', 'summary four', '1', '', '', '', '');
         $newNum->save();
         $num = Number::findAll();
-        $this->assertEqual(4, count($num));
+        $this->assertEqual(16, count($num));
     }
 
     function testUpdate() {
@@ -110,7 +110,7 @@ class NumberTests extends UnitTestCase {
         $num = Number::findById(1);
         $num->delete();
         $num = Number::findAll();
-        $this->assertEqual(2, count($num));
+        $this->assertEqual(14, count($num));
     }
 }
 

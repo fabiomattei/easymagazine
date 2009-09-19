@@ -412,7 +412,7 @@ class Article {
 
     public function delete() {
         $this->deleteImg();
-        $tables = array("articles" => TBPREFIX."articles");
+        $tables = array("articles" => TBPREFIX."articles", "users_articles" => TBPREFIX."users_articles");
         try {
             DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
             if (count($this->users()) > 0) {
