@@ -24,13 +24,18 @@ $dbuser = $_POST['username'];
 $dbpassword = $_POST['password'];
 $dbhost = $_POST['dbhost'];
 $tbprefix = $_POST['tbprefix'];
-$folder = $_POST['folder'];
+
+// Calculating the sub folder
+$path = $_SERVER['PHP_SELF'];
+$position = strpos($path, 'installation');
+$folder = substr($path, 0, $position);
 
 //Check for valid mysql connection
-$conn = mysql_connect($dbhost, $dbuser, $dbpassword);
-if (! $conn || ! is_resource($conn)) {
+$conn = @mysql_connect($dbhost, $dbuser, $dbpassword);
+if (!$conn || !is_resource($conn)) {
     header('Location: index.php?error=1');
 }
+@mysql_close($conn);
 
 ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder);
 

@@ -30,9 +30,6 @@ class ConfigWriter {
 
         ConfigWriter::write($handle, '<?PHP ');
 
-        if ($folder == '') $folder = '/';
-        else $folder = '/'.$folder.'/';
-
         $toWrite = ' define(\'FOLDER\', \''.$folder.'\'); ';
         ConfigWriter::write($handle, $toWrite);
         $toWrite = ' define(\'DB_NAME\', \''.$dbName.'\'); ';

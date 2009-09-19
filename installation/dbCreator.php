@@ -245,7 +245,7 @@ class DbCreator {
         return $result;
     }
 
-    public function createCategories() {
+    public function createTableCategories() {
         $cmd = "CREATE TABLE ".TBPREFIX."categories (
             id int(11) NOT NULL auto_increment,
             name varchar(255),
@@ -259,7 +259,7 @@ class DbCreator {
         return $result;
     }
 
-    public function populateCategories() {
+    public function populateTableCategories() {
         $cmd = "insert into ".TBPREFIX."categories (name, description, published, indexnumber, created, updated) values
             ('News', 'News Articles', 1, 1, '2009-08-06', '2009-08-06')";
         $result = mysql_query($cmd, $this->connection);
@@ -269,7 +269,7 @@ class DbCreator {
         return $result;
     }
 
-    public function dropCategories() {
+    public function dropTableCategories() {
         $cmd="DROP TABLE IF EXISTS ".TBPREFIX."categories;";
         $result = mysql_query($cmd, $this->connection);
         return $result;

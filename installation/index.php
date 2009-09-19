@@ -40,6 +40,7 @@
                 <form action="createconfig.php" method="post" id="login">
                     In order to install the application please put rights 0777 to the folders:
                     <b>easymagazine/system</b> (and all contained files)<br />
+                    <b>easymagazine/contents/epug</b><br />
                     <b>easymagazine/contents/img</b><br /><br />
                     Then fill the form:
                     <table>
@@ -62,10 +63,6 @@
                         <tr>
                             <td>MySql DB Password:</td>
                             <td><input type="password" name="password" value="" /></td>
-                        </tr>
-                        <tr>
-                            <td>SubFolder: <br />(Ex. in www.mydomain.org/mymag)<br />folder is mymag</td>
-                            <td valign="top"><input type="text" name="folder" value="" /></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Ok" /></td>
