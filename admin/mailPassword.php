@@ -34,7 +34,7 @@ if ($usr->getName() != '') {
     $newpassword = $usr->setNewRandomPassword();
     mail($email, 'New Password', 'Your new passwrod is: '.$newpassword);
 } else {
-    header("Location: loginError.php");
+    header('Location: loginError.php');
 }
 
 ?>

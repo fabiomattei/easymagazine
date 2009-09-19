@@ -26,6 +26,12 @@ $dbhost = $_POST['dbhost'];
 $tbprefix = $_POST['tbprefix'];
 $folder = $_POST['folder'];
 
+//Check for valid mysql connection
+$conn = mysql_connect($dbhost, $dbuser, $dbpassword);
+if (! $conn || ! is_resource($conn)) {
+    header('Location: index.php?error=1');
+}
+
 ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder);
 
 ?>
@@ -52,13 +58,13 @@ ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbp
                 <br /><br />
                 <CODE>
                     &lt;? <br />
-                     define('FOLDER', '<?=$folder?>'); <br />
-                     define('DB_NAME', '<?=$dbName?>');<br />
-                     define('DB_USER', '<?=$dbuser?>');<br />
-                     define('DB_PASSWORD', '<?=$dbpassword?>');<br />
-                     define('DB_HOST', '<?=$dbhost?>');<br />
-                     define('TBPREFIX', '<?=$tbprefix?>');<br />
-                     ?&gt;<br />
+                    define('FOLDER', '<?=$folder?>'); <br />
+                    define('DB_NAME', '<?=$dbName?>');<br />
+                    define('DB_USER', '<?=$dbuser?>');<br />
+                    define('DB_PASSWORD', '<?=$dbpassword?>');<br />
+                    define('DB_HOST', '<?=$dbhost?>');<br />
+                    define('TBPREFIX', '<?=$tbprefix?>');<br />
+                    ?&gt;<br />
                 </CODE>
                 <br />
                 After that <a href="createdb.php">click here and create the database</a>
