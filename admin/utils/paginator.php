@@ -98,14 +98,14 @@ class Paginator {
      * @param string $tag Text string to be displayed as the link. Defaults to 'First'
      * @return string
      */
-    public function renderFirst($tag = 'First') {
+    public function renderFirst($pagelink, $tag = 'First') {
         if ($this->total_rows == 0)
             return FALSE;
 
         if ($this->page == 1) {
             return "$tag ";
         } else {
-            return '<a href="'.URIMaker::result().'&page=1' . $this->append . '">' . $tag . '</a> ';
+            return '<a href="'.$pagelink.'&page=1' . $this->append . '">' . $tag . '</a> ';
         }
     }
 
@@ -116,14 +116,14 @@ class Paginator {
      * @param string $tag Text string to be displayed as the link. Defaults to 'Last'
      * @return string
      */
-    function renderLast($tag = 'Last') {
+    function renderLast($pagelink, $tag = 'Last') {
         if ($this->total_rows == 0)
             return FALSE;
 
         if ($this->page == $this->max_pages) {
             return $tag;
         } else {
-            return ' <a href="'.URIMaker::result().'&page=' . $this->max_pages . '&' . $this->append . '">' . $tag . '</a>';
+            return ' <a href="'.$pagelink.'&page=' . $this->max_pages . '&' . $this->append . '">' . $tag . '</a>';
         }
     }
 
@@ -134,12 +134,12 @@ class Paginator {
      * @param string $tag Text string to be displayed as the link. Defaults to '>>'
      * @return string
      */
-    function renderNext($tag = '&gt;&gt;') {
+    function renderNext($pagelink, $tag = '&gt;&gt;') {
         if ($this->total_rows == 0)
             return FALSE;
 
         if ($this->page < $this->max_pages) {
-            return '<a href="'.URIMaker::result().'&page=' . ($this->page + 1) . '&' . $this->append . '">' . $tag . '</a>';
+            return '<a href="'.$pagelink.'&page=' . ($this->page + 1) . '&' . $this->append . '">' . $tag . '</a>';
         } else {
             return $tag;
         }
@@ -152,12 +152,12 @@ class Paginator {
      * @param string $tag Text string to be displayed as the link. Defaults to '<<'
      * @return string
      */
-    function renderPrev($tag = '&lt;&lt;') {
+    function renderPrev($pagelink, $tag = '&lt;&lt;') {
         if ($this->total_rows == 0)
             return FALSE;
 
         if ($this->page > 1) {
-            return ' <a href="'.URIMaker::result().'&page=' . ($this->page - 1) . '&' . $this->append . '">' . $tag . '</a>';
+            return ' <a href="'.$pagelink.'&page=' . ($this->page - 1) . '&' . $this->append . '">' . $tag . '</a>';
         } else {
             return " $tag";
         }
@@ -169,7 +169,7 @@ class Paginator {
      * @access public
      * @return string
      */
-    function renderNav($prefix = '<span class="page_link">', $suffix = '</span>') {
+    function renderNav($pagelink, $prefix = '<span class="page_link">', $suffix = '</span>') {
         if ($this->total_rows == 0)
             return FALSE;
 
@@ -189,7 +189,7 @@ class Paginator {
             if ($i == $this->page) {
                 $links .= $prefix . " $i " . $suffix;
             } else {
-                $links .= ' ' . $prefix . '<a href="'.URIMaker::result().'?page=' . $i . '&' . $this->append . '">' . $i . '</a>' . $suffix . ' ';
+                $links .= ' ' . $prefix . '<a href="'.$pagelink.'&page=' . $i . '&' . $this->append . '">' . $i . '</a>' . $suffix . ' ';
             }
         }
 
@@ -202,8 +202,8 @@ class Paginator {
      * @access public
      * @return string
      */
-    public function renderFullNav() {
-        return $this->renderFirst() . '&nbsp;' . $this->renderPrev() . '&nbsp;' . $this->renderNav() . '&nbsp;' . $this->renderNext() . '&nbsp;' . $this->renderLast();
+    public function renderFullNav($pagelink) {
+        return $this->renderFirst($pagelink) . '&nbsp;' . $this->renderPrev($pagelink) . '&nbsp;' . $this->renderNav($pagelink) . '&nbsp;' . $this->renderNext($pagelink) . '&nbsp;' . $this->renderLast($pagelink);
     }
 
 }
