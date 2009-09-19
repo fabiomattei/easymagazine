@@ -37,7 +37,7 @@ class ArticlesPersonRouter extends Router {
         $arURI = $this->getArrayURI();
         $this->person = User::findById($arURI['id']);
         $this->pages = Page::findAllPublishedOrdered();
-        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->number = Number::findLastPublished();
         foreach ($this->person as $person) {

@@ -38,6 +38,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'results/';
     }
 
+    static function numberslist() {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'numberslist/';
+    }
+
     static function page($page) {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'pages/'.$page->getTitle().'/'.$page->getId();
     }

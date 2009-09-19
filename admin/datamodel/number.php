@@ -54,6 +54,7 @@ class Number {
     const SELECT_LAST = 'select * from numbers where published = 1 order by indexnumber DESC Limit 1';
     const SELECT_LAST_PUBLISHED = 'select * from numbers where published = 1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from numbers where published = 1 order by indexnumber DESC';
+    const SELECT_LASTN_PUBLISHED = 'select * from numbers where published = 1 order by indexnumber DESC Limit # ';
     const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from numbers order by indexnumber DESC';
     const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from numbers where published = 1 order by indexnumber DESC ';
@@ -164,6 +165,17 @@ class Number {
 
     public static function findLastPublished() {
         $ret = NUMBER::findOne(self::SELECT_LAST_PUBLISHED, array(), array());
+        return $ret;
+    }
+
+    /*
+     * Returns a list of last $n numbers published, the list is
+     * ordered by indexnumber.
+     *
+     * $n <int>
+     */
+    public static function findLastNPublished($n) {
+        $ret = NUMBER::findMany(self::SELECT_LASTN_PUBLISHED, array(), array($n));
         return $ret;
     }
 

@@ -38,7 +38,7 @@ class CommentsRouter extends Router {
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
         $this->number = $this->article->number();
-        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->article->getMetadescription();

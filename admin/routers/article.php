@@ -36,7 +36,7 @@ class ArticlesRouter extends Router {
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->article = Article::findById($arURI['id']);
-        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->number = $this->article->number();
         $this->pages = Page::findAllPublishedOrdered();

@@ -17,49 +17,48 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(STARTPATH.DATAMODELPATH.'/user.php');
+require_once(STARTPATH.DATAMODELPATH.'/page.php');
+
 require_once('router.php');
 
-class CategoryRouter extends Router {
+class NumberListRouter extends Router {
 
     public $pages;
-    private $number;
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
-    public $title;
+    public $number;
     public $categories;
-    public $paginator;
+    public $numberslist;
 
     function loadData() {
         $arURI = $this->getArrayURI();
-        $this->category = Category::findById($arURI['id']);
-
-        $collection = $this->category->articlesPublished();
+        $collection = Number::findAllPublishedOrderedByIndexNumber();
         $this->paginator = new Paginator($collection, 10, 5);
         if (isset($_GET['page']) && $_GET['page'] > 0){
             $page = $_GET['page'];
         } else {
             $page = 1;
         }
-        $this->articles = $this->paginator->rowsToShow($page);
-
-        $this->numbers = Number::findLastNPublished(10);
-        $this->number = Number::findLastPublished();
-        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
+        $this->numberslist = $this->paginator->rowsToShow($page);
         $this->pages = Page::findAllPublishedOrdered();
-        $this->metadescritpion = $this->category->getdescription();
-        $this->metakeywords = $this->category->getName();
-        $this->title = Magazine::getMagazineTitle().': '.$this->category->getName();
+        $this->numbers = Number::findLastNPublished(10);
+        $this->categories = Category::findAllPublishedOrderedByIndexNumber();
+        $this->number = Number::findLastPublished();
+        $this->metadescritpion = $this->numberslist[0]->getMetadescription();
+        $this->metakeywords = $this->numberslist[0]->getMetakeyword();
+        $this->title = Magazine::getMagazineTitle().': Numbers List';
     }
 
     function applyTemplate() {
-        $this->getRemote()->executeCommandBeforeNumber();
-        if (file_exists(TEMPLATEPATH.'/category.php')) {
-            include (TEMPLATEPATH.'/category.php');
+        $this->getRemote()->executeCommandBeforeArticle();
+        if (file_exists(TEMPLATEPATH.'/numberslist.php')) {
+            include (TEMPLATEPATH.'/numberslist.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
                 include (TEMPLATEPATH.'/index.php');
             }
-        $this->getRemote()->executeCommandAfterNumber();
+        $this->getRemote()->executeCommandAfterArticle();
     }
 
 }

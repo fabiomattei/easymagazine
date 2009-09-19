@@ -34,7 +34,7 @@ class IndexRouter extends Router {
 
     function loadData(){
         $this->number = Number::findLastPublished();
-        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->number->getMetadescription();

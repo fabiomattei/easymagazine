@@ -35,17 +35,18 @@ class UriOptimized extends URI {
         $newArray = explode('/', $this->uri);
 
         switch ($newArray[0]) {
-            case 'numbers': $router = 'number'; $id = $newArray[2]; break;
-            case 'category': $router = 'category'; $id = $newArray[2]; break;
-            case 'articles': $router = 'article'; $id = $newArray[2]; break;
-            case 'comments': $router = 'comments'; $id = $newArray[2]; break;
-            case 'results': $router = 'results'; $id = 'not required'; break;
-            case 'pages': $router = 'page'; $id = $newArray[2]; break;
-            case 'articlesperson': $router = 'articlesperson'; $id = $newArray[2]; break;
-            case 'people': $router = 'people'; $id = 'not required'; break;
-            default: $router = 'index'; $id = 'not required';
+            case 'numbers':         $router = 'number'; $id = $newArray[2]; break;
+            case 'category':        $router = 'category'; $id = $newArray[2]; break;
+            case 'articles':        $router = 'article'; $id = $newArray[2]; break;
+            case 'comments':        $router = 'comments'; $id = $newArray[2]; break;
+            case 'results':         $router = 'results'; $id = 'not required'; break;
+            case 'numberslist':     $router = 'numberslist'; $id = 'not required'; break;
+            case 'pages':           $router = 'page'; $id = $newArray[2]; break;
+            case 'articlesperson':  $router = 'articlesperson'; $id = $newArray[2]; break;
+            case 'people':          $router = 'people'; $id = 'not required'; break;
+            default:                $router = 'index'; $id = 'not required';
         }
-        
+
         $this->arrayURI = array(
             'Router' => $router,
             'id' => $id

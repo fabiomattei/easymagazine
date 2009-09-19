@@ -34,7 +34,7 @@ class PagesRouter extends Router {
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->page = Page::findById($arURI['id']);
-        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->number = Number::findLastPublished();
         $this->pages = Page::findAllPublishedOrdered();

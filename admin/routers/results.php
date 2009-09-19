@@ -38,7 +38,7 @@ class ResultsRouter extends Router {
     function loadData() {
         $arURI = $this->getArrayURI();
         $this->number = Number::findLastPublished();
-        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
 

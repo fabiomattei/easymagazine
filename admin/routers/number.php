@@ -32,7 +32,7 @@ class NumberRouter extends Router {
     function loadData(){
         $arURI = $this->getArrayURI();
         $this->number = Number::findById($arURI['id']);
-        $this->numbers = Number::findAllPublishedOrderedByIndexNumber();
+        $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
         $this->metadescritpion = $this->number->getMetadescription();

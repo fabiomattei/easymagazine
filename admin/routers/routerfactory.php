@@ -23,6 +23,7 @@ require_once('page.php');
 require_once('category.php');
 require_once('article.php');
 require_once('results.php');
+require_once('numberslist.php');
 require_once('number.php');
 require_once('people.php');
 require_once('articlesperson.php');
@@ -39,6 +40,8 @@ class RouterFactory {
         if ($request['Router'] == "results") $out = new ResultsRouter($request);
 
         if ($request['Router'] == "page") $out = new PagesRouter($request);
+
+        if ($request['Router'] == "numberslist") $out = new NumberListRouter($request);
 
         if ($request['Router'] == "category") $out = new CategoryRouter($request);
 
