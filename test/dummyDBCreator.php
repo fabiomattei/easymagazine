@@ -65,7 +65,55 @@ class DbCreator {
            'Summary of my second number', 1, '', '', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
-           values (3, 3, 0, 'My third number', 'Subtitle to my third number',
+           values (3, 3, 1, 'My third number', 'Subtitle to my third number',
+           'Summary of my third number', 0, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (4, 4, 1, 'My 4th number', 'Subtitle to my first number',
+           'Summary of my first number', 1, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (5, 5, 1, 'My 5th number', 'Subtitle to my second number',
+           'Summary of my second number', 1, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (6, 6, 1, 'My 6th number', 'Subtitle to my third number',
+           'Summary of my third number', 0, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (7, 7, 1, 'My 7th number', 'Subtitle to my first number',
+           'Summary of my first number', 1, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (8, 8, 1, 'My 8th number', 'Subtitle to my second number',
+           'Summary of my second number', 1, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (9, 9, 1, 'My 9th number', 'Subtitle to my third number',
+           'Summary of my third number', 0, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (10, 10, 1, 'My 10 number', 'Subtitle to my first number',
+           'Summary of my first number', 1, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (11, 11, 1, 'My 11 number', 'Subtitle to my second number',
+           'Summary of my second number', 1, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (12, 12, 1, 'My 12 number', 'Subtitle to my third number',
+           'Summary of my third number', 0, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (13, 13, 1, 'My 13 number', 'Subtitle to my first number',
+           'Summary of my first number', 1, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (14, 14, 1, 'My 14 number', 'Subtitle to my second number',
+           'Summary of my second number', 1, '', '', '', '', NOW(), NOW())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgdescription, created, updated)
+           values (15, 15, 0, 'My 15 number', 'Subtitle to my third number',
            'Summary of my third number', 0, '', '', '', '', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
@@ -114,6 +162,66 @@ class DbCreator {
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
             (3, 1, 2, 3, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
+            'Body of my third article', 1, 'tag of my third article',
+            'metadescription of my third article', 'metakeyword of my third article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (4, 1, 1, 4, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
+            'Body of my first article', 1, 'tag of my first article',
+            'metadescription of my first article', 'metakeyword of my first article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (5, 1, 1, 5, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
+            'Body of my second article', 1, 'tag of my second article',
+            'metadescription of my second article', 'metakeyword of my second article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (6, 1, 1, 6, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
+            'Body of my third article', 1, 'tag of my third article',
+            'metadescription of my third article', 'metakeyword of my third article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (7, 1, 1, 7, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
+            'Body of my first article', 1, 'tag of my first article',
+            'metadescription of my first article', 'metakeyword of my first article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (8, 1, 1, 8, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
+            'Body of my second article', 1, 'tag of my second article',
+            'metadescription of my second article', 'metakeyword of my second article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (9, 1, 1, 9, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
+            'Body of my third article', 1, 'tag of my third article',
+            'metadescription of my third article', 'metakeyword of my third article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (10, 1, 1, 10, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
+            'Body of my first article', 1, 'tag of my first article',
+            'metadescription of my first article', 'metakeyword of my first article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (11, 1, 1, 11, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
+            'Body of my second article', 1, 'tag of my second article',
+            'metadescription of my second article', 'metakeyword of my second article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (12, 1, 1, 12, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
+            'Body of my third article', 1, 'tag of my third article',
+            'metadescription of my third article', 'metakeyword of my third article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (13, 1, 1, 13, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
+            'Body of my first article', 1, 'tag of my first article',
+            'metadescription of my first article', 'metakeyword of my first article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (14, 1, 1, 14, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
+            'Body of my second article', 1, 'tag of my second article',
+            'metadescription of my second article', 'metakeyword of my second article', '', '', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgdescription, created, updated) values
+            (15, 1, 1, 15, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
             'Body of my third article', 1, 'tag of my third article',
             'metadescription of my third article', 'metakeyword of my third article', '', '', now(), now())";
         $result = mysql_query($cmd, $this->connection);
@@ -552,7 +660,7 @@ class DbCreator {
             } else {
                 $out .= "Table Relation Options NOT dropped<BR>";;
             }
-            
+
         } else {
             $out = "Error in the connection <br>".mysql_errno().": ".mysql_error();
         }
