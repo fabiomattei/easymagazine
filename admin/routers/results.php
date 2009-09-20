@@ -42,10 +42,7 @@ class ResultsRouter extends Router {
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->pages = Page::findAllPublishedOrdered();
 
-        $cont = 0;
         if (isset($_POST['s']) && $_POST['s']!='') {
-            $cont++;
-
             $collection = Article::findInAllTextFieldsInPublishedArticles($_POST['s']);
             $_SESSION['paginator'] = new Paginator($collection, 10, 5);
 
@@ -56,8 +53,7 @@ class ResultsRouter extends Router {
             $this->metakeywords = 'Results for: '.$_POST['s'];
             $resultsNumber = count($this->articles);
         } else {
-            if (isset($_SESSION['paginator'])) {
-                $cont++;
+            if (isset($_SESSION['paginator']) && isset($_GET['page'])) {
                 $this->articles = $_SESSION['paginator']->rowsToShow($_GET['page']);
                 $this->title = 'Results for: '.$_SESSION['s'];
                 $this->metadescritpion = 'Results for: '.$_SESSION['s'];
@@ -73,11 +69,8 @@ class ResultsRouter extends Router {
         }
 
 
-        if ($cont == 1 && $resultsNumber > 0) {
+        if ($resultsNumber > 0) {
             $this->advice = 'Results:';
-        }
-        if ($cont == 0) {
-            $this->advice = 'What I\'m looking for?';
         }
         if ($resultsNumber == 0) {
             $this->advice = 'No Article matches with your search criteria';

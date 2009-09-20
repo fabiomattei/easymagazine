@@ -32,9 +32,8 @@
         <li id="Themes">
             <h2>Admin</h2>
             <ul>
-                <li>login logout</li>
-                <li><a href="http://localhost:8888/easymagazine/admin">hello</a></li>
-                <li><a href="http://validator.w3.org/check?uri=referer">hello</a></li>
+                <li><a href="<?= URIMaker::loginPage() ?>">Login</a></li>
+                <li><a href="http://www.easymagazine.org/">Easy Magazine</a></li>
             </ul>
         </li>
 

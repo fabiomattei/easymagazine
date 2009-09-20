@@ -58,6 +58,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER;
     }
 
+    static function loginPage() {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'admin/login.php';
+    }
+
     static function fromBasePath($path) {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.$path;
     }
