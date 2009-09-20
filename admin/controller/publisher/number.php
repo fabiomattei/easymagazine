@@ -23,7 +23,7 @@ require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
-require_once(STARTPATH.UTILSPATH.'epugcreator.php');
+require_once(STARTPATH.UTILSPATH.'epubcreator.php');
 
 session_start();
 
@@ -120,8 +120,8 @@ function epub($id) {
     $numb = Number::findById($id);
     $outAction['numb'] = $numb;
 
-    $epugcreator = new ePugCreator();
-    $epugcreator->writeEPugForNumber($numb);
+    $epugcreator = new ePugCreator($numb);
+    $epugcreator->writeEPubForNumber();
 
     $outAction['info'] = 'Epub file created for number <i>'.$numb->getTitle().'</i>';
 

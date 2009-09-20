@@ -26,18 +26,20 @@ class ePugCreator {
     private $epubFolderName;
     private $number;
 
+    public function __construct($number) {
+        $this->number = $number;
+        $this->epubfilename = STARTPATH.EPUBSPATH.'number_'.$number->getId().'.epub';
+        $this->epubFolderName = STARTPATH.EPUBSPATH.'number_'.$number->getId().'/';
+    }
+
     /**
      * This method handles the complete publication of an epub file related
      * to a number.
      *
      * @param Number $number
      */
-    public function writeEPugForNumber($number) {
-        $this->number = $number;
-        $this->epubfilename = STARTPATH.EPUBSPATH.'number_'.$number->getId().'.epub';
-        $this->epubFolderName = STARTPATH.EPUBSPATH.'number_'.$number->getId().'/';
-
-        $this->cleanNumber($number);
+    public function writeEPubForNumber() {
+        $this->cleanNumber($this->number);
 
         $this->createFolder($this->epubFolderName);
         $this->createFolder($this->epubFolderName.'META-INF/');
@@ -55,6 +57,26 @@ class ePugCreator {
         $this->zipFolder($this->epubFolderName);
 
         $this->deleteFolder($this->epubFolderName);
+    }
+
+    /**
+     * This method checks if there is an epub pubblication for
+     * the number
+     *
+     * @param Number $number
+     */
+    public function fileEPubExistsForNumber($number) {
+        return file_exists($this->epubfilename);
+    }
+
+    /**
+     * This method returns the path of the Epub pubblication
+     * of the number
+     *
+     * @param Number $number
+     */
+    public function pathFileEPugForNumber($number) {
+        return $this->epubfilename;
     }
 
     /**

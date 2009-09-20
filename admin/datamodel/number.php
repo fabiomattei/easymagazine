@@ -22,6 +22,7 @@ require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.FILTERPATH.'numberfilterremote.php');
 require_once(STARTPATH.UTILSPATH.'imagefiles.php');
 require_once(STARTPATH.UTILSPATH.'pagination.php');
+require_once(STARTPATH.UTILSPATH.'epubcreator.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.'lib/textile2/classTextile.php');
 
@@ -405,6 +406,16 @@ class Number {
 
     public function imagePath() {
         return ImageFiles::filepath($this->created, $this->imgfilename);
+    }
+
+    public function epubExists() {
+        $epugcreator = new ePugCreator($numb);
+        return $epugcreator->fileEPubExistsForNumber();
+    }
+
+    public function epubPath() {
+        $epugcreator = new ePugCreator($numb);
+        return $epugcreator->pathFileEPugForNumber();
     }
 
     public function getMaxIndexNumber() {
