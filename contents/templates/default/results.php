@@ -4,9 +4,11 @@
 
 <div class="post">
 
-    <h1><?= $this->number->getTitle() ?></h1>
+    <? if (isset($this->advice)) :?>
+        <p><?= $this->advice ?></p>
+    <? endif; ?>
 
-    <? foreach($this->number->articlesPublished()  as $article) { ?>
+    <? foreach($this->articles  as $article) { ?>
 
     <h2>
         <? echo '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
@@ -36,4 +38,7 @@
 
     <? } ?>
 
+    <p>
+        <?= $_SESSION['paginator']->renderFullNav(URIMaker::result())  ?>
+    </p>
 </div>

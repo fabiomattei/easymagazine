@@ -1,6 +1,6 @@
 <div id="footer">
 
-    <p>&copy; 2009 Powered by <a href="http://www.easymagazine.org/">Easy Magazine</a></p>
+    <p><?= Magazine::getMagazinePublisher()?> <?= Magazine::getMagazineRights()?> Powered by <a href="http://www.easymagazine.org/">Easy Magazine</a></p>
 
 </div>
 

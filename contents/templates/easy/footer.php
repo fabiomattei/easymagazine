@@ -1,1 +1,1 @@
-<? // empty ?>
+<?= Magazine::getMagazinePublisher()?> <?= Magazine::getMagazineRights()?> Powered by <a href="http://www.easymagazine.org/">Easy Magazine</a>
