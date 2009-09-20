@@ -3,10 +3,9 @@
     <head profile="http://gmpg.org/xfn/11">
 
         <meta name="keywords" content="<?= $this->metakeywords; ?>" />
-
         <meta name="description" content="<?= $this->metadescritpion; ?>" />
 
-        <title>My magazine</title>
+        <title><?= $this->title?></title>
 
         <link rel="stylesheet" href="<?= URIMaker::fromBasePath('contents/templates/easy/style.css') ?>" type="text/css" media="screen" />
 
@@ -24,6 +23,7 @@
             <ul>
                 <li><a href="<?= URIMaker::fromBasePath('index.php') ?>">Home</a></li>
                 <li><a href="<?= URIMaker::people() ?>">People</a></li>
+                <li><a href="<?= URIMaker::numberslist() ?>">Numbers</a></li>
                 <?
                 foreach ($this->pages as $page) {
                     echo '<li><a href="'.URIMaker::page($page).'">'.$page->getTitle().'</a></li>';
