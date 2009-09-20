@@ -409,12 +409,12 @@ class Number {
     }
 
     public function epubExists() {
-        $epugcreator = new ePugCreator($numb);
+        $epugcreator = new ePugCreator($this);
         return $epugcreator->fileEPubExistsForNumber();
     }
 
     public function epubPath() {
-        $epugcreator = new ePugCreator($numb);
+        $epugcreator = new ePugCreator($this);
         return $epugcreator->pathFileEPugForNumber();
     }
 

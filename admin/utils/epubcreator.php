@@ -65,7 +65,7 @@ class ePugCreator {
      *
      * @param Number $number
      */
-    public function fileEPubExistsForNumber($number) {
+    public function fileEPubExistsForNumber() {
         return file_exists($this->epubfilename);
     }
 
@@ -75,7 +75,7 @@ class ePugCreator {
      *
      * @param Number $number
      */
-    public function pathFileEPugForNumber($number) {
+    public function pathFileEPugForNumber() {
         return $this->epubfilename;
     }
 
