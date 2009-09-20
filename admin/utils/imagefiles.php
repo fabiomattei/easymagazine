@@ -69,6 +69,36 @@ class ImageFiles {
         return $path.$year.'/'.$month.'/'.$day;
     }
 
+    /**
+     * Finds the extention of a file
+     *
+     * @param <String> $filename
+     * @return <String>
+     */
+    public static function findexts($filename) {
+        $filename = strtolower($filename) ;
+        $exts = split("[/\\.]", $filename) ;
+        $n = count($exts)-1;
+        $exts = $exts[$n];
+        return $exts;
+    }
+
+    /**
+     * Returns the right mime tipe for an image discovering
+     * the type from the name
+     *
+     * @param <type> $filename
+     * @return <type>
+     */
+    public static function mimetype($filename) {
+        $type = ImageFiles::findexts($filename);
+        $out = '';
+        if ($type == 'jpg' || $type == 'jpeg') $out = 'image/jpeg';
+        if ($type == 'gif') $out = 'image/gif';
+        if ($type == 'png') $out = 'image/png';
+        return $out;
+    }
+
 }
 
 ?>

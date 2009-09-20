@@ -176,7 +176,7 @@ class ePugCreator {
             ImageFiles::checkAndCreatePathFromPath($this->number->getCreated(), $this->epubFolderName.'images/');
             $link = $this->epubFolderName.'images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename());
             copy($target, $link);
-            $text.='<item id="imgn'.$this->number->getId().'" href="images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename()).'.jpg" media-type="image/jpeg"/>';
+            $text.='<item id="imgn'.$this->number->getId().'" href="images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename()).'.jpg" media-type="'.ImageFiles::mimetype($this->number->imagePath()).'"/>';
         }
 
         foreach ($this->number->articles() as $article) {
@@ -187,7 +187,7 @@ class ePugCreator {
                 ImageFiles::checkAndCreatePathFromPath($article->getCreated(), $this->epubFolderName.'images/');
                 $link = $this->epubFolderName.'images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename());
                 copy($target, $link);
-                $text.='<item id="img'.$article->getId().'" href="images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename()).'.jpg" media-type="image/jpeg"/>';
+                $text.='<item id="img'.$article->getId().'" href="images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename()).'.jpg" media-type="'.ImageFiles::mimetype($this->number->imagePath()).'"/>';
             }
         }
 
