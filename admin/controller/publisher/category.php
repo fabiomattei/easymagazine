@@ -23,7 +23,6 @@ require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'category.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
-require_once(STARTPATH.UTILSPATH.'epugcreator.php');
 
 session_start();
 

@@ -173,9 +173,10 @@ class ePugCreator {
 
         if ($this->number->imageExists()) {
             $target = $this->number->imagePath();
-            $link = $this->epubFolderName.'images/number'.$this->number->getId().'.jpg';
+            ImageFiles::checkAndCreatePathFromPath($this->number->getCreated(), $this->epubFolderName.'images/');
+            $link = $this->epubFolderName.'images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename());
             copy($target, $link);
-            $text.='<item id="imgn'.$this->number->getId().'" href="images/number'.$this->number->getId().'.jpg" media-type="image/jpeg"/>';
+            $text.='<item id="imgn'.$this->number->getId().'" href="images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename()).'.jpg" media-type="image/jpeg"/>';
         }
 
         foreach ($this->number->articles() as $article) {
@@ -183,9 +184,10 @@ class ePugCreator {
             ';
             if ($article->imageExists()) {
                 $target = $article->imagePath();
-                $link = $this->epubFolderName.'images/article'.$article->getId().'.jpg';
+                ImageFiles::checkAndCreatePathFromPath($article->getCreated(), $this->epubFolderName.'images/');
+                $link = $this->epubFolderName.'images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename());
                 copy($target, $link);
-                $text.='<item id="img'.$article->getId().'" href="images/article'.$article->getId().'.jpg" media-type="image/jpeg"/>';
+                $text.='<item id="img'.$article->getId().'" href="images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename()).'.jpg" media-type="image/jpeg"/>';
             }
         }
 
@@ -230,7 +232,7 @@ class ePugCreator {
     <p class="CENTER">
       ';
         if ($this->number->imageExists()) {
-            $text.='<img src="images/number'.$this->number->getId().'.jpg" />';
+            $text.='<img src="images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename()).'" />';
         }
         $text.='
     </p>
@@ -410,7 +412,7 @@ $text .= '
 	     <h2>'.$article->getTitle().'</h2>
 	</div>';
             if ($article->imageExists()) {
-                $text.='<img src="images/article'.$article->getId().'.jpg" />';
+                $text.='<img src="images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename()).'" />';
             }
             $text.='<div>'.$article->getSummary().'<br /><br />'.$article->getBody().'
 </div>

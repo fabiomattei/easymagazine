@@ -27,45 +27,46 @@ class ImageFiles {
     }
 
     public static function deletefile($date, $filename) {
-        $year = substr($date, 0, 4);
-        $month = substr($date, 5, 2);
-        $day = substr($date, 8, 2);
-        $completepath = STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
-        if (file_exists($completepath) && $filename != '') {
-            unlink($completepath);
+        if (file_exists(ImageFiles::filepath($date, $filename)) && $filename != '') {
+            unlink(ImageFiles::filepath($date, $filename));
         }
     }
 
     public static function fileexists($date, $filename) {
-        $year = substr($date, 0, 4);
-        $month = substr($date, 5, 2);
-        $day = substr($date, 8, 2);
-        $completepath = STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
-        return file_exists($completepath);
+        return file_exists(ImageFiles::filepath($date, $filename));
     }
 
     public static function filepath($date, $filename) {
-        $year = substr($date, 0, 4);
-        $month = substr($date, 5, 2);
-        $day = substr($date, 8, 2);
-        $completepath = STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day.'/'.$filename;
+        $completepath = STARTPATH.'contents/img/'.ImageFiles::fileShortPath($date, $filename);
         return $completepath;
     }
 
-    public static function checkAndCreatePath($date) {
+    public static function fileShortPath($date, $filename) {
         $year = substr($date, 0, 4);
         $month = substr($date, 5, 2);
         $day = substr($date, 8, 2);
-        if (!file_exists(STARTPATH.'contents/img/'.$year)) { 
-            mkdir(STARTPATH.'contents/img/'.$year);
+        $shortPath = $year.'/'.$month.'/'.$day.'/'.$filename;
+        return $shortPath;
+    }
+
+    public static function checkAndCreatePath($date) {
+        return ImageFiles::checkAndCreatePathFromPath($date, STARTPATH.'contents/img/');
+    }
+
+    public static function checkAndCreatePathFromPath($date, $path) {
+        $year = substr($date, 0, 4);
+        $month = substr($date, 5, 2);
+        $day = substr($date, 8, 2);
+        if (!file_exists($path.$year)) {
+            mkdir($path.$year);
         }
-        if (!file_exists(STARTPATH.'contents/img/'.$year.'/'.$month)) {
-            mkdir(STARTPATH.'contents/img/'.$year.'/'.$month);
+        if (!file_exists($path.$year.'/'.$month)) {
+            mkdir($path.$year.'/'.$month);
         }
-        if (!file_exists(STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day)) {
-            mkdir(STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day);
+        if (!file_exists($path.$year.'/'.$month.'/'.$day)) {
+            mkdir($path.$year.'/'.$month.'/'.$day);
         }
-        return STARTPATH.'contents/img/'.$year.'/'.$month.'/'.$day;
+        return $path.$year.'/'.$month.'/'.$day;
     }
 
 }
