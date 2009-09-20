@@ -4,7 +4,7 @@
 
     <div id="contentmiddle">
         <h1>All articles by <?= $this->person->getName() ?></h1><br />
-        <? foreach($this->person->articles() as $article) { ?>
+        <? foreach($this->articles as $article) { ?>
         <div class="contenttitle">
             <h1><a href="<?=URIMaker::article($article)?>" rel="bookmark"><?= $article->getTitle() ?></a></h1>
             <p>
@@ -24,6 +24,9 @@
             </p>
         </div>
         <? } ?>
+        <div class="contenttitle">
+            <?= $this->paginator->renderFullNav(URIMaker::articlesperson($this->person))  ?>
+        </div>
     </div>
 
     <?php include("r_sidebar.php");?>

@@ -44,6 +44,16 @@ class ArticlesPersonRouter extends Router {
             $this->metadescritpion .= $person->getName().', ';
             $this->metakeywords .= $person->getName().', ';
         }
+
+        $collection = $this->person->articles();
+        $this->paginator = new Paginator($collection, 10, 5);
+        if (isset($_GET['page']) && $_GET['page'] > 0){
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+        $this->articles = $this->paginator->rowsToShow($page);
+
         $this->metadescritpion = substr($this->metadescritpion, 0, strlen($this->metadescritpion)-2);
         $this->metakeywords = substr($this->metakeywords, 0, strlen($this->metakeywords)-2);
         $this->title = Magazine::getMagazineTitle().': '.$this->person->getName();

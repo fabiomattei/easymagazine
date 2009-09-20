@@ -6,7 +6,7 @@
 
     <h1><?= $this->person->getName() ?></h1>
 
-    <? foreach($this->person->articles()  as $article) { ?>
+    <? foreach($this->articles  as $article) { ?>
 
     <h2>
         <? echo '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
@@ -35,5 +35,9 @@
     </p>
 
     <? } ?>
+
+    <p>
+        <?= $this->paginator->renderFullNav(URIMaker::articlesperson($this->person))  ?>
+    </p>
 
 </div>
