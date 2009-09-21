@@ -23,7 +23,6 @@ define('ROUTERPATH', 'admin/routers/');
 define('FILTERPATH', 'admin/filters/');
 define('CONTROLLERPATH', 'admin/controller/');
 define('DATAMODELPATH', 'admin/datamodel/');
-define('SESSIONPATH', 'admin/sessionmanager/');
 define('URIPATH', 'admin/uri/');
 define('UTILSPATH', 'admin/utils/');
 define('EPUBSPATH', 'contents/epubs/');

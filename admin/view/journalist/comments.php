@@ -45,7 +45,7 @@
 				<li><a href="comment.php">View all comments</a></li>
 				<li class="last"><a href="comment.php?list=byuser">View comments to my articles</a></li>
 			</ul>
-			<a href="#" class="link">View the website</a>
+			<a href="../../index.php" class="link">View the website</a>
 		</div>
 		<div id="center-column">
                     <?

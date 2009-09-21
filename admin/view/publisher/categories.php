@@ -52,7 +52,7 @@
                         <li><a href="category.php?list=showPublished">Show Published</a></li>
                         <li class="last"><a href="category.php?list=showNotPublished">Show Not Published</a></li>
                     </ul>
-                    <a href="#" class="link">View the website</a>
+                    <a href="../../index.php" class="link">View the website</a>
                 </div>
                 <div id="center-column">
                     <?

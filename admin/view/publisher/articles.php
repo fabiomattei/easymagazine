@@ -51,7 +51,7 @@
                         <li><a href="article.php">Show All</a></li>
                         <li class="last"><a href="article.php?list=byuser">Show My Articles</a></li>
                     </ul>
-                    <a href="#" class="link">View the website</a>
+                    <a href="../../index.php" class="link">View the website</a>
                 </div>
                 <div id="center-column">
                     <?

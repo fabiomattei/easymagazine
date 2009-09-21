@@ -18,7 +18,6 @@
  */
 
 require_once(STARTPATH.COMMANDPATH.'/remote.php');
-require_once(STARTPATH.SESSIONPATH.'/sessionmanager.php');
 require_once(STARTPATH.DATAMODELPATH.'/magazine.php');
 
 if (URLTYPE == 'optimized') {
@@ -34,9 +33,10 @@ abstract class Router {
     private $arrayURY;
 
     public function  __construct($arrayURI) {
+        session_start();
+        
         $this->arrayURY = $arrayURI;
         $this->remote = Remote::getInstance();
-        $this->session = SessionManager::getInstance();
     }
 
     public abstract function applyTemplate();
@@ -44,7 +44,7 @@ abstract class Router {
     public abstract function loadData();
 
     public function show(){
-        $this->session->startingPage();
+        //$this->session->startingPage();
 
         $this->loadData();
 
@@ -58,7 +58,7 @@ abstract class Router {
         $this->footer();
         $this->remote->executeCommandAfterFooter();
 
-        $this->session->closingPage();
+        //$this->session->closingPage();
     }
 
     public function header() {

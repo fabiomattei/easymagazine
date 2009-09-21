@@ -40,7 +40,7 @@
             <div id="middle">
                 <div id="left-column">
                     <h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
-                    <a href="#" class="link">View the website</a>
+                    <a href="../../index.php" class="link">View the website</a>
                 </div>
                 <div id="center-column">
                     <?
