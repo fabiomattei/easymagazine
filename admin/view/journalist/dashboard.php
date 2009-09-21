@@ -29,13 +29,14 @@
     <body>
         <div id="main">
             <div id="header">
-                <a href="index.html" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
+                <a href="#" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
                 <ul id="top-navigation">
                     <li class="active"><span><span>Dashboard</span></span></li>
                     <li><span><span><a href="article.php">Articles</a></span></span></li>
                     <li><span><span><a href="comment.php">Comments</a></span></span></li>
                     <li><span><span><a href="user.php">Users</a></span></span></li>
                 </ul>
+                <div id="logout"><a href="../../logout.php">logout</a></div>
             </div>
             <div id="middle">
                 <div id="left-column">
@@ -74,11 +75,11 @@
                                 <td class="first style1"><? echo $ar->getTitle(); ?></td>
                                 <td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td class="last">
-                                    <? if ($ar->getPublished()) { ?>
+                                        <? if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                    <? } else { ?>
+                                        <? } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <? } ?>
+                                        <? } ?>
 
                                 </td>
                             </tr>
@@ -104,11 +105,11 @@
                                 <td class="first style1"><? echo $ar->getTitle(); ?></td>
                                 <td><a href="comment.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td class="last">
-                                    <? if ($ar->getPublished()) { ?>
-                                        <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                    <? } else { ?>
-                                        <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <? } ?>
+                                        <? if ($ar->getPublished()) { ?>
+                                    <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
+                                        <? } else { ?>
+                                    <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
+                                        <? } ?>
                                 </td>
                             </tr>
                             <?

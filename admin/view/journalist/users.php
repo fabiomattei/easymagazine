@@ -29,13 +29,14 @@
 <body>
 <div id="main">
 	<div id="header">
-		<a href="index.html" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
+		<a href="#" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
 		<ul id="top-navigation">
 			<li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
 			<li><span><span><a href="article.php">Articles</a></span></span></li>
 			<li><span><span><a href="comment.php">Comments</a></span></span></li>
                         <li class="active"><span><span>Users</span></span></li>
 		</ul>
+                <div id="logout"><a href="../../logout.php">logout</a></div>
 	</div>
 	<div id="middle">
 		<div id="left-column">

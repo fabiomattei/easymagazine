@@ -29,7 +29,7 @@
     <body>
         <div id="main">
             <div id="header">
-                <a href="index.html" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
+                <a href="#" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
                 <ul id="top-navigation">
                     <li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
                     <li><span><span><a href="number.php">Numbers</a></span></span></li>
@@ -42,6 +42,7 @@
                     <li class="active"><span><span>Settings</span></span></li>
                     <li><span><span><a href="user.php">Users</a></span></span></li>
                 </ul>
+                <div id="logout"><a href="../../logout.php">logout</a></div>
             </div>
             <div id="middle">
                 <div id="left-column">
