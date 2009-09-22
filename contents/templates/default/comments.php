@@ -54,8 +54,10 @@
             <textarea name="Body" rows="4" cols="40"></textarea><br />
             Signature<br />
             <input type="text" name="Signature" value=""/><br /><br />
+            <!-- pass a session id to the query string of the script to prevent ie caching -->
+            <img src="<?= URIMaker::fromBasePath('lib/securimage/securimage_show.php?sid='.md5(uniqid(time())))?>"><br />
+            <input type="text" name="code" /><br /><br />
             <input type="submit" value="Ok" name="Ok" />
         </form>
         </p>
-
     </div>

@@ -19,6 +19,7 @@
 
 require_once(STARTPATH.DATAMODELPATH.'/article.php');
 require_once(STARTPATH.DATAMODELPATH.'/page.php');
+require_once(STARTPATH.LIBPATH.'/securimage/securimage.php');
 
 require_once('router.php');
 
@@ -45,29 +46,37 @@ class CommentsRouter extends Router {
         $this->metakeywords = $this->article->getMetakeyword();
         $this->title = Magazine::getMagazineTitle().': '.$this->article->getTitle();
 
-        $cont = 0;
-        if (isset($_POST['Title']) && $_POST['Title']!='') $cont++;
-        if (isset($_POST['Body']) && $_POST['Body']!='') $cont++;
-        if (isset($_POST['Signature']) && $_POST['Signature']!='') $cont++;
+        $img = new Securimage();
+        if (isset($_POST['code'])) {
+            $valid = $img->check($_POST['code']);
+            if($valid == true) {
+                $cont = 0;
+                if (isset($_POST['Title']) && $_POST['Title']!='') $cont++;
+                if (isset($_POST['Body']) && $_POST['Body']!='') $cont++;
+                if (isset($_POST['Signature']) && $_POST['Signature']!='') $cont++;
 
-        if ($cont == 3) {
-            $published = 0;
-            $com = new Comment(
-                Comment::NEW_COMMENT,
-                $arURI['id'],
-                $_POST['Title'],
-                $published,
-                $_POST['Body'],
-                $_POST['Signature']);
-            $com->save();
-            $this->advice = 'Comment saved, it will be checked then published';
-        }
-        if ($cont < 3 && $cont > 0) {
-            $this->advice = 'Fill all the fields please';
-        }
-        if ($cont == 0) {
-            $this->advice = '';
-        }
+                if ($cont == 3) {
+                    $published = 0;
+                    $com = new Comment(
+                        Comment::NEW_COMMENT,
+                        $arURI['id'],
+                        $_POST['Title'],
+                        $published,
+                        $_POST['Body'],
+                        $_POST['Signature']);
+                    $com->save();
+                    $this->advice = 'Comment saved, it will be checked then published';
+                }
+                if ($cont < 3 && $cont > 0) {
+                    $this->advice = 'Fill all the fields please';
+                }
+                if ($cont == 0) {
+                    $this->advice = '';
+                }
+            } else {
+                $this->advice = 'Please type the right Captcha';
+            }
+        } 
     }
 
     function applyTemplate() {
