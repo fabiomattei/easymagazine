@@ -18,6 +18,7 @@
  */
 
 require_once(STARTPATH.SYSTEMPATH.'settings.php');
+require_once(STARTPATH.DATAMODELPATH.'option.php');
 
 class Magazine {
 
@@ -35,6 +36,11 @@ class Magazine {
 
     public static function getMagazineRights() {
         return RIGHTS;
+    }
+
+    public static function getAdministrationEmail() {
+        $email = Option::findByNameAndType('email', 'settings');
+        return $email->getValue();
     }
 }
 

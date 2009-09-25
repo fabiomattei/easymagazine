@@ -25,7 +25,7 @@
     <div class="entry">
 
          <? if ($article->imageExists()) { ?>
-        <img src="<?= URIMaker::fromBasePath($article->imagePath()) ?>" width="100" align="left">
+        <img src="<?= URIMaker::fromBasePath($article->imagePath()) ?>"  title="<?=$article->getImgdescription()?>" width="100" align="left">
          <? } ?>
 
         <?= $article->getSummary() ?>

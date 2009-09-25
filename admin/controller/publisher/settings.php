@@ -76,6 +76,12 @@ function update($get, $post) {
     $toSave->setType('settings');
     $toSave->setValue($post['rights']);
     $toSave->save();
+
+    $toSave = new Option();
+    $toSave->setName('email');
+    $toSave->setType('settings');
+    $toSave->setValue($post['email']);
+    $toSave->save();
     
     $settingsindb = Option::findByType('settings');
 

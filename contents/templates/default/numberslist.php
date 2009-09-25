@@ -11,7 +11,7 @@
         <div class="entry">
 
                 <? if ($nu->imageExists()) { ?>
-            <img src="<?= URIMaker::fromBasePath($nu->imagePath()) ?>" width="200">
+            <img src="<?= URIMaker::fromBasePath($nu->imagePath()) ?>"  title="<?=$nu->getImgdescription()?>" width="200">
                 <? } ?>
 
                 <?= $nu->getSummary() ?>

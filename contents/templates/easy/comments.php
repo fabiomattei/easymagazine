@@ -45,6 +45,7 @@
 
             <? } ?>
 
+            <? if ($this->article->getCommentsallowed() && $this->article->number()->getCommentsallowed()): ?>
             <p>
             <form name="newcomment" method="post" action="<?= URIMaker::comment($this->article) ?>">
                 Title<br />
@@ -59,6 +60,7 @@
                 <input type="submit" value="Ok" name="Ok" />
             </form>
             </p>
+            <? endif; ?>
 
         </div>
     </div>

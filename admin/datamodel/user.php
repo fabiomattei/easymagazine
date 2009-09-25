@@ -46,7 +46,7 @@ class User {
     const DELETE_SQL = 'delete from users where id = #';
     const SELECT_BY_ID = 'select * from users where id = #';
     const SELECT_BY_NAME = 'select * from users where name like ?';
-    const SELECT_BY_USERNAME_AND_EMAIL = 'select * from users where username like ? AND email like ? ';
+    const SELECT_BY_USERNAME_AND_EMAIL = 'select * from users where username = ? AND email = ? ';
     const SELECT_ALL = 'select * from users ';
     const SELECT_USR_PSW = 'select * from users WHERE username like ? AND password like ? ';
     const SELECT_BY_ID_ORD = 'select id from users order by id DESC';

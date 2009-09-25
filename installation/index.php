@@ -42,6 +42,7 @@
                     <b>easymagazine/system</b> (and all contained files)<br />
                     <b>easymagazine/contents/epug</b><br />
                     <b>easymagazine/contents/img</b><br /><br />
+                    Then rename the file htaccess in <b>.htaccess</b><br /><br />
                     Then fill the form:
                     <table>
                         <tr>
@@ -63,6 +64,10 @@
                         <tr>
                             <td>MySql DB Password:</td>
                             <td><input type="password" name="password" value="" /></td>
+                        </tr>
+                        <tr>
+                            <td>Administrator Email:</td>
+                            <td><input type="text" name="email" value="" /></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Ok" /></td>

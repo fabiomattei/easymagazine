@@ -32,6 +32,7 @@ function commons() {
     $outCommons = array();
     $outCommons['numbs'] = Number::findAll();
     $outCommons['authors'] = User::findAll();
+    $outCommons['categories'] = Category::findAll();
 
     return $outCommons;
 }
@@ -225,11 +226,17 @@ function save($toSave, $files) {
         $toSave['created'],
         $toSave['updated']);
     $art->save();
+    
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
         $art->deleteImg();
         $art->saveImg($files['Image']);
     }
+
     $outAction['art'] = $art;
+
+    if (!$art->isUser($_SESSION['user']->getId())) {
+        $art->linkUser($_SESSION['user']->getId());
+    }
 
     return $outAction;
 }
@@ -268,6 +275,7 @@ if (isset($_SESSION['user'])) {
 
 $numbs = $outCommons['numbs'];
 $authors = $outCommons['authors'];
+$categories = $outCommons['categories'];
 
 $art = $outAction['art'];
 

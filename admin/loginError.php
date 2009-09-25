@@ -45,7 +45,7 @@
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td><input type="text" name="password" value="" /></td>
+                            <td><input type="text" name="email" value="" /></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Ok" /></td>

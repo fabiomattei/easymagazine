@@ -35,23 +35,34 @@ function edit($id) {
     return $out;
 }
 
-function save($toSave) {
+function save($toSave, $files) {
     $out = array();
 
     $user_old = User::findById($_SESSION['user']->getId());
+
+    if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
 
     $userp = new User(
         $_SESSION['user']->getId(),
         $toSave['Name'],
         $toSave['Username'],
         $toSave['Password'],
+        $toSave['Body'],
         $user_old->getRole(),
         $toSave['Email'],
         $toSave['MSN'],
         $toSave['Skype'],
+        $toSave['imagefilename'],
+        $toSave['ImageDescription'],
         $toSave['created'],
         $toSave['updated']);
     $userp->save();
+
+    if (isset($files['Image']) && $files['Image']['size'] > 0) {
+        $userp->deleteImg();
+        $userp->saveImg($files['Image']);
+    }
+
     $out['userp'] = User::findById($userp->getId());
 
     return $out;
@@ -76,7 +87,7 @@ if (isset($_SESSION['user'])) {
     if (!isset($_GET["action"])) { $out = edit($_SESSION['user']->getId()); }
     else {
         switch ($_GET["action"]) {
-            case  'save':          $out = save($_POST); break;
+            case  'save':          $out = save($_POST, $_FILES); break;
             case  'savePassword':  $out = savePassword($_POST, $_FILES); break;
             case  'edit':          $out = edit($_SESSION['user']->getId()); break;
         }

@@ -17,7 +17,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+define('STARTPATH', '../');
+
+include ('costants.php');
 include ('configWriter.php');
+require_once(STARTPATH.DATAMODELPATH.'option.php');
 
 $dbName = $_POST['dbname'];
 $dbuser = $_POST['username'];
@@ -36,6 +40,12 @@ if (!$conn || !is_resource($conn)) {
     header('Location: index.php?error=1');
 }
 @mysql_close($conn);
+
+$toSave = new Option();
+$toSave->setName('email');
+$toSave->setType('settings');
+$toSave->setValue($post['email']);
+$toSave->save();
 
 ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder);
 
@@ -56,7 +66,7 @@ ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbp
             <p class="logo">&nbsp;</p>
             <div class="menu">
                 If, for some reason, Easy Magazine is not able to save the file
-                <b>easymagazine/system/config.php</b>,
+                <b>system/config.php</b>,
                 please set the rights of the <b>easymagazine/system</b> folder and reload
                 this page or edit the file
                 by hand filling it with the following code:

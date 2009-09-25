@@ -19,9 +19,8 @@
 
 define('STARTPATH', '../');
 
-require_once(STARTPATH.'config.php');
 require_once(STARTPATH.'costants.php');
-require_once(STARTPATH.'costants.php');
+require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 
@@ -30,9 +29,9 @@ $email = $_POST['email'];
 
 $usr = User::findByUsernameAndEmail($username, $email);
 
-if ($usr->getName() != '') {
+if ($usr->getUsername() == $username) {
     $newpassword = $usr->setNewRandomPassword();
-    mail($email, 'New Password', 'Your new passwrod is: '.$newpassword);
+    mail($email, 'New Password', 'Your new password is: '.$newpassword, 'From: '.Magazine::getAdministrationEmail());
 } else {
     header('Location: loginError.php');
 }

@@ -219,6 +219,6 @@ if (isset($outList['warning'])) { $warningarray[] = $outList['warning']; }
 if (isset($outList['question'])) { $questionarray[] = $outList['question']; }
 if (isset($outList['error'])) { $errorarray[] = $outList['error']; }
 
-include('../../view/publisher/Pages.php');
+include('../../view/publisher/pages.php');
 
 ?>
