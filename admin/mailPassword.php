@@ -23,6 +23,7 @@ require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
+require_once(STARTPATH.DATAMODELPATH.'magazine.php');
 
 $username = $_POST['username'];
 $email = $_POST['email'];
