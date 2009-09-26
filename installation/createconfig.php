@@ -17,17 +17,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('STARTPATH', '../');
-
-include ('costants.php');
 include ('configWriter.php');
-require_once(STARTPATH.DATAMODELPATH.'option.php');
 
 $dbName = $_POST['dbname'];
 $dbuser = $_POST['username'];
 $dbpassword = $_POST['password'];
 $dbhost = $_POST['dbhost'];
 $tbprefix = $_POST['tbprefix'];
+$email = $_POST['email'];
 
 // Calculating the sub folder
 $path = $_SERVER['PHP_SELF'];
@@ -41,13 +38,7 @@ if (!$conn || !is_resource($conn)) {
 }
 @mysql_close($conn);
 
-$toSave = new Option();
-$toSave->setName('email');
-$toSave->setType('settings');
-$toSave->setValue($post['email']);
-$toSave->save();
-
-ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder);
+ConfigWriter::writeConfigFile($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder);
 
 ?>
 
@@ -82,7 +73,10 @@ ConfigWriter::writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbp
                     ?&gt;<br />
                 </CODE>
                 <br />
-                After that <a href="createdb.php">click here and create the database</a>
+                <form name="create" method="post" action="createdb.php">
+                <input type="hidden" name="email" value="<?= $email ?>" />
+                After that click here and <input type="submit" value="create the database" name="create the database" />
+                </form>
                 <br />
             </div>
         </div>

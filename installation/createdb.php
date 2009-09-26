@@ -17,16 +17,23 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Create all the tables and fill it with dummy data
-
+define('STARTPATH', '../');
 include ('dbCreator.php');
+include ('../costants.php');
+require_once(STARTPATH.DATAMODELPATH.'option.php');
 
+// Create all the tables and fill it with dummy data
 $dbCreator = new DbCreator();
-
 $dbCreator->connect();
 $out = $dbCreator->createSchema();
 $out .= $dbCreator->populateSchema();
 $dbCreator->closeConnection();
+
+$toSave = new Option();
+$toSave->setName('email');
+$toSave->setType('settings');
+$toSave->setValue($_POST['email']);
+$toSave->save();
 
 ?>
 

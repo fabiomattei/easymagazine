@@ -19,7 +19,13 @@
 
 class ConfigWriter {
 
-    public static function writeTemplateIncluder($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder) {
+    /*
+     * This method generates a gonfig file for the applications and save it
+     * in the "system" folder.
+     *
+     * no return
+     */
+    public static function writeConfigFile($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix, $folder) {
         $filename = '../system/config.php';
 
         $handle = fopen($filename, 'w');
