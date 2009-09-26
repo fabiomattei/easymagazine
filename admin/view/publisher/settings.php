@@ -72,7 +72,7 @@
                                 <tr>
                                     <th class="full" colspan="2">Settings</th>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>Web Magazine Title</strong></td>
                                     <td class="last"><input type="text" size="50" name="title" value="<?= $settingsindb['title']->getValue(); ?>"/></td>
                                 </tr>
@@ -80,7 +80,7 @@
                                     <td class="first"><strong>Web Magazine Description</strong></td>
                                     <td class="last"><textarea name="description" rows="4" cols="60"><?= $settingsindb['description']->getValue(); ?></textarea></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>URL Type</strong></td>
                                     <td class="last">
                                         <select name="urltype">
@@ -93,7 +93,7 @@
                                     <td class="first" width="172"><strong>Publisher</strong></td>
                                     <td class="last"><input type="text" size="50" name="publisher" value="<?= $settingsindb['publisher']->getValue(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>Rights</strong></td>
                                     <td class="last"><input type="text" size="50" name="rights" value="<?= $settingsindb['rights']->getValue(); ?>"/></td>
                                 </tr>
@@ -101,7 +101,7 @@
                                     <td class="first" width="172"><strong>Administration Email</strong></td>
                                     <td class="last"><input type="text" size="50" name="email" value="<?= $settingsindb['email']->getValue(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
                                     <td class="last"><input type="submit" value="Save" name="save" /></td>
                                 </tr>

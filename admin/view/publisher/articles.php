@@ -138,7 +138,7 @@
                                 <tr>
                                     <th class="full" colspan="2">Edit</th>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>Number</strong></td>
                                     <td class="last">
                                         <select name="numberid">
@@ -162,15 +162,15 @@
                                         </select>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>Title</strong></td>
                                     <td class="last"><input type="text" size="50" name="Title" value="<? echo $art->getUnfilteredTitle(); ?>"/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Sub Title</strong></td>
                                     <td class="last"><input type="text" size="50" name="SubTitle" value="<? echo $art->getUnfilteredSubtitle(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Summary</strong></td>
                                     <td class="last"><textarea name="Summary" rows="4" cols="60"><? echo $art->getUnfilteredSummary(); ?></textarea></td>
                                 </tr>
@@ -187,7 +187,7 @@
                                             </script>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Tag</strong></td>
                                     <td class="last"><input type="text" size="50" name="Tag" value="<? echo $art->getUnfilteredTag(); ?>"/></td>
                                 </tr>
@@ -195,19 +195,19 @@
                                     <td class="first"><strong>Meta Description</strong></td>
                                     <td class="last"><textarea name="MetaDescription" rows="4" cols="60"><? echo $art->getMetaDescription(); ?></textarea></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Meta Keyword</strong></td>
                                     <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><? echo $art->getMetaKeyword(); ?></textarea></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Published</strong></td>
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($art->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Comments allowed</strong></td>
                                     <td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($art->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Show Image</strong></td>
                                     <td class="last">
                                         <? if ($art->imageExists()) { ?>
@@ -218,23 +218,23 @@
                                         <? } ?>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Image File</strong></td>
                                     <td class="last"><input type="file" name="Image" value="" /></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Image file name:</strong></td>
                                     <td class="last"><? echo $art->getImgfilename(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Image description:</strong></td>
                                     <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $art->getImgdescription(); ?>"/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $art->getCreated(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Updated:</strong></td>
                                     <td class="last"><? echo $art->getUpdated(); ?></td>
                                 </tr>

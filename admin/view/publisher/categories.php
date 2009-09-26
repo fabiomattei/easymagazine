@@ -129,7 +129,7 @@
                                 <tr>
                                     <th class="full" colspan="2">Edit</th>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>Name</strong></td>
                                     <td class="last"><input type="text" size="50" name="Name" value="<? echo $categ->getName(); ?>"/></td>
                                 </tr>
@@ -150,15 +150,15 @@
                                     <td class="first"><strong>Published</strong></td>
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($categ->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $categ->getCreated(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Updated:</strong></td>
                                     <td class="last"><? echo $categ->getUpdated(); ?></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $categ->getId(); ?>">
                                 <input type="hidden" name="indexnumber" value="<? echo $categ->getIndexnumber(); ?>">

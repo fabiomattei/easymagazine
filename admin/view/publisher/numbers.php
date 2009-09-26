@@ -144,15 +144,15 @@
                                 <tr>
                                     <th class="full" colspan="2">Edit</th>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>Title</strong></td>
                                     <td class="last"><input type="text" size="50" name="Title" value="<? echo $numb->getTitle(); ?>"/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Sub Title</strong></td>
                                     <td class="last"><input type="text" size="50" name="SubTitle" value="<? echo $numb->getSubtitle(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" colspan="2"><strong>Summary</strong><br />
                                         <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
                                         <textarea cols="40" id="article_body" name="Summary" rows="20" style="width: 500px; padding: 5px"><? echo $numb->getUnfilteredSummary(); ?></textarea>
@@ -169,19 +169,19 @@
                                     <td class="first"><strong>Meta Description</strong></td>
                                     <td class="last"><textarea name="MetaDescription" rows="4" cols="60"><? echo $numb->getMetaDescription(); ?></textarea></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Meta Keyword</strong></td>
                                     <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><? echo $numb->getMetaKeyword(); ?></textarea></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Published</strong></td>
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($numb->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Comments allowed</strong></td>
                                     <td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($numb->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Show Image</strong></td>
                                     <td class="last">
                                         <? if ($numb->imageExists()) { ?>
@@ -192,27 +192,27 @@
                                         <? } ?>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Image File</strong></td>
                                     <td class="last"><input type="file" name="Image" value="" /></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Image file name:</strong></td>
                                     <td class="last"><? echo $numb->getImgfilename(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Image description:</strong></td>
                                     <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $numb->getImgdescription(); ?>"/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $numb->getCreated(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Updated:</strong></td>
                                     <td class="last"><? echo $numb->getUpdated(); ?></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $numb->getId(); ?>">
                                 <input type="hidden" name="indexnumber" value="<? echo $numb->getIndexnumber(); ?>">
