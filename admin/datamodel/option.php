@@ -107,6 +107,11 @@ class Option {
         return $ret;
     }
 
+    public static function findFirstByNameAndType($name, $type) {
+        $ret = OPTION::findOne(self::SELECT_BY_NAME_AND_TYPE, array("%$name%", "%$type%"), array());
+        return $ret;
+    }
+
     public static function findByType($type) {
         $ret = OPTION::findMany(self::SELECT_BY_TYPE, array("%$type%"), array());
         return $ret;

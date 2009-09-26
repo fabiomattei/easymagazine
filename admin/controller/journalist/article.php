@@ -203,8 +203,8 @@ function save($toSave, $files) {
     $page = 1;
     $outAction = array();
 
-    if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
-    if (!isset($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
+    $article_old = Article::findById($toSave['id']);
+
     if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
 
     $art = new Article(
@@ -212,12 +212,12 @@ function save($toSave, $files) {
         $toSave['numberid'],
         $toSave['categoryid'],
         $toSave['indexnumber'],
-        $toSave['Published'],
+        $article_old->getPublished(),
         $toSave['Title'],
         $toSave['SubTitle'],
         $toSave['Summary'],
         $toSave['Body'],
-        $toSave['commentsallowed'],
+        $article_old->getCommentsallowed(),
         $toSave['Tag'],
         $toSave['MetaDescription'],
         $toSave['MetaKeyword'],

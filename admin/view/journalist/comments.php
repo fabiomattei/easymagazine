@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <title>Easy Magazine Admin: Articles</title>
+        <title>Easy Magazine Admin: Comments</title>
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
@@ -126,7 +126,7 @@
                                 <tr>
                                     <th class="full" colspan="2">Edit</th>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>Article</strong></td>
                                     <td class="last">
                                         <? if($comm->getArticle_id() != Comment::NEW_COMMENT) { echo $comm->article()->getTitle(); } ?>
@@ -137,7 +137,7 @@
                                     <td class="first" width="172"><strong>Title</strong></td>
                                     <td class="last"><input type="text" size="50" name="Title" value="<? echo $comm->getUnfilteredTitle(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Body</strong></td>
                                     <td class="last"><textarea name="Body" rows="4" cols="60"><? echo $comm->getUnfilteredBody(); ?></textarea></td>
                                 </tr>
@@ -149,11 +149,11 @@
                                     <td class="first"><strong>Published</strong></td>
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($comm->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $comm->getCreated(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Updated:</strong></td>
                                     <td class="last"><? echo $comm->getUpdated(); ?></td>
                                 </tr>

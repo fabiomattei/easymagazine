@@ -39,7 +39,7 @@ class Magazine {
     }
 
     public static function getAdministrationEmail() {
-        $email = Option::findByNameAndType('email', 'settings');
+        $email = Option::findFirstByNameAndType('email', 'settings');
         return $email->getValue();
     }
 }

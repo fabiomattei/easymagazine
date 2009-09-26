@@ -152,7 +152,7 @@
                                         </select>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong>Category</strong></td>
                                     <td class="last">
                                         <select name="categoryid">
@@ -176,7 +176,7 @@
                                     <td class="first"><strong>Summary</strong></td>
                                     <td class="last"><textarea name="Summary" rows="4" cols="60"><? echo $art->getUnfilteredSummary(); ?></textarea></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" colspan="2"><strong>Body</strong><br />
                                         <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
                                             <textarea cols="40" id="article_body" name="Body" rows="20" style="width: 500px; padding: 5px"><? echo $art->getUnfilteredBody(); ?></textarea>
@@ -193,21 +193,13 @@
                                     <td class="first"><strong>Tag</strong></td>
                                     <td class="last"><input type="text" size="50" name="Tag" value="<? echo $art->getUnfilteredTag(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Meta Description</strong></td>
                                     <td class="last"><textarea name="MetaDescription" rows="4" cols="60"><? echo $art->getMetaDescription(); ?></textarea></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Meta Keyword</strong></td>
                                     <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><? echo $art->getMetaKeyword(); ?></textarea></td>
-                                </tr>
-                                <tr class="bg">
-                                    <td class="first"><strong>Published</strong></td>
-                                    <td class="last"><input type="checkbox" name="Published" value="1" <? if($art->getPublished()) echo 'checked="checked"'; ?>/></td>
-                                </tr>
-                                <tr>
-                                    <td class="first"><strong>Comments allowed</strong></td>
-                                    <td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($art->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Show Image</strong></td>
@@ -240,7 +232,7 @@
                                     <td class="first"><strong>Updated:</strong></td>
                                     <td class="last"><? echo $art->getUpdated(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $art->getId(); ?>">
                                 <input type="hidden" name="indexnumber" value="<? echo $art->getIndexnumber(); ?>">

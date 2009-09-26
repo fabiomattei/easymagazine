@@ -76,7 +76,7 @@ class Article {
     const LINK_USER = 'insert into users_articles (article_id, user_id) values (#, #) ';
 
 
-    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $category_id=self::NEW_ARTICLE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $commentsallowed='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
+    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $category_id=self::NEW_ARTICLE, $indexnumber='', $published='0', $title='', $subtitle='', $summary='', $body='', $commentsallowed='0', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
