@@ -8,7 +8,7 @@
             <h3><?= $this->number->getSubtitle() ?></h3>
             <div id="numberDescription">
                 <? if ($this->number->imageExists()) : ?>
-                <img src="<?= URIMaker::fromBasePath($this->number->imagePath()) ?>" width="200" alt="<?= $this->number->getImgdescription()?>">
+                <img src="<?= URIMaker::fromBasePath($this->number->imagePath()) ?>" alt="<?= $this->number->getImgdescription()?>">
                 <? endif; ?>
                 <?= $this->number->getSummary() ?>
             </div>
