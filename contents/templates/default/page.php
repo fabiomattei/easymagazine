@@ -8,7 +8,7 @@
 
     <div class="entry">
         <? if ($this->page->imageExists()) { ?>
-        <img src="<?= URIMaker::fromBasePath($this->page->imagePath()) ?>"  alt="<?=$this->page->getImgdescription()?>" align="left">
+        <img src="<?= URIMaker::fromBasePath($this->page->imagePath()) ?>"  alt="<?=$this->page->getImgAlt()?>" align="left">
         <? } ?>
          <?= $this->page->getBody() ?>
 

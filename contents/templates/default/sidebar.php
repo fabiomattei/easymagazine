@@ -12,7 +12,7 @@
       <p class="news">
           <b><?= $this->number->getSubtitle() ?></b>
           <? if ($this->number->imageExists()) : ?>
-                <img src="<?= URIMaker::fromBasePath($this->number->imagePath()) ?>" width="200" alt="<?= $this->number->getImgdescription()?>">
+                <img src="<?= URIMaker::fromBasePath($this->number->imagePath()) ?>" width="200" alt="<?= $this->number->getImgAlt()?>">
           <? endif; ?>
           <!-- <?= $this->number->getSummary() ?> -->
           <? if ($this->number->epubExists()) : ?>

@@ -222,7 +222,8 @@ function save($toSave, $files) {
         $toSave['MetaDescription'],
         $toSave['MetaKeyword'],
         $toSave['imagefilename'],
-        $toSave['ImageDescription'],
+        $toSave['ImageAlt'],
+        $toSave['ImageCaption'],
         $toSave['created'],
         $toSave['updated']);
     $numb->save();

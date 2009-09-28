@@ -192,7 +192,8 @@ class Category {
                     $row['metadescription'],
                     $row['metakeyword'],
                     $row['imgfilename'],
-                    $row['imgdescription'],
+                    $row['imgalt'],
+                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -228,7 +229,8 @@ class Category {
                     $row['metadescription'],
                     $row['metakeyword'],
                     $row['imgfilename'],
-                    $row['imgdescription'],
+                    $row['imgalt'],
+                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }

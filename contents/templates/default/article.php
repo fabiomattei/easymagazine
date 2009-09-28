@@ -11,7 +11,7 @@
     </div>
     <div class="entry">
         <? if ($this->article->imageExists()) { ?>
-        <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" alt="<?=$this->article->getImgdescription()?>" align="left">
+        <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" alt="<?=$this->article->getImgAlt()?>" align="left">
         <? } ?>
         <?= $this->article->getBody() ?>
     </div>

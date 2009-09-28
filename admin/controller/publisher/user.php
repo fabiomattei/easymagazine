@@ -118,7 +118,8 @@ function save($toSave, $files) {
         $toSave['MSN'],
         $toSave['Skype'],
         $toSave['imagefilename'],
-        $toSave['ImageDescription'],
+        $toSave['ImageAlt'],
+        $toSave['ImageCaption'],
         $toSave['created'],
         $toSave['updated']);
     $userp->save();

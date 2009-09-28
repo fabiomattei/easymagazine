@@ -43,15 +43,16 @@ class Article {
     private $metadescription;
     private $metakeyword;
     private $imgfilename;
-    private $imgdescription;
+    private $imgalt;
+    private $imgcaption;
     private $created;
     private $updated;
     private $filter;
 
-    const INSERT_SQL = 'insert into articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgdescription, created, updated) values (#, #, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set number_id = #, category_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgdescription = ?, updated=now() where id = #';
+    const INSERT_SQL = 'insert into articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgalt, imgcaption, created, updated) values (#, #, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update articles set number_id = #, category_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgalt = ?, imgcaption = ?, updated=now() where id = #';
     const UPDATE_SQL_IMG = 'update articles set imgfilename = ?, updated = Now() where id = #';
-    const UPDATE_SQL_IMG_IMGDESC = 'update articles set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
+    const UPDATE_SQL_IMG_IMGDESC = 'update articles set imgfilename = ?, imgalt = ?, imgcaption = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from articles where id = # ';
     const DELETE_USER_ARTICLE = 'delete from users_articles where article_id = # ';
     const SELECT_BY_ID = 'select * from articles where id = #';
@@ -76,7 +77,7 @@ class Article {
     const LINK_USER = 'insert into users_articles (article_id, user_id) values (#, #) ';
 
 
-    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $category_id=self::NEW_ARTICLE, $indexnumber='', $published='0', $title='', $subtitle='', $summary='', $body='', $commentsallowed='0', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgdescription='', $created='', $updated='') {
+    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $category_id=self::NEW_ARTICLE, $indexnumber='', $published='0', $title='', $subtitle='', $summary='', $body='', $commentsallowed='0', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgalt='', $imgcaption='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
@@ -92,7 +93,8 @@ class Article {
         $this->metadescription = $metadescription;
         $this->metakeyword = $metakeyword;
         $this->imgfilename = $imgfilename;
-        $this->imgdescription = $imgdescription;
+        $this->imgalt = $imgalt;
+        $this->imgcaption = $imgcaption;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -110,7 +112,7 @@ class Article {
                 $array_int,
                 $tables);
             if ($row = mysql_fetch_array($rs)) {
-                $ret = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+                $ret = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
             } else {
                 $ret = new Article();
             }
@@ -132,7 +134,7 @@ class Article {
                 $tables);
             $ret = array();
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+                $ret[] = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Article();
@@ -296,7 +298,8 @@ class Article {
                     $row['metadescription'],
                     $row['metakeyword'],
                     $row['imgfilename'],
-                    $row['imgdescription'],
+                    $row['imgalt'],
+                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -329,7 +332,8 @@ class Article {
                     $row['msn'],
                     $row['skype'],
                     $row['imgfilename'],
-                    $row['imgdescription'],
+                    $row['imgalt'],
+                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -389,7 +393,7 @@ class Article {
         try {
             DB::getInstance()->execute(
                 self::INSERT_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgalt, $this->imgcaption),
                 array($this->id, $this->number_id, $this->category_id, $this->indexnumber, $this->published, $this->commentsallowed),
                 $tables);
         } catch (Exception $e) {
@@ -402,7 +406,7 @@ class Article {
         try {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgdescription),
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgalt, $this->imgcaption),
                 array($this->number_id, $this->category_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
                 $tables);
         } catch (Exception $e) {
@@ -429,7 +433,8 @@ class Article {
             $this->metadescription = '';
             $this->metakeyword = '';
             $this->imgfilename = '';
-            $this->imgdescription = '';
+            $this->imgalt = '';
+            $this->imgcaption = '';
             $this->created = '';
             $this->updated = '';
         } catch (Exception $e) {
@@ -458,11 +463,12 @@ class Article {
         try {
             ImageFiles::deletefile($this->created, $this->imgfilename);
             $this->imgfilename = '';
-            $this->imgdescription = '';
+            $this->imgalt = '';
+            $this->imgcaption = '';
             $tables = array("articles" => TBPREFIX."articles");
             $rs = DB::getInstance()->execute(
                 self::UPDATE_SQL_IMG_IMGDESC,
-                array($this->imgfilename, $this->imgdescription),
+                array($this->imgfilename, $this->imgalt, $this->imgcaption),
                 array($this->id),
                 $tables);
         } catch (Exception $e) {
@@ -659,12 +665,20 @@ class Article {
         $this->imgfilename = $imgfilename;
     }
 
-    public function getImgdescription() {
-        return $this->imgdescription;
+    public function getImgAlt() {
+        return $this->imgalt;
     }
 
-    public function setImgdescription($imgdescription) {
-        $this->imgdescription = $imgdescription;
+    public function setImgAlt($imgalt) {
+        $this->imgalt = $imgalt;
+    }
+
+    public function getImgCaption() {
+        return $this->imgcaption;
+    }
+
+    public function setImgCaption($imgcaption) {
+        $this->imgcaption = $imgcaption;
     }
 
 }

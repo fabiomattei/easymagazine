@@ -201,8 +201,12 @@
                                     <td class="last"><? echo $numb->getImgfilename(); ?></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Image description:</strong></td>
-                                    <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $numb->getImgdescription(); ?>"/></td>
+                                    <td class="first"><strong>Image Alternative Text:</strong></td>
+                                    <td class="last"><input type="text" size="50" name="ImageAlt" value="<? echo $numb->getImgAlt(); ?>"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="first"><strong>Image Caption:</strong></td>
+                                    <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $numb->getImgCaption(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Created:</strong></td>

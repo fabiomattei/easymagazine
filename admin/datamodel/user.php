@@ -35,13 +35,14 @@ class User {
     private $created;
     private $updated;
     private $imgfilename;
-    private $imgdescription;
+    private $imgalt;
+    private $imgcaption;
     private $db;
 
     const INSERT_SQL = 'insert into users (id, name, username, password, body, role, email, msn, skype, created, updated) values (#, ?, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update users set name = ?, body = ?, role = ?, email = ?, msn = ?, skype = ?, imgdescription = ?, updated=now() where id = #';
+    const UPDATE_SQL = 'update users set name = ?, body = ?, role = ?, email = ?, msn = ?, skype = ?, imgalt = ?, imgcaption = ?, updated=now() where id = #';
     const UPDATE_SQL_IMG = 'update users set imgfilename = ?, updated = Now() where id = #';
-    const UPDATE_SQL_IMG_IMGDESC = 'update users set imgfilename = ?, imgdescription = ?, updated = Now() where id = #';
+    const UPDATE_SQL_IMG_IMGDESC = 'update users set imgfilename = ?, imgalt = ?, imgcaption = ?, updated = Now() where id = #';
     const UPDATE_SQL_PASSWORD = 'update users set password = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from users where id = #';
     const SELECT_BY_ID = 'select * from users where id = #';
@@ -53,7 +54,7 @@ class User {
     const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
     const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
 
-    public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $email='', $msn='', $skype='', $imgfilename='', $imgdescription='', $created='', $updated='') {
+    public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $email='', $msn='', $skype='', $imgfilename='', $imgalt='', $imgcaption='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->name = $name;
@@ -65,7 +66,8 @@ class User {
         $this->msn = $msn;
         $this->skype = $skype;
         $this->imgfilename = $imgfilename;
-        $this->imgdescription = $imgdescription;
+        $this->imgalt = $imgalt;
+        $this->imgcaption = $imgcaption;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -79,7 +81,7 @@ class User {
                 $array_int,
                 $tables);
             if ($row = mysql_fetch_array($rs)) {
-                $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+                $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
             } else {
                 $ret = new User();
             }
@@ -100,7 +102,7 @@ class User {
                 $array_int,
                 $tables);
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['imgfilename'], $row['imgdescription'], $row['created'], $row['updated']);
+                $ret[] = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new User();
@@ -160,7 +162,8 @@ class User {
                     $row['metadescription'],
                     $row['metakeyword'],
                     $row['imgfilename'],
-                    $row['imgdescription'],
+                    $row['imgalt'],
+                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -243,7 +246,8 @@ class User {
             $this->msn = '';
             $this->skype = '';
             $this->imgfilename = '';
-            $this->imgdescription = '';
+            $this->imgalt = '';
+            $this->imgcaption = '';
             $this->created = '';
             $this->updated = '';
         } catch (Exception $e) {
@@ -271,7 +275,7 @@ class User {
         try {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
-                array($this->name, $this->body, $this->role, $this->email, $this->msn, $this->skype, $this->imgdescription),
+                array($this->name, $this->body, $this->role, $this->email, $this->msn, $this->skype, $this->imgalt, $this->imgcaption),
                 array($this->id),
                 $tables);
         } catch (Exception $e) {
@@ -331,12 +335,13 @@ class User {
     public function deleteImg() {
         ImageFiles::deletefile($this->created, $this->imgfilename);
         $this->imgfilename = '';
-        $this->imgdescription = '';
+        $this->imgalt = '';
+        $this->imgcaption = '';
         $tables = array("users" => TBPREFIX."users");
         try {
             DB::getInstance()->execute(
                 self::UPDATE_SQL_IMG_IMGDESC,
-                array($this->imgfilename, $this->imgdescription),
+                array($this->imgfilename, $this->imgalt, $this->imgcaption),
                 array($this->id),
                 $tables);
         } catch (Exception $e) {
@@ -434,13 +439,22 @@ class User {
         $this->imgfilename = $imgfilename;
     }
 
-    public function getImgdescription() {
-        return $this->imgdescription;
+    public function getImgAlt() {
+        return $this->imgalt;
     }
 
-    public function setImgdescription($imgdescription) {
-        $this->imgdescription = $imgdescription;
+    public function setImgAlt($imgalt) {
+        $this->imgalt = $imgalt;
     }
+
+    public function getImgCaption() {
+        return $this->imgcaption;
+    }
+
+    public function setImgCaption($imgcaption) {
+        $this->imgcaption = $imgcaption;
+    }
+
 
     public function getCreated() {
         return $this->created;

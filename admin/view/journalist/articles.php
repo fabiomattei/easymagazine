@@ -221,8 +221,12 @@
                                     <td class="last"><? echo $art->getImgfilename(); ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Image description:</strong></td>
-                                    <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $art->getImgdescription(); ?>"/></td>
+                                    <td class="first"><strong>Image Alternative Text:</strong></td>
+                                    <td class="last"><input type="text" size="50" name="ImageAlt" value="<? echo $art->getImgAlt(); ?>"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="first"><strong>Image Caption:</strong></td>
+                                    <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $art->getImgCaption(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Created:</strong></td>

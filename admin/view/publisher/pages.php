@@ -180,8 +180,12 @@
                                     <td class="last"><? echo $pag->getImgfilename(); ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Image description:</strong></td>
-                                    <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $pag->getImgdescription(); ?>"/></td>
+                                    <td class="first"><strong>Image Alternative Text:</strong></td>
+                                    <td class="last"><input type="text" size="50" name="ImageAlt" value="<? echo $pag->getImgAlt(); ?>"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="first"><strong>Image Caption:</strong></td>
+                                    <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $pag->getImgCaption(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Created:</strong></td>

@@ -9,7 +9,7 @@
             <h1><a href="<?= URIMaker::articlesperson($user) ?>"><?= $user->getName() ?></a></h1>
             <p>
                     <? if ($user->imageExists()) { ?>
-                <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>" alt="<?=$user->getImgdescription()?>" width="60" align="left">
+                <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>" alt="<?=$user->getImgAlt()?>" width="60" align="left">
                     <? } ?>
 
                     <?= $user->getBody() ?>

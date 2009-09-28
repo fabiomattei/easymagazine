@@ -10,7 +10,7 @@
             <p><?= $nu->getSubtitle() ?></p>
             <p>
                     <? if ($nu->imageExists()) : ?>
-                <img src="<?= URIMaker::fromBasePath($nu->imagePath()) ?>" width="200" alt="<?= $nu->getImgdescription()?>">
+                <img src="<?= URIMaker::fromBasePath($nu->imagePath()) ?>" width="200" alt="<?= $nu->getImgAlt()?>">
                     <? endif; ?>
                     <?= $nu->getSummary() ?>
             </p>

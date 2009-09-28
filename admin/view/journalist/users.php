@@ -119,8 +119,12 @@
                                     <td class="last"><? echo $userp->getImgfilename(); ?></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Image description:</strong></td>
-                                    <td class="last"><input type="text" size="50" name="ImageDescription" value="<? echo $userp->getImgdescription(); ?>"/></td>
+                                    <td class="first"><strong>Image Alternative Text:</strong></td>
+                                    <td class="last"><input type="text" size="50" name="ImageAlt" value="<? echo $userp->getImgAlt(); ?>"/></td>
+                                </tr>
+                                <tr class="bg">
+                                    <td class="first"><strong>Image Caption:</strong></td>
+                                    <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $userp->getImgCaption(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Created:</strong></td>

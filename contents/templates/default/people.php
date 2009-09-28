@@ -12,7 +12,7 @@
 
     <div class="entry">
          <? if ($user->imageExists()) { ?>
-            <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>"  alt="<?=$user->getImgdescription()?>" width="60" align="left">
+            <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>"  alt="<?=$user->getImgAlt()?>" width="60" align="left">
          <? } ?>
 
          <?= $user->getBody() ?>

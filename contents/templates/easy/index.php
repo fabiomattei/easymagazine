@@ -17,7 +17,7 @@
             </p>
             <p>
                     <? if ($article->imageExists()) { ?>
-                <img src="<?= URIMaker::fromBasePath($article->imagePath()) ?>" alt="<?=$article->getImgdescription()?>" width="100" align="left">
+                <img src="<?= URIMaker::fromBasePath($article->imagePath()) ?>" alt="<?=$article->getImgAlt()?>" width="100" align="left">
                     <? } ?>
                     <?= $article->getSummary() ?>
             </p>
