@@ -183,19 +183,19 @@
                                     <td class="first"><strong>Image Alternative Text:</strong></td>
                                     <td class="last"><input type="text" size="50" name="ImageAlt" value="<? echo $pag->getImgAlt(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Image Caption:</strong></td>
                                     <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $pag->getImgCaption(); ?>"/></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $pag->getCreated(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Updated:</strong></td>
                                     <td class="last"><? echo $pag->getUpdated(); ?></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $pag->getId(); ?>">
                                 <input type="hidden" name="indexnumber" value="<? echo $pag->getIndexnumber(); ?>">

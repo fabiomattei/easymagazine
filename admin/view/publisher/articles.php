@@ -234,15 +234,15 @@
                                     <td class="first"><strong>Image Caption:</strong></td>
                                     <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $art->getImgCaption(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $art->getCreated(); ?></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Updated:</strong></td>
                                     <td class="last"><? echo $art->getUpdated(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $art->getId(); ?>">
                                 <input type="hidden" name="indexnumber" value="<? echo $art->getIndexnumber(); ?>">

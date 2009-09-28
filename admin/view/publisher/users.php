@@ -170,15 +170,15 @@
                                     <td class="first"><strong>Image Caption:</strong></td>
                                     <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $userp->getImgCaption(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $userp->getCreated(); ?></td>
                                 </tr>
-                                <tr class="bg">
+                                <tr>
                                     <td class="first"><strong>Updated:</strong></td>
                                     <td class="last"><? echo $userp->getUpdated(); ?></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $userp->getId(); ?>">
                                 <input type="hidden" name="created" value="<? echo $userp->getCreated(); ?>">
