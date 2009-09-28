@@ -50,6 +50,13 @@ width:760px;
 margin:0 auto;
 }
 
+#image {
+    width:110 px;
+    background-color:#EFF8FB;
+    float: left;
+    padding: 2 px;
+}
+
 /* header h1 (blogtitle)
 --------------------------------------------------*/
 #header h1 {

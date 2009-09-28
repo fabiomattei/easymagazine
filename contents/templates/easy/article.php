@@ -6,22 +6,29 @@
         <div class="contenttitle">
             <h1><a href="<?=URIMaker::article($this->article)?>" rel="bookmark"><?= $this->article->getTitle() ?></a></h1>
             <p>
-                    <?= $this->article->getCreatedFormatted() ?>  by
-                    <?
-                    foreach ($this->article->users() as $user) {
-                        echo $user->getName().' ';
-                    }
-                    ?> |
-                    <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
+                <?= $this->article->getCreatedFormatted() ?>  by
+                <?
+                foreach ($this->article->users() as $user) {
+                    echo $user->getName().' ';
+                }
+                ?> |
+                <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
             </p>
             <p>
-                    <? if ($this->article->imageExists()) { ?>
-                <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" alt="<?=$this->article->getImgAlt()?>" width="100" align="left">
-                    <? } ?>
-                    <?= $this->article->getSummary() ?>
+                <? if ($this->article->imageExists()) : ?>
+            <div id="image">
+                <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" width="100" alt="<?= $this->article->getImgAlt()?>">
+                    <? if ($this->article->getImgCaption() != ''): ?>
+                <div id="caption">
+                            <?= $this->article->getImgCaption() ?>
+                </div>
+                    <? endif; ?>
+            </div>
+            <? endif; ?>
+            <?= $this->article->getSummary() ?>
             </p>
             <p>
-                    <?= $this->article->getBody() ?>
+                <?= $this->article->getBody() ?>
             </p>
 
         </div>

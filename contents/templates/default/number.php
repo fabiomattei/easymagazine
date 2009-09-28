@@ -22,9 +22,16 @@
 
     <div class="entry">
 
-         <? if ($article->imageExists()) { ?>
-        <img src="<?= URIMaker::fromBasePath($article->imagePath()) ?>"  alt="<?=$article->getImgAlt()?>" width="100" align="left">
-         <? } ?>
+                <? if ($article->imageExists()) : ?>
+                <div id="image">
+                <img src="<?= URIMaker::fromBasePath($article->imagePath()) ?>" width="100" alt="<?= $article->getImgAlt()?>">
+                <? if ($article->getImgCaption() != ''): ?>
+                <div id="caption">
+                <?= $article->getImgCaption() ?>
+                </div>
+                <? endif; ?>
+                </div>
+                <? endif; ?>
 
         <?= $article->getSummary() ?>
 

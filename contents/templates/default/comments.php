@@ -17,6 +17,16 @@
         </div>
 
         <div class="entry">
+            <? if ($this->article->imageExists()) : ?>
+            <div id="image">
+                <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" width="100" alt="<?= $this->article->getImgAlt()?>">
+                    <? if ($this->article->getImgCaption() != ''): ?>
+                <div id="caption">
+                            <?= $this->article->getImgCaption() ?>
+                </div>
+                    <? endif; ?>
+            </div>
+            <? endif; ?>
 
             <?= $this->article->getSummary() ?>
 

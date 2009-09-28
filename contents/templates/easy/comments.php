@@ -15,12 +15,19 @@
                 <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
             </p>
             <p>
-                <? if ($this->article->imageExists()) { ?>
-                <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" alt="<?=$this->article->getImgAlt()?>" width="100" align="left">
-                <? } ?>
-                <?= $this->article->getSummary() ?>
+                <? if ($this->article->imageExists()) : ?>
+            <div id="image">
+                <img src="<?= URIMaker::fromBasePath($this->article->imagePath()) ?>" width="100" alt="<?= $this->article->getImgAlt()?>">
+                    <? if ($this->article->getImgCaption() != ''): ?>
+                <div id="caption">
+                            <?= $this->article->getImgCaption() ?>
+                </div>
+                    <? endif; ?>
+            </div>
+            <? endif; ?>
+            <?= $this->article->getSummary() ?>
             </p>
-            
+
             <h3>Comments</h3>
 
             <?

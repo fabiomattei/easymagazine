@@ -2,29 +2,36 @@
 
 <div id="content">
 
-<div class="post">
+    <div class="post">
 
-    <h1>People</h1>
+        <h1>People</h1>
 
-    <? foreach($this->people  as $user) { ?>
+        <? foreach($this->people  as $user) { ?>
 
-    <div class="date"><h4><a href="<?= URIMaker::articlesperson($user) ?>"><?= $user->getName() ?></a></h4></div>
+        <div class="date"><h4><a href="<?= URIMaker::articlesperson($user) ?>"><?= $user->getName() ?></a></h4></div>
 
-    <div class="entry">
-         <? if ($user->imageExists()) { ?>
-            <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>"  alt="<?=$user->getImgAlt()?>" width="60" align="left">
-         <? } ?>
+        <div class="entry">
+                <? if ($user->imageExists()) : ?>
+            <div id="image">
+                <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>" width="60" alt="<?= $user->getImgAlt()?>">
+                        <? if ($user->getImgCaption() != ''): ?>
+                <div id="caption">
+                                <?= $user->getImgCaption() ?>
+                </div>
+                        <? endif; ?>
+            </div>
+                <? endif; ?>
 
-         <?= $user->getBody() ?>
+                <?= $user->getBody() ?>
+        </div>
+
+        <? } ?>
+
     </div>
 
-    <? } ?>
 
-</div>
+    <?php
 
-
-<?php
-
-echo "<img src=\"contents/templates/default/example.png\">";
+    echo "<img src=\"contents/templates/default/example.png\">";
 
 ?>

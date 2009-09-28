@@ -8,11 +8,18 @@
         <div class="contenttitle">
             <h1><a href="<?= URIMaker::articlesperson($user) ?>"><?= $user->getName() ?></a></h1>
             <p>
-                    <? if ($user->imageExists()) { ?>
-                <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>" alt="<?=$user->getImgAlt()?>" width="60" align="left">
-                    <? } ?>
+                    <? if ($user->imageExists()) : ?>
+            <div id="image">
+                <img src="<?= URIMaker::fromBasePath($user->imagePath()) ?>" width="60" alt="<?= $user->getImgAlt()?>">
+                        <? if ($user->getImgCaption() != ''): ?>
+                <div id="caption">
+                                <?= $user->getImgCaption() ?>
+                </div>
+                        <? endif; ?>
+            </div>
+                <? endif; ?>
 
-                    <?= $user->getBody() ?>
+                <?= $user->getBody() ?>
             </p>
         </div>
         <? } ?>

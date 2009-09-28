@@ -10,9 +10,16 @@
             <p><?= $nu->getSubtitle() ?></p>
             <p>
                     <? if ($nu->imageExists()) : ?>
+            <div id="image">
                 <img src="<?= URIMaker::fromBasePath($nu->imagePath()) ?>" width="200" alt="<?= $nu->getImgAlt()?>">
-                    <? endif; ?>
-                    <?= $nu->getSummary() ?>
+                        <? if ($nu->getImgCaption() != ''): ?>
+                <div id="caption">
+                                <?= $nu->getImgCaption() ?>
+                </div>
+                        <? endif; ?>
+            </div>
+                <? endif; ?>
+                <?= $nu->getSummary() ?>
             </p>
                 <? if ($nu->epubExists()) : ?>
             <p>
@@ -22,9 +29,9 @@
         </div>
         <? endforeach; ?>
         <div class="contenttitle">
-        <p>
-            <?= $this->paginator->renderFullNav(URIMaker::numberslist())  ?>
-        </p>
+            <p>
+                <?= $this->paginator->renderFullNav(URIMaker::numberslist())  ?>
+            </p>
         </div>
     </div>
 
