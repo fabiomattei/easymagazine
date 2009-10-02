@@ -9,7 +9,7 @@
     <br />
     <h2><?= $this->number->getTitle() ?></h2>
 
-    <p class="news">
+    <div class="news">
         <b><?= $this->number->getSubtitle() ?></b>
         <? if ($this->number->imageExists()) : ?>
     <div id="image">
@@ -25,8 +25,8 @@
     <? if ($this->number->epubExists()) : ?>
     <a href="<?= URIMaker::fromBasePath($this->number->epubPath()) ?>">Download Epub</a>
     <? endif; ?>
-</p>
-
+</div>
+<br />
 <h2>Categories</h2>
 <ul>
     <? foreach ($this->categories as $cat) : ?>

@@ -35,6 +35,7 @@ define('PLUGINPATH', 'contents/plug_in/');
 define('TEMPLATEBASEPATH', 'contents/templates/');
 
 define('LIBPATH', 'lib/');
+define('FEEDCREATORPATH', 'feedcreator/');
 define('PCLZIPPATH', 'pclzip_2_8_1/');
 
 ?>

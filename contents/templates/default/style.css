@@ -51,10 +51,10 @@ margin:0 auto;
 }
 
 #image {
-    width:110 px;
-    background-color:#EFF8FB;
-    float: left;
-    padding: 2 px;
+	padding-bottom: 10px;
+}
+#caption {
+	font-style: italic;
 }
 
 /* header h1 (blogtitle)
@@ -260,7 +260,7 @@ margin-top:25px;
 
 /* metadata sidebar ('about this post')
 --------------------------------------------------*/
-p.news {
+.news {
 background:#EFF8FB;
 color:#333;
 font-size:120%;

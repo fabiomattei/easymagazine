@@ -24,6 +24,7 @@ require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
 require_once(STARTPATH.UTILSPATH.'epubcreator.php');
+require_once(STARTPATH.UTILSPATH.'rssfeedcreator.php');
 
 session_start();
 
@@ -227,6 +228,10 @@ function save($toSave, $files) {
         $toSave['created'],
         $toSave['updated']);
     $numb->save();
+
+    if ($toSave['Published'] != 0) {
+        rssFeedCreator::updatefeed();
+    }
 
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
         $numb->deleteImg();

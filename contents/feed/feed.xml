@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- generator="FeedCreator 1.7.2" -->
+<rdf:RDF
+    xmlns="http://purl.org/rss/1.0/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel rdf:about="../../../contents/feed/feed.xml">
+        <title>Title of the magazine</title>
+        <description>A short description of the magazine</description>
+        <link>http://localhost:8888/easymagazine/</link>
+       <dc:date>2009-10-02T02:10:02+01:00</dc:date>
+        <items>
+            <rdf:Seq>
+                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/My firts Article/1"/>
+                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/My second Article/2"/>
+            </rdf:Seq>
+        </items>
+    </channel>
+    <item rdf:about="http://localhost:8888/easymagazine/articles/My firts Article/1">
+        <dc:format>text/html</dc:format>
+        <dc:date>2009-10-02T01:10:02+01:00</dc:date>
+        <dc:source>http://localhost:8888/easymagazine/</dc:source>
+        <dc:creator>New User </dc:creator>
+        <title>My firts Article</title>
+        <link>http://localhost:8888/easymagazine/articles/My firts Article/1</link>
+        <description>Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.</description>
+    </item>
+    <item rdf:about="http://localhost:8888/easymagazine/articles/My second Article/2">
+        <dc:format>text/html</dc:format>
+        <dc:date>2009-10-02T01:10:02+01:00</dc:date>
+        <dc:source>http://localhost:8888/easymagazine/</dc:source>
+        <dc:creator>New User </dc:creator>
+        <title>My second Article</title>
+        <link>http://localhost:8888/easymagazine/articles/My second Article/2</link>
+        <description>Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.</description>
+    </item>
+</rdf:RDF>

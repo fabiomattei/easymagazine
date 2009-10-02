@@ -214,7 +214,7 @@ class DbCreator {
         $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, imgfilename, imgalt, imgcaption, created, updated) values
             ('New User', 'newuser', '".md5("psw")."', 
             'Tityre, tu patulae recubans sub tegmine fagi siluestrem tenui musam meditaris auena: nos patriae finis et dulcia linquimus arua. nos patriam fugimus: tu, Tityre, lentus in umbra formosam resonare doces Amaryllida siluas. O Meliboee, deus nobis haec otia fecit. namque erit ille mihi semper deus, illius aram saepe tener nostris ab ouilibus imbuet agnus. ille meas errare boues, ut cernis, et ipsum ludere quae uellem calamo permisit agresti. Non equidem inuideo, miror magis; undique totis',
-            'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', '', '', '', 2009-08-06', '2009-08-06')";
+            'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', '', '', '', '2009-08-06', '2009-08-06')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
