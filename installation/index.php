@@ -38,8 +38,9 @@
                 check the data inserted.</b><br /><br />
                 <? endif; ?>
                 <form action="createconfig.php" method="post" id="login">
-                    In order to install the application please put rights 0777 to the folders:
+                    In order to install the application please be sure the following folders have the right permissions (0755):
                     <b>easymagazine/system</b> (and all contained files)<br />
+                    <b>easymagazine/contents/feed</b><br />
                     <b>easymagazine/contents/epug</b><br />
                     <b>easymagazine/contents/img</b><br /><br />
                     Then rename the file htaccess in <b>.htaccess</b><br /><br />

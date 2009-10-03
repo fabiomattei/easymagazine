@@ -7,6 +7,10 @@
     </form>
 
     <br />
+    <a href="<?= URIMaker::rssFeed()?>"><img src="<?= URIMaker::fromBasePath('contents/templates/default/images/rss-icon.png') ?>"></a>
+    RSS Feed
+    <br /><br />
+
     <h2><?= $this->number->getTitle() ?></h2>
 
     <div class="news">

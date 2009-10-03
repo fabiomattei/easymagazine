@@ -2,9 +2,14 @@
 
 	<div id="r_sidebar">
 	<ul id="r_sidebarwidgeted">
-	<li id="Themes">
+            
+        <li id="Themes">
+	<a href="<?= URIMaker::rssFeed()?>"><img src="<?= URIMaker::fromBasePath('contents/templates/easy/images/rss-icon.png') ?>"> RSS Feed</a>
+        </li>
+        <br />
 
-            	<h2>Search</h2>
+	<li id="Themes">
+        <h2>Search</h2>
             <form id="searchform" method="post" action="<?= URIMaker::result() ?>">
                 <input type="text" name="s" id="s" size="30" value=""/>
                 <input type="submit" value="Search" name="Search" />
