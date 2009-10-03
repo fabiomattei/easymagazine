@@ -26,30 +26,24 @@ require_once(STARTPATH.UTILSPATH.'paginator.php');
 
 session_start();
 
-function index($posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function index($page) {
     $outList = array();
 
     $comms = Comment::findAll();
     $outList['comms'] = Paginator::paginate($comms, $page);
-    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['page_numbers'] = Comment::getPageNumbers();
     $outList['pageSelected'] = $page;
     $outList['lastList'] = 'index';
 
     return $outList;
 }
 
-function byuser($posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function byuser($page) {
     $outList = array();
 
     $comms = $_SESSION['user']->articlescomments();
     $outList['comms'] = Paginator::paginate($comms, $page);
-    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['page_numbers'] = Comment::getPageNumbers();
     $outList['pageSelected'] = $page;
     $outList['lastList'] = 'index';
 
@@ -69,7 +63,7 @@ function find($posts) {
 
     $comms = Comment::findInAllTextFields($posts['string']);
     $outList['comms'] = Paginator::paginate($comms, $page);
-    $outList['page_numbers'] = Number::getPageNumbers();;
+    $outList['page_numbers'] = Comment::getPageNumbers();;
     $outList['pageSelected'] = $page;
     $outList['lastList'] = 'find';
 
@@ -77,32 +71,26 @@ function find($posts) {
     return $outList;
 }
 
-function commentnumber($id, $posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function commentnumber($id, $page) {
     $outList = array();
 
     $num = Number::findById($id);
     $comms = $num->comments();
     $outList['comms'] = Paginator::paginate($comms, $page);
-    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['page_numbers'] = Comment::getPageNumbers();
     $outList['pageSelected'] = $page;
     $outList['lastList'] = 'index';
 
     return $outList;
 }
 
-function commentarticle($id, $posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function commentarticle($id, $page) {
     $outList = array();
 
     $art = Article::findById($id);
     $comms = $art->comments();
     $outList['comms'] = Paginator::paginate($comms, $page);
-    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['page_numbers'] = Comment::getPageNumbers();
     $outList['pageSelected'] = $page;
     $outList['lastList'] = 'index';
 
@@ -189,6 +177,9 @@ function save($toSave) {
 
 if (isset($_GET['list'])) { $list = $_GET['list']; }
 else { $list = 'index'; }
+if (isset($_GET['pageSelected'])) { $page = $_GET['pageSelected']; }
+elseif (isset($_POST['page'])) { $page = $_POST['page']; }
+else { $page = '1'; }
 if (isset($_GET['action'])) { $action = $_GET['action']; }
 else { $action = 'newComment'; }
 
@@ -202,11 +193,11 @@ if (isset($_SESSION['user'])) {
         case  'replay':            $outAction = replay($_GET['id']); break;
     }
     switch ($list) {
-        case  'index':             $outList = index($_POST); break;
-        case  'commentnumber':     $outList = commentnumber($_GET['id'], $_POST); break;
-        case  'commentarticle':    $outList = commentarticle($_GET['id'], $_POST); break;
+        case  'index':             $outList = index($page); break;
+        case  'commentnumber':     $outList = commentnumber($_GET['id'], $page); break;
+        case  'commentarticle':    $outList = commentarticle($_GET['id'], $page); break;
         case  'find':              $outList = find($_POST); break;
-        case  'byuser':            $outList = byuser($_POST); break;
+        case  'byuser':            $outList = byuser($page); break;
     }
 }
 

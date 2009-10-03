@@ -37,10 +37,7 @@ function commons() {
     return $outCommons;
 }
 
-function index($posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function index($page) {
     $outList = array();
 
     $arts = Article::findAllOrderedByIndexNumber();
@@ -61,25 +58,19 @@ function newArticle() {
     return $outAction;
 }
 
-function articlenumber($id, $posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function articlenumber($id, $page) {
     $outList = array();
 
     $num = Number::findById($id);
     $outList['arts'] = Paginator::paginate($num->articles(), $page);
-    $outList['page_numbers'] = 1;
-    $outList['pageSelected'] = 1;
+    $outList['page_numbers'] = Article::getPageNumbers();
+    $outList['pageSelected'] = $page;
     $outList['lastList'] = 'articlenumber';
 
     return $outList;
 }
 
-function byuser($posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function byuser($page) {
     $outList = array();
 
     $arts = $_SESSION['user']->articles();
@@ -249,6 +240,9 @@ function save($toSave, $files) {
 
 if (isset($_GET['list'])) { $list = $_GET['list']; }
 else { $list = 'index'; }
+if (isset($_GET['pageSelected'])) { $page = $_GET['pageSelected']; }
+elseif (isset($_POST['page'])) { $page = $_POST['page']; }
+else { $page = '1'; }
 if (isset($_GET['action'])) { $action = $_GET['action']; }
 else { $action = 'newArticle'; }
 
@@ -268,12 +262,10 @@ if (isset($_SESSION['user'])) {
         case  'dounlinkauthor':      $outAction = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
     }
     switch ($list) {
-        case  'index':               $outList = index($_POST); break;
-        case  'showPublished':       $outList = showPublished($_POST); break;
-        case  'showNotPublished':    $outList = showNotPublished($_POST); break;
+        case  'index':               $outList = index($page); break;
         case  'find':                $outList = find($_POST); break;
-        case  'byuser':              $outList = byuser($_POST); break;
-        case  'articlenumber':       $outList = articlenumber($_GET['id'], $_POST); break;
+        case  'byuser':              $outList = byuser($page); break;
+        case  'articlenumber':       $outList = articlenumber($_GET['id'], $page); break;
     }
 } else {
     header("Location: ../../loginError.php");

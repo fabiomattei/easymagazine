@@ -28,10 +28,7 @@ require_once(STARTPATH.UTILSPATH.'rssfeedcreator.php');
 
 session_start();
 
-function index($posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function index($page) {
     $outList = array();
 
     $numbs = Number::findAllOrderedByIndexNumber();
@@ -43,10 +40,7 @@ function index($posts) {
     return $outList;
 }
 
-function showPublished($posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function showPublished($page) {
     $outList = array();
 
     $numbs = Number::findAllPublishedOrderedByIndexNumber();
@@ -59,10 +53,7 @@ function showPublished($posts) {
     return $outList;
 }
 
-function showNotPublished($posts) {
-    if (isset($posts['page'])) $page = $posts['page'];
-    else $page = 1;
-
+function showNotPublished($page) {
     $outList = array();
 
     $numbs = Number::findAllNotPublishedOrderedByIndexNumber();
@@ -247,6 +238,9 @@ function save($toSave, $files) {
 
 if (isset($_GET['list'])) { $list = $_GET['list']; }
 else { $list = 'index'; }
+if (isset($_GET['pageSelected'])) { $page = $_GET['pageSelected']; }
+elseif (isset($_POST['page'])) { $page = $_POST['page']; }
+else { $page = '1'; }
 if (isset($_GET['action'])) { $action = $_GET['action']; }
 else { $action = 'newNumber'; }
 
@@ -263,9 +257,9 @@ if (isset($_SESSION['user'])) {
         case  'epub':              $outAction = epub($_GET['id']); break;
     }
     switch ($list) {
-        case  'index':             $outList = index($_POST); break;
-        case  'showPublished':     $outList = showPublished($_POST); break;
-        case  'showNotPublished':  $outList = showNotPublished($_POST); break;
+        case  'index':             $outList = index($page); break;
+        case  'showPublished':     $outList = showPublished($page); break;
+        case  'showNotPublished':  $outList = showNotPublished($page); break;
         case  'find':              $outList = find($_POST); break;
     }
 } else {
