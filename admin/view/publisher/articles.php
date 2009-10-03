@@ -98,9 +98,9 @@
                                 ?>
                             <tr>
                                 <td class="first style1"><? echo $ar->getTitle(); ?></td>
-                                <td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                <td><a href="article.php?action=up&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?action=edit&id=<? echo $ar->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?action=up&id=<? echo $ar->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="comment.php?list=commentarticle&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
                                 <td>
                                         <? if ($ar->getPublished()) { ?>
@@ -164,15 +164,21 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong>Title</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Title" value="<? echo $art->getUnfilteredTitle(); ?>"/></td>
+                                    <td class="last">
+                                        <textarea name="Title" rows="1" cols="60"><? echo $art->getUnfilteredTitle(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Sub Title</strong></td>
-                                    <td class="last"><input type="text" size="50" name="SubTitle" value="<? echo $art->getUnfilteredSubtitle(); ?>"/></td>
+                                    <td class="last">
+                                        <textarea name="SubTitle" rows="1" cols="60"><? echo $art->getUnfilteredSubtitle(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Summary</strong></td>
-                                    <td class="last"><textarea name="Summary" rows="4" cols="60"><? echo $art->getUnfilteredSummary(); ?></textarea></td>
+                                    <td class="last">
+                                        <textarea name="Summary" rows="4" cols="60"><? echo $art->getUnfilteredSummary(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="first" colspan="2"><strong>Body</strong><br />

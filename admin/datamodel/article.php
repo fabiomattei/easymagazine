@@ -72,7 +72,7 @@ class Article {
     const SELECT_BY_ID_ORD = 'select id from articles order by id DESC';
     const SELECT_UP_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber > # order by indexnumber ';
     const SELECT_DOWN_INDEXNUMBER = 'select * from articles WHERE number_id = # AND indexnumber < # order by indexnumber DESC ';
-    const SELECT_USERS = 'select US.* from users as US, users_articles as UA where US.id = UA.user_id AND UA.article_id = # order by US.id DESC';
+    const SELECT_USERS = 'select US.* from users as US, users_articles as UA where US.id = UA.user_id AND UA.article_id = # order by US.name ';
     const DELETE_USER = 'delete from users_articles WHERE article_id = # AND user_id = # ';
     const LINK_USER = 'insert into users_articles (article_id, user_id) values (#, #) ';
 
@@ -474,6 +474,10 @@ class Article {
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
+    }
+
+    public function cleanImg() {
+        ImageFiles::deletefile($this->created, $this->imgfilename);
     }
 
     public function imageExists() {

@@ -45,14 +45,14 @@ class User {
     const UPDATE_SQL_IMG_IMGDESC = 'update users set imgfilename = ?, imgalt = ?, imgcaption = ?, updated = Now() where id = #';
     const UPDATE_SQL_PASSWORD = 'update users set password = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from users where id = #';
-    const SELECT_BY_ID = 'select * from users where id = #';
-    const SELECT_BY_NAME = 'select * from users where name like ?';
-    const SELECT_BY_USERNAME_AND_EMAIL = 'select * from users where username = ? AND email = ? ';
-    const SELECT_ALL = 'select * from users ';
+    const SELECT_BY_ID = 'select * from users where id = # ';
+    const SELECT_BY_NAME = 'select * from users where name like ? order by name';
+    const SELECT_BY_USERNAME_AND_EMAIL = 'select * from users where username = ? AND email = ? order by name ';
+    const SELECT_ALL = 'select * from users order by name ';
     const SELECT_USR_PSW = 'select * from users WHERE username like ? AND password like ? ';
     const SELECT_BY_ID_ORD = 'select id from users order by id DESC';
     const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
-    const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
+    const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = # order by CM.id DESC';
 
     public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $email='', $msn='', $skype='', $imgfilename='', $imgalt='', $imgcaption='', $created='', $updated='') {
         $this->db = DB::getInstance();
@@ -347,6 +347,10 @@ class User {
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
+    }
+
+    public function cleanImg() {
+        ImageFiles::deletefile($this->created, $this->imgfilename);
     }
 
     public function imageExists() {

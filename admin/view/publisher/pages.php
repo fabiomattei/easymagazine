@@ -121,11 +121,15 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong>Title</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Title" value="<? echo $pag->getUnfilteredTitle(); ?>"/></td>
+                                    <td class="last">
+                                        <textarea name="Title" rows="1" cols="60"><?= $pag->getUnfilteredTitle(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Sub Title</strong></td>
-                                    <td class="last"><input type="text" size="50" name="SubTitle" value="<? echo $pag->getUnfilteredSubtitle(); ?>"/></td>
+                                    <td class="last">
+                                        <textarea name="SubTitle" rows="1" cols="60"><?= $pag->getUnfilteredSubtitle(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Summary</strong></td>

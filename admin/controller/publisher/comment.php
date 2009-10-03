@@ -182,7 +182,7 @@ function save($toSave) {
         $toSave['created'],
         $toSave['updated']);
     $comm->save();
-    $outAction['comm'] = $comm_to_be_replayed = Comment::findById($comm->getId());
+    $outAction['comm'] = Comment::findById($comm->getId());
 
     return $outAction;
 }

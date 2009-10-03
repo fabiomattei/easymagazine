@@ -141,7 +141,9 @@
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Title</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Title" value="<? echo $comm->getUnfilteredTitle(); ?>"/></td>
+                                    <td class="last">
+                                        <textarea name="Title" rows="1" cols="60"><?= $comm->getUnfilteredTitle(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Body</strong></td>
@@ -149,7 +151,9 @@
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Signature</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Signature" value="<? echo $comm->getSignature(); ?>"/></td>
+                                    <td class="last">
+                                        <textarea name="Signature" rows="1" cols="60"><?= $comm->getSignature(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Published</strong></td>

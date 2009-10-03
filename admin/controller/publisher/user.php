@@ -124,12 +124,14 @@ function save($toSave, $files) {
         $toSave['updated']);
     $userp->save();
 
+    $userp = User::findById($userp->getId()); // Necessary to reload date informations
+
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $userp->deleteImg();
+        $userp->cleanImg();
         $userp->saveImg($files['Image']);
     }
 
-    $out['userp'] = User::findById($userp->getId());
+    $out['userp'] = $userp;
 
     $userps = User::findAll();
     $out['userps'] = $userps;

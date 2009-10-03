@@ -167,10 +167,13 @@ function save($toSave, $files) {
         $toSave['updated']);
     $pag->save();
 
+    $pag = Page::findById($pag->getId()); // Necessary to reload date informations
+
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $pag->deleteImg();
+        $pag->cleanImg();
         $pag->saveImg($files['Image']);
     }
+    
     $outAction['pag'] = $pag;
 
     return $outAction;

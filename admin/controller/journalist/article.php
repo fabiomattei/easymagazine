@@ -187,14 +187,17 @@ function dounlinkauthor($idAuthor, $idArticle) {
 }
 
 function linkauthor($idAuthor, $idArticle) {
-    $page = 1;
     $outAction = array();
 
-    $art = Article::findById($idArticle);
-    $art->linkUser($idAuthor);
-    $outAction['art'] = $art;
+    if ($idArticle == Article::NEW_ARTICLE) {
+        $outAction['error'] = 'Before to link an article to a writer you need to save the article';
+    } else {
+        $art = Article::findById($idArticle);
+        $art->linkUser($idAuthor);
+        $outAction['art'] = $art;
 
-    $outAction['info'] = 'Author linked';
+        $outAction['info'] = 'Author linked';
+    }
 
     return $outAction;
 }
@@ -227,9 +230,11 @@ function save($toSave, $files) {
         $toSave['created'],
         $toSave['updated']);
     $art->save();
-    
+
+    $art = Article::findById($art->getId()); // Necessary to reload date informations
+
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $art->deleteImg();
+        $art->cleanImg();
         $art->saveImg($files['Image']);
     }
 

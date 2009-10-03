@@ -229,14 +229,17 @@ function save($toSave, $files) {
         $toSave['updated']);
     $numb->save();
 
+    $numb = Number::findById($numb->getId()); // Necessary to reload date informations
+
     if ($toSave['Published'] != 0) {
         rssFeedCreator::updatefeed();
     }
 
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $numb->deleteImg();
+        $numb->cleanImg();
         $numb->saveImg($files['Image']);
     }
+    
     $outAction['numb'] = $numb;
 
     return $outAction;

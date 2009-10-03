@@ -194,7 +194,7 @@ function save($toSave) {
         $toSave['updated']);
     $categ->save();
 
-    $outAction['categ'] = $categ;
+    $outAction['categ'] = Category::findById($categ->getId());
 
     return $outAction;
 }

@@ -146,16 +146,20 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong>Title</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Title" value="<? echo $numb->getTitle(); ?>"/></td>
+                                    <td class="last">
+                                        <textarea name="Title" rows="1" cols="60"><?= $numb->getTitle(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Sub Title</strong></td>
-                                    <td class="last"><input type="text" size="50" name="SubTitle" value="<? echo $numb->getSubtitle(); ?>"/></td>
+                                    <td class="last">
+                                        <textarea name="SubTitle" rows="1" cols="60"><?= $numb->getSubtitle(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" colspan="2"><strong>Summary</strong><br />
                                         <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
-                                        <textarea cols="40" id="article_body" name="Summary" rows="20" style="width: 500px; padding: 5px"><? echo $numb->getUnfilteredSummary(); ?></textarea>
+                                        <textarea cols="40" id="article_body" name="Summary" rows="20" style="width: 500px; padding: 5px"><?= $numb->getUnfilteredSummary(); ?></textarea>
                                 <link href="../../../lib/textileeditor/teh/stylesheets/textile-editor.css" media="screen" rel="Stylesheet" type="text/css" />
                                 <script src="../../../lib/textileeditor/teh/javascripts/textile-editor.js" type="text/javascript"></script>
                                 <script type="text/javascript">

@@ -233,6 +233,10 @@ class Page {
         }
     }
 
+    public function cleanImg() {
+        ImageFiles::deletefile($this->created, $this->imgfilename);
+    }
+
     public function imageExists() {
         if ($this->imgfilename == '') { return false; }
         else { return ImageFiles::fileexists($this->created, $this->imgfilename); }

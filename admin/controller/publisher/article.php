@@ -41,7 +41,7 @@ function commons() {
 function index($posts) {
     if (isset($posts['page'])) $page = $posts['page'];
     else $page = 1;
-    
+
     $outList = array();
 
     $arts = Article::findAllOrderedByIndexNumber();
@@ -122,7 +122,7 @@ function find($posts) {
     $outList['arts'] = Paginator::paginate($arts, $page);
     $outList['page_numbers'] = Article::getPageNumbers();
     $outList['pageSelected'] = $page;
-    
+
     $outList['lastList'] = 'find';
 
     if (count($arts)==0) { $outList['warning'] = 'No articles corresponding to search criteria';  }
@@ -203,15 +203,19 @@ function dounlinkauthor($idAuthor, $idArticle) {
 }
 
 function linkauthor($idAuthor, $idArticle) {
-    $page = 1;
     $outAction = array();
 
-    $art = Article::findById($idArticle);
-    $art->linkUser($idAuthor);
-    $outAction['art'] = $art;
+    if ($idArticle == Article::NEW_ARTICLE) {
+        $outAction['error'] = 'Before to link an article to a writer you need to save the article';
+        $outAction['art'] = New Article();
+    } else {
+        $art = Article::findById($idArticle);
+        $art->linkUser($idAuthor);
+        $outAction['art'] = $art;
 
-    $outAction['info'] = 'Author linked';
-
+        $outAction['info'] = 'Author linked';
+    }
+    
     return $outAction;
 }
 
@@ -281,16 +285,22 @@ function save($toSave, $files) {
         $toSave['created'],
         $toSave['updated']);
     $art->save();
+
+    $art = Article::findById($art->getId()); // Necessary to reload date informations
+
     if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $art->deleteImg();
+        $art->cleanImg();
         $art->saveImg($files['Image']);
     }
+
     $outAction['art'] = $art;
 
     return $outAction;
 }
 
 if (isset($_GET['list'])) { $list = $_GET['list']; }
+else { $list = 'index'; }
+if (isset($_GET['pageSelected'])) { $list = $_GET['list']; }
 else { $list = 'index'; }
 if (isset($_GET['action'])) { $action = $_GET['action']; }
 else { $action = 'newArticle'; }
