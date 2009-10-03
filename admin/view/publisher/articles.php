@@ -126,7 +126,7 @@
                                 <input type="submit" value="Go" name="Go" />
                             </form>
                         </div>
-                        <form name="formnew" method="post" action="article.php">
+                        <form name="formnew" method="post" action="article.php?list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
                             <input type="submit" value="New" name="new" />
                         </form>
                     </div>
@@ -280,7 +280,7 @@
                             }
                             ?>
                             <tr>
-                            <form name="formlinkauthor" method="post" action="article.php?action=linkauthor&idarticle=<? echo $art->getId(); ?>">
+                            <form name="formlinkauthor" method="post" action="article.php?action=linkauthor&idarticle=<? echo $art->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
                                 <td class="first style1">
                                     <select name="authorid">
                                         <? foreach ($authors as $auth) { ?>
