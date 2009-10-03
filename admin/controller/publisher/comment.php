@@ -71,10 +71,17 @@ function find($posts) {
     return $outList;
 }
 
-function commentnumber($id, $page) {
+function commentnumber($get, $page) {
     $outList = array();
 
-    $num = Number::findById($id);
+    if (isset($get['number_id'])) {
+        $_SESSION['number_id'] = $get['number_id'];
+        $number_id = $get['number_id'];
+    } else {
+        $number_id = $_SESSION['number_id'];
+    }
+
+    $num = Number::findById($number_id);
     $comms = $num->comments();
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Comment::getPageNumbers();
@@ -84,10 +91,17 @@ function commentnumber($id, $page) {
     return $outList;
 }
 
-function commentarticle($id, $page) {
+function commentarticle($get, $page) {
     $outList = array();
 
-    $art = Article::findById($id);
+    if (isset($get['article_id'])) {
+        $_SESSION['article_id'] = $get['article_id'];
+        $article_id = $get['article_id'];
+    } else {
+        $article_id = $_SESSION['article_id'];
+    }
+
+    $art = Article::findById($article_id);
     $comms = $art->comments();
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Comment::getPageNumbers();
@@ -194,8 +208,8 @@ if (isset($_SESSION['user'])) {
     }
     switch ($list) {
         case  'index':             $outList = index($page); break;
-        case  'commentnumber':     $outList = commentnumber($_GET['id'], $page); break;
-        case  'commentarticle':    $outList = commentarticle($_GET['id'], $page); break;
+        case  'commentnumber':     $outList = commentnumber($_GET, $page); break;
+        case  'commentarticle':    $outList = commentarticle($_GET, $page); break;
         case  'find':              $outList = find($_POST); break;
         case  'byuser':            $outList = byuser($page); break;
     }

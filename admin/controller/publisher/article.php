@@ -59,10 +59,17 @@ function newArticle() {
     return $outAction;
 }
 
-function articlenumber($id, $page) {
+function articlenumber($get, $page) {
     $outList = array();
 
-    $num = Number::findById($id);
+    if (isset($get['number_id'])) {
+        $_SESSION['number_id'] = $get['number_id'];
+        $number_id = $get['number_id'];
+    } else {
+        $number_id = $_SESSION['number_id'];
+    }
+
+    $num = Number::findById($number_id);
     $outList['arts'] = Paginator::paginate($num->articles(), $page);
     $outList['page_numbers'] = Article::getPageNumbers();
     $outList['pageSelected'] = $page;
@@ -313,7 +320,7 @@ if (isset($_SESSION['user'])) {
         case  'index':               $outList = index($page); break;
         case  'find':                $outList = find($_POST); break;
         case  'byuser':              $outList = byuser($page); break;
-        case  'articlenumber':       $outList = articlenumber($_GET['id'], $page); break;
+        case  'articlenumber':       $outList = articlenumber($_GET, $page); break;
         case  'articlecategory':     $outList = articlecategory($_GET['id'], $page); break;
     }
 } else {
