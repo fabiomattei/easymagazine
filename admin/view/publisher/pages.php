@@ -107,7 +107,7 @@
                             }
                             ?>
                         </table>
-                        <form name="formnew" method="post" action="page.php&list=<?=$lastList?>">
+                        <form name="formnew" method="post" action="page.php?list=<?=$lastList?>">
                             <input type="submit" value="New" name="new" />
                         </form>
                     </div>
