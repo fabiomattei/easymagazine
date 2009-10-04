@@ -45,7 +45,7 @@ function byuser($page) {
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Comment::getPageNumbers();
     $outList['pageSelected'] = $page;
-    $outList['lastList'] = 'index';
+    $outList['lastList'] = 'byuser';
 
     return $outList;
 }
@@ -55,6 +55,7 @@ function find($posts) {
         $page = $posts['page'];
         $string = $_SESSION['oldstring'];
     } else {
+        $_SESSION['oldstring'] = $string;
         $string = $posts['string'];
         $page = 1;
     }
@@ -86,16 +87,20 @@ function commentarticle($get, $page) {
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Comment::getPageNumbers();
     $outList['pageSelected'] = $page;
-    $outList['lastList'] = 'index';
+    $outList['lastList'] = 'commentarticle';
 
     return $outList;
 }
 
-function newComment() {
+function newComment($get) {
     $outAction = array();
 
     $comm = new Comment();
     $outAction['comm'] = $comm;
+
+    if (isset($get['article_id'])) {
+        $comm->setArticle_id($get['article_id']);
+    }
 
     return $outAction;
 }
@@ -151,22 +156,25 @@ function replay($id) {
 
 function save($toSave) {
     $outAction = array();
+    if ($toSave['article_id'] == Article::NEW_ARTICLE) {
+        if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
 
-    if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
+        $comm = new Comment(
+            $toSave['id'],
+            $toSave['article_id'],
+            $toSave['Title'],
+            $toSave['Published'],
+            $toSave['Body'],
+            $toSave['Signature'],
+            $toSave['created'],
+            $toSave['updated']);
+        $comm->save();
 
-    $comm = new Comment(
-        $toSave['id'],
-        $toSave['article_id'],
-        $toSave['Title'],
-        $toSave['Published'],
-        $toSave['Body'],
-        $toSave['Signature'],
-        $toSave['created'],
-        $toSave['updated']);
-    $comm->save();
-    
-    $outAction['comm'] = Comment::findById($comm->getId());
-
+        $outAction['comm'] = Comment::findById($comm->getId());
+    } else {
+        $outAction['comm'] = new Comment();
+        $outAction['info'] = 'A comment must be associated to an article';
+    }
     return $outAction;
 }
 
@@ -180,7 +188,7 @@ else { $action = 'newComment'; }
 
 if (isset($_SESSION['user'])) {
     switch ($action) {
-        case  'newComment':        $outAction = newComment(); break;
+        case  'newComment':        $outAction = newComment($_GET); break;
         case  'save':              $outAction = save($_POST); break;
         case  'edit':              $outAction = edit($_GET['id']); break;
         case  'dodelete':          $outAction = dodelete($_GET['id']); break;

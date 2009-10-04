@@ -91,18 +91,18 @@
                             </tr>
 
                             <?
-                            foreach ($comms as $ar) {
+                            foreach ($comms as $cm) {
                                 ?>
                             <tr>
-                                <td class="first style1"><? echo $ar->getTitle(); ?></td>
-                                <td><a href="comment.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td class="first style1"><? echo $cm->getTitle(); ?></td>
+                                <td><a href="comment.php?action=edit&id=<? echo $cm->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td>
-                                        <? if ($ar->getPublished()) { ?>
+                                        <? if ($cm->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
                                         <? } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                     <? } ?></td>
-                                <td class="last"><a href="comment.php?action=requestdelete&id=<? echo $ar->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                <td class="last"><a href="comment.php?action=requestdelete&id=<? echo $cm->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
@@ -176,10 +176,12 @@
                                 <td class="last">
                                     <input type="submit" value="Save" name="save" />
                             </form>
-
-                            <form name="formnew" method="post" action="comment.php?action=replay&id=<? echo $ar->getId(); ?>">
+                            <? if (isset($cm)): ?>
+                            <form name="formnew" method="post" action="comment.php?action=replay&id=<?= $cm->getId(); ?>">
                                 <input type="submit" value="Replay" name="new" />
-                            </form></td>
+                            </form>
+                            <? endif; ?>
+                            </td>
                             </tr>
                         </table>
                         <p>&nbsp;</p>
