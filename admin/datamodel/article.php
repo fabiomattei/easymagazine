@@ -24,7 +24,7 @@ require_once(STARTPATH.DATAMODELPATH.'category.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
 require_once(STARTPATH.UTILSPATH.'pagination.php');
-require_once(STARTPATH.UTILSPATH.'data.php');
+require_once(STARTPATH.UTILSPATH.'datehandler.php');
 require_once(STARTPATH.'lib/textile2/classTextile.php');
 
 class Article {
@@ -639,7 +639,7 @@ class Article {
         return $this->created;
     }
     public function getCreatedFormatted() {
-        return Data::DataFormat($this->created);
+        return DateHandler::DataFormat($this->created);
     }
     public function getUpdated() {
         return $this->updated;

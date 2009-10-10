@@ -9,17 +9,62 @@
         <title>Title of the magazine</title>
         <description>A short description of the magazine</description>
         <link>http://localhost:8888/easymagazine/</link>
-       <dc:date>2009-10-02T02:10:02+01:00</dc:date>
+       <dc:date>2009-10-10T09:57:15+01:00</dc:date>
         <items>
             <rdf:Seq>
+                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/xs/8"/>
+                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/xxxx/7"/>
+                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/xxxx/6"/>
+                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/ssssssss/5"/>
+                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/xxxx/4"/>
                 <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/My firts Article/1"/>
                 <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/My second Article/2"/>
             </rdf:Seq>
         </items>
     </channel>
+    <item rdf:about="http://localhost:8888/easymagazine/articles/xs/8">
+        <dc:format>text/html</dc:format>
+        <dc:date>2009-10-03T12:12:44+01:00</dc:date>
+        <dc:source>http://localhost:8888/easymagazine/</dc:source>
+        <title>xs</title>
+        <link>http://localhost:8888/easymagazine/articles/xs/8</link>
+        <description>dsxdsxx</description>
+    </item>
+    <item rdf:about="http://localhost:8888/easymagazine/articles/xxxx/7">
+        <dc:format>text/html</dc:format>
+        <dc:date>2009-10-03T12:10:46+01:00</dc:date>
+        <dc:source>http://localhost:8888/easymagazine/</dc:source>
+        <title>xxxx</title>
+        <link>http://localhost:8888/easymagazine/articles/xxxx/7</link>
+        <description>xxxx</description>
+    </item>
+    <item rdf:about="http://localhost:8888/easymagazine/articles/xxxx/6">
+        <dc:format>text/html</dc:format>
+        <dc:date>2009-10-03T12:06:39+01:00</dc:date>
+        <dc:source>http://localhost:8888/easymagazine/</dc:source>
+        <title>xxxx</title>
+        <link>http://localhost:8888/easymagazine/articles/xxxx/6</link>
+        <description>x</description>
+    </item>
+    <item rdf:about="http://localhost:8888/easymagazine/articles/ssssssss/5">
+        <dc:format>text/html</dc:format>
+        <dc:date>2009-10-03T12:03:56+01:00</dc:date>
+        <dc:source>http://localhost:8888/easymagazine/</dc:source>
+        <title>ssssssss</title>
+        <link>http://localhost:8888/easymagazine/articles/ssssssss/5</link>
+        <description>ssss</description>
+    </item>
+    <item rdf:about="http://localhost:8888/easymagazine/articles/xxxx/4">
+        <dc:format>text/html</dc:format>
+        <dc:date>2009-10-03T11:58:43+01:00</dc:date>
+        <dc:source>http://localhost:8888/easymagazine/</dc:source>
+        <title>xxxx</title>
+        <link>http://localhost:8888/easymagazine/articles/xxxx/4</link>
+        <description>xxx</description>
+    </item>
     <item rdf:about="http://localhost:8888/easymagazine/articles/My firts Article/1">
         <dc:format>text/html</dc:format>
-        <dc:date>2009-10-02T01:10:02+01:00</dc:date>
+        <dc:date>2009-08-02T23:00:00+01:00</dc:date>
         <dc:source>http://localhost:8888/easymagazine/</dc:source>
         <dc:creator>New User </dc:creator>
         <title>My firts Article</title>
@@ -28,7 +73,7 @@
     </item>
     <item rdf:about="http://localhost:8888/easymagazine/articles/My second Article/2">
         <dc:format>text/html</dc:format>
-        <dc:date>2009-10-02T01:10:02+01:00</dc:date>
+        <dc:date>2009-08-02T23:00:00+01:00</dc:date>
         <dc:source>http://localhost:8888/easymagazine/</dc:source>
         <dc:creator>New User </dc:creator>
         <title>My second Article</title>

@@ -20,7 +20,7 @@
 require_once(STARTPATH.FILTERPATH.'commentfilterremote.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.DATAMODELPATH.'article.php');
-require_once(STARTPATH.UTILSPATH.'data.php');
+require_once(STARTPATH.UTILSPATH.'datehandler.php');
 require_once(STARTPATH.DBPATH.'db.php');
 
 class Comment {
@@ -301,7 +301,7 @@ class Comment {
     }
 
     public function getCreatedFormatted() {
-        return Data::DataFormat($this->created);
+        return DateHandler::DataFormat($this->created);
     }
 
     public function setCreated($created) {

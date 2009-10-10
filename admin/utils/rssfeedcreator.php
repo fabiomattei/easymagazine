@@ -19,6 +19,7 @@
 
 require_once(STARTPATH.LIBPATH.FEEDCREATORPATH.'feedcreator.class.php');
 require_once(STARTPATH.SYSTEMPATH.'settings.php');
+require_once(STARTPATH.UTILSPATH.'datehandler.php');
 if (URLTYPE == 'optimized') {
     require_once(STARTPATH.URIPATH.'urimakeroptimized.php');
 } else {
@@ -59,7 +60,7 @@ class rssFeedCreator {
                 $item->title = $art->getTitle();
                 $item->link = URIMaker::article($art);
                 $item->description = $art->getSummary();
-                $item->date = time();
+                $item->date = DateHandler::convertMySqlDateTimeToUnixTime($art->getCreated());
                 $item->source = URIMaker::fromBasePath('');
                 $item->author = $author;
 

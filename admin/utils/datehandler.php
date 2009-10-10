@@ -17,10 +17,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-class Data {
+class DateHandler {
 
-    public static function DataFormat($data) {
-        return date("d M Y",strtotime($data));
+    public static function DataFormat($date) {
+        return date("d M Y",strtotime($date));
+    }
+
+    public static function convertMySqlDateTimeToUnixTime($date) {
+        return strtotime($date);
     }
 
 }
