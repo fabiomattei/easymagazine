@@ -139,16 +139,6 @@ function dodelete($id) {
     return $outAction;
 }
 
-function deleteimg($id) {
-    $outAction = array();
-
-    $art = Article::findById($id);
-    $art->deleteImg();
-    $outAction['art'] = $art;
-
-    return $outAction;
-}
-
 function requestunlinkauthor($idAuthor, $idArticle, $list, $pageSelected) {
     $outAction = array();
 
@@ -199,8 +189,6 @@ function save($toSave, $files) {
 
     $article_old = Article::findById($toSave['id']);
 
-    if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
-
     $art = new Article(
         $toSave['id'],
         $toSave['numberid'],
@@ -215,19 +203,11 @@ function save($toSave, $files) {
         $toSave['Tag'],
         $toSave['MetaDescription'],
         $toSave['MetaKeyword'],
-        $toSave['imagefilename'],
-        $toSave['ImageAlt'],
-        $toSave['ImageCaption'],
         $toSave['created'],
         $toSave['updated']);
     $art->save();
 
     $art = Article::findById($art->getId()); // Necessary to reload date informations
-
-    if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $art->cleanImg();
-        $art->saveImg($files['Image']);
-    }
 
     $outAction['art'] = $art;
 
@@ -256,7 +236,6 @@ if (isset($_SESSION['user'])) {
         case  'requestdelete':       $outAction = requestdelete($_GET['id'], $_GET['list'], $_GET['pageSelected']); break;
         case  'up':                  $outAction = up($_GET['id']); break;
         case  'down':                $outAction = down($_GET['id']); break;
-        case  'deleteimg':           $outAction = deleteimg($_GET['id']); break;
         case  'linkauthor':          $outAction = linkauthor($_POST['authorid'], $_GET['idarticle']); break;
         case  'requestunlinkauthor': $outAction = requestunlinkauthor($_GET['idauthor'], $_GET['idarticle'], $_GET['list'], $_GET['pageSelected']); break;
         case  'dounlinkauthor':      $outAction = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;

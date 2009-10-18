@@ -264,9 +264,6 @@ function save($toSave, $files) {
         $toSave['Tag'],
         $toSave['MetaDescription'],
         $toSave['MetaKeyword'],
-        $toSave['imagefilename'],
-        $toSave['ImageAlt'],
-        $toSave['ImageCaption'],
         $toSave['created'],
         $toSave['updated']);
     $art->save();

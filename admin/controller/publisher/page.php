@@ -91,18 +91,6 @@ function dodelete($id) {
     return $outAction;
 }
 
-function deleteimg($id) {
-    $outAction = array();
-
-    $pag = Page::findById($id);
-    $pag->deleteImg();
-    $outAction['pag'] = $pag;
-
-    $outAction['info'] = 'Image deleted';
-
-    return $outAction;
-}
-
 function up($id) {
     $outAction = array();
 
@@ -147,7 +135,6 @@ function save($toSave, $files) {
     $outAction = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
-    if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
 
     $pag = new Page(
         $toSave['id'],
@@ -160,19 +147,11 @@ function save($toSave, $files) {
         $toSave['Tag'],
         $toSave['MetaDescription'],
         $toSave['MetaKeyword'],
-        $toSave['imagefilename'],
-        $toSave['ImageAlt'],
-        $toSave['ImageCaption'],
         $toSave['created'],
         $toSave['updated']);
     $pag->save();
 
     $pag = Page::findById($pag->getId()); // Necessary to reload date informations
-
-    if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $pag->cleanImg();
-        $pag->saveImg($files['Image']);
-    }
     
     $outAction['pag'] = $pag;
 
@@ -193,7 +172,6 @@ if (isset($_SESSION['user'])) {
         case  'requestdelete':     $outAction = requestdelete($_GET['id'], $_GET['list']); break;
         case  'up':                $outAction = up($_GET['id']); break;
         case  'down':              $outAction = down($_GET['id']); break;
-        case  'deleteimg':         $outAction = deleteimg($_GET['id']); break;
     }
     switch ($list) {
         case  'index':             $outList = index($_POST); break;

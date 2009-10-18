@@ -40,8 +40,6 @@ function save($toSave, $files) {
 
     $user_old = User::findById($_SESSION['user']->getId());
 
-    if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
-
     $userp = new User(
         $_SESSION['user']->getId(),
         $toSave['Name'],
@@ -52,17 +50,9 @@ function save($toSave, $files) {
         $toSave['Email'],
         $toSave['MSN'],
         $toSave['Skype'],
-        $toSave['imagefilename'],
-        $toSave['ImageAlt'],
-        $toSave['ImageCaption'],
         $toSave['created'],
         $toSave['updated']);
     $userp->save();
-
-    if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $userp->deleteImg();
-        $userp->saveImg($files['Image']);
-    }
 
     $out['userp'] = User::findById($userp->getId());
 

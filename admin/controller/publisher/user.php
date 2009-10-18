@@ -82,21 +82,6 @@ function dodelete($id) {
     return $out;
 }
 
-function deleteimg($id) {
-    $out = array();
-
-    $userp = User::findById($id);
-    $userp->deleteImg();
-    $out['userp'] = $userp;
-
-    $userps = User::findAll();
-    $out['userps'] = $userps;
-
-    $out['info'] = 'Image deleted';
-
-    return $out;
-}
-
 function save($toSave, $files) {
     $out = array();
     if (isset($toSave['Role'])) {
@@ -104,8 +89,6 @@ function save($toSave, $files) {
     } else {
         $toSave['Role'] = 'journalist';
     }
-
-    if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
 
     $userp = new User(
         $toSave['id'],
@@ -117,19 +100,11 @@ function save($toSave, $files) {
         $toSave['Email'],
         $toSave['MSN'],
         $toSave['Skype'],
-        $toSave['imagefilename'],
-        $toSave['ImageAlt'],
-        $toSave['ImageCaption'],
         $toSave['created'],
         $toSave['updated']);
     $userp->save();
 
     $userp = User::findById($userp->getId()); // Necessary to reload date informations
-
-    if (isset($files['Image']) && $files['Image']['size'] > 0) {
-        $userp->cleanImg();
-        $userp->saveImg($files['Image']);
-    }
 
     $out['userp'] = $userp;
 
