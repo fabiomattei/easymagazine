@@ -33,15 +33,10 @@ class User {
     private $skype;
     private $created;
     private $updated;
-    private $imgfilename;
-    private $imgalt;
-    private $imgcaption;
     private $db;
 
     const INSERT_SQL = 'insert into users (id, name, username, password, body, role, email, msn, skype, created, updated) values (#, ?, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update users set name = ?, body = ?, role = ?, email = ?, msn = ?, skype = ?, imgalt = ?, imgcaption = ?, updated=now() where id = #';
-    const UPDATE_SQL_IMG = 'update users set imgfilename = ?, updated = Now() where id = #';
-    const UPDATE_SQL_IMG_IMGDESC = 'update users set imgfilename = ?, imgalt = ?, imgcaption = ?, updated = Now() where id = #';
+    const UPDATE_SQL = 'update users set name = ?, body = ?, role = ?, email = ?, msn = ?, skype = ?, updated=now() where id = #';
     const UPDATE_SQL_PASSWORD = 'update users set password = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from users where id = #';
     const SELECT_BY_ID = 'select * from users where id = # ';
@@ -53,7 +48,7 @@ class User {
     const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
     const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = # order by CM.id DESC';
 
-    public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $email='', $msn='', $skype='', $imgfilename='', $imgalt='', $imgcaption='', $created='', $updated='') {
+    public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $email='', $msn='', $skype='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->name = $name;
@@ -64,9 +59,6 @@ class User {
         $this->email = $email;
         $this->msn = $msn;
         $this->skype = $skype;
-        $this->imgfilename = $imgfilename;
-        $this->imgalt = $imgalt;
-        $this->imgcaption = $imgcaption;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -80,7 +72,7 @@ class User {
                 $array_int,
                 $tables);
             if ($row = mysql_fetch_array($rs)) {
-                $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
+                $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
             } else {
                 $ret = new User();
             }
@@ -101,7 +93,7 @@ class User {
                 $array_int,
                 $tables);
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
+                $ret[] = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new User();
@@ -160,9 +152,6 @@ class User {
                     $row['tag'],
                     $row['metadescription'],
                     $row['metakeyword'],
-                    $row['imgfilename'],
-                    $row['imgalt'],
-                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -244,9 +233,6 @@ class User {
             $this->email = '';
             $this->msn = '';
             $this->skype = '';
-            $this->imgfilename = '';
-            $this->imgalt = '';
-            $this->imgcaption = '';
             $this->created = '';
             $this->updated = '';
         } catch (Exception $e) {
@@ -274,7 +260,7 @@ class User {
         try {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
-                array($this->name, $this->body, $this->role, $this->email, $this->msn, $this->skype, $this->imgalt, $this->imgcaption),
+                array($this->name, $this->body, $this->role, $this->email, $this->msn, $this->skype),
                 array($this->id),
                 $tables);
         } catch (Exception $e) {
@@ -312,53 +298,6 @@ class User {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $newPassword;
-    }
-
-    public function saveImg($img) {
-        if (!$img['error']) {
-            $this->imgfilename = $img['name'];
-            $tables = array("users" => TBPREFIX."users");
-            try {
-                DB::getInstance()->execute(
-                    self::UPDATE_SQL_IMG,
-                    array($this->imgfilename),
-                    array($this->id),
-                    $tables);
-                ImageFiles::savefile($this->created, $img);
-            } catch (Exception $e) {
-                echo 'Caught exception: ',  $e->getMessage(), "\n";
-            }
-        }
-    }
-
-    public function deleteImg() {
-        ImageFiles::deletefile($this->created, $this->imgfilename);
-        $this->imgfilename = '';
-        $this->imgalt = '';
-        $this->imgcaption = '';
-        $tables = array("users" => TBPREFIX."users");
-        try {
-            DB::getInstance()->execute(
-                self::UPDATE_SQL_IMG_IMGDESC,
-                array($this->imgfilename, $this->imgalt, $this->imgcaption),
-                array($this->id),
-                $tables);
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-    }
-
-    public function cleanImg() {
-        ImageFiles::deletefile($this->created, $this->imgfilename);
-    }
-
-    public function imageExists() {
-        if ($this->imgfilename == '') { return false; }
-        else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
-    }
-
-    public function imagePath() {
-        return ImageFiles::filepath($this->created, $this->imgfilename);
     }
 
     public function getId() {
@@ -432,31 +371,6 @@ class User {
     public function setSkype($skype) {
         $this->skype = $skype;
     }
-
-    public function getImgfilename() {
-        return $this->imgfilename;
-    }
-
-    public function setImgfilename($imgfilename) {
-        $this->imgfilename = $imgfilename;
-    }
-
-    public function getImgAlt() {
-        return $this->imgalt;
-    }
-
-    public function setImgAlt($imgalt) {
-        $this->imgalt = $imgalt;
-    }
-
-    public function getImgCaption() {
-        return $this->imgcaption;
-    }
-
-    public function setImgCaption($imgcaption) {
-        $this->imgcaption = $imgcaption;
-    }
-
 
     public function getCreated() {
         return $this->created;

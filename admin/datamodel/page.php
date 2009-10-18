@@ -36,15 +36,10 @@ class Page {
     private $metakeyword;
     private $created;
     private $updated;
-    private $imgfilename;
-    private $imgalt;
-    private $imgcaption;
     private $db;
 
     const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgalt = ?, imgcaption = ?, updated=now() where id = #';
-    const UPDATE_SQL_IMG = 'update pages set imgfilename = ?, updated = Now() where id = #';
-    const UPDATE_SQL_IMG_IMGDESC = 'update pages set imgfilename = ?, imgalt = ?, imgcaption = ?, updated = Now() where id = #';
+    const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from pages where id = # ';
     const SELECT_BY_ID = 'select * from pages where id = # ';
     const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber DESC';
@@ -59,7 +54,7 @@ class Page {
     const SELECT_BY_ID_ORD = 'select id from pages order by id DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from pages order by indexnumber DESC';
 
-    public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgalt='', $imgcaption='', $created='', $updated='') {
+    public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = PageFilterRemote::getInstance();
         $this->id = $id;
@@ -72,9 +67,6 @@ class Page {
         $this->tag = $tag;
         $this->metadescription = $metadescription;
         $this->metakeyword = $metakeyword;
-        $this->imgfilename = $imgfilename;
-        $this->imgalt = $imgalt;
-        $this->imgcaption = $imgcaption;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -92,7 +84,7 @@ class Page {
                 $array_int,
                 $tables);
             if ($row = mysql_fetch_array($rs)) {
-                $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated'] );
+                $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated'] );
             } else {
                 $ret = new Page();
             }
@@ -113,7 +105,7 @@ class Page {
                 $array_int,
                 $tables);
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
+                $ret[] = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Page();
@@ -198,53 +190,6 @@ class Page {
         }
     }
 
-    public function saveImg($img) {
-        if (!$img['error']) {
-            $this->imgfilename = $img['name'];
-            $tables = array("pages" => TBPREFIX."pages");
-            try {
-                DB::getInstance()->execute(
-                    self::UPDATE_SQL_IMG,
-                    array($this->imgfilename),
-                    array($this->id),
-                    $tables);
-                ImageFiles::savefile($this->created, $img);
-            } catch (Exception $e) {
-                echo 'Caught exception: ', $e->getMessage(), "\n";
-            }
-        }
-    }
-
-    public function deleteImg() {
-        ImageFiles::deletefile($this->created, $this->imgfilename);
-        $this->imgfilename = '';
-        $this->imgalt = '';
-        $this->imgcaption = '';
-        $tables = array("pages" => TBPREFIX."pages");
-        try {
-            DB::getInstance()->execute(
-                self::UPDATE_SQL_IMG_IMGDESC,
-                array($this->imgfilename, $this->imgalt, $this->imgcaption),
-                array($this->id),
-                $tables);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
-    }
-
-    public function cleanImg() {
-        ImageFiles::deletefile($this->created, $this->imgfilename);
-    }
-
-    public function imageExists() {
-        if ($this->imgfilename == '') { return false; }
-        else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
-    }
-
-    public function imagePath() {
-        return ImageFiles::filepath($this->created, $this->imgfilename);
-    }
-
     protected function insert() {
         $this->id = $this->getMaxId()+1;
         $this->indexnumber = $this->getMaxIndexNumber()+1;
@@ -265,7 +210,7 @@ class Page {
         try {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgalt, $this->imgcaption),
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
                 array($this->indexnumber, $this->published, $this->id),
                 $tables);
         } catch (Exception $e) {
@@ -407,31 +352,6 @@ class Page {
     public function setMetakeyword($metakeyword) {
         $this->metakeyword = $metakeyword;
     }
-
-    public function getImgfilename() {
-        return $this->imgfilename;
-    }
-
-    public function setImgfilename($imgfilename) {
-        $this->imgfilename = $imgfilename;
-    }
-
-    public function getImgAlt() {
-        return $this->imgalt;
-    }
-
-    public function setImgAlt($imgalt) {
-        $this->imgalt = $imgalt;
-    }
-
-    public function getImgCaption() {
-        return $this->imgcaption;
-    }
-
-    public function setImgCaption($imgcaption) {
-        $this->imgcaption = $imgcaption;
-    }
-
 
     public function getCreated() {
         return $this->created;

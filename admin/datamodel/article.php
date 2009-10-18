@@ -41,17 +41,12 @@ class Article {
     private $tag;
     private $metadescription;
     private $metakeyword;
-    private $imgfilename;
-    private $imgalt;
-    private $imgcaption;
     private $created;
     private $updated;
     private $filter;
 
-    const INSERT_SQL = 'insert into articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgalt, imgcaption, created, updated) values (#, #, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update articles set number_id = #, category_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, imgalt = ?, imgcaption = ?, updated=now() where id = #';
-    const UPDATE_SQL_IMG = 'update articles set imgfilename = ?, updated = Now() where id = #';
-    const UPDATE_SQL_IMG_IMGDESC = 'update articles set imgfilename = ?, imgalt = ?, imgcaption = ?, updated = Now() where id = #';
+    const INSERT_SQL = 'insert into articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values (#, #, #, #, #, ?, ?, ?, ?, #, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update articles set number_id = #, category_id = #, indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from articles where id = # ';
     const DELETE_USER_ARTICLE = 'delete from users_articles where article_id = # ';
     const SELECT_BY_ID = 'select * from articles where id = #';
@@ -76,7 +71,7 @@ class Article {
     const LINK_USER = 'insert into users_articles (article_id, user_id) values (#, #) ';
 
 
-    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $category_id=self::NEW_ARTICLE, $indexnumber='', $published='0', $title='', $subtitle='', $summary='', $body='', $commentsallowed='0', $tag='', $metadescription='', $metakeyword='', $imgfilename='', $imgalt='', $imgcaption='', $created='', $updated='') {
+    public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $category_id=self::NEW_ARTICLE, $indexnumber='', $published='0', $title='', $subtitle='', $summary='', $body='', $commentsallowed='0', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
         $this->id = $id;
         $this->number_id = $number_id;
@@ -91,9 +86,6 @@ class Article {
         $this->tag = $tag;
         $this->metadescription = $metadescription;
         $this->metakeyword = $metakeyword;
-        $this->imgfilename = $imgfilename;
-        $this->imgalt = $imgalt;
-        $this->imgcaption = $imgcaption;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -111,7 +103,7 @@ class Article {
                 $array_int,
                 $tables);
             if ($row = mysql_fetch_array($rs)) {
-                $ret = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
+                $ret = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             } else {
                 $ret = new Article();
             }
@@ -133,7 +125,7 @@ class Article {
                 $tables);
             $ret = array();
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
+                $ret[] = new Article($row['id'], $row['number_id'], $row['category_id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['commentsallowed'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Article();
@@ -296,9 +288,6 @@ class Article {
                     $row['commentsallowed'],
                     $row['metadescription'],
                     $row['metakeyword'],
-                    $row['imgfilename'],
-                    $row['imgalt'],
-                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -330,9 +319,6 @@ class Article {
                     $row['email'],
                     $row['msn'],
                     $row['skype'],
-                    $row['imgfilename'],
-                    $row['imgalt'],
-                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -392,7 +378,7 @@ class Article {
         try {
             DB::getInstance()->execute(
                 self::INSERT_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgalt, $this->imgcaption),
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
                 array($this->id, $this->number_id, $this->category_id, $this->indexnumber, $this->published, $this->commentsallowed),
                 $tables);
         } catch (Exception $e) {
@@ -405,7 +391,7 @@ class Article {
         try {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword, $this->imgalt, $this->imgcaption),
+                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
                 array($this->number_id, $this->category_id, $this->indexnumber, $this->published, $this->commentsallowed, $this->id),
                 $tables);
         } catch (Exception $e) {
@@ -414,7 +400,6 @@ class Article {
     }
 
     public function delete() {
-        $this->deleteImg();
         $tables = array("articles" => TBPREFIX."articles", "users_articles" => TBPREFIX."users_articles");
         try {
             DB::getInstance()->execute(self::DELETE_SQL, array(),array((int) $this->getId()), $tables);
@@ -431,61 +416,11 @@ class Article {
             $this->tag = '';
             $this->metadescription = '';
             $this->metakeyword = '';
-            $this->imgfilename = '';
-            $this->imgalt = '';
-            $this->imgcaption = '';
             $this->created = '';
             $this->updated = '';
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-    }
-
-    public function saveImg($img) {
-        if (!$img['error']) {
-            $this->imgfilename = $img['name'];
-            $tables = array("articles" => TBPREFIX."articles");
-            try {
-                DB::getInstance()->execute(
-                    self::UPDATE_SQL_IMG,
-                    array($this->imgfilename),
-                    array($this->id),
-                    $tables);
-                ImageFiles::savefile($this->created, $img);
-            } catch (Exception $e) {
-                echo 'Caught exception: ',  $e->getMessage(), "\n";
-            }
-        }
-    }
-
-    public function deleteImg() {
-        try {
-            ImageFiles::deletefile($this->created, $this->imgfilename);
-            $this->imgfilename = '';
-            $this->imgalt = '';
-            $this->imgcaption = '';
-            $tables = array("articles" => TBPREFIX."articles");
-            $rs = DB::getInstance()->execute(
-                self::UPDATE_SQL_IMG_IMGDESC,
-                array($this->imgfilename, $this->imgalt, $this->imgcaption),
-                array($this->id),
-                $tables);
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-    }
-
-    public function cleanImg() {
-        ImageFiles::deletefile($this->created, $this->imgfilename);
-    }
-
-    public function imageExists() {
-        if ($this->imgfilename == '') { return false; }
-        else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
-    }
-
-    public function imagePath() {
-        return ImageFiles::filepath($this->created, $this->imgfilename);
     }
 
     public function getMaxId() {
@@ -657,30 +592,6 @@ class Article {
 
     public function setCategory_id($category_id) {
         $this->category_id = $category_id;
-    }
-
-    public function getImgfilename() {
-        return $this->imgfilename;
-    }
-
-    public function setImgfilename($imgfilename) {
-        $this->imgfilename = $imgfilename;
-    }
-
-    public function getImgAlt() {
-        return $this->imgalt;
-    }
-
-    public function setImgAlt($imgalt) {
-        $this->imgalt = $imgalt;
-    }
-
-    public function getImgCaption() {
-        return $this->imgcaption;
-    }
-
-    public function setImgCaption($imgcaption) {
-        $this->imgcaption = $imgcaption;
     }
 
 }

@@ -36,18 +36,13 @@ class Number {
     private $commentsallowed;
     private $metadescription;
     private $metakeyword;
-    private $imgfilename;
-    private $imgalt;
-    private $imgcaption;
     private $created;
     private $updated;
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgalt, imgcaption, created, updated) values (#, #, #, ?, ?, ?, #, ?, ?, ?, ?, Now(), Now())';
-    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?,  metadescription = ?, metakeyword = ?, imgalt = ?, imgcaption = ?, updated = Now() where id = #';
-    const UPDATE_SQL_IMG = 'update numbers set imgfilename = ?, updated = Now() where id = #';
-    const UPDATE_SQL_IMG_IMGDESC = 'update numbers set imgfilename = ?, imgalt = ?, imgcaption = ?, updated = Now() where id = #';
+    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, #, ?, ?, Now(), Now())';
+    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?,  metadescription = ?, metakeyword = ?, updated = Now() where id = #';
     const DELETE_SQL = 'delete from numbers where id = #';
     const SELECT_BY_ID = 'select * from numbers where id = #';
     const SELECT_BY_TITLE = 'select * from numbers where title like ?';
@@ -69,7 +64,7 @@ class Number {
     const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < # order by indexnumber DESC ';
     const SELECT_COMMENTS = 'select C.* from comments as C, articles as A where A.number_id = # AND C.article_id = A.id order by C.created DESC';
 
-    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $commentsallowed='', $metadescription='', $metakeyword='', $imgfilename='', $imgalt='', $imgcaption='', $created='', $updated='') {
+    public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $commentsallowed='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = NumberFilterRemote::getInstance();
         $this->id = $id;
@@ -81,9 +76,6 @@ class Number {
         $this->commentsallowed = $commentsallowed;
         $this->metakeyword = $metakeyword;
         $this->metadescription = $metadescription;
-        $this->imgfilename = $imgfilename;
-        $this->imgalt = $imgalt;
-        $this->imgcaption = $imgcaption;
         $this->created = $created;
         $this->updated = $updated;
     }
@@ -101,7 +93,7 @@ class Number {
                 $array_int,
                 $tables);
             if ($row = mysql_fetch_array($rs)) {
-                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
+                $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             } else {
                 $ret = new Number();
             }
@@ -122,7 +114,7 @@ class Number {
                 $array_int,
                 $tables);
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['metadescription'], $row['metakeyword'], $row['imgfilename'], $row['imgalt'], $row['imgcaption'], $row['created'], $row['updated']);
+                $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Number();
@@ -230,9 +222,6 @@ class Number {
                     $row['tag'],
                     $row['metadescription'],
                     $row['metakeyword'],
-                    $row['imgfilename'],
-                    $row['imgalt'],
-                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -267,9 +256,6 @@ class Number {
                     $row['tag'],
                     $row['metadescription'],
                     $row['metakeyword'],
-                    $row['imgfilename'],
-                    $row['imgalt'],
-                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }
@@ -322,7 +308,7 @@ class Number {
         try {
             DB::getInstance()->execute(
                 self::INSERT_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->metadescription, $this->metakeyword, $this->imgalt, $this->imgcaption),
+                array($this->title, $this->subtitle, $this->summary, $this->metadescription, $this->metakeyword),
                 array($this->id, $this->indexnumber, $this->published, $this->commentsallowed),
                 $tables);
         } catch (Exception $e) {
@@ -335,7 +321,7 @@ class Number {
         try {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->metadescription, $this->metakeyword, $this->imgalt, $this->imgcaption),
+                array($this->title, $this->subtitle, $this->summary, $this->metadescription, $this->metakeyword),
                 array($this->indexnumber, $this->published, $this->commentsallowed, $this->id),
                 $tables);
         } catch (Exception $e) {
@@ -344,7 +330,6 @@ class Number {
     }
 
     public function delete() {
-        $this->deleteImg();
         $tables = array("numbers" => TBPREFIX."numbers");
         try {
             DB::getInstance()->execute(
@@ -360,61 +345,11 @@ class Number {
             $this->summary = '';
             $this->metadescription = '';
             $this->metakeyword = '';
-            $this->imgfilename = '';
-            $this->imgalt = '';
-            $this->imgcaption = '';
             $this->created = '';
             $this->updated = '';
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
-    }
-
-    public function saveImg($img) {
-        if (!$img['error']) {
-            $this->imgfilename = $img['name'];
-            $tables = array("numbers" => TBPREFIX."numbers");
-            try {
-                DB::getInstance()->execute(
-                    self::UPDATE_SQL_IMG,
-                    array($this->imgfilename),
-                    array($this->id),
-                    $tables);
-                ImageFiles::savefile($this->created, $img);
-            } catch (Exception $e) {
-                echo 'Caught exception: ',  $e->getMessage(), "\n";
-            }
-        }
-    }
-
-    public function deleteImg() {
-        try {
-            ImageFiles::deletefile($this->created, $this->imgfilename);
-            $this->imgfilename = '';
-            $this->imgalt = '';
-            $this->imgcaption = '';
-            $tables = array("numbers" => TBPREFIX."numbers");
-            DB::getInstance()->execute(
-                self::UPDATE_SQL_IMG_IMGDESC,
-                array($this->imgfilename, $this->imgalt, $this->imgcaption),
-                array($this->id),
-                $tables);
-        } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-    }
-
-    public function cleanImg() {
-        ImageFiles::deletefile($this->created, $this->imgfilename);
-    }
-
-    public function imageExists() {
-        if ($this->imgfilename == '') { return false; }
-        else { return ImageFiles::fileexists($this->created, $this->imgfilename); }
-    }
-
-    public function imagePath() {
-        return ImageFiles::filepath($this->created, $this->imgfilename);
     }
 
     public function epubExists() {
@@ -534,30 +469,6 @@ class Number {
     public function getUpdated() {
         return $this->updated;
     }
-    public function getImgfilename() {
-        return $this->imgfilename;
-    }
-
-    public function setImgfilename($imgfilename) {
-        $this->imgfilename = $imgfilename;
-    }
-
-    public function getImgAlt() {
-        return $this->imgalt;
-    }
-
-    public function setImgAlt($imgalt) {
-        $this->imgalt = $imgalt;
-    }
-
-    public function getImgCaption() {
-        return $this->imgcaption;
-    }
-
-    public function setImgCaption($imgcaption) {
-        $this->imgcaption = $imgcaption;
-    }
-
 
     public function getMetadescription() {
         return $this->metadescription;

@@ -151,9 +151,6 @@ class Comment {
                     $row['tag'],
                     $row['metadescription'],
                     $row['metakeyword'],
-                    $row['imgfilename'],
-                    $row['imgalt'],
-                    $row['imgcaption'],
                     $row['created'],
                     $row['updated']);
             }

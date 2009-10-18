@@ -46,9 +46,6 @@ class DbCreator {
            commentsallowed int,
            metadescription text,
            metakeyword text,
-           imgfilename varchar(255),
-           imgalt varchar(255),
-           imgcaption varchar(255),
            created datetime,
            updated datetime,
            PRIMARY KEY (id));";
@@ -57,9 +54,9 @@ class DbCreator {
     }
 
     public function populateTableNumbers() {
-        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, imgfilename, imgalt, imgcaption, created, updated)
+        $cmd = "insert into ".TBPREFIX."numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, created, updated)
            values (1, 1, 1, 'My first number', 'Subtitle to my first number',
-           'Summary of my first number', 1, 'meta description of the number', 'meta keywords of the number', 'viale_dei_pini.jpg', 'Viale dei Pini', 'Viale dei Pini by Daniela Scancella', '2009-08-03', '2009-08-03')";
+           'Summary of my first number', 1, 'meta description of the number', 'meta keywords of the number', '2009-08-03', '2009-08-03')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -85,9 +82,6 @@ class DbCreator {
             tag text,
             metadescription text,
             metakeyword text,
-            imgfilename varchar(255),
-            imgalt varchar(255),
-            imgcaption varchar(255),
             created datetime,
             updated datetime,
             PRIMARY KEY (id));";
@@ -96,19 +90,19 @@ class DbCreator {
     }
 
     public function populateTableArticles() {
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgalt, imgcaption, created, updated) values
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (1, 1, 2, 2, 1, 'My firts Article', 'Subtitle of my first article',
             'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.',
             'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt. Gallos ab Aquitanis Garumna flumen, a Belgis Matrona et Sequana dividit. Horum omnium fortissimi sunt Belgae, propterea quod a cultu atque humanitate provinciae longissime absunt, minimeque ad eos mercatores saepe commeant atque ea quae ad effeminandos animos pertinent important, proximique sunt Germanis, qui trans Rhenum incolunt, quibuscum continenter bellum gerunt. Qua de causa Helvetii quoque reliquos Gallos virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, cum aut suis finibus eos prohibent aut ipsi in eorum finibus bellum gerunt. Eorum una, pars, quam Gallos obtinere dictum est, initium capit a flumine Rhodano, continetur Garumna flumine, Oceano, finibus Belgarum, attingit etiam ab Sequanis et Helvetiis flumen Rhenum, vergit ad septentriones. Belgae ab extremis Galliae finibus oriuntur, pertinent ad inferiorem partem fluminis Rheni, spectant in septentrionem et orientem solem. Aquitania a Garumna flumine ad Pyrenaeos montes et eam partem Oceani quae est ad Hispaniam pertinet; spectat inter occasum solis et septentriones.',
             1, 'tag of my first article',
-            'metadescription of my first article', 'metakeyword of my first article', 'viale_dei_pini.jpg', 'Viale dei Pini', 'Viale dei Pini by Daniela Scancella','2009-08-03', '2009-08-03')";
+            'metadescription of my first article', 'metakeyword of my first article', '2009-08-03', '2009-08-03')";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, imgfilename, imgalt, imgcaption, created, updated) values
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (2, 1, 1, 1, 1, 'My second Article', 'Subtitle of my first article',
             'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.',
             'Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt. Gallos ab Aquitanis Garumna flumen, a Belgis Matrona et Sequana dividit. Horum omnium fortissimi sunt Belgae, propterea quod a cultu atque humanitate provinciae longissime absunt, minimeque ad eos mercatores saepe commeant atque ea quae ad effeminandos animos pertinent important, proximique sunt Germanis, qui trans Rhenum incolunt, quibuscum continenter bellum gerunt. Qua de causa Helvetii quoque reliquos Gallos virtute praecedunt, quod fere cotidianis proeliis cum Germanis contendunt, cum aut suis finibus eos prohibent aut ipsi in eorum finibus bellum gerunt. Eorum una, pars, quam Gallos obtinere dictum est, initium capit a flumine Rhodano, continetur Garumna flumine, Oceano, finibus Belgarum, attingit etiam ab Sequanis et Helvetiis flumen Rhenum, vergit ad septentriones. Belgae ab extremis Galliae finibus oriuntur, pertinent ad inferiorem partem fluminis Rheni, spectant in septentrionem et orientem solem. Aquitania a Garumna flumine ad Pyrenaeos montes et eam partem Oceani quae est ad Hispaniam pertinet; spectat inter occasum solis et septentriones.',
             1, 'tag of my first article',
-            'metadescription of my first article', 'metakeyword of my first article', 'viale_dei_pini.jpg', 'Viale dei Pini', 'Viale dei Pini by Daniela Scancella', '2009-08-03', '2009-08-03')";
+            'metadescription of my first article', 'metakeyword of my first article', '2009-08-03', '2009-08-03')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -159,9 +153,6 @@ class DbCreator {
             tag text,
             metadescription text,
             metakeyword text,
-            imgfilename varchar(255),
-            imgalt varchar(255),
-            imgcaption varchar(255),
             created datetime,
             updated datetime,
             PRIMARY KEY (id));";
@@ -170,10 +161,10 @@ class DbCreator {
     }
 
     public function populateTablePages() {
-        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, imgfilename, imgalt, imgcaption, created, updated) values
+        $cmd = "insert into ".TBPREFIX."pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values
             (1, 1, 1, 'My firts Page', 'Subtitle of my first page', 'summary of my first page',
             'Body of my first page', 'tag of my first page',
-            'metadescription of my first page', 'metakeyword of my first page', '', '', '', NOW(), NOW())";
+            'metadescription of my first page', 'metakeyword of my first page', NOW(), NOW())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
@@ -195,9 +186,6 @@ class DbCreator {
             email varchar(255),
             msn varchar(255),
             skype varchar(255),
-            imgfilename varchar(255),
-            imgalt varchar(255),
-            imgcaption varchar(255),
             created datetime,
             updated datetime,
             PRIMARY KEY (id));";
@@ -206,15 +194,15 @@ class DbCreator {
     }
 
     public function populateTableUsers() {
-        $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, imgfilename, imgalt, imgcaption, created, updated) values
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, created, updated) values
             ('New User', 'user', '".md5("psw")."', 
             'Tityre, tu patulae recubans sub tegmine fagi siluestrem tenui musam meditaris auena: nos patriae finis et dulcia linquimus arua. nos patriam fugimus: tu, Tityre, lentus in umbra formosam resonare doces Amaryllida siluas. O Meliboee, deus nobis haec otia fecit. namque erit ille mihi semper deus, illius aram saepe tener nostris ab ouilibus imbuet agnus. ille meas errare boues, ut cernis, et ipsum ludere quae uellem calamo permisit agresti. Non equidem inuideo, miror magis; undique totis',
-            'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', 'faccina.png', '', '', '2009-08-06', '2009-08-06')";
+            'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', '2009-08-06', '2009-08-06')";
         $result = mysql_query($cmd, $this->connection);
-        $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, imgfilename, imgalt, imgcaption, created, updated) values
+        $cmd = "insert into ".TBPREFIX."users (name, username, password, body, role, email, msn, skype, created, updated) values
             ('New User', 'newuser', '".md5("psw")."', 
             'Tityre, tu patulae recubans sub tegmine fagi siluestrem tenui musam meditaris auena: nos patriae finis et dulcia linquimus arua. nos patriam fugimus: tu, Tityre, lentus in umbra formosam resonare doces Amaryllida siluas. O Meliboee, deus nobis haec otia fecit. namque erit ille mihi semper deus, illius aram saepe tener nostris ab ouilibus imbuet agnus. ille meas errare boues, ut cernis, et ipsum ludere quae uellem calamo permisit agresti. Non equidem inuideo, miror magis; undique totis',
-            'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', '', '', '', '2009-08-06', '2009-08-06')";
+            'publisher', 'email@email.com', 'abcdef@abcdef.com', 'abcdef', '2009-08-06', '2009-08-06')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }
