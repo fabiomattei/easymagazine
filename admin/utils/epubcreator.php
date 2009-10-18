@@ -171,24 +171,9 @@ class ePugCreator {
     <item id="WTOC" href="TOC.html" media-type="application/xhtml+xml" />
     <item id="style" href="style.css" media-type="text/css" />';
 
-        if ($this->number->imageExists()) {
-            $target = $this->number->imagePath();
-            ImageFiles::checkAndCreatePathFromPath($this->number->getCreated(), $this->epubFolderName.'images/');
-            $link = $this->epubFolderName.'images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename());
-            copy($target, $link);
-            $text.='<item id="imgn'.$this->number->getId().'" href="images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename()).'.jpg" media-type="'.ImageFiles::mimetype($this->number->imagePath()).'"/>';
-        }
-
         foreach ($this->number->articles() as $article) {
             $text.='<item id="article'.$article->getId().'" href="article'.$article->getId().'.html" media-type="application/xhtml+xml" />
             ';
-            if ($article->imageExists()) {
-                $target = $article->imagePath();
-                ImageFiles::checkAndCreatePathFromPath($article->getCreated(), $this->epubFolderName.'images/');
-                $link = $this->epubFolderName.'images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename());
-                copy($target, $link);
-                $text.='<item id="img'.$article->getId().'" href="images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename()).'.jpg" media-type="'.ImageFiles::mimetype($this->number->imagePath()).'"/>';
-            }
         }
 
         $text .= '</manifest>
@@ -231,9 +216,6 @@ class ePugCreator {
   <body>
     <p class="CENTER">
       ';
-        if ($this->number->imageExists()) {
-            $text.='<img src="images/'.ImageFiles::fileShortPath($this->number->getCreated(), $this->number->getImgfilename()).'" />';
-        }
         $text.='
     </p>
   </body>
@@ -411,9 +393,6 @@ $text .= '
 	<div class="header">
 	     <h2>'.$article->getTitle().'</h2>
 	</div>';
-            if ($article->imageExists()) {
-                $text.='<img src="images/'.ImageFiles::fileShortPath($article->getCreated(), $article->getImgfilename()).'" />';
-            }
             $text.='<div>'.$article->getSummary().'<br /><br />'.$article->getBody().'
 </div>
 </body>
