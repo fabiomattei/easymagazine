@@ -15,17 +15,8 @@
 
     <div class="news">
         <b><?= $this->number->getSubtitle() ?></b>
-        <? if ($this->number->imageExists()) : ?>
-    <div id="image">
-        <img src="<?= URIMaker::fromBasePath($this->number->imagePath()) ?>" width="200" alt="<?= $this->number->getImgAlt()?>">
-            <? if ($this->number->getImgCaption() != ''): ?>
-        <div id="caption">
-                    <?= $this->number->getImgCaption() ?>
-        </div>
-            <? endif; ?>
-    </div>
-    <? endif; ?>
-    <!-- <?= $this->number->getSummary() ?> -->
+
+     <?= $this->number->getSummary() ?> 
     <? if ($this->number->epubExists()) : ?>
     <a href="<?= URIMaker::fromBasePath($this->number->epubPath()) ?>">Download Epub</a>
     <? endif; ?>

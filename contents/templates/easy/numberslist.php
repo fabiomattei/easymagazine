@@ -9,16 +9,6 @@
             <h1><a href="<?= URIMaker::number($nu) ?>"><?= $nu->getTitle() ?></a></h1>
             <p><?= $nu->getSubtitle() ?></p>
             <p>
-                    <? if ($nu->imageExists()) : ?>
-            <div id="image">
-                <img src="<?= URIMaker::fromBasePath($nu->imagePath()) ?>" width="200" alt="<?= $nu->getImgAlt()?>">
-                        <? if ($nu->getImgCaption() != ''): ?>
-                <div id="caption">
-                                <?= $nu->getImgCaption() ?>
-                </div>
-                        <? endif; ?>
-            </div>
-                <? endif; ?>
                 <?= $nu->getSummary() ?>
             </p>
                 <? if ($nu->epubExists()) : ?>

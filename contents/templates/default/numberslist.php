@@ -10,17 +10,6 @@
         <h3><?= $nu->getSubtitle() ?></h3>
         <div class="entry">
 
-                <? if ($nu->imageExists()) : ?>
-            <div id="image">
-                <img src="<?= URIMaker::fromBasePath($nu->imagePath()) ?>" width="200" alt="<?= $nu->getImgAlt()?>">
-                        <? if ($nu->getImgCaption() != ''): ?>
-                <div id="caption">
-                                <?= $nu->getImgCaption() ?>
-                </div>
-                        <? endif; ?>
-            </div>
-                <? endif; ?>
-
                 <?= $nu->getSummary() ?>
 
         </div>

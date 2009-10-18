@@ -20,16 +20,6 @@
                     <? echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
             </p>
             <p>
-                    <? if ($article->imageExists()) : ?>
-            <div id="image">
-                <img src="<?= URIMaker::fromBasePath($article->imagePath()) ?>" width="100" alt="<?= $article->getImgAlt()?>">
-                        <? if ($article->getImgCaption() != ''): ?>
-                <div id="caption">
-                                <?= $article->getImgCaption() ?>
-                </div>
-                        <? endif; ?>
-            </div>
-                <? endif; ?>
                 <?= $article->getSummary() ?>
             </p>
         </div>
