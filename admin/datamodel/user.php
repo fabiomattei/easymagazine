@@ -19,7 +19,6 @@
 
 require_once(STARTPATH.UTILSPATH.'password.php');
 require_once(STARTPATH.UTILSPATH.'imagefiles.php');
-require_once(STARTPATH.'lib/textile2/classTextile.php');
 
 class User {
     const NEW_USER = -1;
@@ -391,8 +390,7 @@ class User {
     }
 
     public function getBody() {
-        $textile = new Textile();
-        return $textile->TextileThis($this->body);
+        return $this->body;
     }
 
     public function getUnfilteredBody() {

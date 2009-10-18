@@ -25,6 +25,7 @@
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
+        <? require_once('../../view/common/tinymcesetup.php'); ?>
     </head>
     <body>
         <div id="main">
@@ -116,15 +117,7 @@
                                 </tr>                    
                                 <tr class="bg">
                                     <td class="first" colspan="2"><strong>Body</strong><br />
-                                        <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
-                                        <textarea cols="40" id="article_body" name="Body" rows="20" style="width: 500px; padding: 5px"><? echo $userp->getUnfilteredBody(); ?></textarea>
-                                <link href="../../../lib/textileeditor/teh/stylesheets/textile-editor.css" media="screen" rel="Stylesheet" type="text/css" />
-                                <script src="../../../lib/textileeditor/teh/javascripts/textile-editor.js" type="text/javascript"></script>
-                                <script type="text/javascript">
-                                    Event.observe(window, "load", function() {
-                                        TextileEditor.initialize("article_body", "extended");
-                                    });
-                                </script>
+                                        <textarea cols="40" id="article_body" name="Body" rows="20" class="mceAdvanced" style="width: 100%"><? echo $userp->getUnfilteredBody(); ?></textarea>
                                 </td>
                                 </tr>
                                 <tr>
@@ -143,33 +136,6 @@
                                     <td class="first"><strong>Publisher</strong></td>
                                     <td class="last"><input type="checkbox" name="Role" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?>/></td>
                                 </tr
-                                <tr>
-                                    <td class="first"><strong>Show Image</strong></td>
-                                    <td class="last">
-                                        <? if ($userp->imageExists()) { ?>
-                                        <img src="<? echo $userp->imagePath(); ?>"
-                                             <a href="page.php?action=deleteimg&id=<? echo $userp->getId(); ?>">Delete image</a>
-                                             <? } else { ?>
-                                        &nbsp;
-                                        <? } ?>
-                                    </td>
-                                </tr>
-                                <tr class="bg">
-                                    <td class="first"><strong>Image File</strong></td>
-                                    <td class="last"><input type="file" name="Image" value="" /></td>
-                                </tr>
-                                <tr>
-                                    <td class="first"><strong>Image file name:</strong></td>
-                                    <td class="last"><? echo $userp->getImgfilename(); ?></td>
-                                </tr>
-                                <tr class="bg">
-                                    <td class="first"><strong>Image Alternative Text:</strong></td>
-                                    <td class="last"><input type="text" size="50" name="ImageAlt" value="<? echo $userp->getImgAlt(); ?>"/></td>
-                                </tr>
-                                <tr>
-                                    <td class="first"><strong>Image Caption:</strong></td>
-                                    <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $userp->getImgCaption(); ?>"/></td>
-                                </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $userp->getCreated(); ?></td>

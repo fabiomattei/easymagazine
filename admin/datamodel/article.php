@@ -25,7 +25,6 @@ require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
 require_once(STARTPATH.UTILSPATH.'pagination.php');
 require_once(STARTPATH.UTILSPATH.'datehandler.php');
-require_once(STARTPATH.'lib/textile2/classTextile.php');
 
 class Article {
     const NEW_ARTICLE = -1;
@@ -586,8 +585,7 @@ class Article {
     }
 
     public function getBody() {
-        $textile = new Textile();
-        $out = $this->filter->executeFiltersBody($textile->TextileThis($this->body));
+        $out = $this->filter->executeFiltersBody($this->body);
         return $out;
     }
 

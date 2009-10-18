@@ -24,7 +24,6 @@ require_once(STARTPATH.UTILSPATH.'imagefiles.php');
 require_once(STARTPATH.UTILSPATH.'pagination.php');
 require_once(STARTPATH.UTILSPATH.'epubcreator.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
-require_once(STARTPATH.'lib/textile2/classTextile.php');
 
 class Number {
     const NEW_NUMBER = -1;
@@ -500,8 +499,7 @@ class Number {
     }
 
     public function getSummary() {
-        $textile = new Textile();
-        $out = $this->filter->executeFiltersSummary($textile->TextileThis($this->summary));
+        $out = $this->filter->executeFiltersSummary($this->summary);
         return $out;
     }
 

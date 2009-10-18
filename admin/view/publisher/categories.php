@@ -25,6 +25,7 @@
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
+        <? require_once('../../view/common/tinymcesetup.php'); ?>
     </head>
     <body>
         <div id="main">
@@ -135,15 +136,7 @@
                                 </tr>
                                 <tr>
                                     <td class="first" colspan="2"><strong>Description</strong><br />
-                                        <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
-                                        <textarea cols="40" id="article_body" name="Description" rows="20" style="width: 500px; padding: 5px"><? echo $categ->getUnfilteredDescription(); ?></textarea>
-                                <link href="../../../lib/textileeditor/teh/stylesheets/textile-editor.css" media="screen" rel="Stylesheet" type="text/css" />
-                                <script src="../../../lib/textileeditor/teh/javascripts/textile-editor.js" type="text/javascript"></script>
-                                <script type="text/javascript">
-                                    Event.observe(window, "load", function() {
-                                        TextileEditor.initialize("article_body", "extended");
-                                    });
-                                </script>
+                                        <textarea cols="40" id="article_body" name="Description" rows="20" class="mceAdvanced" style="width: 100%"><? echo $categ->getUnfilteredDescription(); ?></textarea>
                                 </td>
                                 </tr>
                                 <tr class="bg">

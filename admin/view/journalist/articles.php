@@ -25,6 +25,7 @@
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
+        <? require_once('../../view/common/tinymcesetup.php'); ?>
     </head>
     <body>
         <div id="main">
@@ -177,22 +178,17 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Summary</strong></td>
-                                    <td class="last">
-                                        <textarea name="Summary" rows="4" cols="60"><? echo $art->getUnfilteredSummary(); ?></textarea>
+                                    <td class="first" colspan="2"><strong>Summary</strong><br />
+                                        <textarea name="Summary" rows="4" cols="60" class="mceAdvanced" style="width: 100%">
+                                            <? echo $art->getUnfilteredSummary(); ?>
+                                        </textarea>
                                     </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" colspan="2"><strong>Body</strong><br />
-                                        <script src="../../../lib/textileeditor/teh/javascripts/prototype.js" type="text/javascript"></script>
-                                            <textarea cols="40" id="article_body" name="Body" rows="20" style="width: 500px; padding: 5px"><? echo $art->getUnfilteredBody(); ?></textarea>
-                                            <link href="../../../lib/textileeditor/teh/stylesheets/textile-editor.css" media="screen" rel="Stylesheet" type="text/css" />
-                                            <script src="../../../lib/textileeditor/teh/javascripts/textile-editor.js" type="text/javascript"></script>
-                                            <script type="text/javascript">
-                                                Event.observe(window, "load", function() {
-                                                    TextileEditor.initialize("article_body", "extended");
-                                                });
-                                            </script>
+                                        <textarea cols="40" id="article_body" name="Body" rows="20" class="mceAdvanced" style="width: 100%">
+                                            <? echo $art->getUnfilteredBody(); ?>
+                                        </textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -206,33 +202,6 @@
                                 <tr>
                                     <td class="first"><strong>Meta Keyword</strong></td>
                                     <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><? echo $art->getMetaKeyword(); ?></textarea></td>
-                                </tr>
-                                <tr class="bg">
-                                    <td class="first"><strong>Show Image</strong></td>
-                                    <td class="last">
-                                        <? if ($art->imageExists()) { ?>
-                                        <img src="<? echo $art->imagePath(); ?>"
-                                             <a href="article.php?action=deleteimg&id=<? echo $art->getId(); ?>">Delete image</a>
-                                             <? } else { ?>
-                                        &nbsp;
-                                        <? } ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="first"><strong>Image File</strong></td>
-                                    <td class="last"><input type="file" name="Image" value="" /></td>
-                                </tr>
-                                <tr class="bg">
-                                    <td class="first"><strong>Image file name:</strong></td>
-                                    <td class="last"><? echo $art->getImgfilename(); ?></td>
-                                </tr>
-                                <tr>
-                                    <td class="first"><strong>Image Alternative Text:</strong></td>
-                                    <td class="last"><input type="text" size="50" name="ImageAlt" value="<? echo $art->getImgAlt(); ?>"/></td>
-                                </tr>
-                                <tr class="bg">
-                                    <td class="first"><strong>Image Caption:</strong></td>
-                                    <td class="last"><input type="text" size="50" name="ImageCaption" value="<? echo $art->getImgCaption(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Created:</strong></td>
