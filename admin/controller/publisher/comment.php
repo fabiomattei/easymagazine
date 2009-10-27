@@ -178,6 +178,9 @@ function replay($id) {
 function save($toSave) {
     $outAction = array();
     if ($toSave['article_id'] == Article::NEW_ARTICLE) {
+        $outAction['comm'] = new Comment();
+        $outAction['info'] = 'A comment must be associated to an article';
+    } else {
         if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
 
         $comm = new Comment(
@@ -192,9 +195,6 @@ function save($toSave) {
         $comm->save();
 
         $outAction['comm'] = Comment::findById($comm->getId());
-    } else {
-        $outAction['comm'] = new Comment();
-        $outAction['info'] = 'A comment must be associated to an article';
     }
     return $outAction;
 }

@@ -316,6 +316,7 @@ class Article {
                     $row['password'],
                     $row['body'],
                     $row['role'],
+                    $row['toshow'],
                     $row['email'],
                     $row['msn'],
                     $row['skype'],

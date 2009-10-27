@@ -190,7 +190,6 @@
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $numb->getId(); ?>">
                                 <input type="hidden" name="indexnumber" value="<? echo $numb->getIndexnumber(); ?>">
-                                <input type="hidden" name="imagefilename" value="<? echo $numb->getImgfilename(); ?>">
                                 <input type="hidden" name="created" value="<? echo $numb->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $numb->getUpdated(); ?>">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="5000000">

@@ -116,7 +116,7 @@
                             ?>
                         </table>
                         <div class="select">
-                            <form name="pageselectionform" method="post" action="article.php?lastList=<?=$lastList?>">
+                            <form name="pageselectionform" method="post" action="article.php?list=<?=$lastList?>">
                                 <strong>Pages: </strong>
                                 <select name="page">
                                     <? for ($i=1;$i<=$page_numbers;$i++) { ?>
@@ -166,13 +166,13 @@
                                 <tr class="bg">
                                     <td class="first" width="172"><strong>Title</strong></td>
                                     <td class="last">
-                                        <input type="text" size="50" name="Title" value="<? echo $art->getUnfilteredTitle(); ?>"/>
+                                        <textarea name="Title" rows="1" cols="60"><? echo $art->getUnfilteredTitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Sub Title</strong></td>
                                     <td class="last">
-                                        <input type="text" size="50" name="SubTitle" value="<? echo $art->getUnfilteredSubtitle(); ?>"/>
+                                        <textarea name="SubTitle" rows="1" cols="60"><? echo $art->getUnfilteredSubtitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr class="bg">
@@ -221,7 +221,6 @@
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $art->getId(); ?>">
                                 <input type="hidden" name="indexnumber" value="<? echo $art->getIndexnumber(); ?>">
-                                <input type="hidden" name="imagefilename" value="<? echo $art->getImgfilename(); ?>">
                                 <input type="hidden" name="created" value="<? echo $art->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $art->getUpdated(); ?>">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="5000000">

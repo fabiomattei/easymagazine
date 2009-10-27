@@ -82,13 +82,15 @@ function dodelete($id) {
     return $out;
 }
 
-function save($toSave, $files) {
+function save($toSave) {
     $out = array();
+
     if (isset($toSave['Role'])) {
         $toSave['Role'] = 'publisher';
     } else {
         $toSave['Role'] = 'journalist';
     }
+    if (!isset($toSave['toshow'])) { $toSave['toshow'] = 0; }
 
     $userp = new User(
         $toSave['id'],
@@ -97,6 +99,7 @@ function save($toSave, $files) {
         $toSave['Password'],
         $toSave['Body'],
         $toSave['Role'],
+        $toSave['toshow'],
         $toSave['Email'],
         $toSave['MSN'],
         $toSave['Skype'],
@@ -139,7 +142,7 @@ if (isset($_SESSION['user'])) {
     if (isset($_SESSION['user'])) {
         switch ($action) {
             case  'index':         $out = index(); break;
-            case  'save':          $out = save($_POST, $_FILES); break;
+            case  'save':          $out = save($_POST); break;
             case  'savePassword':  $out = savePassword($_POST); break;
             case  'edit':          $out = edit($_GET['id']); break;
             case  'dodelete':      $out = dodelete($_GET['id']); break;

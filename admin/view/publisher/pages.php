@@ -169,7 +169,6 @@
                                     <td class="first"><strong>&nbsp;</strong></td>
                                 <input type="hidden" name="id" value="<? echo $pag->getId(); ?>">
                                 <input type="hidden" name="indexnumber" value="<? echo $pag->getIndexnumber(); ?>">
-                                <input type="hidden" name="imagefilename" value="<? echo $pag->getImgfilename(); ?>">
                                 <input type="hidden" name="created" value="<? echo $pag->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $pag->getUpdated(); ?>">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="5000000">

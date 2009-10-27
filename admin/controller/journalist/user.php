@@ -47,6 +47,7 @@ function save($toSave, $files) {
         $toSave['Password'],
         $toSave['Body'],
         $user_old->getRole(),
+        $user_old->getToshow(),
         $toSave['Email'],
         $toSave['MSN'],
         $toSave['Skype'],

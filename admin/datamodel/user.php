@@ -28,6 +28,7 @@ class User {
     private $password;
     private $body;
     private $role;
+    private $toshow;
     private $email;
     private $msn;
     private $skype;
@@ -35,20 +36,21 @@ class User {
     private $updated;
     private $db;
 
-    const INSERT_SQL = 'insert into users (id, name, username, password, body, role, email, msn, skype, created, updated) values (#, ?, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update users set name = ?, body = ?, role = ?, email = ?, msn = ?, skype = ?, updated=now() where id = #';
+    const INSERT_SQL = 'insert into users (id, name, username, password, body, role, toshow, email, msn, skype, created, updated) values (#, ?, ?, ?, ?, ?, #, ?, ?, ?, now(), now())';
+    const UPDATE_SQL = 'update users set name = ?, body = ?, role = ?, toshow = #, email = ?, msn = ?, skype = ?, updated=now() where id = #';
     const UPDATE_SQL_PASSWORD = 'update users set password = ?, updated=now() where id = #';
     const DELETE_SQL = 'delete from users where id = #';
     const SELECT_BY_ID = 'select * from users where id = # ';
     const SELECT_BY_NAME = 'select * from users where name like ? order by name';
     const SELECT_BY_USERNAME_AND_EMAIL = 'select * from users where username = ? AND email = ? order by name ';
     const SELECT_ALL = 'select * from users order by name ';
+    const SELECT_ALL_TO_SHOW = 'select * from users WHERE toshow = 1 order by name ';
     const SELECT_USR_PSW = 'select * from users WHERE username like ? AND password like ? ';
     const SELECT_BY_ID_ORD = 'select id from users order by id DESC';
     const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
     const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = # order by CM.id DESC';
 
-    public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $email='', $msn='', $skype='', $created='', $updated='') {
+    public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $toshow='', $email='', $msn='', $skype='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->id = $id;
         $this->name = $name;
@@ -56,6 +58,7 @@ class User {
         $this->password = $password;
         $this->body = $body;
         $this->role = $role;
+        $this->toshow = $toshow;
         $this->email = $email;
         $this->msn = $msn;
         $this->skype = $skype;
@@ -72,7 +75,7 @@ class User {
                 $array_int,
                 $tables);
             if ($row = mysql_fetch_array($rs)) {
-                $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
+                $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['toshow'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
             } else {
                 $ret = new User();
             }
@@ -93,7 +96,7 @@ class User {
                 $array_int,
                 $tables);
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
+                $ret[] = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['toshow'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new User();
@@ -119,6 +122,11 @@ class User {
 
     public static function findAll() {
         $ret = USER::findMany(self::SELECT_ALL, array(), array());
+        return $ret;
+    }
+
+    public static function findAllToShow() {
+        $ret = USER::findMany(self::SELECT_ALL_TO_SHOW, array(), array());
         return $ret;
     }
 
@@ -230,6 +238,7 @@ class User {
             $this->password = '';
             $this->body = '';
             $this->role = '';
+            $this->toshow = '';
             $this->email = '';
             $this->msn = '';
             $this->skype = '';
@@ -248,7 +257,7 @@ class User {
             DB::getInstance()->execute(
                 self::INSERT_SQL,
                 array($this->name, $this->username, $psw, $this->body, $this->role, $this->email, $this->msn, $this->skype),
-                array($this->id),
+                array($this->id, $this->toshow),
                 $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -261,7 +270,7 @@ class User {
             DB::getInstance()->execute(
                 self::UPDATE_SQL,
                 array($this->name, $this->body, $this->role, $this->email, $this->msn, $this->skype),
-                array($this->id),
+                array($this->toshow, $this->id),
                 $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -346,6 +355,14 @@ class User {
 
     public function setRole($role) {
         $this->role = $role;
+    }
+
+    public function getToshow() {
+        return $this->toshow;
+    }
+
+    public function setToshow($toshow) {
+        $this->toshow = $toshow;
     }
 
     public function getEmail() {

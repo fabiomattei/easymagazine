@@ -171,7 +171,7 @@
                                     <input type="submit" value="Save" name="save" />
                             </form>
 
-                            <form name="formnew" method="post" action="comment.php?action=replay&id=<? echo $ar->getId(); ?>">
+                            <form name="formnew" method="post" action="comment.php?action=replay&id=<? echo $comm->getId(); ?>">
                                 <input type="submit" value="Replay" name="new" />
                             </form></td>
                             </tr>

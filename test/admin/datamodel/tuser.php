@@ -66,7 +66,7 @@ class UserTests extends UnitTestCase {
     }
 
     function testSaveNewUser() {
-        $newNum = new User(User::NEW_USER, 'New User second', 'newusersecond', 'newpasswordsecond' , 'description example', 'role', 'email@email.com', 'abcdef@abcdef.com', 'abcdef');
+        $newNum = new User(User::NEW_USER, 'New User second', 'newusersecond', 'newpasswordsecond' , 'description example', 'role', '1', 'email@email.com', 'abcdef@abcdef.com', 'abcdef');
         $newNum->save();
         $num = User::findAll();
         $this->assertEqual(4, count($num));

@@ -73,6 +73,7 @@
                                 <th class="first" width="377">Name - Username</th>
                                 <th>Edit</th>
                                 <th>Publisher</th>
+                                <th>Show</th>
                                 <th class="last">Delete</th>
                             </tr>
 
@@ -84,6 +85,12 @@
                                 <td><a href="user.php?action=edit&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td>
                                         <? if ($ar->getRole()=='publisher') { ?>
+                                    <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
+                                        <? } else { ?>
+                                    <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
+                                    <? } ?></td>
+                                    <td>
+                                        <? if ($ar->getToshow()==1) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
                                         <? } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
@@ -135,7 +142,11 @@
                                 <tr class="bg">
                                     <td class="first"><strong>Publisher</strong></td>
                                     <td class="last"><input type="checkbox" name="Role" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?>/></td>
-                                </tr
+                                </tr>
+                                <tr class="bg">
+                                    <td class="first"><strong>Show in People page</strong></td>
+                                    <td class="last"><input type="checkbox" name="toshow" value="1" <? if($userp->getToshow()=='1') echo 'checked="checked"'; ?>/></td>
+                                </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Created:</strong></td>
                                     <td class="last"><? echo $userp->getCreated(); ?></td>

@@ -34,7 +34,7 @@ class PeopleRouter extends Router {
 
     function loadData() {
         $arURI = $this->getArrayURI();
-        $this->people = User::findAll();
+        $this->people = User::findAllToShow();
         $this->pages = Page::findAllPublishedOrdered();
         $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
