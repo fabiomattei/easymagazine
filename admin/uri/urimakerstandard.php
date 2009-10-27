@@ -19,39 +19,39 @@
 
 class URIMaker {
     static function article($article) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?page=article&id='.$article->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=article&id='.$article->getId();
     }
 
     static function number($number) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?page=number&id='.$number->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=number&id='.$number->getId();
     }
 
     static function category($category) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?page=category&id='.$category->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=category&id='.$category->getId();
     }
 
     static function comment($article) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?page=comments&id='.$article->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=comments&id='.$article->getId();
     }
 
     static function result() {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'results.php';
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=results';
     }
 
     static function page($page) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?page=page&id='.$page->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=page&id='.$page->getId();
     }
 
     static function people() {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?page=people';
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=people';
     }
 
     static function numberslist() {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?page=numberslist';
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=numberslist';
     }
 
     static function articlesperson($person) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'page=articlesperson&id='.$person->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=articlesperson&id='.$person->getId();
     }
 
     static function index() {
