@@ -35,7 +35,7 @@ function edit($id) {
     return $out;
 }
 
-function save($toSave, $files) {
+function save($toSave) {
     $out = array();
 
     $user_old = User::findById($_SESSION['user']->getId());
@@ -79,7 +79,7 @@ if (isset($_SESSION['user'])) {
     if (!isset($_GET["action"])) { $out = edit($_SESSION['user']->getId()); }
     else {
         switch ($_GET["action"]) {
-            case  'save':          $out = save($_POST, $_FILES); break;
+            case  'save':          $out = save($_POST); break;
             case  'savePassword':  $out = savePassword($_POST, $_FILES); break;
             case  'edit':          $out = edit($_SESSION['user']->getId()); break;
         }

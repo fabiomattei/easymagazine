@@ -107,6 +107,8 @@ function save($toSave) {
         $toSave['updated']);
     $userp->save();
 
+    $out['info'] = 'User saved';
+
     $userp = User::findById($userp->getId()); // Necessary to reload date informations
 
     $out['userp'] = $userp;
@@ -124,6 +126,9 @@ function savePassword($toSave) {
 
     if ($toSave['NewPassword1'] == $toSave['NewPassword2']) {
         $userp->updatePassword($toSave['NewPassword1'], $toSave['OldPassword']);
+        $out['info'] = 'Password successfully modified';
+    } else {
+        $out['error'] = 'Passwords do not match';
     }
 
     $out['userp'] = User::findById($userp->getId());

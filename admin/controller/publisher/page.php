@@ -131,7 +131,7 @@ function down($id) {
     return $Action;
 }
 
-function save($toSave, $files) {
+function save($toSave) {
     $outAction = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
@@ -166,7 +166,7 @@ else { $action = 'newPage'; }
 if (isset($_SESSION['user'])) {
     switch ($action) {
         case  'newPage':           $outAction = newPage(); break;
-        case  'save':              $outAction = save($_POST, $_FILES); break;
+        case  'save':              $outAction = save($_POST); break;
         case  'edit':              $outAction = edit($_GET['id']); break;
         case  'dodelete':          $outAction = dodelete($_GET['id']); break;
         case  'requestdelete':     $outAction = requestdelete($_GET['id'], $_GET['list']); break;

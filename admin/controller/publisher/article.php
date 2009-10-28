@@ -242,7 +242,7 @@ function down($id) {
     return $outAction;
 }
 
-function save($toSave, $files) {
+function save($toSave) {
     $page = 1;
     $outAction = array();
 
@@ -287,7 +287,7 @@ if (isset($_SESSION['user'])) {
     $outCommons = commons();
     switch ($action) {
         case  'newArticle':          $outAction = newArticle(); break;
-        case  'save':                $outAction = save($_POST, $_FILES); break;
+        case  'save':                $outAction = save($_POST); break;
         case  'edit':                $outAction = edit($_GET['id']); break;
         case  'dodelete':            $outAction = dodelete($_GET['id']); break;
         case  'requestdelete':       $outAction = requestdelete($_GET['id'], $_GET['list'], $_GET['pageSelected']); break;
