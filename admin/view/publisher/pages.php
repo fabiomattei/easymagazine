@@ -121,7 +121,7 @@
                                     <th class="full" colspan="2">Edit</th>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Title</strong></td>
+                                    <td class="first"><strong>Title</strong></td>
                                     <td class="last">
                                         <textarea name="Title" rows="1" cols="60"><?= $pag->getUnfilteredTitle(); ?></textarea>
                                     </td>
@@ -133,12 +133,15 @@
                                     </td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Summary</strong></td>
-                                    <td class="last"><textarea name="Summary" rows="4" cols="60"><? echo $pag->getUnfilteredSummary(); ?></textarea></td>
+                                    <td class="first" colspan="2"><strong>Summary</strong><br />
+                                        <textarea name="Summary" class="mceAdvanced" rows="4" cols="60"><? echo $pag->getUnfilteredSummary(); ?></textarea>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="first" colspan="2"><strong>Body</strong><br />
-                                        <textarea cols="40" id="article_body" name="Body" rows="20" style="width: 500px; padding: 5px"><? echo $pag->getUnfilteredBody(); ?></textarea>
+                                        <textarea cols="40" id="article_body" class="mceAdvanced" name="Body" rows="20" style="width: 500px; padding: 5px">
+                                        <? echo $pag->getUnfilteredBody(); ?>
+                                        </textarea>
                                 </td>
                                 </tr>
                                 <tr class="bg">

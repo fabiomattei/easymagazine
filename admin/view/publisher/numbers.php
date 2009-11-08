@@ -146,7 +146,7 @@
                                     <th class="full" colspan="2">Edit</th>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Title</strong></td>
+                                    <td class="first"><strong>Title</strong></td>
                                     <td class="last">
                                         <textarea name="Title" rows="1" cols="60"><?= $numb->getTitle(); ?></textarea>
                                     </td>

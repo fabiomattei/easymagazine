@@ -140,7 +140,7 @@
                                     <th class="full" colspan="2">Edit</th>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Number</strong></td>
+                                    <td class="first"><strong>Number</strong></td>
                                     <td class="last">
                                         <select name="numberid">
                                             <? foreach ($numbs as $nmb) { ?>
@@ -152,7 +152,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Category</strong></td>
+                                    <td class="first"><strong>Category</strong></td>
                                     <td class="last">
                                         <select name="categoryid">
                                             <? foreach ($categories as $cat) { ?>
@@ -164,13 +164,13 @@
                                     </td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Title</strong></td>
+                                    <td class="first"><strong>Title</strong></td>
                                     <td class="last">
                                         <textarea name="Title" rows="1" cols="60"><? echo $art->getUnfilteredTitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Sub Title</strong></td>
+                                    <td class="first"><strong>Sub Title</strong></td>
                                     <td class="last">
                                         <textarea name="SubTitle" rows="1" cols="60"><? echo $art->getUnfilteredSubtitle(); ?></textarea>
                                     </td>
