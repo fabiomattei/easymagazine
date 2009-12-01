@@ -56,6 +56,7 @@ class Article {
     const FIND_IN_ALL_TEXT_FIELDS_PUBLISHED_ARTICLES = 'select * from articles where (title like ? OR subtitle like ? OR summary like ? OR body like ?) AND published=1 ';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = # order by created DESC';
     const SELECT_COMMENTS = 'select * from comments where article_id = # order by created DESC';
+    const SELECT_CATEGORY = 'select * from categories where id = # Limit 1';
     const SELECT_NUMBER = 'select * from numbers where id = #';
     const SELECT_LAST = 'select * from articles order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from articles where published=1 order by indexnumber DESC';
@@ -244,16 +245,15 @@ class Article {
     }
 
     public function category() {
-        $ret = array();
         try {
             $tables = array('categories' => TBPREFIX.'categories');
             $rs = DB::getInstance()->execute(
-                self::SELECT_COMMENTS,
+                self::SELECT_CATEGORY,
                 array(),
-                array($this->id),
+                array($this->category_id),
                 $tables);
             while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Category(
+                $ret = new Category(
                     $row['id'],
                     $row['indexnumber'],
                     $row['published'],
@@ -263,7 +263,7 @@ class Article {
                     $row['updated']);
             }
         } catch (Exception $e) {
-            $ret[] = new Category();
+            $ret = new Category();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
         return $ret;
