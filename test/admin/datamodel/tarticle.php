@@ -38,7 +38,7 @@ class ArticleTests extends UnitTestCase {
 
     function testFindById() {
         $ar = Article::findById(1);
-		$this->assertPattern('(Article)', $ar->getTitle());
+	$this->assertPattern('(Article)', $ar->getTitle());
     }
 
     function testfindUpIndexNumber () {

@@ -1,0 +1,51 @@
+/*
+Theme Name: Shades of Darkness
+Theme URI: http://buynowshop.com/
+Description: A dark theme, from the Shades theme series, easily reduced to a child theme of Shades. A great theme framework to grow from or simply use as is. 
+Version: 1.0.1
+Template: shades
+Author: Edward "Cais" Caissie
+Author URL: http://buynowshop.com/
+Tags: black, brown, red, silver, two-column, right-sidebar, fixed-width
+.
+- JB:Theme Notes
+-- Add class="hr" to any <hr /> (horizontal rule), or add a <div class="hr"></div> for a special darkness treat.
+-- In comments.php -> Review the $comment->user_id code and make changes as appropriate if more than one default user/admininstrator (on or near line 30).
+-- As a suggestion, use the <PRE></PRE> tags to style "code" text.
+.
+- Changelog:
+-- see changelog.txt file
+-- Version 1.0 -> Initial release
+.	
+  Original Theme Name: Shades
+  Original Theme URI: http://www.buynowshop.com/
+.
+	The CSS/XHTML is released under GPL:  http://www.opensource.org/licenses/gpl-license.php
+.
+*/
+@import url("../shades/style.css");
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #000000; /* change to #ffffff for a white background light theme*/
+	font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+	font-size: 12px;
+	line-height: 21px;
+	color: #635537;
+}
+
+#header-center p { color:#635537; }
+
+.hr, .shades {
+  background-image: url(images/dark-hr-img.gif);
+  height:56px;
+  width:560px;
+  margin:0 auto;
+}
+
+.post code {
+  font-style:italic;
+  margin:0;
+  color: silver;
+}

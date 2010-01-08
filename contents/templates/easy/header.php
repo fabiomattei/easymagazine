@@ -7,7 +7,7 @@
 
         <title><?= $this->title?></title>
 
-        <link rel="stylesheet" href="<?= URIMaker::fromBasePath('contents/templates/easy/style.css') ?>" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?= URIMaker::templatePath('style.css') ?>" type="text/css" media="screen" />
 
         </style>
     </head>
@@ -15,13 +15,13 @@
     <body>
 
         <div id="header">
-            <a href="<?= URIMaker::fromBasePath('index.php') ?>/"><?= Magazine::getMagazineTitle() ?></a><br />
+            <a href="<?= URIMaker::index() ?>"><?= Magazine::getMagazineTitle() ?></a><br />
 	<?= Magazine::getMagazineDescription() ?>
         </div>
 
         <div id="navbar">
             <ul>
-                <li><a href="<?= URIMaker::fromBasePath('index.php') ?>">Home</a></li>
+                <li><a href="<?= URIMaker::index() ?>">Home</a></li>
                 <li><a href="<?= URIMaker::people() ?>">People</a></li>
                 <li><a href="<?= URIMaker::numberslist() ?>">Numbers</a></li>
                 <?

@@ -41,6 +41,9 @@ class StrHelper {
         return $newarray;
     }
 
+    /**
+     * @assert ("hello", "wprld") == "mydada"
+     */
     public static function replaceStrings($str, $array) {
         $newArray = explode('?', $str);
         $out = $newArray[0];

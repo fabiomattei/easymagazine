@@ -66,6 +66,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.$path;
     }
 
+    static function templatePath($path) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.TEMPLATEPATH.$path;
+    }
+
     static function rssFeed() {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'contents/feed/feed.xml';
     }

@@ -157,15 +157,17 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
+                                </tr>
+                                <tr>
                                 <input type="hidden" name="id" value="<? echo $userp->getId(); ?>">
                                 <input type="hidden" name="created" value="<? echo $userp->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $userp->getUpdated(); ?>">
                                 <input type="hidden" name="Password" value="<? echo $userp->getPassword(); ?>">
                                 <td class="last">
                                     <input type="submit" value="Save" name="save" />
+                                </td>
+                                </tr>
                             </form>
-                            </td>
-                            </tr>
                         </table>
                         <br />
                         <table class="listing form" cellpadding="0" cellspacing="0">

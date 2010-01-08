@@ -1,0 +1,73 @@
+Changelog as of Nov 24, 2009:
+
+-- Version 1.3
+  - CSS (new): added "YUI Reset"
+  - CSS (new): added '.page ol', '.page ul', and '.page li'
+  - CSS (edit): removed #author 'width' property
+  - CSS (edit): removed #comments-main 'width' property
+  - CSS (edit): removed #comments-main code 'width' property
+  - added comments to the page.php template file
+  - added support for posts that have multiple pages
+  - pt_BR language files added - thanks to Hábner Costa habnertc@msn.com
+
+-- Version 1.2
+  - Added Threaded Comments and related CSS elements and properties
+  - Added support for Sticky Posts - see changes in template files (archive, author, index) -> post="class" to post_class();
+	- Cleanup code for better readability
+	- Separated "navigation" links at end of page(s)
+	- CSS (new): added navigation class
+	- CSS (new): added sticky class element with example properties
+
+-- Version 1.1.1
+	- CSS (edit): .widget h2 -> removed 'padding: 22px 0 0;'
+	- CSS (edit): .widget -> removed 'margin-top:10px;' and 'margin-bottom:20px;'
+	- re-coded footer.php to correct for issues with fopen() errors
+
+-- Version 1.1
+	- update search box; added simple scripting
+	- added "Edit" link to page.php template
+	- re-coded searchform.php
+	- edited sidebar.php to use new searchform.php
+	- CSS (edit): input:focus, textarea:focus -> changed 'padding-bottom: 30px' to 'padding: 1px 0;' 
+	- CSS (new): input#s { width: 70%; }
+	- CSS (new): .textwidget form {text-align:center;}
+	- CSS (new): added BNS Plugins section at end of style.css
+	* child theme Shades of Darkness updated to version 1.0.1
+
+NB: As of version 1.1 the following deprecated files have been removed from the theme core files:
+	* home.php
+	* header-home.php
+   
+-- Version 1.0.4.1
+  - name correction - removed "(by BNS)"
+-- Version 1.0.4
+  - added child theme Shades of Darkness in folder "shades-of-darkness"
+  - added "child-theme-readme.txt" to help with installation  
+  - CSS: Added "WordPress" rules for images and alignments
+-- Version 1.0.3.2
+  - remove mysterious "new line characters from theme files"
+-- Version 1.0.3.1
+  - NB: Removing a core file from a theme will not be reflected within an automatic update of the theme, which is logically correct.
+  -- The contents of the index.php file have been used to overwrite the contents of the home.php file.
+  -- The contents of the header.php file have been used to overwrite the contents of the header-home.php file.
+  -- revision is only to correct this oversight.
+-- Version 1.0.3
+  - deprecated the header-home.php and home.php files by adding a tilde (~) character to the beginning of the file name. The functionalty was merged into the index.php file with additonal PHP code, specifically an IF statement to test for the displayed page being the "home page", or the "front page". This will reduce maintenance and potential errors that cropped up due to the extra files.
+  -- copies of header-come.php and home.php from version 1.0.2 are still included but will be removed in 1.0.4
+  - re-coded footer to programtically write the theme name in the credit line, including recognition of child themes.
+  - added additional internationalization code
+  - CSS: minor adjustment to ".search-submit" for alignment purposes
+  - CSS: changed "pre" element's "width:570px;" to "width:auto;"
+  - CSS: added "overflow:hidden" to #bottom
+  - CSS: removed 1px border from ".post code" elements to improve readability
+  - CSS: add "clear: both" to .wp-caption to address larger images in posts
+
+-- Version 1.0.2
+  - added internationalization (I18n) code as specified at this page: http://codex.wordpress.org/I18n_for_WordPress_Developers
+  - changed <ul id="menu">...</ul> to <div class="menu"><ul>...</ul></div>; added height, margin, and padding elements to the menu class
+  - changed sidebar text alignment to left (from center); and, corrected screenshot image.
+
+-- Version 1.0.1
+  *** first approved version ***
+  - corrected menu over-run on long page names
+-- Version 1.0 -> Initial release

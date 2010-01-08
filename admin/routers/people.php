@@ -40,6 +40,7 @@ class PeopleRouter extends Router {
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->number = Number::findLastPublished();
         foreach ($this->people as $person) {
+            /* @var $person User */
             $this->metadescritpion .= $person->getName().', ';
             $this->metakeywords .= $person->getName().', ';
         }

@@ -66,6 +66,11 @@ class User {
         $this->updated = $updated;
     }
 
+    /**
+     * Return a user from the query
+     *
+     * @return User
+     */
     public static function findOne($SQL, $array_str, $array_int) {
         $tables = array("users" => TBPREFIX."users");
         try {
@@ -105,21 +110,41 @@ class User {
         return $ret;
     }
 
+    /**
+     * Return a user from the query searching by id
+     *
+     * @return User
+     */
     public static function findById($id) {
         $ret = USER::findOne(self::SELECT_BY_ID, array(), array($id));
         return $ret;
     }
 
+    /**
+     * Return a user from the query searching by name
+     *
+     * @return User
+     */
     public static function findByName($name) {
         $ret = USER::findMany(self::SELECT_BY_NAME, array("%$name%"), array());
         return $ret;
     }
 
+    /**
+     * Return a user from the  searching by Username and Email
+     *
+     * @return User
+     */
     public static function findByUsernameAndEmail($username, $email) {
         $ret = USER::findOne(self::SELECT_BY_USERNAME_AND_EMAIL, array("$username", "$email"), array());
         return $ret;
     }
 
+    /**
+     * Return all user in the database
+     *
+     * @return Array(User)
+     */
     public static function findAll() {
         $ret = USER::findMany(self::SELECT_ALL, array(), array());
         return $ret;

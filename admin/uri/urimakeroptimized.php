@@ -55,7 +55,7 @@ class URIMaker {
     }
 
     static function index() {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER;
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index';
     }
 
     static function loginPage() {
@@ -64,6 +64,10 @@ class URIMaker {
 
     static function fromBasePath($path) {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.$path;
+    }
+
+    static function templatePath($path) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.TEMPLATEPATH.$path;
     }
 
     static function rssFeed() {

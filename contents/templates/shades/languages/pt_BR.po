@@ -1,0 +1,358 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Hábner Teixeira Costa <habnertc@msn.com>\n"
+"Language-Team: Hábner <habnertc@msn.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#. Text in echo
+#: shades/footer.php:9
+msgid " a child of the "
+msgstr " uma criança de "
+
+#. Text in echo
+#: shades/comments.php:39
+msgid " at "
+msgstr " em "
+
+#. Text in echo
+#: shades/author.php:43
+#: shades/single.php:15
+#: shades/archive.php:12
+#: shades/index.php:14
+msgid " in "
+msgstr " em "
+
+#. Text in echo
+#: shades/author.php:43
+#: shades/single.php:15
+#: shades/archive.php:12
+#: shades/index.php:14
+msgid " on "
+msgstr " em "
+
+#. Text in echo
+#: shades/comments.php:78
+msgid " to post a comment."
+msgstr " comentar"
+
+#. Text in function
+#: shades/header.php:6
+msgid " | "
+msgstr ""
+
+#. Text in echo
+#: shades/header.php:6
+msgid " | Not Found"
+msgstr " | Não encontrado"
+
+#. Text in function
+#: shades/header.php:6
+msgid " | Search results for "
+msgstr " | Buscar por "
+
+#. Text in function
+#: shades/comments.php:27
+#: shades/author.php:39
+#: shades/archive.php:15
+#: shades/index.php:18
+msgid "% Comments"
+msgstr "% Comentários"
+
+#. Text in function
+#: shades/author.php:43
+#: shades/single.php:15
+#: shades/archive.php:12
+#: shades/index.php:14
+msgid "&#124; "
+msgstr ""
+
+#. Text in function
+#: shades/page.php:15
+msgid "&gt "
+msgstr ""
+
+#. Text in function
+#: shades/author.php:57
+#: shades/archive.php:25
+#: shades/index.php:26
+msgid "&laquo; Previous entries"
+msgstr "&laquo; Posts anteriores"
+
+#. Text in function
+#: shades/page.php:15
+msgid "&lt;"
+msgstr ""
+
+#. Text in echo
+#: shades/comments.php:90
+#: shades/comments.php:92
+msgid "(required)"
+msgstr "(obrigatório)"
+
+#. Text in echo
+#: shades/comments.php:92
+msgid "(will not be published)"
+msgstr "(não será publicado)"
+
+#. Text in echo
+#: shades/single.php:18
+msgid "... other posts by "
+msgstr "...outro post por "
+
+#. Text in function
+#: shades/comments.php:27
+#: shades/author.php:39
+#: shades/archive.php:15
+#: shades/index.php:18
+msgid "1 Comment"
+msgstr "1 Comentário"
+
+#. Text in echo
+#: shades/author.php:21
+msgid "About "
+msgstr "Sobre"
+
+#. Text in echo
+#: shades/footer.php:3
+msgid "All rights reserved"
+msgstr "Todos direitos reservados"
+
+#. Text in echo
+#: shades/sidebar.php:38
+msgid "Archives"
+msgstr "Arquivos"
+
+#. Text in echo
+#: shades/author.php:24
+msgid "Biography"
+msgstr "Biografia"
+
+#. Text in echo
+#: shades/sidebar.php:20
+msgid "Calendar"
+msgstr "Calendário"
+
+#. Text in echo
+#: shades/sidebar.php:31
+msgid "Categories"
+msgstr "Categorias"
+
+#. Text in function
+#: shades/author.php:39
+#: shades/archive.php:15
+#: shades/index.php:18
+msgid "Closed"
+msgstr "Fechado"
+
+#. Text in echo
+#: shades/comments.php:68
+msgid "Comments are closed."
+msgstr "Comentários estão fechados"
+
+#. Text in echo
+#: shades/footer.php:3
+msgid "Copyright"
+msgstr ""
+
+#. Text in function
+#: shades/author.php:43
+#: shades/single.php:15
+#: shades/archive.php:12
+#: shades/index.php:14
+msgid "Edit"
+msgstr "Editar"
+
+#. Text in function
+#: shades/page.php:15
+msgid "Edit this page"
+msgstr "Editar esta página"
+
+#. Text in echo
+#: shades/comments.php:85
+msgid "Log out of this account"
+msgstr "Sair desta conta"
+
+#. Text in echo
+#: shades/comments.php:85
+msgid "Logged in as "
+msgstr "Logado como "
+
+#. Text in echo
+#: shades/comments.php:85
+msgid "Logout "
+msgstr "Sair"
+
+#. Text in echo
+#: shades/searchform.php:3
+msgid "Looking for something?"
+msgstr "Procurando algo?"
+
+#. Text in echo
+#: shades/comments.php:92
+msgid "Mail"
+msgstr "E-mail"
+
+#. Text in echo
+#: shades/sidebar.php:45
+msgid "Meta"
+msgstr ""
+
+#. Text in echo
+#: shades/comments.php:90
+msgid "Name"
+msgstr "Nome"
+
+#. Text in function
+#: shades/author.php:57
+#: shades/archive.php:25
+#: shades/index.php:26
+msgid "Next entries &raquo;"
+msgstr "Próximos posts &raquo;"
+
+#. Text in function
+#: shades/comments.php:27
+#: shades/author.php:39
+#: shades/archive.php:15
+#: shades/index.php:18
+msgid "No Comments"
+msgstr "Sem comentários"
+
+#. Text in echo
+#: shades/author.php:65
+#: shades/page.php:21
+#: shades/single.php:25
+#: shades/archive.php:33
+#: shades/index.php:34
+msgid "Not Found"
+msgstr "Não encontrado"
+
+#. Text in function
+#: shades/functions.php:1
+msgid "Page "
+msgstr "Página"
+
+#. Text in echo
+#: shades/author.php:41
+#: shades/single.php:13
+#: shades/archive.php:10
+#: shades/index.php:12
+msgid "Permanent Link to"
+msgstr "Link permanente para "
+
+#. Text in function
+#: shades/comments.php:13
+msgid "Please do not load this page directly. Thanks!"
+msgstr ""
+
+#. Text in echo
+#: shades/single.php:15
+#: shades/archive.php:12
+#: shades/index.php:14
+msgid "Posted by "
+msgstr "Postado por "
+
+#. Text in echo
+#: shades/author.php:28
+msgid "Posts by "
+msgstr "Posts por "
+
+#. Text in function
+#: shades/author.php:49
+#: shades/page.php:16
+#: shades/single.php:17
+msgid "Read more ..."
+msgstr "Leia mais..."
+
+#. Text in function
+#: shades/archive.php:17
+#: shades/index.php:20
+msgid "Read more... "
+msgstr "Leia mais..."
+
+#. Text in echo
+#: shades/comments.php:75
+msgid "Reply"
+msgstr "Responder"
+
+#. Text in echo
+#: shades/searchform.php:4
+msgid "Search"
+msgstr "Procurar"
+
+#. Text in echo
+#: shades/page.php:22
+#: shades/single.php:26
+#: shades/archive.php:34
+#: shades/index.php:35
+msgid "Sorry, but you are looking for something that is not here."
+msgstr "Lamento, mas você está procurando algo que não está aqui."
+
+#. Text in echo
+#: shades/author.php:66
+msgid "Sorry, there are no posts by this author."
+msgstr "Lamento, mas não há posts deste autor."
+
+#. Text in echo
+#: shades/comments.php:100
+msgid "Submit Comment"
+msgstr "Comentar"
+
+#. Text in echo
+#: shades/single.php:15
+msgid "Subscribe"
+msgstr "Inscrever"
+
+#. Text in echo
+#: shades/single.php:15
+msgid "Subscribe to my feed"
+msgstr "Inscreva-se no meu feed"
+
+#. Text in echo
+#: shades/comments.php:11
+msgid "This post is password protected. Enter the password to view comments."
+msgstr "Este post é protegido por senha. Entre com a senha para ver os comentários."
+
+#. Text in echo
+#: shades/comments.php:94
+#: shades/author.php:23
+msgid "Website"
+msgstr ""
+
+#. Text in echo
+#: shades/comments.php:78
+msgid "You must be "
+msgstr "Você deve estar "
+
+#. Text in echo
+#: shades/comments.php:43
+msgid "Your comment is awaiting moderation."
+msgstr "Seu comentário está aguardando a moderação."
+
+#. Text in echo
+#: shades/author.php:23
+msgid "email"
+msgstr "e-mail"
+
+#. Text in echo
+#: shades/comments.php:78
+msgid "logged in"
+msgstr "logado"
+
+#. Text in echo
+#: shades/author.php:23
+msgid "or"
+msgstr "ou"
+
+#. Text in echo
+#: shades/footer.php:17
+msgid "theme from"
+msgstr "tema de"
+

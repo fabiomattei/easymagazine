@@ -372,7 +372,7 @@ class Article {
         }
     }
 
-    protected function insert() {
+    public function insert() {
         $this->id = $this->getMaxId()+1;
         $this->indexnumber = $this->getMaxIndexNumber()+1;
         $tables = array("articles" => TBPREFIX."articles");

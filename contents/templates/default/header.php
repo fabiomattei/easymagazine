@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head profile="http://gmpg.org/xfn/11">
         <title><?= $this->title?></title>
-        <link rel="stylesheet" href="<?= URIMaker::fromBasePath('contents/templates/default/style.css') ?>" type="text/css" media="screen" />
+        <link rel="stylesheet" href="<?= URIMaker::templatePath('style.css') ?>" type="text/css" media="screen" />
         <meta name="keywords" content="<?= $this->metakeywords; ?>" />
         <meta name="description" content="<?= $this->metadescritpion; ?>" />
     </head>
@@ -12,7 +12,7 @@
         <div id="wrapper">
             <div id="header">
                 <ul id="nav">
-                    <li class="page_item"><a href="<?= URIMaker::fromBasePath('index.php') ?>">Home</a></li>
+                    <li class="page_item"><a href="<?= URIMaker::index() ?>">Home</a></li>
                     <li class="page_item"><a href="<?= URIMaker::people() ?>">People</a></li>
                     <li class="page_item"><a href="<?= URIMaker::numberslist() ?>">Numbers</a></li>
                     <?
@@ -24,5 +24,5 @@
                 <p class="description">
                     <?= Magazine::getMagazineDescription() ?>
                 </p>
-                <h1><a href="<?= URIMaker::fromBasePath('index.php') ?>"><?= Magazine::getMagazineTitle() ?></a></h1>
+                <h1><a href="<?= URIMaker::index() ?>"><?= Magazine::getMagazineTitle() ?></a></h1>
             </div>
