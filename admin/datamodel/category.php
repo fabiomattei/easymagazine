@@ -131,16 +131,6 @@ class Category {
         return $ret;
     }
 
-    public static function findLast() {
-        $ret = Category::findOne(self::SELECT_LAST, array(), array());
-        return $ret;
-    }
-
-    public static function findLastPublished() {
-        $ret = Category::findOne(self::SELECT_LAST_PUBLISHED, array(), array());
-        return $ret;
-    }
-
     public static function findAllPublished() {
         $ret = Category::findMany(self::SELECT_ALL_PUB, array(), array());
         return $ret;

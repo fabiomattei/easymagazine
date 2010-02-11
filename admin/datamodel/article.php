@@ -145,7 +145,7 @@ class Article {
         return $ret;
     }
 
-    public function findUpIndexNumber () {
+    public function findUpIndexNumber() {
         $ret = ARTICLE::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($this->number_id, $this->indexnumber));
         return $ret;
     }

@@ -32,7 +32,7 @@ require_once(STARTPATH.URIPATH.'/uri.php');
 class UriStandard extends URI {
 
     function evaluate() {
-        switch ($this->uri['page']) {
+        switch ($this->uri['p']) {
             case 'number':          $router = 'number'; $id = $this->uri['id']; break;
             case 'category':        $router = 'category'; $id = $this->uri['id']; break;
             case 'article':         $router = 'article'; $id = $this->uri['id']; break;
