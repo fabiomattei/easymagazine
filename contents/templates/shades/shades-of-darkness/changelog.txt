@@ -1,8 +1,0 @@
- = Changelog = 
-as of Aug 14, 2009
-----
-= Version 1.01 =
-* CSS (new): #header-center p { color:#635537; } to show blog description
-----
-= Version 1.0 =
-* Initial release
