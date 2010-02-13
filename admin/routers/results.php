@@ -78,7 +78,7 @@ class ResultsRouter extends Router {
     }
 
     function applyTemplate() {
-        $this->getRemote()->executeCommandBeforeComments();
+        $this->getRemote()->executeCommandBeforeResults();
         if (file_exists(TEMPLATEPATH.'/results.php')) {
             include (TEMPLATEPATH.'/results.php');
 
@@ -86,7 +86,7 @@ class ResultsRouter extends Router {
                 include (TEMPLATEPATH.'/index.php');
 
             }
-        $this->getRemote()->executeCommandAfterComments();
+        $this->getRemote()->executeCommandAfterResults();
     }
 
 }

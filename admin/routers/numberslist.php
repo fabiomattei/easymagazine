@@ -52,13 +52,13 @@ class NumberListRouter extends Router {
     }
 
     function applyTemplate() {
-        $this->getRemote()->executeCommandBeforeArticle();
+        $this->getRemote()->executeCommandBeforeNumbersList();
         if (file_exists(TEMPLATEPATH.'/numberslist.php')) {
             include (TEMPLATEPATH.'/numberslist.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
                 include (TEMPLATEPATH.'/index.php');
             }
-        $this->getRemote()->executeCommandAfterArticle();
+        $this->getRemote()->executeCommandAfterNumbersList();
     }
 
 }

@@ -50,13 +50,13 @@ class PeopleRouter extends Router {
     }
 
     function applyTemplate() {
-        $this->getRemote()->executeCommandBeforeArticle();
+        $this->getRemote()->executeCommandBeforePeople();
         if (file_exists(TEMPLATEPATH.'/people.php')) {
             include (TEMPLATEPATH.'/people.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
                 include (TEMPLATEPATH.'/index.php');
             }
-        $this->getRemote()->executeCommandAfterArticle();
+        $this->getRemote()->executeCommandAfterPeople();
     }
 
 }

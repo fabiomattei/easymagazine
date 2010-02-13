@@ -53,13 +53,13 @@ class CategoryRouter extends Router {
     }
 
     function applyTemplate() {
-        $this->getRemote()->executeCommandBeforeNumber();
+        $this->getRemote()->executeCommandBeforeCategory();
         if (file_exists(TEMPLATEPATH.'/category.php')) {
             include (TEMPLATEPATH.'/category.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
                 include (TEMPLATEPATH.'/index.php');
             }
-        $this->getRemote()->executeCommandAfterNumber();
+        $this->getRemote()->executeCommandAfterCategory();
     }
 
 }

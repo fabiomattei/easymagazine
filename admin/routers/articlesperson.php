@@ -60,13 +60,13 @@ class ArticlesPersonRouter extends Router {
     }
 
     function applyTemplate() {
-        $this->getRemote()->executeCommandBeforeArticle();
+        $this->getRemote()->executeCommandBeforeArticlesPerson();
         if (file_exists(TEMPLATEPATH.'/articlesperson.php')) {
             include (TEMPLATEPATH.'/articlesperson.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
                 include (TEMPLATEPATH.'/index.php');
             }
-        $this->getRemote()->executeCommandAfterArticle();
+        $this->getRemote()->executeCommandAfterArticlesPerson();
     }
 
 }
