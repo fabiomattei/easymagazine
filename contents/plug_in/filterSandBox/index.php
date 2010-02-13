@@ -15,8 +15,25 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
+require_once(FILTERPATH.'/filtercommand.php');
+require_once(FILTERPATH.'/articlefilterremote.php');
+
+
+class ProofFilter implements FilterCommand {
+
+    function execute($string) {
+        return $string." filter executed";
+    }
+
+}
+
+$filter= new ProofFilter();
+
+$articleRemote = ArticleFilterRemote::getInstance();
+
+$articleRemote->addFiltersGetTitle($filter);
 
 
 ?>
