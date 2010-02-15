@@ -69,11 +69,8 @@ class CommentsRouter extends Router {
                         $com->save();
                         $this->advice = 'Comment saved, it will be checked then published';
                     }
-                    if ($cont < 3 && $cont > 0) {
+                    if ($cont < 3 && $cont >= 0) {
                         $this->advice = 'Fill all the fields please';
-                    }
-                    if ($cont == 0) {
-                        $this->advice = '';
                     }
                 } else {
                     $this->advice = 'Please type the right Captcha';
