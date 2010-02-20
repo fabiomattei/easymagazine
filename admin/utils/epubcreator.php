@@ -29,7 +29,7 @@ class ePugCreator {
 
     public function __construct($number) {
         $this->number = $number;
-        $this->epubfilename = STARTPATH.EPUBSPATH.'number_'.$number->getId().'.epub';
+        $this->epubfilename = STARTPATH.EPUBSPATH.Magazine::getEpubName().'_'.$number->getId().'.epub';
         $this->epubFolderName = STARTPATH.EPUBSPATH.'number_'.$number->getId().'/';
     }
 

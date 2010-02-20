@@ -1,1 +1,1 @@
-<?PHP  define('TITLE', 's');  define('DESCRIPTION', "s");  define('URLTYPE', 'optimized');  define('PUBLISHER', 's');  define('RIGHTS', 's');  define('LANGUAGE', 'it');  ?>
+<?PHP  define('TITLE', 'prova');  define('DESCRIPTION', "fdsaf");  define('URLTYPE', 'optimized');  define('PUBLISHER', 'fdsaas');  define('RIGHTS', 'fdsdfsa');  define('LANGUAGE', 'en');  define('EPUBNAME', 'easymagazine');  ?>

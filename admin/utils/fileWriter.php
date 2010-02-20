@@ -82,6 +82,8 @@ class FileWriter {
         FileWriter::write($handle, $toWrite);
         $toWrite = ' define(\'LANGUAGE\', \''.$settingsindb['language']->getValue().'\'); ';
         FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'EPUBNAME\', \''.$settingsindb['epubname']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
 
         FileWriter::write($handle, ' ?>');
 

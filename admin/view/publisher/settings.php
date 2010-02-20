@@ -134,6 +134,10 @@
                                     <td class="first" width="172"><strong>Administration Email</strong></td>
                                     <td class="last"><input type="text" size="50" name="email" value="<?= $settingsindb['email']->getValue(); ?>"/></td>
                                 </tr>
+                                <tr>
+                                    <td class="first" width="172"><strong>Epub filename</strong></td>
+                                    <td class="last"><input type="text" size="50" name="epubname" value="<?= $settingsindb['epubname']->getValue(); ?>"/></td>
+                                </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
                                     <td class="last"><input type="submit" value="Save" name="save" /></td>

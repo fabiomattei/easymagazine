@@ -42,6 +42,10 @@ class Magazine {
         return LANGUAGE;
     }
 
+    public static function getEpubName() {
+        return EPUBNAME;
+    }
+
     public static function getAdministrationEmail() {
         $email = Option::findFirstByNameAndType('email', 'settings');
         return $email->getValue();
