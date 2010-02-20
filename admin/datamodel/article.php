@@ -238,6 +238,15 @@ class Article {
         return $ret;
     }
 
+    public function auhorsNamesConcatenation() {
+        $out = '';
+        foreach ($this->users() as $user) {
+                $out .= $user->getName().', ';
+        }
+
+        return substr($out, 0, -2);
+    }
+
     public function isUser($iduser) {
         $out = false;
         foreach ($this->users() as $user) {
