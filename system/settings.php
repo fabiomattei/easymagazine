@@ -1,1 +1,1 @@
-<?PHP  define('TITLE', 's');  define('DESCRIPTION', "s");  define('URLTYPE', 'optimized');  define('PUBLISHER', 's');  define('RIGHTS', 's');  ?>
+<?PHP  define('TITLE', 's');  define('DESCRIPTION', "s");  define('URLTYPE', 'optimized');  define('PUBLISHER', 's');  define('RIGHTS', 's');  define('LANGUAGE', 'it');  ?>

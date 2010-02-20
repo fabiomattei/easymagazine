@@ -80,6 +80,8 @@ class FileWriter {
         FileWriter::write($handle, $toWrite);
         $toWrite = ' define(\'RIGHTS\', \''.$settingsindb['rights']->getValue().'\'); ';
         FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'LANGUAGE\', \''.$settingsindb['language']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
 
         FileWriter::write($handle, ' ?>');
 

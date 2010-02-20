@@ -72,6 +72,39 @@
                                 <tr>
                                     <th class="full" colspan="2">Settings</th>
                                 </tr>
+                                <tr>
+                                    <td class="first" width="172"><strong>Publication Language</strong></td>
+                                    <td class="last">
+                                        <select name="language">
+                                            <option value="ca" <?if ($settingsindb['language']->getValue() == 'ca') echo 'selected';?> >ca</option>
+                                            <option value="cs" <?if ($settingsindb['language']->getValue() == 'cs') echo 'selected';?> >cs</option>
+                                            <option value="da" <?if ($settingsindb['language']->getValue() == 'da') echo 'selected';?> >da</option>
+                                            <option value="de" <?if ($settingsindb['language']->getValue() == 'de') echo 'selected';?> >de</option>
+                                            <option value="el" <?if ($settingsindb['language']->getValue() == 'el') echo 'selected';?> >el</option>
+                                            <option value="en" <?if ($settingsindb['language']->getValue() == 'en') echo 'selected';?> >en</option>
+                                            <option value="eo" <?if ($settingsindb['language']->getValue() == 'eo') echo 'selected';?> >eo</option>
+                                            <option value="es" <?if ($settingsindb['language']->getValue() == 'es') echo 'selected';?> >es</option>
+                                            <option value="et" <?if ($settingsindb['language']->getValue() == 'et') echo 'selected';?> >et</option>
+                                            <option value="fr" <?if ($settingsindb['language']->getValue() == 'fr') echo 'selected';?> >fr</option>
+                                            <option value="he" <?if ($settingsindb['language']->getValue() == 'he') echo 'selected';?> >he</option>
+                                            <option value="hr" <?if ($settingsindb['language']->getValue() == 'hr') echo 'selected';?> >hr</option>
+                                            <option value="it" <?if ($settingsindb['language']->getValue() == 'it') echo 'selected';?> >it</option>
+                                            <option value="ja" <?if ($settingsindb['language']->getValue() == 'ja') echo 'selected';?> >ja</option>
+                                            <option value="ko" <?if ($settingsindb['language']->getValue() == 'ko') echo 'selected';?> >ko</option>
+                                            <option value="ltz" <?if ($settingsindb['language']->getValue() == 'ltz') echo 'selected';?> >ltz</option>
+                                            <option value="nl" <?if ($settingsindb['language']->getValue() == 'nl') echo 'selected';?> >nl</option>
+                                            <option value="nn" <?if ($settingsindb['language']->getValue() == 'nn') echo 'selected';?> >nn</option>
+                                            <option value="no" <?if ($settingsindb['language']->getValue() == 'no') echo 'selected';?> >no</option>
+                                            <option value="pl" <?if ($settingsindb['language']->getValue() == 'pl') echo 'selected';?> >pl</option>
+                                            <option value="pt" <?if ($settingsindb['language']->getValue() == 'pt') echo 'selected';?> >pt</option>
+                                            <option value="ru" <?if ($settingsindb['language']->getValue() == 'ru') echo 'selected';?> >ru</option>
+                                            <option value="sv" <?if ($settingsindb['language']->getValue() == 'sv') echo 'selected';?> >sv</option>
+                                            <option value="tr" <?if ($settingsindb['language']->getValue() == 'tr') echo 'selected';?> >tr</option>
+                                            <option value="ko" <?if ($settingsindb['language']->getValue() == 'ko') echo 'selected';?> >ko</option>
+                                            <option value="zh" <?if ($settingsindb['language']->getValue() == 'zh') echo 'selected';?> >zh</option>
+                                        </select>
+                                    </td>
+                                </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong>Web Magazine Title</strong></td>
                                     <td class="last"><input type="text" size="50" name="title" value="<?= $settingsindb['title']->getValue(); ?>"/></td>

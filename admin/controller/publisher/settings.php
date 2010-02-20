@@ -45,6 +45,7 @@ function index() {
     if (!isset($out['settingsindb']['publisher'])) { $out['settingsindb']['publisher'] = new Option(Option::NEW_OPTION, 'publisher', 'settings', ''); }
     if (!isset($out['settingsindb']['rights'])) { $out['settingsindb']['rights'] = new Option(Option::NEW_OPTION, 'rights', 'settings', ''); }
     if (!isset($out['settingsindb']['email'])) { $out['settingsindb']['email'] = new Option(Option::NEW_OPTION, 'email', 'settings', ''); }
+    if (!isset($out['settingsindb']['language'])) { $out['settingsindb']['language'] = new Option(Option::NEW_OPTION, 'language', 'settings', 'en'); }
 
     return $out;
 }
@@ -88,6 +89,12 @@ function update($get, $post) {
     $toSave->setName('email');
     $toSave->setType('settings');
     $toSave->setValue($post['email']);
+    $toSave->save();
+
+    $toSave = new Option();
+    $toSave->setName('language');
+    $toSave->setType('settings');
+    $toSave->setValue($post['language']);
     $toSave->save();
     
     $settingsindb = Option::findByType('settings');

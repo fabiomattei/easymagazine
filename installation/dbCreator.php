@@ -307,6 +307,9 @@ class DbCreator {
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
             ('rights', 'settings', 'Copyright &copy; 2009 The Smart Cow')";
         $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('language', 'settings', 'en')";
+        $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 

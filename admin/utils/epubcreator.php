@@ -158,7 +158,7 @@ class ePugCreator {
         $text = '<?xml version="1.0" encoding="UTF-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
   <metadata xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/">
-    <dc:language>en</dc:language>
+    <dc:language>'.Magazine::getMagazineLanguage().'</dc:language>
     <dc:title>'.$this->number->getTitle().'</dc:title>
     <dc:publisher>'.Magazine::getMagazinePublisher().'</dc:publisher>
     <dc:rights>'.Magazine::getMagazineRights().'</dc:rights>
@@ -205,9 +205,9 @@ class ePugCreator {
 
         $text = '<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC
-	  "-//W3C//DTD XHTML 1.1//EN"
+	  "-//W3C//DTD XHTML 1.1//'.Magazine::getMagazineLanguage().'"
 	  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'.Magazine::getMagazineLanguage().'">
   <head>
     <title>'.$this->number->getTitle().'</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
@@ -307,7 +307,7 @@ table.cell td {
 
         $text = '<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
-<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" xml:lang="en" version="2005-1">
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" xml:lang="'.Magazine::getMagazineLanguage().'" version="2005-1">
   <head>
       <meta name="dtb:uid" content="web-books-12345" />
       <meta name="dtb:depth" content="2" />
@@ -347,7 +347,7 @@ table.cell td {
         }
 
         $text = '<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//'.Magazine::getMagazineLanguage().'" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
@@ -380,7 +380,7 @@ $text .= '
             }
 
             $text = '<?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//'.Magazine::getMagazineLanguage().'" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />

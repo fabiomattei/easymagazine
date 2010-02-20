@@ -38,6 +38,10 @@ class Magazine {
         return RIGHTS;
     }
 
+    public static function getMagazineLanguage() {
+        return LANGUAGE;
+    }
+
     public static function getAdministrationEmail() {
         $email = Option::findFirstByNameAndType('email', 'settings');
         return $email->getValue();
