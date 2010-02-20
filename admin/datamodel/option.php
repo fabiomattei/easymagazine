@@ -25,15 +25,15 @@ class Option {
     private $name;
     private $type;
     private $value;
-
-    const INSERT_SQL = 'insert into options (id, name, type, value) values (#, ?, ?, ?)';
-    const UPDATE_SQL = 'update options set name = ?, type = ?, value = ? where id = #';
-    const DELETE_SQL = 'delete from options where id = #';
-    const DELETE_TYPE_SQL = 'delete from options where type = ?';
-    const SELECT_BY_ID = 'select * from options where id = #';
-    const SELECT_BY_NAME = 'select * from options where name like ?';
-    const SELECT_BY_NAME_AND_TYPE = 'select * from options where name like ? and type like ?';
-    const SELECT_BY_TYPE = 'select * from options where type like ?';
+    
+    const INSERT_SQL = 'insert into options (id, name, type, value) values (@#@, @?@, @?@, @?@)';
+    const UPDATE_SQL = 'update options set name = @?@, type = @?@, value = @?@ where id = @#@';
+    const DELETE_SQL = 'delete from options where id = @#@';
+    const DELETE_TYPE_SQL = 'delete from options where type = @?@';
+    const SELECT_BY_ID = 'select * from options where id = @#@';
+    const SELECT_BY_NAME = 'select * from options where name like @?@';
+    const SELECT_BY_NAME_AND_TYPE = 'select * from options where name like @?@ and type like @?@';
+    const SELECT_BY_TYPE = 'select * from options where type like @?@';
     const SELECT_ALL = 'select * from options order by id DESC';
     const SELECT_BY_ID_ORD = 'select id from options order by id DESC';
 
@@ -52,16 +52,16 @@ class Option {
         $tables = array("options" => TBPREFIX."options");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $ret = new Option($row['id'], $row['name'], $row['type'], $row['value']);
             } else {
                 $ret = new Option();
             }
-        } catch (Exception $e)  {
+        } catch (Exception $e) {
             $ret = new Option();
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
@@ -73,14 +73,14 @@ class Option {
         $ret = array();
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Option($row['id'], $row['name'], $row['type'], $row['value']);
             }
-        } catch (Exception $e)  {
+        } catch (Exception $e) {
             $ret[] = new Option();
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
@@ -121,10 +121,10 @@ class Option {
         $tables = array("options" => TBPREFIX."options");
         try {
             DB::getInstance()->execute(
-                self::DELETE_TYPE_SQL,
-                array($type),
-                array(),
-                $tables);
+                    self::DELETE_TYPE_SQL,
+                    array($type),
+                    array(),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -142,10 +142,10 @@ class Option {
         $tables = array("options" => TBPREFIX."options");
         try {
             DB::getInstance()->execute(
-                self::DELETE_SQL,
-                array(),
-                array((int) $this->getId()),
-                $tables);
+                    self::DELETE_SQL,
+                    array(),
+                    array((int) $this->getId()),
+                    $tables);
             $this->id = self::NEW_OPTION;
             $this->name = '';
             $this->type = '';
@@ -160,10 +160,10 @@ class Option {
         $tables = array("options" => TBPREFIX."options");
         try {
             DB::getInstance()->execute(
-                self::INSERT_SQL,
-                array($this->name, $this->type, $this->value),
-                array($this->id),
-                $tables);
+                    self::INSERT_SQL,
+                    array($this->name, $this->type, $this->value),
+                    array($this->id),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -173,10 +173,10 @@ class Option {
         $tables = array("options" => TBPREFIX."options");
         try {
             DB::getInstance()->execute(
-                self::UPDATE_SQL,
-                array($this->name, $this->type, $this->value),
-                array($this->id),
-                $tables);
+                    self::UPDATE_SQL,
+                    array($this->name, $this->type, $this->value),
+                    array($this->id),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -186,10 +186,10 @@ class Option {
         $tables = array("options" => TBPREFIX."options");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_ID_ORD,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_BY_ID_ORD,
+                    array(),
+                    array(),
+                    $tables);
             $row = mysql_fetch_array($rs);
             $maxId = $row['id'];
         } catch (Exception $e) {

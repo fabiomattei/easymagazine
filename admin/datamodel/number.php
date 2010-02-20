@@ -41,28 +41,28 @@ class Number {
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, #, ?, ?, Now(), Now())';
-    const UPDATE_SQL = 'update numbers set indexnumber = #, published = #, commentsallowed = #, title = ?, subtitle = ?, summary = ?,  metadescription = ?, metakeyword = ?, updated = Now() where id = #';
-    const DELETE_SQL = 'delete from numbers where id = #';
-    const SELECT_BY_ID = 'select * from numbers where id = #';
-    const SELECT_BY_TITLE = 'select * from numbers where title like ?';
-    const FIND_IN_ALL_TEXT_FIELDS = 'select * from numbers where title like ? OR subtitle like ? OR summary like ? ';
+    const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, @#@, @?@, @?@, Now(), Now())';
+    const UPDATE_SQL = 'update numbers set indexnumber = @#@, published = @#@, commentsallowed = @#@, title = @?@, subtitle = @?@, summary = @?@,  metadescription = @?@, metakeyword = @?@, updated = Now() where id = @#@';
+    const DELETE_SQL = 'delete from numbers where id = @#@';
+    const SELECT_BY_ID = 'select * from numbers where id = @#@';
+    const SELECT_BY_TITLE = 'select * from numbers where title like @?@';
+    const FIND_IN_ALL_TEXT_FIELDS = 'select * from numbers where title like @?@ OR subtitle like @?@ OR summary like @?@ ';
     const SELECT_LAST = 'select * from numbers where published = 1 order by indexnumber DESC Limit 1';
     const SELECT_LAST_PUBLISHED = 'select * from numbers where published = 1 order by indexnumber DESC Limit 1';
     const SELECT_ALL_PUB = 'select * from numbers where published = 1 order by indexnumber DESC';
-    const SELECT_LASTN_PUBLISHED = 'select * from numbers where published = 1 order by indexnumber DESC Limit # ';
+    const SELECT_LASTN_PUBLISHED = 'select * from numbers where published = 1 order by indexnumber DESC Limit @#@ ';
     const SELECT_ALL = 'select * from numbers order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from numbers order by indexnumber DESC';
     const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from numbers where published = 1 order by indexnumber DESC ';
     const SELECT_ALL_NOTPUB_ORD_INDEXNUMBER = 'select * from numbers where published = 0 order by indexnumber DESC';
-    const SELECT_ARTICLES = 'select * from articles where number_id = # order by indexnumber DESC';
-    const SELECT_ARTICLES_PUBLISHED = 'select * from articles where number_id = # AND published = 1 order by indexnumber DESC';
+    const SELECT_ARTICLES = 'select * from articles where number_id = @#@ order by indexnumber DESC';
+    const SELECT_ARTICLES_PUBLISHED = 'select * from articles where number_id = @#@ AND published = 1 order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select * from numbers order by indexnumber DESC ';
     const SELECT_MAX_INDEXNUMBER = 'select max(indexnumber) from numbers ';
     const SELECT_BY_ID_ORD = 'select id from numbers order by id DESC';
-    const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > # order by indexnumber ';
-    const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < # order by indexnumber DESC ';
-    const SELECT_COMMENTS = 'select C.* from comments as C, articles as A where A.number_id = # AND C.article_id = A.id order by C.created DESC';
+    const SELECT_UP_INDEXNUMBER = 'select * from numbers WHERE indexnumber > @#@ order by indexnumber ';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from numbers WHERE indexnumber < @#@ order by indexnumber DESC ';
+    const SELECT_COMMENTS = 'select C.* from comments as C, articles as A where A.number_id = @#@ AND C.article_id = A.id order by C.created DESC';
 
     public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $commentsallowed='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->db = DB::getInstance();
@@ -88,16 +88,16 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $ret = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             } else {
                 $ret = new Number();
             }
-        } catch (Exception $e)  {
+        } catch (Exception $e) {
             $ret = new Number();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -109,10 +109,10 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Number($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['commentsallowed'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
@@ -167,7 +167,7 @@ class Number {
      * ordered by indexnumber.
      *
      * $n <int>
-     */
+    */
     public static function findLastNPublished($n) {
         $ret = NUMBER::findMany(self::SELECT_LASTN_PUBLISHED, array(), array($n));
         return $ret;
@@ -203,27 +203,27 @@ class Number {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_ARTICLES,
-                array(),
-                array("$this->id"),
-                $tables);
+                    self::SELECT_ARTICLES,
+                    array(),
+                    array("$this->id"),
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Article(
-                    $row['id'],
-                    $row['number_id'],
-                    $row['category_id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['body'],
-                    $row['commentsallowed'],
-                    $row['tag'],
-                    $row['metadescription'],
-                    $row['metakeyword'],
-                    $row['created'],
-                    $row['updated']);
+                        $row['id'],
+                        $row['number_id'],
+                        $row['category_id'],
+                        $row['indexnumber'],
+                        $row['published'],
+                        $row['title'],
+                        $row['subtitle'],
+                        $row['summary'],
+                        $row['body'],
+                        $row['commentsallowed'],
+                        $row['tag'],
+                        $row['metadescription'],
+                        $row['metakeyword'],
+                        $row['created'],
+                        $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Article();
@@ -237,27 +237,27 @@ class Number {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_ARTICLES_PUBLISHED,
-                array(),
-                array("$this->id"),
-                $tables);
+                    self::SELECT_ARTICLES_PUBLISHED,
+                    array(),
+                    array("$this->id"),
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Article(
-                    $row['id'],
-                    $row['number_id'],
-                    $row['category_id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['body'],
-                    $row['commentsallowed'],
-                    $row['tag'],
-                    $row['metadescription'],
-                    $row['metakeyword'],
-                    $row['created'],
-                    $row['updated']);
+                        $row['id'],
+                        $row['number_id'],
+                        $row['category_id'],
+                        $row['indexnumber'],
+                        $row['published'],
+                        $row['title'],
+                        $row['subtitle'],
+                        $row['summary'],
+                        $row['body'],
+                        $row['commentsallowed'],
+                        $row['tag'],
+                        $row['metadescription'],
+                        $row['metakeyword'],
+                        $row['created'],
+                        $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Article();
@@ -271,20 +271,20 @@ class Number {
         try {
             $tables = array('comments' => TBPREFIX.'comments', 'articles' => TBPREFIX.'articles');
             $rs = DB::getInstance()->execute(
-                self::SELECT_COMMENTS,
-                array(),
-                array($this->id),
-                $tables);
+                    self::SELECT_COMMENTS,
+                    array(),
+                    array($this->id),
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Comment(
-                    $row['id'],
-                    $row['article_id'],
-                    $row['title'],
-                    $row['published'],
-                    $row['body'],
-                    $row['signature'],
-                    $row['created'],
-                    $row['updated']);
+                        $row['id'],
+                        $row['article_id'],
+                        $row['title'],
+                        $row['published'],
+                        $row['body'],
+                        $row['signature'],
+                        $row['created'],
+                        $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Comment();
@@ -307,10 +307,10 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         try {
             DB::getInstance()->execute(
-                self::INSERT_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->metadescription, $this->metakeyword),
-                array($this->id, $this->indexnumber, $this->published, $this->commentsallowed),
-                $tables);
+                    self::INSERT_SQL,
+                    array($this->title, $this->subtitle, $this->summary, $this->metadescription, $this->metakeyword),
+                    array($this->id, $this->indexnumber, $this->published, $this->commentsallowed),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -320,10 +320,10 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         try {
             DB::getInstance()->execute(
-                self::UPDATE_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->metadescription, $this->metakeyword),
-                array($this->indexnumber, $this->published, $this->commentsallowed, $this->id),
-                $tables);
+                    self::UPDATE_SQL,
+                    array($this->title, $this->subtitle, $this->summary, $this->metadescription, $this->metakeyword),
+                    array($this->indexnumber, $this->published, $this->commentsallowed, $this->id),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -333,10 +333,10 @@ class Number {
         $tables = array("numbers" => TBPREFIX."numbers");
         try {
             DB::getInstance()->execute(
-                self::DELETE_SQL,
-                array(),
-                array($this->id),
-                $tables);
+                    self::DELETE_SQL,
+                    array(),
+                    array($this->id),
+                    $tables);
             $this->id = self::NEW_NUMBER;
             $this->indexnumber = '';
             $this->published = '';
@@ -366,10 +366,10 @@ class Number {
         try {
             $tables = array("numbers" => TBPREFIX."numbers");
             $rs = DB::getInstance()->execute(
-                self::SELECT_MAX_INDEXNUMBER,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_MAX_INDEXNUMBER,
+                    array(),
+                    array(),
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $maxIndexNumber = $row[0];
             } else {
@@ -386,10 +386,10 @@ class Number {
         try {
             $tables = array("numbers" => TBPREFIX."numbers");
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_ID_ORD,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_BY_ID_ORD,
+                    array(),
+                    array(),
+                    $tables);
             $row = mysql_fetch_array($rs);
             $maxId = $row['id'];
         } catch (Exception $e) {

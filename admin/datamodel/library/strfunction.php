@@ -45,7 +45,7 @@ class StrHelper {
      * @assert ("hello", "wprld") == "mydada"
      */
     public static function replaceStrings($str, $array) {
-        $newArray = explode('?', $str);
+        $newArray = explode('@?@', $str);
         $out = $newArray[0];
         $i = 1;
         foreach ($array as $key){
@@ -56,7 +56,7 @@ class StrHelper {
     }
 
     public static function replaceNumbers($str, $array) {
-        $newArray = explode('#', $str);
+        $newArray = explode('@#@', $str);
         $out = $newArray[0];
         $i = 1;
         foreach ($array as $key){

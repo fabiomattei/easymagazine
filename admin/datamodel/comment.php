@@ -36,16 +36,16 @@ class Comment {
     private $db;
     private $filter;
 
-    const INSERT_SQL = 'insert into comments (id, article_id, published, title, body, signature, created, updated) values (#, #, #, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update comments set article_id = #, published = #, title = ?, body = ?, signature = ?, updated=now() where id = #';
-    const DELETE_SQL = 'delete from comments where id = #';
-    const SELECT_BY_ID = 'select * from comments where id = #';
-    const SELECT_LAST_N = 'select * from comments ORDER BY updated DESC LIMIT # ';
-    const SELECT_BY_TITLE = 'select * from comments where title like ?';
-    const FIND_IN_ALL_TEXT_FIELDS = 'select * from comments where title like ? OR body like ? OR signature like ? ';
+    const INSERT_SQL = 'insert into comments (id, article_id, published, title, body, signature, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, now(), now())';
+    const UPDATE_SQL = 'update comments set article_id = @#@, published = @#@, title = @?@, body = @?@, signature = @?@, updated=now() where id = @#@';
+    const DELETE_SQL = 'delete from comments where id = @#@';
+    const SELECT_BY_ID = 'select * from comments where id = @#@';
+    const SELECT_LAST_N = 'select * from comments ORDER BY updated DESC LIMIT @#@ ';
+    const SELECT_BY_TITLE = 'select * from comments where title like @?@';
+    const FIND_IN_ALL_TEXT_FIELDS = 'select * from comments where title like @?@ OR body like @?@ OR signature like @?@ ';
     const SELECT_BY_ID_ORD = 'select id from comments order by id DESC';
     const SELECT_ALL = 'select * from comments order by id DESC';
-    const SELECT_ARTICLE = 'select * from articles where id = # ';
+    const SELECT_ARTICLE = 'select * from articles where id = @#@ ';
 
     public function __construct($id=self::NEW_COMMENT, $article_id=self::NEW_COMMENT, $title='', $published='', $body='', $signature='', $created='', $updated='') {
         $this->db = DB::getInstance();
@@ -68,10 +68,10 @@ class Comment {
         try {
             $tables = array("comments" => TBPREFIX."comments");
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $ret = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
             } else {
@@ -89,10 +89,10 @@ class Comment {
         $tables = array("comments" => TBPREFIX."comments");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Comment($row['id'], $row['article_id'], $row['title'], $row['published'], $row['body'], $row['signature'], $row['created'], $row['updated']);
             }
@@ -132,27 +132,27 @@ class Comment {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_ARTICLE,
-                array(),
-                array($this->article_id),
-                $tables);
+                    self::SELECT_ARTICLE,
+                    array(),
+                    array($this->article_id),
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret = new Article(
-                    $row['id'],
-                    $row['number_id'],
-                    $row['category_id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['body'],
-                    $row['commentsallowed'],
-                    $row['tag'],
-                    $row['metadescription'],
-                    $row['metakeyword'],
-                    $row['created'],
-                    $row['updated']);
+                        $row['id'],
+                        $row['number_id'],
+                        $row['category_id'],
+                        $row['indexnumber'],
+                        $row['published'],
+                        $row['title'],
+                        $row['subtitle'],
+                        $row['summary'],
+                        $row['body'],
+                        $row['commentsallowed'],
+                        $row['tag'],
+                        $row['metadescription'],
+                        $row['metakeyword'],
+                        $row['created'],
+                        $row['updated']);
             }
         } catch (Exception $e) {
             $ret = new Article();
@@ -173,10 +173,10 @@ class Comment {
         $tables = array("comments" => TBPREFIX."comments");
         try {
             DB::getInstance()->execute(
-                self::DELETE_SQL,
-                array(),
-                array((int) $this->getId()),
-                $tables);
+                    self::DELETE_SQL,
+                    array(),
+                    array((int) $this->getId()),
+                    $tables);
             $this->id = self::NEW_COMMENT;
             $this->article_id = self::NEW_COMMENT;
             $this->title = '';
@@ -195,10 +195,10 @@ class Comment {
         $tables = array("comments" => TBPREFIX."comments");
         try {
             DB::getInstance()->execute(
-                self::INSERT_SQL,
-                array($this->title, $this->body, $this->signature),
-                array($this->id, $this->article_id, $this->published),
-                $tables);
+                    self::INSERT_SQL,
+                    array($this->title, $this->body, $this->signature),
+                    array($this->id, $this->article_id, $this->published),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -208,10 +208,10 @@ class Comment {
         $tables = array("comments" => TBPREFIX."comments");
         try {
             DB::getInstance()->execute(
-                self::UPDATE_SQL,
-                array($this->title, $this->body, $this->signature),
-                array($this->article_id, $this->published, $this->id),
-                $tables);
+                    self::UPDATE_SQL,
+                    array($this->title, $this->body, $this->signature),
+                    array($this->article_id, $this->published, $this->id),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -221,10 +221,10 @@ class Comment {
         $tables = array("comments" => TBPREFIX."comments");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_ID_ORD,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_BY_ID_ORD,
+                    array(),
+                    array(),
+                    $tables);
             $row = mysql_fetch_array($rs);
             $maxId = $row['id'];
         } catch (Exception $e) {

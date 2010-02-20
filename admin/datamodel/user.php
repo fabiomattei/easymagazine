@@ -36,20 +36,20 @@ class User {
     private $updated;
     private $db;
 
-    const INSERT_SQL = 'insert into users (id, name, username, password, body, role, toshow, email, msn, skype, created, updated) values (#, ?, ?, ?, ?, ?, #, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update users set name = ?, body = ?, role = ?, toshow = #, email = ?, msn = ?, skype = ?, updated=now() where id = #';
-    const UPDATE_SQL_PASSWORD = 'update users set password = ?, updated=now() where id = #';
-    const DELETE_SQL = 'delete from users where id = #';
-    const SELECT_BY_ID = 'select * from users where id = # ';
-    const SELECT_BY_NAME = 'select * from users where name like ? order by name';
-    const SELECT_BY_USERNAME_AND_EMAIL = 'select * from users where username = ? AND email = ? order by name ';
+    const INSERT_SQL = 'insert into users (id, name, username, password, body, role, toshow, email, msn, skype, created, updated) values (@#@, @?@, @?@, @?@, @?@, @?@, @#@, @?@, @?@, @?@, now(), now())';
+    const UPDATE_SQL = 'update users set name = @?@, body = @?@, role = @?@, toshow = @#@, email = @?@, msn = @?@, skype = @?@, updated=now() where id = @#@';
+    const UPDATE_SQL_PASSWORD = 'update users set password = @?@, updated=now() where id = @#@';
+    const DELETE_SQL = 'delete from users where id = @#@';
+    const SELECT_BY_ID = 'select * from users where id = @#@ ';
+    const SELECT_BY_NAME = 'select * from users where name like @?@ order by name';
+    const SELECT_BY_USERNAME_AND_EMAIL = 'select * from users where username = @?@ AND email = @?@ order by name ';
     const SELECT_ALL = 'select * from users order by name ';
     const SELECT_ALL_TO_SHOW = 'select * from users WHERE toshow = 1 order by name ';
-    const SELECT_USR_PSW = 'select * from users WHERE username like ? AND password like ? ';
+    const SELECT_USR_PSW = 'select * from users WHERE username like @?@ AND password like @?@ ';
     const SELECT_BY_ID_ORD = 'select id from users order by id DESC';
-    const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = # order by AR.id DESC';
-    const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = # order by CM.id DESC';
-
+    const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = @#@ order by AR.id DESC';
+    const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = @#@ order by CM.id DESC';
+    
     public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $toshow='', $email='', $msn='', $skype='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->id = $id;
@@ -75,10 +75,10 @@ class User {
         $tables = array("users" => TBPREFIX."users");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $ret = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['toshow'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
             } else {
@@ -96,10 +96,10 @@ class User {
         $ret = array();
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new User($row['id'], $row['name'], $row['username'], $row['password'], $row['body'], $row['role'], $row['toshow'], $row['email'], $row['msn'], $row['skype'], $row['created'], $row['updated']);
             }
@@ -163,30 +163,30 @@ class User {
     public function articles() {
         $ret = array();
         $tables = array('articles' => TBPREFIX.'articles',
-            'users_articles' => TBPREFIX.'users_articles');
+                'users_articles' => TBPREFIX.'users_articles');
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_ARTICLES,
-                array(),
-                array("$this->id"),
-                $tables);
+                    self::SELECT_ARTICLES,
+                    array(),
+                    array("$this->id"),
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Article(
-                    $row['id'],
-                    $row['number_id'],
-                    $row['category_id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['body'],
-                    $row['commentsallowed'],
-                    $row['tag'],
-                    $row['metadescription'],
-                    $row['metakeyword'],
-                    $row['created'],
-                    $row['updated']);
+                        $row['id'],
+                        $row['number_id'],
+                        $row['category_id'],
+                        $row['indexnumber'],
+                        $row['published'],
+                        $row['title'],
+                        $row['subtitle'],
+                        $row['summary'],
+                        $row['body'],
+                        $row['commentsallowed'],
+                        $row['tag'],
+                        $row['metadescription'],
+                        $row['metakeyword'],
+                        $row['created'],
+                        $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Article();
@@ -198,24 +198,24 @@ class User {
     public function articlescomments() {
         $ret = array();
         $tables = array('comments' => TBPREFIX.'comments',
-            'articles' => TBPREFIX.'articles',
-            'users_articles' => TBPREFIX.'users_articles');
+                'articles' => TBPREFIX.'articles',
+                'users_articles' => TBPREFIX.'users_articles');
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_COMMENTSARTICLES,
-                array(),
-                array("$this->id"),
-                $tables);
+                    self::SELECT_COMMENTSARTICLES,
+                    array(),
+                    array("$this->id"),
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Comment(
-                    $row['id'],
-                    $row['article_id'],
-                    $row['title'],
-                    $row['published'],
-                    $row['body'],
-                    $row['signature'],
-                    $row['created'],
-                    $row['updated']);
+                        $row['id'],
+                        $row['article_id'],
+                        $row['title'],
+                        $row['published'],
+                        $row['body'],
+                        $row['signature'],
+                        $row['created'],
+                        $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Comment();
@@ -228,10 +228,10 @@ class User {
         $tables = array("users" => TBPREFIX."users");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_ID_ORD,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_BY_ID_ORD,
+                    array(),
+                    array(),
+                    $tables);
             $row = mysql_fetch_array($rs);
             $maxId = $row['id'];
         } catch (Exception $e) {
@@ -253,10 +253,10 @@ class User {
         $tables = array("users" => TBPREFIX."users");
         try {
             DB::getInstance()->execute(
-                self::DELETE_SQL,
-                array(),
-                array($this->id),
-                $tables);
+                    self::DELETE_SQL,
+                    array(),
+                    array($this->id),
+                    $tables);
             $this->id = self::NEW_USER;
             $this->name = '';
             $this->username = '';
@@ -280,10 +280,10 @@ class User {
         $psw = md5($this->password);
         try {
             DB::getInstance()->execute(
-                self::INSERT_SQL,
-                array($this->name, $this->username, $psw, $this->body, $this->role, $this->email, $this->msn, $this->skype),
-                array($this->id, $this->toshow),
-                $tables);
+                    self::INSERT_SQL,
+                    array($this->name, $this->username, $psw, $this->body, $this->role, $this->email, $this->msn, $this->skype),
+                    array($this->id, $this->toshow),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -293,10 +293,10 @@ class User {
         $tables = array("users" => TBPREFIX."users");
         try {
             DB::getInstance()->execute(
-                self::UPDATE_SQL,
-                array($this->name, $this->body, $this->role, $this->email, $this->msn, $this->skype),
-                array($this->toshow, $this->id),
-                $tables);
+                    self::UPDATE_SQL,
+                    array($this->name, $this->body, $this->role, $this->email, $this->msn, $this->skype),
+                    array($this->toshow, $this->id),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -308,10 +308,10 @@ class User {
             $this->password = md5($NewPsw);
             try {
                 DB::getInstance()->execute(
-                    self::UPDATE_SQL_PASSWORD,
-                    array($this->password),
-                    array($this->id),
-                    $tables);
+                        self::UPDATE_SQL_PASSWORD,
+                        array($this->password),
+                        array($this->id),
+                        $tables);
             } catch (Exception $e) {
                 echo 'Caught exception: ',  $e->getMessage(), "\n";
             }
@@ -324,10 +324,10 @@ class User {
         $this->password = md5($newPassword);
         try {
             DB::getInstance()->execute(
-                self::UPDATE_SQL_PASSWORD,
-                array($this->password),
-                array($this->id),
-                $tables);
+                    self::UPDATE_SQL_PASSWORD,
+                    array($this->password),
+                    array($this->id),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }

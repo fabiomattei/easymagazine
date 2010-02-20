@@ -38,22 +38,22 @@ class Page {
     private $updated;
     private $db;
 
-    const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (#, #, #, ?, ?, ?, ?, ?, ?, ?, now(), now())';
-    const UPDATE_SQL = 'update pages set indexnumber = #, published = #, title = ?, subtitle = ?, summary = ?, body = ?, tag = ?, metadescription = ?, metakeyword = ?, updated=now() where id = #';
-    const DELETE_SQL = 'delete from pages where id = # ';
-    const SELECT_BY_ID = 'select * from pages where id = # ';
+    const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, @?@, @?@, @?@, @?@, now(), now())';
+    const UPDATE_SQL = 'update pages set indexnumber = @#@, published = @#@, title = @?@, subtitle = @?@, summary = @?@, body = @?@, tag = @?@, metadescription = @?@, metakeyword = @?@, updated=now() where id = @#@';
+    const DELETE_SQL = 'delete from pages where id = @#@ ';
+    const SELECT_BY_ID = 'select * from pages where id = @#@ ';
     const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from pages order by indexnumber';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from pages order by indexnumber DESC ';
     const SELECT_MAX_INDEXNUMBER = 'select max(indexnumber) from pages ';
     const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from pages where published = 1 order by indexnumber DESC ';
-    const SELECT_UP_INDEXNUMBER = 'select * from pages WHERE indexnumber > # order by indexnumber ';
-    const SELECT_DOWN_INDEXNUMBER = 'select * from pages WHERE indexnumber < # order by indexnumber DESC ';
-    const SELECT_BY_TITLE = 'select * from pages where title like ?';
-    const FIND_IN_ALL_TEXT_FIELDS = 'select * from pages where title like ? OR subtitle like ? OR summary like ? OR body like ? ';
+    const SELECT_UP_INDEXNUMBER = 'select * from pages WHERE indexnumber > @#@ order by indexnumber ';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from pages WHERE indexnumber < @#@ order by indexnumber DESC ';
+    const SELECT_BY_TITLE = 'select * from pages where title like @?@';
+    const FIND_IN_ALL_TEXT_FIELDS = 'select * from pages where title like @?@ OR subtitle like @?@ OR summary like @?@ OR body like @?@ ';
     const SELECT_BY_ID_ORD = 'select id from pages order by id DESC';
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from pages order by indexnumber DESC';
-
+    
     public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->db = DB::getInstance();
         $this->filter = PageFilterRemote::getInstance();
@@ -79,10 +79,10 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $ret = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated'] );
             } else {
@@ -100,10 +100,10 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Page($row['id'], $row['indexnumber'], $row['published'], $row['title'], $row['subtitle'], $row['summary'], $row['body'], $row['tag'], $row['metadescription'], $row['metakeyword'], $row['created'], $row['updated']);
             }
@@ -171,10 +171,10 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             DB::getInstance()->execute(
-                self::DELETE_SQL,
-                array(),
-                array($this->id),
-                $tables);
+                    self::DELETE_SQL,
+                    array(),
+                    array($this->id),
+                    $tables);
             $this->id = self::NEW_PAGE;
             $this->title = '';
             $this->subtitle = '';
@@ -196,10 +196,10 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             DB::getInstance()->execute(
-                self::INSERT_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
-                array($this->id, $this->indexnumber, $this->published),
-                $tables);
+                    self::INSERT_SQL,
+                    array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+                    array($this->id, $this->indexnumber, $this->published),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
@@ -209,10 +209,10 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             DB::getInstance()->execute(
-                self::UPDATE_SQL,
-                array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
-                array($this->indexnumber, $this->published, $this->id),
-                $tables);
+                    self::UPDATE_SQL,
+                    array($this->title, $this->subtitle, $this->summary, $this->body, $this->tag, $this->metadescription, $this->metakeyword),
+                    array($this->indexnumber, $this->published, $this->id),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
@@ -222,10 +222,10 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_MAX_INDEXNUMBER,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_MAX_INDEXNUMBER,
+                    array(),
+                    array(),
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $maxIndexNumber = $row[0];
             } else {
@@ -242,10 +242,10 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_ID_ORD,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_BY_ID_ORD,
+                    array(),
+                    array(),
+                    $tables);
             $row = mysql_fetch_array($rs);
             $maxId = $row['id'];
         } catch (Exception $e) {

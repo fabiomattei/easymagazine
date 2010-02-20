@@ -32,22 +32,22 @@ class Category {
     private $created;
     private $updated;
 
-    const INSERT_SQL = 'insert into categories (id, indexnumber, published, name, description, created, updated) values (#, #, #, ?, ?, Now(), Now())';
-    const UPDATE_SQL = 'update categories set indexnumber = #, published = #, name = ?, description = ?, updated = Now() where id = #';
-    const DELETE_SQL = 'delete from categories where id = #';
-    const SELECT_BY_ID = 'select * from categories where id = #';
+    const INSERT_SQL = 'insert into categories (id, indexnumber, published, name, description, created, updated) values (@#@, @#@, @#@, @?@, @?@, Now(), Now())';
+    const UPDATE_SQL = 'update categories set indexnumber = @#@, published = @#@, name = @?@, description = @?@, updated = Now() where id = @#@';
+    const DELETE_SQL = 'delete from categories where id = @#@';
+    const SELECT_BY_ID = 'select * from categories where id = @#@';
     const SELECT_ALL_PUB = 'select * from categories where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from categories order by id DESC';
     const SELECT_ALL_ORD_INDEXNUMBER = 'select * from categories order by indexnumber DESC';
     const SELECT_ALL_PUB_ORD_INDEXNUMBER = 'select * from categories where published = 1 order by indexnumber DESC ';
     const SELECT_ALL_NOTPUB_ORD_INDEXNUMBER = 'select * from categories where published = 0 order by indexnumber DESC';
-    const SELECT_ARTICLES = 'select * from articles where category_id = # order by indexnumber DESC';
-    const SELECT_ARTICLES_PUBLISHED = 'select * from articles where category_id = # AND published = 1 order by indexnumber DESC';
+    const SELECT_ARTICLES = 'select * from articles where category_id = @#@ order by indexnumber DESC';
+    const SELECT_ARTICLES_PUBLISHED = 'select * from articles where category_id = @#@ AND published = 1 order by indexnumber DESC';
     const SELECT_BY_INDEXNUMBER = 'select * from categories order by indexnumber DESC ';
     const SELECT_MAX_INDEXNUMBER = 'select max(indexnumber) from categories ';
     const SELECT_BY_ID_ORD = 'select id from categories order by id DESC';
-    const SELECT_UP_INDEXNUMBER = 'select * from categories WHERE indexnumber > # order by indexnumber ';
-    const SELECT_DOWN_INDEXNUMBER = 'select * from categories WHERE indexnumber < # order by indexnumber DESC ';
+    const SELECT_UP_INDEXNUMBER = 'select * from categories WHERE indexnumber > @#@ order by indexnumber ';
+    const SELECT_DOWN_INDEXNUMBER = 'select * from categories WHERE indexnumber < @#@ order by indexnumber DESC ';
 
     public function __construct($id=self::NEW_CATEGORY, $indexnumber='', $published='', $name='', $description='', $created='', $updated='') {
         $this->id = $id;
@@ -67,16 +67,16 @@ class Category {
         $tables = array("categories" => TBPREFIX."categories");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $ret = new Category($row['id'], $row['indexnumber'], $row['published'], $row['name'], $row['description'], $row['created'], $row['updated']);
             } else {
                 $ret = new Category();
             }
-        } catch (Exception $e)  {
+        } catch (Exception $e) {
             $ret = new Category();
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
@@ -88,10 +88,10 @@ class Category {
         $tables = array("categories" => TBPREFIX."categories");
         try {
             $rs = DB::getInstance()->execute(
-                $SQL,
-                $array_str,
-                $array_int,
-                $tables);
+                    $SQL,
+                    $array_str,
+                    $array_int,
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Category($row['id'], $row['indexnumber'], $row['published'], $row['name'], $row['description'], $row['created'], $row['updated']);
             }
@@ -161,27 +161,27 @@ class Category {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_ARTICLES,
-                array(),
-                array("$this->id"),
-                $tables);
+                    self::SELECT_ARTICLES,
+                    array(),
+                    array("$this->id"),
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Article(
-                    $row['id'],
-                    $row['number_id'],
-                    $row['category_id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['body'],
-                    $row['commentsallowed'],
-                    $row['tag'],
-                    $row['metadescription'],
-                    $row['metakeyword'],
-                    $row['created'],
-                    $row['updated']);
+                        $row['id'],
+                        $row['number_id'],
+                        $row['category_id'],
+                        $row['indexnumber'],
+                        $row['published'],
+                        $row['title'],
+                        $row['subtitle'],
+                        $row['summary'],
+                        $row['body'],
+                        $row['commentsallowed'],
+                        $row['tag'],
+                        $row['metadescription'],
+                        $row['metakeyword'],
+                        $row['created'],
+                        $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Article();
@@ -195,27 +195,27 @@ class Category {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
-                self::SELECT_ARTICLES_PUBLISHED,
-                array(),
-                array("$this->id"),
-                $tables);
+                    self::SELECT_ARTICLES_PUBLISHED,
+                    array(),
+                    array("$this->id"),
+                    $tables);
             while ($row = mysql_fetch_array($rs)) {
                 $ret[] = new Article(
-                    $row['id'],
-                    $row['number_id'],
-                    $row['category_id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['body'],
-                    $row['commentsallowed'],
-                    $row['tag'],
-                    $row['metadescription'],
-                    $row['metakeyword'],
-                    $row['created'],
-                    $row['updated']);
+                        $row['id'],
+                        $row['number_id'],
+                        $row['category_id'],
+                        $row['indexnumber'],
+                        $row['published'],
+                        $row['title'],
+                        $row['subtitle'],
+                        $row['summary'],
+                        $row['body'],
+                        $row['commentsallowed'],
+                        $row['tag'],
+                        $row['metadescription'],
+                        $row['metakeyword'],
+                        $row['created'],
+                        $row['updated']);
             }
         } catch (Exception $e) {
             $ret[] = new Article();
@@ -238,10 +238,10 @@ class Category {
         $tables = array("categories" => TBPREFIX."categories");
         try {
             DB::getInstance()->execute(
-                self::INSERT_SQL,
-                array($this->name, $this->description),
-                array($this->id, $this->indexnumber, $this->published),
-                $tables);
+                    self::INSERT_SQL,
+                    array($this->name, $this->description),
+                    array($this->id, $this->indexnumber, $this->published),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
@@ -251,10 +251,10 @@ class Category {
         $tables = array("categories" => TBPREFIX."categories");
         try {
             DB::getInstance()->execute(
-                self::UPDATE_SQL,
-                array($this->name, $this->description),
-                array($this->indexnumber, $this->published, $this->id),
-                $tables);
+                    self::UPDATE_SQL,
+                    array($this->name, $this->description),
+                    array($this->indexnumber, $this->published, $this->id),
+                    $tables);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
@@ -264,10 +264,10 @@ class Category {
         $tables = array("categories" => TBPREFIX."categories");
         try {
             DB::getInstance()->execute(
-                self::DELETE_SQL,
-                array(),
-                array($this->id),
-                $tables);
+                    self::DELETE_SQL,
+                    array(),
+                    array($this->id),
+                    $tables);
             $this->id = self::NEW_CATEGORY;
             $this->indexnumber = '';
             $this->published = '';
@@ -284,10 +284,10 @@ class Category {
         try {
             $tables = array("categories" => TBPREFIX."categories");
             $rs = DB::getInstance()->execute(
-                self::SELECT_MAX_INDEXNUMBER,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_MAX_INDEXNUMBER,
+                    array(),
+                    array(),
+                    $tables);
             if ($row = mysql_fetch_array($rs)) {
                 $maxIndexNumber = $row[0];
             } else {
@@ -304,10 +304,10 @@ class Category {
         try {
             $tables = array("categories" => TBPREFIX."categories");
             $rs = DB::getInstance()->execute(
-                self::SELECT_BY_ID_ORD,
-                array(),
-                array(),
-                $tables);
+                    self::SELECT_BY_ID_ORD,
+                    array(),
+                    array(),
+                    $tables);
             $row = mysql_fetch_array($rs);
             $maxId = $row['id'];
         } catch (Exception $e) {
