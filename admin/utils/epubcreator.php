@@ -19,6 +19,7 @@
 
 require_once(STARTPATH.LIBPATH.PCLZIPPATH.'pclzip.lib.php');
 require_once(STARTPATH.DATAMODELPATH.'magazine.php');
+require_once(STARTPATH.UTILSPATH.'stringfilters.php');
 
 class ePugCreator {
 
@@ -159,7 +160,7 @@ class ePugCreator {
 <package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="BookId">
   <metadata xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:language>'.Magazine::getMagazineLanguage().'</dc:language>
-    <dc:title>'.$this->number->getTitle().'</dc:title>
+    <dc:title>'.StringFilter::removeTags($this->number->getTitle()).'</dc:title>
     <dc:publisher>'.Magazine::getMagazinePublisher().'</dc:publisher>
     <dc:rights>'.Magazine::getMagazineRights().'</dc:rights>
     <dc:date>'.substr($this->number->getCreated(), 0, 10).'</dc:date>
@@ -209,13 +210,15 @@ class ePugCreator {
 	  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'.Magazine::getMagazineLanguage().'">
   <head>
-    <title>'.$this->number->getTitle().'</title>
+    <title>'.StringFilter::removeTags($this->number->getTitle()).'</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
   </head>
   <body>
     <p class="CENTER">
-      ';
-        $text.='
+      '.StringFilter::removeTags($this->number->getSubtitle()).'
+    </p>
+    <p class="CENTER">
+      '.StringFilter::removeTags($this->number->getSummary()).'
     </p>
   </body>
 </html>';
@@ -315,7 +318,7 @@ table.cell td {
       <meta name="dtb:maxPageNumber" content="0" />
    </head>
     <docTitle>
-         <text>'.$this->number->getTitle().'</text>
+         <text>'.StringFilter::removeTags($this->number->getTitle()).'</text>
     </docTitle>
   <navMap>';
 
@@ -324,7 +327,7 @@ table.cell td {
             $orderNumber++;
             $text .= '<navPoint id="navpoint-'.$article->getId().'" playOrder="'.$orderNumber.'">
       <navLabel>
-        <text>'.$article->getTitle().'</text>
+        <text>'.StringFilter::removeTags($article->getTitle()).'</text>
       </navLabel>
         <content src="article'.$article->getId().'.html" />
     </navPoint>';
@@ -386,14 +389,15 @@ $text .= '
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 <meta name="generator" content="Web Books Publishing" />
 <link rel="stylesheet" type="text/css" href="style.css" />
-<title>'.$article->getTitle().'</title>
+<title>'.StringFilter::removeTags($article->getTitle()).'</title>
 </head>
 
 <body>
 	<div class="header">
-	     <h2>'.$article->getTitle().'</h2>
+	     <h2>'.StringFilter::removeTags($article->getTitle()).'</h2>
 	</div>';
-            $text.='<div>'.$article->getSummary().'<br /><br />'.$article->getBody().'
+            $text.='<div>'.StringFilter::removeTags($article->getSummary()).'<br />
+                <br />'.StringFilter::removeTags($article->getBody()).'
 </div>
 </body>
 </html>';

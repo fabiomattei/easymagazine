@@ -45,7 +45,7 @@ class DB {
         if (!$result) {
             $this->countLastQueryResults = 0;
             $this->error=mysql_error();
-            throw new Exception('Error in DB.'.$toSQL);
+            throw new Exception('Error in DB:'.$this->error.' <br>SQL:'.$toSQL);
         } else {
             $this->error='';
             if (strlen(strstr(strtolower($toSQL),'select'))>0) {
