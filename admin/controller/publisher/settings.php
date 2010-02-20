@@ -39,6 +39,13 @@ function index() {
         $out['settingsindb']["$name"] = $stdb;
     }
 
+    if (!isset($out['settingsindb']['title'])) { $out['settingsindb']['title'] = new Option(Option::NEW_OPTION, 'title', 'settings', ''); }
+    if (!isset($out['settingsindb']['description'])) { $out['settingsindb']['description'] = new Option(Option::NEW_OPTION, 'description', 'settings', ''); }
+    if (!isset($out['settingsindb']['urltype'])) { $out['settingsindb']['urltype'] = new Option(Option::NEW_OPTION, 'urltype', 'settings', 'optimized'); }
+    if (!isset($out['settingsindb']['publisher'])) { $out['settingsindb']['publisher'] = new Option(Option::NEW_OPTION, 'publisher', 'settings', ''); }
+    if (!isset($out['settingsindb']['rights'])) { $out['settingsindb']['rights'] = new Option(Option::NEW_OPTION, 'rights', 'settings', ''); }
+    if (!isset($out['settingsindb']['email'])) { $out['settingsindb']['email'] = new Option(Option::NEW_OPTION, 'email', 'settings', ''); }
+
     return $out;
 }
 

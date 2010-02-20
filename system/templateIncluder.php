@@ -1,1 +1,1 @@
-<?PHP  define('TEMPLATEPATH', 'contents/templates/easy/');  ?>
+<?PHP  define('TEMPLATEPATH', 'contents/templates/default/');  ?>

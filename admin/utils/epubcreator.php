@@ -107,7 +107,9 @@ class ePugCreator {
      */
     private function zipFolder() {
         $archive = new PclZip($this->epubfilename);
-        $v_list = $archive->add($this->epubFolderName, PCLZIP_OPT_REMOVE_PATH, STARTPATH.EPUBSPATH);
+        $v_list = $archive->create($this->epubFolderName.'mimetype', PCLZIP_OPT_NO_COMPRESSION, PCLZIP_OPT_REMOVE_ALL_PATH);
+        unlink($this->epubFolderName.'mimetype');
+        $v_list = $archive->add($this->epubFolderName, PCLZIP_OPT_REMOVE_PATH, $this->epubFolderName);
     }
 
     /**
@@ -160,10 +162,8 @@ class ePugCreator {
     <dc:title>'.$this->number->getTitle().'</dc:title>
     <dc:publisher>'.Magazine::getMagazinePublisher().'</dc:publisher>
     <dc:rights>'.Magazine::getMagazineRights().'</dc:rights>
-    <dc:creator>Author contentopf file</dc:creator>
-    <dc:date>2009-09-15</dc:date>
-    <dc:subject>Fiction</dc:subject>
-    <dc:identifier id="BookId">web-books-12345</dc:identifier>
+    <dc:date>'.substr($this->number->getCreated(), 0, 10).'</dc:date>
+    <dc:identifier id="BookId" opf:scheme="URI">http://www.easymagazine.org</dc:identifier>
   </metadata>
   <manifest>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
@@ -171,7 +171,7 @@ class ePugCreator {
     <item id="WTOC" href="TOC.html" media-type="application/xhtml+xml" />
     <item id="style" href="style.css" media-type="text/css" />';
 
-        foreach ($this->number->articles() as $article) {
+        foreach ($this->number->articlesPublished() as $article) {
             $text.='<item id="article'.$article->getId().'" href="article'.$article->getId().'.html" media-type="application/xhtml+xml" />
             ';
         }
@@ -208,7 +208,6 @@ class ePugCreator {
 	  "-//W3C//DTD XHTML 1.1//EN"
 	  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<link rel="stylesheet" href="style.css" type="text/css" />
   <head>
     <title>'.$this->number->getTitle().'</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
@@ -238,7 +237,7 @@ class ePugCreator {
         $text = '<?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
   <rootfiles>
-    <rootfile full-path="OPS/content.opf" media-type="application/oebps-package+xml" />
+    <rootfile full-path="content.opf" media-type="application/oebps-package+xml" />
   </rootfiles>
 </container>';
 
@@ -320,9 +319,10 @@ table.cell td {
     </docTitle>
   <navMap>';
 
-
+    $orderNumber = 0;
         foreach ($this->number->articlesPublished() as $article) {
-            $text .= '<navPoint id="navpoint-'.$article->getId().'" playOrder="'.$article->getId().'">
+            $orderNumber++;
+            $text .= '<navPoint id="navpoint-'.$article->getId().'" playOrder="'.$orderNumber.'">
       <navLabel>
         <text>'.$article->getTitle().'</text>
       </navLabel>

@@ -191,111 +191,19 @@ class Article {
     }
 
     public function commentsPublished() {
-        $ret = array();
-        try {
-            $tables = array('comments' => TBPREFIX.'comments');
-            $rs = DB::getInstance()->execute(
-                self::SELECT_COMMENTS_PUB,
-                array(),
-                array($this->id),
-                $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Comment(
-                    $row['id'],
-                    $row['article_id'],
-                    $row['title'],
-                    $row['published'],
-                    $row['body'],
-                    $row['signature'],
-                    $row['created'],
-                    $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Comment();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return Comment::findMany(self::SELECT_COMMENTS_PUB, array(), array($this->id));
     }
 
     public function comments() {
-        $ret = array();
-        try {
-            $tables = array('comments' => TBPREFIX.'comments');
-            $rs = DB::getInstance()->execute(
-                self::SELECT_COMMENTS,
-                array(),
-                array($this->id),
-                $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Comment(
-                    $row['id'],
-                    $row['article_id'],
-                    $row['title'],
-                    $row['published'],
-                    $row['body'],
-                    $row['signature'],
-                    $row['created'],
-                    $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Comment();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return Comment::findMany(self::SELECT_COMMENTS, array(), array($this->id));
     }
 
     public function category() {
-        try {
-            $tables = array('categories' => TBPREFIX.'categories');
-            $rs = DB::getInstance()->execute(
-                self::SELECT_CATEGORY,
-                array(),
-                array($this->category_id),
-                $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret = new Category(
-                    $row['id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['name'],
-                    $row['description'],
-                    $row['created'],
-                    $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret = new Category();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return Category::findOne(self::SELECT_CATEGORY, array(), array($this->category_id));
     }
 
     public function number() {
-        try {
-            $tables = array('numbers' => TBPREFIX.'numbers');
-            $rs = DB::getInstance()->execute(
-                self::SELECT_NUMBER,
-                array(),
-                array($this->number_id),
-                $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret = new Number(
-                    $row['id'],
-                    $row['indexnumber'],
-                    $row['published'],
-                    $row['title'],
-                    $row['subtitle'],
-                    $row['summary'],
-                    $row['commentsallowed'],
-                    $row['metadescription'],
-                    $row['metakeyword'],
-                    $row['created'],
-                    $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret = new Number();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return Number::findOne(self::SELECT_NUMBER, array(), array($this->number_id));
     }
 
     public function users() {

@@ -1,1 +1,1 @@
-<?PHP  define('TITLE', 'Title of the magazine');  define('DESCRIPTION', "A short description of the magazine");  define('URLTYPE', 'optimized');  define('PUBLISHER', 'Easy Magazine Publishing System');  define('RIGHTS', 'Copyright © 2009 The Smart Cow');  ?>
+<?PHP  define('TITLE', 's');  define('DESCRIPTION', "s");  define('URLTYPE', 'optimized');  define('PUBLISHER', 's');  define('RIGHTS', 's');  ?>

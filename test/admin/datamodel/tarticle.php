@@ -15,7 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 class ArticleTests extends UnitTestCase {
 
@@ -26,57 +26,57 @@ class ArticleTests extends UnitTestCase {
         $this->db->connect();
     }
 
-	function setUp() {
+    function setUp() {
         $this->db->dropSchema();
         $this->db->createSchema();
         $this->db->populateSchema();
-	}
+    }
 
-	public function tearDown() {
+    public function tearDown() {
         $this->db->dropSchema();
-	}
-
+    }
+    
     function testFindById() {
         $ar = Article::findById(1);
-	$this->assertPattern('(Article)', $ar->getTitle());
+        $this->assertPattern('(Article)', $ar->getTitle());
     }
 
     function testfindUpIndexNumber () {
         $ar = Article::findById(2);
         $ar2 = $ar->findUpIndexNumber();
-		$this->assertPattern('(third)', $ar2->getTitle());
+        $this->assertPattern('(third)', $ar2->getTitle());
     }
 
     function testfindDownIndexNumber () {
         $ar = Article::findById(2);
         $ar2 = $ar->findDownIndexNumber();
-		$this->assertPattern('(first)', $ar2->getTitle());
+        $this->assertPattern('(first)', $ar2->getTitle());
     }
 
     function testfindByTitle() {
         $ar = Article::findByTitle('first');
-		$this->assertPattern('(first)', $ar[0]->getTitle());
+        $this->assertPattern('(first)', $ar[0]->getTitle());
     }
 
     function testfindLast() {
         $ar = Article::findLast();
-		$this->assertPattern('(third)', $ar->getTitle());
+        $this->assertPattern('(third)', $ar->getTitle());
     }
 
     function testfindAllPublished() {
         $ar = Article::findAllPublished();
-		$this->assertEqual(14, count($ar));
+        $this->assertEqual(14, count($ar));
     }
 
     function testfindAll() {
         $ar = Article::findAll();
-		$this->assertEqual(15, count($ar));
+        $this->assertEqual(15, count($ar));
     }
 
     function testfindAllOrderedByIndexNumber() {
         $ar = Article::findAllOrderedByIndexNumber();
-		$this->assertEqual(15, count($ar));
-		$this->assertPattern('(third)', $ar[0]->getTitle());
+        $this->assertEqual(15, count($ar));
+        $this->assertPattern('(third)', $ar[0]->getTitle());
     }
 
     function testArticleNumber() {
@@ -103,7 +103,7 @@ class ArticleTests extends UnitTestCase {
         $newArt = new Article(Article::NEW_ARTICLE, '1', '1', '6', '0', 'Article four', 'Subtitle four', 'summary four', 'body four', '1', 'tag four', 'metadescription four', 'metakeyword four');
         $newArt->save();
         $arts = Article::findAll();
-	$this->assertEqual(16, count($arts));
+        $this->assertEqual(16, count($arts));
     }
 
     function testUpdateArticle() {
@@ -118,13 +118,13 @@ class ArticleTests extends UnitTestCase {
         $num = Article::findById(1);
         $num->delete();
         $num = Article::findAll();
-		$this->assertEqual(14, count($num));
+        $this->assertEqual(14, count($num));
     }
 
     function testUsers() {
         $art = Article::findById(1);
         $usrs = $art->users();
-		$this->assertEqual(2, count($usrs));
+        $this->assertEqual(2, count($usrs));
     }
 }
 
