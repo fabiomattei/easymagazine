@@ -210,19 +210,18 @@ class ePugCreator {
 	  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'.Magazine::getMagazineLanguage().'">
   <head>
-    <title>'.StringFilter::removeTags($this->number->getTitle()).'</title>
+    <title>'.StringFilter::removeTagsStrict($this->number->getTitle()).'</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
   </head>
   <body>
     <p class="CENTER">
-      '.StringFilter::removeTags($this->number->getSubtitle()).'
+      '.StringFilter::removeTagsStrict($this->number->getSubtitle()).'
     </p>
     <p class="CENTER">
-      '.StringFilter::removeTags($this->number->getSummary()).'
+      '.StringFilter::removeTagsStrict($this->number->getSummary()).'
     </p>
   </body>
 </html>';
-
         ePugCreator::write($handle, $text);
 
         fclose($handle);
@@ -409,6 +408,8 @@ $text .= '
     }
 
     private static function write($handle, $toWrite) {
+        $toWrite = html_entity_decode($toWrite);
+        $toWrite = utf8_encode($toWrite);
         if (fwrite($handle, $toWrite) === FALSE) {
             echo "Cannot write to file ($filename)";
             exit;

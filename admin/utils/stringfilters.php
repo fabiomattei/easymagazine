@@ -23,6 +23,10 @@ class StringFilter {
         return strip_tags($string, '<p><b><i><strong><em><span><il><ul><ol><table><td><th><tr>');
     }
 
+    public static function removeTagsStrict($string) {
+        return strip_tags($string, '<b><i><strong><em><span><il><ul><ol>');
+    }
+
 }
 
 ?>
