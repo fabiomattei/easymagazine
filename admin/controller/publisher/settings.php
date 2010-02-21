@@ -47,6 +47,7 @@ function index() {
     if (!isset($out['settingsindb']['email'])) { $out['settingsindb']['email'] = new Option(Option::NEW_OPTION, 'email', 'settings', ''); }
     if (!isset($out['settingsindb']['language'])) { $out['settingsindb']['language'] = new Option(Option::NEW_OPTION, 'language', 'settings', 'en'); }
     if (!isset($out['settingsindb']['epubname'])) { $out['settingsindb']['epubname'] = new Option(Option::NEW_OPTION, 'epubname', 'settings', 'easymagazine'); }
+    if (!isset($out['settingsindb']['siteurl'])) { $out['settingsindb']['siteurl'] = new Option(Option::NEW_OPTION, 'siteurl', 'settings', 'http://www.easymagazine.org/'); }
 
     return $out;
 }
@@ -102,6 +103,12 @@ function update($get, $post) {
     $toSave->setName('epubname');
     $toSave->setType('settings');
     $toSave->setValue($post['epubname']);
+    $toSave->save();
+
+    $toSave = new Option();
+    $toSave->setName('siteurl');
+    $toSave->setType('settings');
+    $toSave->setValue($post['siteurl']);
     $toSave->save();
     
     $settingsindb = Option::findByType('settings');

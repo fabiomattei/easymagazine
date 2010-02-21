@@ -164,7 +164,7 @@ class ePugCreator {
     <dc:publisher>'.Magazine::getMagazinePublisher().'</dc:publisher>
     <dc:rights>'.Magazine::getMagazineRights().'</dc:rights>
     <dc:date>'.substr($this->number->getCreated(), 0, 10).'</dc:date>
-    <dc:identifier id="BookId" opf:scheme="URI">http://www.easymagazine.org</dc:identifier>
+    <dc:identifier id="BookId" opf:scheme="URI">'.Magazine::getWebSiteURL().'</dc:identifier>
   </metadata>
   <manifest>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />

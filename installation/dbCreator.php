@@ -313,6 +313,9 @@ class DbCreator {
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
             ('epubname', 'settings', 'easymagazine')";
         $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('siteurl', 'settings', 'http://www.easymagazine.org/')";
+        $result = mysql_query($cmd, $this->connection);
         return $result;
     }
 

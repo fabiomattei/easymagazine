@@ -84,6 +84,8 @@ class FileWriter {
         FileWriter::write($handle, $toWrite);
         $toWrite = ' define(\'EPUBNAME\', \''.$settingsindb['epubname']->getValue().'\'); ';
         FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'WEBSITEURL\', \''.$settingsindb['siteurl']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
 
         FileWriter::write($handle, ' ?>');
 
