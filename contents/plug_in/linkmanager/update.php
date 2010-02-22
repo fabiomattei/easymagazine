@@ -20,7 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'update links set title = ?, text = ?, url = ? WHERE id = #';
+$SQL = 'update links set title = @?@, text = @?@, url = @?@ WHERE id = @#@';
 $array_str = array($post['title'], $post['text'], $post['url']);
 $array_int = array($post['id']);
 

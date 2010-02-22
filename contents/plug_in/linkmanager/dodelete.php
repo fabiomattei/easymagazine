@@ -20,7 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'delete from links where id = #';
+$SQL = 'delete from links where id = @#@';
 $array_str = array();
 $array_int = array($get['id']);
 

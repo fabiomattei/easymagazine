@@ -1,1 +1,1 @@
-<?PHP  define('TITLE', 'prova');  define('DESCRIPTION', "fdsaf");  define('URLTYPE', 'optimized');  define('PUBLISHER', 'fdsaas');  define('RIGHTS', 'fdsdfsa');  define('LANGUAGE', 'en');  define('EPUBNAME', 'easymagazine');  define('WEBSITEURL', 'http://www.libero.org/');  ?>
+<?PHP  define('TITLE', 'prova');  define('DESCRIPTION', "fdsaf");  define('URLTYPE', 'optimized');  define('PUBLISHER', 'fdsaas');  define('RIGHTS', 'fdsdfsa');  define('LANGUAGE', 'en');  define('EPUBNAME', 'easymagazine');  define('WEBSITEURL', 'http://www.easymagazine.org/');  ?>

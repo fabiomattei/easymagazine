@@ -20,7 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'insert into links (title, text, url) values (?, ?, ?)';
+$SQL = 'insert into links (title, text, url) values (@?@, @?@, @?@)';
 $array_str = array($post['title'], $post['text'], $post['url']);
 $array_int = array();
 

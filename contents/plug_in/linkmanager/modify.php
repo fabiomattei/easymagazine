@@ -20,7 +20,7 @@
 require_once(STARTPATH.DBPATH.'db.php');
 
 $tables = array("links" => TBPREFIX."links");
-$SQL = 'SELECT * FROM links WHERE id = #';
+$SQL = 'SELECT * FROM links WHERE id = @#@';
 $array_str = array();
 $array_int = array($get['id']);
 
