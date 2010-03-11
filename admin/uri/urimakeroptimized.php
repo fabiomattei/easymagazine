@@ -55,7 +55,7 @@ class URIMaker {
     }
 
     static function index() {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index';
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER;
     }
 
     static function loginPage() {

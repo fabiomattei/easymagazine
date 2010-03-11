@@ -6,7 +6,7 @@
         <td class="first" width="172">
             The "link manager" plug-in is a working example of administration of a links
             table.<br />
-            The administration is complete a show an example of all CRUD operation on
+            The administration is complete a show an example of all CRUD operation.
             In order to use it you need to insert code like this somewhere in your template
             script:<br />
             while ($row = mysql_fetch_array(LinkPlugIn->getLinkList())) {<br />
