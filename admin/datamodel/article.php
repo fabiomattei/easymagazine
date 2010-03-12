@@ -52,7 +52,6 @@ class Article {
     const SELECT_BY_ID = 'select * from articles where id = @#@';
     const SELECT_LAST_N = 'select * from articles ORDER BY updated DESC LIMIT @#@ ';
     const SELECT_BY_TITLE = 'select * from articles where title like @?@';
-    const FIND_IN_ALL_TEXT_FIELDS = 'select * from articles where title like @?@ OR subtitle like @?@ OR summary like @?@ OR body like @?@ ';
     const FIND_IN_ALL_TEXT_FIELDS_PUBLISHED_ARTICLES = 'select * from articles where (title like @?@ OR subtitle like @?@ OR summary like @?@ OR body like @?@) AND published=1 ';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = @#@ order by created DESC';
     const SELECT_COMMENTS = 'select * from comments where article_id = @#@ order by created DESC';
@@ -161,12 +160,35 @@ class Article {
     }
 
     public static function findInAllTextFields($string) {
-        $ret = ARTICLE::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%", "%$string%"), array());
+        $query = 'select * from articles where';
+        $dividedstrings = explode(' ', $string);
+        $arraystrings = array();
+        foreach ($dividedstrings as $str) {
+            $query .= ' (title like @?@ OR subtitle like @?@ OR summary like @?@ OR body like @?@) AND ';
+            $arraystrings[] = '%'.$str.'%';
+            $arraystrings[] = '%'.$str.'%';
+            $arraystrings[] = '%'.$str.'%';
+            $arraystrings[] = '%'.$str.'%';
+        }
+        $query = substr($query, 0, -4);
+        $ret = ARTICLE::findMany($query, $arraystrings, array());
         return $ret;
     }
 
     public static function findInAllTextFieldsInPublishedArticles($string) {
-        $ret = ARTICLE::findMany(self::FIND_IN_ALL_TEXT_FIELDS_PUBLISHED_ARTICLES, array("%$string%", "%$string%", "%$string%", "%$string%"), array());
+                $query = 'select * from articles where';
+        $dividedstrings = explode(' ', $string);
+        $arraystrings = array();
+        foreach ($dividedstrings as $str) {
+            $query .= ' (title like @?@ OR subtitle like @?@ OR summary like @?@ OR body like @?@) AND ';
+            $arraystrings[] = '%'.$str.'%';
+            $arraystrings[] = '%'.$str.'%';
+            $arraystrings[] = '%'.$str.'%';
+            $arraystrings[] = '%'.$str.'%';
+        }
+        $query = substr($query, 0, -4);
+        $query .= ' AND published=1 ';
+        $ret = ARTICLE::findMany($query, $arraystrings, array());
         return $ret;
     }
 
