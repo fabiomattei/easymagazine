@@ -15,25 +15,36 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
-require_once(FILTERPATH.'/filtercommand.php');
-require_once(FILTERPATH.'/articlefilterremote.php');
-require_once(FILTERPATH.'/userfilterremote.php');
+class UserFilterRemote {
 
+    private static $instance = null;
 
-class ProofFilter implements FilterCommand {
-
-    function execute($string) {
-        return $string." filter executed";
+    public function __construct() {
+        $this->filtersGetBody = array();
     }
 
+    public static function getInstance()
+    {
+        if(self::$instance == null)
+        {
+            $c = __CLASS__;
+            self::$instance = new $c;
+        }
+
+        return self::$instance;
+    }
+
+    public function addFiltersGetBody($filterCommand) {
+        $this->filtersGetBody[] = $filterCommand;
+    }
+
+    public function executeFiltersBody($string){
+        foreach ($this->filtersGetBody as $filterCommand) {
+            $string = $filterCommand->execute($string);
+        }
+        return $string;
+    }
 }
-
-$filter= new ProofFilter();
-
-$articleRemote = ArticleFilterRemote::getInstance();
-
-$articleRemote->addFiltersGetTitle($filter);
-
 ?>

@@ -25,15 +25,19 @@ require_once('router.php');
 
 class CommentsRouter extends Router {
 
-    private $article;
+    public $article;
     public $pages;
-    private $numbers;
+    public $numbers;
     public $metadescritpion;
     public $metakeywords;
     public $advice;
     public $title;
     public $number;
     public $categories;
+
+    public $postedsignature;
+    public $postedtitle;
+    public $postedbody;
 
     function loadData() {
         $arURI = $this->getArrayURI();
@@ -45,6 +49,10 @@ class CommentsRouter extends Router {
         $this->metadescritpion = $this->article->getMetadescription();
         $this->metakeywords = $this->article->getMetakeyword();
         $this->title = Magazine::getMagazineTitle().': '.$this->article->getTitle();
+
+        $this->postedsignature = '';
+        $this->postedtitle = '';
+        $this->postedbody = '';
 
         if ($this->article->getCommentsallowed() && $this->article->number()->getCommentsallowed()) {
 
@@ -71,9 +79,15 @@ class CommentsRouter extends Router {
                     }
                     if ($cont < 3 && $cont >= 0) {
                         $this->advice = 'Fill all the fields please';
+                        $this->postedsignature = $_POST['Signature'];
+                        $this->postedtitle = $_POST['Title'];
+                        $this->postedbody = $_POST['Body'];
                     }
                 } else {
                     $this->advice = 'Please type the right Captcha';
+                    $this->postedsignature = $_POST['Signature'];
+                    $this->postedtitle = $_POST['Title'];
+                    $this->postedbody = $_POST['Body'];
                 }
             }
         } else {

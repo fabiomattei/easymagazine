@@ -19,6 +19,8 @@
 
 require_once(STARTPATH.UTILSPATH.'password.php');
 require_once(STARTPATH.UTILSPATH.'imagefiles.php');
+require_once(STARTPATH.FILTERPATH.'userfilterremote.php');
+
 
 class User {
     const NEW_USER = -1;
@@ -34,7 +36,6 @@ class User {
     private $skype;
     private $created;
     private $updated;
-    private $db;
 
     const INSERT_SQL = 'insert into users (id, name, username, password, body, role, toshow, email, msn, skype, created, updated) values (@#@, @?@, @?@, @?@, @?@, @?@, @#@, @?@, @?@, @?@, now(), now())';
     const UPDATE_SQL = 'update users set name = @?@, body = @?@, role = @?@, toshow = @#@, email = @?@, msn = @?@, skype = @?@, updated=now() where id = @#@';
@@ -51,7 +52,7 @@ class User {
     const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = @#@ order by CM.id DESC';
     
     public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $toshow='', $email='', $msn='', $skype='', $created='', $updated='') {
-        $this->db = DB::getInstance();
+        $this->filter = UserFilterRemote::getInstance();
         $this->id = $id;
         $this->name = $name;
         $this->username = $username;
@@ -363,7 +364,8 @@ class User {
     }
 
     public function getBody() {
-        return $this->body;
+        $out = $this->filter->executeFiltersBody($this->body);
+        return $out;
     }
 
     public function getUnfilteredBody() {

@@ -46,11 +46,11 @@
             <p>
             <form name="newcomment" method="post" action="<?= URIMaker::comment($this->article) ?>">
                 Title<br />
-                <input type="text" name="Title" value=""/><br />
+                <input type="text" name="Title" value="<?= $this->postedtitle ?>"/><br />
                 Body<br />
-                <textarea name="Body" rows="4" cols="40"></textarea><br />
+                <textarea name="Body" rows="4" cols="40"><?= $this->postedbody ?></textarea><br />
                 Signature<br />
-                <input type="text" name="Signature" value=""/><br /><br />
+                <input type="text" name="Signature" value="<?= $this->postedsignature ?>"/><br /><br />
                 <!-- pass a session id to the query string of the script to prevent ie caching -->
                 <img src="<?= URIMaker::fromBasePath('lib/securimage/securimage_show.php?sid='.md5(uniqid(time())))?>"><br />
                 <input type="text" name="code" /><br /><br />
