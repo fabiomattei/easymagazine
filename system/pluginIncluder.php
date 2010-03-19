@@ -1,1 +1,1 @@
-<?PHP  require_once(PLUGINPATH.'commandSandBox/index.php');  ?>
+<?PHP  require_once(PLUGINPATH.'commandSandBox/index.php');  require_once(PLUGINPATH.'linkmanager/index.php');  ?>

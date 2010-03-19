@@ -25,11 +25,14 @@ require_once(STARTPATH.DATAMODELPATH.'option.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.UTILSPATH.'fileWriter.php');
 require_once(STARTPATH.UTILSPATH.'directoryrunner.php');
+require_once(STARTPATH.UTILSPATH.'adminpluginurimaker.php');
 
 session_start();
 
 function index() {
     $out = array();
+
+    $out['pluginname'] = '';
 
     $pluginsindb = Option::findByType('plugin');
 
@@ -50,6 +53,8 @@ function index() {
 function info($pluginname) {
     $out = array();
 
+    $out['pluginname'] = $pluginname;
+
     $pluginsindb = Option::findByType('plugin');
 
     $out['pluginsindb'] = array();
@@ -68,6 +73,8 @@ function info($pluginname) {
 
 function activate($pluginname) {
     $out = array();
+
+    $out['pluginname'] = $pluginname;
 
     $pluginsindb = Option::findByName($pluginname);
 
@@ -104,6 +111,8 @@ function activate($pluginname) {
 function deactivate($pluginname) {
     $out = array();
 
+    $out['pluginname'] = $pluginname;
+
     $toDeletes = Option::findByNameAndType($pluginname, 'plugin');
     foreach ($toDeletes as $td) {
         $td->delete();
@@ -136,6 +145,8 @@ function deactivate($pluginname) {
 function admin($pluginname) {
     $out = array();
 
+    $out['pluginname'] = $pluginname;
+
     $pluginsindb = Option::findByType('plugin');
 
     $out['pluginsindb'] = array();
@@ -154,6 +165,8 @@ function admin($pluginname) {
 
 function general($get, $post, $files) {
     $out = array();
+
+    $out['pluginname'] = $get['pluginname'];
 
     $pluginsindb = Option::findByType('plugin');
 
@@ -192,6 +205,8 @@ if (isset($_SESSION['user'])) {
 $pluginsindb = $out['pluginsindb'];
 $plugins = $out['plugins'];
 $toshow = $out['toshow'];
+$pluginname = $out['pluginname'];
+define("PLUGINNAME", $pluginname);
 
 if (isset($out['get'])) { $get = $out['get']; }
 if (isset($out['post'])) { $post = $out['post']; }

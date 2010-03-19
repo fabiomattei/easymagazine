@@ -38,23 +38,21 @@ $rs = DB::getInstance()->execute(
             <th class="full" colspan="2">Link list</th>
      </tr>
     <?
-    if ($rs) {
-        while ($row = mysql_fetch_array($rs)) { ?>
+    if ($rs):
+        while ($row = mysql_fetch_array($rs)): ?>
     <tr>
         <td class="first" width="172">
                     <?
                     echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' |
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=modify.php&id='.$row['id'].'">Modify</a> |
-             <a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=delete.php&id='.$row['id'].'">Delete</a><br />';
-                    ?>
-
-                <?     }
-            }
-            ?>
+             <a href="'.AdminPluginUriMaker::generalAction('modify.php', 'id='.$row['id']).'">Modify</a> |
+             <a href="'.AdminPluginUriMaker::generalAction('delete.php', 'id='.$row['id']).'">Delete</a><br />';
+        endwhile;
+    endif;
+    ?>
     <tr>
         <td class="first" width="172">
             <?
-            echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
+            echo '<a href="'.AdminPluginUriMaker::generalAction('new.php').'">New</a>';
             ?>
         </td>
     </tr>
