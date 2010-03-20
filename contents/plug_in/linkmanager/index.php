@@ -17,6 +17,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * This file will be included by Easy Magazine if the plug-in is activated
+ * for every page of the website.
+ * You can use all funtions or class defined in this file, in every
+ * script of the template.
+ */
+
 require_once(STARTPATH.DBPATH.'db.php');
 
 class LinkPlugIn{

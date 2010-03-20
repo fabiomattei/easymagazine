@@ -32,7 +32,6 @@ $rs = DB::getInstance()->execute(
 
 ?>
 
-
 <table class="listing form" cellpadding="0" cellspacing="0">
      <tr>
             <th class="full" colspan="2">Link list</th>
@@ -44,15 +43,15 @@ $rs = DB::getInstance()->execute(
         <td class="first" width="172">
                     <?
                     echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' |
-             <a href="'.AdminPluginUriMaker::generalAction('modify.php', 'id='.$row['id']).'">Modify</a> |
-             <a href="'.AdminPluginUriMaker::generalAction('delete.php', 'id='.$row['id']).'">Delete</a><br />';
+             <a href="'.AdminPluginUriMaker::linkFile('modify.php', 'id='.$row['id']).'">Modify</a> |
+             <a href="'.AdminPluginUriMaker::linkFile('delete.php', 'id='.$row['id']).'">Delete</a><br />';
         endwhile;
     endif;
     ?>
     <tr>
         <td class="first" width="172">
             <?
-            echo '<a href="'.AdminPluginUriMaker::generalAction('new.php').'">New</a>';
+            echo '<a href="'.AdminPluginUriMaker::linkFile('new.php').'">New</a>';
             ?>
         </td>
     </tr>

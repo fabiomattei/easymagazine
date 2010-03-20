@@ -34,12 +34,9 @@ $rs = DB::getInstance()->execute(
     $text = $post['text'];
     $url = $post['url'];
 
-echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
-
-
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=admin.php'?>">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?= AdminPluginUriMaker::linkFile('admin.php') ?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">Data Inserted</th>

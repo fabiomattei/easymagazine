@@ -9,7 +9,7 @@
             The administration is complete a show an example of all CRUD operation.
             In order to use it you need to insert code like this somewhere in your template
             script:<br />
-            while ($row = mysql_fetch_array(LinkPlugIn->getLinkList())) {<br />
+            while ($row = mysql_fetch_array(LinkPlugIn::getLinkList())) {<br />
             &nbsp;&nbsp;&nbsp;&nbsp;echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url'].' |
             }<br />
         </td>

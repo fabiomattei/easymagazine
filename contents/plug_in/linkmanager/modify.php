@@ -38,12 +38,9 @@ if ($rs) {
     $url = $row['url'];
 }
 
-echo '<a href="'.STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=new.php">New</a>';
-
-
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=update.php'?>">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?= AdminPluginUriMaker::linkFile('update.php') ?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">Edit</th>

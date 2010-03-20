@@ -19,7 +19,7 @@
 
 class AdminPluginUriMaker {
 
-    public static function generalAction($destiantionfilename = '', $vars = '') {
+    public static function linkFile($destiantionfilename = '', $vars = '') {
         return STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname='.PLUGINNAME.'&destiantionfilename='.$destiantionfilename.'&'.$vars;
     }
 

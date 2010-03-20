@@ -205,8 +205,7 @@ if (isset($_SESSION['user'])) {
 $pluginsindb = $out['pluginsindb'];
 $plugins = $out['plugins'];
 $toshow = $out['toshow'];
-$pluginname = $out['pluginname'];
-define("PLUGINNAME", $pluginname);
+define("PLUGINNAME", $out['pluginname']);
 
 if (isset($out['get'])) { $get = $out['get']; }
 if (isset($out['post'])) { $post = $out['post']; }

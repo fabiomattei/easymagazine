@@ -20,7 +20,7 @@
 
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=insert.php'?>">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?= AdminPluginUriMaker::linkFile('insert.php') ?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">New</th>

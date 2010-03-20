@@ -41,7 +41,7 @@ if ($rs) {
 
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="<?=STARTPATH.ADMINCONTROLLERPUBLISHERPATH.'plugin.php?action=general&pluginname=linkmanager&destiantionfilename=dodelete.php'?>&id=<?=$id?>">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?= AdminPluginUriMaker::linkFile('dodelete.php', 'id='.$id) ?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">Are you sure you want delete:</th>
