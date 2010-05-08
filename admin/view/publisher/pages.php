@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <title>Easy Magazine Admin: Pages</title>
+        <title>Easy Magazine Admin: <?php echo LANG_MENU_PAGES; ?></title>
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
@@ -43,26 +43,26 @@
                     <li><span><span><a href="settings.php"><?php echo LANG_MENU_SETTINGS; ?></a></span></span></li>
                     <li><span><span><a href="user.php"><?php echo LANG_MENU_USERS; ?></a></span></span></li>
                 </ul>
-                <div id="logout"><a href="../../logout.php">logout</a></div>
+                <div id="logout"><a href="../../logout.php"><?php echo LANG_MENU_LOGOUT; ?></a></div>
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
-                    <a href="../../index.php" class="link">View the website</a>
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
+                    <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
                     <?
                     foreach ($infoarray as $info) {
-                        echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
+                        echo '<div class="message info"><p><strong>'.LANG_MSG_INFO.':</strong>: '.$info.'</p></div>';
                     }
                     foreach ($warningarray as $warning) {
-                        echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
+                        echo '<div class="message warning"><p><strong>'.LANG_MSG_WARNING.':</strong>: '.$warning.'</p></div>';
                     }
                     foreach ($questionarray as $question) {
-                        echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
+                        echo '<div class="message question"><p><strong>'.LANG_MSG_QUESTION.':</strong>: '.$question.'</p></div>';
                     }
                     foreach ($errorarray as $error) {
-                        echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
+                        echo '<div class="message error"><p><strong>'.LANG_MSG_ERROR.':</strong>: '.$error.'</p></div>';
                     }
                     ?>
                     <div class="select-bar">
@@ -71,7 +71,7 @@
                                 <input type="text" size="50" name="string" />
                             </label>
                             <label>
-                                <input type="submit" name="Submit" value="Search" />
+                                <input type="submit" name="Submit" value="<?php echo LANG_MENU_SEARCH; ?>" />
                             </label>
                         </form>
                     </div>
@@ -80,12 +80,12 @@
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                         <table class="listing" cellpadding="0" cellspacing="0">
                             <tr>
-                                <th class="first" width="177">Title</th>
-                                <th>Edit</th>
-                                <th>Up</th>
-                                <th>Down</th>
-                                <th>Published</th>
-                                <th class="last">Delete</th>
+                                <th class="first" width="177"><?php echo LANG_ADMIN_TABLE_TITLE; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_UP; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_DOWN; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
+                                <th class="last"><?php echo LANG_ADMIN_TABLE_DELETE; ?></th>
                             </tr>
 
                             <?
@@ -109,7 +109,7 @@
                             ?>
                         </table>
                         <form name="formnew" method="post" action="page.php?list=<?=$lastList?>">
-                            <input type="submit" value="New" name="new" />
+                            <input type="submit" value="<?php echo LANG_ADMIN_TABLE_NEW; ?>" name="new" />
                         </form>
                     </div>
                     <div class="table">
@@ -118,27 +118,27 @@
                         <form name="form1" enctype="multipart/form-data" method="post" action="page.php?action=save&list=<?=$lastList?>">
                             <table class="listing form" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <th class="full" colspan="2">Edit</th>
+                                    <th class="full" colspan="2"><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Title</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_TITLE; ?></strong></td>
                                     <td class="last">
                                         <textarea name="Title" rows="1" cols="60"><?= $pag->getUnfilteredTitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Sub Title</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_SUBTITLE; ?></strong></td>
                                     <td class="last">
                                         <textarea name="SubTitle" rows="1" cols="60"><?= $pag->getUnfilteredSubtitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" colspan="2"><strong>Summary</strong><br />
+                                    <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_SUMMARY; ?></strong><br />
                                         <textarea name="Summary" class="mceAdvanced" rows="4" cols="60"><? echo $pag->getUnfilteredSummary(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="first" colspan="2"><strong>Body</strong><br />
+                                    <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_BODY; ?></strong><br />
                                         <textarea cols="40" id="article_body" class="mceAdvanced" name="Body" rows="20" style="width: 500px; padding: 5px">
                                         <? echo $pag->getUnfilteredBody(); ?>
                                         </textarea>
@@ -157,15 +157,15 @@
                                     <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><? echo $pag->getMetaKeyword(); ?></textarea></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Published</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></strong></td>
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($pag->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Created:</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
                                     <td class="last"><? echo $pag->getCreated(); ?></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Updated:</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
                                     <td class="last"><? echo $pag->getUpdated(); ?></td>
                                 </tr>
                                 <tr>
@@ -175,7 +175,7 @@
                                 <input type="hidden" name="created" value="<? echo $pag->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $pag->getUpdated(); ?>">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
-                                <td class="last"><input type="submit" value="Save" name="save" /></td>
+                                <td class="last"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" /></td>
                                 </tr>
                             </table>
                         </form>
@@ -183,8 +183,8 @@
                     </div>
                 </div>
                 <div id="right-column">
-                    <strong class="h">INFO</strong>
-                    <div class="box">Here there is a list of all pages, published and not still published.</div>
+                    <strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
+                    <div class="box"><?php echo LANG_ADMIN_PAGE_INFO; ?></div>
                 </div>
             </div>
             <div id="footer"></div>

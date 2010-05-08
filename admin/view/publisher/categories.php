@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <title>Easy Magazine Admin: Numbers</title>
+        <title><?php echo LANG_ADMIN_TITLE; ?>: <?php echo LANG_MENU_CATEGORIES; ?></title>
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
@@ -47,28 +47,28 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3>Hello, <? echo $_SESSION['user']->getName() ?> </h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?> </h3><br />
                     <h3><?php echo LANG_MENU_CATEGORIES; ?></h3>
                     <ul class="nav">
-                        <li><a href="category.php">Show All</a></li>
-                        <li><a href="category.php?list=showPublished">Show Published</a></li>
-                        <li class="last"><a href="category.php?list=showNotPublished">Show Not Published</a></li>
+                        <li><a href="category.php"><?php echo LANG_LEFT_SHOW_ALL; ?></a></li>
+                        <li><a href="category.php?list=showPublished"><?php echo LANG_LEFT_SHOW_CAT_PUBLISHED; ?></a></li>
+                        <li class="last"><a href="category.php?list=showNotPublished"><?php echo LANG_LEFT_SHOW_CAT_NOTPUBLISHED; ?></a></li>
                     </ul>
-                    <a href="../../index.php" class="link">View the website</a>
+                    <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
                     <?
                     foreach ($infoarray as $info) {
-                        echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
+                        echo '<div class="message info"><p><strong>'.LANG_MSG_INFO.':</strong>: '.$info.'</p></div>';
                     }
                     foreach ($warningarray as $warning) {
-                        echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
+                        echo '<div class="message warning"><p><strong>'.LANG_MSG_WARNING.':</strong>: '.$warning.'</p></div>';
                     }
                     foreach ($questionarray as $question) {
-                        echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
+                        echo '<div class="message question"><p><strong>'.LANG_MSG_QUESTION.':</strong>: '.$question.'</p></div>';
                     }
                     foreach ($errorarray as $error) {
-                        echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
+                        echo '<div class="message error"><p><strong>'.LANG_MSG_ERROR.':</strong>: '.$error.'</p></div>';
                     }
                     ?>
                     <div class="table">
@@ -76,13 +76,13 @@
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                         <table class="listing" cellpadding="0" cellspacing="0">
                             <tr>
-                                <th class="first" width="177">Name</th>
-                                <th>Edit</th>
-                                <th>Up</th>
-                                <th>Down</th>
-                                <th>Articles</th>
-                                <th>Published</th>
-                                <th class="last">Delete</th>
+                                <th class="first" width="177"><?php echo LANG_ADMIN_TABLE_NAME; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_UP; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_DOWN; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_ARTICLES; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
+                                <th class="last"><?php echo LANG_ADMIN_TABLE_DELETE; ?></th>
                             </tr>
                             <?
                             foreach ($categories as $cat) {
@@ -108,18 +108,18 @@
                         </table>
                         <div class="select">
                             <form name="pageselectionform" method="post" action="category.php?lastList=<?=$lastList?>">
-                                <strong>Pages: </strong>
+                                <strong><?php echo LANG_MENU_PAGES; ?>: </strong>
                                 <select name="page">
                                     <? for ($i=1;$i<=$page_numbers;$i++) { ?>
                                     <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
                                     <? }?>
                                 </select>&nbsp;
                                 <input type="hidden" name="movinglist" value="yes" />
-                                <input type="submit" value="Go" name="Go" />
+                                <input type="submit" value="<?php echo LANG_MENU_GO; ?>" name="Go" />
                             </form>
                         </div>
                         <form name="formnew" method="post" action="category.php?list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
-                            <input type="submit" value="New" name="new" />
+                            <input type="submit" value="<?php echo LANG_ADMIN_TABLE_NEW; ?>" name="new" />
                         </form>
                     </div>
                     <div class="table">
@@ -128,27 +128,27 @@
                         <form name="form1" enctype="multipart/form-data" method="post" action="category.php?action=save&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
                             <table class="listing form" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <th class="full" colspan="2">Edit</th>
+                                    <th class="full" colspan="2"><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Name</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_NAME; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="Name" value="<? echo $categ->getName(); ?>"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first" colspan="2"><strong>Description</strong><br />
+                                    <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_DESCRIPTION; ?></strong><br />
                                         <textarea cols="40" id="article_body" name="Description" rows="20" class="mceAdvanced" style="width: 100%"><? echo $categ->getUnfilteredDescription(); ?></textarea>
                                 </td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Published</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></strong></td>
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($categ->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Created:</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
                                     <td class="last"><? echo $categ->getCreated(); ?></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Updated:</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
                                     <td class="last"><? echo $categ->getUpdated(); ?></td>
                                 </tr>
                                 <tr>
@@ -157,7 +157,7 @@
                                 <input type="hidden" name="indexnumber" value="<? echo $categ->getIndexnumber(); ?>">
                                 <input type="hidden" name="created" value="<? echo $categ->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $categ->getUpdated(); ?>">
-                                <td class="last"><input type="submit" value="Save" name="save" /></td>
+                                <td class="last"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" /></td>
                                 </tr>
                             </table>
                         </form>
@@ -165,9 +165,8 @@
                     </div>
                 </div>
                 <div id="right-column">
-                    <strong class="h">INFO</strong>
-                    <div class="box">Here there is a list of all categories, you'll need it to classify your articles.<br />
-                        Only the published ones will be visible in the website.</div>
+                    <strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
+                    <div class="box"><?php echo LANG_ADMIN_CATEGORY_INFO; ?></div>
                 </div>
             </div>
             <div id="footer"></div>
