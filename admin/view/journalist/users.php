@@ -32,12 +32,12 @@
             <div id="header">
                 <a href="#" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
                 <ul id="top-navigation">
-                    <li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
-                    <li><span><span><a href="article.php">Articles</a></span></span></li>
-                    <li><span><span><a href="comment.php">Comments</a></span></span></li>
-                    <li class="active"><span><span>Users</span></span></li>
+                    <li><span><span><a href="dashboard.php"><?php echo LANG_MENU_DASHBOARD; ?></a></span></span></li>
+                    <li><span><span><a href="article.php"><?php echo LANG_MENU_ARTICLES; ?></a></span></span></li>
+                    <li><span><span><a href="comment.php"><?php echo LANG_MENU_COMMENTS; ?></a></span></span></li>
+                    <li class="active"><span><span><?php echo LANG_MENU_USER; ?></span></span></li>
                 </ul>
-                <div id="logout"><a href="../../logout.php">logout</a></div>
+                <div id="logout"><a href="../../logout.php"><?php echo LANG_MENU_LOGOUT; ?></a></div>
             </div>
             <div id="middle">
                 <div id="left-column">

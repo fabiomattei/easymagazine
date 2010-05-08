@@ -31,18 +31,18 @@
             <div id="header">
                 <a href="#" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
                 <ul id="top-navigation">
-                    <li class="active"><span><span>Dashboard</span></span></li>
-                    <li><span><span><a href="number.php">Numbers</a></span></span></li>
-                    <li><span><span><a href="category.php">Categories</a></span></span></li>
-                    <li><span><span><a href="article.php">Articles</a></span></span></li>
-                    <li><span><span><a href="page.php">Pages</a></span></span></li>
-                    <li><span><span><a href="comment.php">Comments</a></span></span></li>
-                    <li><span><span><a href="plugin.php">Plugin</a></span></span></li>
-                    <li><span><span><a href="template.php">Template</a></span></span></li>
-                    <li><span><span><a href="settings.php">Settings</a></span></span></li>
-                    <li><span><span><a href="user.php">Users</a></span></span></li>
+                    <li class="active"><span><span><?php echo LANG_MENU_DASHBOARD; ?></span></span></li>
+                    <li><span><span><a href="number.php"><?php echo LANG_MENU_NUMBERS; ?></a></span></span></li>
+                    <li><span><span><a href="category.php"><?php echo LANG_MENU_CATEGORIES; ?></a></span></span></li>
+                    <li><span><span><a href="article.php"><?php echo LANG_MENU_ARTICLES; ?></a></span></span></li>
+                    <li><span><span><a href="page.php"><?php echo LANG_MENU_PAGES; ?></a></span></span></li>
+                    <li><span><span><a href="comment.php"><?php echo LANG_MENU_COMMENTS; ?></a></span></span></li>
+                    <li><span><span><a href="plugin.php"><?php echo LANG_MENU_PLUGIN; ?></a></span></span></li>
+                    <li><span><span><a href="template.php"><?php echo LANG_MENU_TEMPLATE; ?></a></span></span></li>
+                    <li><span><span><a href="settings.php"><?php echo LANG_MENU_SETTINGS; ?></a></span></span></li>
+                    <li><span><span><a href="user.php"><?php echo LANG_MENU_USERS; ?></a></span></span></li>
                 </ul>
-                <div id="logout"><a href="../../logout.php">logout</a></div>
+                <div id="logout"><a href="../../logout.php"><?php echo LANG_MENU_LOGOUT; ?></a></div>
             </div>
             <div id="middle">
                 <div id="left-column">

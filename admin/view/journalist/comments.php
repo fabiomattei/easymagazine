@@ -31,17 +31,17 @@
             <div id="header">
                 <a href="#" class="logo"><img src="../../resources/img/logo_blu_arancio.gif" alt="" /></a>
                 <ul id="top-navigation">
-                    <li><span><span><a href="dashboard.php">Dashboard</a></span></span></li>
-                    <li><span><span><a href="article.php">Articles</a></span></span></li>
-                    <li class="active"><span><span>Comments</span></span></li>
-                    <li><span><span><a href="user.php">Users</a></span></span></li>
+                    <li><span><span><a href="dashboard.php"><?php echo LANG_MENU_DASHBOARD; ?></a></span></span></li>
+                    <li><span><span><a href="article.php"><?php echo LANG_MENU_ARTICLES; ?></a></span></span></li>
+                    <li class="active"><span><span><?php echo LANG_MENU_COMMENTS; ?></span></span></li>
+                    <li><span><span><a href="user.php"><?php echo LANG_MENU_USER; ?></a></span></span></li>
                 </ul>
-                <div id="logout"><a href="../../logout.php">logout</a></div>
+                <div id="logout"><a href="../../logout.php"><?php echo LANG_MENU_LOGOUT; ?></a></div>
             </div>
             <div id="middle">
                 <div id="left-column">
                     <h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
-                    <h3>Comments</h3>
+                    <h3><?php echo LANG_MENU_COMMENTS; ?></h3>
                     <ul class="nav">
                         <li><a href="comment.php">View all comments</a></li>
                         <li class="last"><a href="comment.php?list=byuser">View comments to my articles</a></li>
