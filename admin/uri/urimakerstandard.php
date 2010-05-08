@@ -73,6 +73,7 @@ class URIMaker {
     static function rssFeed() {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'contents/feed/feed.xml';
     }
+
 }
 
 ?>

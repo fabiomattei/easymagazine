@@ -3,11 +3,7 @@
     <div class="post">
         <h2><?= $this->article->getTitle() ?></h2>
         <div class="date"><small><?= $this->article->getCreatedFormatted() ?></small> by
-            <?
-            foreach ($this->article->users() as $user) {
-                echo $user->getName().' ';
-            }
-            ?>
+            <?= $this->article->auhorsNamesConcatenation() ?>
         </div>
         <div class="entry">
             <?= $this->article->getBody() ?>

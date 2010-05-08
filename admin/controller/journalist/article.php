@@ -25,8 +25,10 @@ require_once(STARTPATH.DATAMODELPATH.'article.php');
 require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
 
 session_start();
+AllControllersCommons::loadlanguage();
 
 function commons() {
     $outCommons = array();

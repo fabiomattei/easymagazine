@@ -157,8 +157,6 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                </tr>
-                                <tr>
                                 <input type="hidden" name="id" value="<? echo $userp->getId(); ?>">
                                 <input type="hidden" name="created" value="<? echo $userp->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $userp->getUpdated(); ?>">
@@ -187,18 +185,15 @@
                                     <td class="first" width="172"><strong>Retype new Password</strong></td>
                                     <td class="last"><input type="password" name="NewPassword2" value=""/></td>
                                 </tr>
-                                <tr class="bg">
-                                    <td class="first"><strong>&nbsp;</strong></td>
+                                 <tr class="bg">
+                                    <td class="first">&nbsp;</td>
                                 <input type="hidden" name="id" value="<? echo $userp->getId(); ?>">
                                 <input type="hidden" name="created" value="<? echo $userp->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $userp->getUpdated(); ?>">
-                                <td class="last">
-                                    <input type="submit" value="Save" name="save" />
-                            </form>
-                            </td>
-                            </tr>
-                        </table>
-
+                                <td class="last"><input type="submit" value="Save" name="save" /></td>
+                                </tr>
+                            </table>
+                        </form>
                         <p>&nbsp;</p>
                     </div>
                 </div>

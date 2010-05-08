@@ -25,8 +25,10 @@ require_once(STARTPATH.DATAMODELPATH.'option.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.UTILSPATH.'fileWriter.php');
 require_once(STARTPATH.UTILSPATH.'directoryrunner.php');
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
 
 session_start();
+AllControllersCommons::loadlanguage();
 
 function index() {
     $out = array();

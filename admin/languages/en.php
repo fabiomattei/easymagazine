@@ -17,8 +17,25 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-echo 'Plugin deactivated';
+/*
+------------------
+Language: English
+------------------
+*/
 
-/* We don't need to delete the table */
+// Menu
+
+define('LANG_MENU_DASHBOARD', 'Dashboard');
+define('LANG_MENU_NUMBERS', 'Numbers');
+define('LANG_MENU_CATEGORIES', 'Categories');
+define('LANG_MENU_ARTICLES', 'Articles');
+define('LANG_MENU_PAGES', 'Pages');
+define('LANG_MENU_COMMENTS', 'Comments');
+define('LANG_MENU_PLUGIN', 'Plugins');
+define('LANG_MENU_TEMPLATE', 'Templates');
+define('LANG_MENU_SETTINGS', 'Settings');
+define('LANG_MENU_USERS', 'Users');
+define('LANG_MENU_USER', 'User');
+define('LANG_MENU_LOGOUT', 'Logout');
 
 ?>

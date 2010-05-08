@@ -23,8 +23,10 @@ require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'comment.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
 
 session_start();
+AllControllersCommons::loadlanguage();
 
 function index($page) {
     $outList = array();

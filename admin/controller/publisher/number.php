@@ -25,8 +25,10 @@ require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
 require_once(STARTPATH.UTILSPATH.'epubcreator.php');
 require_once(STARTPATH.UTILSPATH.'rssfeedcreator.php');
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
 
 session_start();
+AllControllersCommons::loadlanguage();
 
 function index($page) {
     $outList = array();

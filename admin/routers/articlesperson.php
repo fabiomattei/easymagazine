@@ -40,10 +40,8 @@ class ArticlesPersonRouter extends Router {
         $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
         $this->number = Number::findLastPublished();
-        foreach ($this->person as $person) {
-            $this->metadescritpion .= $person->getName().', ';
-            $this->metakeywords .= $person->getName().', ';
-        }
+        $this->metadescritpion = $this->person->getName();
+        $this->metakeywords = $this->person->getName();
 
         $collection = $this->person->articles();
         $this->paginator = new Paginator($collection, 10, 5);

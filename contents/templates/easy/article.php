@@ -7,11 +7,7 @@
             <h1><a href="<?=URIMaker::article($this->article)?>" rel="bookmark"><?= $this->article->getTitle() ?></a></h1>
             <p>
                 <?= $this->article->getCreatedFormatted() ?>  by
-                <?
-                foreach ($this->article->users() as $user) {
-                    echo $user->getName().' ';
-                }
-                ?> |
+                <?= $this->article->auhorsNamesConcatenation() ?> |
                 <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
             </p>
             <p>

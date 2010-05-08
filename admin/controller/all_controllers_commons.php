@@ -15,10 +15,34 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
-echo 'Plugin deactivated';
+define('STARTPATHLANG', '../../../');
 
-/* We don't need to delete the table */
+require_once(STARTPATHLANG.'costants.php');
+require_once(STARTPATHLANG.SYSTEMPATH.'settings.php');
+
+class AllControllersCommons {
+
+    public static function loadlanguage() {
+
+        switch (LANGUAGE) {
+            case 'en':
+                $lang_file = 'en.php';
+                break;
+
+            case 'it':
+                $lang_file = 'it.php';
+                break;
+
+            default:
+                $lang_file = 'en.php';
+
+        }
+
+        require_once(STARTPATHLANG.LANGUAGESPATH.$lang_file);
+    }
+
+}
 
 ?>
