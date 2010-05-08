@@ -86,6 +86,23 @@ define('LANG_ADMIN_TABLE_COMMENTS', 'Commenti');
 define('LANG_ADMIN_TABLE_ARTICLEAUTORS', 'Autore(i) dell\'articolo');
 define('LANG_ADMIN_TABLE_AUTHORLINK', 'Crea relazione');
 define('LANG_ADMIN_TABLE_AUTHORUNLINK', 'Cacella relazione');
+define('LANG_ADMIN_TABLE_UPDATED_ARTICLES', 'Articoli Aggiornati');
+define('LANG_ADMIN_TABLE_UPDATED_COMMENTS', 'Commenti Aggiornati');
+define('LANG_ADMIN_TABLE_INFO', 'Informazioni');
+define('LANG_ADMIN_TABLE_ADMIN', 'Amministrazione');
+define('LANG_ADMIN_TABLE_ACTIVATE', 'Attiva');
+define('LANG_ADMIN_TABLE_DEACTIVATE', 'Disattiva');
+define('LANG_ADMIN_TABLE_ACTIVATED', 'Attivata');
+define('LANG_ADMIN_TABLE_LANGUAGE', 'Lingua');
+define('LANG_ADMIN_TABLE_MAGAZINE_TITLE', 'Titolo del magazine');
+define('LANG_ADMIN_TABLE_MAGAZINE_DESCRIPTION', 'Descrizione del magazine');
+define('LANG_ADMIN_TABLE_URLTYPE', 'Tipo di URL');
+define('LANG_ADMIN_TABLE_PUBLISHER', 'Editore');
+define('LANG_ADMIN_TABLE_RIGHTS', 'Diritti');
+define('LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL', 'Email dell\'amministratore');
+define('LANG_ADMIN_TABLE_EPUBFILENAME', 'Nomi dei file Epub');
+define('LANG_ADMIN_TABLE_WEBSITEURL', 'URL del magazine');
+define('LANG_ADMIN_TABLE_USERNAME', 'Nome utente');
 
 // ADMIN INFO
 
@@ -99,6 +116,11 @@ define('LANG_ADMIN_NUMBER_INFO', 'In questa pagina &egrave; presente l\'elenco d
     &Egrave; possibile modificare l\'ordine dei numeri cliccando sulle freccie.<br />
     &Egrave; inoltre possibile esportare un numero in <b>epub</b>, dopo la pubblicazione, cliccando
     sul bottone corrispondente al numero nella colonna Epub');
-
+define('LANG_ADMIN_DASHBOARD_INFO', 'Da qui puoi tenere sotto controllo il tuo magazine, vedere gli ultimi aggiornament
+    fatti sugli articoli e gli ultimi commenti inseriti dai lettori.');
+define('LANG_ADMIN_PLUGIN_INFO', 'Lista di tutte le estensioni istallate.');
+define('LANG_ADMIN_TEMPLATE_INFO', 'Lista contente tutti i temi grafici istallati (ne pu&ograve; essere attivato soltanto uno).<br />
+    Per attivare un tema cliccare sulla bandierina verde corrispondente.');
+define('LANG_ADMIN_SETTINGS_INFO', 'Pannello di configurazione del magazine.');
 
 ?>

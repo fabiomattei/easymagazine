@@ -43,7 +43,7 @@
                     <li><span><span><a href="settings.php"><?php echo LANG_MENU_SETTINGS; ?></a></span></span></li>
                     <li><span><span><a href="user.php"><?php echo LANG_MENU_USERS; ?></a></span></span></li>
                 </ul>
-                <div id="logout"><a href="../../logout.php">logout</a></div>
+                <div id="logout"><a href="../../logout.php"><?php echo LANG_MENU_LOGOUT; ?></a></div>
             </div>
             <div id="middle">
                 <div id="left-column">

@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <title>Easy Magazine Admin: Users</title>
+        <title><?php echo LANG_ADMIN_TITLE; ?>: <?php echo LANG_MENU_USERS; ?></title>
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
@@ -47,22 +47,22 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
-                    <a href="../../index.php" class="link">View the website</a>
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
+                    <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
                     <?
                     foreach ($infoarray as $info) {
-                        echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
+                        echo '<div class="message info"><p><strong>'.LANG_MSG_INFO.':</strong>: '.$info.'</p></div>';
                     }
                     foreach ($warningarray as $warning) {
-                        echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
+                        echo '<div class="message warning"><p><strong>'.LANG_MSG_WARNING.':</strong>: '.$warning.'</p></div>';
                     }
                     foreach ($questionarray as $question) {
-                        echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
+                        echo '<div class="message question"><p><strong>'.LANG_MSG_QUESTION.':</strong>: '.$question.'</p></div>';
                     }
                     foreach ($errorarray as $error) {
-                        echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
+                        echo '<div class="message error"><p><strong>'.LANG_MSG_ERROR.':</strong>: '.$error.'</p></div>';
                     }
                     ?>
                     <div class="table">
@@ -70,11 +70,11 @@
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                         <table class="listing" cellpadding="0" cellspacing="0">
                             <tr>
-                                <th class="first" width="377">Name - Username</th>
-                                <th>Edit</th>
-                                <th>Publisher</th>
-                                <th>Show</th>
-                                <th class="last">Delete</th>
+                                <th class="first" width="377"><?php echo LANG_ADMIN_TABLE_NAME; ?> - <?php echo LANG_ADMIN_TABLE_USERNAME; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PUBLISHER; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
+                                <th class="last"><?php echo LANG_ADMIN_TABLE_DELETE; ?></th>
                             </tr>
 
                             <?
@@ -112,18 +112,18 @@
                         <table class="listing form" cellpadding="0" cellspacing="0">
                             <form name="form1" enctype="multipart/form-data" method="post" action="user.php?action=save">
                                 <tr>
-                                    <th class="full" colspan="2">Edit</th>
+                                    <th class="full" colspan="2"><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Name</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_NAME; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="Name" value="<? echo $userp->getName(); ?>"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Username</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_USERNAME; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="Username" value="<? echo $userp->getUsername(); ?>"/></td>
                                 </tr>                    
                                 <tr class="bg">
-                                    <td class="first" colspan="2"><strong>Body</strong><br />
+                                    <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_BODY; ?></strong><br />
                                         <textarea cols="40" id="article_body" name="Body" rows="20" class="mceAdvanced" style="width: 100%"><? echo $userp->getUnfilteredBody(); ?></textarea>
                                 </td>
                                 </tr>
@@ -140,7 +140,7 @@
                                     <td class="last"><input type="text" size="50" name="Skype" value="<? echo $userp->getSkype(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Publisher</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHER; ?></strong></td>
                                     <td class="last"><input type="checkbox" name="Role" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
@@ -148,11 +148,11 @@
                                     <td class="last"><input type="checkbox" name="toshow" value="1" <? if($userp->getToshow()=='1') echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Created:</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
                                     <td class="last"><? echo $userp->getCreated(); ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Updated:</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
                                     <td class="last"><? echo $userp->getUpdated(); ?></td>
                                 </tr>
                                 <tr class="bg">
@@ -162,7 +162,7 @@
                                 <input type="hidden" name="updated" value="<? echo $userp->getUpdated(); ?>">
                                 <input type="hidden" name="Password" value="<? echo $userp->getPassword(); ?>">
                                 <td class="last">
-                                    <input type="submit" value="Save" name="save" />
+                                    <input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" />
                                 </td>
                                 </tr>
                             </form>

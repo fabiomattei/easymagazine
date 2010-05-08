@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <title>Easy Magazine Admin: Settings</title>
+        <title><?php echo LANG_ADMIN_TITLE; ?>: <?php echo LANG_MENU_SETTINGS; ?></title>
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
@@ -46,22 +46,22 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
-                    <a href="../../index.php" class="link">View the website</a>
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
+                    <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
                     <?
                     foreach ($infoarray as $info) {
-                        echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
+                        echo '<div class="message info"><p><strong>'.LANG_MSG_INFO.':</strong>: '.$info.'</p></div>';
                     }
                     foreach ($warningarray as $warning) {
-                        echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
+                        echo '<div class="message warning"><p><strong>'.LANG_MSG_WARNING.':</strong>: '.$warning.'</p></div>';
                     }
                     foreach ($questionarray as $question) {
-                        echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
+                        echo '<div class="message question"><p><strong>'.LANG_MSG_QUESTION.':</strong>: '.$question.'</p></div>';
                     }
                     foreach ($errorarray as $error) {
-                        echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
+                        echo '<div class="message error"><p><strong>'.LANG_MSG_ERROR.':</strong>: '.$error.'</p></div>';
                     }
                     ?>
                     <div class="table">
@@ -70,10 +70,10 @@
                         <form name="form1" enctype="multipart/form-data" method="post" action="settings.php?action=update">
                             <table class="listing form" cellpadding="0" cellspacing="0">
                                 <tr>
-                                    <th class="full" colspan="2">Settings</th>
+                                    <th class="full" colspan="2"><?php echo LANG_MENU_SETTINGS; ?></th>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Publication Language</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_LANGUAGE; ?></strong></td>
                                     <td class="last">
                                         <select name="language">
                                             <option value="ca" <?if ($settingsindb['language']->getValue() == 'ca') echo 'selected';?> >ca</option>
@@ -106,15 +106,15 @@
                                     </td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Web Magazine Title</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_MAGAZINE_TITLE; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="title" value="<?= $settingsindb['title']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Web Magazine Description</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_MAGAZINE_DESCRIPTION; ?></strong></td>
                                     <td class="last"><textarea name="description" rows="4" cols="60"><?= $settingsindb['description']->getValue(); ?></textarea></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>URL Type</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_URLTYPE; ?></strong></td>
                                     <td class="last">
                                         <select name="urltype">
                                             <option value="standard" <?if ($settingsindb['urltype']->getValue() == 'standard') echo 'selected';?> >PHP standard</option>
@@ -123,36 +123,36 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Publisher</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHER; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="publisher" value="<?= $settingsindb['publisher']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Rights</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_RIGHTS; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="rights" value="<?= $settingsindb['rights']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Administration Email</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="email" value="<?= $settingsindb['email']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Epub filename</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_EPUBFILENAME; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="epubname" value="<?= $settingsindb['epubname']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Website URL</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_WEBSITEURL; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="siteurl" value="<?= $settingsindb['siteurl']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                    <td class="last"><input type="submit" value="Save" name="save" /></td>
+                                    <td class="last"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" /></td>
                                 </tr>
                             </table>
                         </form>
                     </div>
                 </div>
                 <div id="right-column">
-                    <strong class="h">INFO</strong>
-                    <div class="box">Here there is a list of settings to manage the magazine.</div>
+                    <strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
+                    <div class="box"><?php echo LANG_ADMIN_SETTINGS_INFO; ?></div>
                 </div>
             </div>
             <div id="footer"></div>

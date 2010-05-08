@@ -47,7 +47,7 @@
             <div id="middle">
                 <div id="left-column">
                     <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
-                    <a href="../../index.php" class="link"><?php echo LANG_MENU_NUMBERS; ?></a>
+                    <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
                     <?
@@ -69,9 +69,9 @@
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                         <table class="listing" cellpadding="0" cellspacing="0">
                             <tr>
-                                <th class="first">Updated Articles</th>
-                                <th width="80">Edit</th>
-                                <th class="last" width="80">Published</th>
+                                <th class="first"><?php echo LANG_ADMIN_TABLE_UPDATED_ARTICLES; ?></th>
+                                <th width="80"><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
+                                <th class="last" width="80"><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
                             </tr>
 
                             <?
@@ -99,9 +99,9 @@
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                         <table class="listing" cellpadding="0" cellspacing="0">
                             <tr>
-                                <th class="first">Last comments</th>
-                                <th width="80">Edit</th>
-                                <th class="last" width="80">Published</th>
+                                <th class="first"><?php echo LANG_ADMIN_TABLE_UPDATED_COMMENTS; ?></th>
+                                <th width="80"><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
+                                <th class="last" width="80"><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
                             </tr>
 
                             <?
@@ -125,8 +125,8 @@
                     </div>
                 </div>
                 <div id="right-column">
-                    <strong class="h">INFO</strong>
-                    <div class="box">Here you can take a quick look on your magazine, the lists show the last Articles and Comments modifyed  </div>
+                    <strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
+                    <div class="box"><?php echo LANG_ADMIN_DASHBOARD_INFO; ?></div>
                 </div>
             </div>
             <div id="footer"></div>

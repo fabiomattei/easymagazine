@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>Easy Magazine Admin: Plugin</title>
+	<title><?php echo LANG_ADMIN_TITLE; ?>: <?php echo LANG_MENU_PLUGIN; ?></title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
@@ -46,22 +46,22 @@
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
-			<a href="../../index.php" class="link">View the website</a>
+			<h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
+			<a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
 		</div>
 		<div id="center-column">
                     <?
                     foreach ($infoarray as $info) {
-                        echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
+                        echo '<div class="message info"><p><strong>'.LANG_MSG_INFO.':</strong>: '.$info.'</p></div>';
                     }
                     foreach ($warningarray as $warning) {
-                        echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
+                        echo '<div class="message warning"><p><strong>'.LANG_MSG_WARNING.':</strong>: '.$warning.'</p></div>';
                     }
                     foreach ($questionarray as $question) {
-                        echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
+                        echo '<div class="message question"><p><strong>'.LANG_MSG_QUESTION.':</strong>: '.$question.'</p></div>';
                     }
                     foreach ($errorarray as $error) {
-                        echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
+                        echo '<div class="message error"><p><strong>'.LANG_MSG_ERROR.':</strong>: '.$error.'</p></div>';
                     }
                     ?>
 			<div class="table">
@@ -69,12 +69,12 @@
 				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
 				<table class="listing" cellpadding="0" cellspacing="0">
 					<tr>
-						<th class="first" width="377">Title</th>
-						<th>Info</th>
-                                                <th>Admin</th>
-                                                <th>Activate</th>
-                                                <th>Deactivate</th>
-						<th class="last">Active</th>
+						<th class="first" width="377"><?php echo LANG_ADMIN_TABLE_TITLE; ?></th>
+						<th><?php echo LANG_ADMIN_TABLE_INFO; ?></th>
+                                                <th><?php echo LANG_ADMIN_TABLE_ADMIN; ?></th>
+                                                <th><?php echo LANG_ADMIN_TABLE_ACTIVATE; ?></th>
+                                                <th><?php echo LANG_ADMIN_TABLE_DEACTIVATE; ?></th>
+						<th class="last"><?php echo LANG_ADMIN_TABLE_ACTIVATED; ?></th>
 					</tr>
 
                     <?
@@ -114,8 +114,8 @@
 		  </div>
 		</div>
 		<div id="right-column">
-			<strong class="h">INFO</strong>
-			<div class="box">Here there is a list of all plug-in.</div>
+			<strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
+			<div class="box"><?php echo LANG_ADMIN_PLUGIN_INFO; ?></div>
 	  </div>
 	</div>
 	<div id="footer"></div>

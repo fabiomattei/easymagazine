@@ -84,6 +84,23 @@ define('LANG_ADMIN_TABLE_COMMENTS', 'Comments');
 define('LANG_ADMIN_TABLE_ARTICLEAUTORS', 'Article Authors');
 define('LANG_ADMIN_TABLE_AUTHORLINK', 'Link');
 define('LANG_ADMIN_TABLE_AUTHORUNLINK', 'Unlink');
+define('LANG_ADMIN_TABLE_UPDATED_ARTICLES', 'Updated Articles');
+define('LANG_ADMIN_TABLE_UPDATED_COMMENTS', 'Updated Comments');
+define('LANG_ADMIN_TABLE_INFO', 'Info');
+define('LANG_ADMIN_TABLE_ADMIN', 'Admin');
+define('LANG_ADMIN_TABLE_ACTIVATE', 'Activate');
+define('LANG_ADMIN_TABLE_DEACTIVATE', 'Deactivate');
+define('LANG_ADMIN_TABLE_ACTIVATED', 'Activated');
+define('LANG_ADMIN_TABLE_LANGUAGE', 'Language');
+define('LANG_ADMIN_TABLE_MAGAZINE_TITLE', 'Magazine Title');
+define('LANG_ADMIN_TABLE_MAGAZINE_DESCRIPTION', 'Magazine Description');
+define('LANG_ADMIN_TABLE_URLTYPE', 'URL Type');
+define('LANG_ADMIN_TABLE_PUBLISHER', 'Publisher');
+define('LANG_ADMIN_TABLE_RIGHTS', 'Rights');
+define('LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL', 'Administration Email');
+define('LANG_ADMIN_TABLE_EPUBFILENAME', 'Epub filename');
+define('LANG_ADMIN_TABLE_WEBSITEURL', 'Website URL');
+define('LANG_ADMIN_TABLE_USERNAME', 'Username');
 
 
 // ADMIN INFO
@@ -94,6 +111,10 @@ define('LANG_ADMIN_CATEGORY_INFO', 'Here there is a list of all categories, you 
                         Only the published ones will be visible in the website.');
 define('LANG_ADMIN_NUMBER_INFO', 'Here there is a list of all numbers, published and not still published.<br />
                         Numbers are showed in the same order than in the website.');
+define('LANG_ADMIN_DASHBOARD_INFO', 'Here you can take a quick look on your magazine, the lists show the last Articles and Comments modifyed');
+define('LANG_ADMIN_PLUGIN_INFO', 'Here there is a list of all plug-in.');
+define('LANG_ADMIN_TEMPLATE_INFO', 'Here there is a list of all templates available for the website.');
+define('LANG_ADMIN_SETTINGS_INFO', 'Here there is a list of settings to manage the magazine.');
 
 
 
