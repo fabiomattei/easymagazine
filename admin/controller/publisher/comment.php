@@ -70,7 +70,7 @@ function find($posts) {
     $outList['pageSelected'] = $page;
     $outList['lastList'] = 'find';
 
-    if (count($comms)==0) { $outList['warning'] = 'No comments corresponding to search criteria';  }
+    if (count($comms)==0) { $outList['warning'] = LANG_CON_COMMENT_NO_MACH;  }
     return $outList;
 }
 
@@ -143,9 +143,9 @@ function requestdelete($id, $list, $pageSelected) {
     $comm = Comment::findById($id);
     $outAction['comm'] = $comm;
 
-    $outAction['question'] = 'Do you really want to delete the comment: '.$comm->getTitle().'? <br />
-    <a href="comment.php?action=dodelete&id='.$comm->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
-    <a href="comment.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
+    $outAction['question'] = LANG_CON_COMMENT_DO_YOU_WANT_DELETE.$comm->getTitle().'? <br />
+    <a href="comment.php?action=dodelete&id='.$comm->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_YES.'</a>,
+    <a href="comment.php?list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_NO.'</a>';
 
     return $outAction;
 }
@@ -158,7 +158,7 @@ function dodelete($id) {
     $comm = new Comment();
     $outAction['comm'] = $comm;
 
-    $outAction['info'] = 'Comment deleted';
+    $outAction['info'] = LANG_CON_COMMENT_DELETED;
 
     return $outAction;
 }
@@ -181,7 +181,7 @@ function save($toSave) {
     $outAction = array();
     if ($toSave['article_id'] == Article::NEW_ARTICLE) {
         $outAction['comm'] = new Comment();
-        $outAction['info'] = 'A comment must be associated to an article';
+        $outAction['info'] = LANG_CON_COMMENT_ASSOCIATED_ARTICLE;
     } else {
         if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
 

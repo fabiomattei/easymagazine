@@ -61,9 +61,9 @@ function requestdelete($id) {
     $userps = User::findAll();
     $out['userps'] = $userps;
 
-    $out['question'] = 'Do you really want to delete the user: '.$userp->getName().' - '.$userp->getUsername().'? <br />
-    <a href="user.php?action=dodelete&id='.$userp->getId().'">yes</a>,
-    <a href="user.php">no</a>';
+    $out['question'] = LANG_CON_USER_DO_YOU_WANT_DELETE.$userp->getName().' - '.$userp->getUsername().'? <br />
+    <a href="user.php?action=dodelete&id='.$userp->getId().'">'.LANG_CON_GENERAL_YES.'</a>,
+    <a href="user.php">'.LANG_CON_GENERAL_NO.'</a>';
 
     return $out;
 }
@@ -79,7 +79,7 @@ function dodelete($id) {
     $userps = User::findAll();
     $out['userps'] = $userps;
 
-    $out['info'] = 'User deleted';
+    $out['info'] = LANG_CON_USER_DELETED;
 
     return $out;
 }
@@ -128,9 +128,9 @@ function savePassword($toSave) {
 
     if ($toSave['NewPassword1'] == $toSave['NewPassword2']) {
         $userp->updatePassword($toSave['NewPassword1'], $toSave['OldPassword']);
-        $out['info'] = 'Password successfully modified';
+        $out['info'] = LANG_CON_USER_PASSWORD_MODIFIED;
     } else {
-        $out['error'] = 'Passwords do not match';
+        $out['error'] = LANG_CON_USER_PASSWORD_NO_MACH;
     }
 
     $out['userp'] = User::findById($userp->getId());

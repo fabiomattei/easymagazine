@@ -86,7 +86,7 @@ function find($posts) {
 
     $outList['lastList'] = 'find';
 
-    if (count($numbs)==0) { $outList['warning'] = 'No numbers corresponding to search criteria';  }
+    if (count($numbs)==0) { $outList['warning'] = LANG_CON_NUMBER_NO_MACH;  }
     return $outList;
 }
 
@@ -117,7 +117,7 @@ function epub($id) {
     $epugcreator = new ePugCreator($numb);
     $epugcreator->writeEPubForNumber();
 
-    $outAction['info'] = 'Epub file created for number <i>'.$numb->getTitle().'</i>';
+    $outAction['info'] = LANG_CON_NUMBER_EPUB_CREATED.'<i>'.$numb->getTitle().'</i>';
 
     return $outAction;
 }
@@ -128,9 +128,9 @@ function requestdelete($id, $list, $pageSelected) {
     $numb = Number::findById($id);
     $outAction['numb'] = $numb;
 
-    $outAction['question'] = 'Do you really want to delete the number: '.$numb->getTitle().'? <br />
-    <a href="number.php?action=dodelete&id='.$numb->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
-    <a href="number.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
+    $outAction['question'] = LANG_CON_NUMBER_DO_YOU_WANT_DELETE.$numb->getTitle().'? <br />
+    <a href="number.php?action=dodelete&id='.$numb->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_YES.'</a>,
+    <a href="number.php?list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_NO.'</a>';
 
     return $outAction;
 }
@@ -143,7 +143,7 @@ function dodelete($id) {
     $numb = new Number();
     $outAction['numb'] = $numb;
 
-    $outAction['info'] = 'Number deleted';
+    $outAction['info'] = LANG_CON_NUMBER_DELETED;
 
     return $outAction;
 }

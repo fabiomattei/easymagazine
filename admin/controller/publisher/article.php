@@ -123,7 +123,7 @@ function find($posts) {
 
     $outList['lastList'] = 'find';
 
-    if (count($arts)==0) { $outList['warning'] = 'No articles corresponding to search criteria';  }
+    if (count($arts)==0) { $outList['warning'] = LANG_CON_ARTICLE_NO_MACH;  }
     return $outList;
 }
 
@@ -142,9 +142,9 @@ function requestdelete($id, $list, $pageSelected) {
     $art = Article::findById($id);
     $outAction['art'] = $art;
 
-    $outAction['question'] = 'Do you really want to delete the article: '.$art->getTitle().'? <br />
-    <a href="article.php?action=dodelete&id='.$art->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
-    <a href="article.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
+    $outAction['question'] = LANG_CON_ARTICLE_DO_YOU_WANT_DELETE.$art->getTitle().'? <br />
+    <a href="article.php?action=dodelete&id='.$art->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_YES.'</a>,
+    <a href="article.php?list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_NO.'</a>';
 
     return $outAction;
 }
@@ -157,7 +157,7 @@ function dodelete($id) {
     $art = new Article();
     $outAction['art'] = $art;
 
-    $outAction['info'] = 'Article deleted';
+    $outAction['info'] = LANG_CON_ARTICLE_DELETED;
 
     return $outAction;
 }
@@ -170,10 +170,10 @@ function requestunlinkauthor($idAuthor, $idArticle, $list, $pageSelected) {
 
     $author = User::findById($idAuthor);
 
-    $outAction['question'] = 'Do you really want to unlink the author '.$author->getName().' - '.$author->getUsername().'
-    from the article: '.$art->getTitle().'? <br />
-    <a href="article.php?action=dounlinkauthor&idauthor='.$idAuthor.'&idarticle='.$idArticle.'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
-    <a href="article.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
+    $outAction['question'] = LANG_CON_ARTICLE_DO_YOU_WANT_UNLINK.$author->getName().' - '.$author->getUsername().
+            LANG_CON_ARTICLE_FROM_ARTICLE.$art->getTitle().'? <br />
+    <a href="article.php?action=dounlinkauthor&idauthor='.$idAuthor.'&idarticle='.$idArticle.'&list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_YES.'</a>,
+    <a href="article.php?list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_NO.'</a>';
 
     return $outAction;
 }
@@ -185,7 +185,7 @@ function dounlinkauthor($idAuthor, $idArticle) {
     $art->unlinkUser($idAuthor);
     $outAction['art'] = $art;
 
-    $outAction['info'] = 'Author unlinked';
+    $outAction['info'] = LANG_CON_ARTICLE_AUTHOR_UNLINKED;
 
     return $outAction;
 }
@@ -194,14 +194,14 @@ function linkauthor($idAuthor, $idArticle) {
     $outAction = array();
 
     if ($idArticle == Article::NEW_ARTICLE) {
-        $outAction['error'] = 'Before to link an article to a writer you need to save the article';
+        $outAction['error'] = LANG_CON_ARTICLE_BEFORE_LINK;
         $outAction['art'] = New Article();
     } else {
         $art = Article::findById($idArticle);
         $art->linkUser($idAuthor);
         $outAction['art'] = $art;
 
-        $outAction['info'] = 'Author linked';
+        $outAction['info'] = LANG_CON_ARTICLE_AUTHOR_LINKED;
     }
     
     return $outAction;

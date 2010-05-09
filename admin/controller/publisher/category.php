@@ -84,7 +84,7 @@ function find($posts) {
 
     $outList['lastList'] = 'find';
 
-    if (count($categories)==0) { $outList['warning'] = 'No category corresponding to search criteria';  }
+    if (count($categories)==0) { $outList['warning'] = LANG_CON_CATEGORY_NO_MACH; }
     return $outList;
 }
 
@@ -112,9 +112,9 @@ function requestdelete($id, $list, $pageSelected) {
     $categ = Category::findById($id);
     $outAction['categ'] = $categ;
 
-    $outAction['question'] = 'Do you really want to delete the category: '.$categ->getName().'? <br />
-    <a href="category.php?action=dodelete&id='.$categ->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">yes</a>,
-    <a href="category.php?list='.$list.'&pageSelected='.$pageSelected.'">no</a>';
+    $outAction['question'] = LANG_CON_CATEGORY_DO_YOU_WANT_DELETE.$categ->getName().'? <br />
+    <a href="category.php?action=dodelete&id='.$categ->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_YES.'</a>,
+    <a href="category.php?list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_NO.'</a>';
 
     return $outAction;
 }
@@ -127,7 +127,7 @@ function dodelete($id) {
     $categ = new Category();
     $outAction['categ'] = $categ;
 
-    $outAction['info'] = 'Category deleted';
+    $outAction['info'] = LANG_CON_CATEGORY_DELETED;
 
     return $outAction;
 }

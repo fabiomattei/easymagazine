@@ -136,5 +136,53 @@ define('LANG_ADMIN_USERS_INFO', 'Amministrazione di editori e giornalisti che ha
 define('LANG_ADMIN_USER_INFO', 'Pannello per gestire le tue informazioni personali.');
 define('LANG_ADMIN_COMMENTS_INFO', 'Amministrazione dei commenti.');
 
+// Controller GENERAL
+
+define('LANG_CON_GENERAL_YES', 'si');
+define('LANG_CON_GENERAL_NO', 'no');
+
+// Controller ARTICLE
+
+define('LANG_CON_ARTICLE_NO_MACH', 'Nessun articolo corrispondente ai criteri di ricerca');
+define('LANG_CON_ARTICLE_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare l\'articolo: ');
+define('LANG_CON_ARTICLE_DELETED', 'Articolo cancellato');
+define('LANG_CON_ARTICLE_DO_YOU_WANT_UNLINK', 'Vuoi davvero eliminare la relazione dell\'autore ');
+define('LANG_CON_ARTICLE_FROM_ARTICLE', ' dall\'aricolo: ');
+define('LANG_CON_ARTICLE_AUTHOR_UNLINKED', 'Relazione cancellata');
+define('LANG_CON_ARTICLE_BEFORE_LINK', 'Prima di creare una relazione tra l\'autore e l\'articolo devi salvare l\'articolo');
+define('LANG_CON_ARTICLE_AUTHOR_LINKED', 'Relazione creata');
+
+// Controller CATEGORY
+
+define('LANG_CON_CATEGORY_NO_MACH', 'Nessuna categoria corrisponde ai criteri di ricerca');
+define('LANG_CON_CATEGORY_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare la categoria: ');
+define('LANG_CON_CATEGORY_DELETED', 'Categoria cancellata');
+
+// Controller COMMENT
+
+define('LANG_CON_COMMENT_NO_MACH', 'Nessun commento corrisponde ai criteri di ricerca');
+define('LANG_CON_COMMENT_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare il commento: ');
+define('LANG_CON_COMMENT_DELETED', 'Commento cancellato');
+define('LANG_CON_COMMENT_ASSOCIATED_ARTICLE', 'Un commento deve essere associato ad un articolo');
+
+// Controller NUMBER
+
+define('LANG_CON_NUMBER_NO_MACH', 'Nessun commento corrisponde ai criteri di ricerca');
+define('LANG_CON_NUMBER_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare il numero: ');
+define('LANG_CON_NUMBER_DELETED', 'Numero cancellato');
+define('LANG_CON_NUMBER_EPUB_CREATED', 'File Epub creato per il numero: ');
+
+// Controller PAGE
+
+define('LANG_CON_PAGE_NO_MACH', 'Nessuna pagina corrisponde ai criteri di ricerca');
+define('LANG_CON_PAGE_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare la pagina: ');
+define('LANG_CON_PAGE_DELETED', 'Pagina cancellata');
+
+// Controller USER
+
+define('LANG_CON_USER_PASSWORD_NO_MACH', 'Le password non corrispondono');
+define('LANG_CON_USER_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare l\'utente: ');
+define('LANG_CON_USER_DELETED', 'Utente cancellato');
+define('LANG_CON_USER_PASSWORD_MODIFIED', 'Password modificata con successo');
 
 ?>

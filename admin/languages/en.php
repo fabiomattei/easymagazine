@@ -128,6 +128,56 @@ define('LANG_ADMIN_USERS_INFO', 'Here there is a list of all user and their info
 define('LANG_ADMIN_USER_INFO', 'Here you can handle your information.');
 define('LANG_ADMIN_COMMENTS_INFO', 'Here there is a list of all comments, published and not still published.');
 
+// Controller GENERAL
+
+define('LANG_CON_GENERAL_YES', 'yes');
+define('LANG_CON_GENERAL_NO', 'no');
+
+
+// Controller ARTICLE
+
+define('LANG_CON_ARTICLE_NO_MACH', 'No articles corresponding to search criteria');
+define('LANG_CON_ARTICLE_DO_YOU_WANT_DELETE', 'Do you really want to delete the article: ');
+define('LANG_CON_ARTICLE_DELETED', 'Article deleted');
+define('LANG_CON_ARTICLE_DO_YOU_WANT_UNLINK', 'Do you really want to unlink the author ');
+define('LANG_CON_ARTICLE_FROM_ARTICLE', ' from the article: ');
+define('LANG_CON_ARTICLE_AUTHOR_UNLINKED', 'Author unlinked');
+define('LANG_CON_ARTICLE_BEFORE_LINK', 'Before to link an article to a writer you need to save the article');
+define('LANG_CON_ARTICLE_AUTHOR_LINKED', 'Author linked');
+
+// Controller CATEGORY
+
+define('LANG_CON_CATEGORY_NO_MACH', 'No category corresponding to search criteria');
+define('LANG_CON_CATEGORY_DO_YOU_WANT_DELETE', 'Do you really want to delete the category: ');
+define('LANG_CON_CATEGORY_DELETED', 'Category deleted');
+
+// Controller COMMENT
+
+define('LANG_CON_COMMENT_NO_MACH', 'No comment corresponding to search criteria');
+define('LANG_CON_COMMENT_DO_YOU_WANT_DELETE', 'Do you really want to delete the comment: ');
+define('LANG_CON_COMMENT_DELETED', 'Comment deleted');
+define('LANG_CON_COMMENT_ASSOCIATED_ARTICLE', 'A comment must be associated to an article');
+
+// Controller NUMBER
+
+define('LANG_CON_NUMBER_NO_MACH', 'No numbers corresponding to search criteria');
+define('LANG_CON_NUMBER_DO_YOU_WANT_DELETE', 'Do you really want to delete the number: ');
+define('LANG_CON_NUMBER_DELETED', 'Number deleted');
+define('LANG_CON_NUMBER_EPUB_CREATED', 'Epub file created for number: ');
+
+// Controller PAGE
+
+define('LANG_CON_PAGE_NO_MACH', 'No page corresponding to search criteria');
+define('LANG_CON_PAGE_DO_YOU_WANT_DELETE', 'Do you really want to delete the page: ');
+define('LANG_CON_PAGE_DELETED', 'Page deleted');
+
+// Controller USER
+
+define('LANG_CON_USER_PASSWORD_NO_MACH', 'Passwords do not match');
+define('LANG_CON_USER_DO_YOU_WANT_DELETE', 'Do you really want to delete the user: ');
+define('LANG_CON_USER_DELETED', 'User deleted');
+define('LANG_CON_USER_PASSWORD_MODIFIED', 'Password successfully modified');
+
 
 
 ?>

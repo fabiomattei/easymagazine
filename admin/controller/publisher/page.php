@@ -53,7 +53,7 @@ function find($post) {
     $outList['pags'] = $pags;
     $outList['lastList'] = 'find';
 
-    if (count($pags)==0) { $outList['warning'] = 'No pages corresponding to search criteria';  }
+    if (count($pags)==0) { $outList['warning'] = LANG_CON_PAGE_NO_MACH;  }
     return $outList;
 }
 
@@ -73,9 +73,9 @@ function requestdelete($id, $list) {
     $pag = Page::findById($id);
     $outAction['pag'] = $pag;
 
-    $outAction['question'] = 'Do you really want to delete the page: '.$pag->getTitle().'? <br />
-    <a href="page.php?action=dodelete&id='.$pag->getId().'&list='.$list.'">yes</a>,
-    <a href="page.php?list='.$list.'">no</a>';
+    $outAction['question'] = LANG_CON_PAGE_DO_YOU_WANT_DELETE.$pag->getTitle().'? <br />
+    <a href="page.php?action=dodelete&id='.$pag->getId().'&list='.$list.'">'.LANG_CON_GENERAL_YES.'</a>,
+    <a href="page.php?list='.$list.'">'.LANG_CON_GENERAL_NO.'</a>';
 
     return $outAction;
 }
@@ -88,7 +88,7 @@ function dodelete($id) {
     $pag = new Page();
     $outAction['pag'] = $pag;
 
-    $outAction['info'] = 'Page deleted';
+    $outAction['info'] = LANG_CON_PAGE_DELETED;
 
     return $outAction;
 }
