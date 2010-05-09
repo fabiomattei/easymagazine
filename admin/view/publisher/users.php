@@ -144,7 +144,7 @@
                                     <td class="last"><input type="checkbox" name="Role" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Show in People page</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_SHOW_IN_PEOPLE_PAGE; ?></strong></td>
                                     <td class="last"><input type="checkbox" name="toshow" value="1" <? if($userp->getToshow()=='1') echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
@@ -171,18 +171,18 @@
                         <table class="listing form" cellpadding="0" cellspacing="0">
                             <form name="form1" enctype="multipart/form-data" method="post" action="user.php?action=savePassword">
                                 <tr>
-                                    <th class="full" colspan="2">Change Password</th>
+                                    <th class="full" colspan="2"><?php echo LANG_ADMIN_TABLE_CHANGE_PASSWORD; ?></th>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Old Passwrd</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_OLD_PASSWORD; ?></strong></td>
                                     <td class="last"><input type="password" name="OldPassword" value=""/></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>New Password</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_NEW_PASSWORD; ?></strong></td>
                                     <td class="last"><input type="password" name="NewPassword1" value=""/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Retype new Password</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_RETYPE_PASSWORD; ?></strong></td>
                                     <td class="last"><input type="password" name="NewPassword2" value=""/></td>
                                 </tr>
                                  <tr class="bg">
@@ -190,7 +190,7 @@
                                 <input type="hidden" name="id" value="<? echo $userp->getId(); ?>">
                                 <input type="hidden" name="created" value="<? echo $userp->getCreated(); ?>">
                                 <input type="hidden" name="updated" value="<? echo $userp->getUpdated(); ?>">
-                                <td class="last"><input type="submit" value="Save" name="save" /></td>
+                                <td class="last"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" /></td>
                                 </tr>
                             </table>
                         </form>
@@ -198,8 +198,8 @@
                     </div>
                 </div>
                 <div id="right-column">
-                    <strong class="h">INFO</strong>
-                    <div class="box">Here there is a list of all user and their informations.</div>
+                    <strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
+                    <div class="box"><?php echo LANG_ADMIN_USERS_INFO; ?></div>
                 </div>
             </div>
             <div id="footer"></div>

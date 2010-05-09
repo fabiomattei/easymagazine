@@ -52,6 +52,8 @@ define('LANG_LEFT_SHOW_CAT_PUBLISHED', 'Show Published');
 define('LANG_LEFT_SHOW_CAT_NOTPUBLISHED', 'Show Not Published');
 define('LANG_LEFT_SHOW_NUM_PUBLISHED', 'Show Published');
 define('LANG_LEFT_SHOW_NUM_NOTPUBLISHED', 'Show Not Published');
+define('LANG_LEFT_SHOW_ALL_COMMENTS', 'View all comments');
+define('LANG_LEFT_SHOW_MY_COMMENTS', 'View comments to my articles');
 
 // MESSAGES
 
@@ -77,7 +79,9 @@ define('LANG_ADMIN_TABLE_CREATED', 'Created');
 define('LANG_ADMIN_TABLE_UPDATED', 'Updated');
 define('LANG_ADMIN_TABLE_DESCRIPTION', 'Description');
 define('LANG_ADMIN_TABLE_SAVE', 'Save');
+define('LANG_ADMIN_TABLE_REPLAY', 'Replay');
 define('LANG_ADMIN_TABLE_NUMBER', 'Number');
+define('LANG_ADMIN_TABLE_ARTICLE', 'Article');
 define('LANG_ADMIN_TABLE_CATEGORY', 'Category');
 define('LANG_ADMIN_TABLE_ARTICLES', 'Articles');
 define('LANG_ADMIN_TABLE_COMMENTS', 'Comments');
@@ -101,7 +105,12 @@ define('LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL', 'Administration Email');
 define('LANG_ADMIN_TABLE_EPUBFILENAME', 'Epub filename');
 define('LANG_ADMIN_TABLE_WEBSITEURL', 'Website URL');
 define('LANG_ADMIN_TABLE_USERNAME', 'Username');
-
+define('LANG_ADMIN_TABLE_SHOW_IN_PEOPLE_PAGE', 'Show in People page');
+define('LANG_ADMIN_TABLE_CHANGE_PASSWORD', 'Change Password');
+define('LANG_ADMIN_TABLE_OLD_PASSWORD', 'Old Passwrd');
+define('LANG_ADMIN_TABLE_NEW_PASSWORD', 'New Password');
+define('LANG_ADMIN_TABLE_RETYPE_PASSWORD', 'Retype new Password');
+define('LANG_ADMIN_TABLE_SIGNATURE', 'Signature');
 
 // ADMIN INFO
 
@@ -115,6 +124,9 @@ define('LANG_ADMIN_DASHBOARD_INFO', 'Here you can take a quick look on your maga
 define('LANG_ADMIN_PLUGIN_INFO', 'Here there is a list of all plug-in.');
 define('LANG_ADMIN_TEMPLATE_INFO', 'Here there is a list of all templates available for the website.');
 define('LANG_ADMIN_SETTINGS_INFO', 'Here there is a list of settings to manage the magazine.');
+define('LANG_ADMIN_USERS_INFO', 'Here there is a list of all user and their informations.');
+define('LANG_ADMIN_USER_INFO', 'Here you can handle your information.');
+define('LANG_ADMIN_COMMENTS_INFO', 'Here there is a list of all comments, published and not still published.');
 
 
 

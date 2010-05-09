@@ -53,6 +53,8 @@ define('LANG_LEFT_SHOW_CAT_PUBLISHED', 'Mostra cat. pubblicate');
 define('LANG_LEFT_SHOW_CAT_NOTPUBLISHED', 'Mostra cat. non pubblicate');
 define('LANG_LEFT_SHOW_NUM_PUBLISHED', 'Mostra num. pubblicati');
 define('LANG_LEFT_SHOW_NUM_NOTPUBLISHED', 'Mostra num. non pubblicati');
+define('LANG_LEFT_SHOW_ALL_COMMENTS', 'Mostra tutti i commenti');
+define('LANG_LEFT_SHOW_MY_COMMENTS', 'Mostra i commenti ai miei articoli');
 
 
 // MESSAGES
@@ -79,7 +81,9 @@ define('LANG_ADMIN_TABLE_CREATED', 'Creato');
 define('LANG_ADMIN_TABLE_UPDATED', 'Aggiornato');
 define('LANG_ADMIN_TABLE_DESCRIPTION', 'Descrizione');
 define('LANG_ADMIN_TABLE_SAVE', 'Salva');
+define('LANG_ADMIN_TABLE_REPLAY', 'Rispondi');
 define('LANG_ADMIN_TABLE_NUMBER', 'Numero');
+define('LANG_ADMIN_TABLE_ARTICLE', 'Articolo');
 define('LANG_ADMIN_TABLE_CATEGORY', 'Categoria');
 define('LANG_ADMIN_TABLE_ARTICLES', 'Articoli');
 define('LANG_ADMIN_TABLE_COMMENTS', 'Commenti');
@@ -103,6 +107,12 @@ define('LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL', 'Email dell\'amministratore');
 define('LANG_ADMIN_TABLE_EPUBFILENAME', 'Nomi dei file Epub');
 define('LANG_ADMIN_TABLE_WEBSITEURL', 'URL del magazine');
 define('LANG_ADMIN_TABLE_USERNAME', 'Nome utente');
+define('LANG_ADMIN_TABLE_SHOW_IN_PEOPLE_PAGE', 'Mostra nella pagina Redazione');
+define('LANG_ADMIN_TABLE_CHANGE_PASSWORD', 'Modifica Password');
+define('LANG_ADMIN_TABLE_OLD_PASSWORD', 'Vecchia Passwrd');
+define('LANG_ADMIN_TABLE_NEW_PASSWORD', 'Nuova Password');
+define('LANG_ADMIN_TABLE_RETYPE_PASSWORD', 'Ripeti la nuova Password');
+define('LANG_ADMIN_TABLE_SIGNATURE', 'Firma');
 
 // ADMIN INFO
 
@@ -122,5 +132,9 @@ define('LANG_ADMIN_PLUGIN_INFO', 'Lista di tutte le estensioni istallate.');
 define('LANG_ADMIN_TEMPLATE_INFO', 'Lista contente tutti i temi grafici istallati (ne pu&ograve; essere attivato soltanto uno).<br />
     Per attivare un tema cliccare sulla bandierina verde corrispondente.');
 define('LANG_ADMIN_SETTINGS_INFO', 'Pannello di configurazione del magazine.');
+define('LANG_ADMIN_USERS_INFO', 'Amministrazione di editori e giornalisti che hanno accesso al sistema.');
+define('LANG_ADMIN_USER_INFO', 'Pannello per gestire le tue informazioni personali.');
+define('LANG_ADMIN_COMMENTS_INFO', 'Amministrazione dei commenti.');
+
 
 ?>

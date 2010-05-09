@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <title>Easy Magazine Admin: Comments</title>
+        <title><?php echo LANG_ADMIN_TITLE; ?>: <?php echo LANG_MENU_COMMENTS; ?></title>
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
@@ -46,27 +46,27 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3>Hello, <? echo $_SESSION['user']->getName() ?></h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
                     <h3><?php echo LANG_MENU_COMMENTS; ?></h3>
                     <ul class="nav">
-                        <li><a href="comment.php">View all comments</a></li>
-                        <li class="last"><a href="comment.php?list=byuser">View comments to my articles</a></li>
+                        <li><a href="comment.php"><?php echo LANG_LEFT_SHOW_ALL_COMMENTS; ?></a></li>
+                        <li class="last"><a href="comment.php?list=byuser"><?php echo LANG_LEFT_SHOW_MY_COMMENTS; ?></a></li>
                     </ul>
-                    <a href="../../index.php" class="link">View the website</a>
+                    <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
                     <?
                     foreach ($infoarray as $info) {
-                        echo '<div class="message info"><p><strong>Info:</strong>: '.$info.'</p></div>';
+                        echo '<div class="message info"><p><strong>'.LANG_MSG_INFO.':</strong>: '.$info.'</p></div>';
                     }
                     foreach ($warningarray as $warning) {
-                        echo '<div class="message warning"><p><strong>Warning:</strong>: '.$warning.'</p></div>';
+                        echo '<div class="message warning"><p><strong>'.LANG_MSG_WARNING.':</strong>: '.$warning.'</p></div>';
                     }
                     foreach ($questionarray as $question) {
-                        echo '<div class="message question"><p><strong>Question:</strong>: '.$question.'</p></div>';
+                        echo '<div class="message question"><p><strong>'.LANG_MSG_QUESTION.':</strong>: '.$question.'</p></div>';
                     }
                     foreach ($errorarray as $error) {
-                        echo '<div class="message error"><p><strong>Error:</strong>: '.$error.'</p></div>';
+                        echo '<div class="message error"><p><strong>'.LANG_MSG_ERROR.':</strong>: '.$error.'</p></div>';
                     }
                     ?>
                     <div class="select-bar">
@@ -75,7 +75,7 @@
                                 <input type="text" size="50" name="string" />
                             </label>
                             <label>
-                                <input type="submit" name="Submit" value="Search" />
+                                <input type="submit" name="Submit" value="<?php echo LANG_MENU_SEARCH; ?>" />
                             </label>
                         </form>
                     </div>
@@ -84,10 +84,10 @@
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
                         <table class="listing" cellpadding="0" cellspacing="0">
                             <tr>
-                                <th class="first" width="377">Title</th>
-                                <th>Edit</th>
-                                <th>Published</th>
-                                <th class="last">Delete</th>
+                                <th class="first" width="377"><?php echo LANG_ADMIN_TABLE_TITLE; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
+                                <th class="last"><?php echo LANG_ADMIN_TABLE_DELETE; ?></th>
                             </tr>
 
                             <?
@@ -110,18 +110,18 @@
                         </table>
                         <div class="select">
                             <form name="pageselectionform" method="post" action="number.php?action=<?=$lastAction?>">
-                                <strong>Pages: </strong>
+                                <strong><?php echo LANG_MENU_PAGES; ?>: </strong>
                                 <select name="page">
                                     <? for ($i=1;$i<=$page_numbers;$i++) { ?>
                                     <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
                                     <? }?>
                                 </select>&nbsp;
                                 <input type="hidden" name="movinglist" value="yes" />
-                                <input type="submit" value="Go" name="Go" />
+                                <input type="submit" value="<?php echo LANG_MENU_GO; ?>" name="Go" />
                             </form>
                         </div>
                         <form name="formnew" method="post" action="comment.php">
-                            <input type="submit" value="New" name="new" />
+                            <input type="submit" value="<?php echo LANG_ADMIN_TABLE_NEW; ?>" name="new" />
                         </form>
                     </div>
                     <div class="table">
@@ -130,41 +130,41 @@
                         <table class="listing form" cellpadding="0" cellspacing="0">
                             <form name="form1" enctype="multipart/form-data" method="post" action="comment.php?action=save">
                                 <tr>
-                                    <th class="full" colspan="2">Edit</th>
+                                    <th class="full" colspan="2"><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first" width="172"><strong>Article</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_ARTICLE; ?></strong></td>
                                     <td class="last">
                                         <? if($comm->getArticle_id() != Comment::NEW_COMMENT) { echo $comm->article()->getTitle(); } ?>
                                         <input type="hidden" name="created" value="<? echo $comm->getArticle_id(); ?>">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="first" width="172"><strong>Title</strong></td>
+                                    <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_TITLE; ?></strong></td>
                                     <td class="last">
                                         <textarea name="Title" rows="1" cols="60"><?= $comm->getUnfilteredTitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Body</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_BODY; ?></strong></td>
                                     <td class="last"><textarea name="Body" rows="4" cols="60"><? echo $comm->getUnfilteredBody(); ?></textarea></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Signature</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_SIGNATURE; ?></strong></td>
                                     <td class="last">
                                         <textarea name="Signature" rows="1" cols="60"><?= $comm->getSignature(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Published</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></strong></td>
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($comm->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr>
-                                    <td class="first"><strong>Created:</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
                                     <td class="last"><? echo $comm->getCreated(); ?></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong>Updated:</strong></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
                                     <td class="last"><? echo $comm->getUpdated(); ?></td>
                                 </tr>
                                 <tr>
@@ -174,11 +174,11 @@
                                 <input type="hidden" name="updated" value="<? echo $comm->getUpdated(); ?>">
                                 <input type="hidden" name="article_id" value="<? echo $comm->getArticle_id(); ?>">
                                 <td class="last">
-                                    <input type="submit" value="Save" name="save" />
+                                    <input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" />
                             </form>
                             <? if (isset($cm)): ?>
                             <form name="formnew" method="post" action="comment.php?action=replay&id=<?= $comm->getId(); ?>">
-                                <input type="submit" value="Replay" name="new" />
+                                <input type="submit" value="<?php echo LANG_ADMIN_TABLE_REPLAY; ?>" name="new" />
                             </form>
                             <? endif; ?>
                             </td>
@@ -188,8 +188,8 @@
                     </div>
                 </div>
                 <div id="right-column">
-                    <strong class="h">INFO</strong>
-                    <div class="box">Here there is a list of all comments, published and not still published.</div>
+                    <strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
+                    <div class="box"><?php echo LANG_ADMIN_COMMENTS_INFO; ?></div>
                 </div>
             </div>
             <div id="footer"></div>

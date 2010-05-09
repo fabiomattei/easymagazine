@@ -34,6 +34,21 @@ $db->createSchema();
 $db->populateSchema();
  */
 
+/*
+ * Manualino chiamate utili:
+ * 
+ * $this->get('http://localhost:8888/easymagazine/admin/login.php');
+ * $this->assertText('Username');
+ * $this->click('Testo link');
+ * $this->setFieldByName('username', 'user');
+ * $this->setFieldByName('password', 'psw');
+ * $this->setFieldById('idfield', 'testo da inserire');
+ * $this->click('Ok');
+ * $this->assertText('Benvenuto');
+ * $this->assertTitle('Amministrazione'); Deve essere tutto uguale uguale
+ *
+ */
+
 class AllAcceptanceTests extends TestSuite {
 
     

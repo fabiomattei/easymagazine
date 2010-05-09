@@ -22,7 +22,7 @@ class TestArticles extends WebTestCase {
     function testLogin(){
         $this->get('http://localhost:8888/easymagazine/admin/login.php');
         $this->assertText('Username');
-        $this->click('TEsto link');
+        //$this->click('Testo link');
         $this->setFieldByName('username', 'user');
         $this->setFieldByName('password', 'psw');
         //$this->setFieldById();
