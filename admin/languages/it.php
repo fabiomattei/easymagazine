@@ -185,4 +185,11 @@ define('LANG_CON_USER_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare l\'utente: '
 define('LANG_CON_USER_DELETED', 'Utente cancellato');
 define('LANG_CON_USER_PASSWORD_MODIFIED', 'Password modificata con successo');
 
+// Router Comments
+
+define('LANG_ROUTER_COMMENT_COMSAVED', 'Commento salvato, sar&agrave; controllato dalla redazione e poi pubblicato');
+define('LANG_ROUTER_COMMENT_FILL_ALL_FIELDS', 'Per favore riempire tutti i campi');
+define('LANG_ROUTER_COMMENT_WRITE_CAPTCHA', 'Per favore scrivi il giusto codice di controllo');
+define('LANG_ROUTER_COMMENT_COM_NOT_ALLOWED', 'Commenti non permessi');
+
 ?>

@@ -17,14 +17,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define('STARTPATHLANG', '../../../');
-
-require_once(STARTPATHLANG.'costants.php');
-require_once(STARTPATHLANG.SYSTEMPATH.'settings.php');
-
 class AllControllersCommons {
 
     public static function loadlanguage() {
+        if (file_exists('../../../costants.php')) {
+            $pathlang = '../../../';
+        } elseif (file_exists('../../costants.php')) {
+            $pathlang = '../../';
+        } elseif (file_exists('../costants.php')) {
+            $pathlang = '../';
+        } elseif (file_exists('costants.php')) {
+            $pathlang = '';
+        }
+
+        require_once($pathlang.'costants.php');
+        require_once($pathlang.SYSTEMPATH.'settings.php');
 
         switch (LANGUAGE) {
             case 'en':
@@ -40,7 +47,7 @@ class AllControllersCommons {
 
         }
 
-        require_once(STARTPATHLANG.LANGUAGESPATH.$lang_file);
+        require_once($pathlang.LANGUAGESPATH.$lang_file);
     }
 
 }

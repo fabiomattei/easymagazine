@@ -23,6 +23,9 @@ require_once(STARTPATH.LIBPATH.'/securimage/securimage.php');
 
 require_once('router.php');
 
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+AllControllersCommons::loadlanguage();
+
 class CommentsRouter extends Router {
 
     public $article;
@@ -75,23 +78,23 @@ class CommentsRouter extends Router {
                             $_POST['Body'],
                             $_POST['Signature']);
                         $com->save();
-                        $this->advice = 'Comment saved, it will be checked then published';
+                        $this->advice = LANG_ROUTER_COMMENT_COMSAVED;
                     }
                     if ($cont < 3 && $cont >= 0) {
-                        $this->advice = 'Fill all the fields please';
+                        $this->advice = LANG_ROUTER_COMMENT_FILL_ALL_FIELDS;
                         $this->postedsignature = $_POST['Signature'];
                         $this->postedtitle = $_POST['Title'];
                         $this->postedbody = $_POST['Body'];
                     }
                 } else {
-                    $this->advice = 'Please type the right Captcha';
+                    $this->advice = LANG_ROUTER_COMMENT_WRITE_CAPTCHA;
                     $this->postedsignature = $_POST['Signature'];
                     $this->postedtitle = $_POST['Title'];
                     $this->postedbody = $_POST['Body'];
                 }
             }
         } else {
-            $this->advice = 'Comments not allowed';
+            $this->advice = LANG_ROUTER_COMMENT_COM_NOT_ALLOWED;
         }
     }
 

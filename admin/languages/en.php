@@ -178,6 +178,11 @@ define('LANG_CON_USER_DO_YOU_WANT_DELETE', 'Do you really want to delete the use
 define('LANG_CON_USER_DELETED', 'User deleted');
 define('LANG_CON_USER_PASSWORD_MODIFIED', 'Password successfully modified');
 
+// Router Comments
 
+define('LANG_ROUTER_COMMENT_COMSAVED', 'Comment saved, it will be checked then published');
+define('LANG_ROUTER_COMMENT_FILL_ALL_FIELDS', 'Fill all the fields please');
+define('LANG_ROUTER_COMMENT_WRITE_CAPTCHA', 'Please type the right Captcha');
+define('LANG_ROUTER_COMMENT_COM_NOT_ALLOWED', 'Comments not allowed');
 
 ?>
