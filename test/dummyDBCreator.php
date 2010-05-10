@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include ('../config.php');
+include ('../system/config.php');
 
 class DbCreator {
 
@@ -220,6 +220,11 @@ class DbCreator {
             (15, 1, 1, 15, 1, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
             'Body of my third article', 1, 'tag of my third article',
             'metadescription of my third article', 'metakeyword of my third article', now(), now())";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
+            (16, 14, 1, 15, 1, 'My final Article', 'Subtitle of my final article', 'summary of my final article',
+            'Body of my final article', 1, 'tag of my final article',
+            'metadescription of my final article', 'metakeyword of my final article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }

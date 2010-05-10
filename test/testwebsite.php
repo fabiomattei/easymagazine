@@ -35,7 +35,7 @@ $db->populateSchema();
 
 /*
  * Manualino chiamate utili:
- * 
+ *
  * $this->get('http://localhost:8888/easymagazine/admin/login.php');
  * $this->assertText('Username');
  * $this->click('Testo link');
@@ -48,21 +48,15 @@ $db->populateSchema();
  *
  */
 
+define('BASEADDRESSHTTP', 'http://localhost:8888/easymagazine/');
+
+
 class AllAcceptanceTests extends TestSuite {
 
-    
     function __construct() {
-        parent::__construct('All Acceptance Tests');
-        $this->addFile('admin/view/publisher/numberst.php');
-        $this->addFile('admin/view/publisher/articlest.php');
+        parent::__construct('All Acceptance Tests about the public website');
+        $this->addFile('website/website.php');
     }
-
-    /*
-    function AllTests() {
-        $this->TestSuite('All tests for SimpleTest ' . SimpleTest::getVersion());
-        $this->addFile('admin/view/publisher/numberst.php');
-        $this->addFile('admin/view/publisher/articlest.php');
-    }*/
 
 }
 
