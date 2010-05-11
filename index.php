@@ -36,7 +36,7 @@ if (URLTYPE == 'optimized') {
     }
 } else {
     require_once(URIPATH.'uristandard.php');
-     if (isset($_GET['p'])) {
+     if (isset($_GET['p']) OR isset($_GET['plugin'])) {
         $uri = new UriStandard($_GET);
         $uri->evaluate();
         $arURI = $uri->getArrayuri();

@@ -32,23 +32,31 @@ require_once(STARTPATH.URIPATH.'/uri.php');
 class UriStandard extends URI {
 
     function evaluate() {
-        switch ($this->uri['p']) {
-            case 'number':          $router = 'number'; $id = $this->uri['id']; break;
-            case 'category':        $router = 'category'; $id = $this->uri['id']; break;
-            case 'article':         $router = 'article'; $id = $this->uri['id']; break;
-            case 'comments':        $router = 'comments'; $id = $this->uri['id']; break;
-            case 'results':         $router = 'results'; $id = 'not required'; break;
-            case 'numberslist':     $router = 'numberslist'; $id = 'not required'; break;
-            case 'page':            $router = 'page'; $id = $this->uri['id']; break;
-            case 'articlesperson':  $router = 'articlesperson'; $id = $this->uri['id']; break;
-            case 'people':          $router = 'people'; $id = 'not required'; break;
-            default:                $router = 'index'; $id = 'not required';
-        }
+        if (!isset($this->uri['plugin'])) {
+            switch ($this->uri['p']) {
+                case 'number':          $router = 'number'; $id = $this->uri['id']; break;
+                case 'category':        $router = 'category'; $id = $this->uri['id']; break;
+                case 'article':         $router = 'article'; $id = $this->uri['id']; break;
+                case 'comments':        $router = 'comments'; $id = $this->uri['id']; break;
+                case 'results':         $router = 'results'; $id = 'not required'; break;
+                case 'numberslist':     $router = 'numberslist'; $id = 'not required'; break;
+                case 'page':            $router = 'page'; $id = $this->uri['id']; break;
+                case 'articlesperson':  $router = 'articlesperson'; $id = $this->uri['id']; break;
+                case 'people':          $router = 'people'; $id = 'not required'; break;
+                default:                $router = 'index'; $id = 'not required';
+            }
 
-        $this->arrayURI = array(
-            'Router' => $router,
-            'id' => $id
-        );
+            $this->arrayURI = array(
+                'Router' => $router,
+                'id' => $id
+            );
+        } else {
+            $this->arrayURI = array(
+                'Router' => 'plugin',
+                'plugin' => $this->uri['plugin'],
+                'script' => $this->uri['script']
+            );
+        }
     }
 
 }

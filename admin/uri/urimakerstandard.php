@@ -74,6 +74,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'contents/feed/feed.xml';
     }
 
+    static function pluginPage($plugin, $script, $variablesGet = '') {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?plugin='.$plugin.'&script='.$script.$variablesGet;
+    }
+
 }
 
 ?>

@@ -33,6 +33,8 @@ class UriOptimized extends URI {
 
     function evaluate() {
         $newArray = explode('/', $this->uri);
+        $plugin = '';
+        $script = '';
 
         switch ($newArray[0]) {
             case 'numbers':         $router = 'number'; $id = $newArray[2]; break;
@@ -44,12 +46,15 @@ class UriOptimized extends URI {
             case 'pages':           $router = 'page'; $id = $newArray[2]; break;
             case 'articlesperson':  $router = 'articlesperson'; $id = $newArray[2]; break;
             case 'people':          $router = 'people'; $id = 'not required'; break;
+            case 'plugin':          $router = 'plugin'; $plugin = $newArray[1]; $script = $newArray[2]; $id = 'not required'; break;
             default:                $router = 'index'; $id = 'not required';
         }
 
         $this->arrayURI = array(
             'Router' => $router,
-            'id' => $id
+            'id' => $id,
+            'plugin' => $plugin,
+            'script' => $script,
         );
     }
 

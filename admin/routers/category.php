@@ -58,7 +58,7 @@ class CategoryRouter extends Router {
             include (TEMPLATEPATH.'/category.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
                 include (TEMPLATEPATH.'/index.php');
-            }
+        }
         $this->getRemote()->executeCommandAfterCategory();
     }
 

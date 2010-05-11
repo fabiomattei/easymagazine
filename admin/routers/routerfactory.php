@@ -27,6 +27,7 @@ require_once('numberslist.php');
 require_once('number.php');
 require_once('people.php');
 require_once('articlesperson.php');
+require_once('plugin.php');
 
 class RouterFactory {
 
@@ -52,6 +53,8 @@ class RouterFactory {
         if ($request['Router'] == "people") $out = new PeopleRouter($request);
 
         if ($request['Router'] == "articlesperson") $out = new ArticlesPersonRouter($request);
+
+        if ($request['Router'] == "plugin") $out = new PluginRouter($request);
 
         return $out;
     }
