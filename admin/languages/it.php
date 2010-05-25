@@ -117,24 +117,32 @@ define('LANG_ADMIN_TABLE_SIGNATURE', 'Firma');
 // ADMIN INFO
 
 define('LANG_ADMIN_PAGE_INFO', 'Qui c\'&egrave; una lista di tutte le pagine, sia pubblicate che no.');
-define('LANG_ADMIN_ARTICLE_INFO', 'Qui &egrave; possibile gestire tutti gli articoli della rivista.');
-define('LANG_ADMIN_CATEGORY_INFO', 'Qui &egrave; presenta la lista di  tutte le categorie che potrai
+define('LANG_ADMIN_ARTICLE_INFO', 'Qui &egrave; possibile gestire tutti gli articoli della rivista.
+    &Egrave; possibile inserirne di nuovi oppure modificare quelli gi&agrave; inseriti.');
+define('LANG_ADMIN_CATEGORY_INFO', 'Qui &egrave; presente la lista di  tutte le categorie che potrai
     utilizzare per classificare i tuoi articoli.<br />
-                        Soltanto le categorie pubblicate saranno visibili sul sito.');
+    Ogni articolo appartiene ad una (ed una sola) categoria.<br />
+    Soltanto le categorie pubblicate saranno visibili nel sito nell men&ugrave; delle categorie.');
 define('LANG_ADMIN_NUMBER_INFO', 'In questa pagina &egrave; presente l\'elenco di tutti i numeri, sia quelli pubblicati
     sia quelli ancora in lavorazione.<br />
     &Egrave; possibile modificare l\'ordine dei numeri cliccando sulle freccie.<br />
     &Egrave; inoltre possibile esportare un numero in <b>epub</b>, dopo la pubblicazione, cliccando
-    sul bottone corrispondente al numero nella colonna Epub');
-define('LANG_ADMIN_DASHBOARD_INFO', 'Da qui puoi tenere sotto controllo il tuo magazine, vedere gli ultimi aggiornament
+    sul bottone nella colonna Epub');
+define('LANG_ADMIN_DASHBOARD_INFO', 'Da qui puoi tenere sotto controllo il tuo magazine, vedere gli ultimi aggiornamenti
     fatti sugli articoli e gli ultimi commenti inseriti dai lettori.');
-define('LANG_ADMIN_PLUGIN_INFO', 'Lista di tutte le estensioni istallate.');
+define('LANG_ADMIN_PLUGIN_INFO', 'Lista di tutte le estensioni (plugins) istallate.<br />
+    Le estensioni possono essere scaricate dal sito www.easymagazine.org.<br />
+    Ai fini dell\'istallazione &egrave; sufficente copiare la cartellina dell\'estensione nella cartella "contents/plug_in" e poi
+    attivarla dal men&ugrave;');
 define('LANG_ADMIN_TEMPLATE_INFO', 'Lista contente tutti i temi grafici istallati (ne pu&ograve; essere attivato soltanto uno).<br />
-    Per attivare un tema cliccare sulla bandierina verde corrispondente.');
+    Per attivare un tema cliccare sulla bandierina verde corrispondente.<br />
+    I temi possono essere scaricati dal sito www.easymagazine.org.');
 define('LANG_ADMIN_SETTINGS_INFO', 'Pannello di configurazione del magazine.');
 define('LANG_ADMIN_USERS_INFO', 'Amministrazione di editori e giornalisti che hanno accesso al sistema.');
 define('LANG_ADMIN_USER_INFO', 'Pannello per gestire le tue informazioni personali.');
-define('LANG_ADMIN_COMMENTS_INFO', 'Amministrazione dei commenti.');
+define('LANG_ADMIN_COMMENTS_INFO', 'Amministrazione dei commenti.<br />
+    Puoi visualizzare i commenti da approvati o da approvare, puoi approvare un commento
+    ed, eventualmente, rispondere.');
 
 // Controller GENERAL
 
@@ -191,5 +199,32 @@ define('LANG_ROUTER_COMMENT_COMSAVED', 'Commento salvato, sar&agrave; controllat
 define('LANG_ROUTER_COMMENT_FILL_ALL_FIELDS', 'Per favore riempire tutti i campi');
 define('LANG_ROUTER_COMMENT_WRITE_CAPTCHA', 'Per favore scrivi il giusto codice di controllo');
 define('LANG_ROUTER_COMMENT_COM_NOT_ALLOWED', 'Commenti non permessi');
+
+// Router Search
+
+define('LANG_ROUTER_SEARCH_RESULTS_FOR', 'Risultati per: ');
+define('LANG_ROUTER_SEARCH_NO_RESULTS', 'Non ci sono risultati!');
+define('LANG_ROUTER_SEARCH_RESULTS', 'Risultati: ');
+define('LANG_ROUTER_SEARCH_NO_MATCHES', 'Nessun articolo corrisponde ai criteri di ricerca.');
+
+// PAginator Results
+
+define('LANG_PAGINATOR_FIRST', 'Primo');
+define('LANG_PAGINATOR_LAST', 'Ultimo');
+
+// MONTHS
+
+define('LANG_MONTH_JAN', 'Gennaio');
+define('LANG_MONTH_FEB', 'Febbraio');
+define('LANG_MONTH_MAR', 'Marzo');
+define('LANG_MONTH_APR', 'Aprile');
+define('LANG_MONTH_MAY', 'Maggio');
+define('LANG_MONTH_JUN', 'Giugno');
+define('LANG_MONTH_JUL', 'Luglio');
+define('LANG_MONTH_AUG', 'Agosto');
+define('LANG_MONTH_SEP', 'Settembre');
+define('LANG_MONTH_OCT', 'Ottobre');
+define('LANG_MONTH_NOV', 'Novembre');
+define('LANG_MONTH_DEC', 'Dicembre');
 
 ?>

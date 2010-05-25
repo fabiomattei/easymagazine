@@ -45,35 +45,34 @@ class ResultsRouter extends Router {
         if (isset($_POST['s']) && $_POST['s']!='') {
             $collection = Article::findInAllTextFieldsInPublishedArticles($_POST['s']);
             $_SESSION['paginator'] = new Paginator($collection, 10, 5);
-
             $this->articles = $_SESSION['paginator']->rowsToShow(1);
             $_SESSION['s'] = $_POST['s'];
-            $this->title = 'Results for: '.$_POST['s'];
-            $this->metadescritpion = 'Results for: '.$_POST['s'];
-            $this->metakeywords = 'Results for: '.$_POST['s'];
+            $this->title = LANG_ROUTER_SEARCH_RESULTS_FOR.$_POST['s'];
+            $this->metadescritpion = LANG_ROUTER_SEARCH_RESULTS_FOR.$_POST['s'];
+            $this->metakeywords = LANG_ROUTER_SEARCH_RESULTS_FOR.$_POST['s'];
             $resultsNumber = count($this->articles);
         } else {
             if (isset($_SESSION['paginator']) && isset($_GET['page'])) {
                 $this->articles = $_SESSION['paginator']->rowsToShow($_GET['page']);
-                $this->title = 'Results for: '.$_SESSION['s'];
-                $this->metadescritpion = 'Results for: '.$_SESSION['s'];
-                $this->metakeywords = 'Results for: '.$_SESSION['s'];
+                $this->title = LANG_ROUTER_SEARCH_RESULTS_FOR.$_SESSION['s'];
+                $this->metadescritpion = LANG_ROUTER_SEARCH_RESULTS_FOR.$_SESSION['s'];
+                $this->metakeywords = LANG_ROUTER_SEARCH_RESULTS_FOR.$_SESSION['s'];
                 $resultsNumber = count($this->articles);
             } else {
                 $this->articles = array();
-                $this->title = 'No Results!';
-                $this->metadescritpion = 'No Results!';
-                $this->metakeywords = 'No Results!';
+                $this->title = LANG_ROUTER_SEARCH_NO_RESULTS;
+                $this->metadescritpion = LANG_ROUTER_SEARCH_NO_RESULTS;
+                $this->metakeywords = LANG_ROUTER_SEARCH_NO_RESULTS;
                 $resultsNumber = 0;
             }
         }
 
 
         if ($resultsNumber > 0) {
-            $this->advice = 'Results:';
+            $this->advice = LANG_ROUTER_SEARCH_RESULTS;
         }
         if ($resultsNumber == 0) {
-            $this->advice = 'No Article matches with your search criteria';
+            $this->advice = LANG_ROUTER_SEARCH_NO_MATCHES;
         }
     }
 

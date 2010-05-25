@@ -17,6 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+
+
 class Paginator {
 
     private $rows_per_page = 10; //Number of records to display per page
@@ -98,14 +100,14 @@ class Paginator {
      * @param string $tag Text string to be displayed as the link. Defaults to 'First'
      * @return string
      */
-    public function renderFirst($pagelink, $tag = 'First') {
+    public function renderFirst($pagelink) {
         if ($this->total_rows == 0)
             return FALSE;
 
         if ($this->page == 1) {
-            return "$tag ";
+            return LANG_PAGINATOR_FIRST;
         } else {
-            return '<a href="'.$pagelink.'&page=1' . $this->append . '">' . $tag . '</a> ';
+            return '<a href="'.$pagelink.'&page=1' . $this->append . '">'.LANG_PAGINATOR_FIRST.'</a> ';
         }
     }
 
@@ -116,14 +118,14 @@ class Paginator {
      * @param string $tag Text string to be displayed as the link. Defaults to 'Last'
      * @return string
      */
-    function renderLast($pagelink, $tag = 'Last') {
+    function renderLast($pagelink) {
         if ($this->total_rows == 0)
             return FALSE;
 
         if ($this->page == $this->max_pages) {
-            return $tag;
+            return LANG_PAGINATOR_LAST;
         } else {
-            return ' <a href="'.$pagelink.'&page=' . $this->max_pages . '&' . $this->append . '">' . $tag . '</a>';
+            return ' <a href="'.$pagelink.'&page=' . $this->max_pages . '&' . $this->append . '">'.LANG_PAGINATOR_LAST.'</a>';
         }
     }
 
@@ -203,7 +205,12 @@ class Paginator {
      * @return string
      */
     public function renderFullNav($pagelink) {
-        return $this->renderFirst($pagelink) . '&nbsp;' . $this->renderPrev($pagelink) . '&nbsp;' . $this->renderNav($pagelink) . '&nbsp;' . $this->renderNext($pagelink) . '&nbsp;' . $this->renderLast($pagelink);
+        if (count($this->collection) > $this->rows_per_page) {
+            $out = $this->renderFirst($pagelink) . '&nbsp;' . $this->renderPrev($pagelink) . '&nbsp;' . $this->renderNav($pagelink) . '&nbsp;' . $this->renderNext($pagelink) . '&nbsp;' . $this->renderLast($pagelink);
+        } else {
+            $out ='';
+        }
+        return $out;
     }
 
 }

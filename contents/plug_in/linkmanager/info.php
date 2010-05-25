@@ -9,7 +9,8 @@
             The administration is complete a show an example of all CRUD operation.<br />
             In order to let your readers enjoy your links list, you need to insert, in your template
             script, the following code:<br /><br />
-            while ($row = mysql_fetch_array(LinkPlugIn::getLinkList())) {<br />
+            $result = LinkPlugIn::getLinkList()<br />
+            while ($row = mysql_fetch_array($result)) {<br />
             &nbsp;&nbsp;&nbsp;&nbsp;echo $row['id'].' - '.$row['title'].' - '.$row['text'].' - '.$row['url']; <br />
             }<br />
             <br />

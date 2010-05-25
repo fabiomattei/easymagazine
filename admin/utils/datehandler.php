@@ -15,12 +15,29 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+*/
 
 class DateHandler {
 
     public static function DataFormat($date) {
-        return date("d M Y",strtotime($date));
+        $out = date("j",strtotime($date));
+        $month = date("m",strtotime($date));
+        switch ($month) {
+            case '01': $out .= " ".LANG_MONTH_JAN; break;
+            case '02': $out .= " ".LANG_MONTH_FEB; break;
+            case '03': $out .= " ".LANG_MONTH_MAR; break;
+            case '04': $out .= " ".LANG_MONTH_APR; break;
+            case '05': $out .= " ".LANG_MONTH_MAY; break;
+            case '06': $out .= " ".LANG_MONTH_JUN; break;
+            case '07': $out .= " ".LANG_MONTH_JUL; break;
+            case '08': $out .= " ".LANG_MONTH_AUG; break;
+            case '09': $out .= " ".LANG_MONTH_SEP; break;
+            case '10': $out .= " ".LANG_MONTH_OCT; break;
+            case '11': $out .= " ".LANG_MONTH_NOV; break;
+            case '12': $out .= " ".LANG_MONTH_DEC; break;
+        }
+        $out .= " ".date("Y",strtotime($date));
+        return $out;
     }
 
     public static function convertMySqlDateTimeToUnixTime($date) {

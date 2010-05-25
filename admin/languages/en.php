@@ -71,7 +71,7 @@ define('LANG_ADMIN_TABLE_UP', 'Up');
 define('LANG_ADMIN_TABLE_DOWN', 'Down');
 define('LANG_ADMIN_TABLE_PUBLISHED', 'Published');
 define('LANG_ADMIN_TABLE_DELETE', 'Delete');
-define('LANG_ADMIN_TABLE_NEW', 'Nuovo');
+define('LANG_ADMIN_TABLE_NEW', 'New');
 define('LANG_ADMIN_TABLE_SUBTITLE', 'Sub Title');
 define('LANG_ADMIN_TABLE_SUMMARY', 'Summary');
 define('LANG_ADMIN_TABLE_BODY', 'Body');
@@ -115,18 +115,29 @@ define('LANG_ADMIN_TABLE_SIGNATURE', 'Signature');
 // ADMIN INFO
 
 define('LANG_ADMIN_PAGE_INFO', 'Here there is a list of all pages, published and not still published.');
-define('LANG_ADMIN_ARTICLE_INFO', 'Here there is a list of all articles, published and not still published.');
+define('LANG_ADMIN_ARTICLE_INFO', 'Here you can handle the articles of the magazine.
+    You can create new articles or edit the one you have the right to edit for.');
 define('LANG_ADMIN_CATEGORY_INFO', 'Here there is a list of all categories, you will need it to classify your articles.<br />
-                        Only the published ones will be visible in the website.');
+    An article belongs only to a category.<br />
+    Only the published ones will be visible in the website.');
 define('LANG_ADMIN_NUMBER_INFO', 'Here there is a list of all numbers, published and not still published.<br />
-                        Numbers are showed in the same order than in the website.');
+    You can modify the numbers order, clicking on the gree arrows (Up and Down).<br />
+    In order to publish the epub file of a number, please, click in the corresponding Epub column.');
 define('LANG_ADMIN_DASHBOARD_INFO', 'Here you can take a quick look on your magazine, the lists show the last Articles and Comments modifyed');
-define('LANG_ADMIN_PLUGIN_INFO', 'Here there is a list of all plug-in.');
-define('LANG_ADMIN_TEMPLATE_INFO', 'Here there is a list of all templates available for the website.');
+define('LANG_ADMIN_PLUGIN_INFO', 'Here there is a list of all plug-in.<br />
+    You can download new plugins from www.easymagazine.org website, in order to install you need just to
+    copy the new plugin folder in to the folder "contents/plug_in" than you can activate it
+    clicking the green flag in the menu');
+define('LANG_ADMIN_TEMPLATE_INFO', 'Here there is a list of all templates available for the website.
+    You can download new templates from www.easymagazine.org website, in order to install you need just to
+    copy the new template folder in to the folder "contents/templates" than you can activate it
+    clicking the green flag in the menu');
 define('LANG_ADMIN_SETTINGS_INFO', 'Here there is a list of settings to manage the magazine.');
-define('LANG_ADMIN_USERS_INFO', 'Here there is a list of all user and their informations.');
-define('LANG_ADMIN_USER_INFO', 'Here you can handle your information.');
-define('LANG_ADMIN_COMMENTS_INFO', 'Here there is a list of all comments, published and not still published.');
+define('LANG_ADMIN_USERS_INFO', 'Here there is a list of all user, their right to access the system and their personal informations.');
+define('LANG_ADMIN_USER_INFO', 'Here you can handle your personal information.');
+define('LANG_ADMIN_COMMENTS_INFO', 'Here there is a list of all comments.
+    You can see approved comments and comment to approve.<br />
+    You can approve a comment and eventualy respond to the comment.');
 
 // Controller GENERAL
 
@@ -184,5 +195,32 @@ define('LANG_ROUTER_COMMENT_COMSAVED', 'Comment saved, it will be checked then p
 define('LANG_ROUTER_COMMENT_FILL_ALL_FIELDS', 'Fill all the fields please');
 define('LANG_ROUTER_COMMENT_WRITE_CAPTCHA', 'Please type the right Captcha');
 define('LANG_ROUTER_COMMENT_COM_NOT_ALLOWED', 'Comments not allowed');
+
+// Router Search
+
+define('LANG_ROUTER_SEARCH_RESULTS_FOR', 'Results for: ');
+define('LANG_ROUTER_SEARCH_NO_RESULTS', 'No Results!');
+define('LANG_ROUTER_SEARCH_RESULTS', 'Results: ');
+define('LANG_ROUTER_SEARCH_NO_MATCHES', 'No Article matches with your search criteria');
+
+// Paginator Results
+
+define('LANG_PAGINATOR_FIRST', 'First');
+define('LANG_PAGINATOR_LAST', 'Last');
+
+// MONTHS
+
+define('LANG_MONTH_JAN', 'January');
+define('LANG_MONTH_FEB', 'February');
+define('LANG_MONTH_MAR', 'March');
+define('LANG_MONTH_APR', 'April');
+define('LANG_MONTH_MAY', 'May');
+define('LANG_MONTH_JUN', 'June');
+define('LANG_MONTH_JUL', 'July');
+define('LANG_MONTH_AUG', 'August');
+define('LANG_MONTH_SEP', 'September');
+define('LANG_MONTH_OCT', 'October');
+define('LANG_MONTH_NOV', 'November');
+define('LANG_MONTH_DEC', 'December');
 
 ?>
