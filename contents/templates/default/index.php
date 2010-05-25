@@ -32,6 +32,4 @@
 
     <? } ?>
 
-    <? echo '<a href="'.URIMaker::pluginPage('mailtoeditor', 'mailform').'"> Mail To Editor </a>'; ?>
-
 </div>
