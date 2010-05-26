@@ -41,7 +41,8 @@ class TestWebSite extends WebTestCase {
     }
 
     function testPagePage(){
-        $this->get(BASEADDRESSHTTP.'pages/My%20second%20Page/2');
+        $this->get(BASEADDRESSHTTP);
+        $this->click('My second Page');
         $this->assertText('Body of my second page');
     }
 

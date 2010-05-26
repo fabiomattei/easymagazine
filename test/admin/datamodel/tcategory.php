@@ -70,14 +70,14 @@ class CategoryTests extends UnitTestCase {
     function testfindArticles() {
         $cat = Category::findById(1);
         $arts = $cat->articles();
-        $this->assertEqual(14, count($arts));
+        $this->assertEqual(15, count($arts));
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
     function testfindArticlesPublished() {
         $cat = Category::findById(1);
         $arts = $cat->articlesPublished();
-        $this->assertEqual(14, count($arts));
+        $this->assertEqual(15, count($arts));
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
