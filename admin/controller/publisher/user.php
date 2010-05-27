@@ -94,6 +94,8 @@ function save($toSave) {
     }
     if (!isset($toSave['toshow'])) { $toSave['toshow'] = 0; }
 
+    $checkusername = User::findByUserName($toSave['Username']);
+
     $userp = new User(
         $toSave['id'],
         $toSave['Name'],
@@ -107,9 +109,21 @@ function save($toSave) {
         $toSave['Skype'],
         $toSave['created'],
         $toSave['updated']);
-    $userp->save();
 
-    $out['info'] = 'User saved';
+    if ($checkusername->getId() == User::NEW_USER) {
+        // There is no user with the same username so I can save the user
+        $userp->save();
+        $userp->updateUsername($toSave['Username']);
+
+        $out['info'] = LANG_CON_USER_SAVED;
+    } elseif ($checkusername->getId() == $toSave['id']) {
+        // The user didn't change the username
+        $userp->save();
+
+        $out['info'] = LANG_CON_USER_SAVED;
+    } else {
+        $out['error'] = LANG_CON_USER_WITH_SAME_USERNAME;
+    }
 
     $userp = User::findById($userp->getId()); // Necessary to reload date informations
 

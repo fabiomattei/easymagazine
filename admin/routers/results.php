@@ -60,13 +60,13 @@ class ResultsRouter extends Router {
                 $resultsNumber = count($this->articles);
             } else {
                 $this->articles = array();
+                $_SESSION['paginator'] = new Paginator(array(), 1);
                 $this->title = LANG_ROUTER_SEARCH_NO_RESULTS;
                 $this->metadescritpion = LANG_ROUTER_SEARCH_NO_RESULTS;
                 $this->metakeywords = LANG_ROUTER_SEARCH_NO_RESULTS;
                 $resultsNumber = 0;
             }
         }
-
 
         if ($resultsNumber > 0) {
             $this->advice = LANG_ROUTER_SEARCH_RESULTS;

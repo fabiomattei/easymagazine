@@ -223,6 +223,8 @@ function up($id) {
 
     $outAction['art'] = Article::findById($id);
 
+    $outAction['info'] = LANG_CON_ARTICLE_MOVED_UP;
+
     return $outAction;
 }
 
@@ -241,6 +243,8 @@ function down($id) {
     }
 
     $outAction['art'] = Article::findById($id);
+
+    $outAction['info'] = LANG_CON_ARTICLE_MOVED_DOWN;
 
     return $outAction;
 }
@@ -274,6 +278,8 @@ function save($toSave) {
     $art = Article::findById($art->getId()); // Necessary to reload date informations
 
     $outAction['art'] = $art;
+
+    $outAction['info'] = LANG_CON_ARTICLE_SAVED;
 
     return $outAction;
 }

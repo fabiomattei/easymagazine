@@ -165,6 +165,8 @@ function up($id) {
     $numb = Number::findById($id);
     $outAction['numb'] = $numb;
 
+    $outAction['info'] = LANG_CON_NUMBER_MOVED_UP;
+
     return $outAction;
 }
 
@@ -184,6 +186,8 @@ function down($id) {
 
     $numb = Number::findById($id);
     $outAction['numb'] = $numb;
+
+    $outAction['info'] = LANG_CON_NUMBER_MOVED_DOWN;
 
     return $outAction;
 }
@@ -207,6 +211,8 @@ function save($toSave) {
         $toSave['created'],
         $toSave['updated']);
     $numb->save();
+
+    $outAction['info'] = LANG_CON_NUMBER_SAVED;
 
     $numb = Number::findById($numb->getId()); // Necessary to reload date informations
 

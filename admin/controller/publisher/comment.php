@@ -196,6 +196,8 @@ function save($toSave) {
             $toSave['updated']);
         $comm->save();
 
+        $outAction['info'] = LANG_CON_COMMENT_SAVED;
+
         $outAction['comm'] = Comment::findById($comm->getId());
     }
     return $outAction;

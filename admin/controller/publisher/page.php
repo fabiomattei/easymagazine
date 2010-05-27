@@ -110,6 +110,8 @@ function up($id) {
     $pag = new Page();
     $outAction['pag'] = $pag;
 
+    $outAction['info'] = LANG_CON_PAGE_MOVED_UP;
+
     return $outAction;
 }
 
@@ -129,6 +131,8 @@ function down($id) {
 
     $pag = new Page();
     $Action['pag'] = $pag;
+
+    $outAction['info'] = LANG_CON_PAGE_MOVED_DOWN;
 
     return $Action;
 }
@@ -156,6 +160,8 @@ function save($toSave) {
     $pag = Page::findById($pag->getId()); // Necessary to reload date informations
     
     $outAction['pag'] = $pag;
+
+    $outAction['info'] = LANG_CON_PAGE_SAVED;
 
     return $outAction;
 }

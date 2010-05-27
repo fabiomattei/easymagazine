@@ -40,9 +40,11 @@ class User {
     const INSERT_SQL = 'insert into users (id, name, username, password, body, role, toshow, email, msn, skype, created, updated) values (@#@, @?@, @?@, @?@, @?@, @?@, @#@, @?@, @?@, @?@, now(), now())';
     const UPDATE_SQL = 'update users set name = @?@, body = @?@, role = @?@, toshow = @#@, email = @?@, msn = @?@, skype = @?@, updated=now() where id = @#@';
     const UPDATE_SQL_PASSWORD = 'update users set password = @?@, updated=now() where id = @#@';
+    const UPDATE_SQL_USERNAME = 'update users set username = @?@, updated=now() where id = @#@';
     const DELETE_SQL = 'delete from users where id = @#@';
     const SELECT_BY_ID = 'select * from users where id = @#@ ';
     const SELECT_BY_NAME = 'select * from users where name like @?@ order by name';
+    const SELECT_BY_USERNAME = 'select * from users where username = @?@ LIMIT 1 ';
     const SELECT_BY_USERNAME_AND_EMAIL = 'select * from users where username = @?@ AND email = @?@ order by name ';
     const SELECT_ALL = 'select * from users order by name ';
     const SELECT_ALL_TO_SHOW = 'select * from users WHERE toshow = 1 order by name ';
@@ -50,7 +52,7 @@ class User {
     const SELECT_BY_ID_ORD = 'select id from users order by id DESC';
     const SELECT_ARTICLES = 'select AR.* from articles as AR, users_articles as UA where AR.id = UA.article_id AND UA.user_id = @#@ order by AR.id DESC';
     const SELECT_COMMENTSARTICLES = 'select CM.* from comments as CM, articles as AR, users_articles as UA where AR.id = CM.article_id AND AR.id = UA.article_id AND UA.user_id = @#@ order by CM.id DESC';
-    
+
     public function __construct($id=self::NEW_USER, $name='', $username='', $password='', $body='', $role='', $toshow='', $email='', $msn='', $skype='', $created='', $updated='') {
         $this->filter = UserFilterRemote::getInstance();
         $this->id = $id;
@@ -128,6 +130,16 @@ class User {
      */
     public static function findByName($name) {
         $ret = USER::findMany(self::SELECT_BY_NAME, array("%$name%"), array());
+        return $ret;
+    }
+
+    /**
+     * Return a user from the query searching by username
+     *
+     * @return User
+     */
+    public static function findByUserName($username) {
+        $ret = USER::findOne(self::SELECT_BY_USERNAME, array("$username"), array());
         return $ret;
     }
 
@@ -316,6 +328,20 @@ class User {
             } catch (Exception $e) {
                 echo 'Caught exception: ',  $e->getMessage(), "\n";
             }
+        }
+    }
+
+    public function updateUsername($NewUserName) {
+        $tables = array("users" => TBPREFIX."users");
+        $this->username = $NewUserName;
+        try {
+            DB::getInstance()->execute(
+                    self::UPDATE_SQL_USERNAME,
+                    array($this->username),
+                    array($this->id),
+                    $tables);
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
     }
 

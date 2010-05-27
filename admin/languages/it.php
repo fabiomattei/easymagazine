@@ -138,7 +138,10 @@ define('LANG_ADMIN_TEMPLATE_INFO', 'Lista contente tutti i temi grafici istallat
     Per attivare un tema cliccare sulla bandierina verde corrispondente.<br />
     I temi possono essere scaricati dal sito www.easymagazine.org.');
 define('LANG_ADMIN_SETTINGS_INFO', 'Pannello di configurazione del magazine.');
-define('LANG_ADMIN_USERS_INFO', 'Amministrazione di editori e giornalisti che hanno accesso al sistema.');
+define('LANG_ADMIN_USERS_INFO', 'Amministrazione di editori e giornalisti che hanno accesso al sistema. Gli <b>editori</b> sono gli utenti con maggiori
+    privilegi, possono cambiare le impostazioni del magazine amministrare i numeri della rivista, modificare il testo degli articoli di tutti,
+    amministrare le pagine e le categorie, attivare estensioni e temi grafici. I <b>giornalisti</b> possono modificare esclusivamente i propri articoli.<br />
+    Le persone <b>pubblicate</b> appariranno nella pagina della redazione.');
 define('LANG_ADMIN_USER_INFO', 'Pannello per gestire le tue informazioni personali.');
 define('LANG_ADMIN_COMMENTS_INFO', 'Amministrazione dei commenti.<br />
     Puoi visualizzare i commenti da approvati o da approvare, puoi approvare un commento
@@ -159,12 +162,18 @@ define('LANG_CON_ARTICLE_FROM_ARTICLE', ' dall\'aricolo: ');
 define('LANG_CON_ARTICLE_AUTHOR_UNLINKED', 'Relazione cancellata');
 define('LANG_CON_ARTICLE_BEFORE_LINK', 'Prima di creare una relazione tra l\'autore e l\'articolo devi salvare l\'articolo');
 define('LANG_CON_ARTICLE_AUTHOR_LINKED', 'Relazione creata');
+define('LANG_CON_ARTICLE_MOVED_UP', 'Articolo spostato in alto nella lista');
+define('LANG_CON_ARTICLE_MOVED_DOWN', 'Articolo spostato in basso nella lista');
+define('LANG_CON_ARTICLE_SAVED', 'Articolo salvato');
 
 // Controller CATEGORY
 
 define('LANG_CON_CATEGORY_NO_MACH', 'Nessuna categoria corrisponde ai criteri di ricerca');
 define('LANG_CON_CATEGORY_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare la categoria: ');
 define('LANG_CON_CATEGORY_DELETED', 'Categoria cancellata');
+define('LANG_CON_CATEGORY_MOVED_UP', 'Categoria spostata in alto nella lista');
+define('LANG_CON_CATEGORY_MOVED_DOWN', 'Categoria spostata in basso nella lista');
+define('LANG_CON_CATEGORY_SAVED', 'Categoria salvata');
 
 // Controller COMMENT
 
@@ -172,6 +181,7 @@ define('LANG_CON_COMMENT_NO_MACH', 'Nessun commento corrisponde ai criteri di ri
 define('LANG_CON_COMMENT_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare il commento: ');
 define('LANG_CON_COMMENT_DELETED', 'Commento cancellato');
 define('LANG_CON_COMMENT_ASSOCIATED_ARTICLE', 'Un commento deve essere associato ad un articolo');
+define('LANG_CON_COMMENT_SAVED', 'Commento salvato');
 
 // Controller NUMBER
 
@@ -179,12 +189,18 @@ define('LANG_CON_NUMBER_NO_MACH', 'Nessun commento corrisponde ai criteri di ric
 define('LANG_CON_NUMBER_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare il numero: ');
 define('LANG_CON_NUMBER_DELETED', 'Numero cancellato');
 define('LANG_CON_NUMBER_EPUB_CREATED', 'File Epub creato per il numero: ');
+define('LANG_CON_NUMBER_MOVED_UP', 'Numero spostato in alto nella lista');
+define('LANG_CON_NUMBER_MOVED_DOWN', 'Numero spostato in basso nella lista');
+define('LANG_CON_NUMBER_SAVED', 'Numero salvato');
 
 // Controller PAGE
 
 define('LANG_CON_PAGE_NO_MACH', 'Nessuna pagina corrisponde ai criteri di ricerca');
 define('LANG_CON_PAGE_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare la pagina: ');
 define('LANG_CON_PAGE_DELETED', 'Pagina cancellata');
+define('LANG_CON_PAGE_MOVED_UP', 'Pagina spostata in alto nella lista');
+define('LANG_CON_PAGE_MOVED_DOWN', 'Pagina spostata in basso nella lista');
+define('LANG_CON_PAGE_SAVED', 'Pagina salvata');
 
 // Controller USER
 
@@ -192,6 +208,8 @@ define('LANG_CON_USER_PASSWORD_NO_MACH', 'Le password non corrispondono');
 define('LANG_CON_USER_DO_YOU_WANT_DELETE', 'Vuoi davvero cancellare l\'utente: ');
 define('LANG_CON_USER_DELETED', 'Utente cancellato');
 define('LANG_CON_USER_PASSWORD_MODIFIED', 'Password modificata con successo');
+define('LANG_CON_USER_SAVED', 'Dati relativi all\'utente salvati');
+define('LANG_CON_USER_WITH_SAME_USERNAME', 'Il Nome Utente che hai scelto &egrave; gi&agrave; stato scelto da qualcun altro e non pu&ograve; essere utilizzato');
 
 // Router Comments
 

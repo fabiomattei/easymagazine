@@ -149,6 +149,8 @@ function up($id) {
     $categ = Category::findById($id);
     $outAction['categ'] = $categ;
 
+    $outAction['info'] = LANG_CON_CATEGORY_MOVED_UP;
+
     return $outAction;
 }
 
@@ -169,6 +171,8 @@ function down($id) {
     $categ = Category::findById($id);
     $outAction['categ'] = $categ;
 
+    $outAction['info'] = LANG_CON_CATEGORY_MOVED_DOWN;
+
     return $outAction;
 }
 
@@ -188,6 +192,8 @@ function save($toSave) {
     $categ->save();
 
     $outAction['categ'] = Category::findById($categ->getId());
+
+    $outAction['info'] = LANG_CON_CATEGORY_SAVED;
 
     return $outAction;
 }
