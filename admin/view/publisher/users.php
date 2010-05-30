@@ -140,8 +140,11 @@
                                     <td class="last"><input type="text" size="50" name="Skype" value="<? echo $userp->getSkype(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHER; ?></strong></td>
-                                    <td class="last"><input type="checkbox" name="Role" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?>/></td>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_ROLE; ?></strong></td>
+                                    <td class="last">
+                                        <input type="radio" name="Role" value="publisher" <? if($userp->getRole()=='publisher') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_PUBLISHER; ?>
+                                        <input type="radio" name="Role" value="journalist" <? if($userp->getRole()=='journalist') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_JOURNALIST; ?>
+                                    </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_SHOW_IN_PEOPLE_PAGE; ?></strong></td>

@@ -99,7 +99,9 @@ define('LANG_ADMIN_TABLE_LANGUAGE', 'Language');
 define('LANG_ADMIN_TABLE_MAGAZINE_TITLE', 'Magazine Title');
 define('LANG_ADMIN_TABLE_MAGAZINE_DESCRIPTION', 'Magazine Description');
 define('LANG_ADMIN_TABLE_URLTYPE', 'URL Type');
+define('LANG_ADMIN_TABLE_ROLE', 'Role');
 define('LANG_ADMIN_TABLE_PUBLISHER', 'Publisher');
+define('LANG_ADMIN_TABLE_JOURNALIST', 'Journalist');
 define('LANG_ADMIN_TABLE_RIGHTS', 'Rights');
 define('LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL', 'Administration Email');
 define('LANG_ADMIN_TABLE_EPUBFILENAME', 'Epub filename');
@@ -237,5 +239,21 @@ define('LANG_MONTH_SEP', 'September');
 define('LANG_MONTH_OCT', 'October');
 define('LANG_MONTH_NOV', 'November');
 define('LANG_MONTH_DEC', 'December');
+
+// LOGIN NEW PASSWORD PAGE
+
+define('LANG_LOGIN_NEW_PASSWORD_SENT', 'New password sent to your email, check it and try again.');
+define('LANG_LOGIN_NEW_PASSWORD_FROM', 'New Password from');
+define('LANG_LOGIN_DEAR', 'Dear');
+define('LANG_LOGIN_NEW_PASSWORD_IS', 'your new password is');
+define('LANG_LOGIN_USERNAME_PASSWORD_WRONG', 'Username or password wrong');
+define('LANG_LOGIN_TRY_AGAIN', 'Click here in order to try again');
+define('LANG_LOGIN_MESSAGE', 'If you lost your password please type your username and email and you will recevive a new password.');
+define('LANG_LOGIN_LOGOUT_DONE', 'Logout done!');
+define('LANG_LOGIN_CLICK_TO_LOGIN', 'Click me if you need to login');
+define('LANG_LOGIN_TITLE_LOGIN', 'Easy Magazine: Administration Login Page');
+define('LANG_LOGIN_TITLE_LOGOUT', 'Easy Magazine: Administration Logout page');
+define('LANG_LOGIN_TITLE_ERROR', 'Easy Magazine: Login Error Page');
+define('LANG_LOGIN_TITLE_PASSWORD_SEND', 'Easy Magazine: Password Sending Page');
 
 ?>

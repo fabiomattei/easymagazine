@@ -17,11 +17,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+define('STARTPATH', '../');
+
+require_once(STARTPATH.'costants.php');
+require_once(STARTPATH.SYSTEMPATH.'config.php');
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+
+AllControllersCommons::loadlanguage();
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" dir="ltr">
     <head>
-        <title>Easy Magazine: Login Error Page</title>
+        <title><?PHP echo LANG_LOGIN_TITLE_ERROR; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <meta name="MSSmartTagsPreventParsing" content="TRUE" />
         <link href="resources/css/stylelogin.css" rel="stylesheet" type="text/css" />
@@ -33,14 +41,13 @@
             <p class="logo">&nbsp;</p>
             <div class="menu">
 
-                Username or password wrong!<br />
-                <a href="login.php">Try again</a>. <br /><br />
-                If you lost your password please type your username and
-                email and you will recevive a new password. <br />
+                <?PHP echo LANG_LOGIN_USERNAME_PASSWORD_WRONG; ?>!<br />
+                <a href="login.php"><? echo LANG_LOGIN_TRY_AGAIN; ?></a>. <br /><br />
+                <? echo LANG_LOGIN_MESSAGE; ?> <br />
                 <form action="mailPassword.php" method="post">
                     <table>
                         <tr>
-                            <td>Username:</td>
+                            <td><?PHP echo LANG_ADMIN_TABLE_USERNAME; ?>:</td>
                             <td><input type="text" name="username" value="" /></td>
                         </tr>
                         <tr>

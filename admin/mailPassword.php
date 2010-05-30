@@ -24,6 +24,9 @@ require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.DATAMODELPATH.'magazine.php');
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+
+AllControllersCommons::loadlanguage();
 
 $username = $_POST['username'];
 $email = $_POST['email'];
@@ -32,7 +35,9 @@ $usr = User::findByUsernameAndEmail($username, $email);
 
 if ($usr->getUsername() == $username) {
     $newpassword = $usr->setNewRandomPassword();
-    mail($email, 'New Password', 'Your new password is: '.$newpassword, 'From: '.Magazine::getAdministrationEmail());
+    $object = LANG_LOGIN_NEW_PASSWORD_FROM.' ['.Magazine::getWebSiteURL().']';
+    $message = LANG_LOGIN_DEAR.' '.$username.', '.LANG_LOGIN_NEW_PASSWORD_IS.': '.$newpassword;
+    mail($email, $object, $message, 'From: '.Magazine::getAdministrationEmail());
 } else {
     header('Location: loginError.php');
 }
@@ -43,7 +48,7 @@ if ($usr->getUsername() == $username) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" dir="ltr">
     <head>
-        <title>Easy Magazine: Administration Login Page</title>
+        <title><?PHP echo LANG_LOGIN_TITLE_PASSWORD_SEND; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <meta name="MSSmartTagsPreventParsing" content="TRUE" />
         <link href="resources/css/stylelogin.css" rel="stylesheet" type="text/css" />
@@ -54,11 +59,11 @@ if ($usr->getUsername() == $username) {
         <div id="intestazione">
             <p class="logo">&nbsp;</p>
             <div class="menu">
-                New password sent to your email, check it and try again.
+                <?PHP echo LANG_LOGIN_NEW_PASSWORD_SENT; ?>
                 <form action="openSession.php" method="post" id="login">
                     <table>
                         <tr>
-                            <td>Username:</td>
+                            <td><?PHP echo LANG_ADMIN_TABLE_USERNAME; ?>:</td>
                             <td><input type="text" class="theInput" name="username" value="" /></td>
                         </tr>
                         <tr>

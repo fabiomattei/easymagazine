@@ -149,7 +149,7 @@
                 </div>
                 <div id="right-column">
                     <strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
-                    <div class="box"><?php echo LANG_ADMIN_USER_INFO; ?>.</div>
+                    <div class="box"><?php echo LANG_ADMIN_USER_INFO; ?></div>
                 </div>
             </div>
             <div id="footer"></div>

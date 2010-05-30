@@ -17,6 +17,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+define('STARTPATH', '../');
+
+require_once(STARTPATH.'costants.php');
+require_once(STARTPATH.SYSTEMPATH.'config.php');
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+
+AllControllersCommons::loadlanguage();
+
 session_start();
 session_destroy();
 
@@ -25,7 +33,7 @@ session_destroy();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" dir="ltr">
     <head>
-        <title>Easy Magazine: Administration Login Page</title>
+        <title><?PHP echo LANG_LOGIN_TITLE_LOGOUT; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <meta name="MSSmartTagsPreventParsing" content="TRUE" />
         <link href="resources/css/stylelogin.css" rel="stylesheet" type="text/css" />
@@ -36,8 +44,8 @@ session_destroy();
         <div id="intestazione">
             <p class="logo">&nbsp;</p>
             <div class="menu">
-                Logout done!<br />
-                <a href="login.php">Click me if you need to login</a>
+                <? echo LANG_LOGIN_LOGOUT_DONE; ?><br />
+                <a href="login.php"><? echo LANG_LOGIN_CLICK_TO_LOGIN; ?></a>
                 <br />
                 <br />
                 <br />

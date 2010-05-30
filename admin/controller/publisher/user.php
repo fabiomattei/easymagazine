@@ -87,11 +87,6 @@ function dodelete($id) {
 function save($toSave) {
     $out = array();
 
-    if (isset($toSave['Role'])) {
-        $toSave['Role'] = 'publisher';
-    } else {
-        $toSave['Role'] = 'journalist';
-    }
     if (!isset($toSave['toshow'])) { $toSave['toshow'] = 0; }
 
     $checkusername = User::findByUserName($toSave['Username']);

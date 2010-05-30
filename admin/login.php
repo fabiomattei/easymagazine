@@ -17,12 +17,20 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+define('STARTPATH', '../');
+
+require_once(STARTPATH.'costants.php');
+require_once(STARTPATH.SYSTEMPATH.'config.php');
+require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+
+AllControllersCommons::loadlanguage();
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it" dir="ltr">
     <head>
-        <title>Easy Magazine: Administration Login Page</title>
+        <title><?PHP echo LANG_LOGIN_TITLE_LOGIN; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <meta name="MSSmartTagsPreventParsing" content="TRUE" />
         <link href="resources/css/stylelogin.css" rel="stylesheet" type="text/css" />
@@ -36,7 +44,7 @@
                 <form action="openSession.php" method="post" id="login">
                     <table>
                         <tr>
-                            <td>Username:</td>
+                            <td><?PHP echo LANG_ADMIN_TABLE_USERNAME; ?>:</td>
                             <td><input type="text" class="theInput" name="username" value="" /></td>
                         </tr>
                         <tr>
