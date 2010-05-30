@@ -252,7 +252,7 @@ define('LANG_MONTH_DEC', 'Dicembre');
 define('LANG_LOGIN_NEW_PASSWORD_SENT', 'Una nuova password &egrave; stata spedita alla tua email, controllala e prova di nuovo.');
 define('LANG_LOGIN_NEW_PASSWORD_FROM', 'Nuova Password da');
 define('LANG_LOGIN_DEAR', 'Ciao');
-define('LANG_LOGIN_NEW_PASSWORD_IS', 'la tua nuova password &egrave;');
+define('LANG_LOGIN_NEW_PASSWORD_IS', 'la tua nuova password:');
 define('LANG_LOGIN_USERNAME_PASSWORD_WRONG', 'Nome utente o password sbagliata');
 define('LANG_LOGIN_TRY_AGAIN', 'Clicca qui per riprovare');
 define('LANG_LOGIN_MESSAGE', 'Se hai perduto la tua password per favore digita il tuo nome utentee la tua email e riceverai una nuova password.');
