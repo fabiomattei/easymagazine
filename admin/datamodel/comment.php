@@ -33,7 +33,6 @@ class Comment {
     private $signature;
     private $created;
     private $updated;
-    private $db;
     private $filter;
 
     const INSERT_SQL = 'insert into comments (id, article_id, published, title, body, signature, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, now(), now())';
@@ -48,7 +47,6 @@ class Comment {
     const SELECT_ARTICLE = 'select * from articles where id = @#@ ';
 
     public function __construct($id=self::NEW_COMMENT, $article_id=self::NEW_COMMENT, $title='', $published='', $body='', $signature='', $created='', $updated='') {
-        $this->db = DB::getInstance();
         $this->filter = CommentFilterRemote::getInstance();
         $this->id = $id;
         $this->article_id = $article_id;

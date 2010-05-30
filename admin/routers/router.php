@@ -29,7 +29,6 @@ if (URLTYPE == 'optimized') {
 abstract class Router {
 
     private $remote;
-    private $session;
     private $arrayURY;
 
     public function  __construct($arrayURI) {
@@ -44,8 +43,6 @@ abstract class Router {
     public abstract function loadData();
 
     public function show(){
-        //$this->session->startingPage();
-
         $this->loadData();
 
         $this->remote->executeCommandBeforeHeader();
@@ -57,8 +54,6 @@ abstract class Router {
         $this->remote->executeCommandBeforeFooter();
         $this->footer();
         $this->remote->executeCommandAfterFooter();
-
-        //$this->session->closingPage();
     }
 
     public function header() {
