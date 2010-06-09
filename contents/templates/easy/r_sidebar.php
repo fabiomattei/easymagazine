@@ -4,7 +4,7 @@
 	<ul id="r_sidebarwidgeted">
             
         <li id="Themes">
-	<a href="<?= URIMaker::rssFeed()?>"><img src="<?= URIMaker::fromBasePath('contents/templates/easy/images/rss-icon.png') ?>"> RSS Feed</a>
+            <a href="<?= URIMaker::rssFeed()?>"><img src="<?= URIMaker::fromBasePath('contents/templates/easy/images/rss-icon.png') ?>" border="0"> RSS Feed</a>
         </li>
         <br />
 
