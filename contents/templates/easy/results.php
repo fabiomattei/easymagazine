@@ -3,6 +3,8 @@
     <?php include("l_sidebar.php");?>
 
     <div id="contentmiddle">
+        <h1>Search results for: <?= $this->querystring ?></h1><br />
+
         <? if (isset($this->advice)) :?>
         <div class="contenttitle"><?= $this->advice ?></div>
         <? endif; ?>

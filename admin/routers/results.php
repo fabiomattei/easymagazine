@@ -34,6 +34,7 @@ class ResultsRouter extends Router {
     public $title;
     public $number;
     public $categories;
+    public $querystring;
 
     function loadData() {
         $arURI = $this->getArrayURI();
@@ -47,6 +48,7 @@ class ResultsRouter extends Router {
             $_SESSION['paginator'] = new Paginator($collection, 10, 5);
             $this->articles = $_SESSION['paginator']->rowsToShow(1);
             $_SESSION['s'] = $_POST['s'];
+            $this->querystring = $_POST['s'];
             $this->title = LANG_ROUTER_SEARCH_RESULTS_FOR.$_POST['s'];
             $this->metadescritpion = LANG_ROUTER_SEARCH_RESULTS_FOR.$_POST['s'];
             $this->metakeywords = LANG_ROUTER_SEARCH_RESULTS_FOR.$_POST['s'];
@@ -57,6 +59,7 @@ class ResultsRouter extends Router {
                 $this->title = LANG_ROUTER_SEARCH_RESULTS_FOR.$_SESSION['s'];
                 $this->metadescritpion = LANG_ROUTER_SEARCH_RESULTS_FOR.$_SESSION['s'];
                 $this->metakeywords = LANG_ROUTER_SEARCH_RESULTS_FOR.$_SESSION['s'];
+                $this->querystring = $_SESSION['s'];
                 $resultsNumber = count($this->articles);
             } else {
                 $this->articles = array();
@@ -64,6 +67,7 @@ class ResultsRouter extends Router {
                 $this->title = LANG_ROUTER_SEARCH_NO_RESULTS;
                 $this->metadescritpion = LANG_ROUTER_SEARCH_NO_RESULTS;
                 $this->metakeywords = LANG_ROUTER_SEARCH_NO_RESULTS;
+                $this->querystring = '';
                 $resultsNumber = 0;
             }
         }

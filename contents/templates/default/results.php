@@ -4,6 +4,8 @@
 
 <div class="post">
 
+    <h1>Search results for: <?= $this->querystring ?></h1>
+
     <? if (isset($this->advice)) :?>
         <p><?= $this->advice ?></p>
     <? endif; ?>
