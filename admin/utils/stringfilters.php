@@ -27,6 +27,22 @@ class StringFilter {
         return strip_tags($string, '<b><i><strong><em><span><il><ul><ol>');
     }
 
+    /**
+     * This method creates a clean string that doesn't create confusion in
+     * the URL of the website.
+     *
+     * @param <String> $text
+     * @return <String>
+     */
+    public static function cleanStringForUrl($text) {
+        //REMOVE BEGINNING AND ENDING SPACES
+        $text = trim($text);
+        //CLEAN OUT ALL NON-ALPHA NUMERICAL CHARACTERS
+        $out = preg_filter("/[^A-Za-z0-9]/", '_', $text);
+
+        return $out;
+    }
+
 }
 
 ?>

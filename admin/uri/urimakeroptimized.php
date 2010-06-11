@@ -17,21 +17,23 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once(STARTPATH.UTILSPATH.'stringfilters.php');
+
 class URIMaker {
     static function article($article) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'articles/'.$article->getTitle().'/'.$article->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'articles/'.StringFilter::cleanStringForUrl($article->getTitle()).'/'.$article->getId();
     }
 
     static function category($category) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'category/'.$category->getName().'/'.$category->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'category/'.StringFilter::cleanStringForUrl($category->getName()).'/'.$category->getId();
     }
 
     static function number($number) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'numbers/'.$number->getTitle().'/'.$number->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'numbers/'.StringFilter::cleanStringForUrl($number->getTitle()).'/'.$number->getId();
     }
 
     static function comment($article) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'comments/'.$article->getTitle().'/'.$article->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'comments/'.StringFilter::cleanStringForUrl($article->getTitle()).'/'.$article->getId();
     }
 
     static function result() {
@@ -43,11 +45,11 @@ class URIMaker {
     }
 
     static function page($page) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'pages/'.$page->getTitle().'/'.$page->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'pages/'.StringFilter::cleanStringForUrl($page->getTitle()).'/'.$page->getId();
     }
 
     static function articlesperson($person) {
-        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'articlesperson/'.$person->getName().'/'.$person->getId();
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'articlesperson/'.StringFilter::cleanStringForUrl($person->getName()).'/'.$person->getId();
     }
 
     static function people() {
