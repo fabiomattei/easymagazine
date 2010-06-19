@@ -20,6 +20,11 @@
 define('STARTPATH', '');
 require_once('costants.php');
 
+// If the configuration file does not exist the software has to be installed
+if (!file_exists(STARTPATH.SYSTEMPATH.'config.php')) {
+    header('Location: installation/index.php');
+}
+
 require_once(SYSTEMPATH.'settings.php');
 require_once(SYSTEMPATH.'pluginIncluder.php');
 require_once(SYSTEMPATH.'templateIncluder.php');
