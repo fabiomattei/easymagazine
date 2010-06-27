@@ -20,14 +20,14 @@
 class AllControllersCommons {
 
     public static function loadlanguage() {
-        if (file_exists('../../../costants.php')) {
-            $pathlang = '../../../';
-        } elseif (file_exists('../../costants.php')) {
-            $pathlang = '../../';
+        if (file_exists('costants.php')) {
+            $pathlang = '';
         } elseif (file_exists('../costants.php')) {
             $pathlang = '../';
-        } elseif (file_exists('costants.php')) {
-            $pathlang = '';
+        } elseif (file_exists('../../costants.php')) {
+            $pathlang = '../../';
+        } elseif (file_exists('../../../costants.php')) {
+            $pathlang = '../../../';
         }
 
         require_once($pathlang.'costants.php');

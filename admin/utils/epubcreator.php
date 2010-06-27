@@ -41,6 +41,7 @@ class ePugCreator {
      */
     public function writeEPubForNumber() {
         $this->cleanNumber($this->number);
+        $this->deleteFolder($this->epubFolderName);
 
         $this->createFolder($this->epubFolderName);
         $this->createFolder($this->epubFolderName.'META-INF/');
@@ -98,7 +99,7 @@ class ePugCreator {
      * @param String $dir (The folder name)
      */
     private function createFolder($dir) {
-        mkdir($dir, 0700);
+        mkdir($dir, 0777);
     }
 
     /**
@@ -108,8 +109,8 @@ class ePugCreator {
      */
     private function zipFolder() {
         $archive = new PclZip($this->epubfilename);
-        $v_list = $archive->create($this->epubFolderName.'mimetype', PCLZIP_OPT_NO_COMPRESSION, PCLZIP_OPT_REMOVE_ALL_PATH);
-        unlink($this->epubFolderName.'mimetype');
+        $v_list = $archive->create($this->epubFolderName, PCLZIP_OPT_NO_COMPRESSION, PCLZIP_OPT_REMOVE_ALL_PATH);
+        //unlink($this->epubFolderName);
         $v_list = $archive->add($this->epubFolderName, PCLZIP_OPT_REMOVE_PATH, $this->epubFolderName);
     }
 

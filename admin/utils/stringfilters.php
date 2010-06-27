@@ -37,9 +37,17 @@ class StringFilter {
     public static function cleanStringForUrl($text) {
         //REMOVE BEGINNING AND ENDING SPACES
         $text = trim($text);
-        //CLEAN OUT ALL NON-ALPHA NUMERICAL CHARACTERS
-        $out = preg_filter("/[^A-Za-z0-9]/", '_', $text);
 
+        //CLEAN OUT ALL NON-ALPHA NUMERICAL CHARACTERS
+        $version = explode('.', PHP_VERSION);
+        $ver = $version[0] * 10000 + $version[1] * 100 + $version[2];
+
+        if ($ver >= 50300) {
+            $out = preg_filter("/[^A-Za-z0-9]/", '_', $text);
+        } else {
+            $out = ereg_replace("[^A-Za-z0-9]", "_", $text);
+        }
+        
         return $out;
     }
 
