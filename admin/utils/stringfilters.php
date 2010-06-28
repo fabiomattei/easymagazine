@@ -43,11 +43,10 @@ class StringFilter {
         $ver = $version[0] * 10000 + $version[1] * 100 + $version[2];
 
         if ($ver >= 50300) {
-            $out = preg_filter("/[^A-Za-z0-9]/", '_', $text);
+            $out = preg_replace("/[^A-Za-z0-9]/", '_', $text);
         } else {
             $out = ereg_replace("[^A-Za-z0-9]", "_", $text);
         }
-        
         return $out;
     }
 
