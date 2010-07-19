@@ -26,14 +26,6 @@
             </ul>
         </li>
 
-        <li id="Themes">
-            <h2>Admin</h2>
-            <ul>
-                <li><a href="<?= URIMaker::loginPage() ?>">Login</a></li>
-                <li><a href="http://www.easymagazine.org/">Easy Magazine</a></li>
-            </ul>
-        </li>
-
 </div>
 
 <!-- end l_sidebar -->
