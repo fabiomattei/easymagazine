@@ -36,7 +36,6 @@ class Page {
     private $metakeyword;
     private $created;
     private $updated;
-    private $db;
 
     const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, @?@, @?@, @?@, @?@, now(), now())';
     const UPDATE_SQL = 'update pages set indexnumber = @#@, published = @#@, title = @?@, subtitle = @?@, summary = @?@, body = @?@, tag = @?@, metadescription = @?@, metakeyword = @?@, updated=now() where id = @#@';
@@ -55,7 +54,6 @@ class Page {
     const SELECT_BY_INDEXNUMBER = 'select indexnumber from pages order by indexnumber DESC';
     
     public function __construct($id=self::NEW_PAGE, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $body='', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
-        $this->db = DB::getInstance();
         $this->filter = PageFilterRemote::getInstance();
         $this->id = $id;
         $this->indexnumber = $indexnumber;

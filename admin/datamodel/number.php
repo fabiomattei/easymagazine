@@ -38,7 +38,6 @@ class Number {
     private $metakeyword;
     private $created;
     private $updated;
-    private $db;
     private $filter;
 
     const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, @#@, @?@, @?@, Now(), Now())';
@@ -65,7 +64,6 @@ class Number {
     const SELECT_COMMENTS = 'select C.* from comments as C, articles as A where A.number_id = @#@ AND C.article_id = A.id order by C.created DESC';
 
     public function __construct($id=self::NEW_NUMBER, $indexnumber='', $published='', $title='', $subtitle='', $summary='', $commentsallowed='', $metadescription='', $metakeyword='', $created='', $updated='') {
-        $this->db = DB::getInstance();
         $this->filter = NumberFilterRemote::getInstance();
         $this->id = $id;
         $this->indexnumber = $indexnumber;
