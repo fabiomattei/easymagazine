@@ -1,7 +1,7 @@
 <?php
 
 /*
-    Copyright (C) 2009-2010  Sofia Laureano Schelten
+    Copyright (C) 2009-2010 Sofia Laureano Schelten
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -49,10 +49,10 @@ define('LANG_LEFT_GREETINGS', 'Ol&aacute;');
 define('LANG_LEFT_VIEW_WEBSITE', 'Ver o website');
 define('LANG_LEFT_SHOW_ALL', 'Mostrar tudo');
 define('LANG_LEFT_SHOW_MY_ARTICLES', 'Mostrar os meus artigos');
-//define('LANG_LEFT_SHOW_CAT_PUBLISHED', 'Mostra cat. pubblicate');
-//define('LANG_LEFT_SHOW_CAT_NOTPUBLISHED', 'Mostra cat. non pubblicate');
-//define('LANG_LEFT_SHOW_NUM_PUBLISHED', 'Mostra num. pubblicati');
-//define('LANG_LEFT_SHOW_NUM_NOTPUBLISHED', 'Mostra num. non pubblicati');
+define('LANG_LEFT_SHOW_CAT_PUBLISHED', 'Mostrar categorias publicadas');
+define('LANG_LEFT_SHOW_CAT_NOTPUBLISHED', 'Mostrar categorias n&atilde;o publicadas');
+define('LANG_LEFT_SHOW_NUM_PUBLISHED', 'Mostrar números publicados');
+define('LANG_LEFT_SHOW_NUM_NOTPUBLISHED', 'Mostrar números n&atilde;o publicados');
 define('LANG_LEFT_SHOW_ALL_COMMENTS', 'Ver todos os coment&aacute;rios');
 define('LANG_LEFT_SHOW_MY_COMMENTS', 'Ver os coment&aacute;rios aos meus artigos');
 
@@ -88,8 +88,8 @@ define('LANG_ADMIN_TABLE_CATEGORY', 'Categoria');
 define('LANG_ADMIN_TABLE_ARTICLES', 'Artigos');
 define('LANG_ADMIN_TABLE_COMMENTS', 'Coment&aacute;rios');
 define('LANG_ADMIN_TABLE_ARTICLEAUTORS', 'Autores do artigo');
-//define('LANG_ADMIN_TABLE_AUTHORLINK', 'Crea relazione');
-//define('LANG_ADMIN_TABLE_AUTHORUNLINK', 'Cacella relazione');
+define('LANG_ADMIN_TABLE_AUTHORLINK', 'Criar link ');
+define('LANG_ADMIN_TABLE_AUTHORUNLINK', 'Apagar link');
 define('LANG_ADMIN_TABLE_UPDATED_ARTICLES', 'Artigos Actualizados');
 define('LANG_ADMIN_TABLE_UPDATED_COMMENTS', 'Coment&aacute;rios Actualizados');
 define('LANG_ADMIN_TABLE_INFO', 'Informa&ccedil;&atilde;o');
@@ -101,13 +101,13 @@ define('LANG_ADMIN_TABLE_LANGUAGE', 'L&iacute;ngua');
 define('LANG_ADMIN_TABLE_MAGAZINE_TITLE', 'T&iacute;tulo da revista');
 define('LANG_ADMIN_TABLE_MAGAZINE_DESCRIPTION', 'Descri&ccedil;&atilde;o da revista');
 define('LANG_ADMIN_TABLE_URLTYPE', 'Tipo de URL');
-//define('LANG_ADMIN_TABLE_ROLE', 'Ruolo');
+define('LANG_ADMIN_TABLE_ROLE', 'Perfil');
 define('LANG_ADMIN_TABLE_PUBLISHER', 'Editora');
-//define('LANG_ADMIN_TABLE_JOURNALIST', 'Giornalista');
+define('LANG_ADMIN_TABLE_JOURNALIST', '_Jornalista');
 define('LANG_ADMIN_TABLE_RIGHTS', 'Direitos');
 define('LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL', 'Email de administra&ccedil;&atilde;o');
 define('LANG_ADMIN_TABLE_EPUBFILENAME', 'Nome do ficheiro Epub');
-//define('LANG_ADMIN_TABLE_WEBSITEURL', 'URL del magazine');
+define('LANG_ADMIN_TABLE_WEBSITEURL', 'URL da magazine');
 define('LANG_ADMIN_TABLE_USERNAME', 'Nome do utilizador');
 define('LANG_ADMIN_TABLE_SHOW_IN_PEOPLE_PAGE', 'Mostrar na p&aacute;gina Pessoas');
 define('LANG_ADMIN_TABLE_CHANGE_PASSWORD', 'Mudar palavra-passe');
@@ -156,17 +156,17 @@ define('LANG_CON_ARTICLE_FROM_ARTICLE', ' do artigo: ');
 define('LANG_CON_ARTICLE_AUTHOR_UNLINKED', 'Autor desvinculado');
 define('LANG_CON_ARTICLE_BEFORE_LINK', 'Antes de ligar um artigo a um escritor precisa de guardar o artigo');
 define('LANG_CON_ARTICLE_AUTHOR_LINKED', 'Autor vinculado');
-//define('LANG_CON_ARTICLE_MOVED_UP', 'Articolo spostato in alto nella lista');
-//define('LANG_CON_ARTICLE_MOVED_DOWN', 'Articolo spostato in basso nella lista');
-//define('LANG_CON_ARTICLE_SAVED', 'Articolo salvato');
+define('LANG_CON_ARTICLE_MOVED_UP', 'Artigo subido na lista');
+define('LANG_CON_ARTICLE_MOVED_DOWN', 'Artigo descido na lista');
+define('LANG_CON_ARTICLE_SAVED', 'Artigo guardado');
 
 // Controller CATEGORY
 
 define('LANG_CON_CATEGORY_NO_MACH', 'Nenhuma categoria corresponde aos crit&eacute;rios de procura');
 define('LANG_CON_CATEGORY_DO_YOU_WANT_DELETE', 'Tem a certeza de que quer apagar a categoria: ');
 define('LANG_CON_CATEGORY_DELETED', 'Categoria apagada');
-//define('LANG_CON_CATEGORY_MOVED_UP', 'Categoria spostata in alto nella lista');
-//define('LANG_CON_CATEGORY_MOVED_DOWN', 'Categoria spostata in basso nella lista');
+define('LANG_CON_CATEGORY_MOVED_UP', 'Categoria subida na lista');
+define('LANG_CON_CATEGORY_MOVED_DOWN', 'Categoria descida na lista');
 define('LANG_CON_CATEGORY_SAVED', 'Categoria apagada');
 
 // Controller COMMENT
@@ -175,7 +175,7 @@ define('LANG_CON_COMMENT_NO_MACH', 'Nenhum coment&aacute;rio corresponde aos cri
 define('LANG_CON_COMMENT_DO_YOU_WANT_DELETE', 'Tem a certeza de que quer apagar o coment&aacute;rio: ');
 define('LANG_CON_COMMENT_DELETED', 'Coment&aacute;rio apagado');
 define('LANG_CON_COMMENT_ASSOCIATED_ARTICLE', 'Um coment&aacute;rio tem que estar associado a um artigo');
-//define('LANG_CON_COMMENT_SAVED', 'Commento salvato');
+define('LANG_CON_COMMENT_SAVED', 'Coment&aacute;rio guardado');
 
 // Controller NUMBER
 
@@ -183,18 +183,18 @@ define('LANG_CON_NUMBER_NO_MACH', 'Nenhum n&uacute;mero corresponde aos crit&eac
 define('LANG_CON_NUMBER_DO_YOU_WANT_DELETE', 'Tem a certeza de que quer apagar o n&uacute;mero: ');
 define('LANG_CON_NUMBER_DELETED', 'N&uacute;mero apagado');
 define('LANG_CON_NUMBER_EPUB_CREATED', 'Ficheiro Epub criado para o n&uacute;mero: ');
-//define('LANG_CON_NUMBER_MOVED_UP', 'Numero spostato in alto nella lista');
-//define('LANG_CON_NUMBER_MOVED_DOWN', 'Numero spostato in basso nella lista');
-//define('LANG_CON_NUMBER_SAVED', 'Numero salvato');
+define('LANG_CON_NUMBER_MOVED_UP', 'N&uacute;mero subido na lista');
+define('LANG_CON_NUMBER_MOVED_DOWN', 'N&uacute;mero descido na lista');
+define('LANG_CON_NUMBER_SAVED', 'N&uacute;mero guardado');
 
 // Controller PAGE
 
 define('LANG_CON_PAGE_NO_MACH', 'Nenhuma p&aacute;gina corresponde aos crit&eacute;rios de procura');
 define('LANG_CON_PAGE_DO_YOU_WANT_DELETE', 'Tem a certeza de que quer apagar a p&aacute;gina: ');
 define('LANG_CON_PAGE_DELETED', 'P&aacute;gina apagada');
-//define('LANG_CON_PAGE_MOVED_UP', 'Pagina spostata in alto nella lista');
-//define('LANG_CON_PAGE_MOVED_DOWN', 'Pagina spostata in basso nella lista');
-//define('LANG_CON_PAGE_SAVED', 'Pagina salvata');
+define('LANG_CON_PAGE_MOVED_UP', 'P&aacute;gina subida na lista');
+define('LANG_CON_PAGE_MOVED_DOWN', 'P&aacute;gina descida na lista');
+define('LANG_CON_PAGE_SAVED', 'P&aacute;gina guardada');
 
 // Controller USER
 
@@ -202,8 +202,8 @@ define('LANG_CON_USER_PASSWORD_NO_MACH', 'Palavras-passe n&atilde;o correspondem
 define('LANG_CON_USER_DO_YOU_WANT_DELETE', 'Tem a certeza de que quer apagar o utilizador: ');
 define('LANG_CON_USER_DELETED', 'Utilizador apagado');
 define('LANG_CON_USER_PASSWORD_MODIFIED', 'Palavra-passe modificada com sucesso');
-//define('LANG_CON_USER_SAVED', 'Dati relativi all\'utente salvati');
-//define('LANG_CON_USER_WITH_SAME_USERNAME', 'Il Nome Utente che hai scelto &egrave; gi&agrave; stato scelto da qualcun altro e non pu&ograve; essere utilizzato');
+define('LANG_CON_USER_SAVED', 'Utilizador guardado');
+define('LANG_CON_USER_WITH_SAME_USERNAME', 'O nome the utilizador que escolheu j&aacute; se encontra a ser usado por outra pessoa');
 
 // Router Comments
 
@@ -214,10 +214,10 @@ define('LANG_ROUTER_COMMENT_COM_NOT_ALLOWED', 'Coment&aacute;rios n&atilde;o per
 
 // Router Search
 
-//define('LANG_ROUTER_SEARCH_RESULTS_FOR', 'Risultati per: ');
-//define('LANG_ROUTER_SEARCH_NO_RESULTS', 'Non ci sono risultati!');
-//define('LANG_ROUTER_SEARCH_RESULTS', 'Risultati: ');
-//define('LANG_ROUTER_SEARCH_NO_MATCHES', 'Nessun articolo corrisponde ai criteri di ricerca.');
+define('LANG_ROUTER_SEARCH_RESULTS_FOR', 'Resultados para: ');
+define('LANG_ROUTER_SEARCH_NO_RESULTS', 'Nenhuns resultados encontrados!');
+define('LANG_ROUTER_SEARCH_RESULTS', 'Resultados: ');
+define('LANG_ROUTER_SEARCH_NO_MATCHES', 'Nenhum artigo corresponde aos seus crit&eacute;rios de procura.');
 
 // PAginator Results
 
@@ -241,18 +241,18 @@ define('LANG_MONTH_DEC', 'Dezembro');
 
 // LOGIN NEW PASSWORD PAGE
 
-//define('LANG_LOGIN_NEW_PASSWORD_SENT', 'Una nuova password &egrave; stata spedita alla tua email, controllala e prova di nuovo.');
-//define('LANG_LOGIN_NEW_PASSWORD_FROM', 'Nuova Password da');
+define('LANG_LOGIN_NEW_PASSWORD_SENT', 'Nova palavra-passe enviada para o seu endereço de email, verifique-a e tente de novo.');
+define('LANG_LOGIN_NEW_PASSWORD_FROM', 'Nova palavra-passe de:');
 define('LANG_LOGIN_DEAR', 'Ol&aacute;');
-//define('LANG_LOGIN_NEW_PASSWORD_IS', 'la tua nuova password:');
-//define('LANG_LOGIN_USERNAME_PASSWORD_WRONG', 'Nome utente o password sbagliata');
-//define('LANG_LOGIN_TRY_AGAIN', 'Clicca qui per riprovare');
-//define('LANG_LOGIN_MESSAGE', 'Se hai perduto la tua password per favore digita il tuo nome utentee la tua email e riceverai una nuova password.');
-//define('LANG_LOGIN_LOGOUT_DONE', 'Sei uscito dall\'amministrazione!');
-//define('LANG_LOGIN_CLICK_TO_LOGIN', 'Clicca qui se vuoi rientrare nell\'amministrazione');
-//define('LANG_LOGIN_TITLE_LOGIN', 'Amministrazione di Easy Magazine: Pagina di Login');
-//define('LANG_LOGIN_TITLE_LOGOUT', 'Amministrazione di Easy Magazine: Pagina di uscita');
-//define('LANG_LOGIN_TITLE_ERROR', 'Amministrazione di Easy Magazine: Pagina di errore');
-//define('LANG_LOGIN_TITLE_PASSWORD_SEND', 'Amministrazione di Easy Magazine: Pagina per la spedizione di una nuova password');
+define('LANG_LOGIN_NEW_PASSWORD_IS', 'A sua nova palavra-passe &eacute;:');
+define('LANG_LOGIN_USERNAME_PASSWORD_WRONG', 'Nome de utilizador ou palavra-passe incorrectos');
+define('LANG_LOGIN_TRY_AGAIN', 'Clique aqui para tentar de novo');
+define('LANG_LOGIN_MESSAGE', 'se perdeu a sua palavra-passe, por favor entre o seu nome de utilizador e endereço de email e ir&aacute; receber uma nova palavra-passe.');
+define('LANG_LOGIN_LOGOUT_DONE', 'A sua sess&atilde;o foi encerrada!');
+define('LANG_LOGIN_CLICK_TO_LOGIN', 'Clique aqui para iniciar a sess&atilde;o');
+define('LANG_LOGIN_TITLE_LOGIN', 'Easy Magazine: p&aacute;gina de administraç&atilde;o de in&iacute;cio de sess&atilde;o');
+define('LANG_LOGIN_TITLE_LOGOUT', 'Easy Magazine: p&aacute;gina de administraç&atilde;o de fim de sess&atilde;o');
+define('LANG_LOGIN_TITLE_ERROR', 'Easy Magazine: p&aacute;gina de erro de in&iacute;cio de sess&atilde;o');
+define('LANG_LOGIN_TITLE_PASSWORD_SEND', 'Easy Magazine: p&aacute;gina de envio da palavra-passe');
 
 ?>

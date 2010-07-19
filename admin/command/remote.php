@@ -42,6 +42,8 @@ class Remote {
         $this->commandsAfterResults = array();
         $this->commandsBeforeIndex = array();
         $this->commandsAfterIndex = array();
+        $this->commandsBeforePlugin = array();
+        $this->commandsAfterPlugin = array();
         $this->commandsBeforeHeader = array();
         $this->commandsAfterHeader = array();
         $this->commandsBeforeFooter = array();
@@ -275,6 +277,28 @@ class Remote {
 
     function executeCommandAfterIndex(){
         foreach ( $this->commandsAfterIndex as $command ) {
+            $command->execute();
+        }
+    }
+    
+    /* Plugin Commands Management  */
+
+    function addCommandBeforePlugin($command) {
+        $this->commandsBeforePlugin[] = $command;
+    }
+
+    function executeCommandBeforePlugin(){
+        foreach ($this->commandsBeforePlugin as $command ) {
+            $command->execute();
+        }
+    }
+
+    function addCommandAfterPlugin($command) {
+        $this->commandsAfterPlugin[] = $command;
+    }
+
+    function executeCommandAfterPlugin(){
+        foreach ($this->commandsAfterPlugin as $command ) {
             $command->execute();
         }
     }

@@ -42,6 +42,10 @@ class AllControllersCommons {
                 $lang_file = 'it.php';
                 break;
 
+            case 'pt':
+                $lang_file = 'pt.php';
+                break;
+
             default:
                 $lang_file = 'en.php';
 
