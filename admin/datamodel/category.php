@@ -35,6 +35,7 @@ class Category {
     const INSERT_SQL = 'insert into categories (id, indexnumber, published, name, description, created, updated) values (@#@, @#@, @#@, @?@, @?@, Now(), Now())';
     const UPDATE_SQL = 'update categories set indexnumber = @#@, published = @#@, name = @?@, description = @?@, updated = Now() where id = @#@';
     const DELETE_SQL = 'delete from categories where id = @#@';
+    const SELECT_MAX_ID = 'select max(id) as maxid from categories ';
     const SELECT_BY_ID = 'select * from categories where id = @#@';
     const SELECT_ALL_PUB = 'select * from categories where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from categories order by id DESC';
@@ -107,121 +108,51 @@ class Category {
     }
 
     public static function findById($id) {
-        $ret = Category::findOne(self::SELECT_BY_ID, array(), array($id));
-        return $ret;
+        return Category::findOne(self::SELECT_BY_ID, array(), array($id));
     }
 
     public static function findInAllTextFields($string) {
-        $ret = Category::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%"), array());
-        return $ret;
+        return Category::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%"), array());
     }
 
     public static function findUpIndexNumber ($indexnumber) {
-        $ret = Category::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($indexnumber));
-        return $ret;
+        return Category::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($indexnumber));
     }
 
     public static function findDownIndexNumber ($indexnumber) {
-        $ret = Category::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($indexnumber));
-        return $ret;
+        return Category::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($indexnumber));
     }
 
     public static function findByTitle($title) {
-        $ret = Category::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
-        return $ret;
+        return Category::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
     }
 
     public static function findAllPublished() {
-        $ret = Category::findMany(self::SELECT_ALL_PUB, array(), array());
-        return $ret;
+        return Category::findMany(self::SELECT_ALL_PUB, array(), array());
     }
 
     public static function findAll() {
-        $ret = Category::findMany(self::SELECT_ALL, array(), array());
-        return $ret;
+        return Category::findMany(self::SELECT_ALL, array(), array());
     }
 
     public static function findAllOrderedByIndexNumber() {
-        $ret = Category::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return Category::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
     }
 
     public static function findAllPublishedOrderedByIndexNumber() {
-        $ret = Category::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return Category::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
     }
 
     public static function findAllNotPublishedOrderedByIndexNumber() {
-        $ret = Category::findMany(self::SELECT_ALL_NOTPUB_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return Category::findMany(self::SELECT_ALL_NOTPUB_ORD_INDEXNUMBER, array(), array());
     }
 
     public function articles() {
-        $ret = array();
-        $tables = array("articles" => TBPREFIX."articles");
-        try {
-            $rs = DB::getInstance()->execute(
-                    self::SELECT_ARTICLES,
-                    array(),
-                    array("$this->id"),
-                    $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Article(
-                        $row['id'],
-                        $row['number_id'],
-                        $row['category_id'],
-                        $row['indexnumber'],
-                        $row['published'],
-                        $row['title'],
-                        $row['subtitle'],
-                        $row['summary'],
-                        $row['body'],
-                        $row['commentsallowed'],
-                        $row['tag'],
-                        $row['metadescription'],
-                        $row['metakeyword'],
-                        $row['created'],
-                        $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Article();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return ARTICLE::findMany(self::SELECT_ARTICLES, array(), array($this->id));
     }
 
     public function articlesPublished() {
-        $ret = array();
-        $tables = array("articles" => TBPREFIX."articles");
-        try {
-            $rs = DB::getInstance()->execute(
-                    self::SELECT_ARTICLES_PUBLISHED,
-                    array(),
-                    array("$this->id"),
-                    $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Article(
-                        $row['id'],
-                        $row['number_id'],
-                        $row['category_id'],
-                        $row['indexnumber'],
-                        $row['published'],
-                        $row['title'],
-                        $row['subtitle'],
-                        $row['summary'],
-                        $row['body'],
-                        $row['commentsallowed'],
-                        $row['tag'],
-                        $row['metadescription'],
-                        $row['metakeyword'],
-                        $row['created'],
-                        $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Article();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return ARTICLE::findMany(self::SELECT_ARTICLES_PUBLISHED, array(), array($this->id));
     }
 
     public function save() {
@@ -304,12 +235,12 @@ class Category {
         try {
             $tables = array("categories" => TBPREFIX."categories");
             $rs = DB::getInstance()->execute(
-                    self::SELECT_BY_ID_ORD,
+                    self::SELECT_MAX_ID,
                     array(),
                     array(),
                     $tables);
             $row = mysql_fetch_array($rs);
-            $maxId = $row['id'];
+            $maxId = $row['maxid'];
         } catch (Exception $e) {
             $maxId = 0;
             echo 'Caught exception: ', $e->getMessage(), "\n";

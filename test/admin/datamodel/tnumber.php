@@ -91,6 +91,13 @@ class NumberTests extends UnitTestCase {
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
+    function testfindComments() {
+        $num = Number::findById(1);
+        $coms = $num->comments();
+        $this->assertEqual(2, count($coms));
+        $this->assertPattern('(comment)', $coms[0]->getTitle());
+    }
+
     function testSaveNewNumber() {
         $newNum = new Number(Number::NEW_NUMBER, '4', '0', 'Number four', 'Subtitle four', 'summary four', '1', '', '', '', '');
         $newNum->save();

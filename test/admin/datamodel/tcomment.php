@@ -76,7 +76,7 @@ class CommentTests extends UnitTestCase {
     function testArticle() {
         $comt = Comment::findById(1);
         $art = $comt->article();
-		$this->assertPattern('(first Article)', $art->getTitle());
+	$this->assertPattern('(first Article)', $art->getTitle());
     }
 }
 

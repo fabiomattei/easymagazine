@@ -51,6 +51,7 @@ class Article {
     const DELETE_USER_ARTICLE = 'delete from users_articles where article_id = @#@ ';
     const SELECT_BY_ID = 'select * from articles where id = @#@';
     const SELECT_LAST_N = 'select * from articles ORDER BY updated DESC LIMIT @#@ ';
+    const SELECT_MAX_ID = 'select max(id) as maxid from articles ';
     const SELECT_BY_TITLE = 'select * from articles where title like @?@';
     const FIND_IN_ALL_TEXT_FIELDS_PUBLISHED_ARTICLES = 'select * from articles where (title like @?@ OR subtitle like @?@ OR summary like @?@ OR body like @?@) AND published=1 ';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = @#@ order by created DESC';
@@ -115,9 +116,13 @@ class Article {
     }
 
     public static function findMany($SQL, $array_str, $array_int) {
+        $tables = array("articles" => TBPREFIX."articles");
+        return self::findManyAndSpecifyTables($SQL, $array_str, $array_int, $tables);
+    }
+
+    public static function findManyAndSpecifyTables($SQL, $array_str, $array_int, $tables) {
         $ret = array();
         try {
-            $tables = array("articles" => TBPREFIX."articles");
             $rs = DB::getInstance()->execute(
                     $SQL,
                     $array_str,
@@ -193,23 +198,19 @@ class Article {
     }
 
     public static function findLast() {
-        $ret = ARTICLE::findOne(self::SELECT_LAST, array(), array());
-        return $ret;
+        return ARTICLE::findOne(self::SELECT_LAST, array(), array());
     }
 
     public static function findAllPublished() {
-        $ret = ARTICLE::findMany(self::SELECT_ALL_PUB, array(), array());
-        return $ret;
+        return ARTICLE::findMany(self::SELECT_ALL_PUB, array(), array());
     }
 
     public static function findAll() {
-        $ret = ARTICLE::findMany(self::SELECT_ALL, array(), array());
-        return $ret;
+        return ARTICLE::findMany(self::SELECT_ALL, array(), array());
     }
 
     public static function findAllOrderedByIndexNumber() {
-        $ret = ARTICLE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return ARTICLE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
     }
 
     public function commentsPublished() {
@@ -367,12 +368,12 @@ class Article {
         $tables = array("articles" => TBPREFIX."articles");
         try {
             $rs = DB::getInstance()->execute(
-                    self::SELECT_BY_ID_ORD,
+                    self::SELECT_MAX_ID,
                     array(),
                     array(),
                     $tables);
             $row = mysql_fetch_array($rs);
-            $maxId = $row['id'];
+            $maxId = $row['maxid'];
         } catch (Exception $e) {
             $maxId = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";

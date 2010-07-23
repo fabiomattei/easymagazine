@@ -38,6 +38,7 @@ class Comment {
     const INSERT_SQL = 'insert into comments (id, article_id, published, title, body, signature, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, now(), now())';
     const UPDATE_SQL = 'update comments set article_id = @#@, published = @#@, title = @?@, body = @?@, signature = @?@, updated=now() where id = @#@';
     const DELETE_SQL = 'delete from comments where id = @#@';
+    const SELECT_MAX_ID = 'select max(id) as maxid from comments ';
     const SELECT_BY_ID = 'select * from comments where id = @#@';
     const SELECT_LAST_N = 'select * from comments ORDER BY updated DESC LIMIT @#@ ';
     const SELECT_BY_TITLE = 'select * from comments where title like @?@';
@@ -83,8 +84,12 @@ class Comment {
     }
 
     public static function findMany($SQL, $array_str, $array_int) {
-        $ret = array();
         $tables = array("comments" => TBPREFIX."comments");
+        return self::findManyAndSpecifyTables($SQL, $array_str, $array_int, $tables);
+    }
+
+    public static function findManyAndSpecifyTables($SQL, $array_str, $array_int, $tables) {
+        $ret = array();
         try {
             $rs = DB::getInstance()->execute(
                     $SQL,
@@ -102,61 +107,27 @@ class Comment {
     }
 
     public static function findById($id) {
-        $ret = COMMENT::findOne(self::SELECT_BY_ID, array(), array($id));
-        return $ret;
+        return COMMENT::findOne(self::SELECT_BY_ID, array(), array($id));
     }
 
     public static function findAll() {
-        $ret = COMMENT::findMany(self::SELECT_ALL, array(), array());
-        return $ret;
+        return COMMENT::findMany(self::SELECT_ALL, array(), array());
     }
 
     public static function findLastN($n) {
-        $ret = COMMENT::findMany(self::SELECT_LAST_N, array(), array($n));
-        return $ret;
+        return COMMENT::findMany(self::SELECT_LAST_N, array(), array($n));
     }
 
     public static function findByTitle($title) {
-        $ret = COMMENT::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
-        return $ret;
+        return COMMENT::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
     }
 
     public static function findInAllTextFields($string) {
-        $ret = COMMENT::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%"), array());
-        return $ret;
+        return COMMENT::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%"), array());
     }
 
     public function article() {
-        $tables = array("articles" => TBPREFIX."articles");
-        try {
-            $rs = DB::getInstance()->execute(
-                    self::SELECT_ARTICLE,
-                    array(),
-                    array($this->article_id),
-                    $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret = new Article(
-                        $row['id'],
-                        $row['number_id'],
-                        $row['category_id'],
-                        $row['indexnumber'],
-                        $row['published'],
-                        $row['title'],
-                        $row['subtitle'],
-                        $row['summary'],
-                        $row['body'],
-                        $row['commentsallowed'],
-                        $row['tag'],
-                        $row['metadescription'],
-                        $row['metakeyword'],
-                        $row['created'],
-                        $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret = new Article();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return ARTICLE::findOne(self::SELECT_ARTICLE, array(), array($this->article_id));
     }
 
     public function save() {
@@ -219,12 +190,12 @@ class Comment {
         $tables = array("comments" => TBPREFIX."comments");
         try {
             $rs = DB::getInstance()->execute(
-                    self::SELECT_BY_ID_ORD,
+                    self::SELECT_MAX_ID,
                     array(),
                     array(),
                     $tables);
             $row = mysql_fetch_array($rs);
-            $maxId = $row['id'];
+            $maxId = $row['maxid'];
         } catch (Exception $e) {
             $maxId = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";

@@ -29,6 +29,7 @@ class Option {
     const INSERT_SQL = 'insert into options (id, name, type, value) values (@#@, @?@, @?@, @?@)';
     const UPDATE_SQL = 'update options set name = @?@, type = @?@, value = @?@ where id = @#@';
     const DELETE_SQL = 'delete from options where id = @#@';
+    const SELECT_MAX_ID = 'select max(id) as maxid from options ';
     const DELETE_TYPE_SQL = 'delete from options where type = @?@';
     const SELECT_BY_ID = 'select * from options where id = @#@';
     const SELECT_BY_NAME = 'select * from options where name like @?@';
@@ -88,33 +89,27 @@ class Option {
     }
 
     public static function findById($id) {
-        $ret = OPTION::findOne(self::SELECT_BY_ID, array(), array($id));
-        return $ret;
+        return OPTION::findOne(self::SELECT_BY_ID, array(), array($id));
     }
 
     public static function findAll() {
-        $ret = OPTION::findMany(self::SELECT_ALL, array(), array());
-        return $ret;
+        return OPTION::findMany(self::SELECT_ALL, array(), array());
     }
 
     public static function findByName($name) {
-        $ret = OPTION::findMany(self::SELECT_BY_NAME, array("%$name%"), array());
-        return $ret;
+        return OPTION::findMany(self::SELECT_BY_NAME, array("%$name%"), array());
     }
 
     public static function findByNameAndType($name, $type) {
-        $ret = OPTION::findMany(self::SELECT_BY_NAME_AND_TYPE, array("%$name%", "%$type%"), array());
-        return $ret;
+        return OPTION::findMany(self::SELECT_BY_NAME_AND_TYPE, array("%$name%", "%$type%"), array());
     }
 
     public static function findFirstByNameAndType($name, $type) {
-        $ret = OPTION::findOne(self::SELECT_BY_NAME_AND_TYPE, array("%$name%", "%$type%"), array());
-        return $ret;
+        return OPTION::findOne(self::SELECT_BY_NAME_AND_TYPE, array("%$name%", "%$type%"), array());
     }
 
     public static function findByType($type) {
-        $ret = OPTION::findMany(self::SELECT_BY_TYPE, array("%$type%"), array());
-        return $ret;
+        return OPTION::findMany(self::SELECT_BY_TYPE, array("%$type%"), array());
     }
 
     public static function cleanType($type) {
@@ -186,12 +181,12 @@ class Option {
         $tables = array("options" => TBPREFIX."options");
         try {
             $rs = DB::getInstance()->execute(
-                    self::SELECT_BY_ID_ORD,
+                    self::SELECT_MAX_ID,
                     array(),
                     array(),
                     $tables);
             $row = mysql_fetch_array($rs);
-            $maxId = $row['id'];
+            $maxId = $row['maxid'];
         } catch (Exception $e) {
             $maxId = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";

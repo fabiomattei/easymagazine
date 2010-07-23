@@ -42,6 +42,7 @@ class User {
     const UPDATE_SQL_PASSWORD = 'update users set password = @?@, updated=now() where id = @#@';
     const UPDATE_SQL_USERNAME = 'update users set username = @?@, updated=now() where id = @#@';
     const DELETE_SQL = 'delete from users where id = @#@';
+    const SELECT_MAX_ID = 'select max(id) as maxid from users ';
     const SELECT_BY_ID = 'select * from users where id = @#@ ';
     const SELECT_BY_NAME = 'select * from users where name like @?@ order by name';
     const SELECT_BY_USERNAME = 'select * from users where username = @?@ LIMIT 1 ';
@@ -119,8 +120,7 @@ class User {
      * @return User
      */
     public static function findById($id) {
-        $ret = USER::findOne(self::SELECT_BY_ID, array(), array($id));
-        return $ret;
+        return USER::findOne(self::SELECT_BY_ID, array(), array($id));
     }
 
     /**
@@ -129,8 +129,7 @@ class User {
      * @return User
      */
     public static function findByName($name) {
-        $ret = USER::findMany(self::SELECT_BY_NAME, array("%$name%"), array());
-        return $ret;
+        return USER::findMany(self::SELECT_BY_NAME, array("%$name%"), array());
     }
 
     /**
@@ -139,8 +138,7 @@ class User {
      * @return User
      */
     public static function findByUserName($username) {
-        $ret = USER::findOne(self::SELECT_BY_USERNAME, array("$username"), array());
-        return $ret;
+        return USER::findOne(self::SELECT_BY_USERNAME, array("$username"), array());
     }
 
     /**
@@ -149,8 +147,7 @@ class User {
      * @return User
      */
     public static function findByUsernameAndEmail($username, $email) {
-        $ret = USER::findOne(self::SELECT_BY_USERNAME_AND_EMAIL, array("$username", "$email"), array());
-        return $ret;
+        return USER::findOne(self::SELECT_BY_USERNAME_AND_EMAIL, array("$username", "$email"), array());
     }
 
     /**
@@ -159,94 +156,40 @@ class User {
      * @return Array(User)
      */
     public static function findAll() {
-        $ret = USER::findMany(self::SELECT_ALL, array(), array());
-        return $ret;
+        return USER::findMany(self::SELECT_ALL, array(), array());
     }
 
     public static function findAllToShow() {
-        $ret = USER::findMany(self::SELECT_ALL_TO_SHOW, array(), array());
-        return $ret;
+        return USER::findMany(self::SELECT_ALL_TO_SHOW, array(), array());
     }
 
     public static function checkUsrPsw($usr, $psw) {
-        $ret = USER::findOne(self::SELECT_USR_PSW, array("$usr", md5($psw)), array());
-        return $ret;
+        return USER::findOne(self::SELECT_USR_PSW, array("$usr", md5($psw)), array());
     }
 
     public function articles() {
-        $ret = array();
         $tables = array('articles' => TBPREFIX.'articles',
                 'users_articles' => TBPREFIX.'users_articles');
-        try {
-            $rs = DB::getInstance()->execute(
-                    self::SELECT_ARTICLES,
-                    array(),
-                    array("$this->id"),
-                    $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Article(
-                        $row['id'],
-                        $row['number_id'],
-                        $row['category_id'],
-                        $row['indexnumber'],
-                        $row['published'],
-                        $row['title'],
-                        $row['subtitle'],
-                        $row['summary'],
-                        $row['body'],
-                        $row['commentsallowed'],
-                        $row['tag'],
-                        $row['metadescription'],
-                        $row['metakeyword'],
-                        $row['created'],
-                        $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Article();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return ARTICLE::findManyAndSpecifyTables(self::SELECT_ARTICLES, array(), array($this->id), $tables);
     }
 
     public function articlescomments() {
-        $ret = array();
         $tables = array('comments' => TBPREFIX.'comments',
                 'articles' => TBPREFIX.'articles',
                 'users_articles' => TBPREFIX.'users_articles');
-        try {
-            $rs = DB::getInstance()->execute(
-                    self::SELECT_COMMENTSARTICLES,
-                    array(),
-                    array("$this->id"),
-                    $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Comment(
-                        $row['id'],
-                        $row['article_id'],
-                        $row['title'],
-                        $row['published'],
-                        $row['body'],
-                        $row['signature'],
-                        $row['created'],
-                        $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Comment();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return COMMENT::findManyAndSpecifyTables(self::SELECT_COMMENTSARTICLES, array(), array($this->id), $tables);
     }
 
     public function getMaxId() {
         $tables = array("users" => TBPREFIX."users");
         try {
             $rs = DB::getInstance()->execute(
-                    self::SELECT_BY_ID_ORD,
+                    self::SELECT_MAX_ID,
                     array(),
                     array(),
                     $tables);
             $row = mysql_fetch_array($rs);
-            $maxId = $row['id'];
+            $maxId = $row['maxid'];
         } catch (Exception $e) {
             $maxId = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";

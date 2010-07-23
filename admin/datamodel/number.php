@@ -43,6 +43,7 @@ class Number {
     const INSERT_SQL = 'insert into numbers (id, indexnumber, published, title, subtitle, summary, commentsallowed, metadescription, metakeyword, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, @#@, @?@, @?@, Now(), Now())';
     const UPDATE_SQL = 'update numbers set indexnumber = @#@, published = @#@, commentsallowed = @#@, title = @?@, subtitle = @?@, summary = @?@,  metadescription = @?@, metakeyword = @?@, updated = Now() where id = @#@';
     const DELETE_SQL = 'delete from numbers where id = @#@';
+    const SELECT_MAX_ID = 'select max(id) as maxid from numbers ';
     const SELECT_BY_ID = 'select * from numbers where id = @#@';
     const SELECT_BY_TITLE = 'select * from numbers where title like @?@';
     const FIND_IN_ALL_TEXT_FIELDS = 'select * from numbers where title like @?@ OR subtitle like @?@ OR summary like @?@ ';
@@ -126,38 +127,31 @@ class Number {
     }
 
     public static function findById($id) {
-        $ret = NUMBER::findOne(self::SELECT_BY_ID, array(), array($id));
-        return $ret;
+        return NUMBER::findOne(self::SELECT_BY_ID, array(), array($id));
     }
 
     public static function findInAllTextFields($string) {
-        $ret = NUMBER::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%"), array());
-        return $ret;
+        return NUMBER::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%"), array());
     }
 
     public static function findUpIndexNumber ($indexnumber) {
-        $ret = NUMBER::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($indexnumber));
-        return $ret;
+        return NUMBER::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($indexnumber));
     }
 
     public static function findDownIndexNumber ($indexnumber) {
-        $ret = NUMBER::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($indexnumber));
-        return $ret;
+        return NUMBER::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($indexnumber));
     }
 
     public static function findByTitle($title) {
-        $ret = NUMBER::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
-        return $ret;
+        return NUMBER::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
     }
 
     public static function findLast() {
-        $ret = NUMBER::findOne(self::SELECT_LAST, array(), array());
-        return $ret;
+        return NUMBER::findOne(self::SELECT_LAST, array(), array());
     }
 
     public static function findLastPublished() {
-        $ret = NUMBER::findOne(self::SELECT_LAST_PUBLISHED, array(), array());
-        return $ret;
+        return NUMBER::findOne(self::SELECT_LAST_PUBLISHED, array(), array());
     }
 
     /*
@@ -167,128 +161,40 @@ class Number {
      * $n <int>
     */
     public static function findLastNPublished($n) {
-        $ret = NUMBER::findMany(self::SELECT_LASTN_PUBLISHED, array(), array($n));
-        return $ret;
+        return NUMBER::findMany(self::SELECT_LASTN_PUBLISHED, array(), array($n));
     }
 
     public static function findAllPublished() {
-        $ret = NUMBER::findMany(self::SELECT_ALL_PUB, array(), array());
-        return $ret;
+        return NUMBER::findMany(self::SELECT_ALL_PUB, array(), array());
     }
 
     public static function findAll() {
-        $ret = NUMBER::findMany(self::SELECT_ALL, array(), array());
-        return $ret;
+        return NUMBER::findMany(self::SELECT_ALL, array(), array());
     }
 
     public static function findAllOrderedByIndexNumber() {
-        $ret = NUMBER::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return NUMBER::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
     }
 
     public static function findAllPublishedOrderedByIndexNumber() {
-        $ret = NUMBER::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return NUMBER::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
     }
 
     public static function findAllNotPublishedOrderedByIndexNumber() {
-        $ret = NUMBER::findMany(self::SELECT_ALL_NOTPUB_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return NUMBER::findMany(self::SELECT_ALL_NOTPUB_ORD_INDEXNUMBER, array(), array());
     }
 
     public function articles() {
-        $ret = array();
-        $tables = array("articles" => TBPREFIX."articles");
-        try {
-            $rs = DB::getInstance()->execute(
-                    self::SELECT_ARTICLES,
-                    array(),
-                    array("$this->id"),
-                    $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Article(
-                        $row['id'],
-                        $row['number_id'],
-                        $row['category_id'],
-                        $row['indexnumber'],
-                        $row['published'],
-                        $row['title'],
-                        $row['subtitle'],
-                        $row['summary'],
-                        $row['body'],
-                        $row['commentsallowed'],
-                        $row['tag'],
-                        $row['metadescription'],
-                        $row['metakeyword'],
-                        $row['created'],
-                        $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Article();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return ARTICLE::findMany(self::SELECT_ARTICLES, array(), array($this->id));
     }
 
     public function articlesPublished() {
-        $ret = array();
-        $tables = array("articles" => TBPREFIX."articles");
-        try {
-            $rs = DB::getInstance()->execute(
-                    self::SELECT_ARTICLES_PUBLISHED,
-                    array(),
-                    array("$this->id"),
-                    $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Article(
-                        $row['id'],
-                        $row['number_id'],
-                        $row['category_id'],
-                        $row['indexnumber'],
-                        $row['published'],
-                        $row['title'],
-                        $row['subtitle'],
-                        $row['summary'],
-                        $row['body'],
-                        $row['commentsallowed'],
-                        $row['tag'],
-                        $row['metadescription'],
-                        $row['metakeyword'],
-                        $row['created'],
-                        $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Article();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        return ARTICLE::findMany(self::SELECT_ARTICLES_PUBLISHED, array(), array($this->id));
     }
 
     public function comments() {
-        $ret = array();
-        try {
-            $tables = array('comments' => TBPREFIX.'comments', 'articles' => TBPREFIX.'articles');
-            $rs = DB::getInstance()->execute(
-                    self::SELECT_COMMENTS,
-                    array(),
-                    array($this->id),
-                    $tables);
-            while ($row = mysql_fetch_array($rs)) {
-                $ret[] = new Comment(
-                        $row['id'],
-                        $row['article_id'],
-                        $row['title'],
-                        $row['published'],
-                        $row['body'],
-                        $row['signature'],
-                        $row['created'],
-                        $row['updated']);
-            }
-        } catch (Exception $e) {
-            $ret[] = new Comment();
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
-        }
-        return $ret;
+        $tables = array('comments' => TBPREFIX.'comments', 'articles' => TBPREFIX.'articles');
+        return COMMENT::findManyAndSpecifyTables(self::SELECT_COMMENTS, array(), array($this->id), $tables);
     }
 
     public function save() {
@@ -384,12 +290,12 @@ class Number {
         try {
             $tables = array("numbers" => TBPREFIX."numbers");
             $rs = DB::getInstance()->execute(
-                    self::SELECT_BY_ID_ORD,
+                    self::SELECT_MAX_ID,
                     array(),
                     array(),
                     $tables);
             $row = mysql_fetch_array($rs);
-            $maxId = $row['id'];
+            $maxId = $row['maxid'];
         } catch (Exception $e) {
             $maxId = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";

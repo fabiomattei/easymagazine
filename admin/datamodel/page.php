@@ -40,6 +40,7 @@ class Page {
     const INSERT_SQL = 'insert into pages (id, indexnumber, published, title, subtitle, summary, body, tag, metadescription, metakeyword, created, updated) values (@#@, @#@, @#@, @?@, @?@, @?@, @?@, @?@, @?@, @?@, now(), now())';
     const UPDATE_SQL = 'update pages set indexnumber = @#@, published = @#@, title = @?@, subtitle = @?@, summary = @?@, body = @?@, tag = @?@, metadescription = @?@, metakeyword = @?@, updated=now() where id = @#@';
     const DELETE_SQL = 'delete from pages where id = @#@ ';
+    const SELECT_MAX_ID = 'select max(id) as maxid from pages ';
     const SELECT_BY_ID = 'select * from pages where id = @#@ ';
     const SELECT_ALL_PUB = 'select * from pages where published = 1 order by indexnumber DESC';
     const SELECT_ALL = 'select * from pages order by indexnumber';
@@ -113,48 +114,39 @@ class Page {
     }
 
     public static function findById($id) {
-        $ret = PAGE::findOne(self::SELECT_BY_ID, array(), array($id));
-        return $ret;
+        return PAGE::findOne(self::SELECT_BY_ID, array(), array($id));
     }
 
     public static function findAllPublished() {
-        $ret = PAGE::findMany(self::SELECT_ALL_PUB, array(), array());
-        return $ret;
+        return PAGE::findMany(self::SELECT_ALL_PUB, array(), array());
     }
 
     public static function findAllPublishedOrdered() {
-        $ret = PAGE::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return PAGE::findMany(self::SELECT_ALL_PUB_ORD_INDEXNUMBER, array(), array());
     }
 
     public static function findAll() {
-        $ret = PAGE::findMany(self::SELECT_ALL, array(), array());
-        return $ret;
+        return PAGE::findMany(self::SELECT_ALL, array(), array());
     }
 
     public static function findAllOrdered() {
-        $ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
     }
 
     public static function findInAllTextFields($string) {
-        $ret = PAGE::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%", "%$string%"), array());
-        return $ret;
+        return PAGE::findMany(self::FIND_IN_ALL_TEXT_FIELDS, array("%$string%", "%$string%", "%$string%", "%$string%"), array());
     }
 
     public static function findAllOrderedByIndexNumber() {
-        $ret = PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
-        return $ret;
+        return PAGE::findMany(self::SELECT_ALL_ORD_INDEXNUMBER, array(), array());
     }
 
     public function findUpIndexNumber () {
-        $ret = PAGE::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($this->indexnumber));
-        return $ret;
+        return PAGE::findOne(self::SELECT_UP_INDEXNUMBER, array(), array($this->indexnumber));
     }
 
     public function findDownIndexNumber() {
-        $ret = PAGE::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($this->indexnumber));
-        return $ret;
+        return PAGE::findOne(self::SELECT_DOWN_INDEXNUMBER, array(), array($this->indexnumber));
     }
 
     public function save() {
@@ -240,12 +232,12 @@ class Page {
         $tables = array("pages" => TBPREFIX."pages");
         try {
             $rs = DB::getInstance()->execute(
-                    self::SELECT_BY_ID_ORD,
+                    self::SELECT_MAX_ID,
                     array(),
                     array(),
                     $tables);
             $row = mysql_fetch_array($rs);
-            $maxId = $row['id'];
+            $maxId = $row['maxid'];
         } catch (Exception $e) {
             $maxId = 0;
             echo 'Caught exception: ',  $e->getMessage(), "\n";

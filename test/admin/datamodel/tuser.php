@@ -53,6 +53,13 @@ class UserTests extends UnitTestCase {
         $this->assertPattern('(Article)', $arts[0]->getTitle());
     }
 
+    function testfindArticlesComments() {
+        $usr = User::findById(1);
+        $coms = $usr->articlescomments();
+        $this->assertEqual(2, count($coms));
+        $this->assertPattern('(comment)', $coms[0]->getTitle());
+    }
+
     function testCheckUsrPsw() {
         $usr = User::checkUsrPsw('newuser','psw');
         $this->assertPattern('(User)', $usr->getName());

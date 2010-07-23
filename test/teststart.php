@@ -41,7 +41,7 @@ require_once('dummyDBCreator.php');
 
 
 require_once('admin/utils/tpagination.php');
-require_once('admin/utils/timagefiles.php');
+//require_once('admin/utils/timagefiles.php');
 require_once('admin/utils/tdirectoryrunner.php');
 require_once('admin/utils/tfileWriter.php');
 require_once('admin/utils/tpassword.php');
