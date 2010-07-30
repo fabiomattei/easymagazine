@@ -26,7 +26,6 @@
                 <? endforeach; ?>
             </ul>
         </li>
-        </ul>
         <br />
 
         <li id="Themes">
