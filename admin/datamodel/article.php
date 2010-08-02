@@ -54,6 +54,7 @@ class Article {
     const SELECT_MAX_ID = 'select max(id) as maxid from articles ';
     const SELECT_BY_TITLE = 'select * from articles where title like @?@';
     const FIND_IN_ALL_TEXT_FIELDS_PUBLISHED_ARTICLES = 'select * from articles where (title like @?@ OR subtitle like @?@ OR summary like @?@ OR body like @?@) AND published=1 ';
+    const SELECT_BY_TAG = 'select * from articles where tag like @?@ AND published=1 ';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = @#@ order by created DESC';
     const SELECT_COMMENTS = 'select * from comments where article_id = @#@ order by created DESC';
     const SELECT_CATEGORY = 'select * from categories where id = @#@ Limit 1';
@@ -161,6 +162,11 @@ class Article {
 
     public static function findByTitle($title) {
         $ret = ARTICLE::findMany(self::SELECT_BY_TITLE, array("%$title%"), array());
+        return $ret;
+    }
+
+    public static function findByTag($tag) {
+        $ret = ARTICLE::findMany(self::SELECT_BY_TAG, array("%$tag%"), array());
         return $ret;
     }
 
@@ -509,9 +515,11 @@ class Article {
     public function setMetakeyword($metakeyword) {
         $this->metakeyword = $metakeyword;
     }
+    
     public function getCreated() {
         return $this->created;
     }
+
     public function getCreatedFormatted() {
         return DateHandler::DataFormat($this->created);
     }

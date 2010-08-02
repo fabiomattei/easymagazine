@@ -27,6 +27,7 @@ require_once('numberslist.php');
 require_once('number.php');
 require_once('people.php');
 require_once('articlesperson.php');
+require_once('tag.php');
 require_once('plugin.php');
 
 class RouterFactory {
@@ -41,6 +42,8 @@ class RouterFactory {
         if ($request['Router'] == "results") $out = new ResultsRouter($request);
 
         if ($request['Router'] == "page") $out = new PagesRouter($request);
+
+        if ($request['Router'] == "tag") $out = new TagRouter($request);
 
         if ($request['Router'] == "numberslist") $out = new NumberListRouter($request);
 

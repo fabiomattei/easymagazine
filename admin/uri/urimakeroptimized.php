@@ -28,6 +28,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'category/'.StringFilter::cleanStringForUrl($category->getName()).'/'.$category->getId();
     }
 
+    static function tag($tag) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'tag/'.StringFilter::cleanStringForUrl($tag).'/';
+    }
+
     static function number($number) {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'numbers/'.StringFilter::cleanStringForUrl($number->getTitle()).'/'.$number->getId();
     }

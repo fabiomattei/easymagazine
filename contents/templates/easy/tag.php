@@ -3,7 +3,13 @@
     <?php include("l_sidebar.php");?>
 
     <div id="contentmiddle">
-        <? foreach($this->number->articlesPublished()  as $article) { ?>
+        <h1><?= $this->tag ?></h1><br />
+
+        <? if (isset($this->advice)) :?>
+        <div class="contenttitle"><?= $this->advice ?></div>
+        <? endif; ?>
+
+        <? foreach($this->articles as $article) { ?>
         <div class="contenttitle">
             <h1><a href="<?=URIMaker::article($article)?>" rel="bookmark"><?= $article->getTitle() ?></a></h1>
             <p>
@@ -18,10 +24,13 @@
                     <?= Taghandler::tagsToLink($article->getTag()) ?>
             </p>
             <p>
-                <?= $article->getSummary() ?>
+                    <?= $article->getSummary() ?>
             </p>
         </div>
         <? } ?>
+        <div class="contenttitle">
+            <?= $_SESSION['paginator']->renderFullNav(URIMaker::result())  ?>
+        </div>
     </div>
 
     <?php include("r_sidebar.php");?>

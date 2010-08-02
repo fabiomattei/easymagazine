@@ -19,6 +19,8 @@
         }
         ?>
     </div>
+    <div class="date"><small><?= Taghandler::tagsToLink($article->getTag()) ?></small>
+    </div>
 
     <div class="entry">
 

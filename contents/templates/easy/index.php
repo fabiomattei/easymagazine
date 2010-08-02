@@ -14,6 +14,8 @@
                     }
                     ?> |
                     <? echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
+                    <br />
+                    <?= Taghandler::tagsToLink($article->getTag()) ?>
             </p>
             <p>
                 <?= $article->getSummary() ?>

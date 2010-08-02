@@ -9,6 +9,8 @@
                 <?= $this->article->getCreatedFormatted() ?>  by
                 <?= $this->article->auhorsNamesConcatenation() ?> |
                 <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
+                <br />
+                <?= Taghandler::tagsToLink($article->getTag()) ?>
             </p>
             <p>
 

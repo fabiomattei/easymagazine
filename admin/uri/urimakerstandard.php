@@ -30,6 +30,10 @@ class URIMaker {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=category&id='.$category->getId();
     }
 
+    static function tag($tag) {
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=tag&id='.$tag;
+    }
+
     static function comment($article) {
         return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.'index.php?p=comments&id='.$article->getId();
     }
