@@ -19,12 +19,17 @@
 
 class Taghandler {
 
+    /**
+     * This method trasforms the input string, containing a list of comma separated tags,
+     * in a string cotaining all necessary links for the website.
+     *
+     * @param <string> $tags
+     * @return string
+     */
     public static function tagsToLink($tags) {
-        //REMOVE BEGINNING AND ENDING SPACES
         $tags = trim($tags);
 
-        // TODO: Check split string function with PHP 5.3
-        $arraytag = split(' ', $tags);
+        $arraytag = preg_split('/,/', $tags);
         $out = '';
         foreach ($arraytag as $singleTag) {
             $singleTag = trim($singleTag);

@@ -148,22 +148,22 @@ class DbCreator {
     public function populateTableArticles() {
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (1, 1, 1, 1, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
-            'Body of my first article', 1, 'tag of my first article',
+            'Body of my first article', 1, 'history, flowers',
             'metadescription of my first article', 'metakeyword of my first article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (2, 1, 1, 2, 1, 'My second Article', 'Subtitle of my second article', 'summary of my second article',
-            'Body of my second article', 1, 'tag of my second article',
+            'Body of my second article', 1, 'flowers, hello',
             'metadescription of my second article', 'metakeyword of my second article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (3, 1, 2, 3, 0, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
-            'Body of my third article', 1, 'tag of my third article',
+            'Body of my third article', 1, 'roman history, bike',
             'metadescription of my third article', 'metakeyword of my third article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (4, 1, 1, 4, 1, 'My first Article', 'Subtitle of my first article', 'summary of my first article',
-            'Body of my first article', 1, 'tag of my first article',
+            'Body of my first article', 1, 'bike, flowers',
             'metadescription of my first article', 'metakeyword of my first article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
@@ -218,12 +218,12 @@ class DbCreator {
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (15, 1, 1, 15, 1, 'My third Article', 'Subtitle of my third article', 'summary of my third article',
-            'Body of my third article', 1, 'tag of my third article',
+            'Body of my third article', 1, 'roman history, flowers, hello',
             'metadescription of my third article', 'metakeyword of my third article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."articles (id, number_id, category_id, indexnumber, published, title, subtitle, summary, body, commentsallowed, tag, metadescription, metakeyword, created, updated) values
             (16, 14, 1, 15, 1, 'My final Article', 'Subtitle of my final article', 'summary of my final article',
-            'Body of my final article', 1, 'tag of my final article',
+            'Body of my final article', 1, 'bike, hello',
             'metadescription of my final article', 'metakeyword of my final article', now(), now())";
         $result = mysql_query($cmd, $this->connection);
         return $result;
