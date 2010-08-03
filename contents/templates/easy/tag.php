@@ -29,7 +29,7 @@
         </div>
         <? } ?>
         <div class="contenttitle">
-            <?= $_SESSION['paginator']->renderFullNav(URIMaker::result())  ?>
+            <?= $this->paginator->renderFullNav(URIMaker::result())  ?>
         </div>
     </div>
 

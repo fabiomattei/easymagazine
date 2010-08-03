@@ -39,6 +39,6 @@
     <? } ?>
 
     <p>
-        <?= $_SESSION['paginator']->renderFullNav(URIMaker::result())  ?>
+        <?= $this->paginator->renderFullNav(URIMaker::result())  ?>
     </p>
 </div>
