@@ -17,40 +17,35 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(STARTPATH.DATAMODELPATH.'/article.php');
-require_once(STARTPATH.DATAMODELPATH.'/page.php');
-
 require_once('router.php');
 
-class ArticlesRouter extends Router {
+class NumberRouter extends Router {
 
-    private $article;
     public $pages;
+    private $number;
     private $numbers;
     public $metadescritpion;
     public $metakeywords;
     public $title;
-    public $number;
     public $categories;
 
     function loadData(){
         $arURI = $this->getArrayURI();
-        $this->article = Article::findById($arURI['id']);
+        $this->number = Number::findById($arURI['id']);
         $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
-        $this->number = $this->article->number();
         $this->pages = Page::findAllPublishedOrdered();
-        $this->metadescritpion = $this->article->getMetadescription();
-        $this->metakeywords = $this->article->getMetakeyword();
-        $this->title = Magazine::getMagazineTitle().': '.$this->article->getTitle();
+        $this->metadescritpion = $this->number->getMetadescription();
+        $this->metakeywords = $this->number->getMetakeyword();
+        $this->title = Magazine::getMagazineTitle().': '.$this->number->getTitle();
     }
 
     function applyTemplate(){
-        $this->getRemote()->executeCommandBeforeArticle();
-        if (file_exists(STARTPATH.TEMPLATEPATH.'article.php')) {
-            include (STARTPATH.TEMPLATEPATH.'article.php');
+        $this->getRemote()->executeCommandBeforeNumber();
+        if (file_exists(STARTPATH.TEMPLATEPATH.'number.php')) {
+            include(STARTPATH.TEMPLATEPATH.'number.php');
         }
-        $this->getRemote()->executeCommandAfterArticle();
+        $this->getRemote()->executeCommandAfterNumber();
     }
 
 }

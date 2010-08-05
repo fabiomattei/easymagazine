@@ -85,6 +85,7 @@ define('LANG_ADMIN_TABLE_ARTICLE', 'Article');
 define('LANG_ADMIN_TABLE_CATEGORY', 'Category');
 define('LANG_ADMIN_TABLE_ARTICLES', 'Articles');
 define('LANG_ADMIN_TABLE_COMMENTS', 'Comments');
+define('LANG_ADMIN_TABLE_PREVIEW', 'Preview');
 define('LANG_ADMIN_TABLE_ARTICLEAUTORS', 'Article Authors');
 define('LANG_ADMIN_TABLE_AUTHORLINK', 'Link');
 define('LANG_ADMIN_TABLE_AUTHORUNLINK', 'Unlink');

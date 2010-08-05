@@ -17,14 +17,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(STARTPATH.DATAMODELPATH.'/article.php');
+require_once('router.php');
 require_once(STARTPATH.DATAMODELPATH.'/page.php');
 
-require_once('router.php');
+class PagesRouter extends Router {
 
-class ArticlesRouter extends Router {
-
-    private $article;
+    private $page;
     public $pages;
     private $numbers;
     public $metadescritpion;
@@ -35,22 +33,24 @@ class ArticlesRouter extends Router {
 
     function loadData(){
         $arURI = $this->getArrayURI();
-        $this->article = Article::findById($arURI['id']);
+        $this->page = Page::findById($arURI['id']);
         $this->numbers = Number::findLastNPublished(10);
         $this->categories = Category::findAllPublishedOrderedByIndexNumber();
-        $this->number = $this->article->number();
+        $this->number = Number::findLastPublished();
         $this->pages = Page::findAllPublishedOrdered();
-        $this->metadescritpion = $this->article->getMetadescription();
-        $this->metakeywords = $this->article->getMetakeyword();
-        $this->title = Magazine::getMagazineTitle().': '.$this->article->getTitle();
+        $this->metadescritpion = $this->page->getMetadescription();
+        $this->metakeywords = $this->page->getMetakeyword();
+        $this->title = Magazine::getMagazineTitle().': '.$this->page->getTitle();
     }
 
     function applyTemplate(){
-        $this->getRemote()->executeCommandBeforeArticle();
-        if (file_exists(STARTPATH.TEMPLATEPATH.'article.php')) {
-            include (STARTPATH.TEMPLATEPATH.'article.php');
+        $this->getRemote()->executeCommandBeforePage();
+        if (file_exists(TEMPLATEPATH.'/page.php')) {
+            include (TEMPLATEPATH.'/page.php');
+        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
+            include (TEMPLATEPATH.'/index.php');
         }
-        $this->getRemote()->executeCommandAfterArticle();
+        $this->getRemote()->executeCommandAfterPage();
     }
 
 }

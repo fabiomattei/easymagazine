@@ -1,1 +1,1 @@
-<?PHP  define('TITLE', '');  define('DESCRIPTION', "");  define('URLTYPE', 'optimized');  define('PUBLISHER', '');  define('RIGHTS', '');  define('LANGUAGE', 'en');  define('EPUBNAME', 'easymagazine');  define('WEBSITEURL', 'http://www.easymagazine.org/');  ?>
+<?PHP  define('TITLE', 'Title of my magazine');  define('DESCRIPTION', "description of my magazine");  define('URLTYPE', 'optimized');  define('PUBLISHER', '');  define('RIGHTS', '');  define('LANGUAGE', 'en');  define('EPUBNAME', 'easymagazine');  define('WEBSITEURL', 'http://www.easymagazine.org/');  ?>

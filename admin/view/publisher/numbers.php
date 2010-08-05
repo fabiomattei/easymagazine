@@ -92,6 +92,7 @@
                                 <th><?php echo LANG_ADMIN_TABLE_DOWN; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_ARTICLES; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_COMMENTS; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PREVIEW; ?></th>
                                 <th>EPub</th>
                                 <th><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
                                 <th class="last"><?php echo LANG_ADMIN_TABLE_DELETE; ?></th>
@@ -107,6 +108,7 @@
                                 <td><a href="number.php?action=down&id=<? echo $num->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="article.php?list=articlenumber&number_id=<? echo $num->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="comment.php?list=commentnumber&number_id=<? echo $num->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="number.php?action=preview&id=<? echo $num->getId(); ?>"><img src="../../resources/img/preview_icon.png" width="16" height="16" alt="Creates and publish ePub file" /></a></td>
                                 <td><a href="number.php?action=epub&id=<? echo $num->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/epub.png" width="16" height="16" alt="Creates and publish ePub file" /></a></td>
                                 <td>
                                         <? if ($num->getPublished()) { ?>

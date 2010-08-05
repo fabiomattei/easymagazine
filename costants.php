@@ -20,6 +20,7 @@
 define('ADMINPATH', 'admin/view/');
 define('COMMANDPATH', 'admin/command/');
 define('ROUTERPATH', 'admin/routers/');
+define('PREVIEWPATH', 'admin/preview/');
 define('FILTERPATH', 'admin/filters/');
 define('CONTROLLERPATH', 'admin/controller/');
 define('DATAMODELPATH', 'admin/datamodel/');
