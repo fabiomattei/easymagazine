@@ -18,5 +18,8 @@
  */
 
 ?>
-
-top preview <br /><br />
+<br />
+<form name="back">
+<input type="button" value="<< <?php echo LANG_PREVIEW_BACK_BUTTON; ?>" onClick="javascript:history.back()" name="button">
+</form>
+<br /><br />

@@ -257,4 +257,8 @@ define('LANG_LOGIN_TITLE_LOGOUT', 'Easy Magazine: Administration Logout page');
 define('LANG_LOGIN_TITLE_ERROR', 'Easy Magazine: Login Error Page');
 define('LANG_LOGIN_TITLE_PASSWORD_SEND', 'Easy Magazine: Password Sending Page');
 
+// PREVIEW
+
+define('LANG_PREVIEW_BACK_BUTTON', 'Back to the administration');
+
 ?>

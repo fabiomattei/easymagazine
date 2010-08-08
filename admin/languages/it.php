@@ -264,4 +264,8 @@ define('LANG_LOGIN_TITLE_LOGOUT', 'Amministrazione di Easy Magazine: Pagina di u
 define('LANG_LOGIN_TITLE_ERROR', 'Amministrazione di Easy Magazine: Pagina di errore');
 define('LANG_LOGIN_TITLE_PASSWORD_SEND', 'Amministrazione di Easy Magazine: Pagina per la spedizione di una nuova password');
 
+// PREVIEW
+
+define('LANG_PREVIEW_BACK_BUTTON', 'Ritorna all\'amministrazione');
+
 ?>
