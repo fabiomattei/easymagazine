@@ -17,9 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once(FILTERPATH.'/filtercommand.php');
-require_once(FILTERPATH.'/articlefilterremote.php');
-require_once(FILTERPATH.'/userfilterremote.php');
+require_once(STARTPATH.FILTERPATH.'filtercommand.php');
+require_once(STARTPATH.FILTERPATH.'articlefilterremote.php');
+require_once(STARTPATH.FILTERPATH.'userfilterremote.php');
 
 
 class ProofFilter implements FilterCommand {

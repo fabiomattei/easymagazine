@@ -17,15 +17,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(STARTPATH.URIPATH.'/urimakerfake.php');
+require_once(STARTPATH.URIPATH.'urimakerfake.php');
 
-require_once(STARTPATH.COMMANDPATH.'/remote.php');
-require_once(STARTPATH.DATAMODELPATH.'/magazine.php');
-require_once(STARTPATH.UTILSPATH.'/taghandler.php');
+require_once(STARTPATH.COMMANDPATH.'remote.php');
+require_once(STARTPATH.DATAMODELPATH.'magazine.php');
+require_once(STARTPATH.UTILSPATH.'taghandler.php');
 require_once(STARTPATH.SYSTEMPATH.'templateIncluder.php');
 require_once(STARTPATH.SYSTEMPATH.'settings.php');
 require_once(STARTPATH.SYSTEMPATH.'config.php');
-#require_once(STARTPATH.SYSTEMPATH.'pluginIncluder.php');
+require_once(STARTPATH.SYSTEMPATH.'pluginIncluder.php');
 
 abstract class Router {
     private $remote;

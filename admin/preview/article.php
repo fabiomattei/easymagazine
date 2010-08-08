@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(STARTPATH.DATAMODELPATH.'/article.php');
-require_once(STARTPATH.DATAMODELPATH.'/page.php');
+require_once(STARTPATH.DATAMODELPATH.'article.php');
+require_once(STARTPATH.DATAMODELPATH.'page.php');
 
 require_once('router.php');
 
@@ -47,10 +47,8 @@ class ArticlesRouter extends Router {
 
     function applyTemplate(){
         $this->getRemote()->executeCommandBeforeArticle();
-        if (file_exists(TEMPLATEPATH.'/article.php')) {
-            include (TEMPLATEPATH.'/article.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
+        if (file_exists(STARTPATH.TEMPLATEPATH.'article.php')) {
+            include (STARTPATH.TEMPLATEPATH.'article.php');
         }
         $this->getRemote()->executeCommandAfterArticle();
     }

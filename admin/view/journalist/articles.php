@@ -82,6 +82,7 @@
                                 <th class="first" width="177"><?php echo LANG_ADMIN_TABLE_TITLE; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_COMMENTS; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PREVIEW; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
                                 <th class="last"><?php echo LANG_ADMIN_TABLE_DELETE; ?></th>
                             </tr>
@@ -99,6 +100,7 @@
                                     <? } ?>
                                 </td>
                                 <td><a href="comment.php?list=commentarticle&article_id=<? echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?action=preview&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/preview_icon.png" width="16" height="16" alt="" /></a></td>
                                 <td>
                                     <? if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />

@@ -23,6 +23,7 @@ require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'page.php');
 require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+require_once(STARTPATH.PREVIEWPATH.'routerfactory.php');
 
 session_start();
 AllControllersCommons::loadlanguage();
@@ -137,6 +138,19 @@ function down($id) {
     return $Action;
 }
 
+function preview($id) {
+    $Action = array();
+
+    $Action['view'] = 'router';
+
+    $arURI = array('Router' => 'page', 'id' => $id);
+    $routerFactory = new RouterFactory();
+    $router = $routerFactory->createRouter($arURI);
+    $router->show();
+
+    return $Action;
+}
+
 function save($toSave) {
     $outAction = array();
 
@@ -180,6 +194,7 @@ if (isset($_SESSION['user'])) {
         case  'requestdelete':     $outAction = requestdelete($_GET['id'], $_GET['list']); break;
         case  'up':                $outAction = up($_GET['id']); break;
         case  'down':              $outAction = down($_GET['id']); break;
+        case  'preview':           $outAction = preview($_GET['id']); break;
     }
     switch ($list) {
         case  'index':             $outList = index($_POST); break;
@@ -192,7 +207,9 @@ if (isset($_SESSION['user'])) {
 $pags = $outList['pags'];
 $lastList = $outList['lastList'];
 
-$pag = $outAction['pag'];
+if (isset($outAction['pag'])) {
+    $pag = $outAction['pag'];
+}
 
 $infoarray = array();
 $warningarray = array();
@@ -209,6 +226,10 @@ if (isset($outList['warning'])) { $warningarray[] = $outList['warning']; }
 if (isset($outList['question'])) { $questionarray[] = $outList['question']; }
 if (isset($outList['error'])) { $errorarray[] = $outList['error']; }
 
-include('../../view/publisher/pages.php');
+if (isset ($outAction['view']) && $outAction['view'] == 'router') {
+    #nothign
+} else {
+    include('../../view/publisher/pages.php');
+}
 
 ?>

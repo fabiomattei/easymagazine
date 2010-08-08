@@ -5,7 +5,7 @@
         <div class="date"><small><?= $this->article->getCreatedFormatted() ?></small> by
             <?= $this->article->auhorsNamesConcatenation() ?>
         </div>
-        <div class="date"><small><?= Taghandler::tagsToLink($article->getTag()) ?></small>
+        <div class="date"><small><?= Taghandler::tagsToLink($this->article->getTag()) ?></small>
         </div>
         <div class="entry">
             <?= $this->article->getBody() ?>

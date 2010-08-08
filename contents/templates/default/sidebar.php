@@ -7,7 +7,7 @@
     </form>
 
     <br />
-    <a href="<?= URIMaker::rssFeed()?>"><img src="<?= URIMaker::fromBasePath('contents/templates/default/images/rss-icon.png') ?>"></a>
+    <a href="<?= URIMaker::rssFeed()?>"><img src="<?= URIMaker::templatePath('images/rss-icon.png') ?>"></a>
     RSS Feed
     <br /><br />
 

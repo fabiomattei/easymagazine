@@ -26,6 +26,8 @@ require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
 require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+require_once(STARTPATH.PREVIEWPATH.'routerfactory.php');
+
 
 session_start();
 AllControllersCommons::loadlanguage();
@@ -70,6 +72,19 @@ function articlenumber($id, $page) {
     $outList['lastList'] = 'articlenumber';
 
     return $outList;
+}
+
+function preview($id) {
+    $outAction = array();
+
+    $outAction['view'] = 'router';
+
+    $arURI = array('Router' => 'article', 'id' => $id);
+    $routerFactory = new RouterFactory();
+    $router = $routerFactory->createRouter($arURI);
+    $router->show();
+
+    return $outAction;
 }
 
 function byuser($page) {
@@ -241,6 +256,7 @@ if (isset($_SESSION['user'])) {
         case  'linkauthor':          $outAction = linkauthor($_POST['authorid'], $_GET['idarticle']); break;
         case  'requestunlinkauthor': $outAction = requestunlinkauthor($_GET['idauthor'], $_GET['idarticle'], $_GET['list'], $_GET['pageSelected']); break;
         case  'dounlinkauthor':      $outAction = dounlinkauthor($_GET['idauthor'], $_GET['idarticle']); break;
+        case  'preview':             $outAction = preview($_GET['id']); break;
     }
     switch ($list) {
         case  'index':               $outList = index($page); break;
@@ -256,7 +272,9 @@ $numbs = $outCommons['numbs'];
 $authors = $outCommons['authors'];
 $categories = $outCommons['categories'];
 
-$art = $outAction['art'];
+if (isset($outAction['art'])) {
+    $art = $outAction['art'];
+}
 
 $arts = $outList['arts'];
 $lastList = $outList['lastList'];
@@ -278,6 +296,10 @@ if (isset($outList['warning'])) { $warningarray[] = $outList['warning']; }
 if (isset($outList['question'])) { $questionarray[] = $outList['question']; }
 if (isset($outList['error'])) { $errorarray[] = $outList['error']; }
 
-include('../../view/journalist/articles.php');
+if (isset ($outAction['view']) && $outAction['view'] == 'router') {
+    #nothign
+} else {
+    include('../../view/publisher/articles.php');
+}
 
 ?>

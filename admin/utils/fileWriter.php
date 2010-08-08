@@ -31,7 +31,7 @@ class FileWriter {
         FileWriter::write($handle, '<?PHP ');
 
         foreach ($dirList as $key => $value) {
-            $toWrite = ' require_once(PLUGINPATH.\''.$key.'/index.php\'); ';
+            $toWrite = ' require_once(STARTPATH.PLUGINPATH.\''.$key.'/index.php\'); ';
             FileWriter::write($handle, $toWrite);
         }
 

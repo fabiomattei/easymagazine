@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once(PLUGINPATH.'commandSandBox/example.php');
+require_once(STARTPATH.PLUGINPATH.'commandSandBox/example.php');
 
 $remote = Remote::getInstance();
 

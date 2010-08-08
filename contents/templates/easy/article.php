@@ -10,7 +10,7 @@
                 <?= $this->article->auhorsNamesConcatenation() ?> |
                 <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
                 <br />
-                <?= Taghandler::tagsToLink($article->getTag()) ?>
+                <?= Taghandler::tagsToLink($this->article->getTag()) ?>
             </p>
             <p>
 

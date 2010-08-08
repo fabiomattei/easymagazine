@@ -84,6 +84,7 @@
                                 <th><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_UP; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_DOWN; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PREVIEW; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
                                 <th class="last"><?php echo LANG_ADMIN_TABLE_DELETE; ?></th>
                             </tr>
@@ -96,6 +97,7 @@
                                 <td><a href="page.php?action=edit&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td><a href="page.php?action=up&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="page.php?action=down&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="page.php?action=preview&id=<? echo $pg->getId(); ?>"><img src="../../resources/img/preview_icon.png" width="16" height="16" alt="" /></a></td>
                                 <td>
                                         <? if ($pg->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />

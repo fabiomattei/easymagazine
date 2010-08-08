@@ -90,6 +90,7 @@
                                 <th><?php echo LANG_ADMIN_TABLE_UP; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_DOWN; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_COMMENTS; ?></th>
+                                <th><?php echo LANG_ADMIN_TABLE_PREVIEW; ?></th>
                                 <th><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></th>
                                 <th class="last"><?php echo LANG_ADMIN_TABLE_DELETE; ?></th>
                             </tr>
@@ -103,6 +104,7 @@
                                 <td><a href="article.php?action=up&id=<? echo $ar->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="article.php?action=down&id=<? echo $ar->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
                                 <td><a href="comment.php?list=commentarticle&article_id=<? echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?action=preview&id=<? echo $ar->getId(); ?>"><img src="../../resources/img/preview_icon.png" width="16" height="16" alt="" /></a></td>
                                 <td>
                                         <? if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
