@@ -35,7 +35,7 @@
         <div class="date"><small><?= $comment->getCreatedFormatted() ?></small> by
                 <?= $comment->getSignature() ?>
         </div>
-        <div class="date"><small><?= Taghandler::tagsToLink($article->getTag()) ?></small>
+        <div class="date"><small><?= Taghandler::tagsToLink($this->article->getTag()) ?></small>
         </div>
 
         <div class="entry">
