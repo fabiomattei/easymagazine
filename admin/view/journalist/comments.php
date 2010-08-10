@@ -65,12 +65,8 @@
                     ?>
                     <div class="select-bar">
                         <form name="searchform" method="post" action="comment.php?list=find">
-                            <label>
-                                <input type="text" size="50" name="string" />
-                            </label>
-                            <label>
-                                <input type="submit" name="Submit" value="<?php echo LANG_MENU_SEARCH; ?>" />
-                            </label>
+                            <input type="text" size="50" name="string" />
+                            <input type="submit" name="Submit" value="<?php echo LANG_MENU_SEARCH; ?>" />
                         </form>
                     </div>
                     <div class="table">

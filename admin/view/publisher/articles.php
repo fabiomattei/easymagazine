@@ -72,12 +72,8 @@
                     ?>
                     <div class="select-bar">
                         <form name="searchform" method="post" action="article.php?list=find">
-                            <label>
                                 <input type="text" size="50" name="string" />
-                            </label>
-                            <label>
                                 <input type="submit" name="Submit" value="<?php echo LANG_MENU_SEARCH; ?>" />
-                            </label>
                         </form>
                     </div>
                     <div class="table">
@@ -208,7 +204,7 @@
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($art->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_COMMENTS; ?></strong></td>
+                                    <td class="first"><label for="commentsallowed" title="<?php echo LANG_ADMIN_TABLE_TIP_COMMENT; ?>"><?php echo LANG_ADMIN_TABLE_COMMENTS; ?></label></td>
                                     <td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($art->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">

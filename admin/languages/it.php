@@ -117,6 +117,10 @@ define('LANG_ADMIN_TABLE_NEW_PASSWORD', 'Nuova Password');
 define('LANG_ADMIN_TABLE_RETYPE_PASSWORD', 'Ripeti la nuova Password');
 define('LANG_ADMIN_TABLE_SIGNATURE', 'Firma');
 
+// Admin Table Tooltips
+
+define('LANG_ADMIN_TABLE_TIP_COMMENT', 'Attenzione: i commenti per essere abilitati devono essere attivati sia sull\'articolo sia sul numero corrispondente.');
+
 // ADMIN INFO
 
 define('LANG_ADMIN_PAGE_INFO', 'Qui c\'&egrave; una lista di tutte le pagine, sia pubblicate che no.');

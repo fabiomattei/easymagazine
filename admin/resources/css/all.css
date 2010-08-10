@@ -320,3 +320,11 @@ div.table .select select {
     padding:30px 0 15px 0;
 }
 .buttons input {margin:0 0 6px 0;}
+label { 
+  font-size: 1em;
+  text-align:left;
+  font-weight: bold; 
+  float: left; 
+  background: url(../img/icon-info.png) no-repeat right; 
+  padding-right:20px;
+}

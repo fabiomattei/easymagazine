@@ -115,6 +115,10 @@ define('LANG_ADMIN_TABLE_NEW_PASSWORD', 'New Password');
 define('LANG_ADMIN_TABLE_RETYPE_PASSWORD', 'Retype new Password');
 define('LANG_ADMIN_TABLE_SIGNATURE', 'Signature');
 
+// Admin Table Tooltips
+
+define('LANG_ADMIN_TABLE_TIP_COMMENT', 'In order to allow the readers to comment an article, comments need to be activated in the article and in the corresponding number.');
+
 // ADMIN INFO
 
 define('LANG_ADMIN_PAGE_INFO', 'Here there is a list of all pages, published and not still published.');
