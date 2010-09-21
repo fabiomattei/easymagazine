@@ -50,6 +50,19 @@ class StringFilter {
         return $out;
     }
 
+    /**
+     * This method extract from a string, that could be the text of
+     * an article, the href of all images contained and put it in
+     * an array.
+     *
+     * @param <String> $text
+     * @return <String>
+     */
+    public static function extractHref($text) {
+        preg_match_all("|<[^>]+[^>]+href=\"(.*)\">(.*)</[^>]+>|U", $text, $out);
+        return $out;
+    }
+
 }
 
 ?>

@@ -86,6 +86,10 @@ class FileWriter {
         FileWriter::write($handle, $toWrite);
         $toWrite = ' define(\'WEBSITEURL\', \''.$settingsindb['siteurl']->getValue().'\'); ';
         FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'SOCIAL_FACEBOOK\', \''.$settingsindb['facebookbutton']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
+        $toWrite = ' define(\'SOCIAL_TWITTER\', \''.$settingsindb['twitterbutton']->getValue().'\'); ';
+        FileWriter::write($handle, $toWrite);
 
         FileWriter::write($handle, ' ?>');
 

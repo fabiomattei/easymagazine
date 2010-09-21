@@ -3,12 +3,12 @@
 	<div id="r_sidebar">
 	<ul id="r_sidebarwidgeted">
             
-        <li id="Themes">
+        <li class="Themes">
             <a href="<?= URIMaker::rssFeed()?>"><img src="<?= URIMaker::templatePath('images/rss-icon.png') ?>" border="0"> RSS Feed</a>
         </li>
         <br />
 
-	<li id="Themes">
+	<li class="Themes">
         <h2>Search</h2>
             <form id="searchform" method="post" action="<?= URIMaker::result() ?>">
                 <input type="text" name="s" id="s" size="30" value=""/>
@@ -18,7 +18,7 @@
         </li>
         <br />
 
-        <li id="Themes">
+        <li class="Themes">
 	<h2>Categories</h2>
             <ul>
                 <? foreach ($this->categories as $cat) : ?>
@@ -28,7 +28,7 @@
         </li>
         <br />
 
-        <li id="Themes">
+        <li class="Themes">
         <h2>Admin</h2>
             <ul>
                 <li><a href="<?= URIMaker::loginPage() ?>">Login</a></li>

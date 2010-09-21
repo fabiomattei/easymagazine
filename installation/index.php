@@ -41,7 +41,8 @@
                     In order to install the application please be sure the following folders have the right permissions (0755):
                     <b>easymagazine/system</b> (and all contained files)<br />
                     <b>easymagazine/contents/feed</b><br />
-                    <b>easymagazine/contents/epug</b><br /><br />
+                    <b>easymagazine/contents/epug</b><br />
+                    <b>easymagazine/cache</b><br /><br />
                     Then rename the file htaccess in <b>.htaccess</b><br /><br />
                     Then fill the form:
                     <table>

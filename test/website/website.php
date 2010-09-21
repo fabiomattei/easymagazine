@@ -78,6 +78,14 @@ class TestWebSite extends WebTestCase {
         $this->click('Ok');
         //$this->assertText('Please type the right Captcha');
     }
+
+    function testTagPage(){
+        $this->get(BASEADDRESSHTTP);
+        $this->click('bike');
+        $this->assertText('bike');
+        $this->assertText('My first Article');
+        $this->assertText('My final Article');
+    }
     
 }
 

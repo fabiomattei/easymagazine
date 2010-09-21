@@ -19,6 +19,7 @@
 
 require_once(STARTPATH.DATAMODELPATH.'/article.php');
 require_once(STARTPATH.DATAMODELPATH.'/page.php');
+require_once(STARTPATH.UTILSPATH.'/social.php');
 
 require_once('router.php');
 
@@ -53,6 +54,15 @@ class ArticlesRouter extends Router {
             include (TEMPLATEPATH.'/index.php');
         }
         $this->getRemote()->executeCommandAfterArticle();
+    }
+
+    function  createCachePath() {
+        $arURI = $this->getArrayURI();
+        return STARTPATH.'cached/'.'article'.$arURI['id'].'.cache';
+    }
+
+    function isCachable() {
+        return true;
     }
 
 }

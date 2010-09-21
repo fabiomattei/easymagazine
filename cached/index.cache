@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//en" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head profile="http://gmpg.org/xfn/11">
+
+        <meta name="keywords" content="meta keywords of the number" />
+        <meta name="description" content="meta description of the number" />
+
+        <title>: My first number</title>
+
+        <link rel="stylesheet" href="http://localhost:8888/easymagazine/contents/templates/easy/style.css" type="text/css" media="screen" />
+
+        </style>
+    </head>
+
+    <body>
+
+        <div id="header">
+            <a href="http://localhost:8888/easymagazine/"></a><br />
+	        </div>
+
+        <div id="navbar">
+            <ul>
+                <li><a href="http://localhost:8888/easymagazine/">Home</a></li>
+                <li><a href="http://localhost:8888/easymagazine/people/">People</a></li>
+                <li><a href="http://localhost:8888/easymagazine/numberslist/">Numbers</a></li>
+                <li><a href="http://localhost:8888/easymagazine/pages/My_firts_Page/1">My firts Page</a></li>            </ul>
+        </div>
+
+        <div id="wrap"><div id="content">
+
+    <!-- begin l_sidebar -->
+
+<div id="l_sidebar">
+    <ul id="l_sidebarwidgeted">
+
+        <li id="Themes">
+            <h2>My first number</h2>
+            <h3>Subtitle to my first number</h3>
+            <div id="numberDescription">
+                <p><img src="../../../../easymagazinefiles/images/chapmelon.jpg" alt="" width="170" height="170" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.</p>            </div>
+                    </li>
+        <br />
+
+        <li id="Numbers">
+            <h2>Last Numbers</h2>
+            <ul>
+                <li><a href="http://localhost:8888/easymagazine/numbers/My_first_number/1">My first number</a></li>            </ul>
+        </li>
+
+</div>
+
+<!-- end l_sidebar -->
+    <div id="contentmiddle">
+                <div class="contenttitle">
+            <h1><a href="http://localhost:8888/easymagazine/articles/Omnia_Gallia/1" rel="bookmark">Omnia Gallia</a></h1>
+            <p>
+                    3 August 2009  by
+                    John Smith  |
+                    <a href="http://localhost:8888/easymagazine/comments/Omnia_Gallia/1"> comments (1) </a>                    <br />
+                    <a href="http://localhost:8888/easymagazine/tag/romans/" Title="romans">romans</a> <a href="http://localhost:8888/easymagazine/tag/gallia/" Title="gallia">gallia</a>             </p>
+            <p>
+                <p><img src="../../../../easymagazinefiles/images/giulio-cesare2.jpg" alt="" width="304" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.</p>            </p>
+            <div>
+                <a href="http://www.facebook.com/share.php?u=http://localhost:8888/easymagazine/articles/Omnia_Gallia/1&t=Omnia Gallia" title="Segnala su Facebook" rel="nofollow"><img src="http://localhost:8888/easymagazine/admin/resources/img/social/bookmark_facebook.png" width="20" height="20" alt="add to facebook" title=" &#64; to facebook " /></a><a href="http://twitter.com/home?status=http://localhost:8888/easymagazine/articles/Omnia_Gallia/1" title="Click to send this page to Twitter!" target="_blank" rel="nofollow"><img src="http://localhost:8888/easymagazine/admin/resources/img/social/bookmark_twitter.png" width="20" height="20" alt="add to twitter" title=" &#64; to twitter " /></a>            </div>
+        </div>
+                <div class="contenttitle">
+            <h1><a href="http://localhost:8888/easymagazine/articles/Omnia_Gallia/2" rel="bookmark">Omnia Gallia</a></h1>
+            <p>
+                    3 August 2009  by
+                    John Smith  |
+                    <a href="http://localhost:8888/easymagazine/comments/Omnia_Gallia/2"> comments (0) </a>                    <br />
+                    <a href="http://localhost:8888/easymagazine/tag/gallia/" Title="gallia">gallia</a> <a href="http://localhost:8888/easymagazine/tag/rome/" Title="rome">rome</a>             </p>
+            <p>
+                <p><img src="../../../../easymagazinefiles/images/giulio_cesare.jpg" alt="" width="306" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.</p>            </p>
+            <div>
+                <a href="http://www.facebook.com/share.php?u=http://localhost:8888/easymagazine/articles/Omnia_Gallia/2&t=Omnia Gallia" title="Segnala su Facebook" rel="nofollow"><img src="http://localhost:8888/easymagazine/admin/resources/img/social/bookmark_facebook.png" width="20" height="20" alt="add to facebook" title=" &#64; to facebook " /></a><a href="http://twitter.com/home?status=http://localhost:8888/easymagazine/articles/Omnia_Gallia/2" title="Click to send this page to Twitter!" target="_blank" rel="nofollow"><img src="http://localhost:8888/easymagazine/admin/resources/img/social/bookmark_twitter.png" width="20" height="20" alt="add to twitter" title=" &#64; to twitter " /></a>            </div>
+        </div>
+            </div>
+
+    <!-- begin r_sidebar -->
+
+	<div id="r_sidebar">
+	<ul id="r_sidebarwidgeted">
+            
+        <li class="Themes">
+            <a href="http://localhost:8888/easymagazine/contents/feed/feed.xml"><img src="http://localhost:8888/easymagazine/contents/templates/easy/images/rss-icon.png" border="0"> RSS Feed</a>
+        </li>
+        <br />
+
+	<li class="Themes">
+        <h2>Search</h2>
+            <form id="searchform" method="post" action="http://localhost:8888/easymagazine/results/">
+                <input type="text" name="s" id="s" size="30" value=""/>
+                <input type="submit" value="Search" name="Search" />
+            </form>
+		
+        </li>
+        <br />
+
+        <li class="Themes">
+	<h2>Categories</h2>
+            <ul>
+                                <li><a href="http://localhost:8888/easymagazine/category/Sport/2">Sport</a></li>
+                                <li><a href="http://localhost:8888/easymagazine/category/Sport/4">Sport</a></li>
+                                <li><a href="http://localhost:8888/easymagazine/category/Sport/6">Sport</a></li>
+                                <li><a href="http://localhost:8888/easymagazine/category/News/1">News</a></li>
+                                <li><a href="http://localhost:8888/easymagazine/category/News/3">News</a></li>
+                                <li><a href="http://localhost:8888/easymagazine/category/News/5">News</a></li>
+                            </ul>
+        </li>
+        <br />
+
+        <li class="Themes">
+        <h2>Admin</h2>
+            <ul>
+                <li><a href="http://localhost:8888/easymagazine/admin/login.php">Login</a></li>
+                <li><a href="http://www.easymagazine.org/">Easy Magazine</a></li>
+            </ul>
+        </li>
+        </ul>
+			
+</div>
+
+<!-- end r_sidebar -->
+</div></div>
+
+<!-- The main column ends  -->
+
+<!-- begin footer -->
+
+<div style="clear:both;"></div>
+<div style="clear:both;"></div>
+</div>
+
+<div id="footer">
+  Powered by <a href="http://www.easymagazine.org/">Easy Magazine</a>
+</div>
+</body>
+
+</html>

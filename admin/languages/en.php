@@ -107,6 +107,8 @@ define('LANG_ADMIN_TABLE_RIGHTS', 'Rights');
 define('LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL', 'Administration Email');
 define('LANG_ADMIN_TABLE_EPUBFILENAME', 'Epub filename');
 define('LANG_ADMIN_TABLE_WEBSITEURL', 'Website URL');
+define('LANG_ADMIN_TABLE_FACEBOOK', 'Send to Facebook button');
+define('LANG_ADMIN_TABLE_TWITTER', 'Send to Twitter button');
 define('LANG_ADMIN_TABLE_USERNAME', 'Username');
 define('LANG_ADMIN_TABLE_SHOW_IN_PEOPLE_PAGE', 'Show in People page');
 define('LANG_ADMIN_TABLE_CHANGE_PASSWORD', 'Change Password');
@@ -114,6 +116,8 @@ define('LANG_ADMIN_TABLE_OLD_PASSWORD', 'Old Passwrd');
 define('LANG_ADMIN_TABLE_NEW_PASSWORD', 'New Password');
 define('LANG_ADMIN_TABLE_RETYPE_PASSWORD', 'Retype new Password');
 define('LANG_ADMIN_TABLE_SIGNATURE', 'Signature');
+define('LANG_ADMIN_TABLE_ON', 'On');
+define('LANG_ADMIN_TABLE_OFF', 'Off');
 
 // Admin Table Tooltips
 

@@ -110,6 +110,14 @@ class CommentsRouter extends Router {
         $this->getRemote()->executeCommandAfterComments();
     }
 
+    function  createCachePath() {
+        return '';
+    }
+
+    function isCachable() {
+        return false;
+    }
+
 }
 
 ?>

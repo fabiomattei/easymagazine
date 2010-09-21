@@ -314,13 +314,27 @@
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="email" value="<?= $settingsindb['email']->getValue(); ?>"/></td>
                                 </tr>
-                                <tr>
+                                <tr class="bg">
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_EPUBFILENAME; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="epubname" value="<?= $settingsindb['epubname']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_WEBSITEURL; ?></strong></td>
                                     <td class="last"><input type="text" size="50" name="siteurl" value="<?= $settingsindb['siteurl']->getValue(); ?>"/></td>
+                                </tr>
+                                <tr class="bg">
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_FACEBOOK; ?></strong></td>
+                                    <td class="last">
+                                        <input type="radio" name="facebookbutton" value="ON" <? if($settingsindb['facebookbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
+                                        <input type="radio" name="facebookbutton" value="OFF" <? if($settingsindb['facebookbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_TWITTER; ?></strong></td>
+                                    <td class="last">
+                                        <input type="radio" name="twitterbutton" value="ON" <? if($settingsindb['twitterbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
+                                        <input type="radio" name="twitterbutton" value="OFF" <? if($settingsindb['twitterbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
+                                    </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>

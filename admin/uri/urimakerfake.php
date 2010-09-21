@@ -67,7 +67,7 @@ class URIMaker {
     }
 
     static function fromBasePath($path) {
-        return '#';
+        return 'http://'.$_SERVER['HTTP_HOST'].FOLDER.$path;
     }
 
     static function templatePath($path) {

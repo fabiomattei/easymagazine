@@ -109,6 +109,8 @@ define('LANG_ADMIN_TABLE_RIGHTS', 'Direitos');
 define('LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL', 'Email de administra&ccedil;&atilde;o');
 define('LANG_ADMIN_TABLE_EPUBFILENAME', 'Nome do ficheiro Epub');
 define('LANG_ADMIN_TABLE_WEBSITEURL', 'URL da magazine');
+define('LANG_ADMIN_TABLE_FACEBOOK', 'Send to Facebook button');
+define('LANG_ADMIN_TABLE_TWITTER', 'Send to Twitter button');
 define('LANG_ADMIN_TABLE_USERNAME', 'Nome do utilizador');
 define('LANG_ADMIN_TABLE_SHOW_IN_PEOPLE_PAGE', 'Mostrar na p&aacute;gina Pessoas');
 define('LANG_ADMIN_TABLE_CHANGE_PASSWORD', 'Mudar palavra-passe');
@@ -116,6 +118,8 @@ define('LANG_ADMIN_TABLE_OLD_PASSWORD', 'Palavra-passe antiga');
 define('LANG_ADMIN_TABLE_NEW_PASSWORD', 'Palavra-passe nova');
 define('LANG_ADMIN_TABLE_RETYPE_PASSWORD', 'Voltar a introduzir a nova palavra-passe');
 define('LANG_ADMIN_TABLE_SIGNATURE', 'Assinatura');
+define('LANG_ADMIN_TABLE_ON', 'On');
+define('LANG_ADMIN_TABLE_OFF', 'Off');
 
 // Admin Table Tooltips
 

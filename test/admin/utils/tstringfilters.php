@@ -1,0 +1,45 @@
+<?php
+
+/*
+    Copyright (C) 2009-2010  Fabio Mattei <burattino@gmail.com>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+class StringFiltersFileTests extends UnitTestCase {
+
+    public function __construct() {
+    }
+
+    function setUp() {
+    }
+
+    function tearDown() {
+    }
+
+    function testCheckAndCreatePath() {
+        $text = "<b>example: </b><div align=left><img href=\"prova.jpg\">  <IMG href=\"http://www.easymagazine.org/img/prova.jpg\"> </div>";
+        $testout = StringFilter::extractHref($text);
+        $this->assertEqual(2, count($testout));
+        print_r($testout);
+        //$this->assertPattern('(prova.jpg)', $testout[0]);
+        //$this->assertPattern('(http://www.easymagazine.org/img/prova.jpg)', $testout[1]);
+    }
+
+}
+
+$test = new StringFiltersFileTests();
+$test->run(new HtmlReporter());
+
+?>

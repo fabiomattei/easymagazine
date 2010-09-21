@@ -50,6 +50,15 @@ class NumberRouter extends Router {
         $this->getRemote()->executeCommandAfterNumber();
     }
 
+    function createCachePath() {
+        $arURI = $this->getArrayURI();
+        return STARTPATH.'cached/'.'number'.$arURI['id'].'.cache';
+    }
+
+    function isCachable() {
+        return true;
+    }
+
 }
 
 ?>

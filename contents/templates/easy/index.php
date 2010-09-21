@@ -20,6 +20,9 @@
             <p>
                 <?= $article->getSummary() ?>
             </p>
+            <div>
+                <? echo Social::createLinks(URIMaker::article($article), $article->getTitle(), '_blank', $article->getMetakeyword()); ?>
+            </div>
         </div>
         <? } ?>
     </div>

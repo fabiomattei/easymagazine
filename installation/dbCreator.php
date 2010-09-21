@@ -281,7 +281,7 @@ class DbCreator {
 
     public function populateTableOptions() {
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
-            ('version', 'version', '2.0.9')";
+            ('version', 'version', '2.0.10')";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
             ('default', 'template', 'active')";

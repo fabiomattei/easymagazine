@@ -174,8 +174,7 @@ class ePugCreator {
     <item id="style" href="style.css" media-type="text/css" />';
 
         foreach ($this->number->articlesPublished() as $article) {
-            $text.='<item id="article'.$article->getId().'" href="article'.$article->getId().'.html" media-type="application/xhtml+xml" />
-            ';
+            $text.='<item id="article'.$article->getId().'" href="article'.$article->getId().'.html" media-type="application/xhtml+xml" />';
         }
 
         $text .= '</manifest>

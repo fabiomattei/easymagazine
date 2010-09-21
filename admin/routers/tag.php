@@ -62,6 +62,14 @@ class TagRouter extends Router {
         $this->getRemote()->executeCommandAfterTag();
     }
 
+    function  createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';
+    }
+
+    function isCachable() {
+        return false;
+    }
+
 }
 
 ?>

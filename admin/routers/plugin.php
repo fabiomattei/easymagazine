@@ -53,6 +53,13 @@ class PluginRouter extends Router {
         $this->getRemote()->executeCommandAfterPlugin();
     }
 
+    function  createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';
+    }
+
+    function isCachable() {
+        return false;
+    }
 
 }
 

@@ -1,1 +1,1 @@
-<?PHP  require_once(STARTPATH.PLUGINPATH.'commandSandBox/index.php');  require_once(STARTPATH.PLUGINPATH.'filterSandBox/index.php');  ?>
+<?PHP  ?>

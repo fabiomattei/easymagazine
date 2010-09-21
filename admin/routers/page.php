@@ -53,6 +53,15 @@ class PagesRouter extends Router {
         $this->getRemote()->executeCommandAfterPage();
     }
 
+    function  createCachePath() {
+        $arURI = $this->getArrayURI();
+        return STARTPATH.'cached/'.'page'.$arURI['id'].'.cache';
+    }
+
+    function isCachable() {
+        return true;
+    }
+
 }
 
 ?>

@@ -55,9 +55,17 @@ class PeopleRouter extends Router {
         if (file_exists(TEMPLATEPATH.'/people.php')) {
             include (TEMPLATEPATH.'/people.php');
         } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-                include (TEMPLATEPATH.'/index.php');
-            }
+            include (TEMPLATEPATH.'/index.php');
+        }
         $this->getRemote()->executeCommandAfterPeople();
+    }
+
+    function  createCachePath() {
+        return STARTPATH.'cached/'.'people.cache';
+    }
+
+    function isCachable() {
+        return true;
     }
 
 }

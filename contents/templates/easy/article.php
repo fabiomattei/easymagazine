@@ -12,6 +12,10 @@
                 <br />
                 <?= Taghandler::tagsToLink($this->article->getTag()) ?>
             </p>
+            <div>
+                <? echo Social::createLinks(URIMaker::article($this->article), $this->article->getTitle(), '_blank', $this->article->getMetakeyword()); ?>
+            </div>
+
             <p>
 
             <?= $this->article->getSummary() ?>
@@ -19,6 +23,9 @@
             <p>
                 <?= $this->article->getBody() ?>
             </p>
+            <div>
+                <? echo Social::createLinks(URIMaker::article($this->article), $this->article->getTitle(), '_blank', $this->article->getMetakeyword()); ?>
+            </div>
 
         </div>
     </div>

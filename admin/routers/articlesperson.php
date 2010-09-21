@@ -67,6 +67,14 @@ class ArticlesPersonRouter extends Router {
         $this->getRemote()->executeCommandAfterArticlesPerson();
     }
 
+    function  createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';;
+    }
+
+    function isCachable() {
+        return false;
+    }
+
 }
 
 ?>

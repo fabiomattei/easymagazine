@@ -62,6 +62,14 @@ class CategoryRouter extends Router {
         $this->getRemote()->executeCommandAfterCategory();
     }
 
+    function  createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';
+    }
+
+    function isCachable() {
+        return false;
+    }
+
 }
 
 ?>

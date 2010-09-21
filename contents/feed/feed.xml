@@ -6,46 +6,33 @@
     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
     xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel rdf:about="../../../contents/feed/feed.xml">
-        <title>Title of the magazine</title>
-        <description>A short description of the magazine</description>
-        <link>http://localhost:8888/easymagazine/</link>
-       <dc:date>2010-02-25T15:50:38+01:00</dc:date>
+        <title></title>
+        <description></description>
+        <link>#</link>
+       <dc:date>2010-08-12T09:21:38+01:00</dc:date>
         <items>
             <rdf:Seq>
-                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/Omnia Gallia/1"/>
-                <rdf:li rdf:resource="http://localhost:8888/easymagazine/articles/Omnia Gallia/2"/>
+                <rdf:li rdf:resource="#"/>
+                <rdf:li rdf:resource="#"/>
             </rdf:Seq>
         </items>
     </channel>
-    <item rdf:about="http://localhost:8888/easymagazine/articles/Omnia Gallia/1">
+    <item rdf:about="#">
         <dc:format>text/html</dc:format>
-        <dc:date>2009-08-03T00:00:00+01:00</dc:date>
-        <dc:source>http://localhost:8888/easymagazine/</dc:source>
-        <dc:creator>New User </dc:creator>
-        <title>Omnia Gallia</title>
-        <link>http://localhost:8888/easymagazine/articles/Omnia Gallia/1</link>
+        <dc:date>2009-08-02T23:00:00+01:00</dc:date>
+        <dc:creator>John Smith </dc:creator>
+        <title>Omnia Gallia filter executed</title>
+        <link>#</link>
         <description>&lt;p&gt;&lt;img src=&quot;../../../../easymagazinefiles/images/giulio-cesare2.jpg&quot; alt=&quot;&quot; width=&quot;304&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
 &lt;p&gt;Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.&lt;/p&gt;</description>
     </item>
-    <item rdf:about="http://localhost:8888/easymagazine/articles/Omnia Gallia/2">
+    <item rdf:about="#">
         <dc:format>text/html</dc:format>
-        <dc:date>2009-08-03T00:00:00+01:00</dc:date>
-        <dc:source>http://localhost:8888/easymagazine/</dc:source>
-        <dc:creator>New User </dc:creator>
-        <title>Omnia Gallia</title>
-        <link>http://localhost:8888/easymagazine/articles/Omnia Gallia/2</link>
+        <dc:date>2009-08-02T23:00:00+01:00</dc:date>
+        <dc:creator>John Smith </dc:creator>
+        <title>Omnia Gallia filter executed</title>
+        <link>#</link>
         <description>&lt;p&gt;&lt;img src=&quot;../../../../easymagazinefiles/images/giulio_cesare.jpg&quot; alt=&quot;&quot; width=&quot;306&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
 &lt;p&gt;Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur. Hi omnes lingua, institutis, legibus inter se differunt.&lt;/p&gt;</description>
     </item>
 </rdf:RDF>

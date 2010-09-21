@@ -21,6 +21,7 @@ require_once('router.php');
 require_once(STARTPATH.DATAMODELPATH.'/number.php');
 require_once(STARTPATH.DATAMODELPATH.'/category.php');
 require_once(STARTPATH.DATAMODELPATH.'/page.php');
+require_once(STARTPATH.UTILSPATH.'/social.php');
 
 class IndexRouter extends Router {
 
@@ -48,6 +49,14 @@ class IndexRouter extends Router {
             include (TEMPLATEPATH.'/index.php');
         }
         $this->getRemote()->executeCommandAfterIndex();
+    }
+
+    function createCachePath() {
+        return STARTPATH.'cached/'.'index.cache';
+    }
+
+    function isCachable() {
+        return true;
     }
 
 }

@@ -7,16 +7,16 @@
         </div>
         <div class="date"><small><?= Taghandler::tagsToLink($this->article->getTag()) ?></small>
         </div>
+        <p class="date">
+        <? echo Social::createLinks(URIMaker::article($this->article), $this->article->getTitle(), '_blank', $this->article->getMetakeyword()); ?>
+        </p>
         <div class="entry">
             <?= $this->article->getBody() ?>
         </div>
         <p class="date">
             <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
         </p>
+        <p class="date">
+        <? echo Social::createLinks(URIMaker::article($this->article), $this->article->getTitle(), '_blank', $this->article->getMetakeyword()); ?>
+        </p>
     </div>
-    <br><br>Pages<br>
-    <?
-    foreach($this->pages  as $page) {
-        echo '<a href="'.URIMaker::page($page).'"> '.$page->getTitle()." </a><br>";
-    }
-?>

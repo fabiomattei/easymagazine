@@ -31,6 +31,9 @@
     <p class="date">
         <? echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
     </p>
+    <p class="date">
+        <? echo Social::createLinks(URIMaker::article($article), $article->getTitle(), '_blank', $article->getMetakeyword()); ?>
+    </p>
 
     <? } ?>
 

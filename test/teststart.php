@@ -30,6 +30,7 @@ require_once(BASEDIR.'admin/utils/imagefiles.php');
 require_once(BASEDIR.'admin/utils/directoryrunner.php');
 require_once(BASEDIR.'admin/utils/fileWriter.php');
 require_once(BASEDIR.'admin/utils/password.php');
+require_once(BASEDIR.'admin/utils/stringfilters.php');
 require_once(BASEDIR.'admin/datamodel/article.php');
 require_once(BASEDIR.'admin/datamodel/category.php');
 require_once(BASEDIR.'admin/datamodel/number.php');
@@ -39,20 +40,21 @@ require_once(BASEDIR.'admin/datamodel/user.php');
 require_once(BASEDIR.'admin/datamodel/option.php');
 require_once('dummyDBCreator.php');
 
-
 require_once('admin/utils/tpagination.php');
 //require_once('admin/utils/timagefiles.php');
 require_once('admin/utils/tdirectoryrunner.php');
 require_once('admin/utils/tfileWriter.php');
 require_once('admin/utils/tpassword.php');
+require_once('admin/utils/tstringfilters.php');
 require_once('admin/datamodel/library/tstrfunction.php');
+/*
 require_once('admin/datamodel/tarticle.php');
 require_once('admin/datamodel/tcategory.php');
 require_once('admin/datamodel/tnumber.php');
 require_once('admin/datamodel/tcomment.php');
 require_once('admin/datamodel/tpage.php');
 require_once('admin/datamodel/tuser.php');
-require_once('admin/datamodel/toption.php');
+require_once('admin/datamodel/toption.php');*/
 
 
 /* Repopulates the schema in order to restart to develop */

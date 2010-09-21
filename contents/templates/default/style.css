@@ -254,6 +254,10 @@ margin: 25px 0;
 margin: 0 0 15px 0;
 }
 
+.date img{
+	border-style: none;
+}
+
 .post small {
 margin-top:25px;
 }

@@ -173,7 +173,7 @@
                                     <td class="last"><input type="checkbox" name="Published" value="1" <? if($numb->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
-                                    <td class="first"><strong><?php echo LANG_ADMIN_TABLE_COMMENTS; ?></strong></td>
+                                    <td class="first"><label for="commentsallowed" title="<?php echo LANG_ADMIN_TABLE_TIP_COMMENT; ?>"><?php echo LANG_ADMIN_TABLE_COMMENTS; ?></label></td>
                                     <td class="last"><input type="checkbox" name="commentsallowed" value="1"  <? if($numb->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">

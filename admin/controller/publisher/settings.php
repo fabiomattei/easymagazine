@@ -50,6 +50,8 @@ function index() {
     if (!isset($out['settingsindb']['language'])) { $out['settingsindb']['language'] = new Option(Option::NEW_OPTION, 'language', 'settings', 'en'); }
     if (!isset($out['settingsindb']['epubname'])) { $out['settingsindb']['epubname'] = new Option(Option::NEW_OPTION, 'epubname', 'settings', 'easymagazine'); }
     if (!isset($out['settingsindb']['siteurl'])) { $out['settingsindb']['siteurl'] = new Option(Option::NEW_OPTION, 'siteurl', 'settings', 'http://www.easymagazine.org/'); }
+    if (!isset($out['settingsindb']['facebookbutton'])) { $out['settingsindb']['facebookbutton'] = new Option(Option::NEW_OPTION, 'facebookbutton', 'settings', 'OFF'); }
+    if (!isset($out['settingsindb']['twitterbutton'])) { $out['settingsindb']['twitterbutton'] = new Option(Option::NEW_OPTION, 'twitterbutton', 'settings', 'OFF'); }
 
     return $out;
 }
@@ -113,6 +115,18 @@ function update($get, $post) {
     $toSave->setValue($post['siteurl']);
     $toSave->save();
     
+    $toSave = new Option();
+    $toSave->setName('facebookbutton');
+    $toSave->setType('settings');
+    $toSave->setValue($post['facebookbutton']);
+    $toSave->save();
+
+    $toSave = new Option();
+    $toSave->setName('twitterbutton');
+    $toSave->setType('settings');
+    $toSave->setValue($post['twitterbutton']);
+    $toSave->save();
+
     $settingsindb = Option::findByType('settings');
 
     $out['settingsindb'] = array();
