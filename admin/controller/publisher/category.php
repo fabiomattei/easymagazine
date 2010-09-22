@@ -23,6 +23,7 @@ require_once(STARTPATH.'costants.php');
 require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DATAMODELPATH.'category.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
+require_once(STARTPATH.UTILSPATH.'directoryrunner.php');
 require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
 
 session_start();
@@ -177,6 +178,8 @@ function down($id) {
 }
 
 function save($toSave) {
+    DirectoryRunner::cleanDir('cached');
+
     $outAction = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }

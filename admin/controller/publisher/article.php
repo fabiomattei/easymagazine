@@ -26,6 +26,7 @@ require_once(STARTPATH.DATAMODELPATH.'number.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.DATAMODELPATH.'category.php');
 require_once(STARTPATH.UTILSPATH.'paginator.php');
+require_once(STARTPATH.UTILSPATH.'directoryrunner.php');
 require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
 require_once(STARTPATH.PREVIEWPATH.'routerfactory.php');
 
@@ -264,6 +265,8 @@ function down($id) {
 }
 
 function save($toSave) {
+    DirectoryRunner::cleanDir('cached');
+
     $page = 1;
     $outAction = array();
 
