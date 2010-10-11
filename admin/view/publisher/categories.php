@@ -25,7 +25,7 @@
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
-        <? require_once('../../view/common/tinymcesetup.php'); ?>
+        <?PHPrequire_once('../../view/common/tinymcesetup.php'); ?>
     </head>
     <body>
         <div id="main">
@@ -47,7 +47,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?> </h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?> </h3><br />
                     <h3><?php echo LANG_MENU_CATEGORIES; ?></h3>
                     <ul class="nav">
                         <li><a href="category.php"><?php echo LANG_LEFT_SHOW_ALL; ?></a></li>
@@ -88,75 +88,75 @@
                             foreach ($categories as $cat) {
                                 ?>
                             <tr>
-                                <td class="first style1"><? echo $cat->getName(); ?></td>
-                                <td><a href="category.php?action=edit&id=<? echo $cat->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                <td><a href="category.php?action=up&id=<? echo $cat->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="category.php?action=down&id=<? echo $cat->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="article.php?list=articlecategory&id=<? echo $cat->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
+                                <td class="first style1"><?PHPecho $cat->getName(); ?></td>
+                                <td><a href="category.php?action=edit&id=<?PHPecho $cat->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td><a href="category.php?action=up&id=<?PHPecho $cat->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="category.php?action=down&id=<?PHPecho $cat->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?list=articlecategory&id=<?PHPecho $cat->getId(); ?>"><img src="../../resources/img/article.png" width="16" height="16" alt="" /></a></td>
                                 <td>
-                                        <? if ($cat->getPublished()) { ?>
+                                        <?PHPif ($cat->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <? } else { ?>
+                                        <?PHP} else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                        <? } ?>
+                                        <?PHP} ?>
                                 </td>
-                                <td class="last"><a href="category.php?action=requestdelete&id=<? echo $cat->getId(); ?>&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                <td class="last"><a href="category.php?action=requestdelete&id=<?PHPecho $cat->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
                             ?>
                         </table>
                         <div class="select">
-                            <form name="pageselectionform" method="post" action="category.php?lastList=<?=$lastList?>">
+                            <form name="pageselectionform" method="post" action="category.php?lastList=<?PHP echo$lastList?>">
                                 <strong><?php echo LANG_MENU_PAGES; ?>: </strong>
                                 <select name="page">
-                                    <? for ($i=1;$i<=$page_numbers;$i++) { ?>
-                                    <option value="<?=$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?=$i?></option>
-                                    <? }?>
+                                    <?PHPfor ($i=1;$i<=$page_numbers;$i++) { ?>
+                                    <option value="<?PHP echo$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?PHP echo$i?></option>
+                                    <?PHP}?>
                                 </select>&nbsp;
                                 <input type="hidden" name="movinglist" value="yes" />
                                 <input type="submit" value="<?php echo LANG_MENU_GO; ?>" name="Go" />
                             </form>
                         </div>
-                        <form name="formnew" method="post" action="category.php?list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
+                        <form name="formnew" method="post" action="category.php?list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>">
                             <input type="submit" value="<?php echo LANG_ADMIN_TABLE_NEW; ?>" name="new" />
                         </form>
                     </div>
                     <div class="table">
                         <img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                        <form name="form1" enctype="multipart/form-data" method="post" action="category.php?action=save&list=<?=$lastList?>&pageSelected=<?=$pageSelected?>">
+                        <form name="form1" enctype="multipart/form-data" method="post" action="category.php?action=save&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>">
                             <table class="listing form" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <th class="full" colspan="2"><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_NAME; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="Name" value="<? echo $categ->getName(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Name" value="<?PHPecho $categ->getName(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_DESCRIPTION; ?></strong><br />
-                                        <textarea cols="40" id="article_body" name="Description" rows="20" class="mceAdvanced" style="width: 100%"><? echo $categ->getUnfilteredDescription(); ?></textarea>
+                                        <textarea cols="40" id="article_body" name="Description" rows="20" class="mceAdvanced" style="width: 100%"><?PHPecho $categ->getUnfilteredDescription(); ?></textarea>
                                 </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></strong></td>
-                                    <td class="last"><input type="checkbox" name="Published" value="1" <? if($categ->getPublished()) echo 'checked="checked"'; ?>/></td>
+                                    <td class="last"><input type="checkbox" name="Published" value="1" <?PHPif($categ->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
-                                    <td class="last"><? echo $categ->getCreated(); ?></td>
+                                    <td class="last"><?PHPecho $categ->getCreated(); ?></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
-                                    <td class="last"><? echo $categ->getUpdated(); ?></td>
+                                    <td class="last"><?PHPecho $categ->getUpdated(); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                <input type="hidden" name="id" value="<? echo $categ->getId(); ?>">
-                                <input type="hidden" name="indexnumber" value="<? echo $categ->getIndexnumber(); ?>">
-                                <input type="hidden" name="created" value="<? echo $categ->getCreated(); ?>">
-                                <input type="hidden" name="updated" value="<? echo $categ->getUpdated(); ?>">
+                                <input type="hidden" name="id" value="<?PHPecho $categ->getId(); ?>">
+                                <input type="hidden" name="indexnumber" value="<?PHPecho $categ->getIndexnumber(); ?>">
+                                <input type="hidden" name="created" value="<?PHPecho $categ->getCreated(); ?>">
+                                <input type="hidden" name="updated" value="<?PHPecho $categ->getUpdated(); ?>">
                                 <td class="last"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" /></td>
                                 </tr>
                             </table>

@@ -40,23 +40,23 @@ if ($rs) {
 
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="<?= AdminPluginUriMaker::linkFile('update.php') ?>">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?PHP echo AdminPluginUriMaker::linkFile('update.php') ?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">Edit</th>
         </tr>
         <tr>
             <td class="first" width="172"><strong>Title</strong></td>
-            <td class="last"><input type="text" name="title" value="<?=$title?>"/></td>
+            <td class="last"><input type="text" name="title" value="<?PHP echo$title?>"/></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>Text</strong></td>
-            <td class="last"><input type="text" name="text" value="<?=$text?>"/></td>
+            <td class="last"><input type="text" name="text" value="<?PHP echo$text?>"/></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>Url</strong></td>
-            <td class="last"><input type="text" name="url" value="<?=$url?>"/>
-            <input type="hidden" name="id" value="<?=$id?>"/>
+            <td class="last"><input type="text" name="url" value="<?PHP echo$url?>"/>
+            <input type="hidden" name="id" value="<?PHP echo$id?>"/>
             </td>
         </tr>
         <tr class="bg">

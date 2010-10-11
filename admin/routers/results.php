@@ -35,6 +35,7 @@ class ResultsRouter extends Router {
     public $number;
     public $categories;
     public $querystring;
+    public $paginator;
 
     function loadData() {
         $arURI = $this->getArrayURI();
@@ -45,8 +46,8 @@ class ResultsRouter extends Router {
 
         if (isset($_POST['s']) && $_POST['s'] != '') {
             $collection = Article::findInAllTextFieldsInPublishedArticles($_POST['s']);
-            $_SESSION['paginator'] = new Paginator($collection, 10, 5);
-            $this->articles = $_SESSION['paginator']->rowsToShow(1);
+            $this->paginator = new Paginator($collection, 10, 5);
+            $this->articles = $this->paginator->rowsToShow(1);
             $_SESSION['s'] = $_POST['s'];
             $this->querystring = $_POST['s'];
             $this->title = LANG_ROUTER_SEARCH_RESULTS_FOR . $_POST['s'];
@@ -54,8 +55,10 @@ class ResultsRouter extends Router {
             $this->metakeywords = LANG_ROUTER_SEARCH_RESULTS_FOR . $_POST['s'];
             $resultsNumber = count($this->articles);
         } else {
-            if (isset($_SESSION['paginator']) && isset($_GET['page'])) {
-                $this->articles = $_SESSION['paginator']->rowsToShow($_GET['page']);
+            if (isset($_SESSION['s']) && isset($_GET['page'])) {
+                $collection = Article::findInAllTextFieldsInPublishedArticles($_SESSION['s']);
+                $this->paginator = new Paginator($collection, 10, 5);
+                $this->articles = $this->paginator->rowsToShow($_GET['page']);
                 $this->title = LANG_ROUTER_SEARCH_RESULTS_FOR . $_SESSION['s'];
                 $this->metadescritpion = LANG_ROUTER_SEARCH_RESULTS_FOR . $_SESSION['s'];
                 $this->metakeywords = LANG_ROUTER_SEARCH_RESULTS_FOR . $_SESSION['s'];
@@ -63,7 +66,7 @@ class ResultsRouter extends Router {
                 $resultsNumber = count($this->articles);
             } else {
                 $this->articles = array();
-                $_SESSION['paginator'] = new Paginator(array(), 1);
+                $this->paginator = new Paginator(array(), 1);
                 $this->title = LANG_ROUTER_SEARCH_NO_RESULTS;
                 $this->metadescritpion = LANG_ROUTER_SEARCH_NO_RESULTS;
                 $this->metakeywords = LANG_ROUTER_SEARCH_NO_RESULTS;

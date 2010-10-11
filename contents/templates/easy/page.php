@@ -4,12 +4,12 @@
 
     <div id="contentmiddle">
         <div class="contenttitle">
-            <h1><a href="<?=URIMaker::page($this->page)?>" rel="bookmark"><?= $this->page->getTitle() ?></a></h1>
+            <h1><a href="<?PHP echoURIMaker::page($this->page)?>" rel="bookmark"><?PHP echo $this->page->getTitle() ?></a></h1>
             <p>
-            <?= $this->page->getSummary() ?>
+            <?PHP echo $this->page->getSummary() ?>
             </p>
             <p>
-                <?= $this->page->getBody() ?>
+                <?PHP echo $this->page->getBody() ?>
             </p>
 
         </div>

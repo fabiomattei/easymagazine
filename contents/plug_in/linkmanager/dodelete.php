@@ -32,7 +32,7 @@ $rs = DB::getInstance()->execute(
 
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="<?= AdminPluginUriMaker::linkFile('admin.php') ?>">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?PHP echo AdminPluginUriMaker::linkFile('admin.php') ?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">Deleted!</th>

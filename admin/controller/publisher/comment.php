@@ -1,29 +1,29 @@
 <?php
 
 /*
-    Copyright (C) 2009-2010  Fabio Mattei <burattino@gmail.com>
+  Copyright (C) 2009-2010  Fabio Mattei <burattino@gmail.com>
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 define('STARTPATH', '../../../');
 
-require_once(STARTPATH.'costants.php');
-require_once(STARTPATH.SYSTEMPATH.'config.php');
-require_once(STARTPATH.DATAMODELPATH.'comment.php');
-require_once(STARTPATH.UTILSPATH.'paginator.php');
-require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+require_once(STARTPATH . 'costants.php');
+require_once(STARTPATH . SYSTEMPATH . 'config.php');
+require_once(STARTPATH . DATAMODELPATH . 'comment.php');
+require_once(STARTPATH . UTILSPATH . 'paginator.php');
+require_once(STARTPATH . CONTROLLERPATH . 'all_controllers_commons.php');
 
 session_start();
 AllControllersCommons::loadlanguage();
@@ -66,11 +66,14 @@ function find($posts) {
 
     $comms = Comment::findInAllTextFields($posts['string']);
     $outList['comms'] = Paginator::paginate($comms, $page);
-    $outList['page_numbers'] = Comment::getPageNumbers();;
+    $outList['page_numbers'] = Comment::getPageNumbers();
+    ;
     $outList['pageSelected'] = $page;
     $outList['lastList'] = 'find';
 
-    if (count($comms)==0) { $outList['warning'] = LANG_CON_COMMENT_NO_MACH;  }
+    if (count($comms) == 0) {
+        $outList['warning'] = LANG_CON_COMMENT_NO_MACH;
+    }
     return $outList;
 }
 
@@ -106,7 +109,7 @@ function commentarticle($get, $page) {
 
     $art = Article::findById($article_id);
     $comms = $art->comments();
-    
+
     $outList['comms'] = Paginator::paginate($comms, $page);
     $outList['page_numbers'] = Comment::getPageNumbers();
     $outList['pageSelected'] = $page;
@@ -143,9 +146,9 @@ function requestdelete($id, $list, $pageSelected) {
     $comm = Comment::findById($id);
     $outAction['comm'] = $comm;
 
-    $outAction['question'] = LANG_CON_COMMENT_DO_YOU_WANT_DELETE.$comm->getTitle().'? <br />
-    <a href="comment.php?action=dodelete&id='.$comm->getId().'&list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_YES.'</a>,
-    <a href="comment.php?list='.$list.'&pageSelected='.$pageSelected.'">'.LANG_CON_GENERAL_NO.'</a>';
+    $outAction['question'] = LANG_CON_COMMENT_DO_YOU_WANT_DELETE . $comm->getTitle() . '? <br />
+    <a href="comment.php?action=dodelete&id=' . $comm->getId() . '&list=' . $list . '&pageSelected=' . $pageSelected . '">' . LANG_CON_GENERAL_YES . '</a>,
+    <a href="comment.php?list=' . $list . '&pageSelected=' . $pageSelected . '">' . LANG_CON_GENERAL_NO . '</a>';
 
     return $outAction;
 }
@@ -170,7 +173,7 @@ function replay($id) {
 
     $comm = new Comment();
     $comm->setArticle_id($comm_to_be_replayed->getArticle_id());
-    $comm->setTitle('Re: '.$comm_to_be_replayed->getTitle());
+    $comm->setTitle('Re: ' . $comm_to_be_replayed->getTitle());
     $comm->setSignature($_SESSION['user']->getName());
     $outAction['comm'] = $comm;
 
@@ -180,20 +183,29 @@ function replay($id) {
 function save($toSave) {
     $outAction = array();
     if ($toSave['article_id'] == Article::NEW_ARTICLE) {
+        # if no article is specified it means that the written comment
+        # is an orphan. I cannot save that comment.
         $outAction['comm'] = new Comment();
         $outAction['info'] = LANG_CON_COMMENT_ASSOCIATED_ARTICLE;
     } else {
-        if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
+        if (!isset($toSave['Published'])) {
+            $toSave['Published'] = 0;
+        }
+
+        # If the article is published I need to delete the cache
+        if ($toSave['Published'] == 1) {
+            DirectoryRunner::cleanDir('cached');
+        }
 
         $comm = new Comment(
-            $toSave['id'],
-            $toSave['article_id'],
-            $toSave['Title'],
-            $toSave['Published'],
-            $toSave['Body'],
-            $toSave['Signature'],
-            $toSave['created'],
-            $toSave['updated']);
+                        $toSave['id'],
+                        $toSave['article_id'],
+                        $toSave['Title'],
+                        $toSave['Published'],
+                        $toSave['Body'],
+                        $toSave['Signature'],
+                        $toSave['created'],
+                        $toSave['updated']);
         $comm->save();
 
         $outAction['info'] = LANG_CON_COMMENT_SAVED;
@@ -203,29 +215,50 @@ function save($toSave) {
     return $outAction;
 }
 
-if (isset($_GET['list'])) { $list = $_GET['list']; }
-else { $list = 'index'; }
-if (isset($_GET['pageSelected'])) { $page = $_GET['pageSelected']; }
-elseif (isset($_POST['page'])) { $page = $_POST['page']; }
-else { $page = '1'; }
-if (isset($_GET['action'])) { $action = $_GET['action']; }
-else { $action = 'newComment'; }
+if (isset($_GET['list'])) {
+    $list = $_GET['list'];
+} else {
+    $list = 'index';
+}
+if (isset($_GET['pageSelected'])) {
+    $page = $_GET['pageSelected'];
+} elseif (isset($_POST['page'])) {
+    $page = $_POST['page'];
+} else {
+    $page = '1';
+}
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+} else {
+    $action = 'newComment';
+}
 
 if (isset($_SESSION['user'])) {
     switch ($action) {
-        case  'newComment':        $outAction = newComment($_GET); break;
-        case  'save':              $outAction = save($_POST); break;
-        case  'edit':              $outAction = edit($_GET['id']); break;
-        case  'dodelete':          $outAction = dodelete($_GET['id']); break;
-        case  'requestdelete':     $outAction = requestdelete($_GET['id'], $_GET['list'], $_GET['pageSelected']); break;
-        case  'replay':            $outAction = replay($_GET['id']); break;
+        case 'newComment': $outAction = newComment($_GET);
+            break;
+        case 'save': $outAction = save($_POST);
+            break;
+        case 'edit': $outAction = edit($_GET['id']);
+            break;
+        case 'dodelete': $outAction = dodelete($_GET['id']);
+            break;
+        case 'requestdelete': $outAction = requestdelete($_GET['id'], $_GET['list'], $_GET['pageSelected']);
+            break;
+        case 'replay': $outAction = replay($_GET['id']);
+            break;
     }
     switch ($list) {
-        case  'index':             $outList = index($page); break;
-        case  'commentnumber':     $outList = commentnumber($_GET, $page); break;
-        case  'commentarticle':    $outList = commentarticle($_GET, $page); break;
-        case  'find':              $outList = find($_POST); break;
-        case  'byuser':            $outList = byuser($page); break;
+        case 'index': $outList = index($page);
+            break;
+        case 'commentnumber': $outList = commentnumber($_GET, $page);
+            break;
+        case 'commentarticle': $outList = commentarticle($_GET, $page);
+            break;
+        case 'find': $outList = find($_POST);
+            break;
+        case 'byuser': $outList = byuser($page);
+            break;
     }
 }
 
@@ -241,16 +274,31 @@ $warningarray = array();
 $questionarray = array();
 $errorarray = array();
 
-if (isset($outAction['info'])) { $infoarray[] = $outAction['info']; }
-if (isset($outAction['warning'])) { $warningarray[] = $outAction['warning']; }
-if (isset($outAction['question'])) { $questionarray[] = $outAction['question']; }
-if (isset($outAction['error'])) { $errorarray[] = $outAction['error']; }
+if (isset($outAction['info'])) {
+    $infoarray[] = $outAction['info'];
+}
+if (isset($outAction['warning'])) {
+    $warningarray[] = $outAction['warning'];
+}
+if (isset($outAction['question'])) {
+    $questionarray[] = $outAction['question'];
+}
+if (isset($outAction['error'])) {
+    $errorarray[] = $outAction['error'];
+}
 
-if (isset($outList['info'])) { $infoarray[] = $outList['info']; }
-if (isset($outList['warning'])) { $warningarray[] = $outList['warning']; }
-if (isset($outList['question'])) { $questionarray[] = $outList['question']; }
-if (isset($outList['error'])) { $errorarray[] = $outList['error']; }
+if (isset($outList['info'])) {
+    $infoarray[] = $outList['info'];
+}
+if (isset($outList['warning'])) {
+    $warningarray[] = $outList['warning'];
+}
+if (isset($outList['question'])) {
+    $questionarray[] = $outList['question'];
+}
+if (isset($outList['error'])) {
+    $errorarray[] = $outList['error'];
+}
 
 include('../../view/publisher/comments.php');
-
 ?>

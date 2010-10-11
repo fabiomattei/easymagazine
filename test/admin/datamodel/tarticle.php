@@ -41,6 +41,15 @@ class ArticleTests extends UnitTestCase {
         $this->assertPattern('(Article)', $ar->getTitle());
     }
 
+    function testFindByTag() {
+        $ar = Article::findByTag('flowers');
+        $this->assertEqual(4, count($ar));
+        $this->assertPattern('(flowers)', $ar[0]->getTag());
+        $this->assertPattern('(flowers)', $ar[1]->getTag());
+        $this->assertPattern('(flowers)', $ar[2]->getTag());
+        $this->assertPattern('(flowers)', $ar[3]->getTag());
+    }
+
     function testfindUpIndexNumber () {
         $ar = Article::findById(2);
         $ar2 = $ar->findUpIndexNumber();

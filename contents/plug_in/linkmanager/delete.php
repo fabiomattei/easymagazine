@@ -41,22 +41,22 @@ if ($rs) {
 
 ?>
 
-<form name="form1" enctype="multipart/form-data" method="post" action="<?= AdminPluginUriMaker::linkFile('dodelete.php', 'id='.$id) ?>">
+<form name="form1" enctype="multipart/form-data" method="post" action="<?PHP echo AdminPluginUriMaker::linkFile('dodelete.php', 'id='.$id) ?>">
     <table class="listing form" cellpadding="0" cellspacing="0">
         <tr>
             <th class="full" colspan="2">Are you sure you want delete:</th>
         </tr>
         <tr>
             <td class="first" width="172"><strong>Title</strong></td>
-            <td class="last"><?=$title?></td>
+            <td class="last"><?PHP echo$title?></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>Text</strong></td>
-            <td class="last"><?=$text?></td>
+            <td class="last"><?PHP echo$text?></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>Url</strong></td>
-            <td class="last"><?=$url?></td>
+            <td class="last"><?PHP echo$url?></td>
         </tr>
         <tr class="bg">
             <td class="first"><strong>&nbsp;</strong></td>

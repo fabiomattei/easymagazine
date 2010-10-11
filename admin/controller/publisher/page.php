@@ -159,6 +159,11 @@ function save($toSave) {
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
 
+    # If the page is published I need to delete the cache
+    if ($toSave['Published'] == 1) {
+        DirectoryRunner::cleanDir('cached');
+    }
+
     $pag = new Page(
         $toSave['id'],
         $toSave['indexnumber'],

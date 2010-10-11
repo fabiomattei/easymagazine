@@ -24,6 +24,8 @@ require_once(STARTPATH.SYSTEMPATH.'config.php');
 require_once(STARTPATH.DBPATH.'db.php');
 require_once(STARTPATH.DATAMODELPATH.'user.php');
 require_once(STARTPATH.CONTROLLERPATH.'all_controllers_commons.php');
+require_once(STARTPATH.UTILSPATH.'directoryrunner.php');
+
 
 session_start();
 AllControllersCommons::loadlanguage();
@@ -88,6 +90,11 @@ function save($toSave) {
     $out = array();
 
     if (!isset($toSave['toshow'])) { $toSave['toshow'] = 0; }
+
+    # If the user is published I need to delete the cache
+    if ($toSave['toshow'] == 1) {
+        DirectoryRunner::cleanDir('cached');
+    }
 
     $checkusername = User::findByUserName($toSave['Username']);
 

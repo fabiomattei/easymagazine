@@ -4,20 +4,20 @@
 
     <div id="contentmiddle">
         <div class="contenttitle">
-            <h1><a href="<?=URIMaker::article($this->article)?>" rel="bookmark"><?= $this->article->getTitle() ?></a></h1>
+            <h1><a href="<?PHP echoURIMaker::article($this->article)?>" rel="bookmark"><?PHP echo $this->article->getTitle() ?></a></h1>
             <p>
-                <?= $this->article->getCreatedFormatted() ?>  by
+                <?PHP echo $this->article->getCreatedFormatted() ?>  by
                 <?
                 foreach ($this->article->users() as $user) {
                     echo $user->getName().' ';
                 }
                 ?> |
-                <? echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
+                <?PHPecho '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
                 <br />
-                <?= Taghandler::tagsToLink($this->article->getTag()) ?>
+                <?PHP echo Taghandler::tagsToLink($this->article->getTag()) ?>
             </p>
             <p>
-            <?= $this->article->getSummary() ?>
+            <?PHP echo $this->article->getSummary() ?>
             </p>
 
             <h3>Comments</h3>
@@ -28,38 +28,38 @@
             }
             ?>
 
-            <? foreach($this->article->commentsPublished()  as $comment) { ?>
+            <?PHPforeach($this->article->commentsPublished()  as $comment) { ?>
 
-            <p><small><?= $comment->getCreatedFormatted() ?></small> by
-                    <?= $comment->getSignature() ?>
+            <p><small><?PHP echo $comment->getCreatedFormatted() ?></small> by
+                    <?PHP echo $comment->getSignature() ?>
             </p>
 
             <p>
 
-                    <?= $comment->getTitle() ?><br />
+                    <?PHP echo $comment->getTitle() ?><br />
 
-                    <?= $comment->getBody() ?>
+                    <?PHP echo $comment->getBody() ?>
 
             </p>
 
-            <? } ?>
+            <?PHP} ?>
 
-            <? if ($this->article->getCommentsallowed() && $this->article->number()->getCommentsallowed()): ?>
+            <?PHPif ($this->article->getCommentsallowed() && $this->article->number()->getCommentsallowed()): ?>
             <p>
-            <form name="newcomment" method="post" action="<?= URIMaker::comment($this->article) ?>">
+            <form name="newcomment" method="post" action="<?PHP echo URIMaker::comment($this->article) ?>">
                 Title<br />
-                <input type="text" name="Title" value="<?= $this->postedtitle ?>"/><br />
+                <input type="text" name="Title" value="<?PHP echo $this->postedtitle ?>"/><br />
                 Body<br />
-                <textarea name="Body" rows="4" cols="40"><?= $this->postedbody ?></textarea><br />
+                <textarea name="Body" rows="4" cols="40"><?PHP echo $this->postedbody ?></textarea><br />
                 Signature<br />
-                <input type="text" name="Signature" value="<?= $this->postedsignature ?>"/><br /><br />
+                <input type="text" name="Signature" value="<?PHP echo $this->postedsignature ?>"/><br /><br />
                 <!-- pass a session id to the query string of the script to prevent ie caching -->
-                <img src="<?= URIMaker::fromBasePath('lib/securimage/securimage_show.php?sid='.md5(uniqid(time())))?>"><br />
+                <img src="<?PHP echo URIMaker::fromBasePath('lib/securimage/securimage_show.php?sid='.md5(uniqid(time())))?>"><br />
                 <input type="text" name="code" /><br /><br />
                 <input type="submit" value="Ok" name="Ok" />
             </form>
             </p>
-            <? endif; ?>
+            <?PHPendif; ?>
 
         </div>
     </div>

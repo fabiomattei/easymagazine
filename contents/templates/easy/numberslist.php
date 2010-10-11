@@ -4,23 +4,23 @@
 
     <div id="contentmiddle">
 
-        <? foreach($this->numberslist  as $nu) : ?>
+        <?PHPforeach($this->numberslist  as $nu) : ?>
         <div class="contenttitle">
-            <h1><a href="<?= URIMaker::number($nu) ?>"><?= $nu->getTitle() ?></a></h1>
-            <p><?= $nu->getSubtitle() ?></p>
+            <h1><a href="<?PHP echo URIMaker::number($nu) ?>"><?PHP echo $nu->getTitle() ?></a></h1>
+            <p><?PHP echo $nu->getSubtitle() ?></p>
             <p>
-                <?= $nu->getSummary() ?>
+                <?PHP echo $nu->getSummary() ?>
             </p>
-                <? if ($nu->epubExists()) : ?>
+                <?PHPif ($nu->epubExists()) : ?>
             <p>
-                <a href="<?= URIMaker::fromBasePath($nu->epubPath()) ?>">Download Epub</a>
+                <a href="<?PHP echo URIMaker::fromBasePath($nu->epubPath()) ?>">Download Epub</a>
             </p>
-                <? endif; ?>
+                <?PHPendif; ?>
         </div>
-        <? endforeach; ?>
+        <?PHPendforeach; ?>
         <div class="contenttitle">
             <p>
-                <?= $this->paginator->renderFullNav(URIMaker::numberslist())  ?>
+                <?PHP echo $this->paginator->renderFullNav(URIMaker::numberslist())  ?>
             </p>
         </div>
     </div>

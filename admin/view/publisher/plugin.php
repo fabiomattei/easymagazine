@@ -46,7 +46,7 @@
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
+			<h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
 			<a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
 		</div>
 		<div id="center-column">
@@ -81,17 +81,17 @@
                     foreach ($plugins as $key => $value) {
                     ?>
 					<tr>
-						<td class="first style1"><? echo $key; ?></td>
-						<td><a href="plugin.php?action=info&pluginname=<? echo $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=admin&pluginname=<? echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=activate&pluginname=<? echo $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=deactivate&pluginname=<? echo $key; ?>"><img src="../../resources/img/flag-red.png" width="16" height="16" alt="" /></a></td>
+						<td class="first style1"><?PHPecho $key; ?></td>
+						<td><a href="plugin.php?action=info&pluginname=<?PHPecho $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=admin&pluginname=<?PHPecho $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=activate&pluginname=<?PHPecho $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="plugin.php?action=deactivate&pluginname=<?PHPecho $key; ?>"><img src="../../resources/img/flag-red.png" width="16" height="16" alt="" /></a></td>
 						<td>
-                                                <? if (isset($pluginsindb["$key"])) { ?>
+                                                <?PHPif (isset($pluginsindb["$key"])) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                                <? } else { ?>
+                                                <?PHP} else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                                <? } ?></td>
+                                                <?PHP} ?></td>
 					</tr>
                     <?
                     }

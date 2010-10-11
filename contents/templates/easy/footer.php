@@ -9,7 +9,7 @@
 </div>
 
 <div id="footer">
-<?= Magazine::getMagazinePublisher()?> <?= Magazine::getMagazineRights()?> Powered by <a href="http://www.easymagazine.org/">Easy Magazine</a>
+<?PHP echo Magazine::getMagazinePublisher()?> <?PHP echo Magazine::getMagazineRights()?> Powered by <a href="http://www.easymagazine.org/">Easy Magazine</a>
 </div>
 </body>
 

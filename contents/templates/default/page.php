@@ -4,11 +4,11 @@
 
     <div class="post">
 
-        <h2><?= $this->page->getTitle() ?></h2>
+        <h2><?PHP echo $this->page->getTitle() ?></h2>
 
         <div class="entry">
             
-            <?= $this->page->getBody() ?>
+            <?PHP echo $this->page->getBody() ?>
 
         </div>
 

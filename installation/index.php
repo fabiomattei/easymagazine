@@ -33,10 +33,10 @@
         <div id="intestazione">
             <p class="logo">&nbsp;</p>
             <div class="menu">
-                <? if (isset($_GET['error']) && $_GET['error'] == 1) :?>
+                <?PHPif (isset($_GET['error']) && $_GET['error'] == 1) :?>
                 <b>It is not possible to open a connection with the database, please
                 check the data inserted.</b><br /><br />
-                <? endif; ?>
+                <?PHPendif; ?>
                 <form action="createconfig.php" method="post" id="login">
                     In order to install the application please be sure the following folders have the right permissions (0755):
                     <b>easymagazine/system</b> (and all contained files)<br />

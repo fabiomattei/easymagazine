@@ -3,28 +3,28 @@
     <?php include("l_sidebar.php");?>
 
     <div id="contentmiddle">
-        <h1>All articles by <?= $this->person->getName() ?></h1><br />
-        <? foreach($this->articles as $article) { ?>
+        <h1>All articles by <?PHP echo $this->person->getName() ?></h1><br />
+        <?PHPforeach($this->articles as $article) { ?>
         <div class="contenttitle">
-            <h1><a href="<?=URIMaker::article($article)?>" rel="bookmark"><?= $article->getTitle() ?></a></h1>
+            <h1><a href="<?PHP echoURIMaker::article($article)?>" rel="bookmark"><?PHP echo $article->getTitle() ?></a></h1>
             <p>
-                    <?= $article->getCreatedFormatted() ?>  by
+                    <?PHP echo $article->getCreatedFormatted() ?>  by
                     <?
                     foreach ($article->users() as $user) {
                         echo $user->getName().' ';
                     }
                     ?> |
-                    <? echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
+                    <?PHPecho '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
                     <br />
-                    <?= Taghandler::tagsToLink($article->getTag()) ?>
+                    <?PHP echo Taghandler::tagsToLink($article->getTag()) ?>
             </p>
             <p>
-                <?= $article->getSummary() ?>
+                <?PHP echo $article->getSummary() ?>
             </p>
         </div>
-        <? } ?>
+        <?PHP} ?>
         <div class="contenttitle">
-            <?= $this->paginator->renderFullNav(URIMaker::articlesperson($this->person))  ?>
+            <?PHP echo $this->paginator->renderFullNav(URIMaker::articlesperson($this->person))  ?>
         </div>
     </div>
 

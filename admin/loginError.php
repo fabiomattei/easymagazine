@@ -42,8 +42,8 @@ AllControllersCommons::loadlanguage();
             <div class="menu">
 
                 <?PHP echo LANG_LOGIN_USERNAME_PASSWORD_WRONG; ?>!<br />
-                <a href="login.php"><? echo LANG_LOGIN_TRY_AGAIN; ?></a>. <br /><br />
-                <? echo LANG_LOGIN_MESSAGE; ?> <br />
+                <a href="login.php"><?PHPecho LANG_LOGIN_TRY_AGAIN; ?></a>. <br /><br />
+                <?PHPecho LANG_LOGIN_MESSAGE; ?> <br />
                 <form action="mailPassword.php" method="post">
                     <table>
                         <tr>

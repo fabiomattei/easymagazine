@@ -4,23 +4,23 @@
     <ul id="l_sidebarwidgeted">
 
         <li id="Themes">
-            <h2><?= $this->number->getTitle() ?></h2>
-            <h3><?= $this->number->getSubtitle() ?></h3>
+            <h2><?PHP echo $this->number->getTitle() ?></h2>
+            <h3><?PHP echo $this->number->getSubtitle() ?></h3>
             <div id="numberDescription">
-                <?= $this->number->getSummary() ?>
+                <?PHP echo $this->number->getSummary() ?>
             </div>
-            <? if ($this->number->epubExists()) : ?>
+            <?PHPif ($this->number->epubExists()) : ?>
             <div id="epub">
-                <a href="<?= URIMaker::fromBasePath($this->number->epubPath()) ?>">Download Epub</a>
+                <a href="<?PHP echo URIMaker::fromBasePath($this->number->epubPath()) ?>">Download Epub</a>
             </div>
-            <? endif; ?>
+            <?PHPendif; ?>
         </li>
         <br />
 
         <li id="Numbers">
             <h2>Last Numbers</h2>
             <ul>
-                <? foreach ($this->numbers as $num) {
+                <?PHPforeach ($this->numbers as $num) {
                     echo '<li><a href="'.URIMaker::number($num).'">'.$num->getTitle().'</a></li>';
                 }?>
             </ul>

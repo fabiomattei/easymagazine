@@ -49,7 +49,7 @@ abstract class Router {
     public abstract function isCachable();
 
     public function isCacheStillValid() {
-        $timeout = 60; // Seconds
+        $timeout = 3600; // Seconds
         return file_exists($this->cachePath) and filemtime($this->cachePath) + $timeout > time();
     }
 

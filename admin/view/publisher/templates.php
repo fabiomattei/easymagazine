@@ -46,7 +46,7 @@
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
+			<h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
 			<a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
 		</div>
 		<div id="center-column">
@@ -79,15 +79,15 @@
                     foreach ($templates as $key => $value) {
                     ?>
 					<tr>
-						<td class="first style1"><? echo $key; ?></td>
-						<td><a href="template.php?action=info&id=<? echo $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="template.php?action=activate&id=<? echo $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
+						<td class="first style1"><?PHPecho $key; ?></td>
+						<td><a href="template.php?action=info&id=<?PHPecho $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="template.php?action=activate&id=<?PHPecho $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
 						<td>
-                                                <? if ($key == $activetemplate->getName()) { ?>
+                                                <?PHPif ($key == $activetemplate->getName()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                                <? } else { ?>
+                                                <?PHP} else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                                <? } ?></td>
+                                                <?PHP} ?></td>
                                         </tr>
                     <?
                     }

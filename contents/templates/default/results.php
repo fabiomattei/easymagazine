@@ -4,41 +4,41 @@
 
 <div class="post">
 
-    <h1>Search results for: <?= $this->querystring ?></h1>
+    <h1>Search results for: <?PHP echo $this->querystring ?></h1>
 
-    <? if (isset($this->advice)) :?>
-        <p><?= $this->advice ?></p>
-    <? endif; ?>
+    <?PHPif (isset($this->advice)) :?>
+        <p><?PHP echo $this->advice ?></p>
+    <?PHPendif; ?>
 
-    <? foreach($this->articles  as $article) { ?>
+    <?PHPforeach($this->articles  as $article) { ?>
 
     <h2>
-        <? echo '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
+        <?PHPecho '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
     </h2>
 
-    <div class="date"><small><?= $article->getCreatedFormatted() ?></small> by
+    <div class="date"><small><?PHP echo $article->getCreatedFormatted() ?></small> by
             <?
         foreach ($article->users() as $user) {
              echo $user->getName().' ';
         }
         ?>
     </div>
-    <div class="date"><small><?= Taghandler::tagsToLink($article->getTag()) ?></small>
+    <div class="date"><small><?PHP echo Taghandler::tagsToLink($article->getTag()) ?></small>
     </div>
 
     <div class="entry">
 
-        <?= $article->getSummary() ?>
+        <?PHP echo $article->getSummary() ?>
 
     </div>
 
     <p class="date">
-        <? echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
+        <?PHPecho '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
     </p>
 
-    <? } ?>
+    <?PHP} ?>
 
     <p>
-        <?= $_SESSION['paginator']->renderFullNav(URIMaker::result())  ?>
+        <?PHP echo $this->paginator->renderFullNav(URIMaker::result())  ?>
     </p>
 </div>

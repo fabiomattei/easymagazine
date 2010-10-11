@@ -225,6 +225,11 @@ function save($toSave) {
         $toSave['commentsallowed'] = 0;
     }
 
+    # If the number is published I need to delete the cache
+    if ($toSave['Published'] == 1) {
+        DirectoryRunner::cleanDir('cached');
+    }
+
     $numb = new Number(
                     $toSave['id'],
                     $toSave['indexnumber'],

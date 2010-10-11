@@ -17,8 +17,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
-
 class Paginator {
 
     private $rows_per_page = 10; //Number of records to display per page

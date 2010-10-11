@@ -25,7 +25,7 @@
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
-        <? require_once('../../view/common/tinymcesetup.php'); ?>
+        <?PHPrequire_once('../../view/common/tinymcesetup.php'); ?>
     </head>
     <body>
         <div id="main">
@@ -47,7 +47,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
                     <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
@@ -89,31 +89,31 @@
                             foreach ($pags as $pg) {
                                 ?>
                             <tr>
-                                <td class="first style1"><? echo $pg->getTitle(); ?></td>
-                                <td><a href="page.php?action=edit&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                <td><a href="page.php?action=up&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="page.php?action=down&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="page.php?action=preview&id=<? echo $pg->getId(); ?>" target="_blank"><img src="../../resources/img/preview_icon.png" width="16" height="16" alt="" /></a></td>
+                                <td class="first style1"><?PHPecho $pg->getTitle(); ?></td>
+                                <td><a href="page.php?action=edit&id=<?PHPecho $pg->getId(); ?>&list=<?PHP echo$lastList?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td><a href="page.php?action=up&id=<?PHPecho $pg->getId(); ?>&list=<?PHP echo$lastList?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="page.php?action=down&id=<?PHPecho $pg->getId(); ?>&list=<?PHP echo$lastList?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="page.php?action=preview&id=<?PHPecho $pg->getId(); ?>" target="_blank"><img src="../../resources/img/preview_icon.png" width="16" height="16" alt="" /></a></td>
                                 <td>
-                                        <? if ($pg->getPublished()) { ?>
+                                        <?PHPif ($pg->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <? } else { ?>
+                                        <?PHP} else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <? } ?></td>
-                                <td class="last"><a href="page.php?action=requestdelete&id=<? echo $pg->getId(); ?>&list=<?=$lastList?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                    <?PHP} ?></td>
+                                <td class="last"><a href="page.php?action=requestdelete&id=<?PHPecho $pg->getId(); ?>&list=<?PHP echo$lastList?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
                             ?>
                         </table>
-                        <form name="formnew" method="post" action="page.php?list=<?=$lastList?>">
+                        <form name="formnew" method="post" action="page.php?list=<?PHP echo$lastList?>">
                             <input type="submit" value="<?php echo LANG_ADMIN_TABLE_NEW; ?>" name="new" />
                         </form>
                     </div>
                     <div class="table">
                         <img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
                         <img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
-                        <form name="form1" enctype="multipart/form-data" method="post" action="page.php?action=save&list=<?=$lastList?>">
+                        <form name="form1" enctype="multipart/form-data" method="post" action="page.php?action=save&list=<?PHP echo$lastList?>">
                             <table class="listing form" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <th class="full" colspan="2"><?php echo LANG_ADMIN_TABLE_EDIT; ?></th>
@@ -121,57 +121,57 @@
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_TITLE; ?></strong></td>
                                     <td class="last">
-                                        <textarea name="Title" rows="1" cols="60"><?= $pag->getUnfilteredTitle(); ?></textarea>
+                                        <textarea name="Title" rows="1" cols="60"><?PHP echo $pag->getUnfilteredTitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_SUBTITLE; ?></strong></td>
                                     <td class="last">
-                                        <textarea name="SubTitle" rows="1" cols="60"><?= $pag->getUnfilteredSubtitle(); ?></textarea>
+                                        <textarea name="SubTitle" rows="1" cols="60"><?PHP echo $pag->getUnfilteredSubtitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_SUMMARY; ?></strong><br />
-                                        <textarea name="Summary" class="mceAdvanced" rows="4" cols="60"><? echo $pag->getUnfilteredSummary(); ?></textarea>
+                                        <textarea name="Summary" class="mceAdvanced" rows="4" cols="60"><?PHPecho $pag->getUnfilteredSummary(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_BODY; ?></strong><br />
                                         <textarea cols="40" id="article_body" class="mceAdvanced" name="Body" rows="20" style="width: 500px; padding: 5px">
-                                        <? echo $pag->getUnfilteredBody(); ?>
+                                        <?PHPecho $pag->getUnfilteredBody(); ?>
                                         </textarea>
                                 </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Tag</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Tag" value="<? echo $pag->getUnfilteredTag(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Tag" value="<?PHPecho $pag->getUnfilteredTag(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Meta Description</strong></td>
-                                    <td class="last"><textarea name="MetaDescription" rows="4" cols="60"><? echo $pag->getMetaDescription(); ?></textarea></td>
+                                    <td class="last"><textarea name="MetaDescription" rows="4" cols="60"><?PHPecho $pag->getMetaDescription(); ?></textarea></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Meta Keyword</strong></td>
-                                    <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><? echo $pag->getMetaKeyword(); ?></textarea></td>
+                                    <td class="last"><textarea name="MetaKeyword" rows="4" cols="60"><?PHPecho $pag->getMetaKeyword(); ?></textarea></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></strong></td>
-                                    <td class="last"><input type="checkbox" name="Published" value="1" <? if($pag->getPublished()) echo 'checked="checked"'; ?>/></td>
+                                    <td class="last"><input type="checkbox" name="Published" value="1" <?PHPif($pag->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
-                                    <td class="last"><? echo $pag->getCreated(); ?></td>
+                                    <td class="last"><?PHPecho $pag->getCreated(); ?></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
-                                    <td class="last"><? echo $pag->getUpdated(); ?></td>
+                                    <td class="last"><?PHPecho $pag->getUpdated(); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                <input type="hidden" name="id" value="<? echo $pag->getId(); ?>">
-                                <input type="hidden" name="indexnumber" value="<? echo $pag->getIndexnumber(); ?>">
-                                <input type="hidden" name="created" value="<? echo $pag->getCreated(); ?>">
-                                <input type="hidden" name="updated" value="<? echo $pag->getUpdated(); ?>">
+                                <input type="hidden" name="id" value="<?PHPecho $pag->getId(); ?>">
+                                <input type="hidden" name="indexnumber" value="<?PHPecho $pag->getIndexnumber(); ?>">
+                                <input type="hidden" name="created" value="<?PHPecho $pag->getCreated(); ?>">
+                                <input type="hidden" name="updated" value="<?PHPecho $pag->getUpdated(); ?>">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
                                 <td class="last"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" /></td>
                                 </tr>

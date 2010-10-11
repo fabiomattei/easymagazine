@@ -1,44 +1,44 @@
 <div id="sidebar">
 
     <h2>Search</h2>
-    <form id="searchform" method="post" action="<?= URIMaker::result() ?>">
+    <form id="searchform" method="post" action="<?PHP echo URIMaker::result() ?>">
         <input type="text" name="s" id="s"  value=""/>
         <input type="submit" value="Search" name="Search" />
     </form>
 
     <br />
-    <a href="<?= URIMaker::rssFeed()?>"><img src="<?= URIMaker::templatePath('images/rss-icon.png') ?>"></a>
+    <a href="<?PHP echo URIMaker::rssFeed()?>"><img src="<?PHP echo URIMaker::templatePath('images/rss-icon.png') ?>"></a>
     RSS Feed
     <br /><br />
 
-    <h2><?= $this->number->getTitle() ?></h2>
+    <h2><?PHP echo $this->number->getTitle() ?></h2>
 
     <div class="news">
-        <b><?= $this->number->getSubtitle() ?></b>
+        <b><?PHP echo $this->number->getSubtitle() ?></b>
 
-     <?= $this->number->getSummary() ?> 
-    <? if ($this->number->epubExists()) : ?>
-    <a href="<?= URIMaker::fromBasePath($this->number->epubPath()) ?>">Download Epub</a>
-    <? endif; ?>
+     <?PHP echo $this->number->getSummary() ?> 
+    <?PHPif ($this->number->epubExists()) : ?>
+    <a href="<?PHP echo URIMaker::fromBasePath($this->number->epubPath()) ?>">Download Epub</a>
+    <?PHPendif; ?>
 </div>
 <br />
 <h2>Categories</h2>
 <ul>
-    <? foreach ($this->categories as $cat) : ?>
-    <li><a href="<?= URIMaker::category($cat) ?>"><?= $cat->getName() ?></a></li>
-    <? endforeach; ?>
+    <?PHPforeach ($this->categories as $cat) : ?>
+    <li><a href="<?PHP echo URIMaker::category($cat) ?>"><?PHP echo $cat->getName() ?></a></li>
+    <?PHPendforeach; ?>
 </ul>
 
 
 <h2>Lasts Numbers</h2>
 <ul>
-    <? foreach ($this->numbers as $num) { ?>
-    <li><a href="<?= URIMaker::number($num)?>"><?= $num->getTitle() ?></a></li>
-    <?   }?>
+    <?PHPforeach ($this->numbers as $num) { ?>
+    <li><a href="<?PHP echo URIMaker::number($num)?>"><?PHP echo $num->getTitle() ?></a></li>
+    <?PHP  }?>
 </ul>
 <h2>Admin</h2>
 <ul>
-    <li><a href="<?= URIMaker::loginPage() ?>">Login</a></li>
+    <li><a href="<?PHP echo URIMaker::loginPage() ?>">Login</a></li>
     <li><a href="http://www.easymagazine.org/">Easy Magazine</a></li>
 </ul>
 

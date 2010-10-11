@@ -46,7 +46,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <? echo $_SESSION['user']->getName() ?></h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
                     <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
@@ -287,11 +287,11 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_MAGAZINE_TITLE; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="title" value="<?= $settingsindb['title']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="title" value="<?PHP echo $settingsindb['title']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_MAGAZINE_DESCRIPTION; ?></strong></td>
-                                    <td class="last"><textarea name="description" rows="4" cols="60"><?= $settingsindb['description']->getValue(); ?></textarea></td>
+                                    <td class="last"><textarea name="description" rows="4" cols="60"><?PHP echo $settingsindb['description']->getValue(); ?></textarea></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_URLTYPE; ?></strong></td>
@@ -304,36 +304,36 @@
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHER; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="publisher" value="<?= $settingsindb['publisher']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="publisher" value="<?PHP echo $settingsindb['publisher']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_RIGHTS; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="rights" value="<?= $settingsindb['rights']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="rights" value="<?PHP echo $settingsindb['rights']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_ADMINISTRATION_EMAIL; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="email" value="<?= $settingsindb['email']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="email" value="<?PHP echo $settingsindb['email']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_EPUBFILENAME; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="epubname" value="<?= $settingsindb['epubname']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="epubname" value="<?PHP echo $settingsindb['epubname']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_WEBSITEURL; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="siteurl" value="<?= $settingsindb['siteurl']->getValue(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="siteurl" value="<?PHP echo $settingsindb['siteurl']->getValue(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_FACEBOOK; ?></strong></td>
                                     <td class="last">
-                                        <input type="radio" name="facebookbutton" value="ON" <? if($settingsindb['facebookbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
-                                        <input type="radio" name="facebookbutton" value="OFF" <? if($settingsindb['facebookbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
+                                        <input type="radio" name="facebookbutton" value="ON" <?PHPif($settingsindb['facebookbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
+                                        <input type="radio" name="facebookbutton" value="OFF" <?PHPif($settingsindb['facebookbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_TWITTER; ?></strong></td>
                                     <td class="last">
-                                        <input type="radio" name="twitterbutton" value="ON" <? if($settingsindb['twitterbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
-                                        <input type="radio" name="twitterbutton" value="OFF" <? if($settingsindb['twitterbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
+                                        <input type="radio" name="twitterbutton" value="ON" <?PHPif($settingsindb['twitterbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
+                                        <input type="radio" name="twitterbutton" value="OFF" <?PHPif($settingsindb['twitterbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
                                     </td>
                                 </tr>
                                 <tr class="bg">

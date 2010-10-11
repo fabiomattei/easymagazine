@@ -265,14 +265,17 @@ function down($id) {
 }
 
 function save($toSave) {
-    DirectoryRunner::cleanDir('cached');
-
     $page = 1;
     $outAction = array();
 
     if (!isset($toSave['Published'])) { $toSave['Published'] = 0; }
     if (!isset($toSave['commentsallowed'])) { $toSave['commentsallowed'] = 0; }
     if (!isset($toSave['imagefilename'])) { $toSave['imagefilename'] = ''; }
+
+    # If the article is published I need to delete the cache
+    if ($toSave['Published'] == 1) {
+        DirectoryRunner::cleanDir('cached');
+    }
 
     $art = new Article(
         $toSave['id'],

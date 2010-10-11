@@ -51,7 +51,7 @@ $toSave->save();
         <div id="intestazione">
             <p class="logo">&nbsp;</p>
             <div class="menu">
-                <? echo $out; ?><br /><br />
+                <?PHPecho $out; ?><br /><br />
                 If there are no error the istallation is well done.<br />
                 Please delete the "installation" folder and access to your new
                 on-line magazine with the username "user" and password "psw" in the

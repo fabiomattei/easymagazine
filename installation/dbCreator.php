@@ -281,7 +281,7 @@ class DbCreator {
 
     public function populateTableOptions() {
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
-            ('version', 'version', '2.0.10')";
+            ('version', 'version', '2.0.11')";
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
             ('default', 'template', 'active')";
@@ -309,6 +309,11 @@ class DbCreator {
         $result = mysql_query($cmd, $this->connection);
         $cmd = "insert into ".TBPREFIX."options (name, type, value) values
             ('siteurl', 'settings', 'http://www.easymagazine.org/')";
+		$cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('facebookbutton', 'settings', 'OFF')";
+        $result = mysql_query($cmd, $this->connection);
+        $cmd = "insert into ".TBPREFIX."options (name, type, value) values
+            ('twitterbutton', 'settings', 'OFF')";
         $result = mysql_query($cmd, $this->connection);
         return $result;
     }

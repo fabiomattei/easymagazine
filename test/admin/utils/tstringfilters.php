@@ -28,15 +28,6 @@ class StringFiltersFileTests extends UnitTestCase {
     function tearDown() {
     }
 
-    function testCheckAndCreatePath() {
-        $text = "<b>example: </b><div align=left><img href=\"prova.jpg\">  <IMG href=\"http://www.easymagazine.org/img/prova.jpg\"> </div>";
-        $testout = StringFilter::extractHref($text);
-        $this->assertEqual(2, count($testout));
-        print_r($testout);
-        //$this->assertPattern('(prova.jpg)', $testout[0]);
-        //$this->assertPattern('(http://www.easymagazine.org/img/prova.jpg)', $testout[1]);
-    }
-
 }
 
 $test = new StringFiltersFileTests();

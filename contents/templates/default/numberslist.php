@@ -4,24 +4,24 @@
 
     <div class="post">
 
-        <? foreach($this->numberslist  as $nu) : ?>
+        <?PHPforeach($this->numberslist  as $nu) : ?>
 
-        <h2><a href="<?= URIMaker::number($nu) ?>"><?= $nu->getTitle() ?></a></h2>
-        <h3><?= $nu->getSubtitle() ?></h3>
+        <h2><a href="<?PHP echo URIMaker::number($nu) ?>"><?PHP echo $nu->getTitle() ?></a></h2>
+        <h3><?PHP echo $nu->getSubtitle() ?></h3>
         <div class="entry">
 
-                <?= $nu->getSummary() ?>
+                <?PHP echo $nu->getSummary() ?>
 
         </div>
-            <? if ($nu->epubExists()) : ?>
+            <?PHPif ($nu->epubExists()) : ?>
         <div class="entry">
-            <a href="<?= URIMaker::fromBasePath($nu->epubPath()) ?>">Download Epub</a>
+            <a href="<?PHP echo URIMaker::fromBasePath($nu->epubPath()) ?>">Download Epub</a>
         </div>
-            <? endif; ?>
+            <?PHPendif; ?>
 
-        <? endforeach; ?>
+        <?PHPendforeach; ?>
         <p>
-            <?= $this->paginator->renderFullNav(URIMaker::numberslist())  ?>
+            <?PHP echo $this->paginator->renderFullNav(URIMaker::numberslist())  ?>
         </p>
     </div>
 

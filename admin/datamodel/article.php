@@ -1,5 +1,4 @@
 <?php
-
 /*
 	Copyright (C) 2009-2010  Fabio Mattei <burattino@gmail.com>
 
@@ -54,7 +53,9 @@ class Article {
     const SELECT_MAX_ID = 'select max(id) as maxid from articles ';
     const SELECT_BY_TITLE = 'select * from articles where title like @?@';
     const FIND_IN_ALL_TEXT_FIELDS_PUBLISHED_ARTICLES = 'select * from articles where (title like @?@ OR subtitle like @?@ OR summary like @?@ OR body like @?@) AND published=1 ';
-    const SELECT_BY_TAG = 'select * from articles where tag like @?@ AND published=1 ';
+    const SELECT_BY_TAG = 'select * from articles ';
+    const SELECT_BY_TAG_COUNTER = 'select count(id) as num from articles ';
+    const SELECT_BY_TAG_CONDITIONS = ' where tag like @?@ AND published=1 ';
     const SELECT_COMMENTS_PUB = 'select * from comments where published=1 AND article_id = @#@ order by created DESC';
     const SELECT_COMMENTS = 'select * from comments where article_id = @#@ order by created DESC';
     const SELECT_CATEGORY = 'select * from categories where id = @#@ Limit 1';
@@ -71,7 +72,6 @@ class Article {
     const SELECT_USERS = 'select US.* from users as US, users_articles as UA where US.id = UA.user_id AND UA.article_id = @#@ order by US.name ';
     const DELETE_USER = 'delete from users_articles WHERE article_id = @#@ AND user_id = @#@ ';
     const LINK_USER = 'insert into users_articles (article_id, user_id) values (@#@, @#@) ';
-
 
     public function __construct($id=self::NEW_ARTICLE, $number_id=self::NEW_ARTICLE, $category_id=self::NEW_ARTICLE, $indexnumber='', $published='0', $title='', $subtitle='', $summary='', $body='', $commentsallowed='0', $tag='', $metadescription='', $metakeyword='', $created='', $updated='') {
         $this->filter = ArticleFilterRemote::getInstance();
@@ -166,7 +166,7 @@ class Article {
     }
 
     public static function findByTag($tag) {
-        $ret = ARTICLE::findMany(self::SELECT_BY_TAG, array("%$tag%"), array());
+        $ret = ARTICLE::findMany(self::SELECT_BY_TAG . self::SELECT_BY_TAG_CONDITIONS, array("%$tag%"), array());
         return $ret;
     }
 

@@ -64,17 +64,17 @@ ConfigWriter::writeConfigFile($dbName, $dbuser, $dbpassword, $dbhost, $tbprefix,
                 <br /><br />
                 <CODE>
                     &lt;? <br />
-                    define('FOLDER', '<?=$folder?>'); <br />
-                    define('DB_NAME', '<?=$dbName?>');<br />
-                    define('DB_USER', '<?=$dbuser?>');<br />
-                    define('DB_PASSWORD', '<?=$dbpassword?>');<br />
-                    define('DB_HOST', '<?=$dbhost?>');<br />
-                    define('TBPREFIX', '<?=$tbprefix?>');<br />
+                    define('FOLDER', '<?PHP echo$folder?>'); <br />
+                    define('DB_NAME', '<?PHP echo$dbName?>');<br />
+                    define('DB_USER', '<?PHP echo$dbuser?>');<br />
+                    define('DB_PASSWORD', '<?PHP echo$dbpassword?>');<br />
+                    define('DB_HOST', '<?PHP echo$dbhost?>');<br />
+                    define('TBPREFIX', '<?PHP echo$tbprefix?>');<br />
                     ?&gt;<br />
                 </CODE>
                 <br />
                 <form name="create" method="post" action="createdb.php">
-                <input type="hidden" name="email" value="<?= $email ?>" />
+                <input type="hidden" name="email" value="<?PHP echo $email ?>" />
                 After that click here and <input type="submit" value="create the database" name="create the database" />
                 </form>
                 <br />

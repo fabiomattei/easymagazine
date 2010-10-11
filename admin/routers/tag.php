@@ -34,6 +34,12 @@ class TagRouter extends Router {
         $arURI = $this->getArrayURI();
         $this->tag = $arURI['id'];
 
+        if (isset($_GET['page']) && $_GET['page'] > 0){
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
         $collection = Article::findByTag($this->tag);
         $this->paginator = new Paginator($collection, 10, 5);
         if (isset($_GET['page']) && $_GET['page'] > 0){
