@@ -12,7 +12,7 @@
                     echo $user->getName().' ';
                 }
                 ?> |
-                <?PHPecho '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
+                <?PHP echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
                 <br />
                 <?PHP echo Taghandler::tagsToLink($this->article->getTag()) ?>
             </p>
@@ -28,7 +28,7 @@
             }
             ?>
 
-            <?PHPforeach($this->article->commentsPublished()  as $comment) { ?>
+            <?PHP foreach($this->article->commentsPublished()  as $comment) { ?>
 
             <p><small><?PHP echo $comment->getCreatedFormatted() ?></small> by
                     <?PHP echo $comment->getSignature() ?>
@@ -42,9 +42,9 @@
 
             </p>
 
-            <?PHP} ?>
+            <?PHP } ?>
 
-            <?PHPif ($this->article->getCommentsallowed() && $this->article->number()->getCommentsallowed()): ?>
+            <?PHP if ($this->article->getCommentsallowed() && $this->article->number()->getCommentsallowed()): ?>
             <p>
             <form name="newcomment" method="post" action="<?PHP echo URIMaker::comment($this->article) ?>">
                 Title<br />
@@ -59,7 +59,7 @@
                 <input type="submit" value="Ok" name="Ok" />
             </form>
             </p>
-            <?PHPendif; ?>
+            <?PHP endif; ?>
 
         </div>
     </div>

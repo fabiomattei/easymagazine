@@ -9,18 +9,18 @@
             <div id="numberDescription">
                 <?PHP echo $this->number->getSummary() ?>
             </div>
-            <?PHPif ($this->number->epubExists()) : ?>
+            <?PHP if ($this->number->epubExists()) : ?>
             <div id="epub">
                 <a href="<?PHP echo URIMaker::fromBasePath($this->number->epubPath()) ?>">Download Epub</a>
             </div>
-            <?PHPendif; ?>
+            <?PHP endif; ?>
         </li>
         <br />
 
         <li id="Numbers">
             <h2>Last Numbers</h2>
             <ul>
-                <?PHPforeach ($this->numbers as $num) {
+                <?PHP foreach ($this->numbers as $num) {
                     echo '<li><a href="'.URIMaker::number($num).'">'.$num->getTitle().'</a></li>';
                 }?>
             </ul>

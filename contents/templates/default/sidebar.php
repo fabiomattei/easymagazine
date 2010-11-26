@@ -17,22 +17,22 @@
         <b><?PHP echo $this->number->getSubtitle() ?></b>
 
      <?PHP echo $this->number->getSummary() ?> 
-    <?PHPif ($this->number->epubExists()) : ?>
+    <?PHP if ($this->number->epubExists()) : ?>
     <a href="<?PHP echo URIMaker::fromBasePath($this->number->epubPath()) ?>">Download Epub</a>
-    <?PHPendif; ?>
+    <?PHP endif; ?>
 </div>
 <br />
 <h2>Categories</h2>
 <ul>
-    <?PHPforeach ($this->categories as $cat) : ?>
+    <?PHP foreach ($this->categories as $cat) : ?>
     <li><a href="<?PHP echo URIMaker::category($cat) ?>"><?PHP echo $cat->getName() ?></a></li>
-    <?PHPendforeach; ?>
+    <?PHP endforeach; ?>
 </ul>
 
 
 <h2>Lasts Numbers</h2>
 <ul>
-    <?PHPforeach ($this->numbers as $num) { ?>
+    <?PHP foreach ($this->numbers as $num) { ?>
     <li><a href="<?PHP echo URIMaker::number($num)?>"><?PHP echo $num->getTitle() ?></a></li>
     <?PHP  }?>
 </ul>

@@ -46,7 +46,7 @@
 	</div>
 	<div id="middle">
 		<div id="left-column">
-			<h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
+			<h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHP echo $_SESSION['user']->getName() ?></h3><br />
 			<a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
 		</div>
 		<div id="center-column">
@@ -79,15 +79,15 @@
                     foreach ($templates as $key => $value) {
                     ?>
 					<tr>
-						<td class="first style1"><?PHPecho $key; ?></td>
-						<td><a href="template.php?action=info&id=<?PHPecho $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="template.php?action=activate&id=<?PHPecho $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
+						<td class="first style1"><?PHP echo $key; ?></td>
+						<td><a href="template.php?action=info&id=<?PHP echo $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="template.php?action=activate&id=<?PHP echo $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
 						<td>
-                                                <?PHPif ($key == $activetemplate->getName()) { ?>
+                                                <?PHP if ($key == $activetemplate->getName()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                                <?PHP} else { ?>
+                                                <?PHP } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                                <?PHP} ?></td>
+                                                <?PHP } ?></td>
                                         </tr>
                     <?
                     }

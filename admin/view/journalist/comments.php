@@ -40,7 +40,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHP echo $_SESSION['user']->getName() ?></h3><br />
                     <h3><?php echo LANG_MENU_COMMENTS; ?></h3>
                     <ul class="nav">
                         <li><a href="comment.php"><?php echo LANG_LEFT_SHOW_ALL_COMMENTS; ?></a></li>
@@ -84,15 +84,15 @@
                             foreach ($comms as $ar) {
                                 ?>
                             <tr>
-                                <td class="first style1"><?PHPecho $ar->getTitle(); ?></td>
-                                <td><a href="comment.php?action=edit&article_id=<?PHPecho $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td class="first style1"><?PHP echo $ar->getTitle(); ?></td>
+                                <td><a href="comment.php?action=edit&article_id=<?PHP echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td>
-                                        <?PHPif ($ar->getPublished()) { ?>
+                                        <?PHP if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <?PHP} else { ?>
+                                        <?PHP } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <?PHP} ?></td>
-                                <td class="last"><a href="comment.php?action=requestdelete&id=<?PHPecho $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                    <?PHP } ?></td>
+                                <td class="last"><a href="comment.php?action=requestdelete&id=<?PHP echo $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
@@ -102,9 +102,9 @@
                             <form name="pageselectionform" method="post" action="number.php?action=<?PHP echo$lastAction?>">
                                 <strong><?php echo LANG_MENU_PAGES; ?>: </strong>
                                 <select name="page">
-                                    <?PHPfor ($i=1;$i<=$page_numbers;$i++) { ?>
-                                    <option value="<?PHP echo$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?PHP echo$i?></option>
-                                    <?PHP}?>
+                                    <?PHP for ($i=1;$i<=$page_numbers;$i++) { ?>
+                                    <option value="<?PHP echo$i?>" <?PHP if ($i == $pageSelected) echo 'selected';?> ><?PHP echo$i?></option>
+                                    <?PHP }?>
                                 </select>&nbsp;
                                 <input type="hidden" name="movinglist" value="yes" />
                                 <input type="submit" value="<?php echo LANG_MENU_GO; ?>" name="Go" />
@@ -125,8 +125,8 @@
                                 <tr class="bg">
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_ARTICLE; ?></strong></td>
                                     <td class="last">
-                                        <?PHPif($comm->getArticle_id() != Comment::NEW_COMMENT) { echo $comm->article()->getTitle(); } ?>
-                                        <input type="hidden" name="created" value="<?PHPecho $comm->getArticle_id(); ?>">
+                                        <?PHP if($comm->getArticle_id() != Comment::NEW_COMMENT) { echo $comm->article()->getTitle(); } ?>
+                                        <input type="hidden" name="created" value="<?PHP echo $comm->getArticle_id(); ?>">
                                     </td>
                                 </tr>
                                 <tr>
@@ -137,7 +137,7 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_BODY; ?></strong></td>
-                                    <td class="last"><textarea name="Body" rows="4" cols="60"><?PHPecho $comm->getUnfilteredBody(); ?></textarea></td>
+                                    <td class="last"><textarea name="Body" rows="4" cols="60"><?PHP echo $comm->getUnfilteredBody(); ?></textarea></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_SIGNATURE; ?></strong></td>
@@ -147,27 +147,27 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></strong></td>
-                                    <td class="last"><input type="checkbox" name="Published" value="1" <?PHPif($comm->getPublished()) echo 'checked="checked"'; ?>/></td>
+                                    <td class="last"><input type="checkbox" name="Published" value="1" <?PHP if($comm->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
-                                    <td class="last"><?PHPecho $comm->getCreated(); ?></td>
+                                    <td class="last"><?PHP echo $comm->getCreated(); ?></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
-                                    <td class="last"><?PHPecho $comm->getUpdated(); ?></td>
+                                    <td class="last"><?PHP echo $comm->getUpdated(); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                <input type="hidden" name="id" value="<?PHPecho $comm->getId(); ?>">
-                                <input type="hidden" name="created" value="<?PHPecho $comm->getCreated(); ?>">
-                                <input type="hidden" name="updated" value="<?PHPecho $comm->getUpdated(); ?>">
-                                <input type="hidden" name="article_id" value="<?PHPecho $comm->getArticle_id(); ?>">
+                                <input type="hidden" name="id" value="<?PHP echo $comm->getId(); ?>">
+                                <input type="hidden" name="created" value="<?PHP echo $comm->getCreated(); ?>">
+                                <input type="hidden" name="updated" value="<?PHP echo $comm->getUpdated(); ?>">
+                                <input type="hidden" name="article_id" value="<?PHP echo $comm->getArticle_id(); ?>">
                                 <td class="last">
                                     <input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" />
                             </form>
 
-                            <form name="formnew" method="post" action="comment.php?action=replay&id=<?PHPecho $comm->getId(); ?>">
+                            <form name="formnew" method="post" action="comment.php?action=replay&id=<?PHP echo $comm->getId(); ?>">
                                 <input type="submit" value="<?php echo LANG_ADMIN_TABLE_REPLAY; ?>" name="new" />
                             </form></td>
                             </tr>

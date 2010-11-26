@@ -46,7 +46,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHP echo $_SESSION['user']->getName() ?></h3><br />
                     <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
@@ -325,15 +325,15 @@
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_FACEBOOK; ?></strong></td>
                                     <td class="last">
-                                        <input type="radio" name="facebookbutton" value="ON" <?PHPif($settingsindb['facebookbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
-                                        <input type="radio" name="facebookbutton" value="OFF" <?PHPif($settingsindb['facebookbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
+                                        <input type="radio" name="facebookbutton" value="ON" <?PHP if($settingsindb['facebookbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
+                                        <input type="radio" name="facebookbutton" value="OFF" <?PHP if($settingsindb['facebookbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_TWITTER; ?></strong></td>
                                     <td class="last">
-                                        <input type="radio" name="twitterbutton" value="ON" <?PHPif($settingsindb['twitterbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
-                                        <input type="radio" name="twitterbutton" value="OFF" <?PHPif($settingsindb['twitterbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
+                                        <input type="radio" name="twitterbutton" value="ON" <?PHP if($settingsindb['twitterbutton']->getValue()=='ON') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_ON; ?>
+                                        <input type="radio" name="twitterbutton" value="OFF" <?PHP if($settingsindb['twitterbutton']->getValue()=='OFF') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_OFF; ?>
                                     </td>
                                 </tr>
                                 <tr class="bg">

@@ -44,8 +44,8 @@ session_destroy();
         <div id="intestazione">
             <p class="logo">&nbsp;</p>
             <div class="menu">
-                <?PHPecho LANG_LOGIN_LOGOUT_DONE; ?><br />
-                <a href="login.php"><?PHPecho LANG_LOGIN_CLICK_TO_LOGIN; ?></a>
+                <?PHP echo LANG_LOGIN_LOGOUT_DONE; ?><br />
+                <a href="login.php"><?PHP echo LANG_LOGIN_CLICK_TO_LOGIN; ?></a>
                 <br />
                 <br />
                 <br />

@@ -30,7 +30,7 @@
         }
         ?>
 
-        <?PHPforeach($this->article->commentsPublished()  as $comment) { ?>
+        <?PHP foreach($this->article->commentsPublished()  as $comment) { ?>
 
         <div class="date"><small><?PHP echo $comment->getCreatedFormatted() ?></small> by
                 <?PHP echo $comment->getSignature() ?>
@@ -46,9 +46,9 @@
 
         </div>
 
-        <?PHP} ?>
+        <?PHP } ?>
 
-        <?PHPif ($this->article->getCommentsallowed() && $this->article->number()->getCommentsallowed()): ?>
+        <?PHP if ($this->article->getCommentsallowed() && $this->article->number()->getCommentsallowed()): ?>
         <p>
         <form name="newcomment" method="post" action="<?PHP echo URIMaker::comment($this->article) ?>">
             Title<br />
@@ -63,5 +63,5 @@
             <input type="submit" value="Ok" name="Ok" />
         </form>
         </p>
-        <?PHPendif; ?>
+        <?PHP endif; ?>
     </div>

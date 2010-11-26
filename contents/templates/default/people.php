@@ -6,7 +6,7 @@
 
         <h1>People</h1>
 
-        <?PHPforeach($this->people  as $user) { ?>
+        <?PHP foreach($this->people  as $user) { ?>
 
         <div class="date"><h4><a href="<?PHP echo URIMaker::articlesperson($user) ?>"><?PHP echo $user->getName() ?></a></h4></div>
 
@@ -15,7 +15,7 @@
                 <?PHP echo $user->getBody() ?>
         </div>
 
-        <?PHP} ?>
+        <?PHP } ?>
 
     </div>
 

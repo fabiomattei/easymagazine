@@ -46,7 +46,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHP echo $_SESSION['user']->getName() ?></h3><br />
                     <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
@@ -78,14 +78,14 @@
                             foreach ($arts as $ar) {
                                 ?>
                             <tr>
-                                <td class="first style1"><?PHPecho $ar->getTitle(); ?></td>
-                                <td><a href="article.php?action=edit&id=<?PHPecho $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td class="first style1"><?PHP echo $ar->getTitle(); ?></td>
+                                <td><a href="article.php?action=edit&id=<?PHP echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td class="last">
-                                    <?PHPif ($ar->getPublished()) { ?>
+                                    <?PHP if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                    <?PHP} else { ?>
+                                    <?PHP } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <?PHP} ?>
+                                    <?PHP } ?>
 
                                 </td>
                             </tr>
@@ -108,14 +108,14 @@
                             foreach ($comms as $ar) {
                                 ?>
                             <tr>
-                                <td class="first style1"><?PHPecho $ar->getTitle(); ?></td>
-                                <td><a href="comment.php?action=edit&id=<?PHPecho $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td class="first style1"><?PHP echo $ar->getTitle(); ?></td>
+                                <td><a href="comment.php?action=edit&id=<?PHP echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td class="last">
-                                    <?PHPif ($ar->getPublished()) { ?>
+                                    <?PHP if ($ar->getPublished()) { ?>
                                         <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                    <?PHP} else { ?>
+                                    <?PHP } else { ?>
                                         <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <?PHP} ?>
+                                    <?PHP } ?>
                                 </td>
                             </tr>
                             <?

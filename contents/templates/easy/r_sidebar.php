@@ -21,9 +21,9 @@
         <li class="Themes">
 	<h2>Categories</h2>
             <ul>
-                <?PHPforeach ($this->categories as $cat) : ?>
+                <?PHP foreach ($this->categories as $cat) : ?>
                 <li><a href="<?PHP echo URIMaker::category($cat) ?>"><?PHP echo $cat->getName() ?></a></li>
-                <?PHPendforeach; ?>
+                <?PHP endforeach; ?>
             </ul>
         </li>
         <br />

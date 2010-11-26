@@ -5,11 +5,11 @@
     <div id="contentmiddle">
         <h1><?PHP echo $this->tag ?></h1><br />
 
-        <?PHPif (isset($this->advice)) :?>
+        <?PHP if (isset($this->advice)) :?>
         <div class="contenttitle"><?PHP echo $this->advice ?></div>
-        <?PHPendif; ?>
+        <?PHP endif; ?>
 
-        <?PHPforeach($this->articles as $article) { ?>
+        <?PHP foreach($this->articles as $article) { ?>
         <div class="contenttitle">
             <h1><a href="<?PHP echoURIMaker::article($article)?>" rel="bookmark"><?PHP echo $article->getTitle() ?></a></h1>
             <p>
@@ -19,7 +19,7 @@
                         echo $user->getName().' ';
                     }
                     ?> |
-                    <?PHPecho '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
+                    <?PHP echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
                     <br />
                     <?PHP echo Taghandler::tagsToLink($article->getTag()) ?>
             </p>
@@ -27,7 +27,7 @@
                     <?PHP echo $article->getSummary() ?>
             </p>
         </div>
-        <?PHP} ?>
+        <?PHP } ?>
         <div class="contenttitle">
             <?PHP echo $this->paginator->renderFullNav(URIMaker::result())  ?>
         </div>

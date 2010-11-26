@@ -8,12 +8,12 @@
             <p>
                 <?PHP echo $this->article->getCreatedFormatted() ?>  by
                 <?PHP echo $this->article->auhorsNamesConcatenation() ?> |
-                <?PHPecho '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
+                <?PHP echo '<a href="'.URIMaker::comment($this->article).'"> comments ('.count($this->article->commentsPublished()).') </a>'; ?>
                 <br />
                 <?PHP echo Taghandler::tagsToLink($this->article->getTag()) ?>
             </p>
             <div>
-                <?PHPecho Social::createLinks(URIMaker::article($this->article), $this->article->getTitle(), '_blank', $this->article->getMetakeyword()); ?>
+                <?PHP echo Social::createLinks(URIMaker::article($this->article), $this->article->getTitle(), '_blank', $this->article->getMetakeyword()); ?>
             </div>
 
             <p>
@@ -24,12 +24,12 @@
                 <?PHP echo $this->article->getBody() ?>
             </p>
             <div>
-                <?PHPecho Social::createLinks(URIMaker::article($this->article), $this->article->getTitle(), '_blank', $this->article->getMetakeyword()); ?>
+                <?PHP echo Social::createLinks(URIMaker::article($this->article), $this->article->getTitle(), '_blank', $this->article->getMetakeyword()); ?>
             </div>
 
         </div>
     </div>
 
-    <?php include("r_sidebar.php");?>
+    <?PHP include("r_sidebar.php");?>
 
 </div>

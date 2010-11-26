@@ -25,7 +25,7 @@
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
-        <?PHPrequire_once('../../view/common/tinymcesetup.php'); ?>
+        <?PHP require_once('../../view/common/tinymcesetup.php'); ?>
     </head>
     <body>
         <div id="main">
@@ -47,7 +47,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?> </h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHP echo $_SESSION['user']->getName() ?> </h3><br />
                     <h3><?php echo LANG_MENU_ARTICLES; ?></h3>
                     <ul class="nav">
                         <li><a href="article.php"><?php echo LANG_LEFT_SHOW_ALL; ?></a></li>
@@ -95,19 +95,19 @@
                             foreach ($arts as $ar) {
                                 ?>
                             <tr>
-                                <td class="first style1"><?PHPecho $ar->getTitle(); ?></td>
-                                <td><a href="article.php?action=edit&id=<?PHPecho $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                <td><a href="article.php?action=up&id=<?PHPecho $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="article.php?action=down&id=<?PHPecho $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="comment.php?list=commentarticle&article_id=<?PHPecho $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
-                                <td><a href="article.php?action=preview&id=<?PHPecho $ar->getId(); ?>" target="_blank"><img src="../../resources/img/preview_icon.png" width="16" height="16" alt="" /></a></td>
+                                <td class="first style1"><?PHP echo $ar->getTitle(); ?></td>
+                                <td><a href="article.php?action=edit&id=<?PHP echo $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?action=up&id=<?PHP echo $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/up-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?action=down&id=<?PHP echo $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/down-arrow.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="comment.php?list=commentarticle&article_id=<?PHP echo $ar->getId(); ?>"><img src="../../resources/img/comments.png" width="16" height="16" alt="" /></a></td>
+                                <td><a href="article.php?action=preview&id=<?PHP echo $ar->getId(); ?>" target="_blank"><img src="../../resources/img/preview_icon.png" width="16" height="16" alt="" /></a></td>
                                 <td>
-                                        <?PHPif ($ar->getPublished()) { ?>
+                                        <?PHP if ($ar->getPublished()) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <?PHP} else { ?>
+                                        <?PHP } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <?PHP} ?></td>
-                                <td class="last"><a href="article.php?action=requestdelete&id=<?PHPecho $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                    <?PHP } ?></td>
+                                <td class="last"><a href="article.php?action=requestdelete&id=<?PHP echo $ar->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
@@ -117,9 +117,9 @@
                             <form name="pageselectionform" method="post" action="article.php?list=<?PHP echo$lastList?>">
                                 <strong><?php echo LANG_MENU_PAGES; ?>: </strong>
                                 <select name="page">
-                                    <?PHPfor ($i=1;$i<=$page_numbers;$i++) { ?>
+                                    <?PHP for ($i=1;$i<=$page_numbers;$i++) { ?>
                                     <option value="<?PHP echo$i?>" <?if ($i == $pageSelected) echo 'selected';?> ><?PHP echo$i?></option>
-                                    <?PHP}?>
+                                    <?PHP }?>
                                 </select>&nbsp;
                                 <input type="hidden" name="movinglist" value="yes" />
                                 <input type="submit" value="<?php echo LANG_MENU_GO; ?>" name="Go" />
@@ -141,11 +141,11 @@
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_NUMBER; ?></strong></td>
                                     <td class="last">
                                         <select name="numberid">
-                                            <?PHPforeach ($numbs as $nmb) { ?>
-                                            <option value="<?PHPecho $nmb->getId(); ?>"
-                                                <?PHPif ($nmb->getId()==$art->getNumber_id()) { echo "selected"; } ?>
-                                                    ><?PHPecho $nmb->getTitle(); ?></option>
-                                                    <?PHP} ?>
+                                            <?PHP foreach ($numbs as $nmb) { ?>
+                                            <option value="<?PHP echo $nmb->getId(); ?>"
+                                                <?PHP if ($nmb->getId()==$art->getNumber_id()) { echo "selected"; } ?>
+                                                    ><?PHP echo $nmb->getTitle(); ?></option>
+                                                    <?PHP } ?>
                                         </select>
                                     </td>
                                 </tr>
@@ -153,74 +153,74 @@
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CATEGORY; ?></strong></td>
                                     <td class="last">
                                         <select name="categoryid">
-                                            <?PHPforeach ($categories as $cat) { ?>
-                                            <option value="<?PHPecho $cat->getId(); ?>"
-                                                <?PHPif ($cat->getId()==$art->getCategory_id()) { echo "selected"; } ?>
-                                                    ><?PHPecho $cat->getName(); ?></option>
-                                                    <?PHP} ?>
+                                            <?PHP foreach ($categories as $cat) { ?>
+                                            <option value="<?PHP echo $cat->getId(); ?>"
+                                                <?PHP if ($cat->getId()==$art->getCategory_id()) { echo "selected"; } ?>
+                                                    ><?PHP echo $cat->getName(); ?></option>
+                                                    <?PHP } ?>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_TITLE; ?></strong></td>
                                     <td class="last">
-                                        <textarea name="Title" rows="1" cols="60"><?PHPecho $art->getUnfilteredTitle(); ?></textarea>
+                                        <textarea name="Title" rows="1" cols="60"><?PHP echo $art->getUnfilteredTitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_SUBTITLE; ?></strong></td>
                                     <td class="last">
-                                        <textarea name="SubTitle" rows="1" cols="60"><?PHPecho $art->getUnfilteredSubtitle(); ?></textarea>
+                                        <textarea name="SubTitle" rows="1" cols="60"><?PHP echo $art->getUnfilteredSubtitle(); ?></textarea>
                                     </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_SUMMARY; ?></strong><br />
                                         <textarea id="Summary" name="Summary" rows="4" cols="60" class="mceAdvanced" style="width: 100%">
-                                            <?PHPecho $art->getUnfilteredSummary(); ?>
+                                            <?PHP echo $art->getUnfilteredSummary(); ?>
                                         </textarea>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_BODY; ?></strong><br />
                                         <textarea cols="40" id="article_body" name="Body" rows="20" class="mceAdvanced" style="width: 100%">
-                                            <?PHPecho $art->getUnfilteredBody(); ?>
+                                            <?PHP echo $art->getUnfilteredBody(); ?>
                                         </textarea>
                                 </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Tag</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Tag" value="<?PHPecho $art->getUnfilteredTag(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Tag" value="<?PHP echo $art->getUnfilteredTag(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>Meta Description</strong></td>
-                                    <td class="last"><textarea name="MetaDescription" rows="4" cols="50"><?PHPecho $art->getMetaDescription(); ?></textarea></td>
+                                    <td class="last"><textarea name="MetaDescription" rows="4" cols="50"><?PHP echo $art->getMetaDescription(); ?></textarea></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>Meta Keyword</strong></td>
-                                    <td class="last"><textarea name="MetaKeyword" rows="4" cols="50"><?PHPecho $art->getMetaKeyword(); ?></textarea></td>
+                                    <td class="last"><textarea name="MetaKeyword" rows="4" cols="50"><?PHP echo $art->getMetaKeyword(); ?></textarea></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_PUBLISHED; ?></strong></td>
-                                    <td class="last"><input type="checkbox" name="Published" value="1" <?PHPif($art->getPublished()) echo 'checked="checked"'; ?>/></td>
+                                    <td class="last"><input type="checkbox" name="Published" value="1" <?PHP if($art->getPublished()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><label for="commentsallowed" title="<?php echo LANG_ADMIN_TABLE_TIP_COMMENT; ?>"><?php echo LANG_ADMIN_TABLE_COMMENTS; ?></label></td>
-                                    <td class="last"><input type="checkbox" name="commentsallowed" value="1"  <?PHPif($art->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
+                                    <td class="last"><input type="checkbox" name="commentsallowed" value="1"  <?PHP if($art->getCommentsallowed()) echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
-                                    <td class="last"><?PHPecho $art->getCreated(); ?></td>
+                                    <td class="last"><?PHP echo $art->getCreated(); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
-                                    <td class="last"><?PHPecho $art->getUpdated(); ?></td>
+                                    <td class="last"><?PHP echo $art->getUpdated(); ?></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                <input type="hidden" name="id" value="<?PHPecho $art->getId(); ?>">
-                                <input type="hidden" name="indexnumber" value="<?PHPecho $art->getIndexnumber(); ?>">
-                                <input type="hidden" name="created" value="<?PHPecho $art->getCreated(); ?>">
-                                <input type="hidden" name="updated" value="<?PHPecho $art->getUpdated(); ?>">
+                                <input type="hidden" name="id" value="<?PHP echo $art->getId(); ?>">
+                                <input type="hidden" name="indexnumber" value="<?PHP echo $art->getIndexnumber(); ?>">
+                                <input type="hidden" name="created" value="<?PHP echo $art->getCreated(); ?>">
+                                <input type="hidden" name="updated" value="<?PHP echo $art->getUpdated(); ?>">
                                 <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
                                 <td class="last"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" /></td>
                                 </tr>
@@ -239,19 +239,19 @@
                             foreach ($art->users() as $ur) {
                                 ?>
                             <tr>
-                                <td class="first style1"><?PHPecho $ur->getName(); ?> - <?PHPecho $ur->getUsername(); ?></td>
-                                <td class="last" width="50"><a href="article.php?action=requestunlinkauthor&idauthor=<?PHPecho $ur->getId(); ?>&idarticle=<?PHPecho $art->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                <td class="first style1"><?PHP echo $ur->getName(); ?> - <?PHP echo $ur->getUsername(); ?></td>
+                                <td class="last" width="50"><a href="article.php?action=requestunlinkauthor&idauthor=<?PHP echo $ur->getId(); ?>&idarticle=<?PHP echo $art->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
                             ?>
                             <tr>
-                            <form name="formlinkauthor" method="post" action="article.php?action=linkauthor&idarticle=<?PHPecho $art->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>">
+                            <form name="formlinkauthor" method="post" action="article.php?action=linkauthor&idarticle=<?PHP echo $art->getId(); ?>&list=<?PHP echo$lastList?>&pageSelected=<?PHP echo$pageSelected?>">
                                 <td class="first style1">
                                     <select name="authorid">
-                                        <?PHPforeach ($authors as $auth) { ?>
-                                        <option value="<?PHPecho $auth->getId(); ?>" ><?PHPecho $auth->getName(); ?> - <?PHPecho $auth->getUsername(); ?></option>
-                                        <?PHP} ?>
+                                        <?PHP foreach ($authors as $auth) { ?>
+                                        <option value="<?PHP echo $auth->getId(); ?>" ><?PHP echo $auth->getName(); ?> - <?PHP echo $auth->getUsername(); ?></option>
+                                        <?PHP } ?>
                                     </select>
                                 </td>
                                 <td class="last" width="50"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_AUTHORLINK; ?>" name="Link" /></td>

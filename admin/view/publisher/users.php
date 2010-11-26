@@ -25,7 +25,7 @@
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
-        <?PHPrequire_once('../../view/common/tinymcesetup.php'); ?>
+        <?PHP require_once('../../view/common/tinymcesetup.php'); ?>
     </head>
     <body>
         <div id="main">
@@ -47,7 +47,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHP echo $_SESSION['user']->getName() ?></h3><br />
                     <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
@@ -81,21 +81,21 @@
                             foreach ($userps as $ar) {
                                 ?>
                             <tr>
-                                <td class="first style1"><?PHPecho $ar->getName(); ?> - <?PHPecho $ar->getUsername(); ?></td>
-                                <td><a href="user.php?action=edit&id=<?PHPecho $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
+                                <td class="first style1"><?PHP echo $ar->getName(); ?> - <?PHP echo $ar->getUsername(); ?></td>
+                                <td><a href="user.php?action=edit&id=<?PHP echo $ar->getId(); ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
                                 <td>
-                                        <?PHPif ($ar->getRole()=='publisher') { ?>
+                                        <?PHP if ($ar->getRole()=='publisher') { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <?PHP} else { ?>
+                                        <?PHP } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <?PHP} ?></td>
+                                    <?PHP } ?></td>
                                     <td>
-                                        <?PHPif ($ar->getToshow()==1) { ?>
+                                        <?PHP if ($ar->getToshow()==1) { ?>
                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
-                                        <?PHP} else { ?>
+                                        <?PHP } else { ?>
                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
-                                    <?PHP} ?></td>
-                                <td class="last"><a href="user.php?action=requestdelete&id=<?PHPecho $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
+                                    <?PHP } ?></td>
+                                <td class="last"><a href="user.php?action=requestdelete&id=<?PHP echo $ar->getId(); ?>"><img src="../../resources/img/hr.gif" width="16" height="16" alt="add" /></a></td>
                             </tr>
                             <?
                             }
@@ -116,54 +116,54 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_NAME; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="Name" value="<?PHPecho $userp->getName(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Name" value="<?PHP echo $userp->getName(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_USERNAME; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="Username" value="<?PHPecho $userp->getUsername(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Username" value="<?PHP echo $userp->getUsername(); ?>"/></td>
                                 </tr>                    
                                 <tr class="bg">
                                     <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_BODY; ?></strong><br />
-                                        <textarea cols="40" id="article_body" name="Body" rows="20" class="mceAdvanced" style="width: 100%"><?PHPecho $userp->getUnfilteredBody(); ?></textarea>
+                                        <textarea cols="40" id="article_body" name="Body" rows="20" class="mceAdvanced" style="width: 100%"><?PHP echo $userp->getUnfilteredBody(); ?></textarea>
                                 </td>
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Email</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Email" value="<?PHPecho $userp->getEmail(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Email" value="<?PHP echo $userp->getEmail(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>MSN</strong></td>
-                                    <td class="last"><input type="text" size="50" name="MSN" value="<?PHPecho $userp->getMsn(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="MSN" value="<?PHP echo $userp->getMsn(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong>Skype</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Skype" value="<?PHPecho $userp->getSkype(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Skype" value="<?PHP echo $userp->getSkype(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_ROLE; ?></strong></td>
                                     <td class="last">
-                                        <input type="radio" name="Role" value="publisher" <?PHPif($userp->getRole()=='publisher') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_PUBLISHER; ?>
-                                        <input type="radio" name="Role" value="journalist" <?PHPif($userp->getRole()=='journalist') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_JOURNALIST; ?>
+                                        <input type="radio" name="Role" value="publisher" <?PHP if($userp->getRole()=='publisher') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_PUBLISHER; ?>
+                                        <input type="radio" name="Role" value="journalist" <?PHP if($userp->getRole()=='journalist') echo 'checked="checked"'; ?> /> <?php echo LANG_ADMIN_TABLE_JOURNALIST; ?>
                                     </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_SHOW_IN_PEOPLE_PAGE; ?></strong></td>
-                                    <td class="last"><input type="checkbox" name="toshow" value="1" <?PHPif($userp->getToshow()=='1') echo 'checked="checked"'; ?>/></td>
+                                    <td class="last"><input type="checkbox" name="toshow" value="1" <?PHP if($userp->getToshow()=='1') echo 'checked="checked"'; ?>/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
-                                    <td class="last"><?PHPecho $userp->getCreated(); ?></td>
+                                    <td class="last"><?PHP echo $userp->getCreated(); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
-                                    <td class="last"><?PHPecho $userp->getUpdated(); ?></td>
+                                    <td class="last"><?PHP echo $userp->getUpdated(); ?></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                <input type="hidden" name="id" value="<?PHPecho $userp->getId(); ?>">
-                                <input type="hidden" name="created" value="<?PHPecho $userp->getCreated(); ?>">
-                                <input type="hidden" name="updated" value="<?PHPecho $userp->getUpdated(); ?>">
-                                <input type="hidden" name="Password" value="<?PHPecho $userp->getPassword(); ?>">
+                                <input type="hidden" name="id" value="<?PHP echo $userp->getId(); ?>">
+                                <input type="hidden" name="created" value="<?PHP echo $userp->getCreated(); ?>">
+                                <input type="hidden" name="updated" value="<?PHP echo $userp->getUpdated(); ?>">
+                                <input type="hidden" name="Password" value="<?PHP echo $userp->getPassword(); ?>">
                                 <td class="last">
                                     <input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" />
                                 </td>
@@ -190,9 +190,9 @@
                                 </tr>
                                  <tr class="bg">
                                     <td class="first">&nbsp;</td>
-                                <input type="hidden" name="id" value="<?PHPecho $userp->getId(); ?>">
-                                <input type="hidden" name="created" value="<?PHPecho $userp->getCreated(); ?>">
-                                <input type="hidden" name="updated" value="<?PHPecho $userp->getUpdated(); ?>">
+                                <input type="hidden" name="id" value="<?PHP echo $userp->getId(); ?>">
+                                <input type="hidden" name="created" value="<?PHP echo $userp->getCreated(); ?>">
+                                <input type="hidden" name="updated" value="<?PHP echo $userp->getUpdated(); ?>">
                                 <td class="last"><input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" /></td>
                                 </tr>
                             </table>

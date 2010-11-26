@@ -6,10 +6,10 @@
 
     <h1><?PHP echo $this->person->getName() ?></h1>
 
-    <?PHPforeach($this->articles  as $article) { ?>
+    <?PHP foreach($this->articles  as $article) { ?>
 
     <h2>
-        <?PHPecho '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
+        <?PHP echo '<a href="'.URIMaker::article($article).'"> '.$article->getTitle()." </a>"; ?>
     </h2>
 
     <div class="date"><small><?PHP echo $article->getCreatedFormatted() ?></small> by
@@ -29,10 +29,10 @@
     </div>
 
     <p class="date">
-        <?PHPecho '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
+        <?PHP echo '<a href="'.URIMaker::comment($article).'"> comments ('.count($article->commentsPublished()).') </a>'; ?>
     </p>
 
-    <?PHP} ?>
+    <?PHP } ?>
 
     <p>
         <?PHP echo $this->paginator->renderFullNav(URIMaker::articlesperson($this->person))  ?>

@@ -25,7 +25,7 @@
         <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
         <style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
-        <?PHPrequire_once('../../view/common/tinymcesetup.php'); ?>
+        <?PHP require_once('../../view/common/tinymcesetup.php'); ?>
     </head>
     <body>
         <div id="main">
@@ -41,7 +41,7 @@
             </div>
             <div id="middle">
                 <div id="left-column">
-                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHPecho $_SESSION['user']->getName() ?></h3><br />
+                    <h3><?php echo LANG_LEFT_GREETINGS; ?>, <?PHP echo $_SESSION['user']->getName() ?></h3><br />
                     <a href="../../index.php" class="link"><?php echo LANG_LEFT_VIEW_WEBSITE; ?></a>
                 </div>
                 <div id="center-column">
@@ -70,44 +70,44 @@
                                 </tr>
                                 <tr>
                                     <td class="first" width="172"><strong><?php echo LANG_ADMIN_TABLE_NAME; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="Name" value="<?PHPecho $userp->getName(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Name" value="<?PHP echo $userp->getName(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_USERNAME; ?></strong></td>
-                                    <td class="last"><input type="text" size="50" name="Username" value="<?PHPecho $userp->getUsername(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Username" value="<?PHP echo $userp->getUsername(); ?>"/></td>
                                 </tr>                    <tr>
                                     <td class="first" colspan="2"><strong><?php echo LANG_ADMIN_TABLE_BODY; ?></strong><br />
                                         <textarea cols="40" id="article_body" name="Body" rows="20" class="mceAdvanced" style="width: 100%">
-                                            <?PHPecho $userp->getUnfilteredBody(); ?>
+                                            <?PHP echo $userp->getUnfilteredBody(); ?>
                                         </textarea>
                                     </td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong>Email</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Email" value="<?PHPecho $userp->getEmail(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Email" value="<?PHP echo $userp->getEmail(); ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong>MSN</strong></td>
-                                    <td class="last"><input type="text" size="50" name="MSN" value="<?PHPecho $userp->getMsn(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="MSN" value="<?PHP echo $userp->getMsn(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first" width="172"><strong>Skype</strong></td>
-                                    <td class="last"><input type="text" size="50" name="Skype" value="<?PHPecho $userp->getSkype(); ?>"/></td>
+                                    <td class="last"><input type="text" size="50" name="Skype" value="<?PHP echo $userp->getSkype(); ?>"/></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_CREATED; ?></strong></td>
-                                    <td class="last"><?PHPecho $userp->getCreated(); ?></td>
+                                    <td class="last"><?PHP echo $userp->getCreated(); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="first"><strong><?php echo LANG_ADMIN_TABLE_UPDATED; ?></strong></td>
-                                    <td class="last"><?PHPecho $userp->getUpdated(); ?></td>
+                                    <td class="last"><?PHP echo $userp->getUpdated(); ?></td>
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                <input type="hidden" name="id" value="<?PHPecho $userp->getId(); ?>">
-                                <input type="hidden" name="created" value="<?PHPecho $userp->getCreated(); ?>">
-                                <input type="hidden" name="updated" value="<?PHPecho $userp->getUpdated(); ?>">
-                                <input type="hidden" name="Password" value="<?PHPecho $userp->getPassword(); ?>">
+                                <input type="hidden" name="id" value="<?PHP echo $userp->getId(); ?>">
+                                <input type="hidden" name="created" value="<?PHP echo $userp->getCreated(); ?>">
+                                <input type="hidden" name="updated" value="<?PHP echo $userp->getUpdated(); ?>">
+                                <input type="hidden" name="Password" value="<?PHP echo $userp->getPassword(); ?>">
                                 <td class="last">
                                     <input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" />
                             </form>
@@ -134,9 +134,9 @@
                                 </tr>
                                 <tr class="bg">
                                     <td class="first"><strong>&nbsp;</strong></td>
-                                <input type="hidden" name="id" value="<?PHPecho $userp->getId(); ?>">
-                                <input type="hidden" name="created" value="<?PHPecho $userp->getCreated(); ?>">
-                                <input type="hidden" name="updated" value="<?PHPecho $userp->getUpdated(); ?>">
+                                <input type="hidden" name="id" value="<?PHP echo $userp->getId(); ?>">
+                                <input type="hidden" name="created" value="<?PHP echo $userp->getCreated(); ?>">
+                                <input type="hidden" name="updated" value="<?PHP echo $userp->getUpdated(); ?>">
                                 <td class="last">
                                     <input type="submit" value="<?php echo LANG_ADMIN_TABLE_SAVE; ?>" name="save" />
                             </form>
