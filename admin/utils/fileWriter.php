@@ -70,25 +70,25 @@ class FileWriter {
 
         FileWriter::write($handle, '<?PHP ');
 
-        $toWrite = ' define(\'TITLE\', \''.$settingsindb['title']->getValue().'\'); ';
+        $toWrite = ' define(\'TITLE\', "'.$settingsindb['title']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
         $toWrite = ' define(\'DESCRIPTION\', "'.$settingsindb['description']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'URLTYPE\', \''.$settingsindb['urltype']->getValue().'\'); ';
+        $toWrite = ' define(\'URLTYPE\', "'.$settingsindb['urltype']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'PUBLISHER\', \''.$settingsindb['publisher']->getValue().'\'); ';
+        $toWrite = ' define(\'PUBLISHER\', "'.$settingsindb['publisher']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'RIGHTS\', \''.$settingsindb['rights']->getValue().'\'); ';
+        $toWrite = ' define(\'RIGHTS\', "'.$settingsindb['rights']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'LANGUAGE\', \''.$settingsindb['language']->getValue().'\'); ';
+        $toWrite = ' define(\'LANGUAGE\', "'.$settingsindb['language']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'EPUBNAME\', \''.$settingsindb['epubname']->getValue().'\'); ';
+        $toWrite = ' define(\'EPUBNAME\', "'.$settingsindb['epubname']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'WEBSITEURL\', \''.$settingsindb['siteurl']->getValue().'\'); ';
+        $toWrite = ' define(\'WEBSITEURL\', "'.$settingsindb['siteurl']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'SOCIAL_FACEBOOK\', \''.$settingsindb['facebookbutton']->getValue().'\'); ';
+        $toWrite = ' define(\'SOCIAL_FACEBOOK\', "'.$settingsindb['facebookbutton']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
-        $toWrite = ' define(\'SOCIAL_TWITTER\', \''.$settingsindb['twitterbutton']->getValue().'\'); ';
+        $toWrite = ' define(\'SOCIAL_TWITTER\', "'.$settingsindb['twitterbutton']->getValue().'"); ';
         FileWriter::write($handle, $toWrite);
 
         FileWriter::write($handle, ' ?>');
