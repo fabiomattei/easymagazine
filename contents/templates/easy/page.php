@@ -4,7 +4,7 @@
 
     <div id="contentmiddle">
         <div class="contenttitle">
-            <h1><a href="<?PHP echoURIMaker::page($this->page)?>" rel="bookmark"><?PHP echo $this->page->getTitle() ?></a></h1>
+            <h1><a href="<?PHP echo URIMaker::page($this->page)?>" rel="bookmark"><?PHP echo $this->page->getTitle() ?></a></h1>
             <p>
             <?PHP echo $this->page->getSummary() ?>
             </p>

@@ -65,6 +65,9 @@ function activate($id) {
 
     $out['toshow'] = $out['activetemplate']->getName();
 
+	// I need to delete the cache or the activated template will be invisible
+	DirectoryRunner::cleanDir('cached');
+
     return $out;
 }
 

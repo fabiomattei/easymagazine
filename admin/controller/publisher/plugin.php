@@ -107,6 +107,9 @@ function activate($pluginname) {
 
     $out['toshow'] = $pluginname.'/activate.php';
 
+	// I need to delete the cache or the activated plug in will be invisible
+	DirectoryRunner::cleanDir('cached');
+
     return $out;
 }
 

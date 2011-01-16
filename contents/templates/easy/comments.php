@@ -4,7 +4,7 @@
 
     <div id="contentmiddle">
         <div class="contenttitle">
-            <h1><a href="<?PHP echoURIMaker::article($this->article)?>" rel="bookmark"><?PHP echo $this->article->getTitle() ?></a></h1>
+            <h1><a href="<?PHP echo URIMaker::article($this->article)?>" rel="bookmark"><?PHP echo $this->article->getTitle() ?></a></h1>
             <p>
                 <?PHP echo $this->article->getCreatedFormatted() ?>  by
                 <?

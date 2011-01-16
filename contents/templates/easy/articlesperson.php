@@ -6,7 +6,7 @@
         <h1>All articles by <?PHP echo $this->person->getName() ?></h1><br />
         <?PHP foreach($this->articles as $article) { ?>
         <div class="contenttitle">
-            <h1><a href="<?PHP echoURIMaker::article($article)?>" rel="bookmark"><?PHP echo $article->getTitle() ?></a></h1>
+            <h1><a href="<?PHP echo URIMaker::article($article)?>" rel="bookmark"><?PHP echo $article->getTitle() ?></a></h1>
             <p>
                     <?PHP echo $article->getCreatedFormatted() ?>  by
                     <?

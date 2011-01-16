@@ -13,7 +13,7 @@
     </h2>
 
     <div class="date"><small><?PHP echo $article->getCreatedFormatted() ?></small> by
-            <?
+        <?
         foreach ($article->users() as $user) {
              echo $user->getName().' ';
         }
