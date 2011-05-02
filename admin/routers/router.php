@@ -99,14 +99,14 @@ abstract class Router {
     }
 
     public function header() {
-        if (file_exists(TEMPLATEPATH . '/header.php')) {
-            include (TEMPLATEPATH . '/header.php');
+        if (file_exists(TEMPLATEPATH . 'header.php')) {
+            include (TEMPLATEPATH . 'header.php');
         }
     }
 
     public function footer() {
-        if (file_exists(TEMPLATEPATH . '/footer.php')) {
-            include (TEMPLATEPATH . '/footer.php');
+        if (file_exists(TEMPLATEPATH . 'footer.php')) {
+            include (TEMPLATEPATH . 'footer.php');
         }
     }
 
