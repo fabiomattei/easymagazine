@@ -48,11 +48,18 @@ class ArticlesRouter extends Router {
 
     function applyTemplate(){
         $this->getRemote()->executeCommandBeforeArticle();
-        if (file_exists(TEMPLATEPATH.'article.php')) {
-            include (TEMPLATEPATH.'article.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
+
+		if ($this->article->getId()==Article::NEW_ARTICLE) {
+			// There is no article to load, redirect to 404 page
+			include (TEMPLATEPATH.'404.php');
+		} else {
+            if (file_exists(TEMPLATEPATH.'article.php')) {
+                include (TEMPLATEPATH.'article.php');
+            } else if (file_exists(TEMPLATEPATH.'index.php')) {
+                include (TEMPLATEPATH.'index.php');
+            }
+		}
+		
         $this->getRemote()->executeCommandAfterArticle();
     }
 

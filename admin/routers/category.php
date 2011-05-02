@@ -54,11 +54,18 @@ class CategoryRouter extends Router {
 
     function applyTemplate() {
         $this->getRemote()->executeCommandBeforeCategory();
-        if (file_exists(TEMPLATEPATH.'/category.php')) {
-            include (TEMPLATEPATH.'/category.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-                include (TEMPLATEPATH.'/index.php');
-        }
+
+		if ($this->category->getId()==Category::NEW_CATEGORY) {
+			// There is no category to load, redirect to 404 page
+			include (TEMPLATEPATH.'404.php');
+		} else {
+	        if (file_exists(TEMPLATEPATH.'category.php')) {
+	            include (TEMPLATEPATH.'category.php');
+	        } else if (file_exists(TEMPLATEPATH.'index.php')) {
+	                include (TEMPLATEPATH.'index.php');
+	        }
+		}
+
         $this->getRemote()->executeCommandAfterCategory();
     }
 

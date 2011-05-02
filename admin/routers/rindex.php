@@ -45,9 +45,12 @@ class IndexRouter extends Router {
 
     function applyTemplate(){
         $this->getRemote()->executeCommandBeforeIndex();
-        if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
+
+		// There is no need for a 404 page, the index page MUST exist
+        if (file_exists(TEMPLATEPATH.'index.php')) {
+            include (TEMPLATEPATH.'index.php');
         }
+
         $this->getRemote()->executeCommandAfterIndex();
     }
 

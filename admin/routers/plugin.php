@@ -47,9 +47,11 @@ class PluginRouter extends Router {
 
     function applyTemplate(){
         $this->getRemote()->executeCommandBeforePlugin();
-        if (file_exists(TEMPLATEPATH.'/plugin.php')) {
-            include (TEMPLATEPATH.'/plugin.php');
+
+        if (file_exists(TEMPLATEPATH.'plugin.php')) {
+            include (TEMPLATEPATH.'plugin.php');
         }
+
         $this->getRemote()->executeCommandAfterPlugin();
     }
 

@@ -45,11 +45,18 @@ class PagesRouter extends Router {
 
     function applyTemplate(){
         $this->getRemote()->executeCommandBeforePage();
-        if (file_exists(TEMPLATEPATH.'/page.php')) {
-            include (TEMPLATEPATH.'/page.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
+
+		if ($this->page->getId()==Page::NEW_PAGE) {
+			// There is no page to load, redirect to 404 page
+			include (TEMPLATEPATH.'404.php');
+		} else {
+	        if (file_exists(TEMPLATEPATH.'page.php')) {
+	            include (TEMPLATEPATH.'page.php');
+	        } else if (file_exists(TEMPLATEPATH.'index.php')) {
+	            include (TEMPLATEPATH.'index.php');
+	        }
+		}
+
         $this->getRemote()->executeCommandAfterPage();
     }
 

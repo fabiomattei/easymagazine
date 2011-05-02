@@ -53,11 +53,14 @@ class NumberListRouter extends Router {
 
     function applyTemplate() {
         $this->getRemote()->executeCommandBeforeNumbersList();
-        if (file_exists(TEMPLATEPATH . '/numberslist.php')) {
-            include (TEMPLATEPATH . '/numberslist.php');
-        } else if (file_exists(TEMPLATEPATH . '/index.php')) {
-            include (TEMPLATEPATH . '/index.php');
+
+		// There is no need for a 404 page, in the worse case system return an empty page
+        if (file_exists(TEMPLATEPATH . 'numberslist.php')) {
+            include (TEMPLATEPATH . 'numberslist.php');
+        } else if (file_exists(TEMPLATEPATH . 'index.php')) {
+            include (TEMPLATEPATH . 'index.php');
         }
+
         $this->getRemote()->executeCommandAfterNumbersList();
     }
 

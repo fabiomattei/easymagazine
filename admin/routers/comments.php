@@ -100,13 +100,18 @@ class CommentsRouter extends Router {
 
     function applyTemplate() {
         $this->getRemote()->executeCommandBeforeComments();
-        if (file_exists(TEMPLATEPATH.'/comments.php')) {
-            include (TEMPLATEPATH.'/comments.php');
 
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-                include (TEMPLATEPATH.'/index.php');
+		if ($this->article->getId()==Article::NEW_ARTICLE) {
+			// There is no article to load, redirect to 404 page
+			include (TEMPLATEPATH.'404.php');
+		} else {
+	        if (file_exists(TEMPLATEPATH.'comments.php')) {
+	            include (TEMPLATEPATH.'comments.php');
+	        } else if (file_exists(TEMPLATEPATH.'index.php')) {
+	            include (TEMPLATEPATH.'index.php');
+	        }
+		}
 
-            }
         $this->getRemote()->executeCommandAfterComments();
     }
 

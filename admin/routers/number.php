@@ -42,11 +42,18 @@ class NumberRouter extends Router {
 
     function applyTemplate(){
         $this->getRemote()->executeCommandBeforeNumber();
-        if (file_exists(TEMPLATEPATH.'/number.php')) {
-            include (TEMPLATEPATH.'/number.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-            include (TEMPLATEPATH.'/index.php');
-        }
+
+		if ($this->number->getId()==Number::NEW_NUMBER) {
+			// There is no number to load, redirect to 404 page
+			include (TEMPLATEPATH.'404.php');
+		} else {
+ 	        if (file_exists(TEMPLATEPATH.'number.php')) {
+	            include (TEMPLATEPATH.'number.php');
+	        } else if (file_exists(TEMPLATEPATH.'index.php')) {
+	            include (TEMPLATEPATH.'index.php');
+	        }
+		}
+
         $this->getRemote()->executeCommandAfterNumber();
     }
 

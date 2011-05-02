@@ -59,11 +59,18 @@ class ArticlesPersonRouter extends Router {
 
     function applyTemplate() {
         $this->getRemote()->executeCommandBeforeArticlesPerson();
-        if (file_exists(TEMPLATEPATH.'/articlesperson.php')) {
-            include (TEMPLATEPATH.'/articlesperson.php');
-        } else if (file_exists(TEMPLATEPATH.'/index.php')) {
-                include (TEMPLATEPATH.'/index.php');
-            }
+
+		if ($this->person->getId()==User::NEW_USER) {
+			// There is no person to load, redirect to 404 page
+			include (TEMPLATEPATH.'404.php');
+		} else {
+	        if (file_exists(TEMPLATEPATH.'articlesperson.php')) {
+	            include (TEMPLATEPATH.'articlesperson.php');
+	        } else if (file_exists(TEMPLATEPATH.'index.php')) {
+	                include (TEMPLATEPATH.'index.php');
+	        }
+		}
+
         $this->getRemote()->executeCommandAfterArticlesPerson();
     }
 
