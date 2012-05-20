@@ -57,9 +57,31 @@ class NumberRouter extends Router {
         $this->getRemote()->executeCommandAfterNumber();
     }
 
+    function applyMobileTemplate(){
+        $this->getRemote()->executeCommandBeforeNumber();
+
+		if ($this->number->getId()==Number::NEW_NUMBER) {
+			// There is no number to load, redirect to 404 page
+			include (MOBILETEMPLATEPATH.'404.php');
+		} else {
+ 	        if (file_exists(MOBILETEMPLATEPATH.'number.php')) {
+	            include (MOBILETEMPLATEPATH.'number.php');
+	        } else if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+	            include (MOBILETEMPLATEPATH.'index.php');
+	        }
+		}
+
+        $this->getRemote()->executeCommandAfterNumber();
+    }
+
     function createCachePath() {
         $arURI = $this->getArrayURI();
         return STARTPATH.'cached/'.'number'.$arURI['id'].'.cache';
+    }
+
+    function createMobileCachePath() {
+        $arURI = $this->getArrayURI();
+        return STARTPATH.'cached/'.'mnumber'.$arURI['id'].'.cache';
     }
 
     function isCachable() {

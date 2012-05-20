@@ -54,17 +54,21 @@ class PeopleRouter extends Router {
         $this->getRemote()->executeCommandBeforePeople();
 
 		// There is no need for a 404 page, in the worse case system return an empty page
-        if (file_exists(TEMPLATEPATH.'people.php')) {
-            include (TEMPLATEPATH.'people.php');
-        } else if (file_exists(TEMPLATEPATH.'index.php')) {
-            include (TEMPLATEPATH.'index.php');
+        if (file_exists(MOBILETEMPLATEPATH.'people.php')) {
+            include (MOBILETEMPLATEPATH.'people.php');
+        } else if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+            include (MOBILETEMPLATEPATH.'index.php');
         }
 
         $this->getRemote()->executeCommandAfterPeople();
     }
 
-    function  createCachePath() {
+    function createCachePath() {
         return STARTPATH.'cached/'.'people.cache';
+    }
+
+    function createMobileCachePath() {
+        return STARTPATH.'cached/'.'mpeople.cache';
     }
 
     function isCachable() {

@@ -65,7 +65,7 @@ class rssFeedCreator {
                 $item->description = $art->getSummary();
                 $item->date = DateHandler::convertMySqlDateTimeToUnixTime($art->getCreated());
                 # TODO to be fixed
-                #$item->source = URIMaker::fromBasePath('');
+                #$item->source = URIMaker::article('');
                 $item->author = $author;
 
                 $rss->addItem($item);

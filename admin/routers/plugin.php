@@ -55,7 +55,21 @@ class PluginRouter extends Router {
         $this->getRemote()->executeCommandAfterPlugin();
     }
 
-    function  createCachePath() {
+    function applyMobileTemplate(){
+        $this->getRemote()->executeCommandBeforePlugin();
+
+        if (file_exists(MOBILETEMPLATEPATH.'plugin.php')) {
+            include (MOBILETEMPLATEPATH.'plugin.php');
+        }
+
+        $this->getRemote()->executeCommandAfterPlugin();
+    }
+
+    function createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';
+    }
+
+    function createMobileCachePath() {
         return STARTPATH.'cached/'.'null.cache';
     }
 

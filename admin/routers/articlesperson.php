@@ -74,7 +74,28 @@ class ArticlesPersonRouter extends Router {
         $this->getRemote()->executeCommandAfterArticlesPerson();
     }
 
-    function  createCachePath() {
+    function applyMobileTemplate() {
+        $this->getRemote()->executeCommandBeforeArticlesPerson();
+
+		if ($this->person->getId()==User::NEW_USER) {
+			// There is no person to load, redirect to 404 page
+			include (MOBILETEMPLATEPATH.'404.php');
+		} else {
+	        if (file_exists(MOBILETEMPLATEPATH.'articlesperson.php')) {
+	            include (MOBILETEMPLATEPATH.'articlesperson.php');
+	        } else if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+	                include (MOBILETEMPLATEPATH.'index.php');
+	        }
+		}
+
+        $this->getRemote()->executeCommandAfterArticlesPerson();
+    }
+
+    function createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';;
+    }
+
+    function createMobileCachePath() {
         return STARTPATH.'cached/'.'null.cache';;
     }
 

@@ -54,8 +54,23 @@ class IndexRouter extends Router {
         $this->getRemote()->executeCommandAfterIndex();
     }
 
+    function applyMobileTemplate(){
+        $this->getRemote()->executeCommandBeforeIndex();
+
+		// There is no need for a 404 page, the index page MUST exist
+        if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+            include (MOBILETEMPLATEPATH.'index.php');
+        }
+
+        $this->getRemote()->executeCommandAfterIndex();
+    }
+
     function createCachePath() {
         return STARTPATH.'cached/'.'index.cache';
+    }
+
+    function createMobileCachePath() {
+        return STARTPATH.'cached/'.'mindex.cache';
     }
 
     function isCachable() {

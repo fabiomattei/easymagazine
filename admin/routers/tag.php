@@ -71,7 +71,24 @@ class TagRouter extends Router {
         $this->getRemote()->executeCommandAfterTag();
     }
 
+    function applyMobileTemplate() {
+        $this->getRemote()->executeCommandBeforeTag();
+
+		// There is no need for a 404 page, in the worse case system return an empty page
+        if (file_exists(MOBILETEMPLATEPATH.'tag.php')) {
+            include (MOBILETEMPLATEPATH.'tag.php');
+        } else if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+                include (MOBILETEMPLATEPATH.'index.php');
+        }
+
+        $this->getRemote()->executeCommandAfterTag();
+    }
+
     function  createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';
+    }
+
+    function  createMobileCachePath() {
         return STARTPATH.'cached/'.'null.cache';
     }
 

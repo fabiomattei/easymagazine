@@ -20,6 +20,7 @@
 require_once(STARTPATH . COMMANDPATH . '/remote.php');
 require_once(STARTPATH . DATAMODELPATH . '/magazine.php');
 require_once(STARTPATH . UTILSPATH . '/taghandler.php');
+require_once(STARTPATH . UTILSPATH . '/devicedetection.php');
 
 if (URLTYPE == 'optimized') {
     require_once(STARTPATH . URIPATH . '/urimakeroptimized.php');
@@ -32,6 +33,7 @@ abstract class Router {
     private $remote;
     private $arrayURY;
     private $cachePath;
+	private $mobileCachePath;
 
     public function __construct($arrayURI) {
         session_start();
@@ -46,6 +48,8 @@ abstract class Router {
 
     public abstract function createCachePath();
 
+	public abstract function createMobileCachePath();
+
     public abstract function isCachable();
 
     public function isCacheStillValid() {
@@ -53,18 +57,36 @@ abstract class Router {
         return file_exists($this->cachePath) and filemtime($this->cachePath) + $timeout > time();
     }
 
-    public function show() {
-        if ($this->isCachable()) {
-            $this->cachePath = $this->createCachePath();
-            if ($this->isCacheStillValid()) {
-                $result = readfile($this->cachePath);
-            } else {
-                $this->builtPage();
-            }
-        } else {
-            $this->builtPageNoCache();
-        }
+    public function isMobileCacheStillValid() {
+        $timeout = 3600; // Seconds
+        return file_exists($this->cachePath) and filemtime($this->cachePath) + $timeout > time();
     }
+
+	public function show() {
+		if (DeviceDetection::isMobile()) {
+			if ($this->isCachable()) {
+				$this->mobileCachePath = $this->createMobileCachePath();
+				if ($this->isMobileCacheStillValid()) {
+					$result = readfile($this->mobileCachePath);
+				} else {
+					$this->builtMobilePage();
+				}
+			} else {
+				$this->builtMobilePageNoCache();
+			}
+		} else {
+			if ($this->isCachable()) {
+				$this->cachePath = $this->createCachePath();
+				if ($this->isCacheStillValid()) {
+					$result = readfile($this->cachePath);
+				} else {
+					$this->builtPage();
+				}
+			} else {
+				$this->builtPageNoCache();
+			}			
+		}
+	}
 
     /**
      * It builds tha page and save the correspondig cache file
@@ -98,6 +120,38 @@ abstract class Router {
         $this->remote->executeCommandAfterFooter();
     }
 
+    /**
+     * It builds tha page and save the correspondig cache file
+     */
+    public function builtMobilePage() {
+        ob_start();
+
+        $this->builtMobilePageNoCache();
+
+        $output = ob_get_flush();
+
+        $fp = fopen($this->cachePath, "w");
+        fwrite($fp, $output, strlen($output));
+        fclose($fp);
+    }
+
+    /**
+     * It builds tha page and save the correspondig cache file
+     */
+    public function builtMobilePageNoCache() {
+        $this->loadData();
+
+        $this->remote->executeCommandBeforeHeader();
+        $this->mobileHeader();
+        $this->remote->executeCommandAfterHeader();
+
+        $this->applyMobileTemplate();
+
+        $this->remote->executeCommandBeforeFooter();
+        $this->mobileFooter();
+        $this->remote->executeCommandAfterFooter();
+    }
+
     public function header() {
         if (file_exists(TEMPLATEPATH . 'header.php')) {
             include (TEMPLATEPATH . 'header.php');
@@ -107,6 +161,18 @@ abstract class Router {
     public function footer() {
         if (file_exists(TEMPLATEPATH . 'footer.php')) {
             include (TEMPLATEPATH . 'footer.php');
+        }
+    }
+
+    public function mobileHeader() {
+        if (file_exists(MOBILETEMPLATEPATH . 'header.php')) {
+            include (MOBILETEMPLATEPATH . 'header.php');
+        }
+    }
+
+    public function mobileFooter() {
+        if (file_exists(MOBILETEMPLATEPATH . 'footer.php')) {
+            include (MOBILETEMPLATEPATH . 'footer.php');
         }
     }
 

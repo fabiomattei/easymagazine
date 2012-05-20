@@ -1,1 +1,1 @@
-<?PHP  define('TEMPLATEPATH', 'contents/templates/default/');  ?>
+<?PHP  define('TEMPLATEPATH', 'contents/templates/default/'); define('MOBILETEMPLATEPATH', 'contents/mobiletemplates/default/');  ?>

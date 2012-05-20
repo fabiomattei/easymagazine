@@ -69,7 +69,28 @@ class CategoryRouter extends Router {
         $this->getRemote()->executeCommandAfterCategory();
     }
 
+    function applyMobileTemplate() {
+        $this->getRemote()->executeCommandBeforeCategory();
+
+		if ($this->category->getId()==Category::NEW_CATEGORY) {
+			// There is no category to load, redirect to 404 page
+			include (MOBILETEMPLATEPATH.'404.php');
+		} else {
+	        if (file_exists(MOBILETEMPLATEPATH.'category.php')) {
+	            include (MOBILETEMPLATEPATH.'category.php');
+	        } else if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+	                include (MOBILETEMPLATEPATH.'index.php');
+	        }
+		}
+
+        $this->getRemote()->executeCommandAfterCategory();
+    }
+
     function  createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';
+    }
+
+    function  createMobileCachePath() {
         return STARTPATH.'cached/'.'null.cache';
     }
 

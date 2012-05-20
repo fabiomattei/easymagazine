@@ -64,7 +64,24 @@ class NumberListRouter extends Router {
         $this->getRemote()->executeCommandAfterNumbersList();
     }
 
+    function applyMobileTemplate() {
+        $this->getRemote()->executeCommandBeforeNumbersList();
+
+		// There is no need for a 404 page, in the worse case system return an empty page
+        if (file_exists(MOBILETEMPLATEPATH . 'numberslist.php')) {
+            include (MOBILETEMPLATEPATH . 'numberslist.php');
+        } else if (file_exists(MOBILETEMPLATEPATH . 'index.php')) {
+            include (MOBILETEMPLATEPATH . 'index.php');
+        }
+
+        $this->getRemote()->executeCommandAfterNumbersList();
+    }
+
     function createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';
+    }
+
+    function createMobileCachePath() {
         return STARTPATH.'cached/'.'null.cache';
     }
 

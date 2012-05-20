@@ -93,7 +93,21 @@ class ResultsRouter extends Router {
         $this->getRemote()->executeCommandAfterResults();
     }
 
+    function applyMobileTemplate() {
+        $this->getRemote()->executeCommandBeforeResults();
+        if (file_exists(MOBILETEMPLATEPATH . '/results.php')) {
+            include (MOBILETEMPLATEPATH . '/results.php');
+        } else if (file_exists(MOBILETEMPLATEPATH . '/index.php')) {
+            include (MOBILETEMPLATEPATH . '/index.php');
+        }
+        $this->getRemote()->executeCommandAfterResults();
+    }
+
     function createCachePath() {
+        return STARTPATH.'cached/'.'null.cache';
+    }
+
+    function createMobileCachePath() {
         return STARTPATH.'cached/'.'null.cache';
     }
 

@@ -60,9 +60,31 @@ class PagesRouter extends Router {
         $this->getRemote()->executeCommandAfterPage();
     }
 
+    function applyMobileTemplate(){
+        $this->getRemote()->executeCommandBeforePage();
+
+		if ($this->page->getId()==Page::NEW_PAGE) {
+			// There is no page to load, redirect to 404 page
+			include (MOBILETEMPLATEPATH.'404.php');
+		} else {
+	        if (file_exists(MOBILETEMPLATEPATH.'page.php')) {
+	            include (MOBILETEMPLATEPATH.'page.php');
+	        } else if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+	            include (MOBILETEMPLATEPATH.'index.php');
+	        }
+		}
+
+        $this->getRemote()->executeCommandAfterPage();
+    }
+
     function  createCachePath() {
         $arURI = $this->getArrayURI();
         return STARTPATH.'cached/'.'page'.$arURI['id'].'.cache';
+    }
+
+    function  createMobileCachePath() {
+        $arURI = $this->getArrayURI();
+        return STARTPATH.'cached/'.'mpage'.$arURI['id'].'.cache';
     }
 
     function isCachable() {

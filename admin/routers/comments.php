@@ -115,7 +115,28 @@ class CommentsRouter extends Router {
         $this->getRemote()->executeCommandAfterComments();
     }
 
+    function applyMobileTemplate() {
+        $this->getRemote()->executeCommandBeforeComments();
+
+		if ($this->article->getId()==Article::NEW_ARTICLE) {
+			// There is no article to load, redirect to 404 page
+			include (MOBILETEMPLATEPATH.'404.php');
+		} else {
+	        if (file_exists(MOBILETEMPLATEPATH.'comments.php')) {
+	            include (MOBILETEMPLATEPATH.'comments.php');
+	        } else if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+	            include (MOBILETEMPLATEPATH.'index.php');
+	        }
+		}
+
+        $this->getRemote()->executeCommandAfterComments();
+    }
+
     function  createCachePath() {
+        return '';
+    }
+
+    function  createMobileCachePath() {
         return '';
     }
 

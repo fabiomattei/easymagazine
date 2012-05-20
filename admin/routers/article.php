@@ -63,9 +63,31 @@ class ArticlesRouter extends Router {
         $this->getRemote()->executeCommandAfterArticle();
     }
 
+    function applyMobileTemplate(){
+        $this->getRemote()->executeCommandBeforeArticle();
+
+		if ($this->article->getId()==Article::NEW_ARTICLE) {
+			// There is no article to load, redirect to 404 page
+			include (MOBILETEMPLATEPATH.'404.php');
+		} else {
+            if (file_exists(MOBILETEMPLATEPATH.'article.php')) {
+                include (MOBILETEMPLATEPATH.'article.php');
+            } else if (file_exists(MOBILETEMPLATEPATH.'index.php')) {
+                include (MOBILETEMPLATEPATH.'index.php');
+            }
+		}
+		
+        $this->getRemote()->executeCommandAfterArticle();
+    }
+
     function  createCachePath() {
         $arURI = $this->getArrayURI();
         return STARTPATH.'cached/'.'article'.$arURI['id'].'.cache';
+    }
+
+    function  createMobileCachePath() {
+        $arURI = $this->getArrayURI();
+        return STARTPATH.'cached/'.'marticle'.$arURI['id'].'.cache';
     }
 
     function isCachable() {
