@@ -55,6 +55,24 @@ class DirectoryRunner {
         return $list;
     }
 
+    public static function retriveMobileTemplatesList() {
+        $list = array();
+        $dir = STARTPATH . 'contents/mobiletemplates/';
+
+        if (is_dir($dir)) {
+            $dh = opendir($dir);
+            if ($dh) {
+                while (($file = readdir($dh)) !== false) {
+                    if ((filetype($dir . $file) == 'dir') && ($file != '.') && ($file != '..')) {
+                        $list["$file"] = $file;
+                    }
+                }
+                closedir($dh);
+            }
+        }
+        return $list;
+    }
+
     public static function cleanDir($path) {
         $dir = STARTPATH . $path;
         if (!file_exists($dir))

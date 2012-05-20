@@ -21,7 +21,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title><?php echo LANG_ADMIN_TITLE; ?>: <?php echo LANG_MENU_PLUGIN; ?></title>
+	<title><?php echo LANG_ADMIN_TITLE; ?>: <?php echo LANG_MENU_TEMPLATE; ?></title>
 	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 	<style media="all" type="text/css">@import "../../resources/css/all.css";</style>
         <style media="all" type="text/css">@import "../../resources/css/messages.css";</style>
@@ -35,11 +35,11 @@
                         <li><span><span><a href="number.php"><?php echo LANG_MENU_NUMBERS; ?></a></span></span></li>
                         <li><span><span><a href="category.php"><?php echo LANG_MENU_CATEGORIES; ?></a></span></span></li>
                         <li><span><span><a href="article.php"><?php echo LANG_MENU_ARTICLES; ?></a></span></span></li>
-						<li><span><span><a href="page.php"><?php echo LANG_MENU_PAGES; ?></a></span></span></li>
+                        <li><span><span><a href="page.php"><?php echo LANG_MENU_PAGES; ?></a></span></span></li>
                         <li><span><span><a href="comment.php"><?php echo LANG_MENU_COMMENTS; ?></a></span></span></li>
-                        <li class="active"><span><span><?php echo LANG_MENU_PLUGIN; ?></span></span></li>
+                        <li><span><span><a href="plugin.php"><?php echo LANG_MENU_PLUGIN; ?></a></span></span></li>
                         <li><span><span><a href="template.php"><?php echo LANG_MENU_TEMPLATE; ?></a></span></span></li>
-						<li><span><span><a href="mobiletemplate.php"><?php echo LANG_MENU_MOBILE_TEMPLATE; ?></a></span></span></li>
+						<li class="active"><span><span><?php echo LANG_MENU_MOBILE_TEMPLATE; ?></span></span></li>
                         <li><span><span><a href="settings.php"><?php echo LANG_MENU_SETTINGS; ?></a></span></span></li>
                         <li><span><span><a href="user.php"><?php echo LANG_MENU_USERS; ?></a></span></span></li>
 		</ul>
@@ -72,51 +72,54 @@
 					<tr>
 						<th class="first" width="377"><?php echo LANG_ADMIN_TABLE_TITLE; ?></th>
 						<th><?php echo LANG_ADMIN_TABLE_INFO; ?></th>
-                                                <th><?php echo LANG_ADMIN_TABLE_ADMIN; ?></th>
                                                 <th><?php echo LANG_ADMIN_TABLE_ACTIVATE; ?></th>
-                                                <th><?php echo LANG_ADMIN_TABLE_DEACTIVATE; ?></th>
 						<th class="last"><?php echo LANG_ADMIN_TABLE_ACTIVATED; ?></th>
 					</tr>
 
                     <?
-                    foreach ($plugins as $key => $value) {
+                    foreach ($templates as $key => $value) {
                     ?>
 					<tr>
 						<td class="first style1"><?PHP echo $key; ?></td>
-						<td><a href="plugin.php?action=info&pluginname=<?PHP echo $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=admin&pluginname=<?PHP echo $key; ?>"><img src="../../resources/img/edit-icon.gif" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=activate&pluginname=<?PHP echo $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
-                                                <td><a href="plugin.php?action=deactivate&pluginname=<?PHP echo $key; ?>"><img src="../../resources/img/flag-red.png" width="16" height="16" alt="" /></a></td>
+						<td><a href="mobiletemplate.php?action=info&id=<?PHP echo $key; ?>"><img src="../../resources/img/book.png" width="16" height="16" alt="" /></a></td>
+                                                <td><a href="mobiletemplate.php?action=activate&id=<?PHP echo $key; ?>"><img src="../../resources/img/flag-green.png" width="16" height="16" alt="" /></a></td>
 						<td>
-                                                <?PHP if (isset($pluginsindb["$key"])) { ?>
+                                                <?PHP if ($key == $activetemplate->getName()) { ?>
                                                     <img src="../../resources/img/tic.png" width="16" height="16" alt="save" />
                                                 <?PHP } else { ?>
                                                     <img src="../../resources/img/cross.png" width="16" height="16" alt="save" />
                                                 <?PHP } ?></td>
-					</tr>
+                                        </tr>
                     <?
                     }
                     ?>
 				</table>
 			</div>
-		  <div class="table">
+		        <div class="table">
+				<img src="../../resources/img/bg-th-left.gif" width="8" height="7" alt="" class="left" />
+				<img src="../../resources/img/bg-th-right.gif" width="7" height="7" alt="" class="right" />
+                                <table class="listing form" cellpadding="0" cellspacing="0">
+					<tr>
+						<th class="full">Info</th>
+					</tr>
+                                        <tr>
+						<td class="first" width="172">
                                                 <?
-                                                if ($toshow !='' && file_exists('../../../contents/plug_in/'.$toshow)) {
-                                                    require_once '../../../contents/plug_in/'.$toshow;
+                                                if (file_exists('../../../contents/mobiletemplates/'.$toshow.'/info.php')) {
+                                                    require_once '../../../contents/mobiletemplates/'.$toshow.'/info.php';
                                                 } else {
-                                                    if ($toshow !='') {
-                                                        echo 'No info file detected: '.$toshow;
-                                                    } else {
-                                                        echo '&nbsp; ';
-                                                    }
+                                                    echo "No info file detected";
                                                 }
                                                 ?>
+                                                </td>
+                                        </tr>
+			</table>
 	        <p>&nbsp;</p>
 		  </div>
 		</div>
 		<div id="right-column">
 			<strong class="h"><?php echo LANG_MSG_INFO; ?></strong>
-			<div class="box"><?php echo LANG_ADMIN_PLUGIN_INFO; ?></div>
+			<div class="box"><?php echo LANG_ADMIN_TEMPLATE_INFO; ?></div>
 	  </div>
 	</div>
 	<div id="footer"></div>

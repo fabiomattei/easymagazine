@@ -28,6 +28,7 @@ if (!file_exists(STARTPATH.SYSTEMPATH.'config.php')) {
 require_once(SYSTEMPATH.'settings.php');
 require_once(SYSTEMPATH.'pluginIncluder.php');
 require_once(SYSTEMPATH.'templateIncluder.php');
+require_once(SYSTEMPATH.'mobiletemplateIncluder.php');
 require_once(ROUTERPATH.'routerfactory.php');
 
 if (URLTYPE == 'optimized') {

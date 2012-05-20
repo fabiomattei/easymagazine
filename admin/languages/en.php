@@ -35,6 +35,7 @@ define('LANG_MENU_PAGES', 'Pages');
 define('LANG_MENU_COMMENTS', 'Comments');
 define('LANG_MENU_PLUGIN', 'Plugins');
 define('LANG_MENU_TEMPLATE', 'Templates');
+define('LANG_MENU_MOBILE_TEMPLATE', 'Mobile Templates');
 define('LANG_MENU_SETTINGS', 'Settings');
 define('LANG_MENU_USERS', 'Users');
 define('LANG_MENU_USER', 'User');

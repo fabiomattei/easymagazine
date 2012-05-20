@@ -39,6 +39,7 @@
                         <li><span><span><a href="comment.php"><?php echo LANG_MENU_COMMENTS; ?></a></span></span></li>
                         <li><span><span><a href="plugin.php"><?php echo LANG_MENU_PLUGIN; ?></a></span></span></li>
                         <li class="active"><span><span><?php echo LANG_MENU_TEMPLATE; ?></span></span></li>
+						<li><span><span><a href="mobiletemplate.php"><?php echo LANG_MENU_MOBILE_TEMPLATE; ?></a></span></span></li>
                         <li><span><span><a href="settings.php"><?php echo LANG_MENU_SETTINGS; ?></a></span></span></li>
                         <li><span><span><a href="user.php"><?php echo LANG_MENU_USERS; ?></a></span></span></li>
 		</ul>

@@ -59,6 +59,25 @@ class FileWriter {
         fclose($handle);
     }
 
+    public static function writeMobileTemplateIncluder($dir) {
+        $filename = STARTPATH.'system/mobiletemplateIncluder.php';
+
+        $handle = fopen($filename, 'w');
+        if (!$handle) {
+            echo "Cannot open file ($filename)";
+            exit;
+        }
+
+        FileWriter::write($handle, '<?PHP ');
+
+        $toWrite = ' define(\'TEMPLATEPATH\', \'contents/mobiletemplates/'.$dir.'/\'); ';
+        FileWriter::write($handle, $toWrite);
+
+        FileWriter::write($handle, ' ?>');
+
+        fclose($handle);
+    }
+
     public static function writeSettingsFile($settingsindb) {
         $filename = STARTPATH.'system/settings.php';
 

@@ -36,6 +36,7 @@ define('LANG_MENU_PAGES', 'P&aacute;ginas');
 define('LANG_MENU_COMMENTS', 'Coment&aacute;rios');
 define('LANG_MENU_PLUGIN', 'Plugins');
 define('LANG_MENU_TEMPLATE', 'Modelos');
+define('LANG_MENU_MOBILE_TEMPLATE', 'Mobile Modelos');
 define('LANG_MENU_SETTINGS', 'Configura&ccedil;&otilde;es');
 define('LANG_MENU_USERS', 'Utilizadores');
 define('LANG_MENU_USER', 'Utilizador');
